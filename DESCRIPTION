@@ -19,7 +19,9 @@ Suggests:
     openxlsx
 Imports: 
     dplyr,
+    fs,
     magrittr,
+    kwb.utils,
     rlang,
     stringr,
     tibble
