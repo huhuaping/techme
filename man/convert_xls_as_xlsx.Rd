@@ -23,3 +23,6 @@ convert_xls_as_xlsx(
 \description{
 Convert xls to xlsx
 }
+\examples{
+\dontrun{convert_xls_as_xlsx(input_dir = "d:/temp/", export_dir = "d:/temp/")}
+}

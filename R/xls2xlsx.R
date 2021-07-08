@@ -1,8 +1,10 @@
-# some ref
-## 0. [geosalz](https://rdrr.io/github/KWB-R/kwb.geosalz/man/convert_xls_as_xlsx.html)
-## 1. https://stackoverflow.com/questions/59248369/r-cannot-run-specific-cmd-code-that-converts-xls-to-xlsx
-## 2. http://justgeeks.blogspot.com/2014/08/
-
+#' Helper function: get_excelcnv_exe
+#'
+#' @param office_folder office folder path (default: \code{safe_office_folder}
+#'
+#' @return path containing 'excelcnv.exe'
+#' @importFrom kwb.utils collapsed
+#' @export
 
 get_excelcnv_exe <- function(office_folder = safe_office_folder()) {
   x <- office_folder
@@ -51,13 +53,12 @@ delete_registry <- function(office_folder = safe_office_folder(), dbg = TRUE) {
   parent_folder <- basename(dirname(exe_path))
 
   # Delete registry entry:
-  # http://justgeeks.blogspot.com/2014/08/
-  # free-convert-for-excel-files-xls-to-xlsx.html
-
+  # http://justgeeks.blogspot.com/2014/08/free-convert-for-excel-files-xls-to-xlsx.html
+  # https://rdrr.io/github/KWB-R/kwb.geosalz/src/R/convert_xls_as_xlsx.R
   # "C:\Program Files\Microsoft Office\root\Office16\excelcnv.exe" -oice "C:\temp\MyFile.xls" "C:\temp\MyFile.xlsx"
 
   patterns <- kwb.utils::resolve(list(
-    office = "HKEY_CURRENT_USER\\Software\\Microsoft\\Office\\root",
+    office = "HKEY_CURRENT_USER\\Software\\Microsoft\\Office",
     reg_entry = "<office>\\<version>.0\\Excel\\Resiliency\\StartupItems",
     command = "reg delete <reg_entry> /f",
     debug = "\nDeleting registry entry:\n<command>\n",
@@ -77,7 +78,9 @@ delete_registry <- function(office_folder = safe_office_folder(), dbg = TRUE) {
 #' @param dbg debug (default: TRUE)
 #' @importFrom  fs dir_create
 #' @export
-#'
+#' @examples
+#' \dontrun{convert_xls_as_xlsx(input_dir = "d:/temp/", export_dir = "d:/temp/")}
+
 convert_xls_as_xlsx <- function(input_dir,
                                 export_dir = tempdir(),
                                 office_folder = safe_office_folder(),
@@ -103,13 +106,10 @@ convert_xls_as_xlsx <- function(input_dir,
   for (i in seq_along(xls)) {
     convert_xls_to_xlsx(exe, xls[i], xlsx[i], i, length(xls), dbg = dbg)
 
-    #delete_registry(office_folder, dbg = dbg)
+    delete_registry(office_folder, dbg = dbg)
   }
 }
 
-
-#input_dir<- "d:/temp/"
-#export_dir <- "d:/temp/"
 
 #' Helper function: convert_xls_to_xlsx
 #'
@@ -121,7 +121,6 @@ convert_xls_as_xlsx <- function(input_dir,
 #' @param dbg debug (default: TRUE)
 #' @importFrom kwb.utils catIf
 
-#i <-1
 convert_xls_to_xlsx <- function(exe, xls, xlsx, i, n_files, dbg = TRUE) {
   command <- sprintf('"%s" -oice "%s" "%s"', exe, xls, xlsx)
 
