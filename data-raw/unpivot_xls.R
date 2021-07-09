@@ -1,15 +1,39 @@
+#-----download yearbook dataset----
+
+dir_final <- c("01-machine",
+               "02-fertilizer",
+               "03-plastic",
+               "04-pesticide")
+dir_media <- "data-raw/rural-yearbook/part03-agri-produce/"
+
+file_dir <- glue::glue("{dir_media}{dir_final}")
+
+#unlink(file_dir, recursive = T)
+# create file directory
+sapply(file_dir, FUN = dir.create,recursive = T)
+
+#-----read xls by loop------
+
 ## code to prepare `unpivot_xls` dataset goes here
 require(unpivotr)
 library(XLConnect)
 library(tidyverse)
 library(readxl)
+library(glue)
 
-path_xls <- "data-raw/MyFile.xls"
+#path_xls <- "data-raw/MyFile.xls"
+file_xls <- "raw-2018-2019.xls"
+path_xls <- glue::glue("{file_dir[2]}/{file_xls}")
 wb <- loadWorkbook(path_xls, create = TRUE)
-# get the numbers of sheets. It should minus one to drop the last sheet contains only copyright informal .
-sheetnum <- length(getSheets(wb))-1
 
-#i <- 1
+getSheets(wb)
+removeSheet(wb,"CNKI")
+# get the numbers of sheets. It should minus one to drop the last sheet contains only copyright informal .
+sheetnum <- length(getSheets(wb))
+
+
+
+#i <- 2
 df_out <- NULL
 for (i in 1: sheetnum){
   dt <- readWorksheet(wb, sheet = i,header = F)
@@ -54,14 +78,19 @@ unpivot <- function(dt, rows){
     mutate(value = as.numeric(value),
            year = str_extract(year, "\\d{4}"),
            province = str_replace(province," ", "")) %>%
-    separate(vars, into = c("vars", "unit"), sep = "\\(") %>%
+    #separate(vars, into = c("vars", "unit"), sep = "\\(") %>%
     mutate(vars = str_trim(vars),
-           unit = str_extract(unit, "(.+)(?=\\))")) %>%
-    select(province, year, vars, value, unit)
+           vars = str_replace(vars, "\\d",""),
+           vars = str_replace(vars, "\\.",""),
+           vars = str_replace(vars, "(^\\(.+$\\))",""),
+           #unit = str_extract(unit, "(.+)(?=\\))")
+           ) %>%
+    select(province, year, vars, value#, unit
+           )
   return(dt_tidy)
 }
 
-#----match chn_block4---
+#-----match chn_block4-----
 
 library(purrr)
 library(magrittr)
@@ -70,15 +99,17 @@ require(stringdist)
 
 chn_raw <- unique(df_out$vars)
 data("varsList")
-block_try <- list(block1 ="农村统计年鉴", block2="生产条件",
+block_target <- list(block1 ="农村统计年鉴", block2="生产条件",
                   block3 ="农业机械")
+
 vars_tbl <- get_vars(varsList,lang = "chn",
-                     block = block_try,
+                     block = block_target,
                      what = c("variables","chn_block4"))
 
 # Helper function
 get_best_match <- function(word, charvec ){
-  max_index <- which.max(stringdist::stringsim(word, charvec, method = "jw"))
+  max_index <- which.max(stringdist::stringsim(word, charvec,
+                                               method = "jw"))
   return(charvec[max_index])
 }
 
@@ -92,6 +123,8 @@ vars_matched <- tibble(input = input,target = vector_results) %>%
   rename( chn_block4 = "target") %>%
   left_join(., vars_tbl, by = "chn_block4")
 
+if (any(is.na(vars_matched$chn_block4))) stop("error: raw variables not contained in target variable table.")
+
 #library("mgsub")
 #ptn <- vars_matched$input
 #rpl <- vars_matched$chn_block4
@@ -102,5 +135,9 @@ df_matched <- df_out %>%
   left_join(., vars_matched, by = "chn_block4") %>%
   select(-input, -asis)
 
+
+
+
+#dir.create(file_dir, recursive = T)
 
 #usethis::use_data(unpivot_xls, overwrite = TRUE)

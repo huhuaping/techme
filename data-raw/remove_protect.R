@@ -8,7 +8,7 @@ library(stringr)
 library(zip)
 
 # file with protected sheets
-file <- "data-raw/MyFile.xlsx"
+file <- "data-raw/raw-2018-2019.xlsx"
 
 # file name and path after removing protection
 file_unlocked <- str_replace(basename(file), ".xlsx$", "_unlocked.xlsx")
@@ -21,10 +21,6 @@ temp_dir <- "data-raw/_tmp"
 # remove and recreate _tmp folder in case it already exists
 unlink(temp_dir, recursive = T)
 dir.create(temp_dir)
-
-# Remove the workbook protection
-x <- readLines(paste0(temp_dir, "/xl/workbook.xml"), encoding = "windows1")
-writeLines(str_replace(x, "<workbookProtection.*?/>", ""), paste0(temp_dir, "/xl/workbook.xml"))
 
 # unzip Excel file into temp folder
 unzip(file, exdir = temp_dir)
@@ -54,5 +50,10 @@ setwd(old_wd)
 
 # clean up and remove temporary directory
 unlink(temp_dir, recursive = T)
+
+path_xls <- "data-raw/raw-2018-2019_unlocked.xls"
+wb <- loadWorkbook(path_xls, create = TRUE)
+createSheet(wb, "add.sheet")
+saveWorkbook(wb) # save change to xls
 
 #usethis::use_data(remove_protect, overwrite = TRUE)
