@@ -44,7 +44,7 @@ unpivot <- function(dt, rows){
   dt_cell <- dt[rows,]  %>%
     as_cells() %>%
     arrange( col,row ) %>%
-    behead("up-left", variables) %>%
+    behead("up-left", vars) %>%
     behead("up", year) %>%
     behead("left", province) %>%
     rename(value = chr) %>%
@@ -54,11 +54,53 @@ unpivot <- function(dt, rows){
     mutate(value = as.numeric(value),
            year = str_extract(year, "\\d{4}"),
            province = str_replace(province," ", "")) %>%
-    separate(variables, into = c("variables", "unit"), sep = "\\(") %>%
-    mutate(unit = str_extract(unit, "(.+)(?=\\))")) %>%
-    select(province, year, variables, value, unit)
+    separate(vars, into = c("vars", "unit"), sep = "\\(") %>%
+    mutate(vars = str_trim(vars),
+           unit = str_extract(unit, "(.+)(?=\\))")) %>%
+    select(province, year, vars, value, unit)
   return(dt_tidy)
 }
+
+#----match chn_block4---
+
+library(purrr)
+library(magrittr)
+#install.packages("stringdist")
+require(stringdist)
+
+chn_raw <- unique(df_out$vars)
+data("varsList")
+block_try <- list(block1 ="农村统计年鉴", block2="生产条件",
+                  block3 ="农业机械")
+vars_tbl <- get_vars(varsList,lang = "chn",
+                     block = block_try,
+                     what = c("variables","chn_block4"))
+
+# Helper function
+get_best_match <- function(word, charvec ){
+  max_index <- which.max(stringdist::stringsim(word, charvec, method = "jw"))
+  return(charvec[max_index])
+}
+
+input <- chn_raw
+vec <- vars_tbl$chn_block4
+vector_results <- map_chr(input, ~ get_best_match(.x, charvec = vec))
+#vector_results <- sapply(input, function(word) get_best_match(word, charvec = vec))
+
+vars_matched <- tibble(input = input,target = vector_results) %>%
+  mutate(asis = ifelse(input==target, T, F)) %>%
+  rename( chn_block4 = "target") %>%
+  left_join(., vars_tbl, by = "chn_block4")
+
+#library("mgsub")
+#ptn <- vars_matched$input
+#rpl <- vars_matched$chn_block4
+df_matched <- df_out %>%
+  #mutate(vars = mgsub::mgsub(vars, pattern =ptn,
+                             #replacement = rpl )) %>%
+  rename(chn_block4="vars") %>%
+  left_join(., vars_matched, by = "chn_block4") %>%
+  select(-input, -asis)
 
 
 #usethis::use_data(unpivot_xls, overwrite = TRUE)

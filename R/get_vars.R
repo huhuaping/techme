@@ -30,20 +30,20 @@
 get_vars <- function(df, lang="eng", block, what = "variables"){
   if (lang =="chn") {
     vars <- df %>%
-      dplyr::filter(.data$chn_block1 %in% block$block1,
-                    .data$chn_block2 %in% block$block2,
-                    .data$chn_block3 %in% block$block3,
+      dplyr::filter(.data$chn_block1 %in% block$block1|
+                    .data$chn_block2 %in% block$block2|
+                    .data$chn_block3 %in% block$block3|
                     .data$chn_block4 %in% block$block4)
   } else if (lang =="eng"){
     vars <- df %>%
-      dplyr::filter(.data$block1 %in% block$block1,
-                    .data$block2 %in% block$block2,
-                    .data$block3 %in% block$block3,
+      dplyr::filter(.data$block1 %in% block$block1|
+                    .data$block2 %in% block$block2|
+                    .data$block3 %in% block$block3|
                     .data$block4 %in% block$block4)
   }
 
   vars <-  vars %>%
-    dplyr::select(one_of(what)) %>%
-    unlist()
+    dplyr::select(one_of(what)) #%>%
+    #unlist()
   return(vars)
 }
