@@ -15,7 +15,8 @@ file_dir <- glue::glue("{dir_media}{dir_final}")
 # create file directory
 sapply(file_dir, FUN = dir.create,recursive = T)
 
-dir_sel <- file_dir[2]
+i <- 2
+dir_sel <- file_dir[i]
 #path_xls <- "data-raw/MyFile.xls"
 file_xls <- "raw-2018-2019.xls"
 path_xls <- glue::glue("{dir_sel}/{file_xls}")
