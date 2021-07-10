@@ -9,7 +9,7 @@ library(glue)
 
 
 
-wb <- loadWorkbook(path_xls, create = TRUE)
+#wb <- loadWorkbook(path_xls, create = TRUE)
 wb <- loadWorkbook(file_unlocked_path, create = TRUE)
 
 # you should copy region or change cell values by hand
@@ -20,6 +20,11 @@ saveWorkbook(wb,file = file_edited_path )
 #input <- tibble(myvalue="地 区") # must be data.frame
 #writeWorksheet(wb, input, sheet = getSheets(wb)[1],
                #startRow = 3, startCol = 10)
+
+# check edited sheet
+wb <- loadWorkbook(file_edited_path, create = TRUE)
+i <- 1
+dt_check <- readWorksheet(wb, sheet = i,header = F)
 
 # clear sheets
 saveWorkbook(wb)
