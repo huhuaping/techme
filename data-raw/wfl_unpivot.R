@@ -49,6 +49,36 @@ pivot_range <- getRange(dt)
 pivot_rows <- pivot_range$start:pivot_range$end
 tbl_raw <- unpivot(dt, pivot_rows)
 
+#------Helper function to Extract Information------
+
+#' Helper function to Extract Information
+#'
+#' Such as units (thousand tons, etc.),given that all variables have the same units scale in pivot table.
+#'
+#' @param dt data.frame. Should be characterer the type of pivot table .
+#'
+#' @return vector
+#'
+#' @export getInfo
+#'
+#' @examples
+#' same_units <- getInfo(dt)
+
+getInfo <- function(dt){
+  dt_cell <- dt  %>%
+    unpivotr::as_cells() %>%
+    filter(str_detect(chr,"单位:|单位："))
+  info_list <- dt_cell %>%
+    mutate(chr = str_trim(str_extract(chr, "(?<=单位:|单位：)(.+)"))) %>%
+    select(chr) %>%
+    unique() %>%
+    unlist() %>%
+    unname()
+  if (length(info_list) > 1) stop( glue::glue("Info items (units) more than 1, please check raw xls file!"))
+
+  return(info_list)
+}
+
 
 #-----pivot and combine all data tables from xls file------
 
@@ -60,6 +90,7 @@ dir_final <- c("01-machine",
 dir_media <- "data-raw/rural-yearbook/part03-agri-produce/"
 file_dir <- glue::glue("{dir_media}{dir_final}")
 #path_xls <- "data-raw/MyFile.xls"
+#file_xls <- "raw-2018-2019-edited.xlsx"
 file_xls <- "raw-2018-2019.xls"
 path_xls <- glue::glue("{file_dir[1]}/{file_xls}")
 wb <- loadWorkbook(path_xls, create = TRUE)
@@ -68,10 +99,11 @@ getSheets(wb)
 removeSheet(wb,"CNKI")
 # get the numbers of sheets. It should minus one to drop the last sheet contains only copyright informal .
 sheetnum <- length(getSheets(wb))
+
 if (sheetnum==0) {
   stop("no files founded, please check file existed")
 }  else{
-  print(glue::glue("totally {sheetnum} xls sheet need to unpivot."))
+  print(glue::glue("totally {sheetnum} xls sheet(s) need to unpivot."))
 }
 
 
@@ -79,6 +111,7 @@ if (sheetnum==0) {
 df_out <- NULL
 for (i in 1: sheetnum){
   print(glue::glue("begin unpivot the {i} of {sheetnum} xls sheet."))
+
   dt <- readWorksheet(wb, sheet = i,header = F)
   pivot_range <- getRange(dt)
   len <- nrow(pivot_range)
@@ -91,6 +124,21 @@ for (i in 1: sheetnum){
     print(glue::glue("Successfully unpivot the {j} of {len} pivot data region."))
     df_out <- bind_rows(df_out, df_tem)
   } # end loop j
+  # get unit when all variables have the same units.
+  same_units <- getInfo(dt)
+  if (length(same_units)==1) {
+    print( glue::glue("Varibales in sheet {i} have same units: {same_units}"))
+  } else if (length(same_units)==0) {
+    print( glue::glue("Varibales in sheet {i} have different units"))
+  } else {
+    warning("Please check Varibales units in sheet {i} when unpivot.")
+  }
+
+  # given that units different and contains within () following variables names,
+  ## or all variables have same units.
+  df_out <- df_out %>%
+    mutate(units = str_trim(str_extract(vars, "(?<=\\()(.+)(?=\\))"))) %>%
+    mutate(units = ifelse(is.na(units), same_units, units))
 } # end loop i
 
 # usethis::use_data(wfl_unpivot, overwrite = TRUE)
