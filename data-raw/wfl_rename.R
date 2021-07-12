@@ -6,6 +6,7 @@
 # -----rename batch files without special characters-----
 ## all change to the same file names.
 rename_files_vec <- function(media, final, char_exclude=NA, char_replace){
+  require("stringr")
   if (is.na(char_exclude)) stop("Excluded character for file name not set, it is danger to do bantch rename.")
 
   dir_dest <- glue::glue("{media}{final}")
@@ -30,6 +31,6 @@ rename_files_vec <- function(media, final, char_exclude=NA, char_replace){
 # example
 rename_files_vec(media = dir_media, final = dir_final,
                  char_exclude = "raw",
-                 char_replace = "my-raw")
+                 char_replace = "raw-2018")
 
 # usethis::use_data(wfl_rename, overwrite = TRUE)

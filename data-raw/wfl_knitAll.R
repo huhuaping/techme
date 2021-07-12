@@ -4,7 +4,7 @@ require(devtools)
 load_all()
 
 # default the first directory
-i_sel <- 4
+i_sel <- 1
 file_sel <- "raw-2018-2019.xls"
 #file_sel <- "raw-2018-2019-edited.xlsx"
 source("data-raw/wfl_files.R")
