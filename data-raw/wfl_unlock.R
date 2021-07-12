@@ -1,4 +1,4 @@
-## code to prepare `wfl_unlocked` dataset goes here
+## code to prepare `wfl_unlock` dataset goes here
 
 # remove sheet protection in Excel
 # Sample file: https://www.dropbox.com/s/4ul0kowrscyr8cz/excel_protected.xlsx?dl=0
@@ -10,11 +10,11 @@ library(zip)
 # you should firstly "save as" locked .xls to .xlsx format manually.
 
 # file with protected sheets
-file <- str_replace(basename(file_xls), ".xls", ".xlsx")
-file_locked_path <- glue::glue("{dir_sel}/{file}")
+file_locked <- str_replace(basename(file_xls), ".xls", ".xlsx")
+file_locked_path <- glue::glue("{dir_sel}/{file_locked}")
 
 # file name and path after removing protection
-file_unlocked <- str_replace(basename(file), ".xlsx$", "-unlocked.xlsx")
+file_unlocked <- str_replace(basename(file_locked), ".xlsx$", "-unlocked.xlsx")
 #file_unlocked_path <- glue::glue("{dir_sel}/{file_unlocked}")
 file_unlocked_path <- file.path(getwd(),dir_sel,file_unlocked)
 
@@ -56,4 +56,4 @@ setwd(old_wd)
 unlink(temp_dir, recursive = T)
 
 
-# usethis::use_data(wfl_unlocked, overwrite = TRUE)
+# usethis::use_data(wfl_unlock, overwrite = TRUE)

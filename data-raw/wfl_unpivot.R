@@ -7,6 +7,21 @@ library(readxl)
 library(glue)
 
 #------Helper function to get range of pivot table----
+#' Get range of pivot table
+#'
+#' @param dt
+#' @param reg_start character regex pattern for start identifier, default \code{'^地.*区'}.
+#' @param reg_end character regex pattern for end identifier, default \code{'^新.*疆'}
+#'
+#' @return list
+#' @export
+#'
+#' @examples
+#'   wb <- loadWorkbook(path_xls, create = TRUE)
+#'   dt <- readWorksheet(wb, sheet = 1,header = F)
+#'   pivot_range <- getRange(dt)
+#'   len <- nrow(pivot_range)
+#'
 getRange <- function(dt, reg_start="^地.*区", reg_end ="^新.*疆"){
   pivot_start <- which(str_detect(dt$Col1, reg_start))
   pivot_end <- which(str_detect(dt$Col1, reg_end ))
@@ -20,16 +35,24 @@ getRange <- function(dt, reg_start="^地.*区", reg_end ="^新.*疆"){
   return(pivot_range)
 }
 
-## example
-
-wb <- loadWorkbook(path_xls, create = TRUE)
-dt <- readWorksheet(wb, sheet = 1,header = F)
-pivot_range <- getRange(dt)
-len <- nrow(pivot_range)
-
 
 # ------function to unpivot table-----
 
+#' Unpivot table
+#'
+#' @param dt
+#' @param rows
+#'
+#' @return data.frame
+#' @export unpivot
+#'
+#' @examples
+#' wb <- loadWorkbook(path_xls, create = TRUE)
+#' dt <- readWorksheet(wb, sheet = 1,header = F)
+#' pivot_range <- getRange(dt)
+#' pivot_rows <- pivot_range$start:pivot_range$end
+#' tbl_raw <- unpivot(dt, pivot_rows)
+#'
 unpivot <- function(dt, rows){
   dt_cell <- dt[rows,]  %>%
     as_cells() %>%
@@ -42,12 +65,7 @@ unpivot <- function(dt, rows){
   return(dt_cell)
 }
 
-## example
-wb <- loadWorkbook(path_xls, create = TRUE)
-dt <- readWorksheet(wb, sheet = 1,header = F)
-pivot_range <- getRange(dt)
-pivot_rows <- pivot_range$start:pivot_range$end
-tbl_raw <- unpivot(dt, pivot_rows)
+
 
 #------Helper function to Extract Information------
 
@@ -80,19 +98,6 @@ getInfo <- function(dt){
 }
 
 
-#-----pivot and combine all data tables from xls file------
-
-dir_final <- c("01-machine",
-               "02-fertilizer",
-               "03-plastic",
-               "04-pesticide",
-               "05-test")
-dir_media <- "data-raw/rural-yearbook/part03-agri-produce/"
-file_dir <- glue::glue("{dir_media}{dir_final}")
-#path_xls <- "data-raw/MyFile.xls"
-#file_xls <- "raw-2018-2019-edited.xlsx"
-file_xls <- "raw-2018-2019.xls"
-path_xls <- glue::glue("{file_dir[1]}/{file_xls}")
 wb <- loadWorkbook(path_xls, create = TRUE)
 
 getSheets(wb)

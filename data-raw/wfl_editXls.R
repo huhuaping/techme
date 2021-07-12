@@ -34,7 +34,7 @@ removeSheet(wb,"CNKI")
 ## get the numbers of sheets. It should minus one to drop the last sheet contains only copyright informal .
 sheetnum <- length(getSheets(wb))
 
-i <- 1
+i <- 1 # default the first sheet
 dt_check <- readWorksheet(wb, sheet = i,header = F)
 
 # release file permission again

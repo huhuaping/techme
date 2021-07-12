@@ -2,33 +2,10 @@
 
 #-----download yearbook dataset----
 
-# -----generate batch directories------
-gen_dirs_vec<- function(media,final){
-  file_dir <- glue::glue("{media}{final}")
-  #unlink(file_dir, recursive = T)
-  # create file directory
-  sl <- sapply(file_dir, FUN = dir.create,recursive = T)
-  warn_list <- utils::warnErrList(sl)
-  if (length(warn_list)!=0){
-    warn_list
-  } else {
-    print(glue::glue("Generate directores successfully." ))
-  }
-}
 
-# examples
-dir_final <- c("01-machine",
-               "02-fertilizer",
-               "03-plastic",
-               "04-pesticide",
-               "05-test")
-dir_media <- "data-raw/rural-yearbook/part03-agri-produce/"
-gen_dirs_vec(media = dir_media,
-                final = dir_final)
-length("")
 # -----rename batch files without special characters-----
 ## all change to the same file names.
-renmae_files_vec<- function(media, final, char_exclude=NA, char_replace){
+rename_files_vec <- function(media, final, char_exclude=NA, char_replace){
   if (is.na(char_exclude)) stop("Excluded character for file name not set, it is danger to do bantch rename.")
 
   dir_dest <- glue::glue("{media}{final}")
@@ -51,6 +28,8 @@ renmae_files_vec<- function(media, final, char_exclude=NA, char_replace){
 }
 
 # example
-renmae_files_vec(dir_media, dir_final, "raw", "my-raw")
+rename_files_vec(media = dir_media, final = dir_final,
+                 char_exclude = "raw",
+                 char_replace = "my-raw")
 
 # usethis::use_data(wfl_rename, overwrite = TRUE)
