@@ -26,13 +26,24 @@ matchData <- function(dt_left, dt_right){
 
 
 df_matched <- matchData(dt_left = df_tidy, dt_right = df_vars_matched)
-last_dir <- str_extract(path_xls, "(?<=/\\d{2}-)(.+)") %>%
+
+last_dir <- str_extract(path_xls, "(part.+)") %>%
   str_replace(., "(?<=\\.)(.+)", "xlsx")
-tidy_dir <- mgsub::mgsub(last_dir,
+tidy_file_name <- mgsub::mgsub(last_dir,
                           c("raw", "/", "-edited"),
                           c("tidy", "-", ""))
-tidy_path <-paste0("data-raw/data-tidy/",tidy_dir)
-openxlsx::write.xlsx(df_matched, tidy_path)
+
+# generte directory
+dir_sub1 <- "data-raw/data-tidy/"
+dir_sub2 <- yearbook
+
+if (noDir ) {
+  gen_dirs_vec(media = dir_sub1, final = dir_sub2)
+}
+
+
+
+tidy_path <-paste0(dir_sub1, dir_sub2,"/",tidy_file_name)
 
 
 #usethis::use_data(df_matched, overwrite = TRUE, internal = T)

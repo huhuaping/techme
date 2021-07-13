@@ -39,7 +39,7 @@ get_best_match <- function(word, charvec ){
 #' df_vars_matched <- matchVars(dt = df_tidy, block_target = target)
 #' openxlsx::write.xlsx(df_vars_matched, "data-raw/df-vars-matched.xlsx")
 #'
-matchVars <- function(dt, block_target, block_lang="eng"){
+matchVars <- function(dt, block_target = target, block_lang="eng"){
   input <- unique(dt$vars)
   require(techme)
   data("varsList")
@@ -63,8 +63,6 @@ matchVars <- function(dt, block_target, block_lang="eng"){
 
 }
 
-target <- list(block1 ="v7", block2="sctj",block3 ="nyjx")
 df_vars_matched <- matchVars(dt = df_tidy, block_target = target)
-openxlsx::write.xlsx(df_vars_matched, "data-raw/df-vars-matched.xlsx")
 
 #usethis::use_data(vars_matched, overwrite = TRUE, internal = T)

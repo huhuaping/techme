@@ -34,8 +34,12 @@ getRange <- function(dt, reg_start="^地.*区", reg_end ="^新.*疆"){
 
 #' Unpivot table
 #'
-#' @param dt
-#' @param rows
+#' @param dt data.frame. Which is the wb object reading from xls workbook.
+#' @param rows vector. Target rows of the region contains pivot table.
+#' @param cols.drop vector. Columns numbers which will be dropped, default \code{NULL}.
+#' @param header.mode character. One of the four options:  'vars-year', 'vars', 'vars-vars','year'
+#' @param vars.add character. if header.mode = 'year', then the vars.add must be specified,
+#'   And you can use the function \code{get_vars()} to get the variable name.
 #'
 #' @return data.frame
 #' @export unpivot
@@ -45,6 +49,8 @@ getRange <- function(dt, reg_start="^地.*区", reg_end ="^新.*疆"){
 #' dt <- readWorksheet(wb, sheet = 1,header = F)
 #' pivot_range <- getRange(dt)
 #' pivot_rows <- pivot_range$start:pivot_range$end
+#' cols_drop <- c(2)
+#' header_mode <- "vars-vars"
 #' vars_spc <- get_vars(df = varsList, lang = "eng",
 #'                      block = list(block1 = "v4",
 #'                                   block2 = "zh",
@@ -54,65 +60,57 @@ getRange <- function(dt, reg_start="^地.*区", reg_end ="^新.*疆"){
 #'
 #'
 #' tbl_raw <- unpivot(dt, rows = pivot_rows,
-#'                    cols.drop = c(2),
+#'                    cols.drop = cols_drop,
 #'                    header.mode = "year",
 #'                    vars.add = vars_spc)
 #'
 
+unpivot <- function(dt, rows, cols.drop = cols_drop,
+                    header.mode = header_mode,
+                    vars.add = vars_spc ){
+  # drop cols
+  if (is.null(cols.drop)) {
+    dt_cell <- dt[rows,]
+  } else {
+    dt_cell <- dt[rows,-cols.drop]
+  }
 
+  dt_cell <- dt_cell  %>%
+    as_cells() %>%
+    arrange( col, row )
 
-if (yearbook=="rural") {
-  unpivot <- function(dt, rows){
-    dt_cell <- dt[rows,]  %>%
-      as_cells() %>%
-      arrange( col,row ) %>%
+  if(header.mode == "vars-year"){ # header mode 1
+    dt_cell <- dt_cell %>%
       behead("up-left", vars) %>%
       behead("up", year) %>%
-      behead("left", province) %>%
-      rename(value = chr) %>%
-      select(-data_type, -row, -col)
-    return(dt_cell)
-  }
-#
-} else if (yearbook=="tech") {
-  unpivot <- function(dt, rows, cols.drop = NULL,
-                      header.mode = "year",
-                      vars.add = NULL){
-    # drop cols
-    if (is.null(cols.drop)) {
-      dt_cell <- dt[rows,]
-    } else {
-      dt_cell <- dt[rows,-cols.drop]
-    }
-
-    dt_cell <- dt_cell  %>%
-      as_cells() %>%
-      arrange( col,row )
-
-    if(header.mode == "vars-year"){ # header mode 1
-      dt_cell <- dt_cell %>%
-        behead("up-left", vars) %>%
-        behead("up", year) %>%
-        behead("left", province)
-    } else if (header.mode == "vars"){ # header mode 2
-      dt_cell <- dt_cell %>%
-        behead("up", vars) %>%
-        behead("left", province) %>%
-        add_column(year = str_extract(file_xls,"\\d{4}"))
-    } else if (header.mode == "year"){ # header mode 3
-      if (length(vars.add)!=1) stop("Added Vars info not correct, please specify by function 'get_vars()' ")
-      dt_cell <- dt_cell %>%
-        behead("up", year) %>%
-        behead("left", province) %>%
-        add_column(vars = vars.add)
-    }
+      behead("left", province)
+  } else if (header.mode == "vars"){ # header mode 2
     dt_cell <- dt_cell %>%
-      rename(value = chr) %>%
-      select(province, year, vars, value)
-    return(dt_cell)
+      behead("up", vars) %>%
+      behead("left", province) %>%
+      add_column(year = str_extract(file_xls,"\\d{4}"))
+  } else if (header.mode == "vars-vars"){ # header mode 3
+    dt_cell <- dt_cell %>%
+      behead("up-left", vars_tot) %>%
+      behead("up", vars) %>%
+      mutate(vars = ifelse(is.na(vars), vars_tot, vars)) %>%
+      behead("left-up", province) %>%
+      add_column(year = str_extract(file_xls,"\\d{4}")) %>%
+      select(-vars_tot)
+  }else if (header.mode == "year"){ # header mode 4
+    if (length(vars.add)!=1) stop("Added Vars info not correct, please specify by function 'get_vars()' ")
+    dt_cell <- dt_cell %>%
+      behead("up", year) %>%
+      behead("left", province) %>%
+      add_column(vars = unname(unlist(vars.add)))
   }
-
+  dt_cell <- dt_cell %>%
+    rename(value = chr) %>%
+    select(province, year, vars, value)
+  return(dt_cell)
 }
+
+
 
 
 
@@ -129,14 +127,15 @@ if (yearbook=="rural") {
 #' @export getInfo
 #'
 #' @examples
-#' same_units <- getInfo(dt)
+#' same_units <- getInfo(dt )
 
 getInfo <- function(dt){
   dt_cell <- dt  %>%
     unpivotr::as_cells() %>%
     filter(str_detect(chr,"单位:|单位："))
   info_list <- dt_cell %>%
-    mutate(chr = str_trim(str_extract(chr, "(?<=单位:|单位：)(.+)"))) %>%
+    mutate(chr = str_extract(chr, "(?<=单位:|单位：)(.+)"),
+           chr = str_trim(chr)) %>%
     select(chr) %>%
     unique() %>%
     unlist() %>%
@@ -161,7 +160,7 @@ if (sheetnum==0) {
 }
 
 
-#i <- 2
+#i <- 1
 df_out <- NULL
 for (i in 1: sheetnum){
   print(glue::glue("begin unpivot the {i} of {sheetnum} xls sheet."))
@@ -191,7 +190,8 @@ for (i in 1: sheetnum){
   # given that units different and contains within () following variables names,
   ## or all variables have same units.
   df_out <- df_out %>%
-    mutate(units = str_trim(str_extract(vars, "(?<=\\()(.+)(?=\\))"))) %>%
+    mutate(units = str_extract(vars, "(?<=\\()(.+)(?=\\))"),
+           units = str_trim(units)) %>%
     mutate(units = ifelse(is.na(units), same_units, units))
 } # end loop i
 
