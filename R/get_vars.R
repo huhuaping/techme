@@ -29,21 +29,43 @@
 #'
 get_vars <- function(df, lang="eng", block, what = "variables"){
   if (lang =="chn") {
-    vars <- df %>%
-      dplyr::filter(.data$chn_block1 %in% block$block1|
-                    .data$chn_block2 %in% block$block2|
-                    .data$chn_block3 %in% block$block3|
-                    .data$chn_block4 %in% block$block4)
+    if (!is.null(block$block1)){
+      df <-  df %>% filter(.data$chn_block1 %in% block$block1)
+    }
+
+    if (!is.null(block$block2)){
+      df <- df %>% filter(.data$chn_block2 %in% block$block2)
+    }
+
+    if (!is.null(block$block3)){
+      df <- df %>% filter(.data$chn_block3 %in% block$block3)
+    }
+
+    if (!is.null(block$block4)){
+      df <- df %>% filter(.data$chn_block4 %in% block$block4)
+    }
+
   } else if (lang =="eng"){
-    vars <- df %>%
-      dplyr::filter(.data$block1 %in% block$block1|
-                    .data$block2 %in% block$block2|
-                    .data$block3 %in% block$block3|
-                    .data$block4 %in% block$block4)
+    if (!is.null(block$block1)){
+      df <-  df %>% filter(.data$block1 %in% block$block1)
+    }
+
+    if (!is.null(block$block2)){
+      df <- df %>% filter(.data$block2 %in% block$block2)
+    }
+
+    if (!is.null(block$block3)){
+      df <- df %>% filter(.data$block3 %in% block$block3)
+    }
+
+    if (!is.null(block$block4)){
+      df <- df %>% filter(.data$block4 %in% block$block4)
+    }
   }
 
-  vars <-  vars %>%
+  vars <-  df %>%
     dplyr::select(one_of(what)) #%>%
     #unlist()
   return(vars)
 }
+

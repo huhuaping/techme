@@ -1,11 +1,5 @@
 ## code to prepare `wfl_unpivot` dataset goes here
 
-require(unpivotr)
-library(XLConnect)
-library(tidyverse)
-library(readxl)
-library(glue)
-
 #------Helper function to get range of pivot table----
 #' Get range of pivot table
 #'
@@ -51,18 +45,73 @@ getRange <- function(dt, reg_start="^地.*区", reg_end ="^新.*疆"){
 #' dt <- readWorksheet(wb, sheet = 1,header = F)
 #' pivot_range <- getRange(dt)
 #' pivot_rows <- pivot_range$start:pivot_range$end
-#' tbl_raw <- unpivot(dt, pivot_rows)
+#' vars_spc <- get_vars(df = varsList, lang = "eng",
+#'                      block = list(block1 = "v4",
+#'                                   block2 = "zh",
+#'                                   block3 = "qd",
+#'                                   block4 = "RD"),
+#'                      what = "chn_block4")
 #'
-unpivot <- function(dt, rows){
-  dt_cell <- dt[rows,]  %>%
-    as_cells() %>%
-    arrange( col,row ) %>%
-    behead("up-left", vars) %>%
-    behead("up", year) %>%
-    behead("left", province) %>%
-    rename(value = chr) %>%
-    select(-data_type, -row, -col)
-  return(dt_cell)
+#'
+#' tbl_raw <- unpivot(dt, rows = pivot_rows,
+#'                    cols.drop = c(2),
+#'                    header.mode = "year",
+#'                    vars.add = vars_spc)
+#'
+
+
+
+if (yearbook=="rural") {
+  unpivot <- function(dt, rows){
+    dt_cell <- dt[rows,]  %>%
+      as_cells() %>%
+      arrange( col,row ) %>%
+      behead("up-left", vars) %>%
+      behead("up", year) %>%
+      behead("left", province) %>%
+      rename(value = chr) %>%
+      select(-data_type, -row, -col)
+    return(dt_cell)
+  }
+#
+} else if (yearbook=="tech") {
+  unpivot <- function(dt, rows, cols.drop = NULL,
+                      header.mode = "year",
+                      vars.add = NULL){
+    # drop cols
+    if (is.null(cols.drop)) {
+      dt_cell <- dt[rows,]
+    } else {
+      dt_cell <- dt[rows,-cols.drop]
+    }
+
+    dt_cell <- dt_cell  %>%
+      as_cells() %>%
+      arrange( col,row )
+
+    if(header.mode == "vars-year"){ # header mode 1
+      dt_cell <- dt_cell %>%
+        behead("up-left", vars) %>%
+        behead("up", year) %>%
+        behead("left", province)
+    } else if (header.mode == "vars"){ # header mode 2
+      dt_cell <- dt_cell %>%
+        behead("up", vars) %>%
+        behead("left", province) %>%
+        add_column(year = str_extract(file_xls,"\\d{4}"))
+    } else if (header.mode == "year"){ # header mode 3
+      if (length(vars.add)!=1) stop("Added Vars info not correct, please specify by function 'get_vars()' ")
+      dt_cell <- dt_cell %>%
+        behead("up", year) %>%
+        behead("left", province) %>%
+        add_column(vars = vars.add)
+    }
+    dt_cell <- dt_cell %>%
+      rename(value = chr) %>%
+      select(province, year, vars, value)
+    return(dt_cell)
+  }
+
 }
 
 
