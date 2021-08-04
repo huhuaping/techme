@@ -6,46 +6,34 @@ load_all()
 #dir_final <- c("01-machine", "02-fertilizer","03-plastic", "04-pesticide")
 #dir_media <- "data-raw/rural-yearbook/part03-agri-produce/"
 
-#dir_final <- c("01-labor-hour", "02-spend-intense","03-spend-inner", "05-public-professionals")
-#dir_media <- "data-raw/tech-yearbook/part01-over/"
-
-#dir_final <- c("01-activity", "02-source","03-purpose")
-#dir_media <- "data-raw/tech-yearbook/part01-over/03-spend-inner/"
-
-dir_final <- c("00-firms", "01-employee","03-spend-inner", "04-spend-outer",
-               "05-RD-projects","06-RD-institution","07-new-product",
-               "08-patent","09-tech-renew")
-dir_media <- "data-raw/tech-yearbook/part02-firm/"
-
-#dir_final <- c("01-operation", "02-RD")
-#dir_media <- "data-raw/tech-yearbook/part05-industry/"
-
-#dir_final <- c("01-patent", "02-enrollmark","03-teckmarket-pull", "04-teckmarket-push")
-#dir_media <- "data-raw/tech-yearbook/part08-output/"
-
-#dir_final <- c("01-public-income", "02-public-budget")
-#dir_media <- "data-raw/nation-yearbook/part07-finance/"
-
 # default the first directory
 i_sel <- 1
 file_sel <- "raw-2018.xls"
 #file_sel <- "raw-2018-2019-edited.xlsx"
 
-# step 1: filesystem------
-source("data-raw/wfl_files.R")
+tidy.Xlsx<- function(dir_final, dir_media,
+         i_sel = 1, file_sel,
+         ){
+  # step 1: filesystem------
+  source("data-raw/wfl_files.R")
 
-# step 2: generate dirs------
-source("data-raw/wfl_genDirs.R")
+  # step 2: generate dirs------
+  source("data-raw/wfl_genDirs.R")
 
-# step 3: rename download xls files -----
-## ignore following steps if unneccesary
-# source("data-raw/wfl_rename.R")
+  # step 3: rename download xls files -----
+  ## ignore following steps if unneccesary
+  source("data-raw/wfl_rename.R")
 
-# step 4: unlock xlsx files ------
-source("data-raw/wfl_unlock.R")
+  # step 4: unlock xlsx files ------
+  source("data-raw/wfl_unlock.R")
 
-# step 5: edit xlsx files manually ------
-source("data-raw/wfl_editXls.R")
+  # step 5: edit xlsx files manually ------
+  source("data-raw/wfl_editXls.R")
+}
+
+
+
+
 
 # step 6: begin unpivot
 ## whether drop columns and specify the header mode.
@@ -85,17 +73,10 @@ openxlsx::write.xlsx(df_vars_matched, "data-raw/df-vars-matched.xlsx")
 
 
 # step 9: left join to varsList and export data -----
-#noDir <- FALSE
+yearbook <- "tech-yearbook"
+noDir <- FALSE
 source("data-raw/wfl_matchData.R", encoding = "UTF-8")
-
-tidy_path # see the files' path
-
-# loop to export xlsx
-for (id_year in vec_year) {
-  n_year <- which(str_detect(tidy_path, id_year))
-  df_matched %>%
-    filter(year == id_year) %>%
-    openxlsx::write.xlsx(., tidy_path[n_year])
-}
+tidy_path
+openxlsx::write.xlsx(df_matched, tidy_path)
 
 #usethis::use_data(wfl_knitAll, overwrite = TRUE)
