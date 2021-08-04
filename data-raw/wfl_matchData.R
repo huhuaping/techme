@@ -37,6 +37,7 @@ tidy_file_name <- mgsub::mgsub(last_dir,
 dir_sub1 <- "data-raw/data-tidy/"
 dir_sub2 <- gsub("data-raw/", "",dir_sel)
 gen_dirs_vec(media = dir_sub1, final = dir_sub2)
+dir_tidy <- paste0(dir_sub1, dir_sub2)
 
 # extract year
 vec_year <- sort(unique(df_matched$year))

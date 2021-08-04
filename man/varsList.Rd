@@ -11,7 +11,7 @@ A data frame:
 \item{chn_full_name}{price, in US dollars}
 \item{short_chn}{price, in US dollars}
 \item{short_eng}{price, in US dollars}
-\item{unit}{price, in US dollars}
+\item{units}{price, in US dollars}
 \item{block1}{price, in US dollars}
 \item{block2}{price, in US dollars}
 \item{block3}{price, in US dollars}
