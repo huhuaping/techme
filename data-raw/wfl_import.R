@@ -1,15 +1,37 @@
 ## code to prepare `wfl_import` dataset goes here
 
 # read file from history files
-url_xlsx <- "d://github/tech-report/data-extract/part01-01-machine-2010t2017.xlsx"
+#url_xlsx <- "d://github/tech-report/data-extract/part01-01-machine-2010t2018.xlsx"
+#url_xlsx <- "d://github/tech-report/data-extract/part01-02-fertilizer-2010t2018.xlsx"
+#url_xlsx <- "d://github/tech-report/data-extract/part01-03-plastic-2010t2018.xlsx"
+url_xlsx <- "d://github/tech-report/data-extract/part01-04-pesticide-2010t2018.xlsx"
+
 df_import <- openxlsx::read.xlsx(url_xlsx)
 
 # get additional info
+## merchine
 vars_table <- get_vars(varsList, block = list(block1= "v7",
                                               block2 = "sctj",
                                               block3 = "nyjx"),
                        what = c("variables","chn_block4", "units"))
-
+## fertilizer
+vars_table <- get_vars(varsList, block = list(block1= "v7",
+                                              block2 = "sctj",
+                                              block3 = "nyhf",
+                                              block4 = "hj"),
+                       what = c("variables","chn_block4", "units"))
+## plastics
+vars_table <- get_vars(varsList, block = list(block1= "v7",
+                                              block2 = "sctj",
+                                              block3 = "nybm",
+                                              block4 = "bmsy"),
+                       what = c("variables","chn_block4", "units"))
+## pesticide
+vars_table <- get_vars(varsList, block = list(block1= "v7",
+                                              block2 = "sctj",
+                                              block3 = "cyny",
+                                              block4 = "nysy"),
+                       what = c("variables","chn_block4", "units"))
 
 vars_order <- c('province','year','chn_block4','value','units','variables')
 
@@ -39,7 +61,7 @@ for (id_year in vec_year) {
     filter(year == id_year) %>%
     openxlsx::write.xlsx(., tidy_path[n_year])
   print(glue::glue("Export Year {id_year} has finished!"))
-  Sys.sleep(0.5)
+  Sys.sleep(0.1)
 }
 
 

@@ -13,6 +13,13 @@ for ( i in length(files_use):1) {
 
 }
 
-AgriMachine <- df_use
+#AgriMachine <- df_use
+#AgriFertilizer <- df_use
+#AgriPlastic <- df_use
+AgriPesticide <- df_use
 
-usethis::use_data(AgriMachine, overwrite = TRUE)
+#usethis::use_data(AgriMachine, overwrite = TRUE)
+#usethis::use_data(AgriFertilizer, overwrite = TRUE)
+#usethis::use_data(AgriPlastic, overwrite = TRUE)
+usethis::use_data(AgriPesticide, overwrite = TRUE)
+

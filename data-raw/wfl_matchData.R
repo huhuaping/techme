@@ -40,6 +40,12 @@ gen_dirs_vec(media = dir_sub1, final = dir_sub2)
 dir_tidy <- paste0(dir_sub1, dir_sub2)
 
 # extract year
+#url_xlsx <- "data-raw/data-tidy/rural-yearbook/fertilizer-tidy-2018-2019.xlsx"
+#url_xlsx <- "data-raw/data-tidy/rural-yearbook/plastic-tidy-2018-2019.xlsx"
+url_xlsx <- "data-raw/data-tidy/rural-yearbook/pesticide-tidy-2018-2019.xlsx"
+
+df_matched <- openxlsx::read.xlsx(url_xlsx)
+
 vec_year <- sort(unique(df_matched$year))
 files_tidy <- glue::glue("{vec_year}.xlsx" )
 
