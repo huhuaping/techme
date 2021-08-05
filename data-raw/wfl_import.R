@@ -1,10 +1,11 @@
 ## code to prepare `wfl_import` dataset goes here
 
 # read file from history files
+url_xlsx <- "d://github/tech-report/data-extract/part01-01-machine-2010t2018.xlsx"
 #url_xlsx <- "d://github/tech-report/data-extract/part01-01-machine-2010t2018.xlsx"
 #url_xlsx <- "d://github/tech-report/data-extract/part01-02-fertilizer-2010t2018.xlsx"
 #url_xlsx <- "d://github/tech-report/data-extract/part01-03-plastic-2010t2018.xlsx"
-url_xlsx <- "d://github/tech-report/data-extract/part01-04-pesticide-2010t2018.xlsx"
+#url_xlsx <- "d://github/tech-report/data-extract/part01-04-pesticide-2010t2018.xlsx"
 
 df_import <- openxlsx::read.xlsx(url_xlsx)
 

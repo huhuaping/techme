@@ -27,7 +27,7 @@ dir_media <- "data-raw/tech-yearbook/part02-firm/"
 #dir_media <- "data-raw/nation-yearbook/part07-finance/"
 
 # default the first directory
-i_sel <- 4
+i_sel <- 1
 file_sel <- "raw-2018-2019.xls"
 #file_sel <- "raw-2018-2019-edited.xlsx"
 
