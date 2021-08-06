@@ -6,15 +6,15 @@ load_all()
 #dir_final <- c("01-machine", "02-fertilizer","03-plastic", "04-pesticide")
 #dir_media <- "data-raw/rural-yearbook/part03-agri-produce/"
 
-dir_final <- c("01-public-income", "02-public-budget")
-dir_media <- "data-raw/nation-yearbook/part07-finance/"
+#dir_final <- c("01-public-income", "02-public-budget")
+#dir_media <- "data-raw/nation-yearbook/part07-finance/"
 
 
 #dir_final <- c("01-labor-hour", "02-spend-intense","03-spend-inner", "05-public-professionals")
 #dir_media <- "data-raw/tech-yearbook/part01-over/"
 
-#dir_final <- c("01-activity", "02-source","03-purpose")
-#dir_media <- "data-raw/tech-yearbook/part01-over/03-spend-inner/"
+dir_final <- c("01-activity", "02-source","03-purpose")
+dir_media <- "data-raw/tech-yearbook/part01-over/03-spend-inner/"
 
 dir_final <- c("00-firms", "01-employee","03-spend-inner", "04-spend-outer",
                "05-RD-projects","06-RD-institution","07-new-product",
@@ -29,7 +29,7 @@ dir_media <- "data-raw/tech-yearbook/part02-firm/"
 
 
 # default the first directory
-i_sel <- 2
+i_sel <- 1
 file_sel <- "raw-2019.xls"
 #file_sel <- "raw-2018-2019.xls"
 #file_sel <- "raw-2018-2019-edited.xlsx"

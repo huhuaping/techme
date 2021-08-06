@@ -7,7 +7,9 @@ url_xlsx <- "d://github/tech-report/data-extract/part01-01-machine-2010t2018.xls
 #url_xlsx <- "d://github/tech-report/data-extract/part01-03-plastic-2010t2018.xlsx"
 #url_xlsx <- "d://github/tech-report/data-extract/part01-04-pesticide-2010t2018.xlsx"
 #url_xlsx <- "d://github/tech-report/data-extract/part01-04-pesticide-2010t2018.xlsx"
-url_xlsx <- "d://github/tech-report/data-analysis/part01-07-finance-public-budget2010t2018.xlsx"
+#url_xlsx <- "d://github/tech-report/data-analysis/part01-07-finance-public-budget2010t2018.xlsx"
+url_xlsx <- "d://github/tech-report/data-analysis/part01-RD-update.xlsx"
+url_xlsx <- "d://github/tech-report/data-analysis/part01-inner-activity-upto-2018.xlsx"
 
 df_import <- openxlsx::read.xlsx(url_xlsx)
 
@@ -42,6 +44,15 @@ vars_table <- get_vars(varsList, block = list(block1= "v6",
                                               block3 = "yszc"),
                        what = c("variables","chn_block4", "units"))
 
+## RD intense
+vars_table <- get_vars(varsList, block = list(block1= "v4",
+                                              block2 = "ztr"),
+                       what = c("variables","chn_block4", "units"))
+## RD intense
+vars_table <- get_vars(varsList, block = list(block1= "v4",
+                                              block2 = "zh",
+                                              block3 = "nbzc"),
+                       what = c("variables","chn_block4", "units"))
 
 vars_order <- c('province','year','chn_block4','value','units','variables')
 
