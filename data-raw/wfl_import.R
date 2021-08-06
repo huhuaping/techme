@@ -6,6 +6,8 @@ url_xlsx <- "d://github/tech-report/data-extract/part01-01-machine-2010t2018.xls
 #url_xlsx <- "d://github/tech-report/data-extract/part01-02-fertilizer-2010t2018.xlsx"
 #url_xlsx <- "d://github/tech-report/data-extract/part01-03-plastic-2010t2018.xlsx"
 #url_xlsx <- "d://github/tech-report/data-extract/part01-04-pesticide-2010t2018.xlsx"
+#url_xlsx <- "d://github/tech-report/data-extract/part01-04-pesticide-2010t2018.xlsx"
+url_xlsx <- "d://github/tech-report/data-analysis/part01-07-finance-public-budget2010t2018.xlsx"
 
 df_import <- openxlsx::read.xlsx(url_xlsx)
 
@@ -34,10 +36,17 @@ vars_table <- get_vars(varsList, block = list(block1= "v7",
                                               block4 = "nysy"),
                        what = c("variables","chn_block4", "units"))
 
+## public budget
+vars_table <- get_vars(varsList, block = list(block1= "v6",
+                                              block2 = "cz",
+                                              block3 = "yszc"),
+                       what = c("variables","chn_block4", "units"))
+
+
 vars_order <- c('province','year','chn_block4','value','units','variables')
 
 df_reface <- df_import %>%
-  gather(key = "variables", value = "value", -province, -year) %>%
+  #gather(key = "variables", value = "value", -province, -year) %>%
   left_join(., vars_table, by = "variables") %>%
   mutate(year = as.character(year)) %>%
   select(all_of(vars_order)) %>%

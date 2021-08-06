@@ -14,7 +14,8 @@ getTidy <- function(dt){
   dt_tidy <- dt %>%
     mutate(value = as.numeric(value),
            year = str_extract(year, "\\d{4}")) %>%
-    mutate(province = str_replace(province," ", "")) %>%
+    mutate(province = str_replace(province," ", ""),
+           province = str_replace(province,"地方合计", "全国")) %>%
     filter(!str_detect(province, "东部|中部|西部|东北")) %>%
     #separate(vars, into = c("vars", "unit"), sep = "\\(") %>%
     mutate(vars = str_trim(vars),

@@ -21,17 +21,18 @@ matchData <- function(dt_left, dt_right){
                                replacement = rpl )) %>%
     rename(chn_block4="vars") %>%
     left_join(., dt_right, by = "chn_block4") %>%
-    select(-input, -asis)
+    select(-input, -asis) %>%
+    filter(!is.na(variables))
 }
 
 
 df_matched <- matchData(dt_left = df_tidy, dt_right = df_vars_matched)
 
-last_dir <- str_extract(path_xls, "(part.+)") %>%
-  str_replace(., "(?<=\\.)(.+)", "xlsx")
-tidy_file_name <- mgsub::mgsub(last_dir,
-                          c("raw", "/", "-edited"),
-                          c("tidy", "-", ""))
+#last_dir <- str_extract(path_xls, "(part.+)") %>%
+#  str_replace(., "(?<=\\.)(.+)", "xlsx")
+#tidy_file_name <- mgsub::mgsub(last_dir,
+#                          c("raw", "/", "-edited"),
+#                          c("tidy", "-", ""))
 
 # generte directory
 dir_sub1 <- "data-raw/data-tidy/"
@@ -42,9 +43,9 @@ dir_tidy <- paste0(dir_sub1, dir_sub2)
 # extract year
 #url_xlsx <- "data-raw/data-tidy/rural-yearbook/fertilizer-tidy-2018-2019.xlsx"
 #url_xlsx <- "data-raw/data-tidy/rural-yearbook/plastic-tidy-2018-2019.xlsx"
-url_xlsx <- "data-raw/data-tidy/rural-yearbook/pesticide-tidy-2018-2019.xlsx"
+#url_xlsx <- "data-raw/data-tidy/rural-yearbook/pesticide-tidy-2018-2019.xlsx"
 
-df_matched <- openxlsx::read.xlsx(url_xlsx)
+#df_matched <- openxlsx::read.xlsx(url_xlsx)
 
 vec_year <- sort(unique(df_matched$year))
 files_tidy <- glue::glue("{vec_year}.xlsx" )

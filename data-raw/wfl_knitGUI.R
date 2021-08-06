@@ -3,8 +3,12 @@
 require(devtools)
 load_all()
 
-dir_final <- c("01-machine", "02-fertilizer","03-plastic", "04-pesticide")
-dir_media <- "data-raw/rural-yearbook/part03-agri-produce/"
+#dir_final <- c("01-machine", "02-fertilizer","03-plastic", "04-pesticide")
+#dir_media <- "data-raw/rural-yearbook/part03-agri-produce/"
+
+dir_final <- c("01-public-income", "02-public-budget")
+dir_media <- "data-raw/nation-yearbook/part07-finance/"
+
 
 #dir_final <- c("01-labor-hour", "02-spend-intense","03-spend-inner", "05-public-professionals")
 #dir_media <- "data-raw/tech-yearbook/part01-over/"
@@ -23,12 +27,11 @@ dir_media <- "data-raw/tech-yearbook/part02-firm/"
 #dir_final <- c("01-patent", "02-enrollmark","03-teckmarket-pull", "04-teckmarket-push")
 #dir_media <- "data-raw/tech-yearbook/part08-output/"
 
-#dir_final <- c("01-public-income", "02-public-budget")
-#dir_media <- "data-raw/nation-yearbook/part07-finance/"
 
 # default the first directory
-i_sel <- 1
-file_sel <- "raw-2018-2019.xls"
+i_sel <- 2
+file_sel <- "raw-2019.xls"
+#file_sel <- "raw-2018-2019.xls"
 #file_sel <- "raw-2018-2019-edited.xlsx"
 
 # step 1: filesystem------
@@ -49,15 +52,14 @@ source("data-raw/wfl_editXls.R")
 
 # step 6: begin unpivot
 ## whether drop columns and specify the header mode.
-#cols_drop <- c(2)
-#header_mode <- "vars"
-cols_drop <- NULL
-header_mode <- "vars-year"
+cols_drop <- c(2)
+header_mode <- "vars"
+#cols_drop <- NULL
+#header_mode <- "vars-year"
 ## following value only for header.mode=="year"
 ## and you should specify it manuualy
 vars_spc <- get_vars(df = varsList, lang = "eng",
-                      block = list(block1 = "v7",block2 = "sctj",block3 = "qd",
-                                   block4 = "RD"),
+                      block = list(block1 = "v6",block2 = "cz",block3 = "yszc"),
                       what = "chn_block4")
 
 source("data-raw/wfl_unpivot.R", encoding = "UTF-8")
@@ -69,7 +71,8 @@ source("data-raw/wfl_tidy.R", encoding = "UTF-8")
 # step 8: match and check variables names to the varsList ----
 ## check if warnings
 ## target search
-target <- list(block1 = "v7",block2 = "sctj",block3 = "nyjx")
+target <- list(block1 = "v6",block2 = "cz",block3 = "yszc")
+#target <- list(block1 = "v7",block2 = "sctj",block3 = "nyjx")
 #target <- list(block1 = "v4",block2 = "qy",block3 = "qysl")
 source("data-raw/wfl_matchVars.R", encoding = "UTF-8")
 df_vars_matched
@@ -77,22 +80,26 @@ df_vars_matched
 ## target search
 get_vars(varsList,lang = "eng", block = target, what = "chn_block4" )
 ## replace characters
-ptn <- c("谷物联合收割机")
-rpl <- c("联合收获机")
-
+#ptn <- c("谷物联合收割机")
+#rpl <- c("联合收获机")
 #ptn <- c("有研发机构的企业数", "有R&D活动的企业数")
 #rpl <- c("有研发机构", "有RD活动")
+## replace characters
+ptn <- c("地方一般公共预算支出","教育支出","科学技术支出",
+"农林水支出")
+rpl <- c("合计","教育","科学技术","农林水")
 
 
 df_tidy <- df_tidy %>%
   mutate(vars= mgsub::mgsub(vars, ptn, rpl))
 ## rerun the function
-df_vars_matched <- matchVars(dt = df_tidy, block_target = target)
+df_vars_matched <- matchVars(dt = df_tidy, block_target = target)%>%
+  filter(asis==TRUE)
 openxlsx::write.xlsx(df_vars_matched, "data-raw/df-vars-matched.xlsx")
 
 
 # step 9: left join to varsList and export data -----
-yearbook <- "rural-yearbook"
+#yearbook <- "rural-yearbook"
 #yearbook <- "tech-yearbook"
 #noDir <- FALSE
 source("data-raw/wfl_matchData.R", encoding = "UTF-8")
