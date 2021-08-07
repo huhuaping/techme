@@ -14,15 +14,14 @@ for ( i in length(files_use):1) {
 }
 
 
-
 #AgriMachine <- df_use
 #AgriFertilizer <- df_use
 #AgriPlastic <- df_use
 #AgriPesticide <- df_use
 #PublicBudget <- df_use
-RDIntense <- df_use
-RDActivity <- df_use
-MarketPull <- df_use
+#RDIntense <- df_use
+#RDActivity <- df_use
+#MarketPull <- df_use
 MarketPush <- df_use
 
 #usethis::use_data(AgriMachine, overwrite = TRUE)
@@ -31,8 +30,8 @@ MarketPush <- df_use
 #usethis::use_data(AgriPesticide, overwrite = TRUE)
 #usethis::use_data(PublicBudget, overwrite = TRUE)
 #usethis::use_data(RDIntense, overwrite = TRUE)
-usethis::use_data(RDActivity, overwrite = TRUE)
-usethis::use_data(MarketPull, overwrite = TRUE)
+#usethis::use_data(RDActivity, overwrite = TRUE)
+#usethis::use_data(MarketPull, overwrite = TRUE)
 usethis::use_data(MarketPush, overwrite = TRUE)
 
 

@@ -51,8 +51,8 @@ dir_tidy <- paste0(dir_sub1, dir_sub2)
 #  filter(year ==2019)
 
 vec_year <- sort(unique(df_matched$year))
-#files_tidy <- glue::glue("{vec_year}.xlsx" )
-files_tidy <- glue::glue("ammount-{vec_year}.xlsx" )
+files_tidy <- glue::glue("{vec_year}.xlsx" )
+#files_tidy <- glue::glue("ammount-{vec_year}.xlsx" )
 #files_tidy <- glue::glue("funds-{vec_year}.xlsx" )
 
 

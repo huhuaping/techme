@@ -9,13 +9,14 @@
 #url_xlsx <- "d://github/tech-report/data-extract/part01-04-pesticide-2010t2018.xlsx"
 #url_xlsx <- "d://github/tech-report/data-analysis/part01-07-finance-public-budget2010t2018.xlsx"
 #url_xlsx <- "d://github/tech-report/data-analysis/part01-RD-update.xlsx"
-url_xlsx <- "d://github/tech-report/data-proc/update-part01-RD-year2019.xlsx"
+#url_xlsx <- "d://github/tech-report/data-proc/update-part01-RD-year2019.xlsx"
 #url_xlsx <- "d://github/tech-report/data-analysis/part01-inner-activity-upto-2018.xlsx"
-url_xlsx <- "d://github/tech-report/data-raw/tech-yearbook/part08-output/03-teckmarket-pull/data-update/gather-pull-amount-funds-upto-2018.xlsx"
+#url_xlsx <- "d://github/tech-report/data-raw/tech-yearbook/part08-output/03-teckmarket-pull/data-update/gather-pull-amount-funds-upto-2018.xlsx"
 url_xlsx <- "d://github/tech-report/data-raw/tech-yearbook/part08-output/04-teckmarket-push/data-update/gather-push-amount-funds-upto-2018.xlsx"
 
-df_import <- openxlsx::read.xlsx(url_xlsx) %>%
-  filter(variables == "v4_cg_jssr_ht")
+
+df_import <- openxlsx::read.xlsx(url_xlsx) #%>%
+  #filter(variables == "v4_cg_jssr_ht")
 
 # get additional info
 ## merchine
@@ -65,6 +66,7 @@ vars_table <- get_vars(varsList, block = list(block1= "v4",
 
 vars_order <- c('province','year','chn_block4','value','units','variables')
 df_reface <- df_import %>%
+  mutate(year = as.character(year))
   #gather(key = "variables", value = "value", -province, -year) %>%
   left_join(., vars_table, by = "variables") %>%
   mutate(year = as.character(year)) %>%
@@ -76,12 +78,13 @@ df_reface <- df_import %>%
 
 # extract year
 vec_year <- sort(unique(df_reface$year))
-files_tidy <- glue::glue("ammount-{vec_year}.xlsx" )
+files_tidy <- glue::glue("funds-{vec_year}.xlsx" )
 
 # file path
 tidy_path <-paste0(dir_sub1, dir_sub2,"/",files_tidy)
 
 tidy_path # see the files' path
+
 
 # loop to export xlsx
 for (id_year in vec_year) {
