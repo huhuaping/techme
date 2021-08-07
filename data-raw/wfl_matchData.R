@@ -44,14 +44,17 @@ dir_tidy <- paste0(dir_sub1, dir_sub2)
 #url_xlsx <- "data-raw/data-tidy/rural-yearbook/fertilizer-tidy-2018-2019.xlsx"
 #url_xlsx <- "data-raw/data-tidy/rural-yearbook/plastic-tidy-2018-2019.xlsx"
 #url_xlsx <- "data-raw/data-tidy/rural-yearbook/pesticide-tidy-2018-2019.xlsx"
-url_xlsx <- "data-raw/data-tidy/tech-yearbook/part01-over-02-spend-intense-tidy-2019.xlsx"
-url_xlsx <- "data-raw/data-tidy/tech-yearbook/part01-over-03-spend-inner-01-activity-tidy-2019.xlsx"
+#url_xlsx <- "data-raw/data-tidy/tech-yearbook/part01-over-02-spend-intense-tidy-2019.xlsx"
+#url_xlsx <- "data-raw/data-tidy/tech-yearbook/part01-over-03-spend-inner-01-activity-tidy-2019.xlsx"
 
-df_matched <- openxlsx::read.xlsx(url_xlsx) %>%
-  filter(year ==2019)
+#df_matched <- openxlsx::read.xlsx(url_xlsx) %>%
+#  filter(year ==2019)
 
 vec_year <- sort(unique(df_matched$year))
-files_tidy <- glue::glue("{vec_year}.xlsx" )
+#files_tidy <- glue::glue("{vec_year}.xlsx" )
+files_tidy <- glue::glue("ammount-{vec_year}.xlsx" )
+#files_tidy <- glue::glue("funds-{vec_year}.xlsx" )
+
 
 # file path
 tidy_path <-paste0(dir_sub1, dir_sub2,"/",files_tidy)

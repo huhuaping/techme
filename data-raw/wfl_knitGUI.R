@@ -23,13 +23,14 @@ dir_media <- "data-raw/tech-yearbook/part02-firm/"
 #dir_final <- c("01-operation", "02-RD")
 #dir_media <- "data-raw/tech-yearbook/part05-industry/"
 
-#dir_final <- c("01-patent", "02-enrollmark","03-teckmarket-pull", "04-teckmarket-push")
-#dir_media <- "data-raw/tech-yearbook/part08-output/"
+dir_final <- c("01-patent", "02-enrollmark","03-teckmarket-pull", "04-teckmarket-push")
+dir_media <- "data-raw/tech-yearbook/part08-output/"
 
 
 # default the first directory
-i_sel <- 2
-file_sel <- "raw-2019.xls"
+i_sel <- 4
+file_sel <- "raw-type-amount-2019.xls"
+#file_sel <- "raw-2019.xls"
 #file_sel <- "raw-2018-2019.xls"
 #file_sel <- "raw-2018-2019-edited.xlsx"
 
@@ -52,13 +53,14 @@ source("data-raw/wfl_editXls.R")
 # step 6: begin unpivot
 ## whether drop columns and specify the header mode.
 cols_drop <- c(2)
-header_mode <- "vars"
+header_mode <- "year"
 #cols_drop <- NULL
 #header_mode <- "vars-year"
 ## following value only for header.mode=="year"
 ## and you should specify it manuualy
 vars_spc <- get_vars(df = varsList, lang = "eng",
-                      block = list(block1 = "v6",block2 = "cz",block3 = "yszc"),
+                      block = list(block1 = "v4",block2 = "cg",
+                                   block3 = "jssc",block4 = "ht"),
                       what = "chn_block4")
 
 source("data-raw/wfl_unpivot.R", encoding = "UTF-8")
@@ -70,9 +72,11 @@ source("data-raw/wfl_tidy.R", encoding = "UTF-8")
 # step 8: match and check variables names to the varsList ----
 ## check if warnings
 ## target search
-target <- list(block1 = "v6",block2 = "cz",block3 = "yszc")
+#target <- list(block1 = "v6",block2 = "cz",block3 = "yszc")
 #target <- list(block1 = "v7",block2 = "sctj",block3 = "nyjx")
 #target <- list(block1 = "v4",block2 = "qy",block3 = "qysl")
+target <- list(block1 = "v4",block2 = "cg",block3 = "jssc")
+
 source("data-raw/wfl_matchVars.R", encoding = "UTF-8")
 df_vars_matched
 
@@ -111,6 +115,8 @@ for (id_year in vec_year) {
   df_matched %>%
     filter(year == id_year) %>%
     openxlsx::write.xlsx(., tidy_path[n_year])
+  print(glue("eport year {id_year} successed!"))
+  Sys.sleep(0.1)
 }
 
 

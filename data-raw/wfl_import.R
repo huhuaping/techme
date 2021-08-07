@@ -11,8 +11,11 @@
 #url_xlsx <- "d://github/tech-report/data-analysis/part01-RD-update.xlsx"
 url_xlsx <- "d://github/tech-report/data-proc/update-part01-RD-year2019.xlsx"
 #url_xlsx <- "d://github/tech-report/data-analysis/part01-inner-activity-upto-2018.xlsx"
+url_xlsx <- "d://github/tech-report/data-raw/tech-yearbook/part08-output/03-teckmarket-pull/data-update/gather-pull-amount-funds-upto-2018.xlsx"
+url_xlsx <- "d://github/tech-report/data-raw/tech-yearbook/part08-output/04-teckmarket-push/data-update/gather-push-amount-funds-upto-2018.xlsx"
 
-df_import <- openxlsx::read.xlsx(url_xlsx)
+df_import <- openxlsx::read.xlsx(url_xlsx) %>%
+  filter(variables == "v4_cg_jssr_ht")
 
 # get additional info
 ## merchine
@@ -54,7 +57,11 @@ vars_table <- get_vars(varsList, block = list(block1= "v4",
                                               block2 = "zh",
                                               block3 = "nbzc"),
                        what = c("variables","chn_block4", "units"))
-
+## tech market
+vars_table <- get_vars(varsList, block = list(block1= "v4",
+                                              block2 = "cg",
+                                              block3 = "jssr"),
+                       what = c("variables","chn_block4", "units"))
 
 vars_order <- c('province','year','chn_block4','value','units','variables')
 df_reface <- df_import %>%
@@ -69,7 +76,7 @@ df_reface <- df_import %>%
 
 # extract year
 vec_year <- sort(unique(df_reface$year))
-files_tidy <- glue::glue("{vec_year}.xlsx" )
+files_tidy <- glue::glue("ammount-{vec_year}.xlsx" )
 
 # file path
 tidy_path <-paste0(dir_sub1, dir_sub2,"/",files_tidy)
