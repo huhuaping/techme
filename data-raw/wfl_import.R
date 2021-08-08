@@ -12,8 +12,8 @@
 #url_xlsx <- "d://github/tech-report/data-proc/update-part01-RD-year2019.xlsx"
 #url_xlsx <- "d://github/tech-report/data-analysis/part01-inner-activity-upto-2018.xlsx"
 #url_xlsx <- "d://github/tech-report/data-raw/tech-yearbook/part08-output/03-teckmarket-pull/data-update/gather-pull-amount-funds-upto-2018.xlsx"
-url_xlsx <- "d://github/tech-report/data-raw/tech-yearbook/part08-output/04-teckmarket-push/data-update/gather-push-amount-funds-upto-2018.xlsx"
-
+#url_xlsx <- "d://github/tech-report/data-raw/tech-yearbook/part08-output/04-teckmarket-push/data-update/gather-push-amount-funds-upto-2018.xlsx"
+url_xlsx <- "D:/github/tech-report/data-raw/public-site/torch-innocom/csv/tbl-smry-upto-2020.xlsx"
 
 df_import <- openxlsx::read.xlsx(url_xlsx) #%>%
   #filter(variables == "v4_cg_jssr_ht")
@@ -65,8 +65,9 @@ vars_table <- get_vars(varsList, block = list(block1= "v4",
                        what = c("variables","chn_block4", "units"))
 
 vars_order <- c('province','year','chn_block4','value','units','variables')
+
 df_reface <- df_import %>%
-  mutate(year = as.character(year))
+  mutate(year = as.character(year)) %>%
   #gather(key = "variables", value = "value", -province, -year) %>%
   left_join(., vars_table, by = "variables") %>%
   mutate(year = as.character(year)) %>%
@@ -78,19 +79,27 @@ df_reface <- df_import %>%
 
 # extract year
 vec_year <- sort(unique(df_reface$year))
-files_tidy <- glue::glue("funds-{vec_year}.xlsx" )
+files_tidy <- glue::glue("{vec_year}.xlsx" )
+
+dir_tidy <- "data-raw/data-tidy/public-site/torch-innocom/csv/"
 
 # file path
-tidy_path <-paste0(dir_sub1, dir_sub2,"/",files_tidy)
+tidy_path <- paste0(dir_sub1, dir_sub2,"/",files_tidy)
+
+tidy_path <- paste0(dir_tidy,files_tidy)
+gen_dirs_vec(media = "data-raw/data-tidy/public-site/",
+             final = "torch-innocom/csv/")
 
 tidy_path # see the files' path
 
 
 # loop to export xlsx
+
 for (id_year in vec_year) {
-  n_year <- which(str_detect(tidy_path, id_year))
+  n_year <- which(stringr::str_detect(tidy_path, as.character(id_year)))
   df_reface %>%
-    filter(year == id_year) %>%
+    filter(year %in% id_year) %>%
+    #mutate(index = 1:nrow(.)) %>%
     openxlsx::write.xlsx(., tidy_path[n_year])
   print(glue::glue("Export Year {id_year} has finished!"))
   Sys.sleep(0.1)
