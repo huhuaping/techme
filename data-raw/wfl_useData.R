@@ -23,7 +23,10 @@ for ( i in length(files_use):1) {
 #RDActivity <- df_use
 #MarketPull <- df_use
 #MarketPush <- df_use
-HitechFirmsPub <- df_use
+#HitechFirmsPub <- df_use
+#IndustryTrade <- df_use
+#IndustryRD <- df_use
+IndustryOperation <- df_use
 
 #usethis::use_data(AgriMachine, overwrite = TRUE)
 #usethis::use_data(AgriFertilizer, overwrite = TRUE)
@@ -34,5 +37,8 @@ HitechFirmsPub <- df_use
 #usethis::use_data(RDActivity, overwrite = TRUE)
 #usethis::use_data(MarketPull, overwrite = TRUE)
 #usethis::use_data(MarketPush, overwrite = TRUE)
-usethis::use_data(HitechFirmsPub, overwrite = TRUE)
+#usethis::use_data(HitechFirmsPub, overwrite = TRUE)
+#usethis::use_data(IndustryTrade, overwrite = TRUE)
+#usethis::use_data(IndustryRD, overwrite = TRUE)
+usethis::use_data(IndustryOperation, overwrite = TRUE)
 

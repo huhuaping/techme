@@ -61,7 +61,7 @@ header_mode <- c("vars")
 ## and you should specify it manuualy
 vars_spc <- get_vars(df = varsList, lang = "eng",
                       block = list(block1 = "v4",block2 = "cy",
-                                   block3 = c("scjy")
+                                   block3 = c("my")
                                    #,block4 = "ht"
                                    ),
                       what = "chn_block4")
@@ -80,7 +80,7 @@ source("data-raw/wfl_tidy.R", encoding = "UTF-8")
 #target <- list(block1 = "v4",block2 = "qy",block3 = "qysl")
 #target <- list(block1 = "v4",block2 = "cg",block3 = "jssc")
 target <- list(block1 = "v4",block2 = "cy",
-               block3 = "scjy")
+               block3 = "my")
 
 
 source("data-raw/wfl_matchVars.R", encoding = "UTF-8")
@@ -95,8 +95,12 @@ get_vars(varsList,lang = "eng", block = target, what = "chn_block4" )
 #rpl <- c("有研发机构", "有RD活动")
 #ptn <- c("地方一般公共预算支出","教育支出","科学技术支出","农林水支出")
 #rpl <- c("合计","教育","科学技术","农林水")
-ptn <- c("项目数","新产品开发项目数","新产品开发经费支出","新产品销售收入","有效发明专利数")
-rpl <- c("项目数量","开发项目数","开发经费支出","销售收入","有效专利数")
+#ptn <- c("项目数","新产品开发项目数","新产品开发经费支出","新产品销售收入","有效发明专利数")
+#rpl <- c("项目数量","开发项目数","开发经费支出","销售收入","有效专利数")
+#ptn <- c("营业收入")
+#rpl <- c("主营业务收入")
+ptn <- c("进出口贸易总额")
+rpl <- c("贸易总额")
 
 df_tidy <- df_tidy %>%
   mutate(vars= mgsub::mgsub(vars, ptn, rpl))
