@@ -29,8 +29,9 @@ rename_files_vec <- function(media, final, char_exclude=NA, char_replace){
 }
 
 # example
+rpl <- str_extract(file_sel, ".*(?=\\.)")
 rename_files_vec(media = dir_media, final = dir_final,
                  char_exclude = "raw",
-                 char_replace = "raw-2019")
+                 char_replace = rpl)
 
 # usethis::use_data(wfl_rename, overwrite = TRUE)

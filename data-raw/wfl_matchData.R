@@ -37,8 +37,8 @@ df_matched <- matchData(dt_left = df_tidy, dt_right = df_vars_matched)
 # generte directory
 dir_sub1 <- "data-raw/data-tidy/"
 dir_sub2 <- gsub("data-raw/", "",dir_sel)
-gen_dirs_vec(media = dir_sub1, final = dir_sub2)
 dir_tidy <- paste0(dir_sub1, dir_sub2)
+gen_dirs_vec(media = dir_sub1, final = dir_sub2)
 
 # extract year
 #url_xlsx <- "data-raw/data-tidy/rural-yearbook/fertilizer-tidy-2018-2019.xlsx"

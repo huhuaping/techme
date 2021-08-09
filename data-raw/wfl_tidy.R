@@ -23,12 +23,14 @@ getTidy <- function(dt){
            vars = str_replace_all(vars, "\\r\\n","_" ),
            vars = str_replace(vars, "(_[a-zA-Z].+)","" ),
            vars = str_replace_all(vars, "_","" ),
-           # handel cell begin with number followed by dot.
+           # handle cell begin with number followed by dot.
            vars = str_replace(vars, "\\d",""),
            vars = str_replace(vars, "\\.",""),
-           # handel cell contains units within round brackets.
+           # handle cell contains units within round brackets.
            vars = str_replace(vars, "(\\(.+\\))",""),
-           vars = str_replace(vars, " ","")#,
+           vars = mgsub::mgsub(vars,
+                               c(" ", "#", "R&D"),
+                               c("", "",""))
            #vars = str_trim(vars)
            #unit = str_extract(unit, "(.+)(?=\\))")
     ) %>%

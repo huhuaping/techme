@@ -20,17 +20,17 @@ dir_final <- c("00-firms", "01-employee","03-spend-inner", "04-spend-outer",
                "08-patent","09-tech-renew")
 dir_media <- "data-raw/tech-yearbook/part02-firm/"
 
-#dir_final <- c("01-operation", "02-RD")
-#dir_media <- "data-raw/tech-yearbook/part05-industry/"
+dir_final <- c("01-operation", "02-RD","03-trade")
+dir_media <- "data-raw/tech-yearbook/part05-industry/"
 
-dir_final <- c("01-patent", "02-enrollmark","03-teckmarket-pull", "04-teckmarket-push")
-dir_media <- "data-raw/tech-yearbook/part08-output/"
+#dir_final <- c("01-patent", "02-enrollmark","03-teckmarket-pull", "04-teckmarket-push")
+#dir_media <- "data-raw/tech-yearbook/part08-output/"
 
 
 # default the first directory
-i_sel <- 4
-file_sel <- "raw-type-amount-2019.xls"
-#file_sel <- "raw-2019.xls"
+i_sel <- 1
+#file_sel <- "raw-type-amount-2019.xls"
+file_sel <- "raw-2018.xls"
 #file_sel <- "raw-2018-2019.xls"
 #file_sel <- "raw-2018-2019-edited.xlsx"
 
@@ -53,17 +53,20 @@ source("data-raw/wfl_editXls.R")
 # step 6: begin unpivot
 ## whether drop columns and specify the header mode.
 cols_drop <- c(2)
-header_mode <- "year"
 #cols_drop <- NULL
-#header_mode <- "vars-year"
+header_mode <- c("vars")
+#header_mode <- c("vars","vars-vars")
+
 ## following value only for header.mode=="year"
 ## and you should specify it manuualy
 vars_spc <- get_vars(df = varsList, lang = "eng",
-                      block = list(block1 = "v4",block2 = "cg",
-                                   block3 = "jssc",block4 = "ht"),
+                      block = list(block1 = "v4",block2 = "cy",
+                                   block3 = c("scjy")
+                                   #,block4 = "ht"
+                                   ),
                       what = "chn_block4")
 
-source("data-raw/wfl_unpivot.R", encoding = "UTF-8")
+source("data-raw/wfl_unpivot_new.R", encoding = "UTF-8")
 
 
 # step 7: tidy data -----
@@ -75,7 +78,10 @@ source("data-raw/wfl_tidy.R", encoding = "UTF-8")
 #target <- list(block1 = "v6",block2 = "cz",block3 = "yszc")
 #target <- list(block1 = "v7",block2 = "sctj",block3 = "nyjx")
 #target <- list(block1 = "v4",block2 = "qy",block3 = "qysl")
-target <- list(block1 = "v4",block2 = "cg",block3 = "jssc")
+#target <- list(block1 = "v4",block2 = "cg",block3 = "jssc")
+target <- list(block1 = "v4",block2 = "cy",
+               block3 = "scjy")
+
 
 source("data-raw/wfl_matchVars.R", encoding = "UTF-8")
 df_vars_matched
@@ -87,11 +93,10 @@ get_vars(varsList,lang = "eng", block = target, what = "chn_block4" )
 #rpl <- c("联合收获机")
 #ptn <- c("有研发机构的企业数", "有R&D活动的企业数")
 #rpl <- c("有研发机构", "有RD活动")
-## replace characters
-ptn <- c("地方一般公共预算支出","教育支出","科学技术支出",
-"农林水支出")
-rpl <- c("合计","教育","科学技术","农林水")
-
+#ptn <- c("地方一般公共预算支出","教育支出","科学技术支出","农林水支出")
+#rpl <- c("合计","教育","科学技术","农林水")
+ptn <- c("项目数","新产品开发项目数","新产品开发经费支出","新产品销售收入","有效发明专利数")
+rpl <- c("项目数量","开发项目数","开发经费支出","销售收入","有效专利数")
 
 df_tidy <- df_tidy %>%
   mutate(vars= mgsub::mgsub(vars, ptn, rpl))
