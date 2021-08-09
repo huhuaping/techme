@@ -16,6 +16,7 @@
 #url_xlsx <- "D:/github/tech-report/data-raw/public-site/torch-innocom/csv/tbl-smry-upto-2020.xlsx"
 url_xlsx <- "D:/github/tech-report/data-raw/tech-yearbook/part05-industry/data-update"
 
+# use dirs if lots files need to ipmport
 dir_xlsx <- "D:/github/tech-report/data-raw/tech-yearbook/part05-industry/data-update"
 files_xlsx <-  list.files(dir_xlsx)
 tbl_sel <- tibble(files = files_xlsx) %>%
