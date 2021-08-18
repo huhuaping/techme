@@ -1,6 +1,5 @@
 ## code to prepare `hack_tianyan` dataset goes here
-require(purrr)
-require("tidyverse")
+source("data-raw/set-global.R")
 
 #===== read existed xlsx files =====
 ## in `hub` dir
@@ -83,6 +82,16 @@ list_ins <-  tbl_newInst %>%
   #head() %>%
   unlist() %>%
   unname()
+
+# ===== Here your list =======
+## it should  be unique and exclusive from 'queryTianyan'
+## and xlsx file in directory 'ship/xx.xlsx'
+
+url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot16-2021-08-18.xlsx"
+list_ins <- openxlsx::read.xlsx(url_xlsx) %>%
+  unlist() %>%
+  unname()
+
 
 # ===== Rselenium set =====
 ##  load R pkgs
@@ -171,38 +180,27 @@ for (i in 1:length(list_ins)) {
 
   # scraping tel
   ## css selector may change
-  css_opt <- list("div.f0:nth-child(1) > div:nth-child(1) > span:nth-child(4)",
-                  "span.link-hover-click")
-  choice <- sapply(css_opt, function(X){
-    length(remDr$findElements(using='css', X))
-  })
 
-  if (sum(choice)==1) {
-    css_sel <- unlist(css_opt[which(as.logical(choice))])
-    tel[i] <- remDr$findElement("css",
-                                css_sel)$getElementText() %>%
-      unlist()
-  } else stop("CSS selector failed, please check!")
+  xpath_tel <- "//span[contains(@class, 'label') and text() = '电话：']/following-sibling::span[1]"
+  isExist <- as.logical(length(remDr$findElement("xpath",xpath_tel)))
+  if (!isExist) stop("xpath 'tel' failed, please check!")
+  tel[i] <- remDr$findElement("xpath",
+                              xpath_tel)$getElementText() %>%
+    unlist()
 
-  # extract address
-  ## selector may change
-  css_opt <- list("div.ac:nth-child(3) > div:nth-child(1)",
-                  ".address")
-  choice <- sapply(css_opt, function(X){
-    length(remDr$findElements(using='css', X))
-  })
 
-  if (sum(choice)==1) {
-    css_sel <- unlist(css_opt[which(as.logical(choice))])
-    address[i] <- remDr$findElement("css", css_sel)$getElementText() %>%
-      unlist()
-  } else if (sum(choice)==2) {
-    css_sel <- unlist(css_opt)[1]
-    address[i] <- remDr$findElement("css", css_sel)$getElementText() %>%
-      unlist()
-  } else{
-    stop("CSS selector (address) failed, please check!")
-  }
+
+  xpath_opt <- c("//span[contains(@class, 'label') and text() = '地址：']/following-sibling::span[1]",
+                 "//span[contains(@class, 'label') and text() = '地址：']/following-sibling::div[1]/div[contains(@class, 'detail-content')]")
+  xpath_address <- paste0(xpath_opt, collapse = "|")
+  isExist <- as.logical(length(remDr$findElement("xpath",xpath_address)))
+  address[i] <- remDr$findElement("xpath",
+                              xpath_address)$getElementText() %>%
+    unlist()
+
+
+  if (!isExist) stop("xpath 'address' failed, please check!")
+
 
   # close the opened new tab
   remDr$closeWindow()
@@ -229,6 +227,18 @@ tbl_out <- tibble( index = 1:length(list_ins),
 
 # ==== match `ProvinceCity` again =====
 
+# exclude rows exist in data base of `ProvinceCity`
+data("ProvinceCity")
+dt_city <- ProvinceCity
+
+index_city <- which(str_detect(unique(dt_city$city),"市"))
+list_city <- unique(dt_city$city)[index_city]
+ptn_city<- paste0(list_city, collapse = "|")
+
+list_province <- unique(dt_city$province) %>%
+  str_replace(., c("回族自治区|维吾尔自治区|壮族自治区|自治区|省|市"), "")
+ptn_province <- paste0(list_province, collapse = "|")
+
 tbl_province <- tbl_out %>%
   mutate(city = str_extract(address, ptn_city),
          province_raw = str_extract(address, ptn_province)) %>%
@@ -242,12 +252,19 @@ tbl_province <- tbl_out %>%
                                 c("自治区|省|市"),
                                 ""))
 
+
 # =====write out xlsx======
+dir_xlsx <- "data-raw/data-tidy/hack-tianyan/hub/"
 path_xlsx <- paste0(dir_xlsx,
-                    glue::glue("match-tianyan-tot{nrow(tbl_out)}-{Sys.Date()}.xlsx"))
+                    glue::glue("match-tianyan-tot{nrow(tbl_province)}-{Sys.Date()}.xlsx"))
 
 openxlsx::write.xlsx(tbl_province, path_xlsx)
 
+## just for check
+sum(is.na(tbl_province$province))
+
+
+## edit by hand if needed
 
 # ===== combine all query =====
 
