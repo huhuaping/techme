@@ -83,11 +83,11 @@ list_ins <-  tbl_newInst %>%
   unlist() %>%
   unname()
 
-# ===== Here your list =======
+# ===== your list =======
 ## it should  be unique and exclusive from 'queryTianyan'
 ## and xlsx file in directory 'ship/xx.xlsx'
 
-url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot16-2021-08-18.xlsx"
+url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot57-2021-08-19.xlsx"
 list_ins <- openxlsx::read.xlsx(url_xlsx) %>%
   unlist() %>%
   unname()
@@ -125,7 +125,7 @@ myswitch <- function (remDr, windowId) {
 
 # loop to scrape info
 i <- 1
-for (i in 1:length(list_ins)) {
+for (i in 53:length(list_ins)) {
   # navigate the url
   remDr$navigate(url_list)
   Sys.sleep(1)
@@ -165,7 +165,7 @@ for (i in 1:length(list_ins)) {
                                  css_sel)$getElementText() %>%
       unlist()
   } else {
-    stop("CSS selector failed, please check!")
+    stop("CSS selector 'newpage' failed, please check!")
   }
 
   # click to open new page
@@ -225,6 +225,26 @@ tbl_out <- tibble( index = 1:length(list_ins),
                    tel = tel,
                    url=url)
 
+# stop Rselenium and free ports
+remDr$close()
+rm(driver)
+gc()
+## kill the Java instance(s) inside RStudio
+### see [url](https://github.com/ropensci/RSelenium/issues/228#issuecomment-632885370)
+system("taskkill /im java.exe /f", intern=FALSE, ignore.stdout=FALSE)
+pingr::ping_port("localhost", 4446)
+
+
+# =====check query=====
+
+tbl_check <- tbl_out %>%
+  select(index, name_origin, name_search) %>%
+  mutate(check = as.logical(name_origin==name_search)) #%>%
+  #filter(check==FALSE)
+
+id_false <- which(tbl_check$check==FALSE)
+tbl_check$index[id_false]
+
 # ==== match `ProvinceCity` again =====
 
 # exclude rows exist in data base of `ProvinceCity`
@@ -262,9 +282,8 @@ openxlsx::write.xlsx(tbl_province, path_xlsx)
 
 ## just for check
 sum(is.na(tbl_province$province))
-
-
 ## edit by hand if needed
+
 
 # ===== combine all query =====
 
