@@ -165,15 +165,6 @@ system("taskkill /im java.exe /f", intern=FALSE, ignore.stdout=FALSE)
 pingr::ping_port("localhost", 4446)
 
 
-# =====check query=====
-
-tbl_check <- tbl_out %>%
-  select(index, name_origin, name_search) %>%
-  mutate(check = as.logical(name_origin==name_search)) %>%
-  filter(check==FALSE)
-
-id_false <- which(tbl_check$check==FALSE)
-tbl_check$index[id_false]
 
 # ==== match `ProvinceCity` again =====
 
@@ -210,8 +201,21 @@ path_xlsx <- paste0(dir_xlsx,
 
 openxlsx::write.xlsx(tbl_province, path_xlsx)
 
+# =====check query=====
+tbl_province <- openxlsx::read.xlsx("data-raw/data-tidy/hack-tianyan/hub/match-tianyan-tot286-2021-08-19.xlsx")
+tbl_check <- tbl_province %>%
+  select(index, name_origin, name_search) %>%
+  mutate(check = as.logical(name_origin==name_search)) %>%
+  filter(check==FALSE)
+
+id_false <- which(tbl_check$check==FALSE)
+tbl_check$index[id_false]
+
 ## just for check
 sum(is.na(tbl_province$province))
+tbl_province %>%
+  select(index, province) %>%
+  filter(is.na(province))
 ## edit by hand if needed
 
 
