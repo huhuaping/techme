@@ -20,10 +20,12 @@ dt_city <-   tidyjson::spread_all(city) %>%
   mutate(province_clean = mgsub::mgsub(province, ptn, rpl) ) %>%
   mutate(city_clean = str_extract(city, "(.*)(?=市)")) %>%
   mutate(city_clean = ifelse(is.na(city_clean)|city_clean=="",
-                             "未列出",
-                             city_clean))
+                             "uncheck",
+                             city_clean)) #%>%
+  # handle 'non-ASCII characters' warning
+  #mutate(city_clean = iconv(city_clean, from="UTF-8", to="UTF-8"))
 
-
+#unique(dt_city$province_clean)
 
 ProvinceCity <- dt_city
 

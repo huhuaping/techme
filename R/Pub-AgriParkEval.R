@@ -1,0 +1,20 @@
+#' Details of Evaluation result of National Agricultural Sci-tech Park
+#'
+#' A data set containing Evaluation result of National Agricultural Sci-tech Park
+#'   year by year from the public
+#'   site \url{https://www.most.gov.cn},
+#'   with wide data format.
+#'
+#' @format A data frame:
+#' \describe{
+#'   \item{year}{  }
+#'   \item{index}{ integer, the ordered index of list }
+#'   \item{name}{ character, name of the agri park }
+#'   \item{result}{ character, evaluation result marked in c('good','ok','fail') }
+#'   \item{province}{character, province of agri park in reduced chinese}
+#' }
+#'
+#' @source \url{https://www.huhuaping.com/}
+#'
+
+"PubAgriParkEval"

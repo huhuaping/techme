@@ -11,6 +11,8 @@ A data frame:
 \item{province}{ name of province  }
 \item{city}{ city belongs of the province }
 \item{id}{ id of city with digits 12 }
+\item{province_clean}{ reduced province name in chinese }
+\item{city_clean}{ reduced city name in chinese  }
 }
 }
 \source{
