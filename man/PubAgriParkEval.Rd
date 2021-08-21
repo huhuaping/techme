@@ -7,7 +7,7 @@
 \format{
 A data frame:
 \describe{
-\item{year}{  }
+\item{year}{ integer, year of document }
 \item{index}{ integer, the ordered index of list }
 \item{name}{ character, name of the agri park }
 \item{result}{ character, evaluation result marked in c('good','ok','fail') }

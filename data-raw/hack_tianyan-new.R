@@ -208,7 +208,8 @@ dt_hub<- tibble(files = url_xlsx ) %>%
   mutate(tbl = map(.x = files,
                    .f = openxlsx::read.xlsx)) %>%
   select(-files) %>%
-  unnest(tbl)
+  unnest(tbl) %>%
+  select(-city_clean, -province_clean)
 
 #unique(dt_hub$province)
 

@@ -13,9 +13,10 @@
 #'   \item{address}{ searched address of institution  }
 #'   \item{tel}{ searched telephone of institution  }
 #'   \item{url}{ searched website url of institution  }
+#'   \item{province}{ final province of institution }
 #'   \item{city}{ matched city of institution  }
 #'   \item{province_raw}{ matched province of institution }
-#'   \item{province}{ final province of institution }
+
 #' }
 #'
 #' @source \url{https://www.huhuaping.com/}
