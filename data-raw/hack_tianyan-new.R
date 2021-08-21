@@ -231,6 +231,7 @@ dt_hub<- tibble(files = url_xlsx ) %>%
   select(-files) %>%
   unnest(tbl)
 
+#unique(dt_hub$province)
 
 queryTianyan <- dt_hub
 
