@@ -5,7 +5,7 @@ source("data-raw/set-global.R")
 ## it should  be unique and exclusive from 'queryTianyan'
 ## and xlsx file in directory 'ship/xx.xlsx'
 
-url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot286-2021-08-19.xlsx"
+url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot2-2021-08-21.xlsx"
 list_ins <- openxlsx::read.xlsx(url_xlsx) %>%
   unlist() %>%
   unname()
@@ -44,7 +44,7 @@ myswitch <- function (remDr, windowId) {
 # loop to scrape info
 i <- 95
 
-for (i in 237:length(list_ins)) {
+for (i in 1:length(list_ins)) {
   # navigate the url
   if (i==1) {
     remDr$navigate(url_list)
@@ -170,29 +170,25 @@ pingr::ping_port("localhost", 4446)
 
 # exclude rows exist in data base of `ProvinceCity`
 data("ProvinceCity")
-dt_city <- ProvinceCity
+dt_city <- ProvinceCity %>%
+  select(city_clean, province_clean)
 
-index_city <- which(str_detect(unique(dt_city$city),"市"))
-list_city <- unique(dt_city$city)[index_city]
-ptn_city<- paste0(list_city, collapse = "|")
-
-list_province <- unique(dt_city$province) %>%
-  str_replace(., c("回族自治区|维吾尔自治区|壮族自治区|自治区|省|市"), "")
-ptn_province <- paste0(list_province, collapse = "|")
+ptn_city<- paste0(unique(ProvinceCity$city_clean), collapse = "|")
+ptn_province <- paste0(unique(ProvinceCity$province_clean), collapse = "|")
 
 tbl_province <- tbl_out %>%
-  mutate(city = str_extract(address, ptn_city),
-         province_raw = str_extract(address, ptn_province)) %>%
+  # get obvious province
+  mutate(province = str_extract(address, ptn_province)) %>%
   # match city database
-  left_join(., select(dt_city, province, city), by = "city") %>%
+  mutate(city_clean = str_extract(address, ptn_city)) %>%
+  left_join(., dt_city, by = "city_clean") %>%
   mutate(province = ifelse(is.na(province),
-                           province_raw,
-                           province)) %>%
-  # simplify the name of province
-  mutate(province = str_replace(province,
-                                c("自治区|省|市"),
-                                ""))
-
+                           province_clean,
+                           province))
+# only for check
+## edited if needed
+check <- sum(is.na(tbl_province$province))
+if(check > 0) stop("please check the name of institution!")
 
 # =====write out xlsx======
 dir_xlsx <- "data-raw/data-tidy/hack-tianyan/hub/"
@@ -200,23 +196,6 @@ path_xlsx <- paste0(dir_xlsx,
                     glue::glue("match-tianyan-tot{nrow(tbl_province)}-{Sys.Date()}.xlsx"))
 
 openxlsx::write.xlsx(tbl_province, path_xlsx)
-
-# =====check query=====
-tbl_province <- openxlsx::read.xlsx("data-raw/data-tidy/hack-tianyan/hub/match-tianyan-tot286-2021-08-19.xlsx")
-tbl_check <- tbl_province %>%
-  select(index, name_origin, name_search) %>%
-  mutate(check = as.logical(name_origin==name_search)) %>%
-  filter(check==FALSE)
-
-id_false <- which(tbl_check$check==FALSE)
-tbl_check$index[id_false]
-
-## just for check
-sum(is.na(tbl_province$province))
-tbl_province %>%
-  select(index, province) %>%
-  filter(is.na(province))
-## edit by hand if needed
 
 
 # ===== combine all query =====
