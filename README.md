@@ -18,6 +18,38 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("huhuaping/techme")
 ```
 
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+``` r
+require(techme)
+#> 载入需要的程辑包：techme
+data("varsList")
+head(varsList)
+#>        variables   chn_full_name short_chn short_eng  units block1 block2
+#> 1  v1_sc_bzmj_dd   播种面积_大豆      <NA>      <NA> 千公顷     v1     sc
+#> 2  v1_sc_bzmj_dg   播种面积_稻谷      <NA>      <NA> 千公顷     v1     sc
+#> 3  v1_sc_bzmj_dl   播种面积_豆类      <NA>      <NA> 千公顷     v1     sc
+#> 4  v1_sc_bzmj_dm   播种面积_大麦      <NA>      <NA> 千公顷     v1     sc
+#> 5 v1_sc_bzmj_ggl 播种面积_瓜果类      <NA>      <NA> 千公顷     v1     sc
+#> 6  v1_sc_bzmj_gl   播种面积_高粱      <NA>      <NA> 千公顷     v1     sc
+#>   block3 block4 chn_block1 chn_block2 chn_block3 chn_block4
+#> 1   bzmj     dd       农业       生产   播种面积       大豆
+#> 2   bzmj     dg       农业       生产   播种面积       稻谷
+#> 3   bzmj     dl       农业       生产   播种面积       豆类
+#> 4   bzmj     dm       农业       生产   播种面积       大麦
+#> 5   bzmj    ggl       农业       生产   播种面积     瓜果类
+#> 6   bzmj     gl       农业       生产   播种面积       高粱
+#>                    chn_full    flag source
+#> 1   农业;生产;播种面积;大豆 v2018.6   <NA>
+#> 2   农业;生产;播种面积;稻谷 v2018.6   <NA>
+#> 3   农业;生产;播种面积;豆类 v2018.6   <NA>
+#> 4   农业;生产;播种面积;大麦 v2018.6   <NA>
+#> 5 农业;生产;播种面积;瓜果类 v2018.6   <NA>
+#> 6   农业;生产;播种面积;高粱 v2018.6   <NA>
+```
+
 ## Data set list and source
 
 ### Basic
@@ -273,35 +305,4 @@ Observe Stations of MOA and MOE.
 
 -   Totally 158 rows。
 
--   Years (Batch) range from to -
-
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-require(techme)
-data("varsList")
-head(varsList)
-#>        variables   chn_full_name short_chn short_eng  units block1 block2
-#> 1  v1_sc_bzmj_dd   播种面积_大豆      <NA>      <NA> 千公顷     v1     sc
-#> 2  v1_sc_bzmj_dg   播种面积_稻谷      <NA>      <NA> 千公顷     v1     sc
-#> 3  v1_sc_bzmj_dl   播种面积_豆类      <NA>      <NA> 千公顷     v1     sc
-#> 4  v1_sc_bzmj_dm   播种面积_大麦      <NA>      <NA> 千公顷     v1     sc
-#> 5 v1_sc_bzmj_ggl 播种面积_瓜果类      <NA>      <NA> 千公顷     v1     sc
-#> 6  v1_sc_bzmj_gl   播种面积_高粱      <NA>      <NA> 千公顷     v1     sc
-#>   block3 block4 chn_block1 chn_block2 chn_block3 chn_block4
-#> 1   bzmj     dd       农业       生产   播种面积       大豆
-#> 2   bzmj     dg       农业       生产   播种面积       稻谷
-#> 3   bzmj     dl       农业       生产   播种面积       豆类
-#> 4   bzmj     dm       农业       生产   播种面积       大麦
-#> 5   bzmj    ggl       农业       生产   播种面积     瓜果类
-#> 6   bzmj     gl       农业       生产   播种面积       高粱
-#>                    chn_full    flag source
-#> 1   农业;生产;播种面积;大豆 v2018.6   <NA>
-#> 2   农业;生产;播种面积;稻谷 v2018.6   <NA>
-#> 3   农业;生产;播种面积;豆类 v2018.6   <NA>
-#> 4   农业;生产;播种面积;大麦 v2018.6   <NA>
-#> 5 农业;生产;播种面积;瓜果类 v2018.6   <NA>
-#> 6   农业;生产;播种面积;高粱 v2018.6   <NA>
-```
+-   Years range from 2018 to 2019

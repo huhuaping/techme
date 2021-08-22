@@ -28,6 +28,17 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("huhuaping/techme")
 ```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r}
+require(techme)
+data("varsList")
+head(varsList)
+```
+
 ## Data set list and source
 
 ### Basic
@@ -280,15 +291,7 @@ Several data set sources from Ministry of Agriculture (MOA) or Ministry of Educa
 
 - Totally `r dim(PubObsStation)[1]` rows。
 
-- Years (Batch) range from `r min(PubObsStation$batch)` to `r max(PubObsStation$batch)` 
+- Years range from `r min(PubObsStation$year)` to `r max(PubObsStation$year)` 
 
-## Example
 
-This is a basic example which shows you how to solve a common problem:
-
-```{r}
-require(techme)
-data("varsList")
-head(varsList)
-```
 
