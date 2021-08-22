@@ -28,6 +28,64 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("huhuaping/techme")
 ```
+## Data set list and source
+
+### Basic
+
+```{r,echo=FALSE}
+require(techme)
+data("BasicProvince")
+data("queryTianyan")
+data("ProvinceCity")
+
+```
+
+**`BasicProvince`**：A data set containing basic information of province and its region, with wide data format.
+
+- Totally `r dim(BasicProvince)[2]` columns including: `r paste0(names(BasicProvince), collapse =", ")`。
+
+- Totally `r dim(BasicProvince)[1]` rows。
+
+
+**`ProvinceCity`**：A data set containing Province and City of china.
+
+- Totally `r dim(ProvinceCity)[2]` columns including: `r paste0(names(ProvinceCity), collapse =", ")`。
+
+- Totally `r dim(ProvinceCity)[1]` rows。
+
+
+**`queryTianyan`**：A data set containing basic info of institution enrolled in officer administrator.
+
+- Totally `r dim(queryTianyan)[2]` columns including: `r paste0(names(queryTianyan), collapse =", ")`。
+
+- Totally `r dim(queryTianyan)[1]` rows。
+
+
+### Yearbook
+
+
+#### Data from Rural Yearbook
+
+```{r,echo=FALSE}
+data("AgriMachine")
+data("AgriMachine")
+data("AgriFertilizer")
+data("AgriPlastic")
+data("AgriPesticide")
+```
+
+**`AgriMachine`**：A **long format** data set containing Agricultural Machine statistics .
+
+- Years range in `min(AgriMachine$year)` to `max(AgriMachine$year)` 
+
+- Totally `r dim(AgriMachine)[2]` columns including: `r paste0(names(AgriMachine), collapse =", ")`。
+
+- Totally `r dim(AgriMachine)[1]` rows。
+
+
+
+### Public site
+
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
