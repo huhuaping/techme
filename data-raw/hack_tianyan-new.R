@@ -5,7 +5,7 @@ source("data-raw/set-global.R")
 ## it should  be unique and exclusive from 'queryTianyan'
 ## and xlsx file in directory 'ship/xx.xlsx'
 
-url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot2-2021-08-21.xlsx"
+url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot31-2021-08-23.xlsx"
 list_ins <- openxlsx::read.xlsx(url_xlsx) %>%
   unlist() %>%
   unname()
@@ -179,12 +179,17 @@ ptn_province <- paste0(unique(ProvinceCity$province_clean), collapse = "|")
 tbl_province <- tbl_out %>%
   # get obvious province
   mutate(province = str_extract(address, ptn_province)) %>%
+  # get obvinous city
+  mutate(city_origin = str_extract(name_origin, ptn_city)) %>%
   # match city database
   mutate(city_clean = str_extract(address, ptn_city)) %>%
+  mutate(city_clean = ifelse(is.na(city_clean),
+                             city_origin, city_clean)) %>%
   left_join(., dt_city, by = "city_clean") %>%
   mutate(province = ifelse(is.na(province),
                            province_clean,
-                           province))
+                           province)) %>%
+  select(-city_origin)
 # only for check
 ## edited if needed
 check <- sum(is.na(tbl_province$province))
@@ -197,6 +202,13 @@ path_xlsx <- paste0(dir_xlsx,
 
 openxlsx::write.xlsx(tbl_province, path_xlsx)
 
+
+# check and edited by hand
+
+id_notEqual<- which(tbl_province$name_search!= tbl_province$name_origin)
+tbl_province %>%
+  select(name_origin, name_search, province) %>%
+  .[id_notEqual,]
 
 # ===== combine all query =====
 
@@ -212,6 +224,7 @@ dt_hub<- tibble(files = url_xlsx ) %>%
   select(-city_clean, -province_clean)
 
 #unique(dt_hub$province)
+
 
 queryTianyan <- dt_hub
 
