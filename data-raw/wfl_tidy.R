@@ -33,14 +33,13 @@ getTidy <- function(dt){
                                c("", "",""))
            #vars = str_trim(vars)
            #unit = str_extract(unit, "(.+)(?=\\))")
-    ) %>%
-    select(province, year, vars, value, units)
+    )
   if (any(is.na(dt_tidy$year))) warning("Variable 'year' missing in some rows, please check.")
   if (any(is.na(dt_tidy$vars))) warning("Variable 'vars' missing in some rows, please check.")
 
   return(dt_tidy)
 }
 
-df_tidy <- getTidy(dt = df_out)
+
 
 #usethis::use_data(wfl_tidy, overwrite = TRUE)

@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples
-#' wb <- loadWorkbook(path_xls, create = TRUE)
+#' wb <- loadWorkbook(path_xls[1], create = TRUE)
 #' dt <- readWorksheet(wb, sheet = 1,header = F) %>%
 #'   select_if(~ !all(is.na(.)))
 #' i <- 1
@@ -63,6 +63,7 @@ getRange <- function(dt, ith, what,
 #' Unpivot table
 #'
 #' @param dt data.frame. Which is the wb object reading from xls workbook.
+#' @param file character. current file with full names (contains '.xls').
 #' @param cols vector. Target cols of the region contains pivot table.
 #' @param rows vector. Target rows of the region contains pivot table.
 #' @param cols.drop vector. Columns numbers which will be dropped, default \code{NULL}.
@@ -74,28 +75,31 @@ getRange <- function(dt, ith, what,
 #' @export unpivot
 #'
 #' @examples
-#' wb <- loadWorkbook(path_xls, create = TRUE)
+#' wb <- loadWorkbook(path_xls[1], create = TRUE)
 #' dt <- readWorksheet(wb, sheet = 1,header = F) %>%
 #'   select_if(~ !all(is.na(.)))
 #' i <- 1
 #' myrows <- getRange(dt, ith = i, what = "row")
 #' mycols <- getRange(dt, ith = i, what = "col")
-#' cols_drop <- c(2)
-#' header_mode <- c("vars", "vars-vars")
+#' #cols_drop <- c(2)
+#' cols_drop <- NULL
+#' #header_mode <- c("vars", "vars-vars")
+#' header_mode <- c("vars-h4")
 #' vars_spc <- get_vars(df = varsList, lang = "eng",
-#'                      block = list(block1 = "v4",
-#'                                   block2 = "zh",
-#'                                   block3 = "qd",
-#'                                   block4 = "RD"),
+#'                      block = list(block1 = "v8",
+#'                                   block2 = "t1",
+#'                                   block3 = "zcqc"#,
+#'                                   #block4 = "RD"
+#'                                   ),
 #'                      what = "chn_block4")
 #'
-#' tbl_raw <- unpivot(dt, cols = mycols, rows = myrows,
+#' tbl_raw <- unpivot(dt, file=file_xls[1], cols = mycols, rows = myrows,
 #'                    cols.drop = cols_drop,
 #'                    header.mode = header_mode[i],
 #'                    vars.add = vars_spc)
 #'
 
-unpivot <- function(dt, rows, cols,
+unpivot <- function(dt, file, rows, cols,
                     cols.drop = cols_drop,
                     header.mode ,
                     vars.add = vars_spc ){
@@ -121,15 +125,54 @@ unpivot <- function(dt, rows, cols,
     dt_cell <- dt_cell %>%
       behead("up", vars) %>%
       behead("left", province) %>%
-      add_column(year = str_extract(file_xls,"\\d{4}"))
+      add_column(year = str_extract(file,"\\d{4}"))
   } else if (header.mode == "vars-vars"){ # header mode 3
     dt_cell <- dt_cell %>%
       behead("up-left", vars_tot) %>%
       behead("up", vars) %>%
       mutate(vars = ifelse(is.na(vars), vars_tot, vars)) %>%
       behead("left-up", province) %>%
-      add_column(year = str_extract(file_xls,"\\d{4}")) %>%
+      add_column(year = str_extract(file,"\\d{4}")) %>%
       select(-vars_tot)
+  }else if (header.mode == "vars-h3"){ # 3 headers for livestock
+    dt_cell <- dt_cell %>%
+      behead("left", province) %>%
+      behead("up", vars) %>%
+      behead("up", h2) %>%
+      behead("up", h3) %>%
+      mutate(vars = ifelse(!is.na(h3), h3, vars)) %>%
+      mutate(vars = ifelse(is.na(h3)&!is.na(h2) , h2, vars)) %>%
+      add_column(year = str_extract(file,"\\d{4}")) %>%
+      add_column(tab = str_extract(file,"\\d{1}(?=\\.xls)")) %>%
+      select(-h3,-h2)
+  }else if (header.mode == "vars-h4"){ # 4 headers for livestock
+    dt_cell <- dt_cell %>%
+      behead("left", province) %>%
+      behead("up", vars) %>%
+      behead("up", h2) %>%
+      behead("up", h3) %>%
+      behead("up", h4) %>%
+      mutate(vars = ifelse(!is.na(h4) , h4, vars)) %>%
+      mutate(vars = ifelse(is.na(h4)&!is.na(h3), h3, vars)) %>%
+      mutate(vars = ifelse( is.na(h4)&is.na(h3)&!is.na(h2), h2, vars)) %>%
+      add_column(year = str_extract(file,"\\d{4}")) %>%
+      add_column(tab = str_extract(file,"\\d{1}(?=\\.xls)")) %>%
+      select(-h4,-h3,-h2)
+  }else if (header.mode == "vars-h5"){ # 5 headers for livestock
+    dt_cell <- dt_cell %>%
+      behead("left", province) %>%
+      behead("up", vars) %>%
+      behead("up", h2) %>%
+      behead("up", h3) %>%
+      behead("up", h4) %>%
+      behead("up", h5) %>%
+      mutate(vars = ifelse(!is.na(h5) , h5, vars)) %>%
+      mutate(vars = ifelse(is.na(h5) &!is.na(h4) , h4, vars)) %>%
+      mutate(vars = ifelse(is.na(h5) &is.na(h4)&!is.na(h3), h3, vars)) %>%
+      mutate(vars = ifelse(is.na(h5) &is.na(h4)&is.na(h3)&!is.na(h2), h2, vars)) %>%
+      add_column(year = str_extract(file,"\\d{4}")) %>%
+      add_column(tab = str_extract(file,"\\d{1}(?=\\.xls)")) %>%
+      select(-h5,-h4,-h3,-h2)
   }else if (header.mode == "year"){ # header mode 4
     if (length(vars.add)!=1) stop("Added Vars info not correct, please specify by function 'get_vars()' ")
     dt_cell <- dt_cell %>%
@@ -140,7 +183,9 @@ unpivot <- function(dt, rows, cols,
 
   dt_cell <- dt_cell %>%
     rename(value = chr) %>%
-    select(province, year, vars, value)
+    select(province, year,
+           tab,
+           vars, value)
   return(dt_cell)
 }
 
@@ -181,71 +226,90 @@ getInfo <- function(dt){
 
 #-----begin run-----
 
-wb <- loadWorkbook(path_xls, create = TRUE)
+k <- 1
+df_all <-NULL
+# loop k xls files
+for (k in 1: length(path_xls)) {
 
-getSheets(wb)
-removeSheet(wb,"CNKI")
-# get the numbers of sheets. It should minus one to drop the last sheet contains only copyright informal .
-sheetnum <- length(getSheets(wb))
+  wb <- loadWorkbook(path_xls[k], create = TRUE)
 
-if (sheetnum==0) {
-  stop("no files founded, please check file existed")
-}  else{
-  print(glue::glue("totally {sheetnum} xls sheet(s) need to unpivot."))
-}
+  getSheets(wb)
+  removeSheet(wb,"CNKI")
+  # get the numbers of sheets. It should minus one to drop the last sheet contains only copyright informal .
+  sheetnum <- length(getSheets(wb))
 
-# j = 1
-df_out <- NULL
-for (j in 1: sheetnum){
-  print(glue::glue("begin unpivot the {j} of {sheetnum} xls sheet."))
-  # load workbook
-  wb <- loadWorkbook(path_xls, create = TRUE)
-  dt <- readWorksheet(wb, sheet = j,header = F) %>%
-    select_if(~ !all(is.na(.)))
-
-  # detect numbers of tables in this sheet
-  n_tables <- dt %>%
-    mutate_all(.funs = funs(str_detect(., "续表"))) %>%
-    unlist() %>%
-    sum(na.rm = T) +1
-
-  print(glue::glue("totally {n_tables} pivot table detect in this sheet."))
-
-  # loop tables in sheet
-  # i <- 1
-  for (i in 1:n_tables) {
-    sel_rows <- getRange(dt, ith = i, what = "row")
-    sel_cols <- getRange(dt, ith = i, what = "col")
-
-    #header_mode <- c("vars", "vars-vars")
-    tbl_tem <- unpivot(dt = dt,
-                       rows = sel_rows,
-                       cols = sel_cols,
-                       cols.drop = cols_drop,
-                       header.mode = header_mode[i] ,
-                       vars.add = vars_spc)
-    print(glue::glue("Successfully unpivot the {i} of {n_tables} pivot data region."))
-
-    df_out <- bind_rows(df_out, tbl_tem)
-  }# end loop i
-
-  # get unit when all variables have the same units.
-  same_units <- getInfo(dt)
-  if (length(same_units)==1) {
-    print( glue::glue("Varibales in sheet {j} have same units: {same_units}"))
-  } else if (length(same_units)==0) {
-    print( glue::glue("Varibales in sheet {j} have different units"))
-  } else {
-    warning("Please check Varibales units in sheet {j} when unpivot.")
+  if (sheetnum==0) {
+    stop("no files founded, please check file existed")
+  }  else{
+    print(glue::glue("totally {sheetnum} xls sheet(s) need to unpivot."))
   }
 
-  # given that units different and contains within () following variables names,
-  ## or all variables have same units.
-  df_out <- df_out %>%
-    mutate(units = str_extract(vars, "(?<=\\()(.+)(?=\\))"),
-           units = str_trim(units)) %>%
-    mutate(units = ifelse(is.na(units), same_units, units))
-} # end loop i
+  # j = 1
+  df_out <- NULL
+  for (j in 1: sheetnum){
+    print(glue::glue("begin unpivot the {j} of {sheetnum} xls sheet."))
+    # load workbook
+    wb <- loadWorkbook(path_xls[k], create = TRUE)
+    dt <- readWorksheet(wb, sheet = j,header = F) %>%
+      select_if(~ !all(is.na(.)))
+
+    # detect numbers of tables in this sheet
+    n_tables <- dt %>%
+      mutate_all(.funs = funs(str_detect(., "续表"))) %>%
+      unlist() %>%
+      sum(na.rm = T) +1
+
+    print(glue::glue("totally {n_tables} pivot table detect in this sheet."))
+
+    # loop tables in sheet
+    # i <- 1
+    for (i in 1:n_tables) {
+      sel_rows <- getRange(dt, ith = i, what = "row")
+      sel_cols <- getRange(dt, ith = i, what = "col")
+
+      #header_mode <- c("vars", "vars-vars")
+      if (k %in% c(2:7) ) {
+        mode <- header_mode[5]
+      } else {
+        mode <- header_mode[4]
+      }
+
+      tbl_tem <- unpivot(dt = dt,
+                         file = file_xls[k],
+                         rows = sel_rows,
+                         cols = sel_cols,
+                         cols.drop = cols_drop,
+                         header.mode = mode ,
+                         vars.add = vars_spc)
+      print(glue::glue("Successfully unpivot the {i} of {n_tables} pivot data region."))
+
+      df_out <- bind_rows(df_out, tbl_tem)
+    }# end loop i
+
+    # get unit when all variables have the same units.
+    same_units <- getInfo(dt)
+    if (length(same_units)==1) {
+      print( glue::glue("Varibales in sheet {j} have same units: {same_units}"))
+    } else if (length(same_units)==0) {
+      print( glue::glue("Varibales in sheet {j} have different units"))
+    } else {
+      warning("Please check Varibales units in sheet {j} when unpivot.")
+    }
+
+    # given that units different and contains within () following variables names,
+    ## or all variables have same units.
+    df_out <- df_out %>%
+      mutate(units = str_extract(vars, "(?<=\\()(.+)(?=\\))"),
+             units = str_trim(units)) %>%
+      mutate(units = ifelse(is.na(units), same_units, units))
+  } # end loop i
+
+df_all <- bind_rows(df_all, df_out)
+
+print(glue::glue("Succesful unpivot file {k}/{length(file_xls)}: {file_xls[k]}") )
+Sys.sleep(0.5)
+
+} # end loop k
 
 
 

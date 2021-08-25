@@ -34,7 +34,7 @@ dir_media <- "data-raw/livestock-yearbook/"
 i_sel <- 1
 
 # target which file(s)?
-pattern_sel <- "^2011-.*\\.xls$"
+pattern_sel <- "^raw-\\d{4}-1.xls$"
 
 # step 1: get files and path------
 source("data-raw/wfl_files.R")
@@ -61,25 +61,43 @@ source("data-raw/wfl_editXls.R")
 
 # step 6: begin unpivot
 ## whether drop columns and specify the header mode.
-cols_drop <- c(2)
-#cols_drop <- NULL
-header_mode <- c("vars")
-#header_mode <- c("vars","vars-vars")
+#cols_drop <- c(2)
+cols_drop <- NULL
+
+# choose header mode
+header_mode <- c("vars", "vars-vars",
+                 "vars-h3","vars-h4","vars-h5")
+## change mode on conditions if needed in `wfl_unpivot_livestock.R`
+# mode <- header_mode[?]
+
 
 ## following value only for header.mode=="year"
 ## and you should specify it manuualy
 vars_spc <- get_vars(df = varsList, lang = "eng",
-                      block = list(block1 = "v4",block2 = "cy",
-                                   block3 = c("my")
+                      block = list(block1 = "v8",block2 = "t1",
+                                   block3 = c("zcqc")
                                    #,block4 = "ht"
                                    ),
                       what = "chn_block4")
 
-source("data-raw/wfl_unpivot_new.R", encoding = "UTF-8")
+#source("data-raw/wfl_unpivot_new.R", encoding = "UTF-8")
+## for livestock yearbook
+source("data-raw/wfl_unpivot_livestock.R", encoding = "UTF-8")
 
+## check
+df_all %>%
+  filter(is.na(vars))
 
 # step 7: tidy data -----
 source("data-raw/wfl_tidy.R", encoding = "UTF-8")
+
+df_tidy <- getTidy(dt = df_all) %>%
+  select(province, year,
+         tab,
+         vars, value, units)
+
+unique(df_tidy$vars)
+unique(df_tidy$province)
 
 # step 8: match and check variables names to the varsList ----
 ## check if warnings
@@ -88,8 +106,8 @@ source("data-raw/wfl_tidy.R", encoding = "UTF-8")
 #target <- list(block1 = "v7",block2 = "sctj",block3 = "nyjx")
 #target <- list(block1 = "v4",block2 = "qy",block3 = "qysl")
 #target <- list(block1 = "v4",block2 = "cg",block3 = "jssc")
-target <- list(block1 = "v4",block2 = "cy",
-               block3 = "my")
+#target <- list(block1 = "v4",block2 = "cy",block3 = "my")
+target <- list(block1 = "v8",block2 = "t1",block3 = c("zcqc"))
 
 
 source("data-raw/wfl_matchVars.R", encoding = "UTF-8")
@@ -113,6 +131,7 @@ rpl <- c("贸易总额")
 
 df_tidy <- df_tidy %>%
   mutate(vars= mgsub::mgsub(vars, ptn, rpl))
+
 ## rerun the function
 df_vars_matched <- matchVars(dt = df_tidy, block_target = target)%>%
   filter(asis==TRUE)
@@ -124,6 +143,16 @@ openxlsx::write.xlsx(df_vars_matched, "data-raw/df-vars-matched.xlsx")
 #yearbook <- "tech-yearbook"
 #noDir <- FALSE
 source("data-raw/wfl_matchData.R", encoding = "UTF-8")
+
+vec_year <- sort(unique(df_matched$year))
+vec_tab <- unique(df_matched$tab)
+files_tidy <- glue::glue("year-{vec_year}-{vec_tab}.xlsx" )
+#files_tidy <- glue::glue("{vec_year}.xlsx" )
+#files_tidy <- glue::glue("ammount-{vec_year}.xlsx" )
+#files_tidy <- glue::glue("funds-{vec_year}.xlsx" )
+
+# file path
+tidy_path <-paste0(dir_sub1, dir_sub2,"/",files_tidy)
 
 tidy_path # see the files' path
 # loop to export xlsx

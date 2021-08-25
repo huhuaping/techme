@@ -50,14 +50,5 @@ gen_dirs_vec(media = dir_sub1, final = dir_sub2)
 #df_matched <- openxlsx::read.xlsx(url_xlsx) %>%
 #  filter(year ==2019)
 
-vec_year <- sort(unique(df_matched$year))
-files_tidy <- glue::glue("{vec_year}.xlsx" )
-#files_tidy <- glue::glue("ammount-{vec_year}.xlsx" )
-#files_tidy <- glue::glue("funds-{vec_year}.xlsx" )
-
-
-# file path
-tidy_path <-paste0(dir_sub1, dir_sub2,"/",files_tidy)
-
 
 #usethis::use_data(df_matched, overwrite = TRUE, internal = T)
