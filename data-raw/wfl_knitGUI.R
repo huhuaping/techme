@@ -26,25 +26,34 @@ dir_media <- "data-raw/tech-yearbook/part05-industry/"
 #dir_final <- c("01-patent", "02-enrollmark","03-teckmarket-pull", "04-teckmarket-push")
 #dir_media <- "data-raw/tech-yearbook/part08-output/"
 
+dir_final <- c("02-breeding")
+dir_media <- "data-raw/livestock-yearbook/"
 
-# default the first directory
+
+# which final directory ?
 i_sel <- 1
-#file_sel <- "raw-type-amount-2019.xls"
-file_sel <- "raw-2018.xls"
-#file_sel <- "raw-2018-2019.xls"
-#file_sel <- "raw-2018-2019-edited.xlsx"
 
-# step 1: filesystem------
+# target which file(s)?
+pattern_sel <- "^2011-.*\\.xls$"
+
+# step 1: get files and path------
 source("data-raw/wfl_files.R")
+file_sel <- file_xls
+print(glue::glue(" You have selected  totally {length(path_xls)} file(s) and the path(s) are : {path_xls}"))
 
 # step 2: generate dirs------
 source("data-raw/wfl_genDirs.R")
 
 # step 3: rename download xls files -----
 ## ignore following steps if unneccesary
-# source("data-raw/wfl_rename.R")
+source("data-raw/wfl_rename.R")
+rename_xls_files(dir = file_dir,
+                 ptn_target_file ="^\\d{4}",
+                 ptn = "(^\\d{4})",
+                 rpl ="raw-01-\\1")
 
 # step 4: unlock xlsx files ------
+## you should 'save as' to '.xlsx' by hand!!
 source("data-raw/wfl_unlock.R")
 
 # step 5: edit xlsx files manually ------

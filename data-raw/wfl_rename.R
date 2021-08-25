@@ -4,34 +4,50 @@
 
 
 # -----rename batch files without special characters-----
-## all change to the same file names.
-rename_files_vec <- function(media, final, char_exclude=NA, char_replace){
-  require("stringr")
-  if (is.na(char_exclude)) stop("Excluded character for file name not set, it is danger to do bantch rename.")
 
-  dir_dest <- glue::glue("{media}{final}")
+#' Helper function  rename xls files in directory
+#'
+#' @param dir character, the directory of files.
+#' @param ptn_target_file character,  expression of 'regex' to target files.
+#' @param ptn  character, 'regex' expression of string pattern to rename.
+#' @param rpl character, 'regex' expression of  string replacement to rename.
+#'
+#' @export rename_xls_files
+#'
+#'
 
-  path_all <- list.files(dir_dest, full.names = T)
-  files_all <- basename(path_all)
+rename_xls_files <- function(dir , ptn_target_file,
+                             ptn , rpl){
+  old_files <- list.files(dir)
+  id_sel <- which(str_detect(old_files, ptn_target_file))
+  files_sel <- old_files[id_sel]
 
-  id_not <- which(!str_detect(files_all,
-                              paste0("(",char_exclude,".+)(?=\\.)")))
+  names_full <- str_extract(files_sel, "(.+)(?=\\.xls)")
 
-  if (length(id_not)==0) {
-    print("No files detect with current reg pattern.")
+  names_new <- str_replace(names_full, ptn, rpl )
+
+  if (length(names_new)>0) {
+    print(glue::glue("OK. Your new file name mode is : {names_new[1]}"))
   } else {
-    path_new <- str_replace(path_all[id_not],
-                            str_extract(files_all[id_not],".+(?=\\.)"),
-                            char_replace)
-    files_new <- file.rename(path_all[id_not], path_new )
-    print(glue::glue("rename file: \n '{path_all[id_not]}' to \n '{path_new};'"))
-  }
+    stop("Ops! String replace is not success, check you regex pattern expression!")
+    }
+
+  path_old <- paste0(file_dir,"/",names_full, ".xls")
+  path_new <- paste0(file_dir,"/",names_new, ".xls")
+
+  # copy old to new
+  file.copy(path_old, to = path_new )
+
+  print(glue::glue("copy totally {length(path_old)} old files to directory: {dir}"))
+
+  # remove old files
+  file.remove(path_old)
+
+  print(glue::glue("remove totally {length(path_old)} old files from directory: {dir}"))
+
 }
 
-# example
-rpl <- str_extract(file_sel, ".*(?=\\.)")
-rename_files_vec(media = dir_media, final = dir_final,
-                 char_exclude = "raw",
-                 char_replace = rpl)
+
+
 
 # usethis::use_data(wfl_rename, overwrite = TRUE)
