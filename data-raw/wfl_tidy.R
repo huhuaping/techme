@@ -23,6 +23,10 @@ getTidy <- function(dt){
            vars = str_replace_all(vars, "\\r\\n","_" ),
            vars = str_replace(vars, "(_[a-zA-Z].+)","" ),
            vars = str_replace_all(vars, "_","" ),
+           # handle newline break
+           vars = mgsub::mgsub(vars,
+                               c(fixed("\u00a0"),fixed("\n")," "),
+                               c("", "","")) ,
            # handle cell begin with number followed by dot.
            vars = str_replace(vars, "\\d",""),
            vars = str_replace(vars, "\\.",""),

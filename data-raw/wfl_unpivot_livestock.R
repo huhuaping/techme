@@ -143,7 +143,6 @@ unpivot <- function(dt, file, rows, cols,
       mutate(vars = ifelse(!is.na(h3), h3, vars)) %>%
       mutate(vars = ifelse(is.na(h3)&!is.na(h2) , h2, vars)) %>%
       add_column(year = str_extract(file,"\\d{4}")) %>%
-      add_column(tab = str_extract(file,"\\d{1}(?=\\.xls)")) %>%
       select(-h3,-h2)
   }else if (header.mode == "vars-h4"){ # 4 headers for livestock
     dt_cell <- dt_cell %>%
@@ -156,7 +155,6 @@ unpivot <- function(dt, file, rows, cols,
       mutate(vars = ifelse(is.na(h4)&!is.na(h3), h3, vars)) %>%
       mutate(vars = ifelse( is.na(h4)&is.na(h3)&!is.na(h2), h2, vars)) %>%
       add_column(year = str_extract(file,"\\d{4}")) %>%
-      add_column(tab = str_extract(file,"\\d{1}(?=\\.xls)")) %>%
       select(-h4,-h3,-h2)
   }else if (header.mode == "vars-h5"){ # 5 headers for livestock
     dt_cell <- dt_cell %>%
@@ -171,7 +169,6 @@ unpivot <- function(dt, file, rows, cols,
       mutate(vars = ifelse(is.na(h5) &is.na(h4)&!is.na(h3), h3, vars)) %>%
       mutate(vars = ifelse(is.na(h5) &is.na(h4)&is.na(h3)&!is.na(h2), h2, vars)) %>%
       add_column(year = str_extract(file,"\\d{4}")) %>%
-      add_column(tab = str_extract(file,"\\d{1}(?=\\.xls)")) %>%
       select(-h5,-h4,-h3,-h2)
   }else if (header.mode == "year"){ # header mode 4
     if (length(vars.add)!=1) stop("Added Vars info not correct, please specify by function 'get_vars()' ")
@@ -184,7 +181,6 @@ unpivot <- function(dt, file, rows, cols,
   dt_cell <- dt_cell %>%
     rename(value = chr) %>%
     select(province, year,
-           tab,
            vars, value)
   return(dt_cell)
 }
@@ -231,12 +227,12 @@ df_all <-NULL
 # loop k xls files
 for (k in 1: length(path_xls)) {
 
-  wb <- loadWorkbook(path_xls[k], create = TRUE)
+  wb <- XLConnect::loadWorkbook(path_xls[k], create = TRUE)
 
-  getSheets(wb)
-  removeSheet(wb,"CNKI")
+  XLConnect::getSheets(wb)
+  XLConnect::removeSheet(wb,"CNKI")
   # get the numbers of sheets. It should minus one to drop the last sheet contains only copyright informal .
-  sheetnum <- length(getSheets(wb))
+  sheetnum <- length(XLConnect::getSheets(wb))
 
   if (sheetnum==0) {
     stop("no files founded, please check file existed")
@@ -249,8 +245,8 @@ for (k in 1: length(path_xls)) {
   for (j in 1: sheetnum){
     print(glue::glue("begin unpivot the {j} of {sheetnum} xls sheet."))
     # load workbook
-    wb <- loadWorkbook(path_xls[k], create = TRUE)
-    dt <- readWorksheet(wb, sheet = j,header = F) %>%
+    wb <- XLConnect::loadWorkbook(path_xls[k], create = TRUE)
+    dt <- XLConnect::readWorksheet(wb, sheet = j,header = F) %>%
       select_if(~ !all(is.na(.)))
 
     # detect numbers of tables in this sheet
@@ -268,10 +264,16 @@ for (k in 1: length(path_xls)) {
       sel_cols <- getRange(dt, ith = i, what = "col")
 
       #header_mode <- c("vars", "vars-vars")
-      if (k %in% c(2:7) ) {
-        mode <- header_mode[5]
-      } else {
+      # livestock tab1: 2011=h4, 2012-2017 =h5
+      # livestock tab2: 2011-2017 =h5
+      # livestock tab3\4: 2011-2017 =h4
+      # livestock tab5: 2011-2015,2017 =h3; 2016=h4
+      # livestock tab6\tab7: 2011-2017 =h4
+      # livestock tab8: 2011-2017 =h4
+      if (k %in% c(1:7) ) {
         mode <- header_mode[4]
+      } else {
+        mode <- header_mode[3]
       }
 
       tbl_tem <- unpivot(dt = dt,
@@ -310,7 +312,6 @@ print(glue::glue("Succesful unpivot file {k}/{length(file_xls)}: {file_xls[k]}")
 Sys.sleep(0.5)
 
 } # end loop k
-
 
 
 # usethis::use_data(wfl_unpivot, overwrite = TRUE)

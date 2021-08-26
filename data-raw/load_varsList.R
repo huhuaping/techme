@@ -13,4 +13,16 @@ varsList <- openxlsx::read.xlsx(file_path) %>%
 
 write.xlsx(varsList, out_path)
 
+# check
+
+check <- varsList %>%
+  filter(block1 =="v8") %>%
+  select(chn_block2:chn_block4) %>%
+  janitor::get_dupes()
+
+if (nrow(check) >0) stop( "some encoding rows duplicated!")
+
 usethis::use_data(varsList, overwrite = TRUE)
+
+
+
