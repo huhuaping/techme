@@ -63,7 +63,7 @@ format.
     chn\_block1, chn\_block2, chn\_block3, chn\_block4, chn\_full, flag,
     source。
 
--   Totally 488 rows。
+-   Totally 586 rows。
 
 **`BasicProvince`**：A data set containing basic information of province
 and its region, with wide data format.
@@ -85,7 +85,7 @@ enrolled in officer administrator.
 -   Totally 9 columns including: index, name\_origin, name\_search,
     address, tel, url, province, city, province\_raw。
 
--   Totally 410 rows。
+-   Totally 441 rows。
 
 ### Yearbook
 
@@ -256,6 +256,27 @@ statistics.
 -   Variables including: v6\_cz\_yszc\_hj, v6\_cz\_yszc\_jy,
     v6\_cz\_yszc\_kxjs, v6\_cz\_yszc\_nls
 
+#### Data from Livestock Yearbook
+
+**`LivestockBreeding`**：A **long format** data set containing Livestock
+Breeding statistics.
+
+-   Totally 6 columns including: province, year, chn\_block4, value,
+    units, variables。
+
+-   Totally 20672 rows。
+
+-   Years range from 2011 to 2017
+
+-   Variables including: v8\_t1\_zcqc\_zhnc, v8\_t1\_zcqc\_zmc,
+    v8\_t1\_zcqc\_zmsyc, v8\_t1\_zcqc\_zmyc, v8\_t1\_zcqc\_znc,
+    v8\_t1\_zcqc\_znnc1, v8\_t1\_zcqc\_znnc2, v8\_t1\_zcqc\_zrnc,
+    v8\_t1\_zcqc\_zs, v8\_t1\_zcqc\_zsnc, v8\_t1\_zcqc\_zsyc,
+    v8\_t1\_zcqc\_zxmyc, v8\_t1\_zcqc\_zyc, v8\_t1\_zcqc\_zzc,
+    v8\_t2\_zcqc\_fmddjc, v8\_t2\_zcqc\_fmdrjc, v8\_t2\_zcqc\_qt,
+    v8\_t2\_zcqc\_zdjc, v8\_t2\_zcqc\_zdjysdjc,
+    v8\_t2\_zcqc\_zdjysrjc（top 20 of totally 98 variables）
+
 ### Public site
 
 #### Data from MOST
@@ -306,3 +327,22 @@ Observe Stations of MOA and MOE.
 -   Totally 158 rows。
 
 -   Years range from 2018 to 2019
+
+<!---CARS from MOA---->
+
+``` r
+data("PubCars")
+```
+
+**`PubCars`**：A **wide format** data set containing Details of China
+Agricultural Research System(CARS) from MOA.
+
+-   Totally 16 columns including: year, index, area\_num\_eng,
+    area\_name, chairman\_industry, institution\_industry, func\_num,
+    func\_name, func\_inst, func\_director, researcher\_area,
+    researcher\_name, researcher\_inst, province\_industry,
+    province\_func, province\_researcher。
+
+-   Totally 1691 rows。
+
+-   Years range from 2011 to 2021

@@ -238,6 +238,22 @@ data("PublicBudget")
 
 - Variables including: `r paste0(sort(unique(PublicBudget$variables)), collapse =", ")`
 
+#### Data from Livestock Yearbook
+
+```{r,echo=FALSE}
+data("LivestockBreeding")
+```
+
+**`LivestockBreeding`**：A **long format** data set containing Livestock Breeding statistics.
+
+- Totally `r dim(LivestockBreeding)[2]` columns including: `r paste0(names(LivestockBreeding), collapse =", ")`。
+
+- Totally `r dim(LivestockBreeding)[1]` rows。
+
+- Years range from `r min(LivestockBreeding$year)` to `r max(LivestockBreeding$year)` 
+
+- Variables including: `r paste0(head(sort(unique(LivestockBreeding$variables)),20), collapse =", ")`（top 20 of totally `r glue::glue("{length(unique(LivestockBreeding$variables))} variables")`）
+
 ### Public site
 
 #### Data from MOST
@@ -292,6 +308,20 @@ Several data set sources from Ministry of Agriculture (MOA) or Ministry of Educa
 - Totally `r dim(PubObsStation)[1]` rows。
 
 - Years range from `r min(PubObsStation$year)` to `r max(PubObsStation$year)` 
+
+<!---CARS from MOA---->
+
+```{r}
+data("PubCars")
+```
+
+**`PubCars`**：A **wide format** data set containing Details of China Agricultural Research System(CARS) from MOA.
+
+- Totally `r dim(PubCars)[2]` columns including: `r paste0(names(PubCars), collapse =", ")`。
+
+- Totally `r dim(PubCars)[1]` rows。
+
+- Years range from `r min(PubCars$year)` to `r max(PubCars$year)` 
 
 
 
