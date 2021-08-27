@@ -5,7 +5,7 @@ source("data-raw/set-global.R")
 ## it should  be unique and exclusive from 'queryTianyan'
 ## and xlsx file in directory 'ship/xx.xlsx'
 
-url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot31-2021-08-23.xlsx"
+url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot23-2021-08-27.xlsx"
 list_ins <- openxlsx::read.xlsx(url_xlsx) %>%
   unlist() %>%
   unname()
@@ -20,7 +20,7 @@ require("stringr")
 require("tidyverse")
 require("tidyselect")
 
-driver <- rsDriver(browser=c("firefox"), port = 4446L)
+driver <- rsDriver(browser=c("firefox"), port = 4445L)
 remDr <- driver[["client"]]
 ## open the connect
 remDr$open()
@@ -42,7 +42,7 @@ myswitch <- function (remDr, windowId) {
 }
 
 # loop to scrape info
-i <- 95
+i <- 1
 
 for (i in 1:length(list_ins)) {
   # navigate the url
