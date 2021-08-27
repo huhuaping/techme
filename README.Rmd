@@ -45,6 +45,9 @@ head(varsList)
 
 ```{r,echo=FALSE, message=FALSE}
 require(techme)
+require(tidyverse)
+require(purrr)
+require(knitr)
 data("varsList")
 data("BasicProvince")
 data("queryTianyan")
@@ -52,12 +55,21 @@ data("ProvinceCity")
 
 ```
 
+#### varsList
+
 **`varsList`**：A data set containing all variables and additional information, such as unit, chn_name, eng_name etc., with wide data format.
 
 - Totally `r dim(varsList)[2]` columns including: `r paste0(names(varsList), collapse =", ")`。
 
 - Totally `r dim(varsList)[1]` rows。
 
+```{r}
+varsList %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+#### BasicProvince
 
 **`BasicProvince`**：A data set containing basic information of province and its region, with wide data format.
 
@@ -65,6 +77,13 @@ data("ProvinceCity")
 
 - Totally `r dim(BasicProvince)[1]` rows。
 
+```{r}
+BasicProvince %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+#### ProvinceCity
 
 **`ProvinceCity`**：A data set containing Province and City of china.
 
@@ -72,6 +91,13 @@ data("ProvinceCity")
 
 - Totally `r dim(ProvinceCity)[1]` rows。
 
+```{r}
+ProvinceCity %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+#### 
 
 **`queryTianyan`**：A data set containing basic info of institution enrolled in officer administrator.
 
@@ -79,6 +105,11 @@ data("ProvinceCity")
 
 - Totally `r dim(queryTianyan)[1]` rows。
 
+```{r}
+AgriMachine %>%
+  sample_n(size = 10) %>%
+  kable()
+```
 
 ### Yearbook
 
@@ -92,6 +123,8 @@ data("AgriPlastic")
 data("AgriPesticide")
 ```
 
+##### AgriMachine
+
 **`AgriMachine`**：A **long format** data set containing Agricultural Machine statistics .
 
 - Totally `r dim(AgriMachine)[2]` columns including: `r paste0(names(AgriMachine), collapse =", ")`。
@@ -102,6 +135,14 @@ data("AgriPesticide")
 
 - Variables including: `r paste0(sort(unique(AgriMachine$variables)), collapse =", ")`
 
+```{r}
+AgriMachine %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+
+##### AgriFertilizer
 
 **`AgriFertilizer`**：A **long format** data set containing Agricultural Fertilizer statistics .
 
@@ -113,6 +154,13 @@ data("AgriPesticide")
 
 - Variables including: `r paste0(sort(unique(AgriFertilizer$variables)), collapse =", ")`
 
+```{r}
+AgriFertilizer %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+##### AgriPlastic
 
 **`AgriPlastic`**：A **long format** data set containing Agricultural Plastic statistics .
 
@@ -124,6 +172,13 @@ data("AgriPesticide")
 
 - Variables including: `r paste0(sort(unique(AgriPlastic$variables)), collapse =", ")`
 
+```{r}
+AgriPlastic %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+##### AgriPesticide
 
 **`AgriPesticide`**：A **long format** data set containing Agricultural Pesticide statistics .
 
@@ -135,8 +190,15 @@ data("AgriPesticide")
 
 - Variables including: `r paste0(sort(unique(AgriPesticide$variables)), collapse =", ")`
 
+```{r}
+AgriPesticide %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
 #### Data from Sci-Tech Yearbook
 
+##### RDIntense
 
 ```{r,echo=FALSE}
 data("RDIntense")
@@ -159,6 +221,14 @@ data("MarketPush")
 
 - Variables including: `r paste0(sort(unique(RDIntense$variables)), collapse =", ")`
 
+```{r}
+RDIntense %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+##### RDActivity
+
 **`RDActivity`**：A **long format** data set containing R&D Activity statistics .
 
 - Totally `r dim(RDActivity)[2]` columns including: `r paste0(names(RDActivity), collapse =", ")`。
@@ -169,6 +239,14 @@ data("MarketPush")
 
 - Variables including: `r paste0(sort(unique(RDActivity$variables)), collapse =", ")`
 
+```{r}
+RDActivity %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+
+##### IndustryOperation
 
 **`IndustryOperation`**：A **long format** data set containing Industry Operation statistics .
 
@@ -180,6 +258,13 @@ data("MarketPush")
 
 - Variables including: `r paste0(sort(unique(IndustryOperation$variables)), collapse =", ")`
 
+```{r}
+IndustryOperation %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+##### IndustryRD
 
 **`IndustryRD`**：A **long format** data set containing Industry R&D statistics .
 
@@ -191,6 +276,14 @@ data("MarketPush")
 
 - Variables including: `r paste0(sort(unique(IndustryRD$variables)), collapse =", ")`
 
+```{r}
+IndustryRD %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+##### IndustryTrade
+
 **`IndustryTrade`**：A **long format** data set containing Industry Trade statistics .
 
 - Totally `r dim(IndustryTrade)[2]` columns including: `r paste0(names(IndustryTrade), collapse =", ")`。
@@ -201,6 +294,13 @@ data("MarketPush")
 
 - Variables including: `r paste0(sort(unique(IndustryTrade$variables)), collapse =", ")`
 
+```{r}
+IndustryTrade %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+##### MarketPull
 
 **`MarketPull`**：A **long format** data set containing Tech Market Pull statistics .
 
@@ -212,6 +312,14 @@ data("MarketPush")
 
 - Variables including: `r paste0(sort(unique(MarketPull$variables)), collapse =", ")`
 
+```{r}
+MarketPull %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+##### MarketPush
+
 **`MarketPush`**：A **long format** data set containing Tech Market Push statistics .
 
 - Totally `r dim(MarketPush)[2]` columns including: `r paste0(names(MarketPush), collapse =", ")`。
@@ -222,11 +330,19 @@ data("MarketPush")
 
 - Variables including: `r paste0(sort(unique(MarketPush$variables)), collapse =", ")`
 
+```{r}
+MarketPush %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
 #### Data from China National Yearbook
 
 ```{r,echo=FALSE}
 data("PublicBudget")
 ```
+
+##### PublicBudget
 
 **`PublicBudget`**：A **long format** data set containing Public Budget statistics.
 
@@ -237,6 +353,12 @@ data("PublicBudget")
 - Years range from `r min(PublicBudget$year)` to `r max(PublicBudget$year)` 
 
 - Variables including: `r paste0(sort(unique(PublicBudget$variables)), collapse =", ")`
+
+```{r}
+PublicBudget %>%
+  sample_n(size = 10) %>%
+  kable()
+```
 
 ### Public site
 
@@ -251,6 +373,8 @@ data("PubAgriParkList")
 data("PubAgriParkEval")
 ```
 
+##### PubNKRDP
+
 **`PubNKRDP`**：A **wide format** data set containing Details of National Key R&D Plans(NKRDP) statistics.
 
 - Totally `r dim(PubNKRDP)[2]` columns including: `r paste0(names(PubNKRDP), collapse =", ")`。
@@ -259,6 +383,13 @@ data("PubAgriParkEval")
 
 - Years range from `r min(PubNKRDP$year)` to `r max(PubNKRDP$year)` 
 
+```{r}
+PubNKRDP %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+##### PubAgriParkList
 
 **`PubAgriParkList`**：A **wide format** data set containing Details of Approved List of National Agricultural Sci-tech Park.
 
@@ -268,6 +399,14 @@ data("PubAgriParkEval")
 
 - Years (Batch) range from `r min(PubAgriParkList$batch)` to `r max(PubAgriParkList$batch)` 
 
+```{r}
+PubAgriParkList %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+##### PubAgriParkEval
+
 **`PubAgriParkEval`**：A **wide format** data set containing Details of Evaluation result of National Agricultural Sci-tech Park.
 
 - Totally `r dim(PubAgriParkEval)[2]` columns including: `r paste0(names(PubAgriParkEval), collapse =", ")`。
@@ -275,6 +414,12 @@ data("PubAgriParkEval")
 - Totally `r dim(PubAgriParkEval)[1]` rows。
 
 - Years range from `r min(PubAgriParkEval$year)` to `r max(PubAgriParkEval$year)` 
+
+```{r}
+PubAgriParkEval %>%
+  sample_n(size = 10) %>%
+  kable()
+```
 
 #### Data from MOA or MOE
 
@@ -285,6 +430,8 @@ data("PubObsStation")
 
 Several data set sources from Ministry of Agriculture (MOA) or Ministry of Education (MOE).
 
+##### PubObsStation
+
 **`PubObsStation`**：A **wide format** data set containing Details of Evaluation result of National Agricultural Sci-tech Details list of Observe Stations of MOA and MOE.
 
 - Totally `r dim(PubObsStation)[2]` columns including: `r paste0(names(PubObsStation), collapse =", ")`。
@@ -293,5 +440,29 @@ Several data set sources from Ministry of Agriculture (MOA) or Ministry of Educa
 
 - Years range from `r min(PubObsStation$year)` to `r max(PubObsStation$year)` 
 
+```{r}
+PubObsStation %>%
+  sample_n(size = 10) %>%
+  kable()
+```
 
+##### PubBreedingXmj
+
+```{r,echo=FALSE}
+data("PubBreedingXmj")
+```
+
+**`PubBreedingXmj`**：A **wide format** data set containing details of Officer' Livestock Breeding List from MOA (Xmj).
+
+- Totally `r dim(PubBreedingXmj)[2]` columns including: `r paste0(names(PubBreedingXmj), collapse =", ")`。
+
+- Totally `r dim(PubBreedingXmj)[1]` rows。
+
+- Years range from `r min(PubBreedingXmj$year)` to `r max(PubBreedingXmj$year)` 
+
+```{r}
+PubBreedingXmj %>%
+  sample_n(size = 10) %>%
+  kable()
+```
 
