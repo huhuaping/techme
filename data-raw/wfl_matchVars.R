@@ -63,6 +63,5 @@ matchVars <- function(dt, block_target = target, block_lang="eng"){
 
 }
 
-df_vars_matched <- matchVars(dt = df_tidy, block_target = target)
 
 #usethis::use_data(vars_matched, overwrite = TRUE, internal = T)

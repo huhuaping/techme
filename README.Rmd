@@ -59,9 +59,9 @@ data("ProvinceCity")
 
 **`varsList`**ï¼šA data set containing all variables and additional information, such as unit, chn_name, eng_name etc., with wide data format.
 
-- Totally `r dim(varsList)[2]` columns including: `r paste0(names(varsList), collapse =", ")`ã€‚
+- Totally `r dim(varsList)[2]` columns including: `r paste0(names(varsList), collapse =", ")`ã€?
 
-- Totally `r dim(varsList)[1]` rowsã€‚
+- Totally `r dim(varsList)[1]` rowsã€?
 
 ```{r}
 varsList %>%
@@ -73,9 +73,9 @@ varsList %>%
 
 **`BasicProvince`**ï¼šA data set containing basic information of province and its region, with wide data format.
 
-- Totally `r dim(BasicProvince)[2]` columns including: `r paste0(names(BasicProvince), collapse =", ")`ã€‚
+- Totally `r dim(BasicProvince)[2]` columns including: `r paste0(names(BasicProvince), collapse =", ")`ã€?
 
-- Totally `r dim(BasicProvince)[1]` rowsã€‚
+- Totally `r dim(BasicProvince)[1]` rowsã€?
 
 ```{r}
 BasicProvince %>%
@@ -87,9 +87,9 @@ BasicProvince %>%
 
 **`ProvinceCity`**ï¼šA data set containing Province and City of china.
 
-- Totally `r dim(ProvinceCity)[2]` columns including: `r paste0(names(ProvinceCity), collapse =", ")`ã€‚
+- Totally `r dim(ProvinceCity)[2]` columns including: `r paste0(names(ProvinceCity), collapse =", ")`ã€?
 
-- Totally `r dim(ProvinceCity)[1]` rowsã€‚
+- Totally `r dim(ProvinceCity)[1]` rowsã€?
 
 ```{r}
 ProvinceCity %>%
@@ -101,9 +101,9 @@ ProvinceCity %>%
 
 **`queryTianyan`**ï¼šA data set containing basic info of institution enrolled in officer administrator.
 
-- Totally `r dim(queryTianyan)[2]` columns including: `r paste0(names(queryTianyan), collapse =", ")`ã€‚
+- Totally `r dim(queryTianyan)[2]` columns including: `r paste0(names(queryTianyan), collapse =", ")`ã€?
 
-- Totally `r dim(queryTianyan)[1]` rowsã€‚
+- Totally `r dim(queryTianyan)[1]` rowsã€?
 
 ```{r}
 AgriMachine %>%
@@ -127,9 +127,9 @@ data("AgriPesticide")
 
 **`AgriMachine`**ï¼šA **long format** data set containing Agricultural Machine statistics .
 
-- Totally `r dim(AgriMachine)[2]` columns including: `r paste0(names(AgriMachine), collapse =", ")`ã€‚
+- Totally `r dim(AgriMachine)[2]` columns including: `r paste0(names(AgriMachine), collapse =", ")`ã€?
 
-- Totally `r dim(AgriMachine)[1]` rowsã€‚
+- Totally `r dim(AgriMachine)[1]` rowsã€?
 
 - Years range from `r min(AgriMachine$year)` to `r max(AgriMachine$year)` 
 
@@ -146,9 +146,9 @@ AgriMachine %>%
 
 **`AgriFertilizer`**ï¼šA **long format** data set containing Agricultural Fertilizer statistics .
 
-- Totally `r dim(AgriFertilizer)[2]` columns including: `r paste0(names(AgriFertilizer), collapse =", ")`ã€‚
+- Totally `r dim(AgriFertilizer)[2]` columns including: `r paste0(names(AgriFertilizer), collapse =", ")`ã€?
 
-- Totally `r dim(AgriFertilizer)[1]` rowsã€‚
+- Totally `r dim(AgriFertilizer)[1]` rowsã€?
 
 - Years range from `r min(AgriFertilizer$year)` to `r max(AgriFertilizer$year)` 
 
@@ -164,9 +164,9 @@ AgriFertilizer %>%
 
 **`AgriPlastic`**ï¼šA **long format** data set containing Agricultural Plastic statistics .
 
-- Totally `r dim(AgriPlastic)[2]` columns including: `r paste0(names(AgriPlastic), collapse =", ")`ã€‚
+- Totally `r dim(AgriPlastic)[2]` columns including: `r paste0(names(AgriPlastic), collapse =", ")`ã€?
 
-- Totally `r dim(AgriPlastic)[1]` rowsã€‚
+- Totally `r dim(AgriPlastic)[1]` rowsã€?
 
 - Years range from `r min(AgriPlastic$year)` to `r max(AgriPlastic$year)` 
 
@@ -182,9 +182,9 @@ AgriPlastic %>%
 
 **`AgriPesticide`**ï¼šA **long format** data set containing Agricultural Pesticide statistics .
 
-- Totally `r dim(AgriPesticide)[2]` columns including: `r paste0(names(AgriPesticide), collapse =", ")`ã€‚
+- Totally `r dim(AgriPesticide)[2]` columns including: `r paste0(names(AgriPesticide), collapse =", ")`ã€?
 
-- Totally `r dim(AgriPesticide)[1]` rowsã€‚
+- Totally `r dim(AgriPesticide)[1]` rowsã€?
 
 - Years range from `r min(AgriPesticide$year)` to `r max(AgriPesticide$year)` 
 
@@ -213,9 +213,9 @@ data("MarketPush")
 
 **`RDIntense`**ï¼šA **long format** data set containing R&D Intense statistics.
 
-- Totally `r dim(RDIntense)[2]` columns including: `r paste0(names(RDIntense), collapse =", ")`ã€‚
+- Totally `r dim(RDIntense)[2]` columns including: `r paste0(names(RDIntense), collapse =", ")`ã€?
 
-- Totally `r dim(RDIntense)[1]` rowsã€‚
+- Totally `r dim(RDIntense)[1]` rowsã€?
 
 - Years range from `r min(RDIntense$year)` to `r max(RDIntense$year)` 
 
@@ -231,9 +231,9 @@ RDIntense %>%
 
 **`RDActivity`**ï¼šA **long format** data set containing R&D Activity statistics .
 
-- Totally `r dim(RDActivity)[2]` columns including: `r paste0(names(RDActivity), collapse =", ")`ã€‚
+- Totally `r dim(RDActivity)[2]` columns including: `r paste0(names(RDActivity), collapse =", ")`ã€?
 
-- Totally `r dim(RDActivity)[1]` rowsã€‚
+- Totally `r dim(RDActivity)[1]` rowsã€?
 
 - Years range from `r min(RDActivity$year)` to `r max(RDActivity$year)` 
 
@@ -250,9 +250,9 @@ RDActivity %>%
 
 **`IndustryOperation`**ï¼šA **long format** data set containing Industry Operation statistics .
 
-- Totally `r dim(IndustryOperation)[2]` columns including: `r paste0(names(IndustryOperation), collapse =", ")`ã€‚
+- Totally `r dim(IndustryOperation)[2]` columns including: `r paste0(names(IndustryOperation), collapse =", ")`ã€?
 
-- Totally `r dim(IndustryOperation)[1]` rowsã€‚
+- Totally `r dim(IndustryOperation)[1]` rowsã€?
 
 - Years range from `r min(IndustryOperation$year)` to `r max(IndustryOperation$year)` 
 
@@ -268,9 +268,9 @@ IndustryOperation %>%
 
 **`IndustryRD`**ï¼šA **long format** data set containing Industry R&D statistics .
 
-- Totally `r dim(IndustryRD)[2]` columns including: `r paste0(names(IndustryRD), collapse =", ")`ã€‚
+- Totally `r dim(IndustryRD)[2]` columns including: `r paste0(names(IndustryRD), collapse =", ")`ã€?
 
-- Totally `r dim(IndustryRD)[1]` rowsã€‚
+- Totally `r dim(IndustryRD)[1]` rowsã€?
 
 - Years range from `r min(IndustryRD$year)` to `r max(IndustryRD$year)` 
 
@@ -286,9 +286,9 @@ IndustryRD %>%
 
 **`IndustryTrade`**ï¼šA **long format** data set containing Industry Trade statistics .
 
-- Totally `r dim(IndustryTrade)[2]` columns including: `r paste0(names(IndustryTrade), collapse =", ")`ã€‚
+- Totally `r dim(IndustryTrade)[2]` columns including: `r paste0(names(IndustryTrade), collapse =", ")`ã€?
 
-- Totally `r dim(IndustryTrade)[1]` rowsã€‚
+- Totally `r dim(IndustryTrade)[1]` rowsã€?
 
 - Years range from `r min(IndustryTrade$year)` to `r max(IndustryTrade$year)` 
 
@@ -304,9 +304,9 @@ IndustryTrade %>%
 
 **`MarketPull`**ï¼šA **long format** data set containing Tech Market Pull statistics .
 
-- Totally `r dim(MarketPull)[2]` columns including: `r paste0(names(MarketPull), collapse =", ")`ã€‚
+- Totally `r dim(MarketPull)[2]` columns including: `r paste0(names(MarketPull), collapse =", ")`ã€?
 
-- Totally `r dim(MarketPull)[1]` rowsã€‚
+- Totally `r dim(MarketPull)[1]` rowsã€?
 
 - Years range from `r min(MarketPull$year)` to `r max(MarketPull$year)` 
 
@@ -322,9 +322,9 @@ MarketPull %>%
 
 **`MarketPush`**ï¼šA **long format** data set containing Tech Market Push statistics .
 
-- Totally `r dim(MarketPush)[2]` columns including: `r paste0(names(MarketPush), collapse =", ")`ã€‚
+- Totally `r dim(MarketPush)[2]` columns including: `r paste0(names(MarketPush), collapse =", ")`ã€?
 
-- Totally `r dim(MarketPush)[1]` rowsã€‚
+- Totally `r dim(MarketPush)[1]` rowsã€?
 
 - Years range from `r min(MarketPush$year)` to `r max(MarketPush$year)` 
 
@@ -346,19 +346,33 @@ data("PublicBudget")
 
 **`PublicBudget`**ï¼šA **long format** data set containing Public Budget statistics.
 
-- Totally `r dim(PublicBudget)[2]` columns including: `r paste0(names(PublicBudget), collapse =", ")`ã€‚
+- Totally `r dim(PublicBudget)[2]` columns including: `r paste0(names(PublicBudget), collapse =", ")`ã€?
 
-- Totally `r dim(PublicBudget)[1]` rowsã€‚
+- Totally `r dim(PublicBudget)[1]` rowsã€?
 
 - Years range from `r min(PublicBudget$year)` to `r max(PublicBudget$year)` 
 
 - Variables including: `r paste0(sort(unique(PublicBudget$variables)), collapse =", ")`
 
+#### Data from Livestock Yearbook
+
+```{r,echo=FALSE}
+data("LivestockBreeding")
 ```{r}
 PublicBudget %>%
   sample_n(size = 10) %>%
   kable()
 ```
+
+**`LivestockBreeding`**ï¼šA **long format** data set containing Livestock Breeding statistics.
+
+- Totally `r dim(LivestockBreeding)[2]` columns including: `r paste0(names(LivestockBreeding), collapse =", ")`ã€?
+
+- Totally `r dim(LivestockBreeding)[1]` rowsã€?
+
+- Years range from `r min(LivestockBreeding$year)` to `r max(LivestockBreeding$year)` 
+
+- Variables including: `r paste0(head(sort(unique(LivestockBreeding$variables)),20), collapse =", ")`ï¼ˆtop 20 of totally `r glue::glue("{length(unique(LivestockBreeding$variables))} variables")`ï¼?
 
 ### Public site
 
@@ -377,9 +391,9 @@ data("PubAgriParkEval")
 
 **`PubNKRDP`**ï¼šA **wide format** data set containing Details of National Key R&D Plans(NKRDP) statistics.
 
-- Totally `r dim(PubNKRDP)[2]` columns including: `r paste0(names(PubNKRDP), collapse =", ")`ã€‚
+- Totally `r dim(PubNKRDP)[2]` columns including: `r paste0(names(PubNKRDP), collapse =", ")`ã€?
 
-- Totally `r dim(PubNKRDP)[1]` rowsã€‚
+- Totally `r dim(PubNKRDP)[1]` rowsã€?
 
 - Years range from `r min(PubNKRDP$year)` to `r max(PubNKRDP$year)` 
 
@@ -393,9 +407,9 @@ PubNKRDP %>%
 
 **`PubAgriParkList`**ï¼šA **wide format** data set containing Details of Approved List of National Agricultural Sci-tech Park.
 
-- Totally `r dim(PubAgriParkList)[2]` columns including: `r paste0(names(PubAgriParkList), collapse =", ")`ã€‚
+- Totally `r dim(PubAgriParkList)[2]` columns including: `r paste0(names(PubAgriParkList), collapse =", ")`ã€?
 
-- Totally `r dim(PubAgriParkList)[1]` rowsã€‚
+- Totally `r dim(PubAgriParkList)[1]` rowsã€?
 
 - Years (Batch) range from `r min(PubAgriParkList$batch)` to `r max(PubAgriParkList$batch)` 
 
@@ -409,9 +423,9 @@ PubAgriParkList %>%
 
 **`PubAgriParkEval`**ï¼šA **wide format** data set containing Details of Evaluation result of National Agricultural Sci-tech Park.
 
-- Totally `r dim(PubAgriParkEval)[2]` columns including: `r paste0(names(PubAgriParkEval), collapse =", ")`ã€‚
+- Totally `r dim(PubAgriParkEval)[2]` columns including: `r paste0(names(PubAgriParkEval), collapse =", ")`ã€?
 
-- Totally `r dim(PubAgriParkEval)[1]` rowsã€‚
+- Totally `r dim(PubAgriParkEval)[1]` rowsã€?
 
 - Years range from `r min(PubAgriParkEval$year)` to `r max(PubAgriParkEval$year)` 
 
@@ -434,11 +448,25 @@ Several data set sources from Ministry of Agriculture (MOA) or Ministry of Educa
 
 **`PubObsStation`**ï¼šA **wide format** data set containing Details of Evaluation result of National Agricultural Sci-tech Details list of Observe Stations of MOA and MOE.
 
-- Totally `r dim(PubObsStation)[2]` columns including: `r paste0(names(PubObsStation), collapse =", ")`ã€‚
+- Totally `r dim(PubObsStation)[2]` columns including: `r paste0(names(PubObsStation), collapse =", ")`ã€?
 
-- Totally `r dim(PubObsStation)[1]` rowsã€‚
+- Totally `r dim(PubObsStation)[1]` rowsã€?
 
 - Years range from `r min(PubObsStation$year)` to `r max(PubObsStation$year)` 
+
+<!---CARS from MOA---->
+
+```{r}
+data("PubCars")
+```
+
+**`PubCars`**ï¼šA **wide format** data set containing Details of China Agricultural Research System(CARS) from MOA.
+
+- Totally `r dim(PubCars)[2]` columns including: `r paste0(names(PubCars), collapse =", ")`ã€?
+
+- Totally `r dim(PubCars)[1]` rowsã€?
+
+- Years range from `r min(PubCars$year)` to `r max(PubCars$year)` 
 
 ```{r}
 PubObsStation %>%
@@ -454,9 +482,9 @@ data("PubBreedingXmj")
 
 **`PubBreedingXmj`**ï¼šA **wide format** data set containing details of Officer' Livestock Breeding List from MOA (Xmj).
 
-- Totally `r dim(PubBreedingXmj)[2]` columns including: `r paste0(names(PubBreedingXmj), collapse =", ")`ã€‚
+- Totally `r dim(PubBreedingXmj)[2]` columns including: `r paste0(names(PubBreedingXmj), collapse =", ")`ã€?
 
-- Totally `r dim(PubBreedingXmj)[1]` rowsã€‚
+- Totally `r dim(PubBreedingXmj)[1]` rowsã€?
 
 - Years range from `r min(PubBreedingXmj$year)` to `r max(PubBreedingXmj$year)` 
 
