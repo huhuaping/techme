@@ -494,3 +494,22 @@ PubBreedingXmj %>%
   kable()
 ```
 
+##### PubStandardXmj
+
+```{r,echo=FALSE}
+data("PubStandardXmj")
+```
+
+**`PubStandardXmj`**：A **wide format** data set containing details of Officer' Livestock Breeding List from MOA (Xmj).
+
+- Totally `r dim(PubStandardXmj)[2]` columns including: `r paste0(names(PubStandardXmj), collapse =", ")`.
+
+- Totally `r dim(PubStandardXmj)[1]` rows.
+
+- Years range from `r min(PubStandardXmj$year)` to `r max(PubStandardXmj$year)` 
+
+```{r}
+PubStandardXmj %>%
+  sample_n(size = 10) %>%
+  kable()
+```

@@ -44,9 +44,10 @@ tbl_result <- techme::get_province_of_institution(df = tbl_read,
   select(all_of(header_target))
 
 # check begin
-tbl_result %>%
-  select(name_origin, province) %>%
-  filter(!is.na(name_origin),is.na(province))
+tbl_result <- PubBreedingXmj
+check <- tbl_result  %>%
+ # select(name_origin, province) %>%
+  filter(is.na(type),!is.na(province))
 
 
 # write out
