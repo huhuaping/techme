@@ -267,13 +267,13 @@ for (k in 1: length(path_xls)) {
       # livestock tab1: 2011=h4, 2012-2017 =h5
       # livestock tab2: 2011-2017 =h5
       # livestock tab3\4: 2011-2017 =h4
-      # livestock tab5: 2011-2015,2017 =h3; 2016=h4
+      # livestock tab5: 2011-2017 =h3
       # livestock tab6\tab7: 2011-2017 =h4
       # livestock tab8: 2011-2017 =h4
       if (k %in% c(1:7) ) {
-        mode <- header_mode[4]
-      } else {
         mode <- header_mode[3]
+      } else {
+        mode <- header_mode[4]
       }
 
       tbl_tem <- unpivot(dt = dt,

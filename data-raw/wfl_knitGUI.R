@@ -34,7 +34,7 @@ dir_media <- "data-raw/livestock-yearbook/"
 i_sel <- 1
 
 # target which file(s)?
-pattern_sel <- "^raw-201[[1-7]]{1}-9.xls$"
+pattern_sel <- "^raw-201[[6]]{1}-5.xls$"
 pattern_sel <- "^raw-201[[1-4]]{1}-2-edited.xlsx$"
 
 pattern_sel <- "^raw-201[[6-7]]{1}-5.xls$|^raw-201[[1-5]]{1}-5-edited.xlsx$"
@@ -189,7 +189,7 @@ dir_tidy <- paste0(dir_sub1, dir_sub2)
 #gen_dirs_vec(media = dir_sub1, final = dir_sub2)
 
 vec_year <- sort(unique(df_matched$year))
-vec_tab <- 9
+vec_tab <- 5
 files_tidy <- glue::glue("year-{vec_year}-{vec_tab}.xlsx" )
 #files_tidy <- glue::glue("{vec_year}.xlsx" )
 #files_tidy <- glue::glue("ammount-{vec_year}.xlsx" )
