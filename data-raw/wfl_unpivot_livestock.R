@@ -264,16 +264,18 @@ for (k in 1: length(path_xls)) {
       sel_cols <- getRange(dt, ith = i, what = "col")
 
       #header_mode <- c("vars", "vars-vars")
-      # livestock tab1: 2011=h4, 2012-2017 =h5
-      # livestock tab2: 2011-2017 =h5
-      # livestock tab3\4: 2011-2017 =h4
-      # livestock tab5: 2011-2017 =h3
-      # livestock tab6\tab7: 2011-2017 =h4
-      # livestock tab8: 2011-2017 =h4
-      if (k %in% c(1:7) ) {
+      # livestock tab1: 2011,2018=h4, 2012-2017 =h5
+      # livestock tab2: 2011-2017 =h5; 2018 = h4
+      # livestock tab3: 2011-2017 =h4;2018 =h3
+      # livestock tab4: 2011-2018 =h4
+      # livestock tab5: 2011-2018 =h3
+      # livestock tab6\tab7: 2011-2018 =h4
+      # livestock tab8: 2011-2017 =h4; 2018 =h3
+      # livestock tab9: 2011-2017 =h4; 2018 =h3
+      if (k %in% c(1:8) ) {
         mode <- header_mode[3]
       } else {
-        mode <- header_mode[4]
+        mode <- header_mode[5]
       }
 
       tbl_tem <- unpivot(dt = dt,

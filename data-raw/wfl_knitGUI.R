@@ -28,13 +28,11 @@ dir_media <- "data-raw/tech-yearbook/part05-industry/"
 
 dir_final <- c("02-breeding")
 dir_media <- "data-raw/livestock-yearbook/"
-
-
 # which final directory ?
 i_sel <- 1
 
 # target which file(s)?
-pattern_sel <- "^raw-201[[6]]{1}-5.xls$"
+pattern_sel <- "^raw-201[[8]]{1}-9.xls$"
 pattern_sel <- "^raw-201[[1-4]]{1}-2-edited.xlsx$"
 
 pattern_sel <- "^raw-201[[6-7]]{1}-5.xls$|^raw-201[[1-5]]{1}-5-edited.xlsx$"
@@ -53,7 +51,7 @@ source("data-raw/wfl_rename.R")
 rename_xls_files(dir = file_dir,
                  ptn_target_file ="^\\d{4}",
                  ptn = "(^\\d{4})",
-                 rpl ="raw-01-\\1")
+                 rpl ="\\1-edited")
 
 # =====step 4: unlock xlsx files =====
 ## you should 'save as' to '.xlsx' by hand!!
@@ -65,7 +63,7 @@ Sys.sleep(1)
 print("OK! Edit the xlsx file finished!")
 
 
-# =====step 6: begin unpivot=====
+# =====step 6: unpivot=====
 ## whether drop columns and specify the header mode.
 #cols_drop <- c(2)
 cols_drop <- NULL
@@ -75,7 +73,6 @@ header_mode <- c("vars", "vars-vars",
                  "vars-h3","vars-h4","vars-h5")
 ## change mode on conditions if needed in `wfl_unpivot_livestock.R`
 # mode <- header_mode[?]
-
 
 ## following value only for header.mode=="year"
 ## and you should specify it manuualy
@@ -117,7 +114,7 @@ target <- list(block1 = "v8",block2 = "t1",block3 = c("zcqc"))
 target <- list(block1 = "v8",block2 = "t2",block3 = c("zcqc"))
 target <- list(block1 = "v8",block2 = "t3",block3 = c("zcqc","nmcl"))
 target <- list(block1 = "v8",block2 = "t4",block3 = c("zcqc","nmcl"))
-target <- list(block1 = "v8",block2 = c("t4","t5"),block3 = c("zcqc","nmcl"))
+target <- list(block1 = "v8",block2 = c("t5"),block3 = c("zcqc","nmcl"))
 target <- list(block1 = "v8",block2 = c("t6"),block3 = c("nfmccl"))
 target <- list(block1 = "v8",block2 = c("t7"),block3 = c("nfmccl","cczcq"))
 target <- list(block1 = "v8",block2 = c("t8"),block3 = c("cczcq","scpt"))
@@ -142,6 +139,10 @@ get_vars(varsList,lang = "eng", block = target, what = "chn_block4" )
 #rpl <- c("主营业务收入")
 #ptn <- c("进出口贸易总额")
 #rpl <- c("贸易总额")
+
+# livestock tab 1
+ptn <- c("种畜禽场总数")
+rpl <- c("总数")
 
 # livestock tab 4
 ptn <- c("祖代及以上场","祖代蛋鸡场","父母代场")
@@ -189,7 +190,7 @@ dir_tidy <- paste0(dir_sub1, dir_sub2)
 #gen_dirs_vec(media = dir_sub1, final = dir_sub2)
 
 vec_year <- sort(unique(df_matched$year))
-vec_tab <- 5
+vec_tab <- 9
 files_tidy <- glue::glue("year-{vec_year}-{vec_tab}.xlsx" )
 #files_tidy <- glue::glue("{vec_year}.xlsx" )
 #files_tidy <- glue::glue("ammount-{vec_year}.xlsx" )
@@ -207,7 +208,7 @@ for (id_year in vec_year) {
     filter(year == id_year) %>%
     openxlsx::write.xlsx(., tidy_path[n_year])
 
-  print(glue("Eport file of year {id_year} successed!"))
+  print(glue("Export file of year {id_year} successed!"))
   Sys.sleep(0.1)
 }
 
