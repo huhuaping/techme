@@ -58,3 +58,7 @@ add_footer_asis <- function(note, source) {
 
   cat(out, sep = "\n")
 }
+
+# reference
+## 1. How to show formatted R output with results='asis' in rmarkdown [see](https://stackoverflow.com/questions/52631689/how-to-show-formatted-r-output-with-results-asis-in-rmarkdown)
+## 2. Add Blank Line to Word Output RMarkdown [see](https://stackoverflow.com/questions/43239868/add-blank-line-to-word-output-rmarkdown)
