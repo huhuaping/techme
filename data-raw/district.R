@@ -6,11 +6,10 @@ full_name <- c("id", "name", "parent_id", "initial", "initials",
 
 
 url_csv <- "https://raw.githubusercontent.com/eduosi/district/master/district-full.csv"
-district <- readr::read_delim(url(url_csv),
+district <- readr::read_delim(url(url_csv), col_types = cols(.default = "c"),
                               col_names = F, delim = "\t") %>%
   as_tibble() %>%
   rename_all(., ~all_of(full_name))
-
 
 
 # write out
