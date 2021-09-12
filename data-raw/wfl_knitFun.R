@@ -12,7 +12,7 @@ file_sel <- "raw-2018.xls"
 #file_sel <- "raw-2018-2019-edited.xlsx"
 
 tidy.Xlsx<- function(dir_final, dir_media,
-         i_sel = 1, file_sel,
+         i_sel = 1, file_sel
          ){
   # step 1: filesystem------
   source("data-raw/wfl_files.R")
