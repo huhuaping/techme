@@ -5,7 +5,7 @@ library("tidyverse")
 full_name <- c("id", "name", "parent_id", "initial", "initials",
                "pinyin", "extra", "suffix", "code", "area_code", "order")
 
-
+#url_csv <- "https://gist.githubusercontent.com/vvtommy/a1bee4cd9e65e6d57b84f35f4e4dd5e1/raw/a0aa736eeec30134ca2a2367c55c115be23d5dd1/%25E4%25B8%25AD%25E5%259B%25BD%25E5%258C%25BA%25E5%258F%25B7.csv"
 url_csv <- "https://raw.githubusercontent.com/eduosi/district/master/district-full.csv"
 district <- readr::read_delim(url(url_csv), col_types = cols(.default = "c"),
                               col_names = F, delim = "\t") %>%
@@ -18,13 +18,11 @@ check <- district %>%
          str_length(code)==6)
 
 # work need handle
-name_chn <- c("南京","洛阳","濮阳")
-area_tel <- c("020","0376", "0393")
+name_chn <- c("南京","洛阳","信阳")
+area_tel <- c("020","0376", "0379")
 
 district_added <- district %>%
-  mutate(area_code = ifelse(is.na(area_code),
-                            mgsub::mgsub(name, name_chn, area_tel),
-                            area_code))
+  mutate(area_code = mgsub::mgsub(name, name_chn, area_tel))
 
 
 # write out
