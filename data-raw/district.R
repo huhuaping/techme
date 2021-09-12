@@ -12,9 +12,23 @@ district <- readr::read_delim(url(url_csv), col_types = cols(.default = "c"),
   as_tibble() %>%
   rename_all(., ~all_of(full_name))
 
+# check tel code
+check <- district %>%
+  filter(is.na(area_code),
+         str_length(code)==6)
+
+# work need handle
+name_chn <- c("南京","洛阳","濮阳")
+area_tel <- c("020","0376", "0393")
+
+district_added <- district %>%
+  mutate(area_code = ifelse(is.na(area_code),
+                            mgsub::mgsub(name, name_chn, area_tel),
+                            area_code))
+
 
 # write out
-BasicDistrict <- district
+BasicDistrict <- district_added
 usethis::use_data(BasicDistrict, overwrite = TRUE)
 
 # write document
@@ -23,6 +37,9 @@ load_all()
 use_r("BasicDistrict")
 document_dt(BasicDistrict)
 document()
+
+
+
 
 ##====telephone area code info ====
 
@@ -46,6 +63,10 @@ dt_district <- BasicDistrict %>%
   left_join(., dt_code_pro, by = "code_province") %>%
   filter(!is.na(district),
          str_length(code)==6)
+
+# check
+
+unique(dt_district$district)
 
 # write out
 BasicTelcode <- dt_district
