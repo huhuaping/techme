@@ -42,9 +42,9 @@ myswitch <- function (remDr, windowId) {
 }
 
 # loop to scrape info
-i <- 1
+i <-22
 
-for (i in 1:length(list_ins)) {
+for (i in 33:length(list_ins)) {
   # navigate the url
   if (i==1) {
     remDr$navigate(url_list)
@@ -224,7 +224,8 @@ dt_hub<- tibble(files = url_xlsx ) %>%
   select(-city_clean, -province_clean)
 
 #unique(dt_hub$province)
-
+check <- dt_hub %>%
+  janitor::get_dupes(name_origin)
 
 queryTianyan <- dt_hub
 
