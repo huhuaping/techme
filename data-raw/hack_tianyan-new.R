@@ -5,7 +5,7 @@ source("data-raw/set-global.R")
 ## it should  be unique and exclusive from 'queryTianyan'
 ## and xlsx file in directory 'ship/xx.xlsx'
 
-url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot23-2021-08-27.xlsx"
+url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot34-2021-09-13.xlsx"
 list_ins <- openxlsx::read.xlsx(url_xlsx) %>%
   unlist() %>%
   unname()
