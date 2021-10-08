@@ -1,0 +1,41 @@
+#' Data Set of Countries and Regions
+#'
+#' A data set containing ISO-3166 countries coding and UNSD m49 standard，
+#'   which include both useful informations such as 'country_name_full_eng',
+#'   'country_name_full_chn','country_code_iso_d3', and 'country_name_alias'.
+#'   It is a long  format dataset.
+#'
+#' @format A data frame:
+#' \describe{
+#'   \item{name}{ full country name (eng) }
+#'   \item{alpha2}{ shortname of country with only 2 Letters}
+#'   \item{alpha3}{ shortname of country with only 3 Letters }
+#'   \item{countryCode}{ country code in iso-3166 with digits 3 }
+#'   \item{iso3166_2}{ iso3166_2 engcoding}
+#'   \item{region}{ region (eng)}
+#'   \item{subRegion}{ sub Region (eng) }
+#'   \item{intermediateRegion}{ intermediate Region (eng)}
+#'   \item{regionCode}{ region Code }
+#'   \item{subRegionCode}{ sub Region Code }
+#'   \item{intermediateRegionCode}{ intermediate Region Code }
+#'   \item{region_name}{ region name (chn) }
+#'   \item{sub_region_name}{ subregion name (chn) }
+#'   \item{intermediate_region_name}{ intermediate Region name (chn) }
+#'   \item{country_or_area}{ country or area name (full chn) }
+#'   \item{countries}{ country or area name (alias chn)  }
+#'   \item{iso_alpha2_code}{ shortname of country with only 2 Letters }
+#'   \item{iso_alpha3_code}{ shortname of country with only 3 Letters }
+#'   \item{least_developed_countries_ldc}{ indicator variable,
+#'     least developed countries(LDCs) }
+#'   \item{land_locked_developing_countries_lldc}{indicator variable,
+#'     land-locked developing countries LLDCs }
+#'   \item{small_island_developing_states_sids}{indicator variable,
+#'     small island developing states(SIDs)  }
+#'   \item{developed_developing_countries}{indicator variable,
+#'     developed or developing countries }
+#' }
+#'
+#' @source \url{https://www.huhuaping.com/}
+#'
+
+"BasicCountriesRegion"
