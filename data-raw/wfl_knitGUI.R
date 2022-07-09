@@ -3,8 +3,8 @@
 require(devtools)
 load_all()
 
-#dir_final <- c("01-machine", "02-fertilizer","03-plastic", "04-pesticide")
-#dir_media <- "data-raw/rural-yearbook/part03-agri-produce/"
+dir_final <- c("01-machine", "02-fertilizer","03-plastic", "04-pesticide")
+dir_media <- "data-raw/rural-yearbook/part03-agri-produce/"
 
 #dir_final <- c("01-public-income", "02-public-budget")
 #dir_media <- "data-raw/nation-yearbook/part07-finance/"
@@ -32,6 +32,7 @@ dir_media <- "data-raw/livestock-yearbook/"
 i_sel <- 1
 
 # target which file(s)?
+pattern_sel <- "2020.xls$"
 pattern_sel <- "^raw-201[[8]]{1}-9.xls$"
 pattern_sel <- "^raw-201[[1-4]]{1}-2-edited.xlsx$"
 
