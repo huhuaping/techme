@@ -17,7 +17,7 @@
 loop_read <- function(dir.media = dir_media,
                       dir.fina =dir_fina,
                       file.pattern = "\\d{4}" ){
-  out_dir <- paste0(dir.media, dir.fina)
+  out_dir <- paste0(dir.media, dir.fina,"/")
   files_all <- list.files(out_dir)
   files_id <- which(str_detect(files_all, file.pattern))
   files_sel <- files_all[files_id]

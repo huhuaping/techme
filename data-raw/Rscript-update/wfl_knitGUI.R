@@ -53,7 +53,7 @@ dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
 file_dir <- glue::glue("{dir_media}{dir_final}")
 
 ## specify which final directory ?
-i_sel <- 1   # change here
+i_sel <- 3   # change here
 dir_sel <- file_dir[i_sel]
 
 ## patterns to target which file(s)?
@@ -116,6 +116,7 @@ vars_spc <- techme::get_vars(df = varsList, lang = "eng",
 source("data-raw/Rscript-update/wfl_unpivot_new.R", encoding = "UTF-8")
 
 ## target file and its path
+### choose your type
 myfile <- str_replace(file_xls,("\\.xls"), "-edited\\.xlsx")
 myfile <- file_xls
 mypath <- glue::glue("{dir_sel}/{myfile}")
@@ -147,10 +148,14 @@ unique(df_tidy$province)
 
 ## target list collection
 tar_list<- list(
-  v7_nyhf =    list(block1 = "v7",block2 = "sctj",
-                  block3 = c("nyhf")),
   v7_machine = list(block1 = "v7",block2 = "sctj",
                     block3 = "nyjx"),
+  v7_fertilizer = list(block1 = "v7",block2 = "sctj",
+                    block3 = c("nyhf")),
+  v7_plastic = list(block1 = "v7",block2 = "sctj",
+                    block3 = c("nybm")),
+  v7_pesticide = list(block1 = "v7",block2 = "sctj",
+                    block3 = c("cyny")),
   v6_budegt =  list(block1 = "v6",block2 = "cz",
                     block3 = "yszc"),
   v4_RDfirm =  list(block1 = "v4",block2 = "qy",
@@ -181,7 +186,7 @@ tar_list<- list(
 
 
 ## now match and check the names
-tar_name <- "v7_machine"
+tar_name <- "v7_plastic"
 mytar <- tar_list[[tar_name]]
 source("data-raw/Rscript-update/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
@@ -194,8 +199,9 @@ get_vars(varsList,lang = "eng", block = mytar, what = "chn_block4" )
 ## replacement pattern by collection
 tbl_pattern <- tribble(
   ~case, ~ptn, ~rpl,
-  "fertilizer", c("农用化肥施用量"), c("化肥使用量"),
   "machine", c("谷物联合收割机"), c("联合收获机"),
+  "fertilizer", c("农用化肥施用量"), c("化肥使用量"),
+  "plastic", c("农用塑料薄膜使用量"), c("农用薄膜使用量"),
   "RD",
     c("有研发机构的企业数", "有R&D活动的企业数"),
     c("有研发机构", "有RD活动"),
@@ -218,7 +224,7 @@ tbl_pattern <- tribble(
 )
 
 ## get my pattern
-mycase <- "machine"
+mycase <- "plastic"
 ptn <- tbl_pattern %>% filter(case ==mycase) %>%
   pull(ptn) %>% unlist()
 rpl <- tbl_pattern %>% filter(case ==mycase) %>%
@@ -295,10 +301,11 @@ source("data-raw/Rscript-update/wfl_useData.R", encoding = "UTF-8")
 
 ## 11.1 loop read all tidy xlsx files
 dir_media <- "data-raw/data-tidy/rural-yearbook/part03-agri-produce/"
-dir_fina <- "01-machine/"
+(dir_final_tar <- dir_final[i_sel]) # i_sel before
+
 
 df_use <- loop_read(dir.media = dir_media,
-                    dir.fina =dir_fina,
+                    dir.fina =dir_final_tar,
                     file.pattern = "\\d{4}")
 
 ## 11.2 match units to base varsList,
@@ -308,7 +315,8 @@ df_units <- match_units(df = df_use)
 ## 11.3 now use_data()  here
 
 use_list <- c(
-  "AgriMachine","AgriFertilizer","AgriPlastic","AgriPesticide",
+  "AgriMachine","AgriFertilizer",
+  "AgriPlastic","AgriPesticide",
   "PublicBudget",
   "RDIntense","RDActivity",
   "MarketPull","MarketPush",
@@ -317,7 +325,7 @@ use_list <- c(
   "LivestockBreeding" # df_units
 )
 
-name_dt <- use_list[1]
+name_dt <- use_list[3]
 which_dt <- "df_use"
 
 use_mydata(name.dt = name_dt,
