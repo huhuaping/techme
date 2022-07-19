@@ -289,5 +289,44 @@ for (id_year in tar_year) {
 }
 
 
-#usethis::use_data(wfl_knitAll, overwrite = TRUE)
+# ==== step 11: use_data ====
+## source R script firstly
+source("data-raw/Rscript-update/wfl_useData.R", encoding = "UTF-8")
 
+## 11.1 loop read all tidy xlsx files
+dir_media <- "data-raw/data-tidy/rural-yearbook/part03-agri-produce/"
+dir_fina <- "01-machine/"
+
+df_use <- loop_read(dir.media = dir_media,
+                    dir.fina =dir_fina,
+                    file.pattern = "\\d{4}")
+
+## 11.2 match units to base varsList,
+## and this is only used when neccesary!
+df_units <- match_units(df = df_use)
+
+## 11.3 now use_data()  here
+
+use_list <- c(
+  "AgriMachine","AgriFertilizer","AgriPlastic","AgriPesticide",
+  "PublicBudget",
+  "RDIntense","RDActivity",
+  "MarketPull","MarketPush",
+  "HitechFirmsPub",
+  "IndustryTrade","IndustryRD","IndustryOperation",
+  "LivestockBreeding" # df_units
+)
+
+name_dt <- use_list[1]
+which_dt <- "df_use"
+
+use_mydata(name.dt = name_dt,
+           which.dt = which_dt)
+
+
+# ====step 12: write document=====
+require(devtools)
+load_all()
+use_r("Livestock-Breeding.R")
+document_dt(LivestockBreeding)
+document()
