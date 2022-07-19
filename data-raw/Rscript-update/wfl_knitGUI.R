@@ -53,7 +53,7 @@ dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
 file_dir <- glue::glue("{dir_media}{dir_final}")
 
 ## specify which final directory ?
-i_sel <- 3   # change here
+i_sel <- 4   # change here
 dir_sel <- file_dir[i_sel]
 
 ## patterns to target which file(s)?
@@ -186,7 +186,7 @@ tar_list<- list(
 
 
 ## now match and check the names
-tar_name <- "v7_plastic"
+tar_name <- "v7_pesticide"
 mytar <- tar_list[[tar_name]]
 source("data-raw/Rscript-update/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
@@ -325,7 +325,7 @@ use_list <- c(
   "LivestockBreeding" # df_units
 )
 
-name_dt <- use_list[3]
+name_dt <- use_list[4]
 which_dt <- "df_use"
 
 use_mydata(name.dt = name_dt,
