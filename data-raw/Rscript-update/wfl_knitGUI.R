@@ -44,7 +44,7 @@ tbl_dir <- tribble(
 #source("data-raw/Rscript-update/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "agri_prod"
+dir_case <- "budget"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
@@ -53,7 +53,7 @@ dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
 file_dir <- glue::glue("{dir_media}{dir_final}")
 
 ## specify which final directory ?
-i_sel <- 4   # change here
+i_sel <- 2   # change here
 dir_sel <- file_dir[i_sel]
 
 ## patterns to target which file(s)?
@@ -66,7 +66,7 @@ files_pattern <- list(
   edited_two = glue("^raw-{first_year}-{last_year}-edited.xlsx$")
 )
 
-pattern_sel <- files_pattern$year_two # change here when neccesary
+pattern_sel <- files_pattern$year_one # change here when neccesary
 
 ## match and position files
 files_all <- list.files(dir_sel)
@@ -126,7 +126,7 @@ header_mode <- c("vars", "vars-vars","vars-year",
                  "vars-h3","vars-h4","vars-h5")
 
 df_unpivot <- loop_unpivot(
-  tar_file = mypath,  hd_mode = "vars-year",
+  tar_file = mypath,  hd_mode = "vars", # change here!
   vars_add = NULL, cols_drop = NULL)
 
 ## check result
@@ -156,7 +156,7 @@ tar_list<- list(
                     block3 = c("nybm")),
   v7_pesticide = list(block1 = "v7",block2 = "sctj",
                     block3 = c("cyny")),
-  v6_budegt =  list(block1 = "v6",block2 = "cz",
+  v6_budget =  list(block1 = "v6",block2 = "cz",
                     block3 = "yszc"),
   v4_RDfirm =  list(block1 = "v4",block2 = "qy",
                     block3 = "qysl"),
@@ -186,7 +186,7 @@ tar_list<- list(
 
 
 ## now match and check the names
-tar_name <- "v7_pesticide"
+tar_name <- "v6_budget"
 mytar <- tar_list[[tar_name]]
 source("data-raw/Rscript-update/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
@@ -202,12 +202,13 @@ tbl_pattern <- tribble(
   "machine", c("谷物联合收割机"), c("联合收获机"),
   "fertilizer", c("农用化肥施用量"), c("化肥使用量"),
   "plastic", c("农用塑料薄膜使用量"), c("农用薄膜使用量"),
-  "RD",
-    c("有研发机构的企业数", "有R&D活动的企业数"),
-    c("有研发机构", "有RD活动"),
   "budget",
     c("地方一般公共预算支出","教育支出","科学技术支出","农林水支出"),
     c("合计","教育","科学技术","农林水"),
+  "RD",
+    c("有研发机构的企业数", "有R&D活动的企业数"),
+    c("有研发机构", "有RD活动"),
+
   "hitech",
     c("项目数","新产品开发项目数","新产品开发经费支出","新产品销售收入","有效发明专利数"),
     c("项目数量","开发项目数","开发经费支出","销售收入","有效专利数"),
@@ -224,7 +225,7 @@ tbl_pattern <- tribble(
 )
 
 ## get my pattern
-mycase <- "plastic"
+mycase <- "budget"
 ptn <- tbl_pattern %>% filter(case ==mycase) %>%
   pull(ptn) %>% unlist()
 rpl <- tbl_pattern %>% filter(case ==mycase) %>%
@@ -232,7 +233,9 @@ rpl <- tbl_pattern %>% filter(case ==mycase) %>%
 
 ## now get clear matched names
 df_tidy <- df_tidy %>%
-  mutate(vars= mgsub::mgsub(vars, ptn, rpl))
+  mutate(vars= mgsub::mgsub(vars, ptn, rpl)) # %>%
+  # for special case such as budget
+  # filter(vars %in% rpl )
 
 # ==== step 8.3: matched english names of vars####
 ## rerun the matched table
@@ -300,7 +303,7 @@ for (id_year in tar_year) {
 source("data-raw/Rscript-update/wfl_useData.R", encoding = "UTF-8")
 
 ## 11.1 loop read all tidy xlsx files
-dir_media <- "data-raw/data-tidy/rural-yearbook/part03-agri-produce/"
+dir_media <- "data-raw/data-tidy/nation-yearbook/part07-finance/"
 (dir_final_tar <- dir_final[i_sel]) # i_sel before
 
 
@@ -325,7 +328,7 @@ use_list <- c(
   "LivestockBreeding" # df_units
 )
 
-name_dt <- use_list[4]
+name_dt <- use_list[5]
 which_dt <- "df_use"
 
 use_mydata(name.dt = name_dt,
