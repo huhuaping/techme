@@ -16,6 +16,9 @@ tbl_dir <- tribble(
   "budget",
     "data-raw/nation-yearbook/part07-finance/",
     c("01-public-income", "02-public-budget"),
+  "RD_nbs", # national bureau statistics
+    "data-raw/public-site/nbs-RD-bulletin/",
+    c("02-xls/"),
   "RD_over",
     "data-raw/tech-yearbook/part01-over/",
     c("01-labor-hour", "02-spend-intense","03-spend-inner", "05-public-professionals"),
@@ -44,7 +47,7 @@ tbl_dir <- tribble(
 #source("data-raw/Rscript-update/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "budget"
+dir_case <- "RD_nbs"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
@@ -53,7 +56,7 @@ dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
 file_dir <- glue::glue("{dir_media}{dir_final}")
 
 ## specify which final directory ?
-i_sel <- 2   # change here
+i_sel <- 1   # change here
 dir_sel <- file_dir[i_sel]
 
 ## patterns to target which file(s)?
@@ -62,11 +65,13 @@ last_year <- 2020
 files_pattern <- list(
   year_one = glue("^raw-{last_year}.xls$"),
   year_two = glue("^raw-{first_year}-{last_year}.xls$"),
+  year_onex = glue("^raw-{last_year}.xlsx$"),
+  year_twox = glue("^raw-{first_year}-{last_year}.xlsx$"),
   edited_one = glue("^raw-{last_year}-edited.xlsx$"),
   edited_two = glue("^raw-{first_year}-{last_year}-edited.xlsx$")
 )
 
-pattern_sel <- files_pattern$year_one # change here when neccesary
+pattern_sel <- files_pattern$year_onex # change here when neccesary
 
 ## match and position files
 files_all <- list.files(dir_sel)
@@ -117,7 +122,7 @@ source("data-raw/Rscript-update/wfl_unpivot_new.R", encoding = "UTF-8")
 
 ## target file and its path
 ### choose your type
-myfile <- str_replace(file_xls,("\\.xls"), "-edited\\.xlsx")
+#myfile <- str_replace(file_xls,("\\.xls"), "-edited\\.xlsx")
 myfile <- file_xls
 mypath <- glue::glue("{dir_sel}/{myfile}")
 
@@ -158,6 +163,8 @@ tar_list<- list(
                     block3 = c("cyny")),
   v6_budget =  list(block1 = "v6",block2 = "cz",
                     block3 = "yszc"),
+  v4_RDnbs =  list(block1 = "v4",block2 = "ztr",
+                    block3 = c("jf","qd")),
   v4_RDfirm =  list(block1 = "v4",block2 = "qy",
                     block3 = "qysl"),
   v4_RDpush =  list(block1 = "v4",block2 = "cg",
@@ -186,7 +193,7 @@ tar_list<- list(
 
 
 ## now match and check the names
-tar_name <- "v6_budget"
+tar_name <- "v4_nbs"
 mytar <- tar_list[[tar_name]]
 source("data-raw/Rscript-update/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
@@ -282,7 +289,7 @@ mytidy <- list(
 
 ## file path
 files_tidy <- mytidy$mod_year
-(tidy_path <-paste0(dir_sub1, dir_sub2,"/",files_tidy))
+(tidy_path <-paste0(dir_sub1, dir_sub2,files_tidy))
 
 ## loop to export xlsx
 tar_year <- c(2020)
@@ -303,12 +310,12 @@ for (id_year in tar_year) {
 source("data-raw/Rscript-update/wfl_useData.R", encoding = "UTF-8")
 
 ## 11.1 loop read all tidy xlsx files
-dir_media <- "data-raw/data-tidy/nation-yearbook/part07-finance/"
+dir_media <- "data-raw/data-tidy/public-site/nbs-RD-bulletin/"
 (dir_final_tar <- dir_final[i_sel]) # i_sel before
 
 
 df_use <- loop_read(dir.media = dir_media,
-                    dir.fina =dir_final_tar,
+                    dir.fina = dir_final_tar,
                     file.pattern = "\\d{4}")
 
 ## 11.2 match units to base varsList,
@@ -321,15 +328,16 @@ use_list <- c(
   "AgriMachine","AgriFertilizer",
   "AgriPlastic","AgriPesticide",
   "PublicBudget",
-  "RDIntense","RDActivity",
+  "RDIntense",
+  "RDActivity",
   "MarketPull","MarketPush",
   "HitechFirmsPub",
   "IndustryTrade","IndustryRD","IndustryOperation",
   "LivestockBreeding" # df_units
 )
 
-name_dt <- use_list[5]
-which_dt <- "df_use"
+name_dt <- use_list[6]
+which_dt <- "df_units"
 
 use_mydata(name.dt = name_dt,
            which.dt = which_dt)
