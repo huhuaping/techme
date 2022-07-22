@@ -47,7 +47,7 @@ tbl_dir <- tribble(
 #source("data-raw/Rscript-update/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "RD_nbs"
+dir_case <- "RD_inner"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
@@ -131,7 +131,7 @@ header_mode <- c("vars", "vars-vars","vars-year",
                  "vars-h3","vars-h4","vars-h5")
 
 df_unpivot <- loop_unpivot(
-  tar_file = mypath,  hd_mode = "vars", # change here!
+  tar_file = mypath,  hd_mode = "vars-vars", # change here!
   vars_add = NULL, cols_drop = NULL)
 
 ## check result
@@ -165,6 +165,8 @@ tar_list<- list(
                     block3 = "yszc"),
   v4_RDnbs =  list(block1 = "v4",block2 = "ztr",
                     block3 = c("jf","qd")),
+  v4_RDinner =  list(block1 = "v4",block2 = "zh",
+                    block3 = "nbzc"),
   v4_RDfirm =  list(block1 = "v4",block2 = "qy",
                     block3 = "qysl"),
   v4_RDpush =  list(block1 = "v4",block2 = "cg",
@@ -193,7 +195,7 @@ tar_list<- list(
 
 
 ## now match and check the names
-tar_name <- "v4_nbs"
+tar_name <- "v4_RDinner"
 mytar <- tar_list[[tar_name]]
 source("data-raw/Rscript-update/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
@@ -212,6 +214,9 @@ tbl_pattern <- tribble(
   "budget",
     c("地方一般公共预算支出","教育支出","科学技术支出","农林水支出"),
     c("合计","教育","科学技术","农林水"),
+  "RDinner",
+    c("经费内部支出"),
+    c("合计"),
   "RD",
     c("有研发机构的企业数", "有R&D活动的企业数"),
     c("有研发机构", "有RD活动"),
@@ -232,7 +237,7 @@ tbl_pattern <- tribble(
 )
 
 ## get my pattern
-mycase <- "budget"
+mycase <- "RDinner"
 ptn <- tbl_pattern %>% filter(case ==mycase) %>%
   pull(ptn) %>% unlist()
 rpl <- tbl_pattern %>% filter(case ==mycase) %>%
@@ -289,7 +294,7 @@ mytidy <- list(
 
 ## file path
 files_tidy <- mytidy$mod_year
-(tidy_path <-paste0(dir_sub1, dir_sub2,files_tidy))
+(tidy_path <-paste0(dir_sub1, dir_sub2,"/",files_tidy))
 
 ## loop to export xlsx
 tar_year <- c(2020)
@@ -310,11 +315,13 @@ for (id_year in tar_year) {
 source("data-raw/Rscript-update/wfl_useData.R", encoding = "UTF-8")
 
 ## 11.1 loop read all tidy xlsx files
-dir_media <- "data-raw/data-tidy/public-site/nbs-RD-bulletin/"
+dir_media_tar <- str_replace(dir_media,
+                             "data-raw",
+                             "data-raw/data-tidy")
 (dir_final_tar <- dir_final[i_sel]) # i_sel before
 
 
-df_use <- loop_read(dir.media = dir_media,
+df_use <- loop_read(dir.media = dir_media_tar,
                     dir.fina = dir_final_tar,
                     file.pattern = "\\d{4}")
 
@@ -336,8 +343,8 @@ use_list <- c(
   "LivestockBreeding" # df_units
 )
 
-name_dt <- use_list[6]
-which_dt <- "df_units"
+name_dt <- use_list[7]
+which_dt <- "df_use"
 
 use_mydata(name.dt = name_dt,
            which.dt = which_dt)
