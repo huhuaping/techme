@@ -5,7 +5,7 @@ source("data-raw/set-global.R")
 ## it should  be unique and exclusive from 'queryTianyan'
 ## and xlsx file in directory 'ship/xx.xlsx'
 
-url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot34-2021-09-13.xlsx"
+url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot8-2022-07-23.xlsx"
 list_ins <- openxlsx::read.xlsx(url_xlsx) %>%
   unlist() %>%
   unname()
@@ -20,7 +20,8 @@ require("stringr")
 require("tidyverse")
 require("tidyselect")
 
-driver <- rsDriver(browser=c("firefox"), port = 4445L)
+driver <- rsDriver(browser=c("firefox"),
+                   port = 4445L)
 remDr <- driver[["client"]]
 ## open the connect
 remDr$open()
@@ -42,9 +43,9 @@ myswitch <- function (remDr, windowId) {
 }
 
 # loop to scrape info
-i <-22
+i <-1
 
-for (i in 33:length(list_ins)) {
+for (i in 1:length(list_ins)) {
   # navigate the url
   if (i==1) {
     remDr$navigate(url_list)
@@ -56,13 +57,13 @@ for (i in 33:length(list_ins)) {
   }
 
   # send key to search input
-  xpath_search <- "//*[@id='home-main-search']"
+  xpath_search <- "*//div[contains(@class,'home-suggest-input')]//input"
   remDr$findElement("xpath", xpath_search)$sendKeysToElement(
     list(list_ins[i]))
 
   # submit search
-  css_submit <-"#web-content > div > div.tyc-home-top.bgtyc > div.container > div > div > div.tab-main > div:nth-child(2) > div.input-group.home-group > div"
-  remDr$findElement(using = "css", value = css_submit)$clickElement()
+  xpath_submit <- "*//button[contains(@class,'home-suggest-button')]//span"
+  remDr$findElement(using = "xpath", value = xpath_submit)$clickElement()
   print("here: 2 submit")
   # wait seconds
   Sys.sleep(1)
