@@ -1,0 +1,537 @@
+---
+title: "国家农业科技园区"
+author: "胡华平"
+date: "`r Sys.Date()`"
+output:
+  bookdown::word_document2:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 4
+    reference_docx: report-reference.docx
+  bookdown::html_document2:
+    number_sections: yes
+    toc: no
+    fig_caption: yes
+    toc_float: yes
+always_allow_html: yes
+---
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE, eval = FALSE,
+                      fig.align='center',fig.width=10, fig.height=7) # Places figures on their own pages
+options(
+  htmltools.dir.version = FALSE, 
+  formatR.indent = 2, width = 55, 
+  digits = 2,scipen=999,tinytex.verbose = TRUE,
+  knitr.kable.NA = '',
+  fig.width=12, fig.height=8)
+
+```
+
+```{r}
+require("rvest")
+require("xml2")
+require("httr")
+require("stringr")
+require("tidyverse")
+require("tidyselect")
+require("here")
+```
+
+\newpage
+
+# 1.研究目标
+
+**评价验收**
+
+**认定获批**
+
+
+# 2.资料来源
+
+## 2.1 数据来源
+
+
+[科技部网站](http://www.most.gov.cn/)
+
+[中国政府网](http://www.gov.cn/index.htm)
+
+
+
+
+## 2.2 数据进度
+
+**名单公示**
+
+- 关于开展第九批国家农业科技园区建设的[通知](http://www.gov.cn/zhengce/zhengceku/2020-12/27/content_5573792.htm)
+    - 关于开展第九批国家农业科技园区申报工作的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2019/201911/t20191104_149728.html)
+    
+- 科技部办公厅关于第八批国家农业科技园区建设的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2018/201812/t20181224_144277.html)
+
+
+**验收**：
+
+- 关于公布国家农业科技园区第七批验收结果和2019年综合评估结果的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2019/201911/t20191119_150024.html)
+
+    - 2019.10.30 农村司关于第七批国家农业科技园区验收结果公示的[公告](http://www.most.gov.cn/tztg/201910/t20191029_149628.htm)
+
+- 2018年12月07日 技部办公厅关于公布2018年国家农业科技园区验收结果的[通知](http://www.gov.cn/zhengce/zhengceku/2018-12/31/content_5446196.htm)
+
+- 2017年关于公布第五批国家农业科技园区验收结果的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2017/201711/t20171128_136490.html)
+
+
+**评估**
+
+- 关于公布2020年国家农业科技园区综合评估结果的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2020/202012/t20201224_171990.html)
+
+- 关于公布国家农业科技园区第七批验收结果和2019年综合评估结果的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2019/201911/t20191119_150024.html)
+
+
+## 异常提示
+
+
+**评价验收**：
+
+- 2017 xlsx
+- 2018 html
+- 2019 word
+
+
+
+
+# 3.数据抓取流程(data-raw到data-extract)
+
+## 3.1 基本过程
+
+```{r}
+require("rvest")
+require("stringr")
+require("tidyverse")
+require("tidyselect")
+require("openxlsx")
+```
+
+## 建设名单
+
+### 历史名单
+
+```{r}
+path_xlsx <- "03-list-raw/raw-agri-park-list.xlsx"
+
+dt_read <- openxlsx::read.xlsx(path_xlsx)
+
+dt_out <- dt_read %>% 
+  mutate(batch = str_extract(class, "\\d{1}"),
+         batch = str_pad(batch, width = 2,
+                         side = "left", pad = "0"))  %>%
+  filter(type == "国家农业科技园区") %>%
+  select(index, batch, name, province) 
+
+list_batch <- sort(unique(dt_out$batch))
+
+i <- 1
+for (i in 1:length(list_batch)) { 
+  path_out <- glue::glue("xlsx/list-batch-{list_batch[i]}.xlsx")
+  dt_out %>%
+    filter(batch == list_batch[i]) %>%
+    mutate(index = 1:nrow(.)) %>%
+    openxlsx::write.xlsx(.,path_out)
+  }
+
+```
+
+
+### 更新年度名单
+
+```{r}
+path_html <- "03-list-raw/list-year-2020-batch09.html"
+
+# xpath for list
+## for year 2020
+xpath_list <-"/html/body/div[5]/div[3]/div[3]/p[position() >= 20  and position() <= 45]"
+
+tbl_raw <- read_html(path_html,encoding = "UTF-8") %>%
+  html_nodes(xpath = xpath_list ) %>%
+  html_text() %>%
+  as_tibble() %>%
+  rename_at(all_of(names(.)),  ~all_of("index_name")) %>%
+  mutate(index_name = str_replace(index_name, " ", "")) %>%
+  separate(col = index_name, into = c("index", "name"), sep = "\\.")  %>%
+  mutate(index = as.numeric(index)) 
+
+require(techme)
+data("BasicProvince")
+batch <- "09"
+ptn_province <- paste0(BasicProvince$province, collapse = "|")
+
+tbl_info <- tbl_raw %>%
+  add_column(batch = batch, .after = "index") %>%
+  # get the province
+  mutate(province = str_extract(name,ptn_province))
+
+check <- sum(is.na(tbl_info$province))
+if (check >0) warning("Povince with NA, please check!")
+
+# write out
+path_out <- glue::glue("xlsx/list-batch-{batch}.xlsx")
+openxlsx::write.xlsx(tbl_info, path_out)
+
+```
+
+
+## 验收情况
+
+### 3.2 抓取html
+
+
+```{r}
+#--------------------------
+# this chunk should run only once
+#--------------------------
+
+# files html path
+files_dir <- "01-check-raw/check-year-2018.html"
+
+# xpath for data table
+css_tbl <-"body > div.policyLibraryOverview > div.policyLibraryOverview_content > div.pages_content > p:nth-child(n+13)"
+
+Year <- 2018
+
+tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
+  html_nodes(css =  css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  separate(col = "value", into = c("index", "name")) %>%
+  add_column(result = "pass",
+             year= Year,
+             doc_num="国科办农2018-99") %>%
+  add_column(id= 1:nrow(.), .before = "index")
+  
+  
+      
+# files csv path
+path_out <- paste0("xlsx/check-year-",Year, ".xlsx")
+write.xlsx(tbl_raw, path_out)
+
+```
+
+
+### 3.2 抓取word
+
+
+
+```{r}
+# install.packages("readtext")
+require("readtext")
+
+# files html path
+files_dir <- "01-check-raw/check-year-2021.docx"
+
+
+Year <- 2021
+
+doc_text <- readtext(files_dir) %>%
+  select(text) %>%
+  str_split(., "\n") %>%
+  .[[1]]  
+
+# case coexist pass and fail
+row_point1 <- which(str_detect(doc_text,"验收通过的园区"))
+row_point2 <- which(str_detect(doc_text,"验收不通过的园区"))
+range_pass <- (row_point1 + 1):(row_point2 -1)
+range_fail <- (row_point2 + 1):length(doc_text)
+
+# case all pass
+row_point1 <- which(str_detect(doc_text,"通过验收"))
+range_pass <- (row_point1 + 1):length(doc_text)
+
+docnum <- "国科办农2021-150号"
+tbl_out <- doc_text %>%
+  as_tibble() %>%
+  mutate(result=ifelse(
+    row_number() %in% range_pass, 
+    "pass",
+    #ifelse(row_number() %in% range_fail, 
+    #       "fail",
+           NA
+    #       )
+    )
+    ) %>%
+  filter(!is.na(result)) %>%
+  separate(col = "value", into = c("index", "name"),
+           sep = "\\.") %>%
+  add_column(year= Year,
+             doc_num= docnum)  %>%
+  add_column(id= 1:nrow(.), .before = "index")
+  
+  
+  
+      
+# files csv path
+path_out <- paste0("xlsx/check-year-",Year, ".xlsx")
+write.xlsx(tbl_out, path_out)
+
+```
+
+
+### 3.3 导出为分析数据
+
+
+```{r}
+dir_path <- here::here("data-raw","public-site","agri-park","xlsx")
+
+files_xlsx <- list.files(dir_path)
+
+
+
+files_target <- files_xlsx[which(str_detect(files_xlsx, "check")) ]
+
+url_xlsx <- paste0(dir_path, "/", files_target)
+
+years_target <- str_extract_all(files_target, "(\\d{4})") %>%
+  unlist() %>%
+  as.numeric(.)
+
+tbl_out <- NULL
+
+i <- 1
+for (i in 1: length(files_target)) {
+  
+  tbl_tem <- read.xlsx(url_xlsx[i]) %>%
+    mutate(index = as.numeric(index))
+  
+  tbl_out <- bind_rows(tbl_out, tbl_tem)
+}
+
+path_out <- paste0("data-update/wide-check-upto-year-", max(years_target), ".xlsx")
+
+write.xlsx(tbl_out, path_out)
+
+```
+
+
+## 评价情况
+
+### 3.2 抓取2019年html
+
+
+```{r}
+#--------------------------
+# this chunk should run only once
+#--------------------------
+
+# files html path
+Year <- 2019
+files_dir <- glue::glue("02-eval-raw/eval-year-{Year}.html")
+
+# xpath for data table
+css_tbl <-"body > div.policyLibraryOverview > div.policyLibraryOverview_content > div.pages_content > p:nth-child(n+103)"
+
+
+tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
+  html_nodes(css =  css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  # clean
+  mutate(value = mgsub::mgsub(value,                 c(fixed("\u00a0"),fixed("\n")," "),
+                              c("", "","")),
+         value = str_trim(value))
+
+# detect head
+row_point <- which(str_detect(tbl_raw$value,"优秀|达标|不达标"))
+
+range_good <- (row_point[1] + 1):(row_point[2] -1)
+range_ok <- (row_point[2] + 1):(row_point[3] -1)
+range_fail <- (row_point[3] + 1):length(tbl_raw)
+
+result_chn <- c("优秀","达标","不达标")
+result_eng <- c("good", "ok", "fail")
+ptn_result <- paste0(result_chn, collapse = "|")
+
+tbl_out <- tbl_raw %>%
+  mutate(result = str_extract(value, ptn_result)) %>%
+  fill(result, .direction = "down") %>%
+  filter(!str_detect(value, ptn_result)) %>%
+  separate(col = "value", 
+           into = c("index", "name"), sep = "\\.") %>%
+  mutate(index = as.numeric(index)) %>%
+  mutate(result = mgsub::mgsub(result, 
+                               result_chn, result_eng))
+  
+require(techme)
+data("BasicProvince")
+data("ProvinceCity")
+ptn_province <- paste0(BasicProvince$province, collapse = "|")
+ptn_city <- paste0(unique(ProvinceCity$city_clean), collapse = "|")
+
+tbl_info <-  tbl_out %>%
+  add_column(year= Year, .before = "index") %>%
+  mutate(province_name = str_extract(name, ptn_province),
+         city_clean= str_extract(name, ptn_city)) %>%
+  # match
+  left_join(., select(ProvinceCity, city_clean, province_clean), by = "city_clean") %>%
+  mutate(province = ifelse(is.na(province_name),
+                           province_clean,
+                           province_name)) %>%
+  # check it
+  select(year, index, name, result,province)
+
+check <- sum(is.na(tbl_info$province))
+if (check >0) warning("Povince with NA, please check!")
+      
+# files csv path
+path_out <- paste0("xlsx/eval-year-",Year, ".xlsx")
+write.xlsx(tbl_info, path_out)
+
+```
+
+
+### 3.2 抓取2020年html
+
+```{r}
+#--------------------------
+# this chunk should run only once
+#--------------------------
+
+# files html path
+Year <- 2020
+files_dir <- glue::glue("02-eval-raw/eval-year-{Year}.html")
+
+# xpath for data table
+css_tbl <-"body > div.policyLibraryOverview > div.policyLibraryOverview_content > div.pages_content > p:nth-child(n+103)"
+
+css_tbl <- "#Zoom > p:nth-child(n+27)"
+tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
+  html_nodes(css =  css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  # clean
+  mutate(value = mgsub::mgsub(value,                 c(fixed("\u00a0"),fixed("\n")," "),
+                              c("", "","")),
+         value = str_trim(value))
+
+# detect head
+row_point <- which(str_detect(tbl_raw$value,"优秀|达标|不达标"))
+
+range_good <- (row_point[1] + 1):(row_point[2] -1)
+range_ok <- (row_point[2] + 1):(row_point[3] -1)
+range_fail <- (row_point[3] + 1):length(tbl_raw)
+
+result_chn <- c("优秀","达标","不达标")
+result_eng <- c("good", "ok", "fail")
+ptn_result <- paste0(result_chn, collapse = "|")
+
+tbl_out <- tbl_raw %>%
+  mutate(result = str_extract(value, ptn_result)) %>%
+  fill(result, .direction = "down") %>%
+  filter(!str_detect(value, ptn_result)) %>%
+  separate(col = "value", 
+           into = c("index", "name"), sep = "\\.") %>%
+  mutate(index = as.numeric(index)) %>%
+  mutate(result = mgsub::mgsub(result, 
+                               result_chn, result_eng))
+  
+require(techme)
+data("BasicProvince")
+data("ProvinceCity")
+ptn_province <- paste0(BasicProvince$province, collapse = "|")
+ptn_city <- paste0(unique(ProvinceCity$city_clean), collapse = "|")
+
+tbl_info <-  tbl_out %>%
+  add_column(year= Year, .before = "index") %>%
+  mutate(province_name = str_extract(name, ptn_province),
+         city_clean= str_extract(name, ptn_city)) %>%
+  # match
+  left_join(., select(ProvinceCity, city_clean, province_clean), by = "city_clean") %>%
+  mutate(province = ifelse(is.na(province_name),
+                           province_clean,
+                           province_name)) %>%
+  # check it
+  select(year, index, name, result,province)
+
+check <- sum(is.na(tbl_info$province))
+if (check >0) warning("Povince with NA, please check!")
+      
+# files csv path
+path_out <- paste0("xlsx/eval-year-",Year, ".xlsx")
+write.xlsx(tbl_info, path_out)
+
+```
+
+
+### 3.2 抓取2021年html
+
+```{r}
+#--------------------------
+# this chunk should run only once
+#--------------------------
+
+# files html path
+Year <- 2021
+files_dir <- glue::glue("02-eval-raw/eval-year-{Year}.html")
+
+# xpath for data table
+css_tbl <-"body > div.policyLibraryOverview > div.policyLibraryOverview_content > div.pages_content > p:nth-child(n+103)"
+#Zoom > p:nth-child(22)
+
+css_tbl <- "#Zoom > p:nth-child(n+22)"
+tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
+  html_nodes(css =  css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  # clean
+  mutate(value = mgsub::mgsub(value,                 c(fixed("\u00a0"),fixed("\n")," "),
+                              c("", "","")),
+         value = str_trim(value)) %>%
+  filter(value!="") %>%
+  filter(!str_detect(value,"、"))
+
+# detect head
+row_point <- which(str_detect(tbl_raw$value,"优秀|达标|不达标的园区|保留园区资格|取消园区资格"))
+
+range_good <- (row_point[1] + 1):(row_point[2] -1)
+range_ok <- (row_point[2] + 1):(row_point[3] -1)
+range_fail <- (row_point[3] + 1):(row_point[4] -1)
+range_retain <- (row_point[4] + 1):(row_point[5] -1)
+range_cancel <- (row_point[5] + 1):length(tbl_raw)
+
+result_chn <- c("优秀","达标","不达标","保留","取消")
+result_eng <- c("good", "ok", "fail","retain","cancel")
+ptn_result <- paste0(result_chn, collapse = "|")
+
+tbl_out <- tbl_raw %>%
+  mutate(result = str_extract(value, ptn_result)) %>%
+  fill(result, .direction = "down") %>%
+  filter(!str_detect(value, ptn_result)) %>%
+  separate(col = "value", 
+           into = c("index", "name"), sep = "\\.") %>%
+  mutate(index = as.numeric(index)) %>%
+  mutate(result = mgsub::mgsub(result, 
+                               result_chn, result_eng))
+  
+require(techme)
+data("BasicProvince")
+data("ProvinceCity")
+ptn_province <- paste0(BasicProvince$province, collapse = "|")
+ptn_city <- paste0(unique(ProvinceCity$city_clean), collapse = "|")
+
+tbl_info <-  tbl_out %>%
+  add_column(year= Year, .before = "index") %>%
+  mutate(province_name = str_extract(name, ptn_province),
+         city_clean= str_extract(name, ptn_city)) %>%
+  # match
+  left_join(., select(ProvinceCity, city_clean, province_clean), by = "city_clean") %>%
+  mutate(province = ifelse(is.na(province_name),
+                           province_clean,
+                           province_name)) %>%
+  # check it
+  select(year, index, name, result,province)
+
+check <- sum(is.na(tbl_info$province))
+if (check >0) warning("Povince with NA, please check!")
+      
+# files csv path
+path_out <- paste0("xlsx/eval-year-",Year, ".xlsx")
+write.xlsx(tbl_info, path_out)
+
+```
