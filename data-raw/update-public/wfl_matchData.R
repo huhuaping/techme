@@ -15,28 +15,24 @@
 matchData <- function(dt_left, dt_right){
   require("mgsub")
   ptn <- dt_right$input
-  rpl <- dt_right$chn_block4
+  rpl <- dt_right$block4
+
+  cols_tar <- c("id","year", "officer","index",
+                 "block3","block4", "chn_block4",
+                 "value", "variables")
+
   df_matched <- dt_left %>%
-    mutate(vars = mgsub::mgsub(vars, pattern =ptn,
+    mutate(vars = mgsub::mgsub(block4, pattern =ptn,
                                replacement = rpl )) %>%
-    rename(chn_block4="vars") %>%
-    left_join(., dt_right, by = "chn_block4") %>%
+    left_join(., dt_right, by = "block4") %>%
     select(-input, -asis) %>%
-    filter(!is.na(variables))
+    filter(!is.na(variables)) %>%
+    # create id column
+    mutate(id = str_c(block3,
+                      str_to_lower(officer),
+                      year, sep="-")) %>%
+    # sort columns
+    select(all_of(cols_tar))
 }
 
 
-
-
-# extract year
-#url_xlsx <- "data-raw/data-tidy/rural-yearbook/fertilizer-tidy-2018-2019.xlsx"
-#url_xlsx <- "data-raw/data-tidy/rural-yearbook/plastic-tidy-2018-2019.xlsx"
-#url_xlsx <- "data-raw/data-tidy/rural-yearbook/pesticide-tidy-2018-2019.xlsx"
-#url_xlsx <- "data-raw/data-tidy/tech-yearbook/part01-over-02-spend-intense-tidy-2019.xlsx"
-#url_xlsx <- "data-raw/data-tidy/tech-yearbook/part01-over-03-spend-inner-01-activity-tidy-2019.xlsx"
-
-#df_matched <- openxlsx::read.xlsx(url_xlsx) %>%
-#  filter(year ==2019)
-
-
-#usethis::use_data(df_matched, overwrite = TRUE, internal = T)

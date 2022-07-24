@@ -29,8 +29,7 @@ loop_read <- function(dir.media = dir_media,
   # loop read
   df_use <- NULL
   for ( i in n_files:1) {
-    df_tem <- openxlsx::read.xlsx(files_path[i]) %>%
-      mutate(units = as.character(units))
+    df_tem <- openxlsx::read.xlsx(files_path[i])
     print(glue::glue("Export file {files_sel[i]} has finished!"))
     Sys.sleep(0.1)
     df_use <- bind_rows(df_use, df_tem)

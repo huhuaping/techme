@@ -36,24 +36,25 @@ get_best_match <- function(word, charvec ){
 #' #target <- list(block1 ="农村统计年鉴", block2="生产条件",block3 ="农业机械")
 #' target <- list(block1 ="v7", block2="sctj",block3 ="nyjx")
 #'
-#' df_vars_matched <- matchVars(dt = df_tidy, block_target = target)
+#' df_vars_matched <- matchVars(dt = df_long, block_target = target)
 #' openxlsx::write.xlsx(df_vars_matched, "data-raw/df-vars-matched.xlsx")
 #'
 matchVars <- function(dt, block_target = target, block_lang="eng"){
-  input <- unique(dt$vars)
+  input <- unique(dt$block4)
   require(techme)
   data("varsList")
   vars_tbl <- get_vars(varsList,lang = block_lang,
                        block = block_target,
-                       what = c("variables","chn_block4"))
-  vec <- vars_tbl$chn_block4
+                       what = c("variables","block3",
+                                "block4","chn_block4"))
+  vec <- vars_tbl$block4
   vector_results <- map_chr(input, ~ get_best_match(.x, charvec = vec))
   #vector_results <- sapply(input, function(word) get_best_match(word, charvec = vec))
 
   vars_matched <- tibble(input = input,target = vector_results) %>%
     mutate(asis = ifelse(input==target, T, F)) %>%
-    rename( chn_block4 = "target") %>%
-    left_join(., vars_tbl, by = "chn_block4")
+    rename( block4 = "target") %>%
+    left_join(., vars_tbl, by = "block4")
   msg_warning <- glue::glue("Varible(s) are not the same. please check variables in rows: \n
              {paste0(vars_matched$input[which(!vars_matched$asis)], collapse ='; ')}")
   if (any(!vars_matched$asis)) warning(msg_warning)

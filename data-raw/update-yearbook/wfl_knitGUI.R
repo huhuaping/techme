@@ -44,7 +44,7 @@ tbl_dir <- tribble(
 
 
 # =====step 1: get files and path=====
-#source("data-raw/Rscript-update/wfl_files.R")
+#source("data-raw/update-yearbook/wfl_files.R")
 
 ## --construct file system and dir path--
 dir_case <- "RD_inner"
@@ -89,12 +89,12 @@ source("data-raw/wfl_genDirs.R")
 
 # =====step 3: unlock xlsx files =====
 ## you should 'save as' to '.xlsx' by hand!!
-source("data-raw/Rscript-update/wfl_unlock.R")
+source("data-raw/update-yearbook/wfl_unlock.R")
 unlock_xlsx(tar_dir = dir_sel,tar_xls = file_sel)
 
 # =====step 4: rename download xls files =====
 ## ignore following steps if unneccesary
-source("data-raw/Rscript-update/wfl_rename.R")
+source("data-raw/update-yearbook/wfl_rename.R")
 rename_xls_files(dir = dir_sel,
                  ptn_target_file ="2020-unlocked\\.xlsx$",
                  ptn = "(unlocked)",
@@ -118,7 +118,7 @@ vars_spc <- techme::get_vars(df = varsList, lang = "eng",
 
 # =====step 6.1: loop unpivot=====
 ## use helper functions
-source("data-raw/Rscript-update/wfl_unpivot_new.R", encoding = "UTF-8")
+source("data-raw/update-yearbook/wfl_unpivot_new.R", encoding = "UTF-8")
 
 ## target file and its path
 ### choose your type
@@ -140,7 +140,7 @@ df_unpivot <- loop_unpivot(
 
 
 # =====step 7: tidy data =====
-source("data-raw/Rscript-update/wfl_tidy.R", encoding = "UTF-8")
+source("data-raw/update-yearbook/wfl_tidy.R", encoding = "UTF-8")
 
 df_tidy <- getTidy(dt = df_unpivot) %>%
   select(province, year,
@@ -197,7 +197,7 @@ tar_list<- list(
 ## now match and check the names
 tar_name <- "v4_RDinner"
 mytar <- tar_list[[tar_name]]
-source("data-raw/Rscript-update/wfl_matchVars.R", encoding = "UTF-8")
+source("data-raw/update-yearbook/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
 
 # ==== step 8.2: check and replace chinese name of vars ====
@@ -261,7 +261,7 @@ df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar)%>%
 #yearbook <- "rural-yearbook"
 #yearbook <- "tech-yearbook"
 #noDir <- FALSE
-source("data-raw/Rscript-update/wfl_matchData.R", encoding = "UTF-8")
+source("data-raw/update-yearbook/wfl_matchData.R", encoding = "UTF-8")
 
 df_matched <- matchData(dt_left = df_tidy, dt_right = df_vars_matched)
 # check it
@@ -312,7 +312,7 @@ for (id_year in tar_year) {
 
 # ==== step 11: use_data ====
 ## source R script firstly
-source("data-raw/Rscript-update/wfl_useData.R", encoding = "UTF-8")
+source("data-raw/update-yearbook/wfl_useData.R", encoding = "UTF-8")
 
 ## 11.1 loop read all tidy xlsx files
 dir_media_tar <- str_replace(dir_media,
@@ -354,5 +354,6 @@ use_mydata(name.dt = name_dt,
 require(devtools)
 load_all()
 use_r("Livestock-Breeding.R")
-document_dt(LivestockBreeding)
+# use my custom function  to help writing document
+do.call("techme::document_dt", list(as.name(name_dt)))
 document()
