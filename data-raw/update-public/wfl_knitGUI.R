@@ -108,7 +108,7 @@ source("data-raw/update-public/wfl_pivot.R")
 df_long <- pivot_long(df = df_province)
 
 ## check result
-(check <- df_pivot %>%
+(check <- df_long %>%
   filter(is.na(block4)))
 
 
