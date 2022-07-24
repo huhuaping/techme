@@ -43,7 +43,7 @@ myswitch <- function (remDr, windowId) {
 }
 
 # loop to scrape info
-i <-1
+i <-2
 
 for (i in 1:length(list_ins)) {
   # navigate the url
@@ -87,10 +87,15 @@ for (i in 1:length(list_ins)) {
     tel[i] <- ""
   } else {
     # get the href
-    xpath_p1 <- "//div[contains(@class, 'result-list') ]/div[1]/div[1]//div[contains(@class,'content')]"
+    xpath_p0 <- "//div[contains(@class, 'index_search-item-center') ]"
 
-    xpath_p2 <- "//a[contains(@class, 'name') ]"
-    xpath_sel <- paste0(xpath_p1, xpath_p2)
+    # div header
+    xpath_p1 <- "/div[contains(@class, 'index_header')]/div[contains(@class,'index_name')]"
+    xpath_p2 <- "//a[contains(@class, 'index_alink') ]"
+    xpath_p3 <- "//span//em"
+
+    xpath_sel <- paste0(xpath_p0, xpath_p1,
+                        xpath_p2) # href
     isExist <- as.logical(length(remDr$findElement("xpath",xpath_sel)))
     if (!isExist) stop("xpath 'address' failed, please check!")
     url[i] <- remDr$findElement("xpath",
@@ -99,8 +104,8 @@ for (i in 1:length(list_ins)) {
     print("here: 3-1 url ")
 
     # get the searched name
-    xpath_p2 <- "//div[contains(@class, 'header') ]//a[contains(@class, 'name') ]"
-    xpath_sel <- paste0(xpath_p1, xpath_p2)
+    xpath_sel <- paste0(xpath_p0,xpath_p1,
+                        xpath_p2, xpath_p3) # name
 
     isExist <- as.logical(length(remDr$findElement("xpath",xpath_sel)))
     if (!isExist) stop("xpath 'address' failed, please check!")
@@ -112,8 +117,14 @@ for (i in 1:length(list_ins)) {
     print("here: 3-2 name ")
 
     # get the address
-    xpath_p2 <- "//span[contains(@class, 'label') and text() = '地址：']/following-sibling::span[1]"
-    xpath_sel <- paste0(xpath_p1, xpath_p2)
+    ## div contact col
+    xpath_p41 <- "//div[contains(@class, 'index_contact-row')]//div[contains(@class, 'index_contact-col') ]"
+    xpath_p42 <- "/span[text() = '地址：']/following-sibling::span[1]"
+
+    xpath_sel <- paste0(xpath_p0, xpath_p41, xpath_p42)
+
+    isExist <- as.logical(length(remDr$findElement("xpath",xpath_sel)))
+    if (!isExist) stop("xpath 'address' failed, please check!")
 
     an.error.occured <- FALSE
     tryCatch( { result <- try_xpath(xpath_sel)},
@@ -227,6 +238,8 @@ dt_hub<- tibble(files = url_xlsx ) %>%
 #unique(dt_hub$province)
 check <- dt_hub %>%
   janitor::get_dupes(name_origin)
+
+if (nrow(check) >0) warning( "there exist duplicate name_origin")
 
 queryTianyan <- dt_hub
 
