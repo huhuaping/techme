@@ -42,12 +42,12 @@ df_matched <- df_pivot %>%
 id_list <- sort(unique(df_matched$id))
 i <- 1
 
-for (i in 1:length(id_list)){
+for (i in 2:length(id_list)){
   names_file <- paste0(id_list[i],".xlsx" )
   path_file <- paste0(dir_tidy,names_file)
 
   df_matched %>%
-    filter(id %in% id_list) %>%
+    filter(id %in% id_list[i]) %>%
     write.xlsx(., path_file)
   print(glue("write out file success: {names_file}"))
 
