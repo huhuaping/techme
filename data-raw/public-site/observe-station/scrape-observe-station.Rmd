@@ -154,7 +154,7 @@ openxlsx::write.xlsx(tbl_out, path_out)
 
 ```
 
-# 3.数据抓取流程(教育部)
+# 4.数据抓取流程(教育部)
 
 ## 3.2 抓取观测站2019年html
 
@@ -202,9 +202,51 @@ openxlsx::write.xlsx(tbl_out, path_out)
 ```
 
 
-# 3.数据抓取流程(科技部部)
+# 5.数据抓取流程(科技部)
 
-## 3.2 抓取观测站2021年html
+## 5.1 抓取观测站2019年html（调整名单）
+
+
+```{r}
+#--------------------------
+# this chunk should run only once
+#--------------------------
+Year <- 2019
+
+# files html path
+file_dir <- "html/"
+file_name <- list.files(file_dir)
+file_id <- which(str_detect(file_name, 
+                       glue::glue("most-year-{Year}")))
+file_sel <- file_name[file_id]
+file_path <- paste0(file_dir, file_sel) 
+
+xpath_tbl <- "//div[contains(@id,'Zoom')]//table"
+
+
+tbl_raw <- read_html(file_path,encoding = "UTF-8") %>%
+  html_nodes(xpath = xpath_tbl) %>%
+  html_table(fill = T, header = T) %>%
+  .[[1]] 
+
+names_eng <- c("index", "name", "institution","administrator","result")
+tbl_out <- tbl_raw %>%
+  rename_all(., ~all_of(names_eng)) %>%
+  mutate(index = 1:nrow(.)) %>%
+  mutate_all(., .funs = str_trim)%>%
+  mutate(name = str_replace(name,"\\n", ""),
+         institution =str_replace(institution,"\\n", "")) %>%
+  add_column(year = Year, .before = "index") %>%
+  add_column(officer = "MOST", .before = "year") %>%
+  select(-result) # drop columns
+
+file_name <- str_extract(file_sel, "(.+)(?=\\.)")
+path_out <- glue::glue("xlsx/{file_name}.xlsx")
+openxlsx::write.xlsx(tbl_out, path_out)  
+
+```
+
+## 5.2 抓取观测站2021年html（新认定）
 
 
 ```{r}

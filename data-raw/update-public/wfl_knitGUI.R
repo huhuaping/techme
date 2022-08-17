@@ -12,6 +12,9 @@ tbl_dir <- tribble(
   ~case, ~media, ~final,
   "observe_station",
     "data-raw/public-site/observe-station/",
+    c("xlsx/"),
+  "agripark",
+    "data-raw/public-site/agri-park/",
     c("xlsx/")
 )
 
@@ -20,7 +23,7 @@ tbl_dir <- tribble(
 #source("data-raw/Rscript-update/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "observe_station"
+dir_case <- "agripark"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
@@ -36,12 +39,14 @@ dir_sel <- file_dir[i_sel]
 officer <- "most"
 first_year <- 2019
 last_year <- 2021
+my_pre <- "check"
 files_pattern <- list(
-  year_one = glue("{officer}-year-{last_year}.xlsx$")
+  year_one = glue("{officer}-year-{last_year}.xlsx$"),
+  year_prefix = glue("{my_pre}-year-{last_year}.xlsx$")
   )
 
 
-pattern_sel <- files_pattern$year_one # change here when neccesary
+pattern_sel <- files_pattern$year_prefix # change here when neccesary
 
 ## match and position files
 files_all <- list.files(dir_sel)
@@ -96,16 +101,32 @@ mypath <- glue::glue("{dir_sel}/{myfile}")
 
 df_read <- readxl::read_excel(mypath)
 
-# =====step 6.2: match institution with province =====
+
+
+# =====step 6.3: match institution with province =====
 
 source("data-raw/update-public/wfl_matchProvince.R")
 myptn <- "、"
 df_province <- match_province(df = df_read,
                               ptn_inst = myptn)
+df_province <- df_read %>%
+  mutate(institution = name) %>% # add new column
+  match_province(.,ptn_inst = myptn)
 
-# =====step 6.3: pivot long =====
+
+# ==== step 6.3 tidy data ====
+officer_tar <- "MOST"
+vars_exclude <- c("id", "institution")
+df_tidy <- df_province %>%
+  mutate(officer = officer_tar) %>%
+  select(-all_of(vars_exclude))
+
+# =====step 6.4: pivot long =====
 source("data-raw/update-public/wfl_pivot.R")
-df_long <- pivot_long(df = df_province)
+## select here
+df_long <- pivot_long(df = df_province) # case no need tidy
+df_long <- pivot_long(df = df_tidy)
+
 
 ## check result
 (check <- df_long %>%
@@ -115,13 +136,16 @@ df_long <- pivot_long(df = df_province)
 # ======step 7: match and check variables names to the varsList====
 ## target list collection
 tar_list <- list(
-  v99_obstation = list(block1 = "v99",
+  obstation = list(block1 = "v99",
                        block2 = "obstation",
-                       block3 = c("list"))
+                       block3 = c("list")),
+  agripark = list(block1 = "v99",
+                  block2 = "agripark",
+                  block3 = c("check"))
   )
 
 ## now match and check the names
-tar_name <- "v99_obstation"
+tar_name <- "agripark"
 mytar <- tar_list[[tar_name]]
 source("data-raw/update-public/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_long,
