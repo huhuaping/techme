@@ -5,13 +5,13 @@ source("data-raw/set-global.R")
 ## it should  be unique and exclusive from 'queryTianyan'
 ## and xlsx file in directory 'ship/xx.xlsx'
 
-url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot8-2022-07-23.xlsx"
+url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot7-2022-08-17.xlsx"
 list_ins <- openxlsx::read.xlsx(url_xlsx) %>%
   unlist() %>%
   unname()
 
 
-# ===== Rselenium set =====
+# ===== docker & Rselenium set =====
 ##  load R pkgs
 library("RSelenium")
 library("xml2")
@@ -20,8 +20,21 @@ require("stringr")
 require("tidyverse")
 require("tidyselect")
 
+
+#-------part 01 start docker + RSelenium-------
+# 1. run docker service and container
+#### you should run and start docker desktop first.
+#### then run code in 'window power shell':
+#### docker run --name chrome -v /dev/shm:/dev/shm -d -p 4445:4444 -p 5901:5900 selenium/standalone-chrome-debug:latest
+
+# 2. create the remote driver
+### 'window power shell': ipconfig
+remDr <- remoteDriver(remoteServerAddr = "10.129.158.130",
+                      port = 4445L, browserName = "chrome")
+
+# local without docker
 driver <- rsDriver(browser=c("firefox"),
-                   port = 4445L)
+                   port = 4567L)
 remDr <- driver[["client"]]
 ## open the connect
 remDr$open()
@@ -43,7 +56,7 @@ myswitch <- function (remDr, windowId) {
 }
 
 # loop to scrape info
-i <-2
+i <-9
 
 for (i in 1:length(list_ins)) {
   # navigate the url
@@ -92,7 +105,7 @@ for (i in 1:length(list_ins)) {
     # div header
     xpath_p1 <- "/div[contains(@class, 'index_header')]/div[contains(@class,'index_name')]"
     xpath_p2 <- "//a[contains(@class, 'index_alink') ]"
-    xpath_p3 <- "//span//em"
+    xpath_p3 <- "//span"
 
     xpath_sel <- paste0(xpath_p0, xpath_p1,
                         xpath_p2) # href

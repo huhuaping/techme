@@ -23,7 +23,7 @@ tbl_dir <- tribble(
 #source("data-raw/Rscript-update/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "agripark"
+dir_case <- "observe_station"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%

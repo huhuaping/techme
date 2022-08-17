@@ -235,9 +235,11 @@ tbl_out <- tbl_raw %>%
   mutate(index = 1:nrow(.)) %>%
   mutate_all(., .funs = str_trim)%>%
   mutate(name = str_replace(name,"\\n", ""),
-         institution =str_replace(institution,"\\n", "")) %>%
+         institution =str_replace(institution,"\\n", "、"),
+         administrator =mgsub::mgsub(administrator,"\U00A0", "、")) %>%
   add_column(year = Year, .before = "index") %>%
   add_column(officer = "MOST", .before = "year") %>%
+  mutate(institution = str_replace(institution, "中科院","中国科学院")) %>% # tidy name
   select(-result) # drop columns
 
 file_name <- str_extract(file_sel, "(.+)(?=\\.)")
