@@ -38,7 +38,7 @@ dir_sel <- file_dir[i_sel]
 ## patterns to target which file(s)?
 officer <- "most"
 first_year <- 2019
-last_year <- 2021
+last_year <- 2019
 my_pre <- "check"
 files_pattern <- list(
   year_one = glue("{officer}-year-{last_year}.xlsx$"),
@@ -46,7 +46,7 @@ files_pattern <- list(
   )
 
 
-pattern_sel <- files_pattern$year_prefix # change here when neccesary
+pattern_sel <- files_pattern$year_one # change here when neccesary
 
 ## match and position files
 files_all <- list.files(dir_sel)
@@ -110,13 +110,14 @@ myptn <- "、"
 df_province <- match_province(df = df_read,
                               ptn_inst = myptn)
 df_province <- df_read %>%
-  mutate(institution = name) %>% # add new column
+  #mutate(institution = name) %>% # add new column
   match_province(.,ptn_inst = myptn)
 
 
 # ==== step 6.3 tidy data ====
 officer_tar <- "MOST"
-vars_exclude <- c("id", "institution")
+vars_exclude <- c("id",
+                  "institution")
 df_tidy <- df_province %>%
   mutate(officer = officer_tar) %>%
   select(-all_of(vars_exclude))
@@ -145,7 +146,7 @@ tar_list <- list(
   )
 
 ## now match and check the names
-tar_name <- "agripark"
+tar_name <- "obstation"
 mytar <- tar_list[[tar_name]]
 source("data-raw/update-public/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_long,
@@ -176,7 +177,7 @@ df_long <- df_long %>%
   # for special case such as budget
   # filter(vars %in% rpl )
 
-# ==== step 8.2: matched english names of vars####
+# ==== step 8.2: matched English names of vars####
 ## rerun the matched table
 df_vars_matched <- matchVars(
   dt = df_long,
@@ -217,7 +218,7 @@ files_tidy <- mytidy$mod_year
 (tidy_path <-paste0(dir_sub1, dir_sub2,"/",files_tidy))
 
 ## loop to export xlsx
-tar_year <- c(2021)
+tar_year <- c(2019)
 
 for (id_year in tar_year) {
   n_year <- which(str_detect(tidy_path, as.character(id_year)))
