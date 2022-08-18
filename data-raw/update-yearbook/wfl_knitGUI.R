@@ -56,7 +56,7 @@ dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
 file_dir <- glue::glue("{dir_media}{dir_final}")
 
 ## specify which final directory ?
-i_sel <- 1   # change here
+i_sel <- 2   # change here
 dir_sel <- file_dir[i_sel]
 
 ## patterns to target which file(s)?
@@ -132,7 +132,7 @@ header_mode <- c("vars", "vars-vars","vars-year",
 
 df_unpivot <- loop_unpivot(
   tar_file = mypath,
-  hd_mode = "vars", # change here!
+  hd_mode = "vars-vars", # change here!
   vars_add = NULL, cols_drop = NULL)
 
 ## check result
@@ -176,6 +176,8 @@ tar_list<- list(
                     block3 = "scjy"),
   v4_RDtrade = list(block1 = "v4",block2 = "cy",
                     block3 = "my"),
+  v4_IndustryRD = list(block1 = "v4",block2 = "cy",
+                    block3 = c("RDhd","xcp","qyzl","jsgz")),
   v8_livestock_t1 = list(block1 = "v8",block2 = "t1",
                          block3 = c("zcqc")),
   v8_livestock_t2 = list(block1 = "v8",block2 = "t2",
@@ -198,7 +200,7 @@ tar_list<- list(
 
 
 ## now match and check the names
-tar_name <- "v4_operation"
+tar_name <- "v4_IndustryRD"
 mytar <- tar_list[[tar_name]]
 source("data-raw/update-yearbook/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
@@ -223,10 +225,11 @@ tbl_pattern <- tribble(
   "RD",
     c("有研发机构的企业数", "有R&D活动的企业数"),
     c("有研发机构", "有RD活动"),
-
-  "hitech",
-    c("项目数","新产品开发项目数","新产品开发经费支出","新产品销售收入","有效发明专利数"),
-    c("项目数量","开发项目数","开发经费支出","销售收入","有效专利数"),
+  "IndustryRD",
+    c("新产品开发项目数","新产品开发经费支出",
+      "新产品销售收入","有效发明专利数"),
+    c("开发项目数","开发经费支出",
+      "销售收入","有效专利数"),
   "operation", c("营业收入"), c("主营业务收入"),
   "trade", c("进出口贸易总额"), c("贸易总额"),
   "livestock tab01", c("种畜禽场总数"),c("总数"),
@@ -333,9 +336,6 @@ df_use <- loop_read(dir.media = dir_media_tar,
 ## and this is only used when neccesary!
 df_units <- match_units(df = df_use)
 
-
-
-
 ## 11.3 now use_data()  here
 use_list <- c(
   "AgriMachine",
@@ -354,7 +354,7 @@ use_list <- c(
   "LivestockBreeding" # df_units
 )
 
-name_dt <- use_list[13] # change here
+name_dt <- use_list[12] # change here
 which_dt <- "df_units"  # change here
 
 use_mydata(name.dt = name_dt,
