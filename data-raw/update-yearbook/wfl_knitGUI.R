@@ -47,7 +47,7 @@ tbl_dir <- tribble(
 #source("data-raw/update-yearbook/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "RD_inner"
+dir_case <- "RD_industry"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
@@ -71,7 +71,7 @@ files_pattern <- list(
   edited_two = glue("^raw-{first_year}-{last_year}-edited.xlsx$")
 )
 
-pattern_sel <- files_pattern$year_onex # change here when neccesary
+pattern_sel <- files_pattern$edited_one # change here when neccesary
 
 ## match and position files
 files_all <- list.files(dir_sel)
@@ -131,7 +131,8 @@ header_mode <- c("vars", "vars-vars","vars-year",
                  "vars-h3","vars-h4","vars-h5")
 
 df_unpivot <- loop_unpivot(
-  tar_file = mypath,  hd_mode = "vars-vars", # change here!
+  tar_file = mypath,
+  hd_mode = "vars", # change here!
   vars_add = NULL, cols_drop = NULL)
 
 ## check result
@@ -171,6 +172,8 @@ tar_list<- list(
                     block3 = "qysl"),
   v4_RDpush =  list(block1 = "v4",block2 = "cg",
                     block3 = "jssc"),
+  v4_operation =  list(block1 = "v4",block2 = "cy",
+                    block3 = "scjy"),
   v4_RDtrade = list(block1 = "v4",block2 = "cy",
                     block3 = "my"),
   v8_livestock_t1 = list(block1 = "v8",block2 = "t1",
@@ -195,7 +198,7 @@ tar_list<- list(
 
 
 ## now match and check the names
-tar_name <- "v4_RDinner"
+tar_name <- "v4_operation"
 mytar <- tar_list[[tar_name]]
 source("data-raw/update-yearbook/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
@@ -237,7 +240,7 @@ tbl_pattern <- tribble(
 )
 
 ## get my pattern
-mycase <- "RDinner"
+mycase <- "operation"
 ptn <- tbl_pattern %>% filter(case ==mycase) %>%
   pull(ptn) %>% unlist()
 rpl <- tbl_pattern %>% filter(case ==mycase) %>%
@@ -263,7 +266,9 @@ df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar)%>%
 #noDir <- FALSE
 source("data-raw/update-yearbook/wfl_matchData.R", encoding = "UTF-8")
 
-df_matched <- matchData(dt_left = df_tidy, dt_right = df_vars_matched)
+df_matched <- matchData(
+  dt_left = df_tidy,
+  dt_right = df_vars_matched)
 # check it
 
 unique(df_matched$variables)
@@ -320,7 +325,6 @@ dir_media_tar <- str_replace(dir_media,
                              "data-raw/data-tidy")
 (dir_final_tar <- dir_final[i_sel]) # i_sel before
 
-
 df_use <- loop_read(dir.media = dir_media_tar,
                     dir.fina = dir_final_tar,
                     file.pattern = "\\d{4}")
@@ -329,22 +333,29 @@ df_use <- loop_read(dir.media = dir_media_tar,
 ## and this is only used when neccesary!
 df_units <- match_units(df = df_use)
 
-## 11.3 now use_data()  here
 
+
+
+## 11.3 now use_data()  here
 use_list <- c(
-  "AgriMachine","AgriFertilizer",
-  "AgriPlastic","AgriPesticide",
+  "AgriMachine",
+  "AgriFertilizer",
+  "AgriPlastic",
+  "AgriPesticide",
   "PublicBudget",
   "RDIntense",
   "RDActivity",
-  "MarketPull","MarketPush",
+  "MarketPull",
+  "MarketPush",
   "HitechFirmsPub",
-  "IndustryTrade","IndustryRD","IndustryOperation",
+  "IndustryTrade",
+  "IndustryRD",
+  "IndustryOperation",
   "LivestockBreeding" # df_units
 )
 
-name_dt <- use_list[7]
-which_dt <- "df_use"
+name_dt <- use_list[13] # change here
+which_dt <- "df_units"  # change here
 
 use_mydata(name.dt = name_dt,
            which.dt = which_dt)
