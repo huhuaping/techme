@@ -1,5 +1,7 @@
 ## code to prepare `hack_tianyan` dataset goes here
 source("data-raw/set-global.R")
+require(devtools)
+load_all()
 
 # ===== your list =======
 ## it should  be unique and exclusive from 'queryTianyan'
