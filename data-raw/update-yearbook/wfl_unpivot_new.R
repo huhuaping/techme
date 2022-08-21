@@ -141,17 +141,17 @@ unpivot <- function(dt, rows, cols,
     arrange( col, row )
 
   if(header.mode == "vars-year"){ # header mode 1
-    dt_cell <- dt_cell %>%
+    dt_cellout <- dt_cell %>%
       behead("up-left", vars) %>%
       behead("up", year) %>%
       behead("left", province)
   } else if (header.mode == "vars"){ # header mode 2
-    dt_cell <- dt_cell %>%
+    dt_cellout <- dt_cell %>%
       behead("up", vars) %>%
       behead("left", province) %>%
       add_column(year = str_extract(file_xls,"\\d{4}"))
   } else if (header.mode == "vars-vars"){ # header mode 3
-    dt_cell <- dt_cell %>%
+    dt_cellout <- dt_cell %>%
       behead("up-left", vars_tot) %>%
       behead("up", vars) %>%
       mutate(vars = ifelse(is.na(vars), vars_tot, vars)) %>%
@@ -160,16 +160,19 @@ unpivot <- function(dt, rows, cols,
       select(-vars_tot)
   }else if (header.mode == "year"){ # header mode 4
     if (length(vars.add)!=1) stop("Added Vars info not correct, please specify by function 'get_vars()' ")
-    dt_cell <- dt_cell %>%
+    dt_cellout <- dt_cell %>%
       behead("up", year) %>%
       behead("left", province) %>%
       add_column(vars = unname(unlist(vars.add)))
   }
 
-  dt_cell <- dt_cell %>%
-    rename(value = chr) %>%
+  # detect data type
+  value_type <- unique(dt_cellout$data_type)
+  dt_cellfinal <- dt_cellout %>%
+    rename(value = value_type) %>%
     select(province, year, vars, value)
-  return(dt_cell)
+
+  return(dt_cellfinal)
 }
 
 
@@ -231,7 +234,7 @@ loop_unpivot <- function(tar_file=mypath,
     print(glue::glue("totally {sheetnum} xls sheet(s) need to unpivot."))
   }
 
-  # j = 2
+  # j = 1
   df_out <- NULL
   for (j in 1: sheetnum){
     print(glue::glue("begin unpivot the {j} of {sheetnum} xls sheet."))

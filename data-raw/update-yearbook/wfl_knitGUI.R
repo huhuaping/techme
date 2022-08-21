@@ -47,7 +47,7 @@ tbl_dir <- tribble(
 #source("data-raw/update-yearbook/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "RD_industry"
+dir_case <- "RD_output"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
@@ -56,18 +56,19 @@ dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
 file_dir <- glue::glue("{dir_media}{dir_final}")
 
 ## specify which final directory ?
-i_sel <- 2   # change here
+i_sel <- 3   # change here
 dir_sel <- file_dir[i_sel]
 
 ## patterns to target which file(s)?
 first_year <- 2019
 last_year <- 2020
+add_info <- "amount"
 files_pattern <- list(
   year_one = glue("^raw-{last_year}.xls$"),
   year_two = glue("^raw-{first_year}-{last_year}.xls$"),
   year_onex = glue("^raw-{last_year}.xlsx$"),
   year_twox = glue("^raw-{first_year}-{last_year}.xlsx$"),
-  edited_one = glue("^raw-{last_year}-edited.xlsx$"),
+  edited_one = glue("^raw-.+?{add_info}-{last_year}-edited.xlsx$"),
   edited_two = glue("^raw-{first_year}-{last_year}-edited.xlsx$")
 )
 
@@ -110,9 +111,9 @@ print("OK! Edit the xlsx file finished!")
 ## use this only if `head.mode ="year"`
 data("varsList")
 vars_spc <- techme::get_vars(df = varsList, lang = "eng",
-                     block = list(block1 = "v7",block2 = "sctj",
-                                  block3 = c("nyhf")
-                                  #,block4 = "ht"
+                     block = list(block1 = "v4",block2 = "cg",
+                                  block3 = c("jssc")
+                                  ,block4 = "ht"
                      ),
                      what = "chn_block4")
 
@@ -132,8 +133,10 @@ header_mode <- c("vars", "vars-vars","vars-year",
 
 df_unpivot <- loop_unpivot(
   tar_file = mypath,
-  hd_mode = "vars-vars", # change here!
-  vars_add = NULL, cols_drop = NULL)
+  hd_mode = "year", # change here!
+  vars_add = vars_spc ,  # only when mode "year"
+  # vars_add = NULL, # change here
+  cols_drop = NULL)
 
 ## check result
 (check <- df_unpivot %>%
@@ -170,6 +173,8 @@ tar_list<- list(
                     block3 = "nbzc"),
   v4_RDfirm =  list(block1 = "v4",block2 = "qy",
                     block3 = "qysl"),
+  v4_RDpull =  list(block1 = "v4",block2 = "cg",
+                    block3 = "jssr"),
   v4_RDpush =  list(block1 = "v4",block2 = "cg",
                     block3 = "jssc"),
   v4_operation =  list(block1 = "v4",block2 = "cy",
@@ -200,7 +205,7 @@ tar_list<- list(
 
 
 ## now match and check the names
-tar_name <- "v4_IndustryRD"
+tar_name <- "v4_RDpush"
 mytar <- tar_list[[tar_name]]
 source("data-raw/update-yearbook/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
@@ -257,7 +262,9 @@ df_tidy <- df_tidy %>%
 
 # ==== step 8.3: matched english names of vars####
 ## rerun the matched table
-df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar)%>%
+df_vars_matched <- matchVars(
+  dt = df_tidy,
+  block_target = mytar )%>%
   filter(asis==TRUE)
 ## write out for check
 #openxlsx::write.xlsx(df_vars_matched, "data-raw/df-vars-matched.xlsx")
@@ -293,7 +300,7 @@ dir_tidy <- paste0(dir_sub1, dir_sub2)
 ## specify file name
 vec_year <- sort(unique(df_matched$year))
 vec_tab <- 9
-prefix <- "ammount"
+prefix <- "amount"
 mytidy <- list(
   mod_year = glue::glue("{vec_year}.xlsx" ),
   mod_year_tbl = glue::glue("year-{vec_year}-{vec_tab}.xlsx" ),
@@ -301,7 +308,7 @@ mytidy <- list(
 )
 
 ## file path
-files_tidy <- mytidy$mod_year
+files_tidy <- mytidy$mod_prefix_year
 (tidy_path <-paste0(dir_sub1, dir_sub2,"/",files_tidy))
 
 ## loop to export xlsx
@@ -336,6 +343,9 @@ df_use <- loop_read(dir.media = dir_media_tar,
 ## and this is only used when neccesary!
 df_units <- match_units(df = df_use)
 
+
+
+
 ## 11.3 now use_data()  here
 use_list <- c(
   "AgriMachine",
@@ -354,8 +364,8 @@ use_list <- c(
   "LivestockBreeding" # df_units
 )
 
-name_dt <- use_list[12] # change here
-which_dt <- "df_units"  # change here
+(name_dt <- use_list[8]) # change here
+which_dt <- "df_use"  # change here
 
 use_mydata(name.dt = name_dt,
            which.dt = which_dt)
