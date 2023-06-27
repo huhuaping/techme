@@ -1,0 +1,378 @@
+---
+title: "农业部和教育部科学观测试验站"
+author: "胡华平"
+date: "`r Sys.Date()`"
+output:
+  bookdown::word_document2:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 4
+    reference_docx: report-reference.docx
+  bookdown::html_document2:
+    number_sections: yes
+    toc: no
+    fig_caption: yes
+    toc_float: yes
+always_allow_html: yes
+---
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE, eval = FALSE,
+                      fig.align='center',fig.width=10, fig.height=7) # Places figures on their own pages
+options(
+  htmltools.dir.version = FALSE, 
+  formatR.indent = 2, width = 55, 
+  digits = 2,scipen=999,tinytex.verbose = TRUE,
+  knitr.kable.NA = '',
+  fig.width=12, fig.height=8)
+
+```
+
+
+\newpage
+
+# 1.研究目标
+
+
+农业部国家农业科学观测实验站
+
+教育部野外科学观测研究站
+
+
+# 2.资料来源
+
+## 2.1 数据来源
+
+
+## 2.2 数据进度
+
+
+【农业部】
+
+- 2020-01-02 农业农村部办公厅关于确定第二批国家农业科学观测实验站的[通知](http://www.moa.gov.cn/nybgb/2019/201907/202001/t20200102_6334210.htm) 80个：html表格
+
+- 2018年01月30日 农业部办公厅关于确定第一批国家农业科学观测实验站的[通知](http://www.moa.gov.cn/govpublic/KJJYS/201802/t20180201_6136233.htm) 36个：docx附件
+
+
+【教育部】
+
+- 2019年8月31日 教育部关于公布2019年教育部野外科学观测研究站名单的[通知](http://www.moe.gov.cn/srcsite/A16/s7062/201909/t20190930_401836.html) [科塔网 统计](https://www.sciping.com/30353.html)
+
+## 2.3 异常提示
+
+- 2016年的学科群体系是最新公布，里面有小麦
+
+- 两个批次的国家农业科学观测实验站，没有明确区分小麦
+
+## 抓取准备
+
+```{r}
+require("rvest")
+require("xml2")
+require("httr")
+require("stringr")
+require("tidyverse")
+require("tidyselect")
+require("here")
+require("openxlsx")
+```
+
+
+# 3.数据抓取流程(农业部)
+
+## 3.2 抓取观测站2018年xlsx
+
+```{r}
+Year <- 2018
+
+# files html path
+file_dir <- "html/"
+file_name <- list.files(file_dir)
+file_id <- which(str_detect(file_name, 
+                       glue::glue("moa-year-{Year}.*xlsx$")))
+file_sel <- file_name[file_id]
+file_path <- paste0(file_dir, file_sel) 
+
+tbl_read <- openxlsx::read.xlsx(file_path, colNames = T) 
+
+names_eng <- c("index", "name", "institution")
+tbl_out <- tbl_read %>%
+  rename_all(., ~all_of(names_eng)) %>%
+  mutate(index = 1:nrow(.)) %>%
+  mutate_all(., .funs = str_trim) %>%
+  add_column(year = Year, .before = "index") %>%
+  add_column(officer = "MOA", .before = "year")
+
+file_name <- str_extract(file_sel, "(.+)(?=\\.)")
+path_out <- glue::glue("xlsx/{file_name}.xlsx")
+openxlsx::write.xlsx(tbl_out, path_out) 
+  
+```
+
+
+
+## 3.2 抓取观测站2019年html
+
+
+```{r}
+#--------------------------
+# this chunk should run only once
+#--------------------------
+
+#--------------------------
+# this chunk should run only once
+#--------------------------
+Year <- 2019
+
+# files html path
+file_dir <- "html/"
+file_name <- list.files(file_dir)
+file_id <- which(str_detect(file_name, 
+                       glue::glue("moa-year-{Year}")))
+file_sel <- file_name[file_id]
+file_path <- paste0(file_dir, file_sel) 
+
+xpath_tbl <- "/html/body/div[4]/div[1]/div[2]/div[1]/div/div/table"
+
+
+tbl_raw <- read_html(file_path,encoding = "UTF-8") %>%
+  html_nodes(xpath = xpath_tbl) %>%
+  html_table(fill = T, header = T) %>%
+  .[[1]] 
+
+names_eng <- c("index", "name", "institution")
+tbl_out <- tbl_raw %>%
+  rename_all(., ~all_of(names_eng)) %>%
+  mutate(index = 1:nrow(.)) %>%
+  mutate_all(., .funs = str_trim) %>%
+  add_column(year = Year, .before = "index") %>%
+  add_column(officer = "MOA", .before = "year")
+
+file_name <- str_extract(file_sel, "(.+)(?=\\.)")
+path_out <- glue::glue("xlsx/{file_name}.xlsx")
+openxlsx::write.xlsx(tbl_out, path_out) 
+
+```
+
+# 4.数据抓取流程(教育部)
+
+## 3.2 抓取观测站2019年html
+
+
+```{r}
+#--------------------------
+# this chunk should run only once
+#--------------------------
+
+#--------------------------
+# this chunk should run only once
+#--------------------------
+Year <- 2019
+
+# files html path
+file_dir <- "html/"
+file_name <- list.files(file_dir)
+file_id <- which(str_detect(file_name, 
+                       glue::glue("moe-year-{Year}")))
+file_sel <- file_name[file_id]
+file_path <- paste0(file_dir, file_sel) 
+
+xpath_tbl <- "/html/body/div[1]/div[2]/div[1]/main/article/div/div[2]/table"
+
+
+tbl_raw <- read_html(file_path,encoding = "UTF-8") %>%
+  html_nodes(xpath = xpath_tbl) %>%
+  html_table(fill = T, header = T) %>%
+  .[[1]] 
+
+names_eng <- c("index", "name", "institution")
+tbl_out <- tbl_raw %>%
+  rename_all(., ~all_of(names_eng)) %>%
+  mutate(index = 1:nrow(.)) %>%
+  mutate_all(., .funs = str_trim)%>%
+  mutate(name = str_replace(name,"\\n", ""),
+         institution =str_replace(institution,"\\n", "")) %>%
+  add_column(year = Year, .before = "index") %>%
+  add_column(officer = "MOE", .before = "year")
+
+file_name <- str_extract(file_sel, "(.+)(?=\\.)")
+path_out <- glue::glue("xlsx/{file_name}.xlsx")
+openxlsx::write.xlsx(tbl_out, path_out)  
+
+```
+
+
+# 5.数据抓取流程(科技部)
+
+## 5.1 抓取观测站2019年html（调整名单）
+
+
+```{r}
+#--------------------------
+# this chunk should run only once
+#--------------------------
+Year <- 2019
+
+# files html path
+file_dir <- "html/"
+file_name <- list.files(file_dir)
+file_id <- which(str_detect(file_name, 
+                       glue::glue("most-year-{Year}")))
+file_sel <- file_name[file_id]
+file_path <- paste0(file_dir, file_sel) 
+
+xpath_tbl <- "//div[contains(@id,'Zoom')]//table"
+
+
+tbl_raw <- read_html(file_path,encoding = "UTF-8") %>%
+  html_nodes(xpath = xpath_tbl) %>%
+  html_table(fill = T, header = T) %>%
+  .[[1]] 
+
+names_eng <- c("index", "name", "institution","administrator","result")
+tbl_out <- tbl_raw %>%
+  rename_all(., ~all_of(names_eng)) %>%
+  mutate(index = 1:nrow(.)) %>%
+  mutate_all(., .funs = str_trim)%>%
+  mutate(name = str_replace(name,"\\n", ""),
+         institution =str_replace(institution,"\\n", "、"),
+         administrator =mgsub::mgsub(administrator,"\U00A0", "、")) %>%
+  add_column(year = Year, .before = "index") %>%
+  add_column(officer = "MOST", .before = "year") %>%
+  mutate(institution = str_replace(institution, "中科院","中国科学院")) %>% # tidy name
+  select(-result) # drop columns
+
+file_name <- str_extract(file_sel, "(.+)(?=\\.)")
+path_out <- glue::glue("xlsx/{file_name}.xlsx")
+openxlsx::write.xlsx(tbl_out, path_out)  
+
+```
+
+## 5.2 抓取观测站2021年html（新认定）
+
+
+```{r}
+#--------------------------
+# this chunk should run only once
+#--------------------------
+
+#--------------------------
+# this chunk should run only once
+#--------------------------
+Year <- 2021
+
+# files html path
+file_dir <- "html/"
+file_name <- list.files(file_dir)
+file_id <- which(str_detect(file_name, 
+                       glue::glue("most-year-{Year}")))
+file_sel <- file_name[file_id]
+file_path <- paste0(file_dir, file_sel) 
+
+xpath_tbl <- "//table[@class='MsoNormalTable']"
+
+
+tbl_raw <- read_html(file_path,encoding = "UTF-8") %>%
+  html_nodes(xpath = xpath_tbl) %>%
+  html_table(fill = T, header = T) %>%
+  .[[1]] 
+
+names_eng <- c("index", "name", "institution","administrator")
+tbl_out <- tbl_raw %>%
+  rename_all(., ~all_of(names_eng)) %>%
+  mutate(index = 1:nrow(.)) %>%
+  mutate_all(., .funs = str_trim)%>%
+  mutate(name = str_replace(name,"\\n", ""),
+         institution =str_replace(institution,"\\n", "")) %>%
+  add_column(year = Year, .before = "index") %>%
+  add_column(officer = "MOST", .before = "year")
+
+file_name <- str_extract(file_sel, "(.+)(?=\\.)")
+path_out <- glue::glue("xlsx/{file_name}.xlsx")
+openxlsx::write.xlsx(tbl_out, path_out)  
+
+```
+
+# 4 查询并匹配机构名称、省份
+
+## 4.1 合并全部年份数据
+
+```{r}
+file_dir <- "xlsx/"
+file_name <- list.files(file_dir)
+file_path <- paste0(file_dir, file_name) 
+
+tbl_out <- tibble(url = file_path) %>%
+  mutate(dt = map(url, openxlsx::read.xlsx)) %>%
+  select(-url) %>%
+  unnest(dt)
+
+```
+
+
+
+## 4.2 唯一化机构名称列表（处理）
+
+```{r}
+require("techme")
+
+data("queryTianyan")
+dt_match <- queryTianyan %>%
+  select(name_origin, province) %>%
+  rename(institution = "name_origin")
+
+data("ProvinceCity")
+dt_city <- ProvinceCity %>%
+  select( city_clean, province_clean)
+
+ptn_province <- paste0(unique(ProvinceCity$province_clean), collapse =  "|")
+ptn_city <- paste0(unique(ProvinceCity$city_clean), collapse =  "|")
+
+list_institution <- tbl_out %>%
+  mutate(institution_raw = institution) %>%
+  #use only the first institution
+  mutate(institution = map_chr(.x = institution_raw, 
+                           .f = function(x) as.character(unlist(str_split(x, pattern='、'))[[1]]) )
+  ) %>%
+  select(institution) %>%
+  unique() %>%
+  left_join(., dt_match, by= "institution" ) %>%
+  # filter obvious province info
+  mutate(province_raw = str_extract(institution, ptn_province)) %>%
+  mutate(province = ifelse(is.na(province), province_raw, province)) %>%
+  # match city
+  mutate(city_clean = str_extract(institution, ptn_city)) %>%
+  left_join(., dt_city, by= "city_clean" ) %>%
+  mutate(province = ifelse(is.na(province), province_clean, province)) %>%
+  filter(is.na(province)) %>%
+  select(institution) %>%
+  arrange(institution)
+
+# check 
+check <- sum(is.na(list_institution$province))
+if(check > 0) stop("please check the name of institution!")
+
+dir_xlsx <- "d:/github/techme/data-raw/data-tidy/hack-tianyan/ship/"
+file_xlsx <- glue::glue("ship-tot{nrow(list_institution)}-{Sys.Date()}.xlsx")
+path_xlsx <- paste0(dir_xlsx, file_xlsx)
+
+openxlsx::write.xlsx(list_institution, path_xlsx)
+
+```
+
+## 4.3 在R包techme中进行天眼查
+
+- 循环查询
+
+- 得到结果，并人工确认
+
+- 重新整合更新`qureyTianyan`
+
+- build 并push `techme`
+
+## 4.4 在R包techme中上传数据集
+
+- 匹配省份信息
+
+- 数据集名为`PubObsStation`
+

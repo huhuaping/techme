@@ -1,17 +1,19 @@
 ## code to prepare `hack_tianyan` dataset goes here
 source("data-raw/set-global.R")
+require(devtools)
+load_all()
 
 # ===== your list =======
 ## it should  be unique and exclusive from 'queryTianyan'
 ## and xlsx file in directory 'ship/xx.xlsx'
 
-url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot34-2021-09-13.xlsx"
+url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot7-2022-08-17.xlsx"
 list_ins <- openxlsx::read.xlsx(url_xlsx) %>%
   unlist() %>%
   unname()
 
 
-# ===== Rselenium set =====
+# ===== docker & Rselenium set =====
 ##  load R pkgs
 library("RSelenium")
 library("xml2")
@@ -20,7 +22,21 @@ require("stringr")
 require("tidyverse")
 require("tidyselect")
 
-driver <- rsDriver(browser=c("firefox"), port = 4445L)
+
+#-------part 01 start docker + RSelenium-------
+# 1. run docker service and container
+#### you should run and start docker desktop first.
+#### then run code in 'window power shell':
+#### docker run --name chrome -v /dev/shm:/dev/shm -d -p 4445:4444 -p 5901:5900 selenium/standalone-chrome-debug:latest
+
+# 2. create the remote driver
+### 'window power shell': ipconfig
+remDr <- remoteDriver(remoteServerAddr = "10.129.158.130",
+                      port = 4445L, browserName = "chrome")
+
+# local without docker
+driver <- rsDriver(browser=c("firefox"),
+                   port = 4567L)
 remDr <- driver[["client"]]
 ## open the connect
 remDr$open()
@@ -42,9 +58,9 @@ myswitch <- function (remDr, windowId) {
 }
 
 # loop to scrape info
-i <-22
+i <-9
 
-for (i in 33:length(list_ins)) {
+for (i in 1:length(list_ins)) {
   # navigate the url
   if (i==1) {
     remDr$navigate(url_list)
@@ -56,13 +72,13 @@ for (i in 33:length(list_ins)) {
   }
 
   # send key to search input
-  xpath_search <- "//*[@id='home-main-search']"
+  xpath_search <- "*//div[contains(@class,'home-suggest-input')]//input"
   remDr$findElement("xpath", xpath_search)$sendKeysToElement(
     list(list_ins[i]))
 
   # submit search
-  css_submit <-"#web-content > div > div.tyc-home-top.bgtyc > div.container > div > div > div.tab-main > div:nth-child(2) > div.input-group.home-group > div"
-  remDr$findElement(using = "css", value = css_submit)$clickElement()
+  xpath_submit <- "*//button[contains(@class,'home-suggest-button')]//span"
+  remDr$findElement(using = "xpath", value = xpath_submit)$clickElement()
   print("here: 2 submit")
   # wait seconds
   Sys.sleep(1)
@@ -86,10 +102,15 @@ for (i in 33:length(list_ins)) {
     tel[i] <- ""
   } else {
     # get the href
-    xpath_p1 <- "//div[contains(@class, 'result-list') ]/div[1]/div[1]//div[contains(@class,'content')]"
+    xpath_p0 <- "//div[contains(@class, 'index_search-item-center') ]"
 
-    xpath_p2 <- "//a[contains(@class, 'name') ]"
-    xpath_sel <- paste0(xpath_p1, xpath_p2)
+    # div header
+    xpath_p1 <- "/div[contains(@class, 'index_header')]/div[contains(@class,'index_name')]"
+    xpath_p2 <- "//a[contains(@class, 'index_alink') ]"
+    xpath_p3 <- "//span"
+
+    xpath_sel <- paste0(xpath_p0, xpath_p1,
+                        xpath_p2) # href
     isExist <- as.logical(length(remDr$findElement("xpath",xpath_sel)))
     if (!isExist) stop("xpath 'address' failed, please check!")
     url[i] <- remDr$findElement("xpath",
@@ -98,8 +119,8 @@ for (i in 33:length(list_ins)) {
     print("here: 3-1 url ")
 
     # get the searched name
-    xpath_p2 <- "//div[contains(@class, 'header') ]//a[contains(@class, 'name') ]"
-    xpath_sel <- paste0(xpath_p1, xpath_p2)
+    xpath_sel <- paste0(xpath_p0,xpath_p1,
+                        xpath_p2, xpath_p3) # name
 
     isExist <- as.logical(length(remDr$findElement("xpath",xpath_sel)))
     if (!isExist) stop("xpath 'address' failed, please check!")
@@ -111,8 +132,14 @@ for (i in 33:length(list_ins)) {
     print("here: 3-2 name ")
 
     # get the address
-    xpath_p2 <- "//span[contains(@class, 'label') and text() = '地址：']/following-sibling::span[1]"
-    xpath_sel <- paste0(xpath_p1, xpath_p2)
+    ## div contact col
+    xpath_p41 <- "//div[contains(@class, 'index_contact-row')]//div[contains(@class, 'index_contact-col') ]"
+    xpath_p42 <- "/span[text() = '地址：']/following-sibling::span[1]"
+
+    xpath_sel <- paste0(xpath_p0, xpath_p41, xpath_p42)
+
+    isExist <- as.logical(length(remDr$findElement("xpath",xpath_sel)))
+    if (!isExist) stop("xpath 'address' failed, please check!")
 
     an.error.occured <- FALSE
     tryCatch( { result <- try_xpath(xpath_sel)},
@@ -226,6 +253,8 @@ dt_hub<- tibble(files = url_xlsx ) %>%
 #unique(dt_hub$province)
 check <- dt_hub %>%
   janitor::get_dupes(name_origin)
+
+if (nrow(check) >0) warning( "there exist duplicate name_origin")
 
 queryTianyan <- dt_hub
 

@@ -1,6 +1,10 @@
 ## code to prepare `wfl_useData_CARS` dataset goes here
 
-# source pkgs
+# ==== prepare ====
+## load pacakge
+
+require(devtools)
+load_all()
 
 source("data-raw/set-global.R")
 
@@ -58,7 +62,8 @@ setdiff(names_sel,names(tbl_read))
 #'   target_province = "province_industry")
 #'
 
-get_province_of_institution <- function(df, target_institution, target_province){
+get_province_of_institution <- function(
+    df, target_institution, target_province){
   #=====match data=====
   require("techme")
   data("queryTianyan")
@@ -96,9 +101,10 @@ get_province_of_institution <- function(df, target_institution, target_province)
 
 # ====== step 1/3 match 'institution_industry'====
 
-tbl_industry <- get_province_of_institution(df = tbl_read,
-                                            target_institution ="institution_industry",
-                                            target_province = "province_industry")
+tbl_industry <- get_province_of_institution(
+  df = tbl_read,
+  target_institution ="institution_industry",
+  target_province = "province_industry")
 
 # check begin
 tbl_industry %>%
@@ -107,9 +113,10 @@ tbl_industry %>%
 
 # ====== step 2/3 match 'func_inst'====
 
-tbl_func <- get_province_of_institution(df = tbl_industry,
-                                            target_institution ="func_inst",
-                                            target_province = "province_func")
+tbl_func <- get_province_of_institution(
+  df = tbl_industry,
+  target_institution ="func_inst",
+  target_province = "province_func")
 
 # check begin
 tbl_func  %>%
@@ -118,15 +125,24 @@ tbl_func  %>%
 
 # ====== step 3/3 match  'researcher_inst'====
 
-tbl_researcher <- get_province_of_institution(df = tbl_func,
-                                              target_institution ="researcher_inst",
-                                              target_province = "province_researcher")
+tbl_researcher <- get_province_of_institution(
+  df = tbl_func,
+  target_institution ="researcher_inst",
+  target_province = "province_researcher")
 
 # check begin
 tbl_researcher %>%
   select(researcher_inst, province_researcher) %>%
   filter(!is.na(researcher_inst),is.na(province_researcher))
 
+# check all type province
+noProvince <- tbl_researcher %>%
+  filter(
+  is.na(tbl_researcher$province_industry),
+  is.na(tbl_researcher$province_func),
+  is.na(tbl_researcher$province_researcher)
+  ) %>%
+  nrow()
 
 # write out
 PubCars <- tbl_researcher
