@@ -1,7 +1,79 @@
 url: https://huhuaping.github.io/techme/
 template:
   bootstrap: 5
-
 lang: zh_CN
 development:
   mode: auto
+
+reference:
+- title: "Data Subset from the Agriculture Yearbook"
+  desc: >
+    Data sets assembled from the Agriculture Yearbook（农业统计年鉴）.
+  contents:
+  - AgriFertilizer
+  - AgriMachine
+  - AgriPesticide
+  - AgriPlastic
+- title: "Data Subset from the Technology Yearbook"
+  desc: >
+    Data sets assembled from the Technology Yearbook（科技统计年鉴）.
+    While `PublicBudget` source from the National Yearbook,
+    and `HitechFirmsPub` source from the public site.
+  contents:
+  - HitechFirmsPub
+  - IndustryOperation
+  - IndustryRD
+  - IndustryTrade
+  - MarketPull
+  - MarketPush
+  - RDActivity
+  - RDIntense
+  - PublicBudget
+  - HitechFirmsPub
+- title: "Data Subset from the public sources"
+  desc: >
+    Data sets assembled from the public sources, including
+    MOA（农业农村部）, MOST（科技部）, MOE（教育部） et. al.
+  contents:
+  - PubAgriParkList
+  - PubAgriParkCheck
+  - PubAgriParkEval
+  - PubCars
+  - PubNKRDP
+  - PubObsStation
+  - PubObsStationX
+  - PubSKLMost
+- title: "Data Subset for the special chapter"
+  desc: >
+    Data sets focus on special topics, including
+    livestocks（畜牧业） et. al.
+  contents:
+  - PubBreedingXmj
+  - PubStandardXmj
+  - LivestockBreeding
+- title: "Some elementary dataset used in the report"
+  desc: >
+    Basic information needed for data handling and report writing,
+    including Provinces, Regions, district, et. al.
+  contents:
+  - varsList
+  - ProvinceCity
+  - starts_with("Basic")
+  - queryTianyan
+- title: "Functions for raw data handling."
+  desc: >
+    various funtions help to data cleaning, computation,summarising,
+    et. al.
+  contents:
+  - add_footer_asis
+  - add_footer_pure
+  - convert_xls_as_xlsx
+  - convert_xls_to_xlsx
+  - delete_registry
+  - document_dt
+  - gen_dirs_vec
+  - get_excelcnv_exe
+  - get_province_of_institution
+  - get_vars
+  - gg2xlsx
+  - safe_office_folder
