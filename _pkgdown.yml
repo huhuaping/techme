@@ -2,3 +2,6 @@ url: https://huhuaping.github.io/techme/
 template:
   bootstrap: 5
 
+lang: zh_CN
+development:
+  mode: auto

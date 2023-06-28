@@ -7,7 +7,7 @@
 <!-- badges: end -->
 
 The goal of techme is to supply basic data sets and toolsets to generate
-research report( 《中国旱区农业技术发展报告2023》).
+research report( 《中国旱区农业技术发展报告2023new》).
 
 ## Installation
 
