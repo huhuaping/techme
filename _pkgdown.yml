@@ -1,0 +1,7 @@
+url: https://huhuaping.github.io/techme/
+template:
+  bootstrap: 5
+development:
+  mode: auto
+lang: zh_CN
+
