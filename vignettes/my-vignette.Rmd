@@ -29,9 +29,10 @@ head(varsList)
 
 ```{r,echo=FALSE, message=FALSE}
 require(techme)
-require(tidyverse)
-require(purrr)
+#require(tidyverse)
+#require(purrr)
 require(knitr)
+library(magrittr)
 library(dplyr)
 data("varsList")
 data("BasicProvince")
