@@ -47,7 +47,7 @@ tbl_dir <- tribble(
 #source("data-raw/update-yearbook/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "RD_output"
+dir_case <- "agri_prod"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
@@ -56,12 +56,12 @@ dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
 file_dir <- glue::glue("{dir_media}{dir_final}")
 
 ## specify which final directory ?
-i_sel <- 3   # change here
+i_sel <- 1   # change here
 dir_sel <- file_dir[i_sel]
 
 ## patterns to target which file(s)?
-first_year <- 2019
-last_year <- 2020
+first_year <- 2020
+last_year <- 2021
 add_info <- "amount"
 files_pattern <- list(
   year_one = glue("^raw-{last_year}.xls$"),
@@ -72,7 +72,7 @@ files_pattern <- list(
   edited_two = glue("^raw-{first_year}-{last_year}-edited.xlsx$")
 )
 
-pattern_sel <- files_pattern$edited_one # change here when neccesary
+pattern_sel <- files_pattern$year_twox # change here when neccesary
 
 ## match and position files
 files_all <- list.files(dir_sel)
@@ -133,9 +133,9 @@ header_mode <- c("vars", "vars-vars","vars-year",
 
 df_unpivot <- loop_unpivot(
   tar_file = mypath,
-  hd_mode = "year", # change here!
-  vars_add = vars_spc ,  # only when mode "year"
-  # vars_add = NULL, # change here
+  hd_mode = "vars-year", # change here!
+  #vars_add = vars_spc ,  # only when mode "year"
+  vars_add = NULL, # change here
   cols_drop = NULL)
 
 ## check result
@@ -205,7 +205,7 @@ tar_list<- list(
 
 
 ## now match and check the names
-tar_name <- "v4_RDpush"
+tar_name <- "v7_machine"
 mytar <- tar_list[[tar_name]]
 source("data-raw/update-yearbook/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
@@ -248,7 +248,7 @@ tbl_pattern <- tribble(
 )
 
 ## get my pattern
-mycase <- "operation"
+mycase <- "machine"
 ptn <- tbl_pattern %>% filter(case ==mycase) %>%
   pull(ptn) %>% unlist()
 rpl <- tbl_pattern %>% filter(case ==mycase) %>%
@@ -308,11 +308,14 @@ mytidy <- list(
 )
 
 ## file path
-files_tidy <- mytidy$mod_prefix_year
+files_tidy <- mytidy$mod_year
+#files_tidy <- mytidy$mod_prefix_year
+
+
 (tidy_path <-paste0(dir_sub1, dir_sub2,"/",files_tidy))
 
 ## loop to export xlsx
-tar_year <- c(2020)
+tar_year <- c(2021)
 
 for (id_year in tar_year) {
   n_year <- which(str_detect(tidy_path, as.character(id_year)))
@@ -344,8 +347,6 @@ df_use <- loop_read(dir.media = dir_media_tar,
 df_units <- match_units(df = df_use)
 
 
-
-
 ## 11.3 now use_data()  here
 use_list <- c(
   "AgriMachine",
@@ -364,7 +365,7 @@ use_list <- c(
   "LivestockBreeding" # df_units
 )
 
-(name_dt <- use_list[8]) # change here
+(name_dt <- use_list[1]) # change here
 which_dt <- "df_use"  # change here
 
 use_mydata(name.dt = name_dt,
@@ -372,9 +373,12 @@ use_mydata(name.dt = name_dt,
 
 
 # ====step 12: write document=====
+## only run for new-comings
 require(devtools)
 load_all()
 use_r("Livestock-Breeding.R")
 # use my custom function  to help writing document
 do.call("techme::document_dt", list(as.name(name_dt)))
+
+# ====step 13: update document"
 document()
