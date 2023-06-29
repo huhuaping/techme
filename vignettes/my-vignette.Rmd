@@ -32,6 +32,7 @@ require(techme)
 require(tidyverse)
 require(purrr)
 require(knitr)
+library(dplyr)
 data("varsList")
 data("BasicProvince")
 data("queryTianyan")
@@ -81,7 +82,7 @@ ProvinceCity %>%
   kable()
 ```
 
-#### 
+## queryTianyan
 
 **`queryTianyan`**：A data set containing basic info of institution enrolled in officer administrator.
 
@@ -90,7 +91,7 @@ ProvinceCity %>%
 - Totally `r dim(queryTianyan)[1]` rows.
 
 ```{r}
-AgriMachine %>%
+queryTianyan %>%
   sample_n(size = 10) %>%
   kable()
 ```
