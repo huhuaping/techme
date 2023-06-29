@@ -1,4 +1,4 @@
-#' Date Set of Agricultural Machine
+#' Data Set of Agricultural Machine
 #'
 #' A data set containing Agricultural Machine statistics from the Yearbook of Rural,
 #'   with long data format.

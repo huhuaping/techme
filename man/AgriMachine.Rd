@@ -3,7 +3,7 @@
 \docType{data}
 \name{AgriMachine}
 \alias{AgriMachine}
-\title{Date Set of Agricultural Machine}
+\title{Data Set of Agricultural Machine}
 \format{
 A data frame:
 \describe{

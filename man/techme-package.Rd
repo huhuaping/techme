@@ -12,6 +12,7 @@ What the package does (one paragraph).
 Useful links:
 \itemize{
   \item \url{https://github.com/huhuaping/techme}
+  \item \url{https://huhuaping.github.io/techme/}
   \item Report bugs at \url{https://github.com/huhuaping/techme/issues}
 }
 
