@@ -1,6 +1,6 @@
-# ===== bulk to output raw
+# ===== bulk to output raw====
 # no use here,
-# this chunk should be run once at the first plce
+# this chunk should be run once at the first place
 data("RDIntense")
 
 year_out <- sort(unique(RDIntense$year))[1:6]
@@ -23,7 +23,7 @@ for (i in year_out) {
     write.xlsx(., path_files)
 }
 
-# ====bulk to output tidy====
+#====bulk to output tidy====
 
 data("RDIntense")
 

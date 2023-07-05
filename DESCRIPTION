@@ -34,5 +34,10 @@ Imports:
     rvg
 Depends: 
     R (>= 2.10)
-Remotes: KWB-R/kwb.utils
-VignetteBuilder: knitr
+Remotes: 
+    KWB-R/kwb.utils
+VignetteBuilder: 
+    knitr
+Config/testthat/edition: 3
+Config/potools/style: explicit
+Config/Needs/website: usethis, servr

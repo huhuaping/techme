@@ -16,7 +16,7 @@ tbl_dir <- tribble(
   "budget",
     "data-raw/nation-yearbook/part07-finance/",
     c("01-public-income", "02-public-budget"),
-  "RD_nbs", # national bureau statistics
+  "RD_nbs", # national bureau bullets !
     "data-raw/public-site/nbs-RD-bulletin/",
     c("02-xls/"),
   "RD_over",
@@ -47,7 +47,7 @@ tbl_dir <- tribble(
 #source("data-raw/update-yearbook/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "agri_prod"
+dir_case <- "RD_nbs"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
@@ -72,7 +72,7 @@ files_pattern <- list(
   edited_two = glue("^raw-{first_year}-{last_year}-edited.xlsx$")
 )
 
-pattern_sel <- files_pattern$year_twox # change here when neccesary
+pattern_sel <- files_pattern$year_onex # change here when neccesary
 
 ## match and position files
 files_all <- list.files(dir_sel)
@@ -111,9 +111,10 @@ print("OK! Edit the xlsx file finished!")
 ## use this only if `head.mode ="year"`
 data("varsList")
 vars_spc <- techme::get_vars(df = varsList, lang = "eng",
-                     block = list(block1 = "v4",block2 = "cg",
-                                  block3 = c("jssc")
-                                  ,block4 = "ht"
+                     block = list(
+                       block1 = "v4",block2 = "ztr"#,
+                       #block3 = c("qd")
+                       #,block4 = "RD"
                      ),
                      what = "chn_block4")
 
@@ -128,14 +129,14 @@ myfile <- file_xls
 mypath <- glue::glue("{dir_sel}/{myfile}")
 
 ## header mode options
-header_mode <- c("vars", "vars-vars","vars-year",
+header_mode <- c("year", "vars", "vars-vars","vars-year",
                  "vars-h3","vars-h4","vars-h5")
 
 df_unpivot <- loop_unpivot(
   tar_file = mypath,
-  hd_mode = "vars-year", # change here!
+  hd_mode = "vars", # change here!
+  #vars_add = NULL, # change here
   #vars_add = vars_spc ,  # only when mode "year"
-  vars_add = NULL, # change here
   cols_drop = NULL)
 
 ## check result
@@ -205,7 +206,7 @@ tar_list<- list(
 
 
 ## now match and check the names
-tar_name <- "v7_machine"
+tar_name <- "v4_RDnbs"
 mytar <- tar_list[[tar_name]]
 source("data-raw/update-yearbook/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
@@ -365,8 +366,8 @@ use_list <- c(
   "LivestockBreeding" # df_units
 )
 
-(name_dt <- use_list[1]) # change here
-which_dt <- "df_use"  # change here
+(name_dt <- use_list[6]) # change here
+(which_dt <- c("df_use","df_units")[2])  # change here
 
 use_mydata(name.dt = name_dt,
            which.dt = which_dt)

@@ -100,7 +100,7 @@ queryTianyan %>%
 # Yearbook
 
 
-## Data from Rural Yearbook
+## Source from Rural Yearbook
 
 ```{r,echo=FALSE}
 data("AgriMachine")
@@ -182,12 +182,11 @@ AgriPesticide %>%
   kable()
 ```
 
-## Data from Sci-Tech Yearbook
+## Source from Sci-Tech Yearbook
 
-### RDIntense
 
 ```{r,echo=FALSE}
-data("RDIntense")
+# data("RDIntense") from public site
 data("RDActivity")
 data("IndustryOperation")
 data("IndustryRD")
@@ -196,6 +195,18 @@ data("MarketPull")
 data("MarketPush")
 
 ```
+
+
+
+### RDIntense
+
+来自于中国政府网历年“全国科技经费投入统计公报”：
+
+- 2021年全国科技经费投入统计[公报](https://www.gov.cn/xinwen/2022-08/31/content_5707547.htm)
+
+- 2020年全国科技经费投入统计[公报](https://www.gov.cn/xinwen/2021-09/22/content_5638653.htm)
+
+> 说明：《中国科技统计年鉴》也有数据发布，但是把经费和强度指标分别存放了，不符合本数据包的更新流程。
 
 **`RDIntense`**：A **long format** data set containing R&D Intense statistics.
 
@@ -322,7 +333,7 @@ MarketPush %>%
   kable()
 ```
 
-## Data from China National Yearbook
+## Source from China National Yearbook
 
 ```{r,echo=FALSE}
 data("PublicBudget")
@@ -340,7 +351,7 @@ data("PublicBudget")
 
 - Variables including: `r paste0(sort(unique(PublicBudget$variables)), collapse =", ")`
 
-## Data from Livestock Yearbook
+## Source from Livestock Yearbook
 
 ```{r,echo=FALSE}
 data("LivestockBreeding")
@@ -362,7 +373,11 @@ LivestockBreeding %>%
 
 # Public site
 
-## Data from MOST
+## Source from Government site
+
+### some data set
+
+## Source from MOST
 
 Several data set sources from Ministry of Sci-Tech (MOST).
 
@@ -421,7 +436,7 @@ PubAgriParkEval %>%
   kable()
 ```
 
-## Data from MOA or MOE
+## Source from MOA or MOE
 
 
 ```{r,echo=FALSE}
