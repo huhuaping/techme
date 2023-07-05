@@ -29,7 +29,7 @@ getRange <- function(dt, ith, sheet, what,
                      reg_start="^地.*区", reg_end ="^新.*疆"){
   # detect numbers of tables in this sheet
   n_tables <- dt %>%
-    mutate_all(.funs = funs(str_detect(., "续表"))) %>%
+    mutate_all(~str_detect(., "续表")) %>%
     unlist() %>%
     sum(na.rm = T)
 
@@ -41,7 +41,7 @@ getRange <- function(dt, ith, sheet, what,
 
   # search whole region
   dt_detect_region <- dt %>%
-    mutate_all(.funs = funs(str_detect(., "^地.*区|^新.*疆")))
+    mutate_all(~str_detect(., "^地.*区|^新.*疆"))
 
   # search along cols
   ## identify id rows
@@ -168,9 +168,25 @@ unpivot <- function(dt, rows, cols,
 
   # detect data type
   value_type <- unique(dt_cellout$data_type)
-  dt_cellfinal <- dt_cellout %>%
-    rename(value = value_type) %>%
-    select(province, year, vars, value)
+  if (length(value_type)==1){
+    # only one type
+    value_tar <- value_type
+
+    dt_cellfinal <- dt_cellout %>%
+      rename(value = value_tar) %>%
+      dplyr::select(province, year, vars, value)
+
+  } else if (length(value_type)>1) {
+    # one more types
+    # use the numerical cells
+    index_tar <- which(str_detect(value_type, "dbl"))
+    value_tar <- value_type[index_tar]
+
+    dt_cellfinal <- dt_cellout %>%
+      filter(is.na(chr)) %>% # drop the chr colums
+      rename(value = value_tar) %>%
+      dplyr::select(province, year, vars, value)
+  }
 
   return(dt_cellfinal)
 }
@@ -236,7 +252,7 @@ loop_unpivot <- function(tar_file=mypath,
 
   # j = 1
   df_out <- NULL
-  for (j in 1: sheetnum){
+  for (j in 1:sheetnum){
     print(glue::glue("begin unpivot the {j} of {sheetnum} xls sheet."))
     # load workbook
     wb <- loadWorkbook(tar_file, create = TRUE)
@@ -245,7 +261,7 @@ loop_unpivot <- function(tar_file=mypath,
 
     # detect numbers of tables in this sheet
     n_tables <- dt %>%
-      mutate_all(.funs = funs(str_detect(., "续表"))) %>%
+      mutate_all(~str_detect(., "续表")) %>%
       unlist() %>%
       sum(na.rm = T)
 
