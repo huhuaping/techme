@@ -1,4 +1,4 @@
-#' Date Set of Public Budget
+#' Data Set of Public Budget
 #'
 #' A data set containing Public Budget statistics from the Yearbook of Nation,
 #'   with long data format.

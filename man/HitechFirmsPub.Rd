@@ -3,7 +3,7 @@
 \docType{data}
 \name{HitechFirmsPub}
 \alias{HitechFirmsPub}
-\title{Date Set of Hi-tech Firms Numbers on Public Site}
+\title{Data Set of Hi-tech Firms Numbers on Public Site}
 \format{
 A data frame:
 \describe{

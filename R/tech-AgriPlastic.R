@@ -1,4 +1,4 @@
-#' Date Set of Agricultural Plastic
+#' Data Set of Agricultural Plastic
 #'
 #' A data set containing Agricultural Plastic statistics from the Yearbook of Rural,
 #'   with long data format.

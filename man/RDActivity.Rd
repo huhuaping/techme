@@ -3,7 +3,7 @@
 \docType{data}
 \name{RDActivity}
 \alias{RDActivity}
-\title{Date Set of RD Activity}
+\title{Data Set of RD Activity}
 \format{
 A data frame:
 \describe{

@@ -1,4 +1,4 @@
-#' Date Set of Agricultural Pesticide
+#' Data Set of Agricultural Pesticide
 #'
 #' A data set containing Agricultural Pesticide statistics from the Yearbook of Rural,
 #'   with long data format.

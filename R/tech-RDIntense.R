@@ -1,4 +1,4 @@
-#' Date Set of RD Intense
+#' Data Set of RD Intense
 #'
 #' A data set containing RD Intense statistics from the Yearbook of Tech,
 #'   with long data format.

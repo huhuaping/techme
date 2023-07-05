@@ -1,4 +1,4 @@
-#' Date Set of Hi-tech Industry RD
+#' Data Set of Hi-tech Industry RD
 #'
 #' A data set containing Hi-tech Industry RD from part IV of the Yearbook of Tech,
 #'   with long data format.

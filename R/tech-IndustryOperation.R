@@ -1,4 +1,4 @@
-#' Date Set of Hi-tech Industry Operation
+#' Data Set of Hi-tech Industry Operation
 #'
 #' A data set containing Hi-tech Industry Operation from part IV of the Yearbook of Tech,
 #'   with long data format.

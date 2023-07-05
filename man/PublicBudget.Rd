@@ -3,7 +3,7 @@
 \docType{data}
 \name{PublicBudget}
 \alias{PublicBudget}
-\title{Date Set of Public Budget}
+\title{Data Set of Public Budget}
 \format{
 A data frame:
 \describe{
