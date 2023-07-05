@@ -3,7 +3,7 @@
 \docType{data}
 \name{AgriPesticide}
 \alias{AgriPesticide}
-\title{Date Set of Agricultural Pesticide}
+\title{Data Set of Agricultural Pesticide}
 \format{
 A data frame:
 \describe{

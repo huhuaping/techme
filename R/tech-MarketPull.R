@@ -1,4 +1,4 @@
-#' Date Set of Tech Market Trade (Pull Effect)
+#' Data Set of Tech Market Trade (Pull Effect)
 #'
 #' A data set containing Tech Market Trade from the Yearbook of Tech,
 #'   with long data format.

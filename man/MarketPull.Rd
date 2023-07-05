@@ -3,7 +3,7 @@
 \docType{data}
 \name{MarketPull}
 \alias{MarketPull}
-\title{Date Set of Tech Market Trade (Pull Effect)}
+\title{Data Set of Tech Market Trade (Pull Effect)}
 \format{
 A data frame:
 \describe{

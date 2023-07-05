@@ -3,7 +3,7 @@
 \docType{data}
 \name{MarketPush}
 \alias{MarketPush}
-\title{Date Set of Tech Market Trade (Push Effect)}
+\title{Data Set of Tech Market Trade (Push Effect)}
 \format{
 A data frame:
 \describe{

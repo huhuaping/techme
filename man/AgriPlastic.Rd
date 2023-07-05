@@ -3,7 +3,7 @@
 \docType{data}
 \name{AgriPlastic}
 \alias{AgriPlastic}
-\title{Date Set of Agricultural Plastic}
+\title{Data Set of Agricultural Plastic}
 \format{
 A data frame:
 \describe{

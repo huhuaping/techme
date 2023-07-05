@@ -1,4 +1,4 @@
-#' Date Set of Agricultural Fertilizer
+#' Data Set of Agricultural Fertilizer
 #'
 #' A data set containing Agricultural Fertilizer statistics from the Yearbook of Rural,
 #'   with long data format.

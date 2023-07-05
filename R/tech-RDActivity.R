@@ -1,4 +1,4 @@
-#' Date Set of RD Activity
+#' Data Set of RD Activity
 #'
 #' A data set containing RD Activity statistics from the Yearbook of Tech,
 #'   with long data format.

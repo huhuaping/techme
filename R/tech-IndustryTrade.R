@@ -1,4 +1,4 @@
-#' Date Set of Hi-tech Industry Trade
+#' Data Set of Hi-tech Industry Trade
 #'
 #' A data set containing Hi-tech Industry Trade from part IV of the Yearbook of Tech,
 #'   with long data format.

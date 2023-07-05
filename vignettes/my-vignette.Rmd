@@ -279,27 +279,13 @@ IndustryRD %>%
   kable()
 ```
 
-### IndustryTrade
 
-**`IndustryTrade`**：A **long format** data set containing Industry Trade statistics .
-
-- Totally `r dim(IndustryTrade)[2]` columns including: `r paste0(names(IndustryTrade), collapse =", ")`.
-
-- Totally `r dim(IndustryTrade)[1]` rows.
-
-- Years range from `r min(IndustryTrade$year)` to `r max(IndustryTrade$year)` 
-
-- Variables including: `r paste0(sort(unique(IndustryTrade$variables)), collapse =", ")`
-
-```{r}
-IndustryTrade %>%
-  sample_n(size = 10) %>%
-  kable()
-```
 
 ### MarketPull
 
 **`MarketPull`**：A **long format** data set containing Tech Market Pull statistics .
+
+> **说明**：数据包括合同数（`amount-xxxx.xlsx`）和金额（`funds-xxxx.xlsx`）两个表格来源，需要独立更新全部xlsx后，再读取整合为一个数据表。
 
 - Totally `r dim(MarketPull)[2]` columns including: `r paste0(names(MarketPull), collapse =", ")`.
 
@@ -319,6 +305,8 @@ MarketPull %>%
 
 **`MarketPush`**：A **long format** data set containing Tech Market Push statistics .
 
+> **说明**：数据包括合同数（`amount-xxxx.xlsx`）和金额（`funds-xxxx.xlsx`）两个表格来源，需要独立更新全部xlsx后，再读取整合为一个数据表。
+
 - Totally `r dim(MarketPush)[2]` columns including: `r paste0(names(MarketPush), collapse =", ")`.
 
 - Totally `r dim(MarketPush)[1]` rows.
@@ -333,6 +321,26 @@ MarketPush %>%
   kable()
 ```
 
+### IndustryTrade
+
+**`IndustryTrade`**：A **long format** data set containing Industry Trade statistics .
+
+> 说明：2018年以后年鉴不再发布该数据！
+
+- Totally `r dim(IndustryTrade)[2]` columns including: `r paste0(names(IndustryTrade), collapse =", ")`.
+
+- Totally `r dim(IndustryTrade)[1]` rows.
+
+- Years range from `r min(IndustryTrade$year)` to `r max(IndustryTrade$year)` 
+
+- Variables including: `r paste0(sort(unique(IndustryTrade$variables)), collapse =", ")`
+
+```{r}
+IndustryTrade %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
 ## Source from China National Yearbook
 
 ```{r,echo=FALSE}
@@ -343,6 +351,8 @@ data("PublicBudget")
 
 **`PublicBudget`**：A **long format** data set containing Public Budget statistics.
 
+> **说明**：来源于《中国统计年鉴》，表7-6 分地区一般公共预算支出。我们只整理更新如下列变量："地方一般公共预算支出","教育支出","科学技术支出","农林水支出"。
+
 - Totally `r dim(PublicBudget)[2]` columns including: `r paste0(names(PublicBudget), collapse =", ")`.
 
 - Totally `r dim(PublicBudget)[1]` rows.
@@ -351,15 +361,16 @@ data("PublicBudget")
 
 - Variables including: `r paste0(sort(unique(PublicBudget$variables)), collapse =", ")`
 
-## Source from Livestock Yearbook
-
 ```{r,echo=FALSE}
-data("LivestockBreeding")
+data("PublicBudget")
 
-LivestockBreeding %>%
+PublicBudget %>%
   sample_n(size = 10) %>%
   kable()
 ```
+
+## Source from Livestock Yearbook
+
 
 **`LivestockBreeding`**：A **long format** data set containing Livestock Breeding statistics.
 
@@ -370,6 +381,14 @@ LivestockBreeding %>%
 - Years range from `r min(LivestockBreeding$year)` to `r max(LivestockBreeding$year)` 
 
 - Variables including: `r paste0(head(sort(unique(LivestockBreeding$variables)),20), collapse =", ")`（top 20 of totally `r glue::glue("{length(unique(LivestockBreeding$variables))} variables")`.
+
+```{r,echo=FALSE}
+data("LivestockBreeding")
+
+LivestockBreeding %>%
+  sample_n(size = 10) %>%
+  kable()
+```
 
 # Public site
 

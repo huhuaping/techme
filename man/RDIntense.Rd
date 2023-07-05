@@ -3,7 +3,7 @@
 \docType{data}
 \name{RDIntense}
 \alias{RDIntense}
-\title{Date Set of RD Intense}
+\title{Data Set of RD Intense}
 \format{
 A data frame:
 \describe{

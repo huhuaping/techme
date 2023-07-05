@@ -41,6 +41,8 @@ getRange <- function(dt, ith, sheet, what,
 
   # search whole region
   dt_detect_region <- dt %>%
+    # avoid conflicts
+    mutate_all(~str_replace(., pattern="分地区", replacement = "")) %>%
     mutate_all(~str_detect(., "^地.*区|^新.*疆"))
 
   # search along cols
@@ -93,7 +95,6 @@ getRange <- function(dt, ith, sheet, what,
 #' @param dt data.frame. Which is the wb object reading from xls workbook.
 #' @param cols vector. Target cols of the region contains pivot table.
 #' @param rows vector. Target rows of the region contains pivot table.
-#' @param cols.drop vector. Columns numbers which will be dropped, default \code{NULL}.
 #' @param header.mode character. One of the four options:  'vars-year', 'vars', 'vars-vars','year'
 #' @param vars.add character. if header.mode = 'year', then the vars.add must be specified,
 #'   And you can use the function \code{get_vars()} to get the variable name.
@@ -124,19 +125,19 @@ getRange <- function(dt, ith, sheet, what,
 #'
 
 unpivot <- function(dt, rows, cols,
-                    cols.drop = cols_drop,
+                    #cols.drop = cols_drop, #no use now
                     header.mode ,
                     vars.add = vars_spc ){
   # drop cols
-  if (is.null(cols.drop)) {
+  #if (is.null(cols.drop)) {
 
-    dt_cell <- dt[rows,cols]
-  } else {
-    dt_cell <- dt[rows,cols] %>%
-      .[,-cols.drop]
-  }
+  #  dt_cell <- dt[rows,cols]
+  #} else {
+  #  dt_cell <- dt[rows,cols] %>%
+  #    .[,-cols.drop]
+  #}
 
-  dt_cell <- dt_cell  %>%
+  dt_cell <- dt[rows,cols]  %>%
     as_cells() %>%
     arrange( col, row )
 
@@ -256,8 +257,23 @@ loop_unpivot <- function(tar_file=mypath,
     print(glue::glue("begin unpivot the {j} of {sheetnum} xls sheet."))
     # load workbook
     wb <- loadWorkbook(tar_file, create = TRUE)
-    dt <- readWorksheet(wb, sheet = j,header = F) %>%
-      select_if(~ !all(is.na(.)))
+    dt_read <- readWorksheet(wb, sheet = j,header = F)
+
+    # drop cols
+    if (is.null(cols_drop)) {
+      dt <- dt_read
+    } else {
+      dt <- dt_read[, -cols_drop]
+    }
+
+    # remove empity rows
+    dt <- dt %>%
+      select_if(~ !all(is.na(.))) %>%
+      # keep rows if all columns not NA
+      ## case if columns cell =""
+      mutate(Col1 = ifelse(Col1=="", NA, Col1)) %>%
+      dplyr::filter(!if_all(everything(), is.na))
+
 
     # detect numbers of tables in this sheet
     n_tables <- dt %>%
@@ -283,7 +299,7 @@ loop_unpivot <- function(tar_file=mypath,
       tbl_tem <- unpivot(dt = dt,
                          rows = sel_rows,
                          cols = sel_cols,
-                         cols.drop = cols_drop,
+                         #cols.drop = cols_drop, #not use now!
                          header.mode = hd_mode,  # default "vars-year"
                          vars.add = vars_add     # base vars chn names
                          )

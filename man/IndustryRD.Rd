@@ -3,7 +3,7 @@
 \docType{data}
 \name{IndustryRD}
 \alias{IndustryRD}
-\title{Date Set of Hi-tech Industry RD}
+\title{Data Set of Hi-tech Industry RD}
 \format{
 A data frame:
 \describe{

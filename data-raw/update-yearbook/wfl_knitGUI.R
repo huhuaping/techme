@@ -47,7 +47,7 @@ tbl_dir <- tribble(
 #source("data-raw/update-yearbook/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "RD_nbs"
+dir_case <- "budget"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
@@ -56,7 +56,7 @@ dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
 file_dir <- glue::glue("{dir_media}{dir_final}")
 
 ## specify which final directory ?
-i_sel <- 1   # change here
+i_sel <- 2   # change here
 dir_sel <- file_dir[i_sel]
 
 ## patterns to target which file(s)?
@@ -68,6 +68,7 @@ files_pattern <- list(
   year_two = glue("^raw-{first_year}-{last_year}.xls$"),
   year_onex = glue("^raw-{last_year}.xlsx$"),
   year_twox = glue("^raw-{first_year}-{last_year}.xlsx$"),
+  add_onex = glue("^raw-.+?{add_info}-{last_year}.xlsx$"),
   edited_one = glue("^raw-.+?{add_info}-{last_year}-edited.xlsx$"),
   edited_two = glue("^raw-{first_year}-{last_year}-edited.xlsx$")
 )
@@ -112,9 +113,9 @@ print("OK! Edit the xlsx file finished!")
 data("varsList")
 vars_spc <- techme::get_vars(df = varsList, lang = "eng",
                      block = list(
-                       block1 = "v4",block2 = "ztr"#,
-                       #block3 = c("qd")
-                       #,block4 = "RD"
+                       block1 = "v4",block2 = "cg",
+                       block3 = c("jssc")
+                       ,block4 = "ht"
                      ),
                      what = "chn_block4")
 
@@ -135,9 +136,11 @@ header_mode <- c("year", "vars", "vars-vars","vars-year",
 df_unpivot <- loop_unpivot(
   tar_file = mypath,
   hd_mode = "vars", # change here!
-  #vars_add = NULL, # change here
+  vars_add = NULL, # change here
   #vars_add = vars_spc ,  # only when mode "year"
-  cols_drop = NULL)
+  #cols_drop = c(2) #, #drop english cols
+  cols_drop = NULL
+  )
 
 ## check result
 (check <- df_unpivot %>%
@@ -147,9 +150,14 @@ df_unpivot <- loop_unpivot(
 # =====step 7: tidy data =====
 source("data-raw/update-yearbook/wfl_tidy.R", encoding = "UTF-8")
 
+# only for budget data collection
+# vars_tar <- c("合计","教育","科学技术","农林水")
+
 df_tidy <- getTidy(dt = df_unpivot) %>%
   select(province, year,
-         vars, value, units)
+         vars, value, units) #%>%
+  #filter(vars %in% vars_tar)
+
 
 unique(df_tidy$vars)
 unique(df_tidy$province)
@@ -206,8 +214,8 @@ tar_list<- list(
 
 
 ## now match and check the names
-tar_name <- "v4_RDnbs"
-mytar <- tar_list[[tar_name]]
+# tar_name <- "v7_plastic"
+mytar <- tar_list$v6_budget
 source("data-raw/update-yearbook/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
 
@@ -249,7 +257,7 @@ tbl_pattern <- tribble(
 )
 
 ## get my pattern
-mycase <- "machine"
+mycase <- "plastic"
 ptn <- tbl_pattern %>% filter(case ==mycase) %>%
   pull(ptn) %>% unlist()
 rpl <- tbl_pattern %>% filter(case ==mycase) %>%
@@ -354,20 +362,20 @@ use_list <- c(
   "AgriFertilizer",
   "AgriPlastic",
   "AgriPesticide",
-  "PublicBudget",
+  "PublicBudget", #5
   "RDIntense",
   "RDActivity",
   "MarketPull",
   "MarketPush",
-  "HitechFirmsPub",
+  "HitechFirmsPub", #10
   "IndustryTrade",
   "IndustryRD",
   "IndustryOperation",
-  "LivestockBreeding" # df_units
+  "LivestockBreeding" #14
 )
 
-(name_dt <- use_list[6]) # change here
-(which_dt <- c("df_use","df_units")[2])  # change here
+(name_dt <- use_list[5]) # change here
+(which_dt <- c("df_use","df_units")[1])  # change here
 
 use_mydata(name.dt = name_dt,
            which.dt = which_dt)
