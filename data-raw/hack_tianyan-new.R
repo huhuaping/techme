@@ -7,7 +7,7 @@ load_all()
 ## it should  be unique and exclusive from 'queryTianyan'
 ## and xlsx file in directory 'ship/xx.xlsx'
 
-url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot7-2022-08-17.xlsx"
+url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot5-2023-07-11.xlsx"
 list_ins <- openxlsx::read.xlsx(url_xlsx) %>%
   unlist() %>%
   unname()
