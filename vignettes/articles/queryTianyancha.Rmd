@@ -1,0 +1,74 @@
+---
+title: "机构信息库"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(techme)
+require(knitr)
+library(magrittr)
+library(dplyr)
+```
+
+
+# 机构信息库
+
+## 天眼查工作流程
+
+（1）根据实际需要，进行机构库比对，然后获得唯一化增量机构列表
+
+（2）在R包`techme`中进行天眼查
+
+- 循环查询（`Rselenium`方法，适合批量查询）；或者手动查询（手都更新，适合少量查询）
+
+- 得到结果，并人工确认
+
+- 重新整合更新`qureyTianyan`
+
+- build R包`techme`并push 到github: "huhuaping/techme"
+
+## 增量更新架构
+
+增量更新架构：
+
+（1）获得增量机构名单。对于新引入的机构名单，首先进行唯一化处理。然后再与现有机构信息库`queryTianyan`进行比对，获得新增机构名单。保存到"techme/data-raw/data-tidy/hack-tianyan/ship/ship-tot5-2023-07-11.xlsx"
+
+> **说明**：以上步骤一般在报告写作的具体部分进行操作完成，例如："tech-report/data-raw/public-site/most-jcs-open-share/scrape-open-share.Rmd"，包含了对最初始数据的爬取、清洗和整理。最后将机构名单输出到后面的`techme`包开发文件夹下"techme/data-raw/data-tidy/hack-tianyan/ship/"。
+
+（2）查询增量机构信息。通过循环查询（`Rselenium`方法，适合批量查询），或者手动查询（手都更新，适合少量查询），得到增量机构信息。保存到"techme/data-raw/data-tidy/hack-tianyan/hub/match-tianyan-tot5-2023-07-11.xlsx"
+
+（3）整合机构信息。读取全部查询到的机构信息表（"techme/data-raw/data-tidy/hack-tianyan/hub/xxx.xlsx"）
+
+（4）更新数据集`queryTianyan`并编译R包`techme`。
+
+> **说明**：以上三个步骤都是在`techme`包开发环境下进行操作完成，例如：""techme/data-raw/hack_tianyan-new.R"，就包含了`Rselenium`方法，以及自动清洗和整理、更新数据集`queryTianyan`的全部代码命令。
+
+## 增量更新来源
+
+以下报告内容的写作中，可能需要增量更新机构数据信息：
+
+（1）科技部公开数据来源：
+
+- `open-share`：中央级高校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核结果。此数据集目前未在`techme`发布，仅在`tech-report`项目下进行维护和更新，维护路径为"tech-report/data-raw/public-site/most-jcs-open-share"。
+
+
+## queryTianyan数据集
+
+**`queryTianyan`**：A data set containing basic info of institution enrolled in officer administrator.
+
+- Totally `r dim(queryTianyan)[2]` columns including: `r paste0(names(queryTianyan), collapse =", ")`.
+
+- Totally `r dim(queryTianyan)[1]` rows.
+
+```{r}
+data(queryTianyan)
+queryTianyan %>%
+  sample_n(size = 20) %>%
+  kable()
+```
