@@ -425,6 +425,8 @@ PubNKRDP %>%
 
 ### PubAgriParkList
 
+> **说明**：本数据集直接在`techme`包开发环境下进行原始数据（data-raw）的清洗和整理（"techme/data-raw/public-site/agri-park/03-list-raw/"）；然后清洗后的xlsx文件复制到（"techme/data-raw/data-tidy/public-site/agri-park/xlsx/"），最后再经由"techme/data-raw/wfl_useData_agriPark.R"进行批量读取和数据集编译。
+
 **`PubAgriParkList`**：A **wide format** data set containing Details of Approved List of National Agricultural Sci-tech Park.
 
 - Totally `r dim(PubAgriParkList)[2]` columns including: `r paste0(names(PubAgriParkList), collapse =", ")`.
@@ -441,6 +443,8 @@ PubAgriParkList %>%
 
 ### PubAgriParkEval
 
+> **说明**：本数据集直接在`techme`包开发环境下进行原始数据（data-raw）的清洗和整理（"techme/data-raw/public-site/agri-park/02-eval-raw/"）；然后清洗后的xlsx文件复制到（"techme/data-raw/data-tidy/public-site/agri-park/xlsx/"），最后再经由"techme/data-raw/wfl_useData_agriPark.R"进行批量读取和数据集编译。
+
 **`PubAgriParkEval`**：A **wide format** data set containing Details of Evaluation result of National Agricultural Sci-tech Park.
 
 - Totally `r dim(PubAgriParkEval)[2]` columns including: `r paste0(names(PubAgriParkEval), collapse =", ")`.
@@ -451,6 +455,25 @@ PubAgriParkList %>%
 
 ```{r}
 PubAgriParkEval %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+
+### PubAgriParkCheck
+
+> **说明**：本数据集直接在`techme`包开发环境下进行原始数据（data-raw）的清洗和整理（"techme/data-raw/public-site/agri-park/01-check-raw/"）；然后清洗后的xlsx文件复制到（"techme/data-raw/data-tidy/public-site/agri-park/xlsx/"），最后再经由"techme/data-raw/wfl_useData_agriPark.R"进行批量读取和数据集编译。
+
+**`PubAgriParkCheck`**：A **wide format** data set containing Details of Check result of National Agricultural Sci-tech Park.
+
+- Totally `r dim(PubAgriParkCheck)[2]` columns including: `r paste0(names(PubAgriParkCheck), collapse =", ")`.
+
+- Totally `r dim(PubAgriParkCheck)[1]` rows.
+
+- Years range from `r min(PubAgriParkCheck$year)` to `r max(PubAgriParkCheck$year)` 
+
+```{r}
+PubAgriParkCheck %>%
   sample_n(size = 10) %>%
   kable()
 ```

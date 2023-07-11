@@ -183,6 +183,7 @@ openxlsx::write.xlsx(tbl_info, path_out)
 
 ### 3.2 抓取html
 
+### html 2018
 
 ```{r}
 #--------------------------
@@ -215,6 +216,43 @@ write.xlsx(tbl_raw, path_out)
 
 ```
 
+### html 2023
+
+```{r}
+#--------------------------
+# this chunk should run only once
+#--------------------------
+
+# files html path
+files_dir <- "01-check-raw/check-year-2023.html"
+
+# xpath for data table
+css_tbl <-"body > div.policyLibraryOverview > div.policyLibraryOverview_content > div.pages_content > p:nth-child(n+13)"
+
+xpath_tbl <- "//*[@id='Zoom']/div[3]/table/tbody" # for 2023
+
+Year <- 2023
+
+tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
+  #html_nodes(css =  css_tbl) %>%
+  html_nodes(xpath =  xpath_tbl) %>%
+  html_table(header = T) %>%
+  .[[1]] %>%
+  as_tibble() %>%
+  rename_all(., ~c("index", "name")) %>%
+  #separate(col = "value", into = c("index", "name")) %>%
+  add_column(result = "pass",
+             year= Year,
+             doc_num="国科办农2023-60") %>%
+  add_column(id= 1:nrow(.), .before = "index")
+    
+  
+      
+# files csv path
+path_out <- paste0("xlsx/check-year-",Year, ".xlsx")
+write.xlsx(tbl_raw, path_out)
+
+```
 
 ### 3.2 抓取word
 
@@ -494,6 +532,85 @@ range_ok <- (row_point[2] + 1):(row_point[3] -1)
 range_fail <- (row_point[3] + 1):(row_point[4] -1)
 range_retain <- (row_point[4] + 1):(row_point[5] -1)
 range_cancel <- (row_point[5] + 1):length(tbl_raw)
+
+result_chn <- c("优秀","达标","不达标","保留","取消")
+result_eng <- c("good", "ok", "fail","retain","cancel")
+ptn_result <- paste0(result_chn, collapse = "|")
+
+tbl_out <- tbl_raw %>%
+  mutate(result = str_extract(value, ptn_result)) %>%
+  fill(result, .direction = "down") %>%
+  filter(!str_detect(value, ptn_result)) %>%
+  separate(col = "value", 
+           into = c("index", "name"), sep = "\\.") %>%
+  mutate(index = as.numeric(index)) %>%
+  mutate(result = mgsub::mgsub(result, 
+                               result_chn, result_eng))
+  
+require(techme)
+data("BasicProvince")
+data("ProvinceCity")
+ptn_province <- paste0(BasicProvince$province, collapse = "|")
+ptn_city <- paste0(unique(ProvinceCity$city_clean), collapse = "|")
+
+tbl_info <-  tbl_out %>%
+  add_column(year= Year, .before = "index") %>%
+  mutate(province_name = str_extract(name, ptn_province),
+         city_clean= str_extract(name, ptn_city)) %>%
+  # match
+  left_join(., select(ProvinceCity, city_clean, province_clean), by = "city_clean") %>%
+  mutate(province = ifelse(is.na(province_name),
+                           province_clean,
+                           province_name)) %>%
+  # check it
+  select(year, index, name, result,province)
+
+check <- sum(is.na(tbl_info$province))
+if (check >0) warning("Povince with NA, please check!")
+      
+# files csv path
+path_out <- paste0("xlsx/eval-year-",Year, ".xlsx")
+write.xlsx(tbl_info, path_out)
+
+```
+
+
+### 3.2 抓取2022年html
+
+```{r}
+#--------------------------
+# this chunk should run only once
+#--------------------------
+
+# files html path
+Year <- 2022
+files_dir <- glue::glue("02-eval-raw/eval-year-{Year}.html")
+
+# xpath for data table
+css_tbl <-"body > div.policyLibraryOverview > div.policyLibraryOverview_content > div.pages_content > p:nth-child(n+103)"
+#Zoom > p:nth-child(22)
+css_tbl <-"#Zoom > div:nth-child(n+18)"
+
+tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
+  html_nodes(css =  css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  # clean
+  mutate(value = mgsub::mgsub(value,                 c(fixed("\u00a0"),fixed("\n")," "),
+                              c("", "","")),
+         value = str_trim(value)) %>%
+  filter(value!="") %>%
+  mutate(value = str_replace(value, "河南郑州", "1.河南郑州")) #%>%
+  #filter(!str_detect(value,"、"))
+
+# detect head
+row_point <- which(str_detect(tbl_raw$value,"保留园区资格|取消园区资格"))
+
+#range_good <- (row_point[1] + 1):(row_point[2] -1)
+#range_ok <- (row_point[2] + 1):(row_point[3] -1)
+#range_fail <- (row_point[3] + 1):(row_point[4] -1)
+range_retain <- (row_point[1] + 1):(row_point[2] -1)
+range_cancel <- (row_point[2] + 1):length(tbl_raw)
 
 result_chn <- c("优秀","达标","不达标","保留","取消")
 result_eng <- c("good", "ok", "fail","retain","cancel")
