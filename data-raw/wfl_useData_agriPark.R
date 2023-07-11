@@ -9,7 +9,7 @@ source("data-raw/set-global.R")
 
 dir_media <- "data-raw/data-tidy/public-site/agri-park/"
 dir_fina <- "xlsx/"
-gen_dirs_vec(dir_media, dir_fina)
+#gen_dirs_vec(dir_media, dir_fina) ## only run once !!!
 
 out_dir <- paste0(dir_media, dir_fina)
 files_all <- list.files(out_dir)
