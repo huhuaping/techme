@@ -17,7 +17,6 @@ reference:
   desc: |
     Data sets assembled from the Technology Yearbook（科技统计年鉴）. While `PublicBudget` source from the National Yearbook, and `HitechFirmsPub` source from the public site.
   contents:
-  - HitechFirmsPub
   - IndustryOperation
   - IndustryRD
   - IndustryTrade
@@ -39,6 +38,7 @@ reference:
   - PubObsStation
   - PubObsStationX
   - PubSKLMost
+  - HitechFirmsPub
 - title: Data Subset for the special chapter
   desc: |
     Data sets focus on special topics, including livestocks（畜牧业） et. al.
