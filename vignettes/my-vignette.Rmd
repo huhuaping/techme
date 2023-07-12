@@ -478,6 +478,26 @@ PubAgriParkCheck %>%
   kable()
 ```
 
+### HitechFirmsPub
+
+**数据来源**：科学技术部火炬高技术产业开发中心<http://www.innocom.gov.cn>。
+
+**说明**：本数据集直接在`tech-report`项目下进行原始数据（data-raw）的清洗和整理（"tech-report/data-raw/public-site/torch-innocom/xlsx/"）；然后清洗后的xlsx文件复制到（"tech-report/data-raw/data-tidy/public-site/torch-innocom/xlsx/"）。最后再一次复制到`techme`包开发环境下的"techme/data-raw/data-tidy/public-site/torch-innocom/xlsx/"，再经由"techme/data-raw/wfl_useData_HitechFirms.R"进行批量读取和数据集编译。
+
+**`HitechFirmsPub`**：A **wide format** data set containing Details of  Hi-tech Firms Numbers on Public Site.
+
+- Totally `r dim(HitechFirmsPub)[2]` columns including: `r paste0(names(HitechFirmsPub), collapse =", ")`.
+
+- Totally `r dim(HitechFirmsPub)[1]` rows.
+
+- Years range from `r min(HitechFirmsPub$year)` to `r max(HitechFirmsPub$year)` 
+
+```{r}
+HitechFirmsPub %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
 ## Source from MOA or MOE
 
 
