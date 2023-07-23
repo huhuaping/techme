@@ -7,7 +7,7 @@ load_all()
 ## it should  be unique and exclusive from 'queryTianyan'
 ## and xlsx file in directory 'ship/xx.xlsx'
 
-url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot5-2023-07-11.xlsx"
+url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot36-2023-07-23.xlsx"
 list_ins <- openxlsx::read.xlsx(url_xlsx) %>%
   unlist() %>%
   unname()
@@ -31,7 +31,7 @@ require("tidyselect")
 
 # 2. create the remote driver
 ### 'window power shell': ipconfig
-remDr <- remoteDriver(remoteServerAddr = "10.129.158.130",
+remDr <- remoteDriver(remoteServerAddr = "10.129.244.205",
                       port = 4445L, browserName = "chrome")
 
 # local without docker
@@ -40,6 +40,7 @@ driver <- rsDriver(browser=c("firefox"),
 remDr <- driver[["client"]]
 ## open the connect
 remDr$open()
+remDr$maxWindowSize()
 
 # ===== loop to query ====
 
