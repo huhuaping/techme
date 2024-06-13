@@ -15,7 +15,10 @@ tbl_dir <- tribble(
     c("xlsx/"),
   "agripark",
     "data-raw/public-site/agri-park/",
-    c("xlsx/")
+    c("xlsx/"),
+  "agrimachine_demo",
+  "data-raw/public-site/moa-machine-county/",
+  c("xlsx/"),
 )
 
 
@@ -23,7 +26,7 @@ tbl_dir <- tribble(
 #source("data-raw/Rscript-update/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "observe_station"
+dir_case <- "agrimachine_demo"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
@@ -142,11 +145,14 @@ tar_list <- list(
                        block3 = c("list")),
   agripark = list(block1 = "v99",
                   block2 = "agripark",
-                  block3 = c("check"))
+                  block3 = c("check")),
+  machincounty = list(block1 = "v99",
+                  block2 = "agrimachine",
+                  block3 = c("county"))
   )
 
 ## now match and check the names
-tar_name <- "obstation"
+tar_name <- "machincounty"
 mytar <- tar_list[[tar_name]]
 source("data-raw/update-public/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_long,
@@ -249,10 +255,11 @@ df_use <- loop_read(dir.media = dir_media_tar,
 ## 11.3 now use_data()  here
 
 use_list <- c(
-  "PubObsStationX" # df_units
+  "PubObsStationX", # df_units
+  "PubMachineCounty"
 )
 
-name_dt <- use_list[1]
+name_dt <- use_list[2]
 which_dt <- "df_use"
 
 use_mydata(name.dt = name_dt,
@@ -262,7 +269,7 @@ use_mydata(name.dt = name_dt,
 # ====step 12: write document=====
 require(devtools)
 load_all()
-use_r("Pub-ObsStationX.R")
+use_r("Pub-MachineCounty.R")
 # use my custom function  to help writing document
-do.call("techme::document_dt", list(as.name(name_dt)))
+do.call(techme::document_dt, list(as.name(name_dt)))
 document()
