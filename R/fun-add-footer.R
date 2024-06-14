@@ -20,9 +20,9 @@
 #'
 #'
 add_footer_pure <- function(text, type="note") {
-  if (type=="note"& !is.null(text)) cat(paste0("说明：",text), sep = "")
+  if (type=="note"& !is.null(text)) cat(paste0("**说明**：",text), sep = "")
   if (type=="note"& is.null(text)) stop("You should set the 'source' at least!")
-  if (type == "source") cat(paste0("资料来源：",text), sep = "")
+  if (type == "source") cat(paste0("**资料来源**：",text), sep = "")
   if (type == "source" & is.null(text)) stop("You should set the 'source' at least!")
 }
 
@@ -50,11 +50,11 @@ add_footer_pure <- function(text, type="note") {
 #'
 add_footer_asis <- function(note, source) {
   out <- stringr::str_c(
-    if (!is.null(note)) stringr::str_c(note),
+    if (!is.null(note)) stringr::str_c("**说明**：",note),
     if (!is.null(note)) stringr::str_c("\n\n"),
     if (!is.null(note)) stringr::str_c("\\newline"),
     if (!is.null(note)) stringr::str_c("\n\n"),
-    if (!is.null(source)) stringr::str_c(source)
+    if (!is.null(source)) stringr::str_c("**资料来源**：",source)
   )
 
   cat(out, sep = "\n")
