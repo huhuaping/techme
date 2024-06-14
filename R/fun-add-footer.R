@@ -20,8 +20,9 @@
 #'
 #'
 add_footer_pure <- function(text, type="note") {
-  if (type=="note"& !is.null(text)) cat(text, sep = "")
-  if (type == "source") cat(text, sep = "")
+  if (type=="note"& !is.null(text)) cat(paste0("说明：",text), sep = "")
+  if (type=="note"& is.null(text)) stop("You should set the 'source' at least!")
+  if (type == "source") cat(paste0("资料来源：",text), sep = "")
   if (type == "source" & is.null(text)) stop("You should set the 'source' at least!")
 }
 
