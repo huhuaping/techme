@@ -56,7 +56,7 @@ dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
 file_dir <- glue::glue("{dir_media}{dir_final}")
 
 ## specify which final directory ?
-i_sel <- 2   # change here
+i_sel <- 3   # change here
 (dir_sel <- file_dir[i_sel])
 
 ## patterns to target which file(s)?
@@ -130,7 +130,7 @@ source("data-raw/update-yearbook/wfl_unpivot_new.R", encoding = "UTF-8")
 
 ## target file and its path
 ### choose your type
-(myfile <- str_replace(file_xls,("\\.xls"), "-edited\\.xlsx"))
+#(myfile <- str_replace(file_xls,("\\.xls"), "-edited\\.xlsx"))
 (myfile <- file_xls)
 (mypath <- glue::glue("{dir_sel}/{myfile}"))
 
@@ -220,7 +220,7 @@ tar_list<- list(
 
 ## now match and check the names
 # tar_name <- "v7_plastic"
-mytar <- tar_list$v7_fertilizer
+mytar <- tar_list$v7_plastic
 source("data-raw/update-yearbook/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
 
@@ -262,7 +262,7 @@ tbl_pattern <- tribble(
 )
 
 ## get my pattern
-mycase <- "fertilizer"
+mycase <- "plastic"
 ptn <- tbl_pattern %>% filter(case ==mycase) %>%
   pull(ptn) %>% unlist()
 rpl <- tbl_pattern %>% filter(case ==mycase) %>%
@@ -358,7 +358,7 @@ df_use <- loop_read(dir.media = dir_media_tar,
 
 ## 11.2 match units to base varsList,
 ## and this is only used when neccesary!
-df_units <- match_units(df = df_use)
+#df_units <- match_units(df = df_use)
 
 
 ## 11.3 now use_data()  here
@@ -380,8 +380,8 @@ use_list <- c(
 )
 
 k <- 2  # choose k
-(name_dt <- use_list[k]) # change here
-(which_dt <- c("df_use","df_units")[k])  # change here
+(name_dt <- use_list[3]) # change here
+(which_dt <- c("df_use","df_units")[1])  # df_use if prefered
 
 use_mydata(name.dt = name_dt,
            which.dt = which_dt)
