@@ -56,7 +56,7 @@ dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
 file_dir <- glue::glue("{dir_media}{dir_final}")
 
 ## specify which final directory ?
-i_sel <- 1   # change here
+i_sel <- 2   # change here
 (dir_sel <- file_dir[i_sel])
 
 ## patterns to target which file(s)?
@@ -98,13 +98,18 @@ unlock_xlsx(tar_dir = dir_sel,tar_xls = file_sel)
 ## ignore following steps if unneccesary
 source("data-raw/update-yearbook/wfl_rename.R")
 rename_xls_files(dir = dir_sel,
-                 ptn_target_file ="2020-unlocked\\.xlsx$",
+                 ptn_target_file ="2021-2022-unlocked\\.xlsx$",
                  ptn = "(unlocked)",
                  rpl ="edited")
 
 # =====step 5: edit xlsx files manually =====
 ## no need here
-source("data-raw/wfl_editXls.R")
+file_unlocked_path <- str_replace(
+  path_xls,
+  "\\.xls","-unlocked.xlsx" # change here
+  )
+source("data-raw/wfl_editXls.R") # run by yourself
+
 Sys.sleep(1)
 print("OK! Edit the xlsx file finished!")
 
@@ -125,7 +130,7 @@ source("data-raw/update-yearbook/wfl_unpivot_new.R", encoding = "UTF-8")
 
 ## target file and its path
 ### choose your type
-#myfile <- str_replace(file_xls,("\\.xls"), "-edited\\.xlsx")
+(myfile <- str_replace(file_xls,("\\.xls"), "-edited\\.xlsx"))
 (myfile <- file_xls)
 (mypath <- glue::glue("{dir_sel}/{myfile}"))
 
@@ -215,7 +220,7 @@ tar_list<- list(
 
 ## now match and check the names
 # tar_name <- "v7_plastic"
-mytar <- tar_list$v7_machine
+mytar <- tar_list$v7_fertilizer
 source("data-raw/update-yearbook/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
 
@@ -257,7 +262,7 @@ tbl_pattern <- tribble(
 )
 
 ## get my pattern
-mycase <- "machine"
+mycase <- "fertilizer"
 ptn <- tbl_pattern %>% filter(case ==mycase) %>%
   pull(ptn) %>% unlist()
 rpl <- tbl_pattern %>% filter(case ==mycase) %>%
@@ -374,8 +379,9 @@ use_list <- c(
   "LivestockBreeding" #14
 )
 
-(name_dt <- use_list[1]) # change here
-(which_dt <- c("df_use","df_units")[1])  # change here
+k <- 2  # choose k
+(name_dt <- use_list[k]) # change here
+(which_dt <- c("df_use","df_units")[k])  # change here
 
 use_mydata(name.dt = name_dt,
            which.dt = which_dt)

@@ -13,7 +13,7 @@ file_edited_path <- str_replace(file_unlocked_path, "unlocked", "edited")
 
 # you should copy region or change cell values by hand
 ## create new sheet and save save change to xls
-#XLConnect::createSheet(wb, "add.sheet")
+XLConnect::createSheet(wb, "add.sheet")
 XLConnect::saveWorkbook(wb,file = file_edited_path )
 #input <- tibble(myvalue="地 区") # must be data.frame
 #writeWorksheet(wb, input, sheet = getSheets(wb)[1],
