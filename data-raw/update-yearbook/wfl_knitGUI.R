@@ -47,7 +47,7 @@ tbl_dir <- tribble(
 #source("data-raw/update-yearbook/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "RD_industry"
+dir_case <- "RD_output"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
@@ -56,24 +56,25 @@ dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
 file_dir <- glue::glue("{dir_media}{dir_final}")
 
 ## specify which final directory ?
-i_sel <- 1   # change here
+i_sel <- 4   # change here
 (dir_sel <- file_dir[i_sel])
 
 ## patterns to target which file(s)?
 first_year <- 2021
 last_year <- 2022
-add_info <- "amount"
+add_info <- c("amount", "funds")[2]
 files_pattern <- list(
   year_one = glue("^raw-{last_year}.xls$"),
   year_two = glue("^raw-{first_year}-{last_year}.xls$"),
   year_onex = glue("^raw-{last_year}.xlsx$"),
   year_twox = glue("^raw-{first_year}-{last_year}.xlsx$"),
   add_onex = glue("^raw-.+?{add_info}-{last_year}.xlsx$"),
+  add_one = glue("^raw-.+?{add_info}-{last_year}.xls$"),
   edited_one = glue("^raw-.+?{add_info}-{last_year}-edited.xlsx$"),
   edited_two = glue("^raw-{first_year}-{last_year}-edited.xlsx$")
 )
 
-pattern_sel <- files_pattern$year_onex # change here when neccesary
+pattern_sel <- files_pattern$add_one # change here when neccesary
 
 ## match and position files
 files_all <- list.files(dir_sel)
@@ -119,9 +120,9 @@ print("OK! Edit the xlsx file finished!")
 data("varsList")
 vars_spc <- techme::get_vars(df = varsList, lang = "eng",
                      block = list(
-                       block1 = "v7",block2 = "sctj",
-                       block3 = c("nyjx")
-                       ,block4 = "ht"
+                       block1 = "v4",block2 = "cg",
+                       block3 = c("jssr")
+                       ,block4 = "je"
                      ),
                      what = "chn_block4")
 
@@ -136,15 +137,14 @@ source("data-raw/update-yearbook/wfl_unpivot_new.R", encoding = "UTF-8")
 (mypath <- glue::glue("{dir_sel}/{myfile}"))
 
 ## header mode options
-header_mode <- c("y
-                 ear", "vars", "vars-vars","vars-year",
+header_mode <- c("year", "vars", "vars-vars","vars-year",
                  "vars-h3","vars-h4","vars-h5")
 
 df_unpivot <- loop_unpivot(
   tar_file = mypath,
-  hd_mode = "vars", # change here!
-  vars_add = NULL, # change here
-  #vars_add = vars_spc ,  # only when mode "year"
+  hd_mode = "year", # change here!
+  #vars_add = NULL, # change here
+  vars_add = vars_spc ,  # only when mode "year"
   cols_drop = c(2) #, #drop english cols
   #cols_drop = NULL
   )
@@ -223,7 +223,7 @@ tar_list<- list(
 
 ## now match and check the names
 # tar_name <- "v7_plastic"
-mytar <- tar_list$v4_operation
+mytar <- tar_list$v4_RDpull
 source("data-raw/update-yearbook/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
 
@@ -317,7 +317,7 @@ dir_tidy <- paste0(dir_sub1, dir_sub2)
 ## specify file name
 vec_year <- sort(unique(df_matched$year))
 vec_tab <- 9
-prefix <- "amount"
+prefix <- c("amount","funds")[2]
 mytidy <- list(
   mod_year = glue::glue("{vec_year}.xlsx" ),
   mod_year_tbl = glue::glue("year-{vec_year}-{vec_tab}.xlsx" ),
@@ -326,7 +326,7 @@ mytidy <- list(
 
 ## file path
 files_tidy <- mytidy$mod_year
-#files_tidy <- mytidy$mod_prefix_year
+(files_tidy <- mytidy$mod_prefix_year)  # only技术输入/输出
 
 
 (tidy_path <-paste0(dir_sub1, dir_sub2,"/",files_tidy))
@@ -382,7 +382,7 @@ use_list <- c(
   "LivestockBreeding" #14
 )
 
-k <- 13 # choose k
+k <- 9 # choose k
 (name_dt <- use_list[k]) # change here
 (which_dt <- c("df_use","df_units")[1])  # df_use if prefered
 
