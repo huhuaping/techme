@@ -47,7 +47,7 @@ tbl_dir <- tribble(
 #source("data-raw/update-yearbook/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "RD_nbs"
+dir_case <- "RD_industry"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
@@ -92,6 +92,7 @@ source("data-raw/wfl_genDirs.R")
 # =====step 3: unlock xlsx files =====
 ## you should 'save as' to '.xlsx' by hand!!
 source("data-raw/update-yearbook/wfl_unlock.R")
+
 unlock_xlsx(tar_dir = dir_sel,tar_xls = file_sel)
 
 # =====step 4: rename download xls files =====
@@ -144,8 +145,8 @@ df_unpivot <- loop_unpivot(
   hd_mode = "vars", # change here!
   vars_add = NULL, # change here
   #vars_add = vars_spc ,  # only when mode "year"
-  #cols_drop = c(2) #, #drop english cols
-  cols_drop = NULL
+  cols_drop = c(2) #, #drop english cols
+  #cols_drop = NULL
   )
 
 ## check result
@@ -222,7 +223,7 @@ tar_list<- list(
 
 ## now match and check the names
 # tar_name <- "v7_plastic"
-mytar <- tar_list$v4_RDnbs
+mytar <- tar_list$v4_operation
 source("data-raw/update-yearbook/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
 
@@ -264,7 +265,7 @@ tbl_pattern <- tribble(
 )
 
 ## get my pattern
-mycase <- "plastic"
+mycase <- "operation"
 ptn <- tbl_pattern %>% filter(case ==mycase) %>%
   pull(ptn) %>% unlist()
 rpl <- tbl_pattern %>% filter(case ==mycase) %>%
@@ -381,9 +382,9 @@ use_list <- c(
   "LivestockBreeding" #14
 )
 
-k <- 6  # choose k
+k <- 13 # choose k
 (name_dt <- use_list[k]) # change here
-(which_dt <- c("df_use","df_units")[2])  # df_use if prefered
+(which_dt <- c("df_use","df_units")[1])  # df_use if prefered
 
 use_mydata(name.dt = name_dt,
            which.dt = which_dt)

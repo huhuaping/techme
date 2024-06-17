@@ -35,10 +35,15 @@ getTidy <- function(dt){
            # handle cell contains units within round brackets.
            vars = str_replace(vars, "(\\(.+\\))",""),
            vars = mgsub::mgsub(vars,
-                               c(" ", "#", "R&D"#, "[A-Z|a-z]"
+                               c(" ", "#", "R&D",
+                                 #"(?<=[\\p{Han}])([A-Z|a-z].+)$" #汉字以后的任意英文
+                                 "[A-Z|a-z]" #任意英文
+
                                  ),
-                               c("", "",""#, ""
-                                 ))
+                               c("", "","",
+                                 ""
+                                 ),
+                               perl = T)
            #vars = str_trim(vars)
            #unit = str_extract(unit, "(.+)(?=\\))")
     )
