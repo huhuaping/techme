@@ -47,7 +47,7 @@ tbl_dir <- tribble(
 #source("data-raw/update-yearbook/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "budget"
+dir_case <- "RD_nbs"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
@@ -56,7 +56,7 @@ dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
 file_dir <- glue::glue("{dir_media}{dir_final}")
 
 ## specify which final directory ?
-i_sel <- 2   # change here
+i_sel <- 1   # change here
 (dir_sel <- file_dir[i_sel])
 
 ## patterns to target which file(s)?
@@ -73,7 +73,7 @@ files_pattern <- list(
   edited_two = glue("^raw-{first_year}-{last_year}-edited.xlsx$")
 )
 
-pattern_sel <- files_pattern$year_one # change here when neccesary
+pattern_sel <- files_pattern$year_onex # change here when neccesary
 
 ## match and position files
 files_all <- list.files(dir_sel)
@@ -135,7 +135,8 @@ source("data-raw/update-yearbook/wfl_unpivot_new.R", encoding = "UTF-8")
 (mypath <- glue::glue("{dir_sel}/{myfile}"))
 
 ## header mode options
-header_mode <- c("year", "vars", "vars-vars","vars-year",
+header_mode <- c("y
+                 ear", "vars", "vars-vars","vars-year",
                  "vars-h3","vars-h4","vars-h5")
 
 df_unpivot <- loop_unpivot(
@@ -143,8 +144,8 @@ df_unpivot <- loop_unpivot(
   hd_mode = "vars", # change here!
   vars_add = NULL, # change here
   #vars_add = vars_spc ,  # only when mode "year"
-  cols_drop = c(2) #, #drop english cols
-  #cols_drop = NULL
+  #cols_drop = c(2) #, #drop english cols
+  cols_drop = NULL
   )
 
 ## check result
@@ -221,7 +222,7 @@ tar_list<- list(
 
 ## now match and check the names
 # tar_name <- "v7_plastic"
-mytar <- tar_list$v6_budget
+mytar <- tar_list$v4_RDnbs
 source("data-raw/update-yearbook/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
 
@@ -380,9 +381,9 @@ use_list <- c(
   "LivestockBreeding" #14
 )
 
-k <- 5  # choose k
+k <- 6  # choose k
 (name_dt <- use_list[k]) # change here
-(which_dt <- c("df_use","df_units")[1])  # df_use if prefered
+(which_dt <- c("df_use","df_units")[2])  # df_use if prefered
 
 use_mydata(name.dt = name_dt,
            which.dt = which_dt)
