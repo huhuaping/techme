@@ -47,7 +47,7 @@ tbl_dir <- tribble(
 #source("data-raw/update-yearbook/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "RD_output"
+dir_case <- "budget"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
@@ -56,7 +56,7 @@ dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
 file_dir <- glue::glue("{dir_media}{dir_final}")
 
 ## specify which final directory ?
-i_sel <- 4   # change here
+i_sel <- 2   # change here
 (dir_sel <- file_dir[i_sel])
 
 ## patterns to target which file(s)?
@@ -74,7 +74,7 @@ files_pattern <- list(
   edited_two = glue("^raw-{first_year}-{last_year}-edited.xlsx$")
 )
 
-pattern_sel <- files_pattern$add_one # change here when neccesary
+pattern_sel <- files_pattern$year_one # change here when neccesary
 
 ## match and position files
 files_all <- list.files(dir_sel)
@@ -142,9 +142,9 @@ header_mode <- c("year", "vars", "vars-vars","vars-year",
 
 df_unpivot <- loop_unpivot(
   tar_file = mypath,
-  hd_mode = "year", # change here!
+  hd_mode = "vars", # change here!
   #vars_add = NULL, # change here
-  vars_add = vars_spc ,  # only when mode "year"
+  #vars_add = vars_spc ,  # only when mode "year"
   cols_drop = c(2) #, #drop english cols
   #cols_drop = NULL
   )
@@ -162,9 +162,10 @@ source("data-raw/update-yearbook/wfl_tidy.R", encoding = "UTF-8")
 # budget_rpl <- c("合计","教育","科学技术","农林水")
 df_tidy <- getTidy(dt = df_unpivot) %>%
   select(province, year,
-         vars, value, units) # %>%
-  # filter(vars %in% budget_ptn) %>%
-  # mutate(vars = mgsub::mgsub(vars, budget_ptn, budget_rpl))
+         vars, value, units)  #%>%
+   #mutate(vars = str_replace(vars, " |,", "")) %>%
+   #filter(vars %in% budget_ptn) %>%
+   #mutate(vars = mgsub::mgsub(vars, budget_ptn, budget_rpl))
 
 
 unique(df_tidy$vars)
@@ -223,7 +224,7 @@ tar_list<- list(
 
 ## now match and check the names
 # tar_name <- "v7_plastic"
-mytar <- tar_list$v4_RDpull
+mytar <- tar_list$v6_budget
 source("data-raw/update-yearbook/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
 
@@ -326,7 +327,7 @@ mytidy <- list(
 
 ## file path
 files_tidy <- mytidy$mod_year
-(files_tidy <- mytidy$mod_prefix_year)  # only技术输入/输出
+#(files_tidy <- mytidy$mod_prefix_year)  # only技术输入/输出
 
 
 (tidy_path <-paste0(dir_sub1, dir_sub2,"/",files_tidy))
@@ -382,7 +383,7 @@ use_list <- c(
   "LivestockBreeding" #14
 )
 
-k <- 9 # choose k
+k <- 5 # choose k
 (name_dt <- use_list[k]) # change here
 (which_dt <- c("df_use","df_units")[1])  # df_use if prefered
 
