@@ -47,7 +47,7 @@ tbl_dir <- tribble(
 #source("data-raw/update-yearbook/wfl_files.R")
 
 ## --construct file system and dir path--
-dir_case <- "budget"
+dir_case <- "RD_industry"
 dir_media <- tbl_dir %>% filter(case ==dir_case) %>%
   pull(media)
 dir_final <- tbl_dir %>% filter(case ==dir_case) %>%
@@ -142,7 +142,7 @@ header_mode <- c("year", "vars", "vars-vars","vars-year",
 
 df_unpivot <- loop_unpivot(
   tar_file = mypath,
-  hd_mode = "vars", # change here!
+  hd_mode = "vars-vars", # change here!
   #vars_add = NULL, # change here
   #vars_add = vars_spc ,  # only when mode "year"
   cols_drop = c(2) #, #drop english cols
@@ -163,7 +163,7 @@ source("data-raw/update-yearbook/wfl_tidy.R", encoding = "UTF-8")
 df_tidy <- getTidy(dt = df_unpivot) %>%
   select(province, year,
          vars, value, units)  #%>%
-   #mutate(vars = str_replace(vars, " |,", "")) %>%
+   mutate(vars = str_replace(vars, " |,", "")) #%>%
    #filter(vars %in% budget_ptn) %>%
    #mutate(vars = mgsub::mgsub(vars, budget_ptn, budget_rpl))
 
@@ -224,7 +224,7 @@ tar_list<- list(
 
 ## now match and check the names
 # tar_name <- "v7_plastic"
-mytar <- tar_list$v6_budget
+mytar <- tar_list$v4_IndustryRD
 source("data-raw/update-yearbook/wfl_matchVars.R", encoding = "UTF-8")
 (df_vars_matched <- matchVars(dt = df_tidy, block_target = mytar))
 
@@ -250,9 +250,11 @@ tbl_pattern <- tribble(
     c("有研发机构", "有RD活动"),
   "IndustryRD",
     c("新产品开发项目数","新产品开发经费支出",
-      "新产品销售收入","有效发明专利数"),
+      "新产品销售收入","有效发明专利数",
+      "引进境外技术经费支出", "引进境外技术消化吸收经费支出"),
     c("开发项目数","开发经费支出",
-      "销售收入","有效专利数"),
+      "销售收入","有效专利数",
+      "技术引进经费支出", "消化吸收经费支出"),
   "operation", c("营业收入"), c("主营业务收入"),
   "trade", c("进出口贸易总额"), c("贸易总额"),
   "livestock tab01", c("种畜禽场总数"),c("总数"),
@@ -266,7 +268,7 @@ tbl_pattern <- tribble(
 )
 
 ## get my pattern
-mycase <- "operation"
+mycase <- "IndustryRD"
 ptn <- tbl_pattern %>% filter(case ==mycase) %>%
   pull(ptn) %>% unlist()
 rpl <- tbl_pattern %>% filter(case ==mycase) %>%
@@ -326,7 +328,7 @@ mytidy <- list(
 )
 
 ## file path
-files_tidy <- mytidy$mod_year
+(files_tidy <- mytidy$mod_year)
 #(files_tidy <- mytidy$mod_prefix_year)  # only技术输入/输出
 
 
@@ -383,7 +385,7 @@ use_list <- c(
   "LivestockBreeding" #14
 )
 
-k <- 5 # choose k
+k <- 12 # choose k
 (name_dt <- use_list[k]) # change here
 (which_dt <- c("df_use","df_units")[1])  # df_use if prefered
 
