@@ -7,7 +7,7 @@ load_all()
 ## it should  be unique and exclusive from 'queryTianyan'
 ## and xlsx file in directory 'ship/xx.xlsx'
 
-url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot36-2023-07-23.xlsx"
+url_xlsx <- "data-raw/data-tidy/hack-tianyan/ship/ship-tot3-2024-06-23.xlsx"
 list_ins <- openxlsx::read.xlsx(url_xlsx) %>%
   unlist() %>%
   unname()
@@ -242,9 +242,9 @@ tbl_province %>%
 
 dir_xlsx <- "data-raw/data-tidy/hack-tianyan/hub/"
 files_xlsx <- list.files(dir_xlsx)
-url_xlsx <- paste0(dir_xlsx, files_xlsx)
+(url_xlsx <- paste0(dir_xlsx, files_xlsx))
 
-dt_hub<- tibble(files = url_xlsx ) %>%
+dt_hub<- tibble(files = url_xlsx) %>%
   mutate(tbl = map(.x = files,
                    .f = openxlsx::read.xlsx)) %>%
   select(-files) %>%
