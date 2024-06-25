@@ -1,0 +1,20 @@
+#' Details of Approved List of Agricultural Modernization Demonstration Zone.
+#'
+#' A data set containing Approved List of Agricultural Modernization Demonstration Zone
+#'   year by year from the public
+#'   site \url{https://www.most.gov.cn},
+#'   see demo page \url{http://nyt.hubei.gov.cn/bmdt/yw/mtksn/202208/t20220810_4256547.shtml}.
+#'   with wide data format.
+#'
+#' @format A data frame:
+#' \describe{
+#'   \item{year}{integer, the official Approved year }
+#'   \item{index}{integer, the ordered index of list }
+#'   \item{name}{character, name of the Demonstration Zone }
+#'   \item{province}{character, province of Demonstration Zone in reduced chinese}
+#' }
+#'
+#' @source \url{https://www.huhuaping.com/}
+#'
+
+"PubAgrimodernZone"

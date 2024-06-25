@@ -6,12 +6,13 @@ load_all()
 
 source("data-raw/update-yearbook/wfl_useData.R", encoding = "UTF-8")
 
-k <- 3 # choose k
+k <- 5 # choose k
 use_list <- c(
   "PubConvergencePark",
   "PubConvergenceCluster",
   "PubConvergenceTown",
-  "PubConvergenceAffirm"
+  "PubConvergenceAffirm",
+  "PubAgrimodernZone" #5
   )
 
 # read data
@@ -27,6 +28,7 @@ use_mydata(name.dt = name_dt,
 
 use_r(glue("{use_list[k]}.R"))
 # template document parameters, my custom function
+assign(name_dt, tbl_out)
 do.call("document_dt", list(as.name(name_dt)))
 # build the formal document
 document()
