@@ -1,5 +1,8 @@
 ## code to prepare `wfl_useData_CARS` dataset goes here
-
+# 本代码文件不再使用，仅作备存
+# 本数据集的维护将在项目
+# `report-tech/topic/moa-agri-system/`下，
+# 进行维护！
 # ==== prepare ====
 ## load pacakge
 
