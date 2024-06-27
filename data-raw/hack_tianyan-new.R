@@ -252,6 +252,8 @@ dt_hub<- tibble(files = url_xlsx) %>%
   select(-city_clean, -province_clean)
 
 #unique(dt_hub$province)
+tbl_check <- dt_hub %>%
+  filter(is.na(province))
 check <- dt_hub %>%
   janitor::get_dupes(name_origin)
 
