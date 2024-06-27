@@ -6,13 +6,15 @@ load_all()
 
 source("data-raw/update-yearbook/wfl_useData.R", encoding = "UTF-8")
 
-k <- 5 # choose k
+k <- 7 # choose k
 use_list <- c(
   "PubConvergencePark",
   "PubConvergenceCluster",
   "PubConvergenceTown",
   "PubConvergenceAffirm",
-  "PubAgrimodernZone" #5
+  "PubAgrimodernZone" ,#5
+  "PubFreshKeepCounty",
+  "PubRuralInfoBase"
   )
 
 # read data
