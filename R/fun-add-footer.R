@@ -34,6 +34,7 @@ add_footer_pure <- function(text, type="note") {
 #'
 #' @param note character, note text for figure or table.
 #' @param source character, source text for figure or table.
+#' @param pre_note character, prefix for note with default value.
 #'
 #' @importFrom stringr str_c
 #'
@@ -48,9 +49,9 @@ add_footer_pure <- function(text, type="note") {
 #'  add_footer_asis(cap_note, cap_source)
 #' }
 #'
-add_footer_asis <- function(note, source) {
+add_footer_asis <- function(note, source, pre_note="注") {
   out <- stringr::str_c(
-    if (!is.null(note)) stringr::str_c("**说明**：",note),
+    if (!is.null(note)) stringr::str_c("**", pre_note,"**：",note),
     if (!is.null(note)) stringr::str_c("\n\n"),
     if (!is.null(note)) stringr::str_c("\\newline"),
     if (!is.null(note)) stringr::str_c("\n\n"),

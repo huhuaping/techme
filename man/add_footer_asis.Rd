@@ -4,12 +4,14 @@
 \alias{add_footer_asis}
 \title{Add success footer information as whole part for the figure or table}
 \usage{
-add_footer_asis(note, source)
+add_footer_asis(note, source, pre_note = "注")
 }
 \arguments{
 \item{note}{character, note text for figure or table.}
 
 \item{source}{character, source text for figure or table.}
+
+\item{pre_note}{character, prefix for note with default value.}
 }
 \value{
 invisible
