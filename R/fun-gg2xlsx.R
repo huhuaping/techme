@@ -22,10 +22,10 @@
 #'         names_chunk = "ggplot-chunk")
 #' }
 
-gg2xlsx <- function(p, dir="pic/ggsave-xlsx/",
+gg2xlsx <- function(p, dir="pic/ggsave-xlsx",
                     num_section=2, num_fig, names_chunk){
 
-  path_out <- paste0(dir, "Figure",
+  path_out <- paste0(dir, "/Figure",
                      num_section, "-", num_fig, "-",
                      names_chunk,
                      ".xlsx")
