@@ -27,5 +27,4 @@ cap_source <- "source from yearbook 2021"
  add_footer_pure(cap_source, type = "source")
 }
 
-
 }

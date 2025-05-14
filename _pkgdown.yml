@@ -39,6 +39,15 @@ reference:
   - PubObsStationX
   - PubSKLMost
   - HitechFirmsPub
+  - PubAgrimodernZone
+  - PubConvergenceAffirm
+  - PubConvergenceCluster
+  - PubConvergencePark
+  - PubConvergenceTown
+  - PubFreshKeepCounty
+  - PubGeneticResource
+  - PubMachineCounty
+  - PubRuralInfoBase
 - title: Data Subset for the special chapter
   desc: |
     Data sets focus on special topics, including livestocks（畜牧业） et. al.

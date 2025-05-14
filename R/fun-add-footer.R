@@ -18,14 +18,12 @@
 #'  add_footer_pure(cap_source, type = "source")
 #' }
 #'
-#'
-add_footer_pure <- function(text, type="note") {
-  if (type=="note"& !is.null(text)) cat(paste0("**说明**：",text), sep = "")
-  if (type=="note"& is.null(text)) stop("You should set the 'source' at least!")
-  if (type == "source") cat(paste0("**资料来源**：",text), sep = "")
+add_footer_pure <- function(text, type = "note") {
+  if (type == "note" & !is.null(text)) cat(paste0("**", "\u6ce8", "**\uff1a", text), sep = "")
+  if (type == "note" & is.null(text)) stop("You should set the 'source' at least!")
+  if (type == "source") cat(paste0("**", "\u8d44\u6599\u6765\u6e90", "**\uff1a", text), sep = "")
   if (type == "source" & is.null(text)) stop("You should set the 'source' at least!")
 }
-
 
 #' Add success footer information as whole part for the figure or table
 #'
@@ -49,18 +47,14 @@ add_footer_pure <- function(text, type="note") {
 #'  add_footer_asis(cap_note, cap_source)
 #' }
 #'
-add_footer_asis <- function(note, source, pre_note="注") {
+add_footer_asis <- function(note, source, pre_note = "\u6ce8") {
   out <- stringr::str_c(
-    if (!is.null(note)) stringr::str_c("**", pre_note,"**：",note),
+    if (!is.null(note)) stringr::str_c("**", pre_note, "**\uff1a", note),
     if (!is.null(note)) stringr::str_c("\n\n"),
     if (!is.null(note)) stringr::str_c("\\newline"),
     if (!is.null(note)) stringr::str_c("\n\n"),
-    if (!is.null(source)) stringr::str_c("**资料来源**：",source)
+    if (!is.null(source)) stringr::str_c("**\u8d44\u6599\u6765\u6e90**\uff1a", source)
   )
 
   cat(out, sep = "\n")
 }
-
-# reference
-## 1. How to show formatted R output with results='asis' in rmarkdown [see](https://stackoverflow.com/questions/52631689/how-to-show-formatted-r-output-with-results-asis-in-rmarkdown)
-## 2. Add Blank Line to Word Output RMarkdown [see](https://stackoverflow.com/questions/43239868/add-blank-line-to-word-output-rmarkdown)
