@@ -4,7 +4,7 @@
 \alias{gg2xlsx}
 \title{Export chunk plot to editable xlsx file}
 \usage{
-gg2xlsx(p, dir = "pic/ggsave-xlsx/", num_section = 2, num_fig, names_chunk)
+gg2xlsx(p, dir = "pic/ggsave-xlsx", num_section = 2, num_fig, names_chunk)
 }
 \arguments{
 \item{p}{ggplot object.}
