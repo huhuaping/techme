@@ -2,7 +2,8 @@
 % Please edit documentation in R/fun-docDataset.R
 \name{document_dt}
 \alias{document_dt}
-\title{Help Document the Variables List of Data Set for Package Development}
+\title{Help Document the Variables List of Data Set for Package Development
+This function is deprecated after v0.1.0, please use \code{help.document()} instead.}
 \usage{
 document_dt(df)
 }
@@ -11,10 +12,10 @@ document_dt(df)
 }
 \description{
 Help Document the Variables List of Data Set for Package Development
+This function is deprecated after v0.1.0, please use \code{help.document()} instead.
 }
 \examples{
 data(ProvinceCity)
 document_dt(ProvinceCity)
-
 
 }

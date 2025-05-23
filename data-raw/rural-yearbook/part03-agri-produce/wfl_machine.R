@@ -128,3 +128,49 @@ wfl.writeXlsx(
     year_target = c(2023),
     prefix_label = NULL # default is NULL, other value may be "funds", "ammount", etc.
 )
+
+# use data----
+## settings
+dir_tidy <- str_replace(dir_tar, "data-raw/", "data-raw/data-tidy/")
+file_ptn <- "\\.xlsx$"
+name_dt <- "AgriMachine"
+
+## now run the function
+## attention the output message in the console !
+wfl.useData(
+    directory.source = dir_tidy,
+    file.pattern = file_ptn, # xlsx file name pattern
+    name.dt = name_dt, # data name for use_data()
+    which.dt = "df_use" # default is "df_use", other value is "df_units"
+)
+
+## Check and view the data by `do.call()`
+load_all() # must refresh and load the package again
+do.call("View", list(as.name(name_dt)))
+
+
+# use_r for new-coming data set----
+
+## generate the name for R file
+## we have custom name format style as following:
+## - "tech-{name_dt}.R" such as "tech-AgriMachine.R"
+## - "Pub{name_dt}.R" such as "PubFreshKeepCounty.R"
+name_r <- paste0("tech-", name_dt, ".R")
+
+## default is FALSE, which means not the new-coming data set
+new_coming <- FALSE
+if (new_coming) {
+    use_r(name_r)
+}
+
+# write or update the data set document----
+## use my custom function to help writing document
+
+## default is FALSE, which means the column names of the data set is not modified
+is_modified <- FALSE
+if (is_modified) {
+    do.call("document_dt", list(as.name(name_dt)))
+}
+
+## always update document
+document()

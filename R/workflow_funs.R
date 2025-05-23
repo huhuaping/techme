@@ -15,7 +15,7 @@ NULL
 utils::globalVariables(c(
     "chr", "row_index", "row_end", "row_start", "col_start", "col_end",
     "year", "file_xls", "vars_tot", "value", "input", "asis", "variables",
-    "varsList", "target", "file_xlsx"
+    "varsList", "target", "file_xlsx", "units_base"
 ))
 
 #' @importFrom dplyr mutate filter select rename left_join bind_rows
@@ -907,4 +907,175 @@ wfl.writeXlsx <- function(
 
         Sys.sleep(0.1)
     }
+}
+
+
+#' Read the raw xlsx files and use the specified data.frame by use_data()
+#'
+#' @param directory.source character. The path of the source xlsx files.
+#' @param file.pattern character. The pattern of the file name.
+#' @param name.dt character. The name of the data frame.
+#' And the name has uniform format style as "AgriMachine", "LivestockBreeding", etc.
+#' @param which.dt character. The name of the data frame to use, default is "df_use".
+#'
+#' @return NULL
+#' @keywords internal
+#' @importFrom openxlsx read.xlsx
+#' @importFrom dplyr mutate rename left_join select bind_rows
+#' @importFrom stringr str_detect
+#' @importFrom glue glue
+#' @importFrom magrittr %>%
+#' @importFrom usethis use_data
+#' @importFrom rlang .data
+#'
+#' @examples
+#' \dontrun{
+#' wfl.useData(
+#'     directory.source = "data-raw/data-tidy/",
+#'     file.pattern = "\\d{4}",
+#'     name.dt = "AgriMachine",
+#'     which.dt = "df_use"
+#' )
+#' }
+#'
+wfl.useData <- function(
+    directory.source, file.pattern,
+    name.dt,
+    which.dt = "df_use") {
+    # Input validation
+    if (!is.character(directory.source) || length(directory.source) != 1) {
+        stop("'directory.source' must be a single character string")
+    }
+    if (!is.character(file.pattern) || length(file.pattern) != 1) {
+        stop("'file.pattern' must be a single character string")
+    }
+    if (!is.character(name.dt) || length(name.dt) != 1) {
+        stop("'name.dt' must be a single character string")
+    }
+    if (!is.character(which.dt) || length(which.dt) != 1) {
+        stop("'which.dt' must be a single character string")
+    }
+    if (!which.dt %in% c("df_use", "df_units")) {
+        stop("'which.dt' must be either 'df_use' or 'df_units'")
+    }
+
+    # Check if directory exists
+    if (!dir.exists(directory.source)) {
+        stop("Directory does not exist: ", directory.source)
+    }
+
+    # loop read raw xlsx files with specific pattern
+    files_all <- list.files(directory.source)
+    files_id <- which(stringr::str_detect(files_all, file.pattern))
+    files_sel <- files_all[files_id]
+    files_path <- paste0(directory.source, files_sel)
+
+    if (length(files_path) == 0) {
+        stop("No files found matching the pattern: ", file.pattern)
+    }
+
+    # loop read xlsx files
+    df_use <- NULL
+    for (i in length(files_path):1) {
+        tryCatch(
+            {
+                df_tem <- openxlsx::read.xlsx(files_path[i]) %>%
+                    dplyr::mutate(units = as.character(units))
+                message(glue::glue("Read file {files_sel[i]} has finished!"))
+                Sys.sleep(0.1)
+                df_use <- dplyr::bind_rows(df_use, df_tem)
+            },
+            error = function(e) {
+                warning(glue::glue("Failed to read file {files_sel[i]}: {e$message}"))
+            }
+        )
+    }
+
+    if (is.null(df_use)) {
+        stop("No data was successfully read from any files")
+    }
+
+    # assign data to the global environment on condition with `which_dt`
+    if (which.dt == "df_use") {
+        ## assign data table
+        do.call("assign", list(name.dt, as.name(which.dt)))
+        message("assign type of `df_use` data set successed!")
+    } else if (which.dt == "df_units") {
+        ## prepare system variables table
+        if (!requireNamespace("techme", quietly = TRUE)) {
+            stop("Package 'techme' is required but not installed")
+        }
+        varsList <- get("varsList", envir = asNamespace("techme"))
+        ## selected system variables table
+        df_base <- varsList %>%
+            dplyr::select(variables, units) %>%
+            dplyr::rename(units_base = "units")
+        ## match units
+        df_units <- dplyr::left_join(df_use, df_base, by = "variables") %>%
+            dplyr::mutate(units = !!sym("units_base")) %>%
+            dplyr::select(-!!sym("units_base"))
+
+        ## assign data table
+        do.call("assign", list(name.dt, as.name(which.dt)))
+        message("assign type of `df_units` data set successed!")
+    }
+
+    ## use data
+    do.call("use_data", list(as.name(name.dt), overwrite = TRUE))
+    message(glue::glue("use_data() for `{name.dt}` successed!"))
+}
+
+#' Help Document the Variables List of Data Set for Package Development
+#'
+#' @description
+#' This function generates documentation template for data frame variables in Roxygen2 format.
+#' It creates a list of variable entries that can be used in the \code{@format} section
+#' of data documentation.
+#'
+#' @details
+#' The function takes a data frame as input and generates documentation entries for each variable
+#' in the format required by Roxygen2. This is particularly useful when documenting datasets
+#' in R packages.
+#'
+#' @param df data.frame. The data frame to document.
+#'
+#' @return NULL. The function prints the documentation template to the console.
+#'
+#' @keywords internal
+#' @importFrom utils str
+#'
+#' @examples
+#' \dontrun{
+#' data(ProvinceCity)
+#' help.document(ProvinceCity)
+#' }
+#'
+help.document <- function(df) {
+    # Input validation
+    if (!is.data.frame(df)) {
+        stop("'df' must be a data frame")
+    }
+    if (ncol(df) == 0) {
+        stop("'df' must have at least one column")
+    }
+
+    # Get variable names and their classes
+    var_names <- names(df)
+    var_classes <- sapply(df, function(x) class(x)[1])
+
+    # Generate documentation entries
+    doc_entries <- paste0(
+        "#'   \\item{", var_names, "}{",
+        "\\code{", var_classes, "}. }"
+    )
+
+    # Print header
+    cat("#' @format A data frame with", nrow(df), "rows and", ncol(df), "variables:\n")
+    cat("#' \\describe{\n")
+
+    # Print variable documentation
+    cat(paste(doc_entries, collapse = "\n"), "\n")
+
+    # Print footer
+    cat("#' }\n")
 }

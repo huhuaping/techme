@@ -37,9 +37,10 @@ Imports:
     purrr,
     stringdist,
     unpivotr,
-    tidyr
+    tidyr,
+    usethis
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5)
 Remotes: 
     kwb-r/kwb.utils
 VignetteBuilder: 
