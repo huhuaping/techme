@@ -15,8 +15,11 @@ NULL
 utils::globalVariables(c(
     "chr", "row_index", "row_end", "row_start", "col_start", "col_end",
     "year", "file_xls", "vars_tot", "value", "input", "asis", "variables",
-    "varsList", "target", "file_xlsx", "units_base"
+    "varsList", "target", "file_xlsx", "units_base",
+    "case", "final", "media"
 ))
+
+
 
 #' @importFrom dplyr mutate filter select rename left_join bind_rows
 #' @importFrom stringr str_detect str_extract str_replace str_replace_all str_trim
@@ -29,33 +32,242 @@ utils::globalVariables(c(
 #' @importFrom purrr map_chr
 #' @importFrom tibble tibble add_row add_column
 
-#' @title Search for files in a directory
+#' @title Helper function to get the directory table
+#' @description
+#' This function creates a directory table that maps case names to their corresponding
+#' directory paths and subdirectories. The table is used to organize and locate data files
+#' in the package's data structure.#'
 #' @rdname workflow_funs
-#' @param directory character. Path to search for files
+#' @details
+#' The function returns a tibble with three columns:
+#' \itemize{
+#'   \item \code{case}: The case identifier (e.g., "agri_prod", "budget")
+#'   \item \code{media}: The main directory path for the case
+#'   \item \code{final}: A list of subdirectories for the case
+#' }
+#'
+#' @return tibble. A tibble containing the directory structure with columns:
+#' \itemize{
+#'   \item \code{case} (character): Case identifier
+#'   \item \code{media} (character): Main directory path
+#'   \item \code{final} (list): Vector of subdirectory names
+#' }
+#'
+#' @keywords internal
+#' @importFrom tibble tribble
+#'
+#' @examples
+#' \dontrun{
+#' # Get the directory table
+#' tbl_dir <- create.dirTable()
+#'
+#' # View the structure
+#' str(tbl_dir)
+#'
+#' # Access specific case
+#' tbl_dir[tbl_dir$case == "agri_prod", ]
+#' }
+#'
+create.dirTable <- function() {
+    ## collection of directory for data base
+    ## the data.frame must contains "case", "media", "final" column
+    tbl_dir <- tibble::tribble(
+        ~case, ~media, ~final,
+        "agri_prod",
+        "data-raw/rural-yearbook/part03-agri-produce/",
+        c("01-machine", "02-fertilizer", "03-plastic", "04-pesticide"),
+        "budget",
+        "data-raw/nation-yearbook/part07-finance/",
+        c("01-public-income", "02-public-budget"),
+        "RD_nbs", # national bureau bullets !
+        "data-raw/public-site/nbs-RD-bulletin/",
+        c("02-xls/"),
+        "RD_over",
+        "data-raw/tech-yearbook/part01-over/",
+        c("01-labor-hour", "02-spend-intense", "03-spend-inner", "05-public-professionals"),
+        "RD_inner",
+        "data-raw/tech-yearbook/part01-over/03-spend-inner/",
+        c("01-activity", "02-source", "03-purpose"),
+        "RD_firm",
+        "data-raw/tech-yearbook/part02-firm/",
+        c(
+            "00-firms", "01-employee", "03-spend-inner",
+            "04-spend-outer", "05-RD-projects", "06-RD-institution",
+            "07-new-product", "08-patent", "09-tech-renew"
+        ),
+        "RD_industry",
+        "data-raw/tech-yearbook/part05-industry/",
+        c("01-operation", "02-RD", "03-trade"),
+        "RD_output",
+        "data-raw/tech-yearbook/part08-output/",
+        c(
+            "01-patent", "02-enrollmark",
+            "03-teckmarket-pull", "04-teckmarket-push"
+        ),
+        "livestock",
+        "data-raw/livestock-yearbook/",
+        c("02-breeding")
+    )
+    return(tbl_dir)
+}
+
+#' Helper function to obtain specific files regex pattern#'
+#' @description
+#' This function generates regex patterns for matching specific file names based on year,
+#' file format, and additional information. It supports various naming patterns for raw
+#' data files and edited files.
+#' @rdname workflow_funs
+#' @param year numeric or numeric vector. The year(s) to include in the pattern.
+#' If a vector of length 2 is provided, it represents a year range.
+#' @param mode character. The pattern mode to use. Must be one of:
+#' \itemize{
+#'   \item \code{year_one}: Single year, xls format, eg. "^raw-2023.xls$"
+#'   \item \code{year_two}: Two years, xls format, eg. "^raw-2022-2023.xls$"
+#'   \item \code{year_onex}: Single year, xlsx format, eg. "^raw-2023.xlsx$"
+#'   \item \code{year_twox}: Two years, xlsx format, eg. "^raw-2022-2023.xlsx$"
+#'   \item \code{add_onex}: Single year with additional info, xlsx format, eg. "^raw-.+?amount-2023.xlsx$"
+#'   \item \code{add_one}: Single year with additional info, xls format, eg. "^raw-.+?amount-2023.xls$"
+#'   \item \code{edited_one}: Single year with additional info, edited xlsx format, eg. "^raw-.+?amount-2023-edited.xlsx$"
+#'   \item \code{edited_two}: Two years, edited xlsx format, eg. "^raw-2022-2023-edited.xlsx$"
+#' }
+#' @param add_info character. Additional information to include in the pattern.
+#'
+#' @return character. A regex pattern string for matching file names.
+#'
+#' @keywords internal
+#' @importFrom glue glue
+#'
+#' @examples
+#' \dontrun{
+#' # Single year pattern
+#' choose.filePattern(year = 2022, mode = "year_onex")
+#'
+#' # Year range pattern
+#' choose.filePattern(year = c(2022, 2023), mode = "year_twox")
+#'
+#' # Pattern with additional info
+#' choose.filePattern(
+#'     year = 2022,
+#'     mode = "add_onex",
+#'     add_info = "amount"
+#' )
+#' }
+#'
+choose.filePattern <- function(year, mode, add_info) {
+    # Input validation
+    if (!is.numeric(year)) {
+        stop("'year' must be numeric")
+    }
+    if (!is.character(mode) || length(mode) != 1) {
+        stop("'mode' must be a single character string")
+    }
+    if (mode %in% c("add_onex", "add_one", "edited_one") &&
+        (missing(add_info) || !is.character(add_info) || length(add_info) != 1)) {
+        stop("'add_info' must be a single character string for the specified mode")
+    }
+
+    # year is a vector, may contains start and end year, or may only contains one year
+    if (length(year) == 1) {
+        year <- year
+    } else if (length(year) == 2) {
+        first_year <- year[1]
+        last_year <- year[2]
+    } else {
+        stop("'year' must be either a single number or a vector of length 2")
+    }
+
+    # mode must be one of the following:
+    # year_one, year_two, year_onex, year_twox, add_onex, add_one, edited_one, edited_two
+    if (mode == "year_one") {
+        pattern <- glue::glue("^raw-{year}.xls$")
+    } else if (mode == "year_two") {
+        pattern <- glue::glue("^raw-{first_year}-{last_year}.xls$")
+    } else if (mode == "year_onex") {
+        pattern <- glue::glue("^raw-{year}.xlsx$")
+    } else if (mode == "year_twox") {
+        pattern <- glue::glue("^raw-{first_year}-{last_year}.xlsx$")
+    } else if (mode == "add_onex") {
+        pattern <- glue::glue("^raw-.+?{add_info}-{year}.xlsx$")
+    } else if (mode == "add_one") {
+        pattern <- glue::glue("^raw-.+?{add_info}-{year}.xls$")
+    } else if (mode == "edited_one") {
+        pattern <- glue::glue("^raw-.+?{add_info}-{year}-edited.xlsx$")
+    } else if (mode == "edited_two") {
+        pattern <- glue::glue("^raw-{first_year}-{last_year}-edited.xlsx$")
+    } else {
+        stop("Invalid 'mode' parameter. Must be one of: 'year_one', 'year_two', 'year_onex', 'year_twox', 'add_onex', 'add_one', 'edited_one', 'edited_two'")
+    }
+    message(glue::glue("The regex pattern is: {pattern}"))
+    return(pattern)
+}
+
+#' @title Search for specific files (regex pattern) in a directory
+#' Return the file path and also the "case" directory path
+#' @rdname workflow_funs
+#' @param dt data.frame. Which must be contain "case", "media", "final" column.
+#' @param dir.case character. The case name to search for files.
+#' Must one of the value of the "case" column in the data.frame.
+#' @param i.final number. The index of the final directory in the "final" column.
 #' @param pattern character. Pattern to match files
 #'
-#' @return character vector of file paths
+#' @return list of file paths and directory path
 #' @keywords internal
 #'
 #' @examples
 #' \dontrun{
-#' wfl.findFiles(directory = "data-raw", pattern = "\\.xlsx$")
+#' find_result <- wfl.findFiles(
+#'     dt = tbl_dir, # the directory table
+#'     dir.case = "agri_prod", # the case name of the target directory
+#'     i.final = 1, # the index of the final subdirectory
+#'     pattern = pattern_sel # the regex pattern for table identifier
+#' )
 #' }
-#'
-wfl.findFiles <- function(directory, pattern) {
-    files <- list.files(directory, pattern = pattern, recursive = TRUE, full.names = TRUE)
+wfl.findFiles <- function(dt, dir.case, i.final, pattern) {
+    # dt must be a data.frame and contain "case", "media", "final" column
+    if (!is.data.frame(dt)) {
+        stop("'dt' must be a data.frame")
+    }
+    if (!"case" %in% colnames(dt)) {
+        stop("'dt' must contain 'case' column")
+    }
+    if (!"media" %in% colnames(dt)) {
+        stop("'dt' must contain 'media' column")
+    }
+    if (!"final" %in% colnames(dt)) {
+        stop("'dt' must contain 'final' column")
+    }
+
+    # check if dir.case is one of the value of the "case" column
+    if (!dir.case %in% dt$case) {
+        stop("'dir.case' must be one of the value of the 'case' column")
+    }
+
+    # get the media and final directory name
+    dir_media <- dt %>%
+        filter(case == dir.case) %>%
+        pull(media)
+    dir_final <- dt %>%
+        filter(case == dir.case) %>%
+        pull(final) %>%
+        unlist()
+    # get the complete directory path for the target final directory
+    file_dir <- glue::glue("{dir_media}{dir_final[i.final]}")
+
+    # search for files with the pattern
+    files <- list.files(file_dir, pattern = pattern, recursive = TRUE, full.names = TRUE)
     if (length(files) == 0) {
         stop("No files found matching the pattern: ", pattern)
     }
+
+    # Print message based on number of files found
     if (length(files) == 1) {
-        print(glue::glue("Only one file found matching the pattern: {pattern}"))
-        return(files)
+        message(glue::glue("Only one file found matching the pattern: {pattern}"))
+    } else {
+        message(glue::glue("Multiple files found matching the pattern: {pattern}"))
     }
-    if (length(files) > 1) {
-        print(glue::glue("Multiple files found matching the pattern: {pattern}"))
-        return(files)
-    }
-    return(files)
+
+    # Return both file directory and files
+    return(list(file_dir = file_dir, files = files))
 }
 
 #' Convert protected xls file to xlsx file, and remove unnecessary sheet.
@@ -138,8 +350,8 @@ wfl.Xls2Xlsx <- function(file_path, sheet_drop = c("CNKI")) {
 #' @param dt data.frame. Which is the wb object reading from xlsx file.
 #' @param ith number. when exist multiple table region in one sheet.
 #' @param what character. What is the object function will return, whether "row" or "col".
-#' @param reg_start character. regex pattern for start identifier, default \code{'^地.*区'}.
-#' @param reg_end character. regex pattern for end identifier, default \code{'^新.*疆'}.
+#' @param reg_start character. regex pattern for start identifier.
+#' @param reg_end character. regex pattern for end identifier.
 #'
 #' @return vector
 #' @keywords internal
@@ -166,7 +378,7 @@ getRange <- function(dt, ith, what,
     dt_detect_region <- dt %>%
         dplyr::mutate_all(.funs = function(x) stringr::str_detect(x, pattern))
 
-    # Search along columns，get the index of the region identifier
+    # Search along columns, get the index of the region identifier
     range_row <- sapply(
         dt_detect_region,
         function(x) {
@@ -174,7 +386,7 @@ getRange <- function(dt, ith, what,
         }
     )
 
-    # Filter index，detect the columns which contain the region identifier
+    # Filter index, detect the columns which contain the region identifier
     index_row <- range_row %>%
         sapply(., function(x) {
             length(x) != 0
@@ -413,7 +625,7 @@ getInfo <- function(dt, unit_pattern) {
 #' @param vars.add character. if header.mode = 'year', then the vars.add must be specified,
 #'   And you can use the function \code{get_vars()} to get the variable name.
 #' @param cols.drop vector. Columns numbers which will be dropped, default \code{NULL}.
-#' @param pattern.table character. Regex pattern for table identifier, default \code{'续表'}.
+#' @param pattern.table character. Regex pattern for table identifier.
 #'
 #' @return data.frame. A data frame containing the unpivoted data with units information.
 #' @keywords internal
@@ -429,7 +641,7 @@ getInfo <- function(dt, unit_pattern) {
 #'     file = "data-raw/example.xlsx",
 #'     header.mode = "vars-year",
 #'     cols.drop = NULL,
-#'     pattern.table = "^地.*区"
+#'     pattern.table = "^\\u5730.*\\u533a"
 #' )
 #' }
 #'
@@ -618,9 +830,285 @@ wfl.tidyTable <- function(dt) {
     return(dt_tidy)
 }
 
+#' Helper function to create target list collection#'
+#' @description
+#' This function provides access to a predefined collection of target lists used for
+#' filtering and organizing data in the package. The lists are organized by different
+#' categories (v4, v6, v7, v8) and contain block identifiers for data filtering.
+#' @rdname workflow_funs
+#' @details
+#' The target lists are organized into several categories:
+#' \itemize{
+#'   \item v4: Research and Development related lists (RDnbs, RDinner, RDfirm, etc.)
+#'   \item v6: Budget related lists
+#'   \item v7: Agricultural production related lists (machine, fertilizer, plastic, pesticide)
+#'   \item v8: Livestock related lists (t1-t9)
+#' }
+#' Each list contains block identifiers (block1, block2, block3) used for filtering data.
+#'
+#' @param identifier character. The identifier of the target list to retrieve. May be one of:
+#'   \itemize{
+#'     \item v7_machine, v7_fertilizer, v7_plastic, v7_pesticide
+#'     \item v6_budget
+#'     \item v4_RDnbs, v4_RDinner, v4_RDfirm, v4_RDpull, v4_RDpush
+#'     \item v4_operation, v4_RDtrade, v4_IndustryRD
+#'     \item v8_livestock_t1 through v8_livestock_t9
+#'     \item other: all other available identifiers
+#'   }
+#' @param show.all.identifier logical. Whether to show all available identifier.
+#'   Default is FALSE.
+#'
+#' @return list. A list of length 2, containing the requested target list with block identifiers
+#' and the full list of all available lists.
+#'
+#' @keywords internal
+#' @importFrom glue glue
+#'
+#' @examples
+#' \dontrun{
+#' # Get machine target list
+#' machine_list <- get.targetList("v7_machine")
+#'
+#' # Get budget target list and show all available lists
+#' budget_list <- get.targetList("v6_budget", show.all.identifier = TRUE)
+#' }
+#'
+get.targetList <- function(identifier, show.all.identifier = FALSE) {
+    # Input validation
+    if (!is.character(identifier) || length(identifier) != 1) {
+        stop("'identifier' must be a single character string")
+    }
+    if (!is.logical(show.all.identifier) || length(show.all.identifier) != 1) {
+        stop("'show.all.identifier' must be a single logical value")
+    }
+
+    # Define full list collection
+    full_list <- list(
+        v7_machine = list(
+            block1 = "v7", block2 = "sctj",
+            block3 = "nyjx"
+        ),
+        v7_fertilizer = list(
+            block1 = "v7", block2 = "sctj",
+            block3 = c("nyhf")
+        ),
+        v7_plastic = list(
+            block1 = "v7", block2 = "sctj",
+            block3 = c("nybm")
+        ),
+        v7_pesticide = list(
+            block1 = "v7", block2 = "sctj",
+            block3 = c("cyny")
+        ),
+        v6_budget = list(
+            block1 = "v6", block2 = "cz",
+            block3 = "yszc"
+        ),
+        v4_RDnbs = list(
+            block1 = "v4", block2 = "ztr",
+            block3 = c("jf", "qd")
+        ),
+        v4_RDinner = list(
+            block1 = "v4", block2 = "zh",
+            block3 = "nbzc"
+        ),
+        v4_RDfirm = list(
+            block1 = "v4", block2 = "qy",
+            block3 = "qysl"
+        ),
+        v4_RDpull = list(
+            block1 = "v4", block2 = "cg",
+            block3 = "jssr"
+        ),
+        v4_RDpush = list(
+            block1 = "v4", block2 = "cg",
+            block3 = "jssc"
+        ),
+        v4_operation = list(
+            block1 = "v4", block2 = "cy",
+            block3 = "scjy"
+        ),
+        v4_RDtrade = list(
+            block1 = "v4", block2 = "cy",
+            block3 = "my"
+        ),
+        v4_IndustryRD = list(
+            block1 = "v4", block2 = "cy",
+            block3 = c("RDhd", "xcp", "qyzl", "jsgz")
+        ),
+        v8_livestock_t1 = list(
+            block1 = "v8", block2 = "t1",
+            block3 = c("zcqc")
+        ),
+        v8_livestock_t2 = list(
+            block1 = "v8", block2 = "t2",
+            block3 = c("zcqc")
+        ),
+        v8_livestock_t3 = list(
+            block1 = "v8", block2 = "t3",
+            block3 = c("zcqc", "nmcl")
+        ),
+        v8_livestock_t4 = list(
+            block1 = "v8", block2 = "t4",
+            block3 = c("zcqc", "nmcl")
+        ),
+        v8_livestock_t5 = list(
+            block1 = "v8", block2 = c("t5"),
+            block3 = c("zcqc", "nmcl")
+        ),
+        v8_livestock_t6 = list(
+            block1 = "v8", block2 = c("t6"),
+            block3 = c("nfmccl")
+        ),
+        v8_livestock_t7 = list(
+            block1 = "v8", block2 = c("t7"),
+            block3 = c("nfmccl", "cczcq")
+        ),
+        v8_livestock_t8 = list(
+            block1 = "v8", block2 = c("t8"),
+            block3 = c("cczcq", "scpt")
+        ),
+        v8_livestock_t9 = list(
+            block1 = "v8", block2 = c("t9"),
+            block3 = c("scpt", "scjy")
+        )
+    )
+
+    # Check if identifier exists
+    if (!identifier %in% names(full_list)) {
+        stop(glue::glue("Invalid identifier: {identifier}. Available identifiers are: {paste(names(full_list), collapse = ', ')}"))
+    }
+
+    # Get the requested list
+    out_list <- full_list[[identifier]]
+    message(glue::glue("Retrieved target list for: {identifier}"))
+    # show the target list, print the name and value of the list
+    message(paste(names(out_list), out_list, sep = ": ", collapse = "\n"))
+
+    # Show the full list if requested
+    if (show.all.identifier) {
+        message(glue::glue("ALL available identifiers: {paste(names(full_list), collapse = ', ')}"))
+    }
+
+    return(list(out_list = out_list, full_list = full_list))
+}
+
+#' Get names from basic variables table
+#' @rdname workflow_funs
+#' @description
+#' This function retrieves variable names from a basic variables table based on specified
+#' language and block criteria. It supports filtering variables by hierarchical block
+#' structure in both English and Chinese.
+#'
+#' @details
+#' The function filters variables based on a hierarchical block structure (block1-4)
+#' and returns the specified variable names. It supports both English and Chinese
+#' variable names through the language parameter. The block4 parameter is optional
+#' in the block list.
+#'
+#' @param df data.frame. The input data frame containing variable information.
+#' @param lang character. The language of variables to select. Must be either "eng" (default)
+#'   or "chn".
+#' @param block list. A list which the length is not greater than 4 with names "block1", "block2", "block3", "block4".
+#'   Each element contains the block identifiers to filter by. Note that block4 is optional.
+#' @param what character. The type of variable names to return. Options include:
+#'   \itemize{
+#'     \item "variables" (default): Full variable names
+#'     \item "short_chn": Short Chinese names
+#'     \item "short_eng": Short English names
+#'     \item "chn_block4": Chinese block4 names
+#'     \item "eng_block4": English block4 names
+#'     \item other: other variable names in the input data frame (typically `varList`)
+#'   }
+#'
+#' @return data.frame. A data frame containing the filtered variable names.
+#'
+#' @keywords internal
+#' @importFrom dplyr filter select one_of
+#' @importFrom magrittr %>%
+#' @importFrom rlang .data
+#' @importFrom glue glue
+#'
+#' @examples
+#' \dontrun{
+#' options(encoding = "UTF-8")
+#' block_sel <- list(
+#'     block1 = "v7",
+#'     block2 = "sctj",
+#'     block3 = "nyjx"
+#' )
+#'
+#' vars_set <- get.vars(df = varsList, block = block_sel, what = "variables")
+#' }
+#'
+get.vars <- function(df, lang = "eng", block, what = "variables") {
+    # Input validation
+    if (!is.data.frame(df)) {
+        stop("'df' must be a data frame")
+    }
+    if (!lang %in% c("eng", "chn")) {
+        stop("'lang' must be either 'eng' or 'chn'")
+    }
+    if (!is.list(block) || length(block) > 4) {
+        stop("'block' must be a list of length not greater than 4")
+    }
+
+    # Check required block names (block1-3 are required, block4 is optional)
+    required_blocks <- c("block1", "block2", "block3")
+    if (!all(required_blocks %in% names(block))) {
+        stop("'block' must have names: block1, block2, block3 (block4 is optional)")
+    }
+
+    # Check for invalid block names
+    valid_blocks <- c("block1", "block2", "block3", "block4")
+    invalid_blocks <- setdiff(names(block), valid_blocks)
+    if (length(invalid_blocks) > 0) {
+        stop("Invalid block names found: ", paste(invalid_blocks, collapse = ", "))
+    }
+
+    if (lang == "chn") {
+        if (!is.null(block$block1)) {
+            df <- df %>% filter(.data$chn_block1 %in% block$block1)
+        }
+
+        if (!is.null(block$block2)) {
+            df <- df %>% filter(.data$chn_block2 %in% block$block2)
+        }
+
+        if (!is.null(block$block3)) {
+            df <- df %>% filter(.data$chn_block3 %in% block$block3)
+        }
+
+        if (!is.null(block$block4)) {
+            df <- df %>% filter(.data$chn_block4 %in% block$block4)
+        }
+    } else if (lang == "eng") {
+        if (!is.null(block$block1)) {
+            df <- df %>% filter(.data$block1 %in% block$block1)
+        }
+
+        if (!is.null(block$block2)) {
+            df <- df %>% filter(.data$block2 %in% block$block2)
+        }
+
+        if (!is.null(block$block3)) {
+            df <- df %>% filter(.data$block3 %in% block$block3)
+        }
+
+        if (!is.null(block$block4)) {
+            df <- df %>% filter(.data$block4 %in% block$block4)
+        }
+    }
+
+    vars <- df %>%
+        dplyr::select(one_of(what))
+
+    message(glue::glue("get variables names: {paste(names(vars), collapse = ', ')}"))
+    return(vars)
+}
 
 #' Helper function to get the best matched of specified character vectors.
-#'
+#' @rdname workflow_funs
 #' @param word character. The word to match.
 #' @param charvec character vector. The vector of words to match against.
 #'
@@ -630,7 +1118,13 @@ wfl.tidyTable <- function(dt) {
 #'
 #' @examples
 #' \dontrun{
-#' get.best.match("农业机械", c("农业机械", "农业机械总动力"))
+#' get.best.match(
+#'     "\u519c\u4e1a\u673a\u68b0",
+#'     c(
+#'         "\u519c\u4e1a\u673a\u68b0",
+#'         "\u519c\u4e1a\u673a\u68b0\u603b\u52a8\u529b"
+#'     )
+#' )
 #' }
 #'
 get.best.match <- function(word, charvec) {
@@ -648,10 +1142,7 @@ get.best.match <- function(word, charvec) {
     return(charvec[max_index])
 }
 
-
-
 #' Match 'vars' to target variables list in chinese block.
-#'
 #' @rdname workflow_funs
 #' @param dt data.frame. The input data frame containing a 'vars' column.
 #' @param block_target list. Names of the list should be part or all of: block1, block2, block3, block4.
@@ -695,7 +1186,7 @@ wfl.matchVars <- function(dt, block_target, block_lang = "eng") {
     varsList <- get("varsList", envir = asNamespace("techme"))
 
     # Get variables table
-    vars_tbl <- get_vars(varsList,
+    vars_tbl <- get.vars(varsList,
         lang = block_lang,
         block = block_target,
         what = c("variables", "chn_block4")
@@ -728,10 +1219,124 @@ wfl.matchVars <- function(dt, block_target, block_lang = "eng") {
     return(vars_matched)
 }
 
+#' Helper function to replace variables names in the tidy table
+#' @rdname workflow_funs
+#' @description
+#' This function provides a collection of Chinese text patterns and their replacements
+#' for standardizing variable names in the tidy table. It supports various categories
+#' including agricultural machinery, fertilizer, plastic, budget, R&D, and livestock data.
+#'
+#' @details
+#' The function maintains a predefined table of patterns and replacements for different
+#' categories of data. Each category may have multiple patterns and corresponding
+#' replacements. The table is soft-coded in the package and can be modified as needed.
+#'
+#' @param case.target character. The target case to replace. Must be one of:
+#'   \itemize{
+#'     \item "machine": Agricultural machinery related terms
+#'     \item "fertilizer": Fertilizer usage related terms
+#'     \item "plastic": Agricultural plastic film related terms
+#'     \item "budget": Budget and expenditure related terms
+#'     \item "RDinner": R&D internal expenditure terms
+#'     \item "RD": R&D institution and activity related terms
+#'     \item "IndustryRD": Industry R&D related terms
+#'     \item "operation": Business operation related terms
+#'     \item "trade": Trade related terms
+#'     \item "livestock tab01" through "livestock tab08": Livestock related terms
+#'     \item other: other cases names available in the table
+#'   }
+#'
+#' @return list. A list containing:
+#'   \itemize{
+#'     \item ptn: The pattern(s) to match
+#'     \item rpl: The replacement(s) for the pattern(s)
+#'     \item tbl_pattern: The full pattern-replacement table
+#'   }
+#'
+#' @keywords internal
+#' @importFrom dplyr filter pull
+#' @importFrom tibble tribble
+#' @importFrom magrittr %>%
+#' @importFrom glue glue
+#'
+#' @examples
+#' \dontrun{
+#' # Get patterns for agricultural machinery
+#' machine_patterns <- choose.chnPattern("machine")
+#'
+#' # Get patterns for budget data
+#' budget_patterns <- choose.chnPattern("budget")
+#' }
+#'
+choose.chnPattern <- function(case.target) {
+    # Input validation
+    if (!is.character(case.target) || length(case.target) != 1) {
+        stop("'case.target' must be a single character string")
+    }
+
+    # Define pattern-replacement table
+    tbl_pattern <- tibble::tribble(
+        ~case, ~ptn, ~rpl,
+        "machine", c("谷物联合收割机"), c("联合收获机"),
+        "fertilizer", c("农用化肥施用量"), c("化肥使用量"),
+        "plastic", c("农用塑料薄膜使用量"), c("农用薄膜使用量"),
+        "budget",
+        c("地方一般公共预算支出", "教育支出", "科学技术支出", "农林水支出"),
+        c("合计", "教育", "科学技术", "农林水"),
+        "RDinner",
+        c("经费内部支出"),
+        c("合计"),
+        "RD",
+        c("有研发机构的企业数", "有R&D活动的企业数"),
+        c("有研发机构", "有RD活动"),
+        "IndustryRD",
+        c(
+            "新产品开发项目数", "新产品开发经费支出",
+            "新产品销售收入", "有效发明专利数",
+            "引进境外技术经费支出", "引进境外技术消化吸收经费支出"
+        ),
+        c(
+            "开发项目数", "开发经费支出",
+            "销售收入", "有效专利数",
+            "技术引进经费支出", "消化吸收经费支出"
+        ),
+        "operation", c("营业收入"), c("主营业务收入"),
+        "trade", c("进出口贸易总额"), c("贸易总额"),
+        "livestock tab01", c("种畜禽场总数"), c("总数"),
+        "livestock tab04",
+        c("祖代及以上场", "祖代蛋鸡场", "父母代场"),
+        c("祖代及以上蛋鸡场", "祖代及以上蛋鸡场", "父母代蛋鸡场"),
+        "livestock tab07", c("种羊细场毛"), c("种细毛羊场"),
+        "livestock tab08",
+        c("祖代蛋鸡场", "祖代以上肉鸡场"),
+        c("祖代及以上蛋鸡场", "祖代及以上肉鸡场")
+    )
+
+    # Check if case.target exists
+    if (!case.target %in% tbl_pattern$case) {
+        stop(glue::glue(
+            "Invalid case.target: {case.target}. Available cases are: {paste(tbl_pattern$case, collapse = ', ')}"
+        ))
+    }
+
+    # Get the pattern and replacement
+    ptn <- tbl_pattern %>%
+        dplyr::filter(case == case.target) %>%
+        dplyr::pull(ptn)
+    rpl <- tbl_pattern %>%
+        dplyr::filter(case == case.target) %>%
+        dplyr::pull(rpl)
+
+    # Show the target case and the pattern and replacement
+    message(glue::glue("Target case: {case.target}"))
+    message(glue::glue("Pattern: {paste(ptn, collapse = ', ')}"))
+    message(glue::glue("Replacement: {paste(rpl, collapse = ', ')}"))
+
+    return(list(ptn = ptn, rpl = rpl, tbl_pattern = tbl_pattern))
+}
 
 
 #' Left join the tidy table with the matched unified variables table.
-#'
 #' @rdname workflow_funs
 #' @param dt_left data.frame. The tidy unpivot table.
 #' @param dt_right data.frame. The matched variables table and should be checked.
@@ -795,7 +1400,6 @@ wfl.addVars <- function(dt_left, dt_right) {
 
 
 #' Write out xlsx with the output file which the file name is specified year and prefix label
-#'
 #' @rdname workflow_funs
 #' @param dt data.frame. The data frame to write out.
 #' @param file_source character. The path of the source file.
@@ -909,9 +1513,66 @@ wfl.writeXlsx <- function(
     }
 }
 
+#' Helper function to choose the name of `use_data()`
+#' @rdname workflow_funs
+#' @description
+#' This function provides an interactive way to select a data name from a predefined list.
+#' It displays all available options and allows the user to choose by entering a number.
+#'
+#' @param name.dt character. The name of the data frame.
+#' @return character. The selected data name from the list.
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' # Interactive selection of data name
+#' selected_name <- choose.nameData()
+#' }
+#'
+choose.nameData <- function() {
+    ## settings: available data name items
+    ## the data name has uniform format style as "AgriMachine", "LivestockBreeding", etc.
+    ## this table is soft-coded in the package, you can change the data name as you need
+    use_list <- c(
+        "AgriMachine",
+        "AgriFertilizer",
+        "AgriPlastic",
+        "AgriPesticide",
+        "PublicBudget", # 5
+        "RDIntense",
+        "RDActivity",
+        "MarketPull",
+        "MarketPush",
+        "HitechFirmsPub", # 10
+        "IndustryTrade",
+        "IndustryRD",
+        "IndustryOperation",
+        "LivestockBreeding" # 14
+    )
+
+    # Display all options
+    cat("Available data name options:\n")
+    for (i in seq_along(use_list)) {
+        cat(sprintf("%2d: %s\n", i, use_list[i]))
+    }
+
+    # Interactive selection
+    repeat {
+        choice <- readline(prompt = "\nEnter option number (1-14): ")
+        choice <- as.integer(choice)
+
+        if (!is.na(choice) && choice >= 1 && choice <= length(use_list)) {
+            selected_name <- use_list[choice]
+            cat(sprintf("\nSelected: %s\n", selected_name))
+            return(selected_name)
+        } else {
+            cat("Invalid option, please try again\n")
+        }
+    }
+}
 
 #' Read the raw xlsx files and use the specified data.frame by use_data()
-#'
+#' @rdname workflow_funs
 #' @param directory.source character. The path of the source xlsx files.
 #' @param file.pattern character. The pattern of the file name.
 #' @param name.dt character. The name of the data frame.
@@ -1026,7 +1687,7 @@ wfl.useData <- function(
 }
 
 #' Help Document the Variables List of Data Set for Package Development
-#'
+#' @rdname workflow_funs
 #' @description
 #' This function generates documentation template for data frame variables in Roxygen2 format.
 #' It creates a list of variable entries that can be used in the \code{@format} section

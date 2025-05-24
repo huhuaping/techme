@@ -2,6 +2,8 @@
 % Please edit documentation in R/workflow_funs.R
 \name{workflow_funs}
 \alias{workflow_funs}
+\alias{create.dirTable}
+\alias{choose.filePattern}
 \alias{wfl.findFiles}
 \alias{wfl.Xls2Xlsx}
 \alias{getRange}
@@ -9,12 +11,23 @@
 \alias{getInfo}
 \alias{wfl.unpivotXlsx}
 \alias{wfl.tidyTable}
+\alias{get.targetList}
+\alias{get.vars}
+\alias{get.best.match}
 \alias{wfl.matchVars}
+\alias{choose.chnPattern}
 \alias{wfl.addVars}
 \alias{wfl.writeXlsx}
+\alias{choose.nameData}
+\alias{wfl.useData}
+\alias{help.document}
 \title{Workflow Functions}
 \usage{
-wfl.findFiles(directory, pattern)
+create.dirTable()
+
+choose.filePattern(year, mode, add_info)
+
+wfl.findFiles(dt, dir.case, i.final, pattern)
 
 wfl.Xls2Xlsx(file_path, sheet_drop = c("CNKI"))
 
@@ -37,14 +50,50 @@ wfl.unpivotXlsx(
 
 wfl.tidyTable(dt)
 
+get.targetList(identifier, show.all.identifier = FALSE)
+
+get.vars(df, lang = "eng", block, what = "variables")
+
+get.best.match(word, charvec)
+
 wfl.matchVars(dt, block_target, block_lang = "eng")
+
+choose.chnPattern(case.target)
 
 wfl.addVars(dt_left, dt_right)
 
 wfl.writeXlsx(dt, file_source = file_xlsx, year_target, prefix_label = NULL)
+
+choose.nameData()
+
+wfl.useData(directory.source, file.pattern, name.dt, which.dt = "df_use")
+
+help.document(df)
 }
 \arguments{
-\item{directory}{character. Path to search for files}
+\item{year}{numeric or numeric vector. The year(s) to include in the pattern.
+If a vector of length 2 is provided, it represents a year range.}
+
+\item{mode}{character. The pattern mode to use. Must be one of:
+\itemize{
+\item \code{year_one}: Single year, xls format, eg. "^raw-2023.xls$"
+\item \code{year_two}: Two years, xls format, eg. "^raw-2022-2023.xls$"
+\item \code{year_onex}: Single year, xlsx format, eg. "^raw-2023.xlsx$"
+\item \code{year_twox}: Two years, xlsx format, eg. "^raw-2022-2023.xlsx$"
+\item \code{add_onex}: Single year with additional info, xlsx format, eg. "^raw-.+?amount-2023.xlsx$"
+\item \code{add_one}: Single year with additional info, xls format, eg. "^raw-.+?amount-2023.xls$"
+\item \code{edited_one}: Single year with additional info, edited xlsx format, eg. "^raw-.+?amount-2023-edited.xlsx$"
+\item \code{edited_two}: Two years, edited xlsx format, eg. "^raw-2022-2023-edited.xlsx$"
+}}
+
+\item{add_info}{character. Additional information to include in the pattern.}
+
+\item{dt}{data.frame. The data frame to write out.}
+
+\item{dir.case}{character. The case name to search for files.
+Must one of the value of the "case" column in the data.frame.}
+
+\item{i.final}{number. The index of the final directory in the "final" column.}
 
 \item{pattern}{character. Pattern to match files}
 
@@ -52,15 +101,21 @@ wfl.writeXlsx(dt, file_source = file_xlsx, year_target, prefix_label = NULL)
 
 \item{sheet_drop}{character. Name of the sheet to drop}
 
-\item{dt}{data.frame. The data frame to write out.}
-
 \item{ith}{number. when exist multiple table region in one sheet.}
 
-\item{what}{character. What is the object function will return, whether "row" or "col".}
+\item{what}{character. The type of variable names to return. Options include:
+\itemize{
+\item "variables" (default): Full variable names
+\item "short_chn": Short Chinese names
+\item "short_eng": Short English names
+\item "chn_block4": Chinese block4 names
+\item "eng_block4": English block4 names
+\item other: other variable names in the input data frame (typically \code{varList})
+}}
 
-\item{reg_start}{character. regex pattern for start identifier, default \code{'^地.*区'}.}
+\item{reg_start}{character. regex pattern for start identifier.}
 
-\item{reg_end}{character. regex pattern for end identifier, default \code{'^新.*疆'}.}
+\item{reg_end}{character. regex pattern for end identifier.}
 
 \item{rows}{vector. Target rows of the region contains pivot table.}
 
@@ -75,11 +130,51 @@ And you can use the function \code{get_vars()} to get the variable name.}
 
 \item{file}{character. Path to the xlsx file.}
 
-\item{pattern.table}{character. Regex pattern for table identifier, default \code{'续表'}.}
+\item{pattern.table}{character. Regex pattern for table identifier.}
+
+\item{identifier}{character. The identifier of the target list to retrieve. May be one of:
+\itemize{
+\item v7_machine, v7_fertilizer, v7_plastic, v7_pesticide
+\item v6_budget
+\item v4_RDnbs, v4_RDinner, v4_RDfirm, v4_RDpull, v4_RDpush
+\item v4_operation, v4_RDtrade, v4_IndustryRD
+\item v8_livestock_t1 through v8_livestock_t9
+\item other: all other available identifiers
+}}
+
+\item{show.all.identifier}{logical. Whether to show all available identifier.
+Default is FALSE.}
+
+\item{df}{data.frame. The data frame to document.}
+
+\item{lang}{character. The language of variables to select. Must be either "eng" (default)
+or "chn".}
+
+\item{block}{list. A list which the length is not greater than 4 with names "block1", "block2", "block3", "block4".
+Each element contains the block identifiers to filter by. Note that block4 is optional.}
+
+\item{word}{character. The word to match.}
+
+\item{charvec}{character vector. The vector of words to match against.}
 
 \item{block_target}{list. Names of the list should be part or all of: block1, block2, block3, block4.}
 
 \item{block_lang}{character. Specify which language to use, either 'eng'(default) or 'chn'.}
+
+\item{case.target}{character. The target case to replace. Must be one of:
+\itemize{
+\item "machine": Agricultural machinery related terms
+\item "fertilizer": Fertilizer usage related terms
+\item "plastic": Agricultural plastic film related terms
+\item "budget": Budget and expenditure related terms
+\item "RDinner": R&D internal expenditure terms
+\item "RD": R&D institution and activity related terms
+\item "IndustryRD": Industry R&D related terms
+\item "operation": Business operation related terms
+\item "trade": Trade related terms
+\item "livestock tab01" through "livestock tab08": Livestock related terms
+\item other: other cases names available in the table
+}}
 
 \item{dt_left}{data.frame. The tidy unpivot table.}
 
@@ -90,9 +185,27 @@ And you can use the function \code{get_vars()} to get the variable name.}
 \item{year_target}{numeric. The year to write out.}
 
 \item{prefix_label}{character. The prefix label of the file name, default is NULL. Other value may be "funds", "ammount", etc.}
+
+\item{directory.source}{character. The path of the source xlsx files.}
+
+\item{file.pattern}{character. The pattern of the file name.}
+
+\item{name.dt}{character. The name of the data frame.
+And the name has uniform format style as "AgriMachine", "LivestockBreeding", etc.}
+
+\item{which.dt}{character. The name of the data frame to use, default is "df_use".}
 }
 \value{
-character vector of file paths
+tibble. A tibble containing the directory structure with columns:
+\itemize{
+\item \code{case} (character): Case identifier
+\item \code{media} (character): Main directory path
+\item \code{final} (list): Vector of subdirectory names
+}
+
+character. A regex pattern string for matching file names.
+
+list of file paths and directory path
 
 character. Path to the converted xlsx file
 
@@ -106,12 +219,57 @@ data.frame. A data frame containing the unpivoted data with units information.
 
 data.frame
 
+list. A list of length 2, containing the requested target list with block identifiers
+and the full list of all available lists.
+
+data.frame. A data frame containing the filtered variable names.
+
+character. The best matched word from charvec.
+
 data.frame. A data frame containing the matched variables.
 
+list. A list containing:
+\itemize{
+\item ptn: The pattern(s) to match
+\item rpl: The replacement(s) for the pattern(s)
+\item tbl_pattern: The full pattern-replacement table
+}
+
 data.frame. A data frame containing the joined and processed data.
+
+character. The selected data name from the list.
+
+NULL. The function prints the documentation template to the console.
 }
 \description{
 Internal functions for handling various workflow tasks in the techme package.
+
+This function creates a directory table that maps case names to their corresponding
+directory paths and subdirectories. The table is used to organize and locate data files
+in the package's data structure.#'
+
+This function generates regex patterns for matching specific file names based on year,
+file format, and additional information. It supports various naming patterns for raw
+data files and edited files.
+
+This function provides access to a predefined collection of target lists used for
+filtering and organizing data in the package. The lists are organized by different
+categories (v4, v6, v7, v8) and contain block identifiers for data filtering.
+
+This function retrieves variable names from a basic variables table based on specified
+language and block criteria. It supports filtering variables by hierarchical block
+structure in both English and Chinese.
+
+This function provides a collection of Chinese text patterns and their replacements
+for standardizing variable names in the tidy table. It supports various categories
+including agricultural machinery, fertilizer, plastic, budget, R&D, and livestock data.
+
+This function provides an interactive way to select a data name from a predefined list.
+It displays all available options and allows the user to choose by entering a number.
+
+This function generates documentation template for data frame variables in Roxygen2 format.
+It creates a list of variable entries that can be used in the \code{@format} section
+of data documentation.
 }
 \details{
 This file contains a collection of internal functions for:
@@ -121,12 +279,71 @@ This file contains a collection of internal functions for:
 \item Matching and standardizing variables
 \item Writing output files
 }
+
+The function returns a tibble with three columns:
+\itemize{
+\item \code{case}: The case identifier (e.g., "agri_prod", "budget")
+\item \code{media}: The main directory path for the case
+\item \code{final}: A list of subdirectories for the case
+}
+
+The target lists are organized into several categories:
+\itemize{
+\item v4: Research and Development related lists (RDnbs, RDinner, RDfirm, etc.)
+\item v6: Budget related lists
+\item v7: Agricultural production related lists (machine, fertilizer, plastic, pesticide)
+\item v8: Livestock related lists (t1-t9)
+}
+Each list contains block identifiers (block1, block2, block3) used for filtering data.
+
+The function filters variables based on a hierarchical block structure (block1-4)
+and returns the specified variable names. It supports both English and Chinese
+variable names through the language parameter. The block4 parameter is optional
+in the block list.
+
+The function maintains a predefined table of patterns and replacements for different
+categories of data. Each category may have multiple patterns and corresponding
+replacements. The table is soft-coded in the package and can be modified as needed.
+
+The function takes a data frame as input and generates documentation entries for each variable
+in the format required by Roxygen2. This is particularly useful when documenting datasets
+in R packages.
 }
 \examples{
 \dontrun{
-wfl.findFiles(directory = "data-raw", pattern = "\\\\.xlsx$")
+# Get the directory table
+tbl_dir <- create.dirTable()
+
+# View the structure
+str(tbl_dir)
+
+# Access specific case
+tbl_dir[tbl_dir$case == "agri_prod", ]
 }
 
+\dontrun{
+# Single year pattern
+choose.filePattern(year = 2022, mode = "year_onex")
+
+# Year range pattern
+choose.filePattern(year = c(2022, 2023), mode = "year_twox")
+
+# Pattern with additional info
+choose.filePattern(
+    year = 2022,
+    mode = "add_onex",
+    add_info = "amount"
+)
+}
+
+\dontrun{
+find_result <- wfl.findFiles(
+    dt = tbl_dir, # the directory table
+    dir.case = "agri_prod", # the case name of the target directory
+    i.final = 1, # the index of the final subdirectory
+    pattern = pattern_sel # the regex pattern for table identifier
+)
+}
 \dontrun{
 wfl.Xls2Xlsx(
     file_path = "data-raw/example.xls",
@@ -180,7 +397,7 @@ wfl.unpivot_xlsx(
     file = "data-raw/example.xlsx",
     header.mode = "vars-year",
     cols.drop = NULL,
-    pattern.table = "^地.*区"
+    pattern.table = "^\\\\u5730.*\\\\u533a"
 )
 }
 
@@ -189,8 +406,45 @@ df_tidy <- wfl.tidyTable(dt = df_out)
 }
 
 \dontrun{
+# Get machine target list
+machine_list <- get.targetList("v7_machine")
+
+# Get budget target list and show all available lists
+budget_list <- get.targetList("v6_budget", show.all.identifier = TRUE)
+}
+
+\dontrun{
+options(encoding = "UTF-8")
+block_sel <- list(
+    block1 = "v7",
+    block2 = "sctj",
+    block3 = "nyjx"
+)
+
+vars_set <- get.vars(df = varsList, block = block_sel, what = "variables")
+}
+
+\dontrun{
+get.best.match(
+    "\u519c\u4e1a\u673a\u68b0",
+    c(
+        "\u519c\u4e1a\u673a\u68b0",
+        "\u519c\u4e1a\u673a\u68b0\u603b\u52a8\u529b"
+    )
+)
+}
+
+\dontrun{
 target <- list(block1 = "v7", block2 = "sctj", block3 = "nyjx")
 df_vars_matched <- wfl.matchVars(dt = df_tidy, block_target = target)
+}
+
+\dontrun{
+# Get patterns for agricultural machinery
+machine_patterns <- choose.chnPattern("machine")
+
+# Get patterns for budget data
+budget_patterns <- choose.chnPattern("budget")
 }
 
 \dontrun{
@@ -204,6 +458,25 @@ wfl.writeXlsx(
     year_target = 2019,
     prefix_label = "funds"
 )
+}
+
+\dontrun{
+# Interactive selection of data name
+selected_name <- choose.nameData()
+}
+
+\dontrun{
+wfl.useData(
+    directory.source = "data-raw/data-tidy/",
+    file.pattern = "\\\\d{4}",
+    name.dt = "AgriMachine",
+    which.dt = "df_use"
+)
+}
+
+\dontrun{
+data(ProvinceCity)
+help.document(ProvinceCity)
 }
 
 }
