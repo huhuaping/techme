@@ -7,12 +7,13 @@
 get.chnPattern()
 }
 \value{
-list. A list containing:
+list or NULL. A list containing:
 \itemize{
 \item ptn: The pattern(s) to match
 \item rpl: The replacement(s) for the pattern(s)
 \item tbl_pattern: The full pattern-replacement table
 }
+Returns NULL if option 0 is selected.
 }
 \description{
 This function provides an interactive way to select a collection of Chinese text patterns

@@ -582,14 +582,14 @@ unpivot <- function(dt, rows, cols,
         dt_cell <- dt_cell %>%
             unpivotr::behead("up", vars) %>%
             unpivotr::behead("left", province) %>%
-            tibble::add_column(year = stringr::str_extract(file_xls, "\\d{4}"))
+            tibble::add_column(year = stringr::str_extract(file_xlsx, "\\d{4}"))
     } else if (header.mode == "vars-vars") { # header mode 3
         dt_cell <- dt_cell %>%
             unpivotr::behead("up-left", vars_tot) %>%
             unpivotr::behead("up", vars) %>%
             dplyr::mutate(vars = dplyr::if_else(is.na(vars), vars_tot, vars)) %>%
             unpivotr::behead("left-up", province) %>%
-            tibble::add_column(year = stringr::str_extract(file_xls, "\\d{4}")) %>%
+            tibble::add_column(year = stringr::str_extract(file_xlsx, "\\d{4}")) %>%
             dplyr::select(-vars_tot)
     } else if (header.mode == "year") { # header mode 4
         if (length(vars.add) != 1) {
@@ -1562,7 +1562,7 @@ wfl.writeXlsx <- function(
 #' It displays all available options and allows the user to choose by entering a number.
 #'
 #' @param name.dt character. The name of the data frame.
-#' @return character. The selected data name from the list.
+#' @return character or NULL. The selected data name from the list, or NULL if option 0 is selected.
 #' @keywords internal
 #'
 #' @examples
@@ -1594,21 +1594,29 @@ choose.nameData <- function() {
 
     # Display all options
     cat("Available data name options:\n")
+    cat(" 0: Return NULL\n")
     for (i in seq_along(use_list)) {
         cat(sprintf("%2d: %s\n", i, use_list[i]))
     }
 
     # Interactive selection
     repeat {
-        choice <- readline(prompt = "\nEnter option number (1-14): ")
+        choice <- readline(prompt = "\nEnter option number (0-14): ")
         choice <- as.integer(choice)
 
-        if (!is.na(choice) && choice >= 1 && choice <= length(use_list)) {
-            selected_name <- use_list[choice]
-            cat(sprintf("\nSelected: %s\n", selected_name))
-            return(selected_name)
+        if (!is.na(choice)) {
+            if (choice == 0) {
+                cat("\nReturning NULL as requested\n")
+                return(NULL)
+            } else if (choice >= 1 && choice <= length(use_list)) {
+                selected_name <- use_list[choice]
+                cat(sprintf("\nSelected: %s\n", selected_name))
+                return(selected_name)
+            } else {
+                cat("Invalid option, please try again\n")
+            }
         } else {
-            cat("Invalid option, please try again\n")
+            cat("Invalid input, please enter a number\n")
         }
     }
 }

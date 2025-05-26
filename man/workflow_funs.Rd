@@ -198,7 +198,7 @@ data.frame. A data frame containing the matched variables.
 
 data.frame. A data frame containing the joined and processed data.
 
-character. The selected data name from the list.
+character or NULL. The selected data name from the list, or NULL if option 0 is selected.
 
 NULL. The function prints the documentation template to the console.
 }
