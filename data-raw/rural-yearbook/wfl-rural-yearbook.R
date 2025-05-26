@@ -13,7 +13,7 @@ View(tbl_dir)
 ## use the helper function `choose.filePattern()` to generate the pattern
 pattern_sel <- choose.filePattern(
     year = c(2022, 2023), # may have length 1 or 2
-    mode = "year_twox", # must be one of the following: year_one, year_two, year_onex, year_twox, add_onex, add_one, edited_one, edited_two
+    mode = "year_two", # must be one of the following: year_one, year_two, year_onex, year_twox, add_onex, add_one, edited_one, edited_two
     add_info = NULL # eg "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
 )
 
@@ -21,23 +21,38 @@ pattern_sel <- choose.filePattern(
 find_result <- wfl.findFiles(
     dt = tbl_dir, # the directory table
     dir.case = "agri_prod", # the case name of the target directory
-    i.final = 1, # the index of the final subdirectory
+    i.final = 4, # the index of the final subdirectory
     pattern = pattern_sel # the regex pattern for table identifier
 )
 
-file_tar <- find_result$files # the target file path
-dir_tar <- find_result$file_dir # the target directory path
+(file_tar <- find_result$files) # the target file path
+(dir_tar <- find_result$file_dir) # the target directory path
 
 # Workflow: convert protected xls file to xlsx file----
 ## it should remove the unnecessary sheet (copyright or empty, or other sheet not needed).
-is.unprotected <- TRUE
+is.unprotected <- FALSE
 if (!is.unprotected) {
     ## the default is to remove the sheet named "CNKI"
     file_xlsx <- wfl.Xls2Xlsx(file_path = file_tar, sheet_drop = c("CNKI"))
 } else {
-    file_xlsx <- file_tar
+    file_xlsx <- str_replace(file_tar, "\\.xls", "\\.xlsx")
 }
 message(glue::glue("The target xlsx file is: {file_xlsx}"))
+
+## check the xlsx file and may need to add "地区" to table column
+## step 1: open the xlsx file
+## step 2： check the first column name
+## step 3：check and save the log detail for yearly update
+##         log information:
+##         - dir.case
+##         - i.final
+##         - mark
+##         - file.tar
+log_xlsx <- tibble::tribble(
+    ~dir.case, ~i.final, ~mark, ~file.tar,
+    "agri_prod", 2, "地区", "data-raw/rural-yearbook/part03-agri-produce/02-fertilizer/raw-2022-2023.xlsx"
+)
+
 
 # Workflow: unpivot xlsx file ----
 ## setting 1： whether drop columns and specify the header mode.
@@ -55,13 +70,10 @@ mode_sel <- header_mode[3]
 ## setting 3： specify the regex pattern for table identifier
 # pattern_table <- "^地.*区" # not to use "续表" !
 
-## setting 4： specify the extra chinese variable list
+## setting 4： specify the target block list
 ## use the target list by `get.targetList()`
-list_block <- get.targetList(
-    identifier = "v7_machine",
-    show.all.identifier = FALSE # whether show all available identifier, default is FALSE
-) %>%
-    .[["out_list"]] # only get the target list
+## this function is interactive, you can choose the target list from the console
+list_block <- get.targetList()
 
 ## setting 5: prepare the additional variable names if needed
 ## this is only used when header mode is "year"
@@ -75,6 +87,16 @@ vars_spc <- get.vars(
 )
 
 ## Now begin loop unpivot xlsx file
+## This function is used to loop unpivot all the sheets in the xlsx file.
+## It will call three internal functions respectively:
+## 1. getRange(): to get the range of the pivot table in the xlsx file.
+## 2. unpivot(): to unpivot the pivot table in the xlsx file.
+## 3. getInfo(): to get the unit information of the pivot table in the xlsx file.
+## Keep in mind that a sheet may contains multiple pivot tables.
+## Note 1: there may be only one table or multiple tables in the sheet
+## Note 2: when there are multiple tables, these table's alignment may be horizontal or vertical
+## Note 3: We only assume the only multiple table's alignment is horizontal or vertical, not hybrid alignment.
+
 df_out <- wfl.unpivotXlsx(
     file = file_xlsx,
     header.mode = mode_sel, # default is "vars-year"
@@ -89,7 +111,8 @@ df_out <- wfl.unpivotXlsx(
 View(df_out)
 
 # Workflow: tidy unpivoted table from xlsx file ----
-
+## may message in the console " Variable 'value' contains NA values after conversion to numeric."
+## it is ok, just ignore it
 df_tidy <- wfl.tidyTable(dt = df_out) %>%
     select(
         province, year,
@@ -117,16 +140,21 @@ vars_spc # see before
 ## Replace chinese variables names if needed ----
 ## replace unconsistent variables names
 
-## get the pattern and replacement using the helper function `choose.chnPattern()`
+## get the pattern and replacement using the helper function `get.chnPattern()`
+## you should interactively choose the case name from the R console
 ## this function is soft-coded in the package, you can change the pattern and replacement as you need
-mycase <- "machine"
-chn_pairs <- choose.chnPattern(mycase)
-ptn <- chn_pairs$ptn
-rpl <- chn_pairs$rpl
+## if select option 0, the function will return NULL and not replace the variables names
 
-## now replace the variables names
-df_tidy <- df_tidy %>%
-    mutate(vars = mgsub::mgsub(vars, ptn, rpl))
+chn_pairs <- get.chnPattern()
+## only replace the variables names if chn_pairs is not NULL
+if (!is.null(chn_pairs)) {
+    ptn <- chn_pairs$ptn
+    rpl <- chn_pairs$rpl
+
+    ## now replace the variables names
+    df_tidy <- df_tidy %>%
+        mutate(vars = mgsub::mgsub(vars, ptn, rpl))
+}
 
 View(df_tidy)
 

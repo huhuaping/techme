@@ -15,7 +15,6 @@
 \alias{get.vars}
 \alias{get.best.match}
 \alias{wfl.matchVars}
-\alias{choose.chnPattern}
 \alias{wfl.addVars}
 \alias{wfl.writeXlsx}
 \alias{choose.nameData}
@@ -50,15 +49,13 @@ wfl.unpivotXlsx(
 
 wfl.tidyTable(dt)
 
-get.targetList(identifier, show.all.identifier = FALSE)
+get.targetList()
 
 get.vars(df, lang = "eng", block, what = "variables")
 
 get.best.match(word, charvec)
 
 wfl.matchVars(dt, block_target, block_lang = "eng")
-
-choose.chnPattern(case.target)
 
 wfl.addVars(dt_left, dt_right)
 
@@ -132,19 +129,6 @@ And you can use the function \code{get_vars()} to get the variable name.}
 
 \item{pattern.table}{character. Regex pattern for table identifier.}
 
-\item{identifier}{character. The identifier of the target list to retrieve. May be one of:
-\itemize{
-\item v7_machine, v7_fertilizer, v7_plastic, v7_pesticide
-\item v6_budget
-\item v4_RDnbs, v4_RDinner, v4_RDfirm, v4_RDpull, v4_RDpush
-\item v4_operation, v4_RDtrade, v4_IndustryRD
-\item v8_livestock_t1 through v8_livestock_t9
-\item other: all other available identifiers
-}}
-
-\item{show.all.identifier}{logical. Whether to show all available identifier.
-Default is FALSE.}
-
 \item{df}{data.frame. The data frame to document.}
 
 \item{lang}{character. The language of variables to select. Must be either "eng" (default)
@@ -160,21 +144,6 @@ Each element contains the block identifiers to filter by. Note that block4 is op
 \item{block_target}{list. Names of the list should be part or all of: block1, block2, block3, block4.}
 
 \item{block_lang}{character. Specify which language to use, either 'eng'(default) or 'chn'.}
-
-\item{case.target}{character. The target case to replace. Must be one of:
-\itemize{
-\item "machine": Agricultural machinery related terms
-\item "fertilizer": Fertilizer usage related terms
-\item "plastic": Agricultural plastic film related terms
-\item "budget": Budget and expenditure related terms
-\item "RDinner": R&D internal expenditure terms
-\item "RD": R&D institution and activity related terms
-\item "IndustryRD": Industry R&D related terms
-\item "operation": Business operation related terms
-\item "trade": Trade related terms
-\item "livestock tab01" through "livestock tab08": Livestock related terms
-\item other: other cases names available in the table
-}}
 
 \item{dt_left}{data.frame. The tidy unpivot table.}
 
@@ -219,21 +188,13 @@ data.frame. A data frame containing the unpivoted data with units information.
 
 data.frame
 
-list. A list of length 2, containing the requested target list with block identifiers
-and the full list of all available lists.
+list. List of target list with block identifiers.
 
 data.frame. A data frame containing the filtered variable names.
 
 character. The best matched word from charvec.
 
 data.frame. A data frame containing the matched variables.
-
-list. A list containing:
-\itemize{
-\item ptn: The pattern(s) to match
-\item rpl: The replacement(s) for the pattern(s)
-\item tbl_pattern: The full pattern-replacement table
-}
 
 data.frame. A data frame containing the joined and processed data.
 
@@ -252,17 +213,13 @@ This function generates regex patterns for matching specific file names based on
 file format, and additional information. It supports various naming patterns for raw
 data files and edited files.
 
-This function provides access to a predefined collection of target lists used for
-filtering and organizing data in the package. The lists are organized by different
+This function provides an interactive way to select a target list from a predefined collection
+used for filtering and organizing data in the package. The lists are organized by different
 categories (v4, v6, v7, v8) and contain block identifiers for data filtering.
 
 This function retrieves variable names from a basic variables table based on specified
 language and block criteria. It supports filtering variables by hierarchical block
 structure in both English and Chinese.
-
-This function provides a collection of Chinese text patterns and their replacements
-for standardizing variable names in the tidy table. It supports various categories
-including agricultural machinery, fertilizer, plastic, budget, R&D, and livestock data.
 
 This function provides an interactive way to select a data name from a predefined list.
 It displays all available options and allows the user to choose by entering a number.
@@ -287,6 +244,25 @@ The function returns a tibble with three columns:
 \item \code{final}: A list of subdirectories for the case
 }
 
+This function is used to get the range of the pivot table in the xlsx file.
+The pivot table is identified by the regex pattern for start and end identifier.
+The function will return the row and column range of the target pivot table.
+Note 1: there may be only one table or multiple tables in the sheet
+Note 2: when there are multiple tables, these table's alignment may be horizontal or vertical
+Note 3: We only assume the only multiple table's alignment is horizontal or vertical, not hybrid alignment.
+
+This function is used to loop unpivot all the sheets in the xlsx file.
+It will call three internal functions respectively:
+\enumerate{
+\item getRange(): to get the range of the pivot table in the xlsx file.
+\item unpivot(): to unpivot the pivot table in the xlsx file.
+\item getInfo(): to get the unit information of the pivot table in the xlsx file.
+Keep in mind that a sheet may contains multiple pivot tables.
+Note 1: there may be only one table or multiple tables in the sheet
+Note 2: when there are multiple tables, these table's alignment may be horizontal or vertical
+Note 3: We only assume the only multiple table's alignment is horizontal or vertical, not hybrid alignment.
+}
+
 The target lists are organized into several categories:
 \itemize{
 \item v4: Research and Development related lists (RDnbs, RDinner, RDfirm, etc.)
@@ -300,10 +276,6 @@ The function filters variables based on a hierarchical block structure (block1-4
 and returns the specified variable names. It supports both English and Chinese
 variable names through the language parameter. The block4 parameter is optional
 in the block list.
-
-The function maintains a predefined table of patterns and replacements for different
-categories of data. Each category may have multiple patterns and corresponding
-replacements. The table is soft-coded in the package and can be modified as needed.
 
 The function takes a data frame as input and generates documentation entries for each variable
 in the format required by Roxygen2. This is particularly useful when documenting datasets
@@ -406,11 +378,8 @@ df_tidy <- wfl.tidyTable(dt = df_out)
 }
 
 \dontrun{
-# Get machine target list
-machine_list <- get.targetList("v7_machine")
-
-# Get budget target list and show all available lists
-budget_list <- get.targetList("v6_budget", show.all.identifier = TRUE)
+# Interactive selection of target list
+target_list <- get.targetList()
 }
 
 \dontrun{
@@ -437,14 +406,6 @@ get.best.match(
 \dontrun{
 target <- list(block1 = "v7", block2 = "sctj", block3 = "nyjx")
 df_vars_matched <- wfl.matchVars(dt = df_tidy, block_target = target)
-}
-
-\dontrun{
-# Get patterns for agricultural machinery
-machine_patterns <- choose.chnPattern("machine")
-
-# Get patterns for budget data
-budget_patterns <- choose.chnPattern("budget")
 }
 
 \dontrun{

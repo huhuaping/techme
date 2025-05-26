@@ -16,12 +16,12 @@ utils::globalVariables(c(
     "chr", "row_index", "row_end", "row_start", "col_start", "col_end",
     "year", "file_xls", "vars_tot", "value", "input", "asis", "variables",
     "varsList", "target", "file_xlsx", "units_base",
-    "case", "final", "media"
+    "case", "final", "media", "col_group", "row_mark", "table_id", "start", "end"
 ))
 
 
 
-#' @importFrom dplyr mutate filter select rename left_join bind_rows
+#' @importFrom dplyr mutate_all filter select rename left_join bind_rows group_by mutate row_number ungroup
 #' @importFrom stringr str_detect str_extract str_replace str_replace_all str_trim
 #' @importFrom XLConnect loadWorkbook getSheets readWorksheet
 #' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook write.xlsx
@@ -31,6 +31,8 @@ utils::globalVariables(c(
 #' @importFrom mgsub mgsub
 #' @importFrom purrr map_chr
 #' @importFrom tibble tibble add_row add_column
+#' @importFrom tidyr fill pivot_wider
+#' @importFrom rlang .data
 
 #' @title Helper function to get the directory table
 #' @description
@@ -346,6 +348,14 @@ wfl.Xls2Xlsx <- function(file_path, sheet_drop = c("CNKI")) {
 
 
 #' Get range of xlsx file's pivot table with target regex pattern
+#' @details
+#' This function is used to get the range of the pivot table in the xlsx file.
+#' The pivot table is identified by the regex pattern for start and end identifier.
+#' The function will return the row and column range of the target pivot table.
+#' Note 1: there may be only one table or multiple tables in the sheet
+#' Note 2: when there are multiple tables, these table's alignment may be horizontal or vertical
+#' Note 3: We only assume the only multiple table's alignment is horizontal or vertical, not hybrid alignment.
+
 #' @rdname workflow_funs
 #' @param dt data.frame. Which is the wb object reading from xlsx file.
 #' @param ith number. when exist multiple table region in one sheet.
@@ -378,7 +388,7 @@ getRange <- function(dt, ith, what,
     dt_detect_region <- dt %>%
         dplyr::mutate_all(.funs = function(x) stringr::str_detect(x, pattern))
 
-    # Search along columns, get the index of the region identifier
+    # Search along columns, get the index of the row (region) identifier
     range_row <- sapply(
         dt_detect_region,
         function(x) {
@@ -386,62 +396,96 @@ getRange <- function(dt, ith, what,
         }
     )
 
-    # Filter index, detect the columns which contain the region identifier
-    index_row <- range_row %>%
-        sapply(., function(x) {
-            length(x) != 0
-        })
+    # name of the last one of the range_row contains the max column number
+    col_max <- length(range_row)
+
+    ## rows start and end index
+    ## note 1: there may be only one table or multiple tables in the sheet
+    ## note 2: when there are multiple tables, the table's alignment may be horizontal or vertical
+
+    # looply create the identifier data.frame
+    dt_identifier <- NULL
+    i <- 2
+    for (i in 1:length(range_row)) {
+        if (length(range_row[[i]]) != 0) {
+            dt_identifier <- rbind(
+                dt_identifier,
+                data.frame(row = range_row[[i]], col = i)
+            )
+        }
+    }
+
+    # add the the odd and even mark for each col group
+    ## note: the index() function is used to get the index of the row
+    dt_identifier_mark <- dt_identifier %>%
+        # add the the odd and even mark for each col group
+        dplyr::group_by(col) %>%
+        dplyr::mutate(
+            col_group = ifelse(dplyr::row_number(row) %% 2 == 0, NA, dplyr::row_number(row)),
+            row_mark = ifelse(dplyr::row_number(row) %% 2 == 0, "end", "start")
+        ) %>%
+        # fill group down, add group index completely
+        tidyr::fill(col_group, .direction = "down") %>%
+        dplyr::ungroup()
+
+    # get unique col values and their next values
+    tbl_distinct <- dt_identifier_mark %>%
+        # get unique col values and their next values
+        dplyr::distinct(col) %>%
+        dplyr::mutate(
+            col_end = dplyr::lead(col) - 1
+        ) %>%
+        # if col_end is NA, fill it with the max col number
+        dplyr::mutate(
+            col_end = ifelse(is.na(col_end), col_max, col_end)
+        )
+
+    # join back to original data by col
+    # and add the table id
+    dt_identifier_add <- tbl_distinct %>%
+        # join back to original data with group and mark
+        dplyr::right_join(
+            dt_identifier_mark,
+            by = "col"
+        ) %>%
+        # reorder columns to match original structure
+        dplyr::select(row, col, col_group, row_mark, col_end) %>%
+        ## add the table id
+        ## note: one col vaule may contains multiple tables
+        dplyr::group_by(col, col_group) %>%
+        tibble::add_column(table_id = dplyr::group_indices(.)) %>%
+        dplyr::ungroup()
+
+    # filter the ith table's identifier
+    tbl_ith <- dt_identifier_add %>%
+        dplyr::filter(table_id == ith)
 
     # Create data frames for row and column indices
-    ## rows start and end index
-    df_row <- range_row[which(index_row == TRUE)] %>%
-        data.frame() %>%
-        # rename the first column to row_index
-        dplyr::rename(row_index = 1) %>%
-        # create start and end columns with odd and even row index value in Column 1
-        dplyr::mutate(row_start = ifelse(row_index %% 2 == 0, row_index, NA)) %>%
-        dplyr::mutate(row_end = ifelse(row_index %% 2 == 1, row_index, NA)) %>%
-        # lead calculation to get the end row index
-        dplyr::mutate(row_end = lead(row_end)) %>%
-        dplyr::select(row_start, row_end) %>%
-        # tidy and filter NA
-        dplyr::filter(!is.na(row_end))
-    ## column start and end index
-    ## max column number
-    col_max <- dim(dt_detect_region)[2]
-    df_col <- which(index_row == TRUE) %>%
-        # t() %>%
-        data.frame() %>%
-        dplyr::rename(col_start = 1) %>%
-        # add the last column index +1, and it will be minus 1 in the next step
-        tibble::add_row(col_start = col_max + 1) %>%
-        # lead calculation to get the end column index
-        dplyr::mutate(col_end = lead(col_start) - 1) %>%
-        # tidy and filter NA
-        dplyr::filter(!is.na(col_end))
+    ## data.frame of column start and end index
+    df_col <- tbl_ith %>%
+        dplyr::select(col, col_end) %>%
+        base::unique() %>%
+        dplyr::rename("col_start" = "col")
 
-    # Check dimensions by row numbers, keep the same dimension for both row and column data.frame
-    if (dim(df_row)[1] > dim(df_col)[1]) {
-        message("more than one tables in one sheet and keep in the same column range.")
-        # add row dimension to the column data.frame as the same dimension as row data.frame
-        df_col_added <- data.frame(
-            col_start = rep(NA, dim(df_row)[1] - dim(df_col)[1]),
-            col_end = rep(NA, dim(df_row)[1] - dim(df_col)[1])
-        )
-        df_col <- dplyr::bind_rows(df_col, df_col_added) %>%
-            # fill down the column index
-            tidyr::fill(col_start, .direction = "down") %>%
-            tidyr::fill(col_end, .direction = "down")
-    } else if (dim(df_row)[1] == dim(df_col)[1]) {
-        df_col <- df_col
-    } else {
-        stop("Row and column dimensions do not match. Please check the identifier patterns!")
+    ## data.frame of row start and end index
+    df_row <- tbl_ith %>%
+        dplyr::select(row, row_mark) %>%
+        # pivot wider to get the start and end row index
+        tidyr::pivot_wider(names_from = row_mark, values_from = row) %>%
+        dplyr::select(start, end) %>%
+        dplyr::rename("row_start" = "start", "row_end" = "end")
+
+    # check the dimension of df_row and df_col must be 1 row and 2 columns
+    if (nrow(df_row) != 1 || ncol(df_row) != 2) {
+        stop("The dimension of df_row must be 1 row and 2 columns")
     }
-    n_tbl <- dim(df_col)[1]
+    if (nrow(df_col) != 1 || ncol(df_col) != 2) {
+        stop("The dimension of df_col must be 1 row and 2 columns")
+    }
 
     # Get row and column ranges
-    rows <- seq(df_row[ith, "row_start"], df_row[ith, "row_end"])
-    cols <- seq(df_col[ith, "col_start"], df_col[ith, "col_end"])
+    rows <- df_row$row_start:df_row$row_end
+    cols <- df_col$col_start:df_col$col_end
 
     # Return appropriate range
     if (what == "row") {
@@ -610,7 +654,7 @@ getInfo <- function(dt, unit_pattern) {
         stop("Multiple unit information found. Please check the raw xls file!")
     }
     if (length(info_list) == 0) {
-        warning("No unit information found in the data.")
+        message("No unified unit information found in the data.")
         return(character(0))
     }
 
@@ -619,6 +663,17 @@ getInfo <- function(dt, unit_pattern) {
 
 #' Main function to loop unpivot all the sheets in the xlsx file.
 #' Keep in mind that a sheet may contains multiple pivot tables.
+#' @details
+#' This function is used to loop unpivot all the sheets in the xlsx file.
+#' It will call three internal functions respectively:
+#' 1. getRange(): to get the range of the pivot table in the xlsx file.
+#' 2. unpivot(): to unpivot the pivot table in the xlsx file.
+#' 3. getInfo(): to get the unit information of the pivot table in the xlsx file.
+#' Keep in mind that a sheet may contains multiple pivot tables.
+#' Note 1: there may be only one table or multiple tables in the sheet
+#' Note 2: when there are multiple tables, these table's alignment may be horizontal or vertical
+#' Note 3: We only assume the only multiple table's alignment is horizontal or vertical, not hybrid alignment.
+
 #' @rdname workflow_funs
 #' @param file character. Path to the xlsx file.
 #' @param header.mode character. One of the four options:  'vars-year', 'vars', 'vars-vars','year'
@@ -680,7 +735,7 @@ wfl.unpivotXlsx <- function(
     df_out <- NULL
 
     # Process each sheet
-    # j <-1
+    # j <-2
     for (j in 1:sheetnum) {
         message(glue::glue("Processing sheet {j} of {sheetnum}"))
 
@@ -698,7 +753,7 @@ wfl.unpivotXlsx <- function(
         message(glue::glue("Found {n_tables} pivot tables in sheet {j}"))
 
         # Process each table
-        # i <- 4
+        # i <- 1
         for (i in 1:n_tables) {
             # get the rows index of the table
             sel_rows <- getRange(
@@ -830,11 +885,12 @@ wfl.tidyTable <- function(dt) {
     return(dt_tidy)
 }
 
-#' Helper function to create target list collection#'
+#' Helper function to create target list collection by interactive selection with R console
 #' @description
-#' This function provides access to a predefined collection of target lists used for
-#' filtering and organizing data in the package. The lists are organized by different
+#' This function provides an interactive way to select a target list from a predefined collection
+#' used for filtering and organizing data in the package. The lists are organized by different
 #' categories (v4, v6, v7, v8) and contain block identifiers for data filtering.
+#'
 #' @rdname workflow_funs
 #' @details
 #' The target lists are organized into several categories:
@@ -846,42 +902,19 @@ wfl.tidyTable <- function(dt) {
 #' }
 #' Each list contains block identifiers (block1, block2, block3) used for filtering data.
 #'
-#' @param identifier character. The identifier of the target list to retrieve. May be one of:
-#'   \itemize{
-#'     \item v7_machine, v7_fertilizer, v7_plastic, v7_pesticide
-#'     \item v6_budget
-#'     \item v4_RDnbs, v4_RDinner, v4_RDfirm, v4_RDpull, v4_RDpush
-#'     \item v4_operation, v4_RDtrade, v4_IndustryRD
-#'     \item v8_livestock_t1 through v8_livestock_t9
-#'     \item other: all other available identifiers
-#'   }
-#' @param show.all.identifier logical. Whether to show all available identifier.
-#'   Default is FALSE.
-#'
-#' @return list. A list of length 2, containing the requested target list with block identifiers
-#' and the full list of all available lists.
+#' @return list. List of target list with block identifiers.
 #'
 #' @keywords internal
+#' @importFrom utils readline
 #' @importFrom glue glue
 #'
 #' @examples
 #' \dontrun{
-#' # Get machine target list
-#' machine_list <- get.targetList("v7_machine")
-#'
-#' # Get budget target list and show all available lists
-#' budget_list <- get.targetList("v6_budget", show.all.identifier = TRUE)
+#' # Interactive selection of target list
+#' target_list <- get.targetList()
 #' }
 #'
-get.targetList <- function(identifier, show.all.identifier = FALSE) {
-    # Input validation
-    if (!is.character(identifier) || length(identifier) != 1) {
-        stop("'identifier' must be a single character string")
-    }
-    if (!is.logical(show.all.identifier) || length(show.all.identifier) != 1) {
-        stop("'show.all.identifier' must be a single logical value")
-    }
-
+get.targetList <- function() {
     # Define full list collection
     full_list <- list(
         v7_machine = list(
@@ -974,23 +1007,28 @@ get.targetList <- function(identifier, show.all.identifier = FALSE) {
         )
     )
 
-    # Check if identifier exists
-    if (!identifier %in% names(full_list)) {
-        stop(glue::glue("Invalid identifier: {identifier}. Available identifiers are: {paste(names(full_list), collapse = ', ')}"))
+    # Display all options
+    cat("Available target list options:\n")
+    for (i in seq_along(full_list)) {
+        cat(sprintf("%2d: %s\n", i, names(full_list)[i]))
     }
 
-    # Get the requested list
-    out_list <- full_list[[identifier]]
-    message(glue::glue("Retrieved target list for: {identifier}"))
-    # show the target list, print the name and value of the list
-    message(paste(names(out_list), out_list, sep = ": ", collapse = "\n"))
+    # Interactive selection
+    repeat {
+        choice <- readline(prompt = "\nEnter option number (1-21): ")
+        choice <- as.integer(choice)
 
-    # Show the full list if requested
-    if (show.all.identifier) {
-        message(glue::glue("ALL available identifiers: {paste(names(full_list), collapse = ', ')}"))
+        if (!is.na(choice) && choice >= 1 && choice <= length(full_list)) {
+            selected_name <- names(full_list)[choice]
+            selected_list <- full_list[[choice]]
+            cat(sprintf("\nSelected: %s\n", selected_name))
+            cat("Block identifiers:\n")
+            cat(paste(names(selected_list), selected_list, sep = ": ", collapse = "\n"), "\n")
+            return(selected_list)
+        } else {
+            cat("Invalid option, please try again\n")
+        }
     }
-
-    return(list(out_list = out_list, full_list = full_list))
 }
 
 #' Get names from basic variables table
@@ -1103,7 +1141,7 @@ get.vars <- function(df, lang = "eng", block, what = "variables") {
     vars <- df %>%
         dplyr::select(one_of(what))
 
-    message(glue::glue("get variables names: {paste(names(vars), collapse = ', ')}"))
+    message(glue::glue("`get.vars()` get variables in {what}: {paste0(vars, collapse = ', ')}\n"))
     return(vars)
 }
 
@@ -1220,60 +1258,40 @@ wfl.matchVars <- function(dt, block_target, block_lang = "eng") {
 }
 
 #' Helper function to replace variables names in the tidy table
-#' @rdname workflow_funs
+#'
 #' @description
-#' This function provides a collection of Chinese text patterns and their replacements
-#' for standardizing variable names in the tidy table. It supports various categories
-#' including agricultural machinery, fertilizer, plastic, budget, R&D, and livestock data.
+#' This function provides an interactive way to select a collection of Chinese text patterns
+#' and their replacements for standardizing variable names in the tidy table. It supports
+#' various categories including agricultural machinery, fertilizer, plastic, budget, R&D,
+#' and livestock data.
 #'
 #' @details
 #' The function maintains a predefined table of patterns and replacements for different
 #' categories of data. Each category may have multiple patterns and corresponding
 #' replacements. The table is soft-coded in the package and can be modified as needed.
 #'
-#' @param case.target character. The target case to replace. Must be one of:
-#'   \itemize{
-#'     \item "machine": Agricultural machinery related terms
-#'     \item "fertilizer": Fertilizer usage related terms
-#'     \item "plastic": Agricultural plastic film related terms
-#'     \item "budget": Budget and expenditure related terms
-#'     \item "RDinner": R&D internal expenditure terms
-#'     \item "RD": R&D institution and activity related terms
-#'     \item "IndustryRD": Industry R&D related terms
-#'     \item "operation": Business operation related terms
-#'     \item "trade": Trade related terms
-#'     \item "livestock tab01" through "livestock tab08": Livestock related terms
-#'     \item other: other cases names available in the table
-#'   }
-#'
-#' @return list. A list containing:
+#' @return list or NULL. A list containing:
 #'   \itemize{
 #'     \item ptn: The pattern(s) to match
 #'     \item rpl: The replacement(s) for the pattern(s)
 #'     \item tbl_pattern: The full pattern-replacement table
 #'   }
+#'   Returns NULL if option 0 is selected.
 #'
 #' @keywords internal
 #' @importFrom dplyr filter pull
 #' @importFrom tibble tribble
 #' @importFrom magrittr %>%
 #' @importFrom glue glue
+#' @importFrom utils readline
 #'
 #' @examples
 #' \dontrun{
-#' # Get patterns for agricultural machinery
-#' machine_patterns <- choose.chnPattern("machine")
-#'
-#' # Get patterns for budget data
-#' budget_patterns <- choose.chnPattern("budget")
+#' # Interactive selection of pattern-replacement pairs
+#' patterns <- get.chnPattern()
 #' }
 #'
-choose.chnPattern <- function(case.target) {
-    # Input validation
-    if (!is.character(case.target) || length(case.target) != 1) {
-        stop("'case.target' must be a single character string")
-    }
-
+get.chnPattern <- function() {
     # Define pattern-replacement table
     tbl_pattern <- tibble::tribble(
         ~case, ~ptn, ~rpl,
@@ -1312,27 +1330,50 @@ choose.chnPattern <- function(case.target) {
         c("祖代及以上蛋鸡场", "祖代及以上肉鸡场")
     )
 
-    # Check if case.target exists
-    if (!case.target %in% tbl_pattern$case) {
-        stop(glue::glue(
-            "Invalid case.target: {case.target}. Available cases are: {paste(tbl_pattern$case, collapse = ', ')}"
-        ))
+    # Display all options
+    cat("Available pattern categories:\n")
+    cat(" 0: Return NULL\n")
+    for (i in seq_along(tbl_pattern$case)) {
+        cat(sprintf("%2d: %s\n", i, tbl_pattern$case[i]))
     }
 
-    # Get the pattern and replacement
-    ptn <- tbl_pattern %>%
-        dplyr::filter(case == case.target) %>%
-        dplyr::pull(ptn)
-    rpl <- tbl_pattern %>%
-        dplyr::filter(case == case.target) %>%
-        dplyr::pull(rpl)
+    # Interactive selection
+    repeat {
+        choice <- readline(prompt = "\nEnter option number (0-14): ")
+        choice <- as.integer(choice)
 
-    # Show the target case and the pattern and replacement
-    message(glue::glue("Target case: {case.target}"))
-    message(glue::glue("Pattern: {paste(ptn, collapse = ', ')}"))
-    message(glue::glue("Replacement: {paste(rpl, collapse = ', ')}"))
+        if (!is.na(choice)) {
+            if (choice == 0) {
+                cat("\nReturning NULL as requested\n")
+                return(NULL)
+            } else if (choice >= 1 && choice <= nrow(tbl_pattern)) {
+                selected_case <- tbl_pattern$case[choice]
+                selected_ptn <- tbl_pattern$ptn[[choice]]
+                selected_rpl <- tbl_pattern$rpl[[choice]]
 
-    return(list(ptn = ptn, rpl = rpl, tbl_pattern = tbl_pattern))
+                # Display selection details
+                cat(sprintf("\nSelected category: %s\n", selected_case))
+                cat("Patterns to match:\n")
+                for (i in seq_along(selected_ptn)) {
+                    cat(sprintf("  %d. %s\n", i, selected_ptn[i]))
+                }
+                cat("Replacements:\n")
+                for (i in seq_along(selected_rpl)) {
+                    cat(sprintf("  %d. %s\n", i, selected_rpl[i]))
+                }
+
+                return(list(
+                    ptn = selected_ptn,
+                    rpl = selected_rpl,
+                    tbl_pattern = tbl_pattern
+                ))
+            } else {
+                cat("Invalid option, please try again\n")
+            }
+        } else {
+            cat("Invalid input, please enter a number\n")
+        }
+    }
 }
 
 
@@ -1393,6 +1434,7 @@ wfl.addVars <- function(dt_left, dt_right) {
     if (any(is.na(df_matched$chn_block4))) {
         warning("Some 'chn_block4' values are NA after joining. Please check the matching process.")
     }
+    message(glue::glue("`wfl.addVars()` successfully added variables to the tidy table"))
 
     return(df_matched)
 }
@@ -1629,14 +1671,17 @@ wfl.useData <- function(
     files_all <- list.files(directory.source)
     files_id <- which(stringr::str_detect(files_all, file.pattern))
     files_sel <- files_all[files_id]
-    files_path <- paste0(directory.source, files_sel)
+    files_path <- paste0(directory.source, "/", files_sel)
 
     if (length(files_path) == 0) {
         stop("No files found matching the pattern: ", file.pattern)
+    } else {
+        message(glue::glue("Found {length(files_path)} files matching the pattern: {paste0(files_sel, collapse = ', ')}"))
     }
 
     # loop read xlsx files
     df_use <- NULL
+    i <- 1
     for (i in length(files_path):1) {
         tryCatch(
             {
@@ -1654,6 +1699,8 @@ wfl.useData <- function(
 
     if (is.null(df_use)) {
         stop("No data was successfully read from any files")
+    } else {
+        message(glue::glue("Successfully read {nrow(df_use)} rows from {length(files_path)} files"))
     }
 
     # assign data to the global environment on condition with `which_dt`
