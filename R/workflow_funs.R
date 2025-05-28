@@ -622,7 +622,7 @@ unpivot <- function(dt, rows, cols,
 
 #' Helper function to extract measurement information of the pivot table
 #' Such as units (thousand tons, etc.),given that all variables have the same units scale in pivot table.
-#' @rdname workflow_funs
+#' @rdname workflow_funs_unpivot_xlsx
 #' @param dt data.frame. Should be characterer the type of pivot table.
 #'
 #' @return vector. A character vector containing the unit information.
@@ -821,7 +821,6 @@ wfl.unpivotXlsx <- function(
 
 #' Tidy dataset from unpivot yearbook table
 #'
-#' @rdname workflow_funs
 #' @param dt data.frame. typically the yearbook unpivot table by use \code{unpivot}.
 #'
 #' @return data.frame
@@ -862,7 +861,7 @@ wfl.tidyTable <- function(dt) {
             # handle cell contain both chn and eng names
             vars = stringr::str_replace_all(vars, "\\r\\n", "_"),
             vars = stringr::str_replace(vars, "(_[a-zA-Z].+)", ""),
-            vars = stringr::str_replace_all(vars, "_", ""),
+            vars = stringr::str_replace_all(vars, "_|,", ""),
             # handle newline break
             vars = mgsub::mgsub(
                 vars,
@@ -1474,7 +1473,7 @@ wfl.addVars <- function(dt_left, dt_right) {
 
 
 #' Write out xlsx with the output file which the file name is specified year and prefix label
-#' @rdname workflow_funs
+
 #' @param dt data.frame. The data frame to write out.
 #' @param file_source character. The path of the source file.
 #' @param year_target numeric. The year to write out.
@@ -1587,8 +1586,19 @@ wfl.writeXlsx <- function(
     }
 }
 
+#' @title Workflow Functions: use data
+#' @description Internal functions for handling various workflow tasks in the techme package.
+#' @details This file contains a collection of internal functions for:
+#' \itemize{
+#'   \item function `choose.nameData()`: choose the name of `use_data()`
+#'   \item function `wfl.useData()`: use the data with `use_data()`
+#' }
+#' @keywords internal
+#' @name workflow_funs_use_data
+NULL
+
 #' Helper function to choose the name of `use_data()`
-#' @rdname workflow_funs
+#' @rdname workflow_funs_use_data
 #' @description
 #' This function provides an interactive way to select a data name from a predefined list.
 #' It displays all available options and allows the user to choose by entering a number.
@@ -1654,6 +1664,7 @@ choose.nameData <- function() {
 }
 
 #' Read the raw xlsx files and use the specified data.frame by use_data()
+#' @rdname workflow_funs_use_data
 #' @param directory.source character. The path of the source xlsx files.
 #' @param file.pattern character. The pattern of the file name.
 #' @param name.dt character. The name of the data frame.
