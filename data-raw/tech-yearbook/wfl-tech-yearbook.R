@@ -11,17 +11,18 @@ View(tbl_dir)
 
 ## setting 2: specify the regex pattern for table identifier
 ## use the helper function `choose.filePattern()` to generate the pattern
+prefix_add <- "funds" # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
 pattern_sel <- choose.filePattern(
     year = c(2023), # may have length 1 or 2
-    mode = "year_one", # must be one of the following: year_one, year_two, year_onex, year_twox, add_onex, add_one, edited_one, edited_two
-    add_info = NULL # eg "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
+    mode = "add_one", # must be one of the following: year_one, year_two, year_onex, year_twox, add_onex, add_one, edited_one, edited_two
+    add_info = prefix_add # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
 )
 
 ##  run the function to find target directory and files ----
 find_result <- wfl.findFiles(
     dt = tbl_dir, # the directory table
-    dir.case = "RD_inner", # the case name of the target directory
-    i.final = 1, # the index of the final subdirectory
+    dir.case = "RD_output", # the case name of the target directory
+    i.final = 4, # the index of the final subdirectory
     pattern = pattern_sel # the regex pattern for table identifier
 )
 
@@ -30,7 +31,7 @@ find_result <- wfl.findFiles(
 
 # Workflow: convert protected xls file to xlsx file----
 ## it should remove the unnecessary sheet (copyright or empty, or other sheet not needed).
-is.unprotected <- FALSE
+is.unprotected <- TRUE
 if (!is.unprotected) {
     ## the default is to remove the sheet named "CNKI"
     file_xlsx <- wfl.Xls2Xlsx(file_path = file_tar, sheet_drop = c("CNKI"))
@@ -65,7 +66,7 @@ header_mode <- c(
     "year", "vars", "vars-year", "vars-vars",
     "vars-h3", "vars-h4", "vars-h5"
 )
-(mode_sel <- header_mode[4])
+(mode_sel <- header_mode[1])
 
 ## setting 3： specify the regex pattern for table identifier
 # pattern_table <- "^地.*区" # not to use "续表" !
@@ -100,7 +101,7 @@ vars_spc <- get.vars(
 df_out <- wfl.unpivotXlsx(
     file = file_xlsx,
     header.mode = mode_sel, # default is "vars-year"
-    vars.add = NULL, # default is NULL, only used when header mode is "year"
+    vars.add = vars_spc[2, ], # default is NULL, only used when header mode is "year"
     cols.drop = cols_drop, # default is NULL
     pattern.table = "^地.*区", # default is "^地.*区"
     reg_start = "^地.*区", # getRange() argument
@@ -123,7 +124,9 @@ df_tidy <- wfl.tidyTable(dt = df_out) %>%
 ## Replace any of following: "Total", "BasicResearch", "AppliedResearch", "Development", etc.
 ## Use regex pattern to replace the variables names
 ## Note:
-##   -
+##   - there may be useful english words in the variables names, such as "RD经费"
+##   - so we need to be careful
+
 is_english <- TRUE # default is TRUE, if FALSE, not replace the variables names
 if (is_english) {
     df_tidy <- df_tidy %>%
@@ -201,8 +204,8 @@ View(df_add_vars)
 wfl.writeXlsx(
     dt = df_add_vars,
     file_source = file_xlsx,
-    year_target = c(2023),
-    prefix_label = NULL # default is NULL, other value may be "funds", "ammount", etc.
+    year_target = c(2023), # filter data by year
+    prefix_label = prefix_add # default is NULL, other value may be "funds", "ammount", etc.
 )
 
 # Workflow: use data----

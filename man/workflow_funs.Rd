@@ -2,10 +2,6 @@
 % Please edit documentation in R/workflow_funs.R
 \name{workflow_funs}
 \alias{workflow_funs}
-\alias{create.dirTable}
-\alias{choose.filePattern}
-\alias{wfl.findFiles}
-\alias{wfl.Xls2Xlsx}
 \alias{getRange}
 \alias{unpivot}
 \alias{getInfo}
@@ -20,16 +16,8 @@
 \alias{choose.nameData}
 \alias{wfl.useData}
 \alias{help.document}
-\title{Workflow Functions}
+\title{Workflow Functions:}
 \usage{
-create.dirTable()
-
-choose.filePattern(year, mode, add_info)
-
-wfl.findFiles(dt, dir.case, i.final, pattern)
-
-wfl.Xls2Xlsx(file_path, sheet_drop = c("CNKI"))
-
 getRange(dt, ith, what, reg_start, reg_end)
 
 unpivot(dt, rows, cols, cols.drop = NULL, header.mode, vars.add = NULL)
@@ -68,35 +56,7 @@ wfl.useData(directory.source, file.pattern, name.dt, which.dt = "df_use")
 help.document(df)
 }
 \arguments{
-\item{year}{numeric or numeric vector. The year(s) to include in the pattern.
-If a vector of length 2 is provided, it represents a year range.}
-
-\item{mode}{character. The pattern mode to use. Must be one of:
-\itemize{
-\item \code{year_one}: Single year, xls format, eg. "^raw-2023.xls$"
-\item \code{year_two}: Two years, xls format, eg. "^raw-2022-2023.xls$"
-\item \code{year_onex}: Single year, xlsx format, eg. "^raw-2023.xlsx$"
-\item \code{year_twox}: Two years, xlsx format, eg. "^raw-2022-2023.xlsx$"
-\item \code{add_onex}: Single year with additional info, xlsx format, eg. "^raw-.+?amount-2023.xlsx$"
-\item \code{add_one}: Single year with additional info, xls format, eg. "^raw-.+?amount-2023.xls$"
-\item \code{edited_one}: Single year with additional info, edited xlsx format, eg. "^raw-.+?amount-2023-edited.xlsx$"
-\item \code{edited_two}: Two years, edited xlsx format, eg. "^raw-2022-2023-edited.xlsx$"
-}}
-
-\item{add_info}{character. Additional information to include in the pattern.}
-
 \item{dt}{data.frame. The data frame to write out.}
-
-\item{dir.case}{character. The case name to search for files.
-Must one of the value of the "case" column in the data.frame.}
-
-\item{i.final}{number. The index of the final directory in the "final" column.}
-
-\item{pattern}{character. Pattern to match files}
-
-\item{file_path}{character. Path to the target xls file}
-
-\item{sheet_drop}{character. Name of the sheet to drop}
 
 \item{ith}{number. when exist multiple table region in one sheet.}
 
@@ -165,19 +125,6 @@ And the name has uniform format style as "AgriMachine", "LivestockBreeding", etc
 \item{which.dt}{character. The name of the data frame to use, default is "df_use".}
 }
 \value{
-tibble. A tibble containing the directory structure with columns:
-\itemize{
-\item \code{case} (character): Case identifier
-\item \code{media} (character): Main directory path
-\item \code{final} (list): Vector of subdirectory names
-}
-
-character. A regex pattern string for matching file names.
-
-list of file paths and directory path
-
-character. Path to the converted xlsx file
-
 vector
 
 data.frame
@@ -205,14 +152,6 @@ NULL. The function prints the documentation template to the console.
 \description{
 Internal functions for handling various workflow tasks in the techme package.
 
-This function creates a directory table that maps case names to their corresponding
-directory paths and subdirectories. The table is used to organize and locate data files
-in the package's data structure.#'
-
-This function generates regex patterns for matching specific file names based on year,
-file format, and additional information. It supports various naming patterns for raw
-data files and edited files.
-
 This function provides an interactive way to select a target list from a predefined collection
 used for filtering and organizing data in the package. The lists are organized by different
 categories (v4, v6, v7, v8) and contain block identifiers for data filtering.
@@ -231,17 +170,10 @@ of data documentation.
 \details{
 This file contains a collection of internal functions for:
 \itemize{
-\item Converting and processing Excel files
-\item Unpivoting data tables
-\item Matching and standardizing variables
-\item Writing output files
-}
-
-The function returns a tibble with three columns:
-\itemize{
-\item \code{case}: The case identifier (e.g., "agri_prod", "budget")
-\item \code{media}: The main directory path for the case
-\item \code{final}: A list of subdirectories for the case
+\item function \code{getRange()}: get the range of the pivot table in the xlsx file
+\item function \code{unpivot()}: unpivot the xlsx file
+\item function \code{getInfo()}: get the information of the xlsx file
+\item function \code{wfl.unpivotXlsx()}: unpivot the xlsx file
 }
 
 This function is used to get the range of the pivot table in the xlsx file.
@@ -282,47 +214,6 @@ in the format required by Roxygen2. This is particularly useful when documenting
 in R packages.
 }
 \examples{
-\dontrun{
-# Get the directory table
-tbl_dir <- create.dirTable()
-
-# View the structure
-str(tbl_dir)
-
-# Access specific case
-tbl_dir[tbl_dir$case == "agri_prod", ]
-}
-
-\dontrun{
-# Single year pattern
-choose.filePattern(year = 2022, mode = "year_onex")
-
-# Year range pattern
-choose.filePattern(year = c(2022, 2023), mode = "year_twox")
-
-# Pattern with additional info
-choose.filePattern(
-    year = 2022,
-    mode = "add_onex",
-    add_info = "amount"
-)
-}
-
-\dontrun{
-find_result <- wfl.findFiles(
-    dt = tbl_dir, # the directory table
-    dir.case = "agri_prod", # the case name of the target directory
-    i.final = 1, # the index of the final subdirectory
-    pattern = pattern_sel # the regex pattern for table identifier
-)
-}
-\dontrun{
-wfl.Xls2Xlsx(
-    file_path = "data-raw/example.xls",
-    sheet_drop = c("CNKI")
-)
-}
-
 \dontrun{
 wb <- loadWorkbook(path_xls, create = TRUE)
 dt <- readWorksheet(wb, sheet = 1, header = F) \%>\%

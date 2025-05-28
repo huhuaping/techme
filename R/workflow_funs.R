@@ -1,16 +1,3 @@
-#' @title Workflow Functions
-#' @description Internal functions for handling various workflow tasks in the techme package.
-#' @details This file contains a collection of internal functions for:
-#' \itemize{
-#'   \item Converting and processing Excel files
-#'   \item Unpivoting data tables
-#'   \item Matching and standardizing variables
-#'   \item Writing output files
-#' }
-#' @keywords internal
-#' @name workflow_funs
-NULL
-
 # Declare global variables
 utils::globalVariables(c(
     "chr", "row_index", "row_end", "row_start", "col_start", "col_end",
@@ -34,12 +21,24 @@ utils::globalVariables(c(
 #' @importFrom tidyr fill pivot_wider
 #' @importFrom rlang .data
 
+#' @title Workflow Functions: find files
+#' @description Internal functions for handling various workflow tasks in the techme package.
+#' @details This file contains a collection of internal functions for:
+#' \itemize{
+#'   \item function `create.dirTable()`: create directory table with case, media, final column
+#'   \item function `choose.filePattern()`: choose the file pattern based on year, mode, and add_info
+#'   \item function `wfl.findFiles()`: find files based on directory table, case, final index, and pattern
+#' }
+#' @keywords internal
+#' @name workflow_find_files
+NULL
+
 #' @title Helper function to get the directory table
 #' @description
 #' This function creates a directory table that maps case names to their corresponding
 #' directory paths and subdirectories. The table is used to organize and locate data files
 #' in the package's data structure.#'
-#' @rdname workflow_funs
+#' @rdname workflow_find_files
 #' @details
 #' The function returns a tibble with three columns:
 #' \itemize{
@@ -118,7 +117,7 @@ create.dirTable <- function() {
 #' This function generates regex patterns for matching specific file names based on year,
 #' file format, and additional information. It supports various naming patterns for raw
 #' data files and edited files.
-#' @rdname workflow_funs
+#' @rdname workflow_find_files
 #' @param year numeric or numeric vector. The year(s) to include in the pattern.
 #' If a vector of length 2 is provided, it represents a year range.
 #' @param mode character. The pattern mode to use. Must be one of:
@@ -205,7 +204,7 @@ choose.filePattern <- function(year, mode, add_info) {
 
 #' @title Search for specific files (regex pattern) in a directory
 #' Return the file path and also the "case" directory path
-#' @rdname workflow_funs
+#' @rdname workflow_find_files
 #' @param dt data.frame. Which must be contain "case", "media", "final" column.
 #' @param dir.case character. The case name to search for files.
 #' Must one of the value of the "case" column in the data.frame.
@@ -274,7 +273,6 @@ wfl.findFiles <- function(dt, dir.case, i.final, pattern) {
 
 #' Convert protected xls file to xlsx file, and remove unnecessary sheet.
 #' This function will remove the xls file permission protected by CNKI.
-#' @rdname workflow_funs
 #' @param file_path character. Path to the target xls file
 #' @param sheet_drop character. Name of the sheet to drop
 #' @return character. Path to the converted xlsx file
@@ -346,6 +344,18 @@ wfl.Xls2Xlsx <- function(file_path, sheet_drop = c("CNKI")) {
     return(file_xlsx_path)
 }
 
+#' @title Workflow Functions: unpivot all tables in the xlsx file
+#' @description Internal functions for handling various workflow tasks in the techme package.
+#' @details This file contains a collection of internal functions for:
+#' \itemize{
+#'   \item function `getRange()`: get the range of the pivot table in the xlsx file
+#'   \item function `unpivot()`: unpivot the xlsx file
+#'   \item function `getInfo()`: get the information of the xlsx file
+#'   \item function `wfl.unpivotXlsx()`: unpivot the xlsx file
+#' }
+#' @keywords internal
+#' @name workflow_funs_unpivot_xlsx
+NULL
 
 #' Get range of xlsx file's pivot table with target regex pattern
 #' @details
@@ -356,7 +366,7 @@ wfl.Xls2Xlsx <- function(file_path, sheet_drop = c("CNKI")) {
 #' Note 2: when there are multiple tables, these table's alignment may be horizontal or vertical
 #' Note 3: We only assume the only multiple table's alignment is horizontal or vertical, not hybrid alignment.
 
-#' @rdname workflow_funs
+#' @rdname workflow_funs_unpivot_xlsx
 #' @param dt data.frame. Which is the wb object reading from xlsx file.
 #' @param ith number. when exist multiple table region in one sheet.
 #' @param what character. What is the object function will return, whether "row" or "col".
@@ -499,7 +509,7 @@ getRange <- function(dt, ith, what,
 
 
 #' Unpivot xlsx file table
-#' @rdname workflow_funs
+#' @rdname workflow_funs_unpivot_xlsx
 #' @param dt data.frame. Which is the wb object reading from xls workbook.
 #' @param cols vector. Target cols of the region contains pivot table.
 #' @param rows vector. Target rows of the region contains pivot table.
@@ -674,7 +684,7 @@ getInfo <- function(dt, unit_pattern) {
 #' Note 2: when there are multiple tables, these table's alignment may be horizontal or vertical
 #' Note 3: We only assume the only multiple table's alignment is horizontal or vertical, not hybrid alignment.
 
-#' @rdname workflow_funs
+#' @rdname workflow_funs_unpivot_xlsx
 #' @param file character. Path to the xlsx file.
 #' @param header.mode character. One of the four options:  'vars-year', 'vars', 'vars-vars','year'
 #' @param vars.add character. if header.mode = 'year', then the vars.add must be specified,
@@ -735,7 +745,7 @@ wfl.unpivotXlsx <- function(
     df_out <- NULL
 
     # Process each sheet
-    # j <-2
+    # j <-1
     for (j in 1:sheetnum) {
         message(glue::glue("Processing sheet {j} of {sheetnum}"))
 
@@ -885,13 +895,26 @@ wfl.tidyTable <- function(dt) {
     return(dt_tidy)
 }
 
+#' @title Workflow Functions: match variables
+#' @description Internal functions for handling various workflow tasks in the techme package.
+#' @details This file contains a collection of internal functions for:
+#' \itemize{
+#'   \item function `get.targetList()`: get the target list
+#'   \item function `get.vars()`: get the variables from the package data `varsList`
+#'   \item function `get.best.match()`: get the best match
+#'   \item function `wfl.matchVars()`: match the variables with the tidy data.frame
+#' }
+#' @keywords internal
+#' @name workflow_funs_match_vars
+NULL
+
 #' Helper function to create target list collection by interactive selection with R console
 #' @description
 #' This function provides an interactive way to select a target list from a predefined collection
 #' used for filtering and organizing data in the package. The lists are organized by different
 #' categories (v4, v6, v7, v8) and contain block identifiers for data filtering.
 #'
-#' @rdname workflow_funs
+#' @rdname workflow_funs_match_vars
 #' @details
 #' The target lists are organized into several categories:
 #' \itemize{
@@ -905,7 +928,6 @@ wfl.tidyTable <- function(dt) {
 #' @return list. List of target list with block identifiers.
 #'
 #' @keywords internal
-#' @importFrom utils readline
 #' @importFrom glue glue
 #'
 #' @examples
@@ -1032,7 +1054,7 @@ get.targetList <- function() {
 }
 
 #' Get names from basic variables table
-#' @rdname workflow_funs
+#' @rdname workflow_funs_match_vars
 #' @description
 #' This function retrieves variable names from a basic variables table based on specified
 #' language and block criteria. It supports filtering variables by hierarchical block
@@ -1146,7 +1168,7 @@ get.vars <- function(df, lang = "eng", block, what = "variables") {
 }
 
 #' Helper function to get the best matched of specified character vectors.
-#' @rdname workflow_funs
+#' @rdname workflow_funs_match_vars
 #' @param word character. The word to match.
 #' @param charvec character vector. The vector of words to match against.
 #'
@@ -1181,7 +1203,7 @@ get.best.match <- function(word, charvec) {
 }
 
 #' Match 'vars' to target variables list in chinese block.
-#' @rdname workflow_funs
+#' @rdname workflow_funs_match_vars
 #' @param dt data.frame. The input data frame containing a 'vars' column.
 #' @param block_target list. Names of the list should be part or all of: block1, block2, block3, block4.
 #' @param block_lang character. Specify which language to use, either 'eng'(default) or 'chn'.
@@ -1257,8 +1279,19 @@ wfl.matchVars <- function(dt, block_target, block_lang = "eng") {
     return(vars_matched)
 }
 
+#' @title Workflow Functions: add variables to the data.frame
+#' @description Internal functions for handling various workflow tasks in the techme package.
+#' @details This file contains a collection of internal functions for:
+#' \itemize{
+#'   \item function `get.chnPattern()`: get the pattern for Chinese variables
+#'   \item function `wfl.addVars()`: add the variables to the data.frame
+#' }
+#' @keywords internal
+#' @name workflow_funs_add_vars
+NULL
+
 #' Helper function to replace variables names in the tidy table
-#'
+#' @rdname workflow_funs_add_vars
 #' @description
 #' This function provides an interactive way to select a collection of Chinese text patterns
 #' and their replacements for standardizing variable names in the tidy table. It supports
@@ -1283,7 +1316,6 @@ wfl.matchVars <- function(dt, block_target, block_lang = "eng") {
 #' @importFrom tibble tribble
 #' @importFrom magrittr %>%
 #' @importFrom glue glue
-#' @importFrom utils readline
 #'
 #' @examples
 #' \dontrun{
@@ -1378,7 +1410,7 @@ get.chnPattern <- function() {
 
 
 #' Left join the tidy table with the matched unified variables table.
-#' @rdname workflow_funs
+#' @rdname workflow_funs_add_vars
 #' @param dt_left data.frame. The tidy unpivot table.
 #' @param dt_right data.frame. The matched variables table and should be checked.
 #'
@@ -1622,7 +1654,6 @@ choose.nameData <- function() {
 }
 
 #' Read the raw xlsx files and use the specified data.frame by use_data()
-#' @rdname workflow_funs
 #' @param directory.source character. The path of the source xlsx files.
 #' @param file.pattern character. The pattern of the file name.
 #' @param name.dt character. The name of the data frame.
@@ -1742,7 +1773,7 @@ wfl.useData <- function(
 }
 
 #' Help Document the Variables List of Data Set for Package Development
-#' @rdname workflow_funs
+
 #' @description
 #' This function generates documentation template for data frame variables in Roxygen2 format.
 #' It creates a list of variable entries that can be used in the \code{@format} section
