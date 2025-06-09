@@ -279,7 +279,142 @@ fs::dir_tree(dir_tar)
 
 - `renv::install("huhuaping/techme")`
 
+## 国家农业科技园区
 
+### 数据说明
+
+更新状态：stay
+
+数据来源：科学技术部/农村科技司（<https://www.most.gov.cn/>）
+
+数据使用：
+
+- 名单数据：`data("PubAgriParkList", package = "techme")`
+
+- 验收数据：`data("PubAgriParkCheck", package = "techme")`
+
+- 评估数据：`data("PubAgriParkEval", package = "techme")`
+
+
+统计目标/统计口径：
+
+- 国家农业科技园区名单
+
+- 国家农业科技园区验收结果
+
+- 国家农业科技园区评估结果
+
+
+### 文件体系
+
+```{r}
+dir_tar <- here::here("data-raw/public-site/agri-park")
+fs::dir_tree(dir_tar, recurse = FALSE)
+```
+
+### 数据集展示
+
+名单数据集：`techme::PubAgriParkList`
+
+```{r}
+techme::PubAgriParkList %>%
+  #head(20) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+
+验收数据集：`techme::PubAgriParkCheck`
+
+```{r}
+techme::PubAgriParkCheck %>%
+  #head(20) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+评估数据集：`techme::PubAgriParkEval`
+
+```{r}
+techme::PubAgriParkEval %>%
+  #head(20) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+
+### 数据进度
+
+
+##### **名单公示**
+
+09-2020;08-2018; 07-2016;06-2015;
+05-2013;04-2011; 03-2010;02-2003;
+01-2001.
+
+- 2020年12月27日关于开展第九批国家农业科技园区建设的[通知](http://www.gov.cn/zhengce/zhengceku/2020-12/27/content_5573792.htm)
+    - 关于开展第九批国家农业科技园区申报工作的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2019/201911/t20191104_149728.html)
+    
+- 科技部办公厅关于第八批国家农业科技园区建设的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2018/201812/t20181224_144277.html)
+
+
+##### **验收** update
+
+- 【附名单html表格】2023年06月01日 科技部办公厅关于公布第九批国家农业科技园区验收结果的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2023/202306/t20230601_186415.html)
+
+- 科技部办公厅关于公布第八批国家农业科技园区验收结果的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2021/202112/t20211221_178654.html)
+
+    - （word）农村司关于第八批国家农业科技园区验收结果公示的[公告](https://www.most.gov.cn/tztg/202112/t20211206_178363.html)
+
+
+- 关于公布国家农业科技园区第七批验收结果和2019年综合评估结果的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2019/201911/t20191119_150024.html)
+
+    - 2019.10.30 农村司关于第七批国家农业科技园区验收结果公示的[公告](http://www.most.gov.cn/tztg/201910/t20191029_149628.htm)
+
+- 2018年12月07日 技部办公厅关于公布2018年国家农业科技园区验收结果的[通知](http://www.gov.cn/zhengce/zhengceku/2018-12/31/content_5446196.htm)
+
+- 2017年关于公布第五批国家农业科技园区验收结果的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2017/201711/t20171128_136490.html)
+
+
+##### **评估**update
+
+- 【html附表】2023年01月10日 科技部办公厅关于公布2022年国家农业科技园区复评结果的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2023/202301/t20230110_184184.html)。【对2020年综合评估结果为不达标整改的5个园区开展复评】
+
+- 科技部办公厅关于公布2021年国家农业科技园区综合评估结果的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2021/202112/t20211222_178687.html)
+
+- 关于公布2020年国家农业科技园区综合评估结果的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2020/202012/t20201224_171990.html)
+
+- 关于公布国家农业科技园区第七批验收结果和2019年综合评估结果的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2019/201911/t20191119_150024.html)
+
+### 数据流程
+
+在`techme`项目下进行维护。
+
+### 背景知识
+
+科技部 [农村科技司](https://www.most.gov.cn/zzjg/jgsz/ncs/ncsjgsz/)。机构调整，职能可能调整到农业部。
+
+- 2018-01-22，国家农业科技园区发展规划（2018—2025年）。[链接](https://www.ncsti.gov.cn/zcfg/zcwj/201811/t20181123_13272.html)。
+
+- 科技部、农业农村部、水利部、林草局中科院、中国农业银行关于印发《国家农业科技园区管理办法》的[通知](https://www.gov.cn/gongbao/content/2020/content_5535330.htm)
 
 # MOA农业部
 
@@ -758,8 +893,8 @@ fs::dir_tree(dir_tar)
 ### 文件管理
 
 ```{r}
-dir_tar <- here("topic/public-site/moa-industry-convergence")
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/public-site/moa-industry-convergence")
+fs::dir_tree(dir_tar, recurse = FALSE)
 ```
 
 ### 数据集展示
@@ -822,13 +957,15 @@ techme::PubConvergenceAffirm %>%
 
 ### 数据进度
 
-#### 农业产业融合发展项目
+#### 农业产业融合发展项目(update)
 
 农业产业融合发展项目名单数据年份：2021年至今。
 
 农业产业融合发展项目（project）公示，包括三类项目名单：国家现代农业产业园（创建park）、优势特色产业集群（cluster）和农业产业强镇（town）。
 
 2021年及以后对三类项目创建进行集中公示，公示文档存档为：`projec-setup-year-xxxx.html`
+
+- 2025年3月27日, 2025年农业产业融合发展项目立项名单公示[公告](https://www.yanqitong.cn/guojiazhengce/19710.html)
 
 - 2024年4月1日，非官方发布。2024年农业产业融合发展项目立项名单[公示](https://baijiahao.baidu.com/s?id=1795115862984744494&wfr=spider&for=pc)
 
@@ -1480,7 +1617,23 @@ fs::dir_tree(dir_tar)
 
 本项目内维护，通过`techme`进行数据发布。
 
-当前版本数据集`techme::PubObsStationX`：
+
+版本数据集1`techme::PubObsStation`：
+
+```{r}
+techme::PubObsStation %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+版本数据集2`techme::PubObsStationX`：
 
 ```{r}
 techme::PubObsStationX %>%
@@ -1495,20 +1648,6 @@ techme::PubObsStationX %>%
   )
 ```
 
-历史版本数据集`techme::PubObsStation`：
-
-```{r}
-techme::PubObsStation %>%
-  head(100) %>%
-  DT::datatable(
-    rownames = FALSE,
-    options = list(
-      dom = "ftip",
-      pageLength = 10,
-      scrollX = TRUE
-    )
-  )
-```
 
 ### 数据进度
 
