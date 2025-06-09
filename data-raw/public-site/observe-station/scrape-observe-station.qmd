@@ -2,18 +2,7 @@
 title: "农业部和教育部科学观测试验站"
 author: "胡华平"
 date: "`r Sys.Date()`"
-output:
-  bookdown::word_document2:
-    fig_caption: yes
-    toc: yes
-    toc_depth: 4
-    reference_docx: report-reference.docx
-  bookdown::html_document2:
-    number_sections: yes
-    toc: no
-    fig_caption: yes
-    toc_float: yes
-always_allow_html: yes
+format: html
 ---
 
 ```{r, echo=FALSE}
@@ -262,7 +251,7 @@ openxlsx::write.xlsx(tbl_out, path_out)
 Year <- 2021
 
 # files html path
-file_dir <- "html/"
+file_dir <- "data-raw/public-site/observe-station/html/"
 file_name <- list.files(file_dir)
 file_id <- which(str_detect(file_name, 
                        glue::glue("most-year-{Year}")))
@@ -287,6 +276,8 @@ tbl_out <- tbl_raw %>%
   add_column(year = Year, .before = "index") %>%
   add_column(officer = "MOST", .before = "year")
 
+View(tbl_out)
+
 file_name <- str_extract(file_sel, "(.+)(?=\\.)")
 path_out <- glue::glue("xlsx/{file_name}.xlsx")
 openxlsx::write.xlsx(tbl_out, path_out)  
@@ -298,7 +289,7 @@ openxlsx::write.xlsx(tbl_out, path_out)
 ## 4.1 合并全部年份数据
 
 ```{r}
-file_dir <- "xlsx/"
+file_dir <- "data-raw/public-site/observe-station/xlsx/"
 file_name <- list.files(file_dir)
 file_path <- paste0(file_dir, file_name) 
 
@@ -307,6 +298,7 @@ tbl_out <- tibble(url = file_path) %>%
   select(-url) %>%
   unnest(dt)
 
+View(tbl_out)
 ```
 
 
@@ -376,3 +368,12 @@ openxlsx::write.xlsx(list_institution, path_xlsx)
 
 - 数据集名为`PubObsStation`
 
+## 根据机构名称匹配省份信息
+
+```{r}
+require(devtools)
+load_all()
+
+
+
+```

@@ -14,6 +14,7 @@
 #'   \item{index}{ integer, the ordered index of list }
 #'   \item{name}{ character, name of the agri park }
 #'   \item{institution}{ character, name  of institution hosted the stations }
+#'   \item{administrator}{ character, name of the administrator for the institution }
 #'   \item{province}{character, province of agri park in reduced chinese}
 #' }
 #'

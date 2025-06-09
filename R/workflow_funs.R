@@ -130,6 +130,8 @@ create.dirTable <- function() {
 #'   \item \code{add_one}: Single year with additional info, xls format, eg. "^raw-.+?amount-2023.xls$"
 #'   \item \code{edited_one}: Single year with additional info, edited xlsx format, eg. "^raw-.+?amount-2023-edited.xlsx$"
 #'   \item \code{edited_two}: Two years, edited xlsx format, eg. "^raw-2022-2023-edited.xlsx$"
+#'   \item \code{custom}: Custom pattern, eg. "^raw-.+?amount-2023.xlsx$".
+#'   Note: when mode is "custom", add_info must be a character string and year argument is not used.
 #' }
 #' @param add_info character. Additional information to include in the pattern.
 #'
@@ -167,6 +169,11 @@ choose.filePattern <- function(year, mode, add_info) {
         stop("'add_info' must be a single character string for the specified mode")
     }
 
+    # if mode is custom, add_info must be a character string
+    if (mode == "custom" && (missing(add_info) || !is.character(add_info) || length(add_info) != 1)) {
+        stop("'add_info' must be a single character string for the specified mode")
+    }
+
     # year is a vector, may contains start and end year, or may only contains one year
     if (length(year) == 1) {
         year <- year
@@ -195,8 +202,10 @@ choose.filePattern <- function(year, mode, add_info) {
         pattern <- glue::glue("^raw-.+?{add_info}-{year}-edited.xlsx$")
     } else if (mode == "edited_two") {
         pattern <- glue::glue("^raw-{first_year}-{last_year}-edited.xlsx$")
+    } else if (mode == "custom") {
+        pattern <- add_info
     } else {
-        stop("Invalid 'mode' parameter. Must be one of: 'year_one', 'year_two', 'year_onex', 'year_twox', 'add_onex', 'add_one', 'edited_one', 'edited_two'")
+        stop("Invalid 'mode' parameter. Must be one of: 'year_one', 'year_two', 'year_onex', 'year_twox', 'add_onex', 'add_one', 'edited_one', 'edited_two', 'custom'")
     }
     message(glue::glue("The regex pattern is: {pattern}"))
     return(pattern)
@@ -1618,12 +1627,15 @@ choose.nameData <- function() {
     ## the data name has uniform format style as "AgriMachine", "LivestockBreeding", etc.
     ## this table is soft-coded in the package, you can change the data name as you need
     use_list <- c(
+        ## yearbook rural
         "AgriMachine",
         "AgriFertilizer",
         "AgriPlastic",
         "AgriPesticide",
+        ## yearbook national
         "PublicBudget", # 5
-        "RDIntense",
+        ## yearbook technology
+        "RDIntense", # public site
         "RDActivity",
         "MarketPull",
         "MarketPush",
@@ -1631,7 +1643,35 @@ choose.nameData <- function() {
         "IndustryTrade",
         "IndustryRD",
         "IndustryOperation",
-        "LivestockBreeding" # 14
+        ## yearbook livestock
+        "LivestockBreeding",
+        ## MOST
+        "PubNKRDP",
+        "PubAgriParkList",
+        "PubAgriParkEval",
+        "PubAgriParkCheck",
+        "HitechFirmsPub",
+        ## observe-station, multiple departments
+        "PubObsStation", # old version
+        "PubObsStationX", # new version
+        ## moa-xmj-breeding
+        "PubBreedingXmj",
+        ## moa-xmj-standard
+        "PubStandardXmj",
+        ## moa-industry-convergence
+        "PubConvergencePark", # 15
+        "PubConvergenceCluster",
+        "PubConvergenceTown",
+        "PubConvergenceAffirm",
+        ## moa-agrimodern-zone
+        "PubAgrimodernZone", # 5
+        ## moa-freshkeep-county
+        "PubFreshKeepCounty",
+        ## moa-rural-infobase
+        "PubRuralInfoBase",
+        ## moa-agri-system
+        "PubCars",
+        "PubGeneticResource"
     )
 
     # Display all options
@@ -1735,8 +1775,8 @@ wfl.useData <- function(
     for (i in length(files_path):1) {
         tryCatch(
             {
-                df_tem <- openxlsx::read.xlsx(files_path[i]) %>%
-                    dplyr::mutate(units = as.character(units))
+                df_tem <- openxlsx::read.xlsx(files_path[i]) # %>%
+                # dplyr::mutate(units = as.character(units)) # not needed for dataset of public site
                 message(glue::glue("Read file {files_sel[i]} has finished!"))
                 Sys.sleep(0.1)
                 df_use <- dplyr::bind_rows(df_use, df_tem)

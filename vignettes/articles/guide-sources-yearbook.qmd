@@ -1,0 +1,555 @@
+---
+title: "年鉴数据来源"
+vignette: >
+  %\VignetteIndexEntry{guide sources yearbook}
+---
+
+```{r}
+library(tidyverse)
+library(magrittr)
+library(here)
+library(glue)
+```
+
+
+# 年鉴数据
+
+## 数据获取
+
+- [西农权限]中国经济社会大数据研究平台<https://data.cnki.net/home>。中国知网推出，主要集中在统计年鉴，资料信息权威稳定。可以下载`xls`（受保护，但是可以处理）！
+
+## 数据进度
+
+## 数据流程
+
+这里我们展示的是数据维护项目R包`techme`对应数据集的文件体系。本文档的渲染，依赖于R包`techme`当前的文件夹状态（如`master`或`dev`分支）。
+
+全部的数据维护主要通过R包`techme`进行管理：
+
+（1）例如下载《中国农村统计年鉴》xls电子版，保存本地（“课题项目文件/数据/中国农村统计年鉴”）。
+
+（2）在R包`techme`项目下完成数据更新、核对和标准化等流程。示例如下：
+
+- 拷贝原始数据到R包项目下对应的文件夹，重命名`xls`文件（例如`raw-2021-2022.xls`）
+
+- 执行R包项目下的数据维护更新流程（主要代码见`techme/data-raw/rural-yearbook/wfl-rural-yearbook.R`）
+
+- 更新编译R包，提交到github（以`dev`分支）。
+
+# 中国统计年鉴
+
+## 公共财政投入
+
+### 数据说明
+
+(1) 年鉴条目
+
+-  表7-6 分地区一般公共预算支出(20xx年)
+
+(2) 统计目标
+
+- 梳理指标变量，包括合计、教育、 科学技术、农林水支出。
+
+
+
+### 初始数据文件
+
+初始数据文件（年鉴电子版，xls进行了重命名）
+
+```{r}
+dir_tar <- "data-raw/nation-yearbook/part07-finance/02-public-budget/"
+fs::dir_tree(dir_tar)
+```
+
+
+### 清洗后数据文件
+
+清洗后数据文件（标准化xlsx整理表格）
+
+```{r}
+dir_tar <- "data-raw/data-tidy/nation-yearbook/part07-finance/02-public-budget"
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+数据集`PublicBudget`：
+
+```{r}
+techme::PublicBudget %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+# 中国农村统计年鉴
+
+## 农业机械`AgriMachine`
+
+### 数据说明
+
+(1) 年鉴条目
+
+-  各地区主要农业机械年末拥有量
+
+(2) 统计目标
+
+- 各地区农业机械动力
+
+- 各地区农用拖拉机
+
+- 各地区农用灌溉机械
+
+- 各地区农用收获机械
+
+
+### 初始数据文件
+
+初始数据文件（年鉴电子版，xls进行了重命名）
+
+```{r}
+#dir_tar <- here::here("topic/rural-yearbook")
+dir_tar <- "data-raw/rural-yearbook/part03-agri-produce/01-machine/"
+fs::dir_tree(dir_tar)
+```
+
+### 清洗后数据文件
+
+清洗后数据文件（标准化xlsx整理表格）
+
+```{r}
+#dir_tar <- here::here("topic/rural-yearbook")
+dir_tar <- "data-raw/data-tidy/rural-yearbook/part03-agri-produce/01-machine/"
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+```{r}
+techme::AgriMachine %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+
+### 注意事项
+
+`AgriMachine`：
+
+- 拖拉机分类重新定义：2018年，农业农村部根据工业和信息化部标准对拖拉机的分类重新定义，把大中型拖拉机和小型拖拉机的分类标准由发动机功率14.7千瓦改为22.1千瓦，大中型拖拉机配套农具口径改为“与58.8千瓦及以上拖拉机配套”。同时，取消小型拖拉机配套农具和农用排灌机相关指标。
+
+- 拖拉机配套农具统计口径变更：2018年起大中型拖拉机配套农具统计口径变更为“与58.8千瓦及以上拖拉机配套”，统计口径与往年不可比。
+
+- 谷物联合收割机统计口径变更：2022年，农业农村部对谷物联合收割机口径进行调整，只包括稻麦联合收割机，不再含玉米联合收割机。
+
+
+## 农用化肥`AgriFertilizer`
+
+### 数据说明
+
+（1）统计目标
+
+- 各地区农用化肥
+
+
+### 初始数据文件
+
+初始数据文件（年鉴电子版，xls进行了重命名）
+
+```{r}
+#dir_tar <- here::here("topic/rural-yearbook")
+dir_tar <- "data-raw/rural-yearbook/part03-agri-produce/02-fertilizer/"
+fs::dir_tree(dir_tar)
+```
+
+### 清洗后数据文件
+
+清洗后数据文件（标准化xlsx整理表格）
+
+```{r}
+#dir_tar <- here::here("topic/rural-yearbook")
+dir_tar <- "data-raw/data-tidy/rural-yearbook/part03-agri-produce/02-fertilizer"
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+```{r}
+techme::AgriFertilizer %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+
+### 注意事项
+
+`AgriFertilizer`计量单位发生改变：
+
+- 2022年开始，农用薄膜使用量计量单位变更为“万吨”（之前是“吨”）
+
+
+## 农用薄膜`AgriPlastic`
+
+### 数据说明
+
+（1）统计目标
+
+- 各地区农用薄膜
+
+### 初始数据文件
+
+初始数据文件（年鉴电子版，xls进行了重命名）
+
+```{r}
+dir_tar <- "data-raw/rural-yearbook/part03-agri-produce/03-plastic/"
+fs::dir_tree(dir_tar)
+```
+
+### 清洗后数据文件
+
+清洗后数据文件（标准化xlsx整理表格）
+
+```{r}
+dir_tar <- "data-raw/data-tidy/rural-yearbook/part03-agri-produce/03-plastic/"
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+```{r}
+techme::AgriPlastic %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+
+### 注意事项
+
+`AgriPlastic`计量单位发生改变：
+
+- 2022年开始，农用薄膜使用量、地膜使用量计量单位变更为“万吨”（之前是“吨”）；
+
+- 2022年开始，地膜覆盖面积计量单位变更为“千公顷”（之前是“公顷”）
+
+## 农药柴油`AgriPesticide`
+
+### 数据说明
+
+（1）统计目标
+
+- 各地区农用农药柴油
+
+
+### 初始数据文件
+
+初始数据文件（年鉴电子版，xls进行了重命名）
+
+```{r}
+#dir_tar <- here::here("topic/rural-yearbook")
+dir_tar <- "data-raw/rural-yearbook/part03-agri-produce/04-pesticide/"
+fs::dir_tree(dir_tar)
+```
+
+### 清洗后数据文件
+
+清洗后数据文件（标准化xlsx整理表格）
+
+```{r}
+#dir_tar <- here::here("topic/rural-yearbook")
+dir_tar <- "data-raw/data-tidy/rural-yearbook/part03-agri-produce/04-pesticide/"
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+```{r}
+techme::AgriPesticide %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+### 注意事项
+
+`AgriPesticide`计量单位发生改变：
+
+- 2022年开始，农药使用量计量单位变更为“万吨”（之前是“吨”）
+
+
+
+# 中国科技统计年鉴
+
+## RD投入经费和强度`RDIntense`
+
+数据集`RDIntense`：实际上采用了公开查询进行数据处理。具体参看[公共数据来源](guide-sources-public-site.qmd#sec-nbs-RD)
+
+（1）公开查询：国家统计局<https://www.stats.gov.cn/>（全国科技经费投入统计公报），包括经费（亿元）和强度。
+
+（2）《中国科技统计年鉴》part02-firm（企业）各地区研究与试验发展(R&D)经费内部支出（万元）、“各地区研究与试验发展(R&D)经费投入强度”
+
+### 数据集展示
+
+```{r}
+techme::RDIntense %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+## RD活动支出`RDActivity`
+
+### 数据说明
+
+（1）统计目标
+
+- 分析RD支出的类型：应用研究、基础研究、试验发展
+
+
+### 初始数据文件
+
+初始数据文件（年鉴电子版，xls进行了重命名）
+
+```{r}
+#dir_tar <- here::here("topic/rural-yearbook")
+dir_tar <- "data-raw/tech-yearbook/part01-over/03-spend-inner/01-activity/"
+fs::dir_tree(dir_tar)
+```
+
+### 清洗后数据文件
+
+清洗后数据文件（标准化xlsx整理表格）
+
+```{r}
+#dir_tar <- here::here("topic/rural-yearbook")
+dir_tar <- "data-raw/data-tidy/tech-yearbook/part01-over/03-spend-inner/01-activity/"
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+```{r}
+techme::RDActivity %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+
+
+## 国家高新技术企业`IndustryOperation`
+
+### 数据说明
+
+（1）统计目标
+
+- 梳理了各地区规模以上高新技术企业数量。
+
+
+### 初始数据文件
+
+初始数据文件（年鉴电子版，xls进行了重命名）
+
+```{r}
+dir_tar <- "data-raw/tech-yearbook/part05-industry/01-operation/"
+fs::dir_tree(dir_tar)
+```
+
+### 清洗后数据文件
+
+清洗后数据文件（标准化xlsx整理表格）
+
+```{r}
+dir_tar <- "data-raw/data-tidy/tech-yearbook/part05-industry/01-operation/"
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+```{r}
+techme::IndustryOperation %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+
+## 技术市场`MarketPull`
+
+### 数据说明
+
+（1）统计目标
+
+- 梳理各地区技术输入的项目数量和金额
+
+
+### 初始数据文件
+
+初始数据文件（年鉴电子版，xls进行了重命名）
+
+```{r}
+dir_tar <- "data-raw/tech-yearbook/part08-output/03-teckmarket-pull/"
+fs::dir_tree(dir_tar)
+```
+
+### 清洗后数据文件
+
+清洗后数据文件（标准化xlsx整理表格）
+
+```{r}
+dir_tar <- "data-raw/data-tidy/tech-yearbook/part08-output/03-teckmarket-pull/"
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+```{r}
+techme::MarketPull %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+
+## 技术市场`MarketPush`
+
+### 数据说明
+
+（1）统计目标
+
+- 梳理各地区技术输出的项目数量和金额
+
+
+### 初始数据文件
+
+初始数据文件（年鉴电子版，xls进行了重命名）
+
+```{r}
+dir_tar <- "data-raw/tech-yearbook/part08-output/04-teckmarket-push/"
+fs::dir_tree(dir_tar)
+```
+
+### 清洗后数据文件
+
+清洗后数据文件（标准化xlsx整理表格）
+
+```{r}
+dir_tar <- "data-raw/data-tidy/tech-yearbook/part08-output/04-teckmarket-push/"
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+```{r}
+techme::MarketPush %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+
+## 高技术产业贸易
+
+数据集`IndustryTrade`：梳理了各地区高新技术产业贸易情况。
+
+```{r}
+data("IndustryTrade",package = "techme")
+head(IndustryTrade)
+```
+
+## 高技术产业研发
+
+数据集`IndustryRD`：梳理了各地区高技术产业研发机构数量。
+
+```{r}
+data("IndustryRD",package = "techme")
+head(IndustryRD)
+```
+
+
+### 注意事项
+
+（1）统计口径变迁
+
+- 中国科技统计年鉴/高新技术产业研发情况RDattention: 
+。2020年及以后，没有“项目数”和“项目经费”！
+
+- 统计口径与中文变量标准对应关系
+
+```{r}
+tbl_pattern <- tibble(
+ ptn = c("新产品开发项目数","新产品开发经费支出",
+      "新产品销售收入","有效发明专利数",
+      "引进境外技术经费支出", "引进境外技术消化吸收经费支出"),
+ rpl = c("开发项目数","开发经费支出",
+      "销售收入","有效专利数",
+      "技术引进经费支出", "消化吸收经费支出")
+  ) %>%
+  add_column(case = "IndustryRD", .before = "ptn")
+
+tbl_pattern
+```
+
+

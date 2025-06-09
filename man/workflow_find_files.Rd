@@ -27,6 +27,8 @@ If a vector of length 2 is provided, it represents a year range.}
 \item \code{add_one}: Single year with additional info, xls format, eg. "^raw-.+?amount-2023.xls$"
 \item \code{edited_one}: Single year with additional info, edited xlsx format, eg. "^raw-.+?amount-2023-edited.xlsx$"
 \item \code{edited_two}: Two years, edited xlsx format, eg. "^raw-2022-2023-edited.xlsx$"
+\item \code{custom}: Custom pattern, eg. "^raw-.+?amount-2023.xlsx$".
+Note: when mode is "custom", add_info must be a character string and year argument is not used.
 }}
 
 \item{add_info}{character. Additional information to include in the pattern.}

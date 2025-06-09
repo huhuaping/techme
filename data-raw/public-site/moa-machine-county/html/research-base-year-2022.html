@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta name="renderer" content="webkit" />
+        <!-- <meta name="force-rendering" content="webkit" /> -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="UTF-8">
+    <title>科研平台</title>
+    <!--<script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>-->
+    <!--&lt;!&ndash; 最新版本的 Bootstrap 核心 CSS 文件 &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <!--&lt;!&ndash; 最新的 Bootstrap 核心 JavaScript 文件 &ndash;&gt;-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+    <script src="../../other/bootstrap/jquery-3.2.1.min.js"></script>
+    <script src="../../js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="../../js/jquery-ui-1.12.1.custom/jquery-ui.min.css">
+    <script src="../../other/bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../other/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/keyan.css">
+    <link rel="stylesheet" type="text/css" href="../../other/toastr.min.css">
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../other/lunbo/css.css">
+    <link rel="stylesheet" href="../../css/foot.css">
+    <link rel="stylesheet" href="../../css/unify.css">
+    <link rel="icon" href="../../images/logo_favicon.ico" type="image/x-icon" />
+    <!--<script src="../../js/public.js"></script>-->
+</head>
+
+<body>
+    <div>
+        <div id="headerpage">
+            <div class="" id="nav">
+    <div class="header">
+        <p><span class="riqidate"></span><span style="margin-left:10px;" class="tiqilei"></span></p>
+
+        <p style="float: right"><span style="color: #ff9f00"><a href="" id="userNames"
+                                                                class="name login-after unify-cursor-pointer"></a>&nbsp;&nbsp;<a class="login-before unify-cursor-pointer" href="/login" target="_Blank">登录</a></span><span> | <a class="login-before unify-cursor-pointer"
+                href="/register">注册</a><span href="javacript:void(0);" onclick="logout()"
+                                                     class="login-after unify-cursor-pointer">注销</span></span>
+                <!-- <span class="unify-cursor-pointer"> 网页导航</span> -->
+        </p>
+        <!-- <span class="unify-cursor-pointer"> 网页导航</span> -->
+
+        <!--<p style="float: right"><span style="color: #ff9f00"><span id="userNames" class="name"></span>&nbsp;&nbsp;<a th:href="@{'/login'}" target="_Blank" id="logining">登录</a></span><span id="register"> | <a th:href="@{'/register'}">注册</a></span>&nbsp;&nbsp;<span style="display:none" id="loginout">退出</span><span> 网页导航</span></p>-->
+
+    </div>
+    <div id="navMiddle">
+
+        <div>
+            <img src="../../images/header/banner2.png" alt="">
+            <!--<div class="img_log" ></div>-->
+        </div>
+        <div>
+            <form class="form-inline" id="searchForm">
+                <div class="form-group">
+                    <input type="text" onkeydown="keyup_submit1(event)" id="searchInput" placeholder="请输入关键字进行搜索">
+                    <button type="button" class="btn-default" id="searchBtn">搜索</button>
+                </div>
+
+            </form>
+        </div>
+        <!-- <div style="height: 60px;width: 223px;margin-left: 8%;" class="ggw">
+            广告位
+            <div class="my_banner"></div>
+        </div> -->
+        <div style="height: 60px;width: 320px;" class="ggwbtnbox">
+            <div class="ggwbtnItem">
+                <img src="../images/jsxqfb.png" alt="" class="ggwbtnItem_js">
+                <div class="ggwbtn ggwbtn1" data-toggle="modal" data-target="#myModals">技术需求发布</div>
+            </div>
+            <div class="ggwbtnItem">
+                <img src="../images/yqsbyy.png" alt="" class="ggwbtnItem_yq">
+                <div class="ggwbtn" id="getlist" data-toggle="modal" data-target="#modal-gxyy">仪器设备预约</div>
+            </div>
+        </div>
+    </div>
+    <div class="navmain">
+        <ul class="nav">
+            <li role="presentation" class="menu"><a href="/index">首页</a></li>
+            <li role="presentation" class="menu"><a
+                    href="/appIndustryInformation/searchIndustryInformationSummary?flag=1">行业资讯</a></li>
+            <li role="presentation" class="menu"><a href="/appIndustryExperts/list?parentType=24">行业专家</a></li>
+            <li role="presentation" class="menu"><a href="/appScientificPlatform/list?parentType=63">科研平台</a>
+            </li>
+            <li role="presentation" class="menu"><a href="/appResearchProjects/kyxmIndex">科研项目</a>
+            </li>
+            <li role="presentation" class="menu"><a href="/appInstrumentEquipment/list">仪器设备</a></li>
+            <li role="presentation" class="menu"><a href="/appScientificEport/keyanbg">科研报告</a></li>
+            <li role="presentation" class="menu"><a href="/appProductTechnique/technique">新产品新技术</a></li>
+            <li role="presentation" class="menu"><a href="/appProductTchnology/list">科教单位</a></li>
+            <li role="presentation" class="menu"><a href="/appExpertConsultation/njdsj">农机大数据</a></li>
+        </ul>
+
+    </div>
+    <div class="modal fade" id="myModals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div style="width: 750px;height: 725px;" class="modal-dialog" role="document">
+
+            <div style="width: 750px;height: 725px;" class="modal-content">
+
+                <div class="modal-body">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+
+
+                    <div class="wbyTitle">我要发布</div>
+                    <form class='biaodan'>
+                        <div><input type="text" placeholder="请输入发布的标题" id="divTitle1"></div>
+                        <div><input type="text" placeholder="请输入关键字" id="keyTou"></div>
+                        <div class="wbyContent1">
+                            <textarea style='resize:none' rows="" cols="" id="divContent1"
+                                      placeholder="请详细描述你的需求"></textarea>
+                        </div>
+                        <p class="mainforleixing1"><i for="">用户类型：</i><input type="radio" id='any1' name='leixing1'
+                                                                            value="个人"><label for='any1'>个人</label><input
+                                id='haha1' type="radio" name='leixing1' value="单位"><label for='haha1'>单位</label></p>
+                        <div><input type="text" placeholder="请输入您的姓名" id="name1"></div>
+                        <div><input type="text" placeholder="请输入联系方式" id="phone1"></div>
+                        <button class="wbyButton1 headertj" type="button">提交问题</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal bs-example-modal-lg " id="modal-gxyy" tabindex="-1" role="dialog"
+         aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width: 957px;height: 886px;left: -175px;">
+                <div class="modal-header" style="border-bottom:0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <div class="modal-title text-center" style="font-size: 30px;margin-top: 35px;color: #000" id="gridSystemModalLabel">仪器设备共享租用预约
+                    </div>
+                </div>
+
+                <div class="yqsbgxbox">
+                    <form>
+                        <input type="hidden" id="rentId2"/>
+                        <input type="hidden" id="rentType2"/>
+                        <div>
+                            <select id="platId2"
+                                    style='padding-left:15px;width: 707px;height: 60px; margin-top: 36px;background-color: #ffffff;box-shadow: inset 2px 2px 2px 0px rgba(105, 105, 105, 0.15);border-radius: 5px;border: solid 1px #d2d2d2;outline: none;font-size: 16px;color: #333;'
+                                    onchange="getpt1()">
+                                    <option>请选择仪器</option>
+
+
+                            </select>
+                        </div>
+                        <div>
+                            <select id="platIdpt2"
+                                    style='padding-left:15px;width: 707px;height: 60px; margin-top: 16px;background-color: #ffffff;box-shadow: inset 2px 2px 2px 0px rgba(105, 105, 105, 0.15);border-radius: 5px;border: solid 1px #d2d2d2;outline: none;font-size: 16px;color: #333;'
+                                    onchange="getCalendar2()">
+                                <option>请选择平台</option>
+                                <!-- <option th:value="null" th:text="--请选择--"></option> -->
+                                <!-- <option th:each="data:${map['parent']}" th:value="${data.id}" th:text="${data.name}"></option> -->
+                            </select>
+                        </div>
+                        <div><input type="text" id="person2" placeholder="请输入租用人姓名"></div>
+                        <div><input type="text" id="rentalUnits2" placeholder="请输入租用人单位"></div>
+                        <div class="calendar">
+                            <input type="text" id="datepicker1" placeholder="请选择租用时间">
+                            <select name="" id="morningAfternoon2">
+                                <option disabled selected hidden>请选择时间</option>
+                                <option value="0" class="yyforenoon2">上午</option>
+                                <option value="1" class="yyafternoon2">下午</option>
+                            </select>
+                        </div>
+                        <div><input type="text" id="phone2" placeholder="请输入联系方式"></div>
+                        <div><textarea style="resize:none" id="details2" placeholder="请输入项目描述"></textarea></div>
+                        <!--                        <div><input type="text" placeholder="请输入运输方式" id="bus"></div>-->
+
+                        <div style="text-align:center">
+                            <button class="header-tj" type="button">提交</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <script src="../../js/public.js"></script>
+    <script src="../../other/toastr.min.js"></script>
+    <script>
+        function getpt1() {
+            $("#platIdpt2").val("");
+            $("#datepicker11").val("");
+            $(".option1").remove()
+
+
+            const mTitle = $("#platId2").find("option:selected").text();
+            $.ajax({
+                url: "/appScientificPlatform/equipment",
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    mtitle: mTitle,
+
+                }),
+                async: true,
+                success: function (data) {
+                    if (10000 == data.code) {
+
+                        let list = data.data
+                        for (let i = 0; i < list.length; i++) {
+                            let option = '<option class="option1" value=' + list[i].id + '>' + list[i].title + '</option>'
+                            $('#platIdpt2').append(option)
+                        }
+
+
+                    }
+                }
+            })
+
+        }
+
+        jQuery(function ($) {
+            $.datepicker.regional['zh-CN'] = {
+                clearText: '清除',
+                clearStatus: '清除已选日期',
+                closeText: '关闭',
+                closeStatus: '不改变当前选择',
+                prevText: '< 上月',
+                prevStatus: '显示上月',
+                prevBigText: '<<',
+                prevBigStatus: '显示上一年',
+                nextText: '下月>',
+                nextStatus: '显示下月',
+                nextBigText: '>>',
+                nextBigStatus: '显示下一年',
+                currentText: '今天',
+                currentStatus: '显示本月',
+                monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                monthStatus: '选择月份',
+                yearStatus: '选择年份',
+                weekHeader: '周',
+                weekStatus: '年内周次',
+                dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+                dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+                dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+                dayStatus: '设置 DD 为一周起始',
+                dateStatus: '选择 m月 d日, DD',
+                dateFormat: 'yy-mm-dd',
+                firstDay: 1,
+                initStatus: '请选择日期',
+                isRTL: false
+            };
+            $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+        });
+        let array2 = []
+
+        function formatDate() {
+            var d = new Date(),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+            return [year, month, day].join('-');
+        }
+
+        function getCalendar2(time) {
+            $("#datepicker1").val("");
+            let platId = $("#platIdpt2").val();
+            let equipId = $("#platId2").val();
+            console.log(equipId)
+            let rentTime = formatDate()
+
+            $.ajax({
+                url: "/appEquipmentRent/rent?time=" + rentTime,
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    platId: platId,
+                    equipId: equipId,
+                }),
+                async: true,
+                success: function (data) {
+                    array2 = data
+
+
+                }
+            })
+
+        }
+
+        function getSet() {
+            console.log(111)
+
+        }
+
+        $(function (date) {
+            $("#datepicker1").datepicker({
+                dateFormat: 'yy-mm-dd',
+                minDate: +1,
+                maxDate: +30,
+                beforeShowDay: function (date) {
+                    let string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+
+                    return [array2.indexOf(string) == -1]
+
+                },
+                onChangeMonthYear: function (year, month, inst) {
+
+                },
+                onSelect: function (dateText, inst) {
+                    let platId = $("#platIdpt2").val();
+                    let equipId = $("#platId2").val();
+                    let rentTime = dateText;
+
+                    $.ajax({
+                        url: "/appEquipmentRent/rentTime?time=" + rentTime,
+                        type: 'post',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            platId: platId,
+                            equipId: equipId,
+                        }),
+                        async: true,
+                        success: function (data) {
+
+
+                            if (data == 0) {
+                                $('.yyforenoon2').attr("disabled", true)
+                                $('.yyafternoon2').attr("disabled", false)
+
+                            } else if (data == 1) {
+                                $('.yyafternoon2').attr("disabled", true)
+                                $('.yyforenoon2').attr("disabled", false)
+                            } else {
+                                $('.yyafternoon2').attr("disabled", false)
+                                $('.yyforenoon2').attr("disabled", false)
+
+                            }
+
+                        }
+                    })
+                }
+
+
+            });
+        })
+        toastr.options = {
+            closeButton: false,
+            debug: false,
+            progressBar: false,
+            positionClass: "toast-top-center",
+            onclick: null,
+            showDuration: "300",
+            hideDuration: "1000",
+            timeOut: "2000",
+            extendedTimeOut: "1000",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut"
+        };
+        $(".ggwbtn1").click(function () {
+            console.log(111)
+        });
+        $('#personalMenu .menu-list').html("");
+        if (localStorage.getExpire("loginName") != null) {
+            $("#userNames").html(localStorage.getExpire("loginName"));
+            $("#userNames").attr("href", "/user/getIndexById?userId=" + localStorage.getExpire("userId") + "");
+            $(".login-after").show()
+            $(".login-before").hide()
+        } else {
+            $("#userNames").html("")
+            $("#userNames").attr("href", "")
+            $(".login-after").hide()
+            $(".login-before").show()
+        }
+        $("#getlist").click(function () {
+            $(".option").remove()
+            var obj = {}
+
+            $.ajax({
+                url: "/appInstrumentEquipment/lists",
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(obj),
+                async: true,
+                success: function (data) {
+                    if (10000 == data.code) {
+
+                        let list = data.data
+                        for (let i = 0; i < list.length; i++) {
+                            let option = '<option class="option" value=' + list[i].id + '>' + list[i].title + '</option>'
+                            $('#platId2').append(option)
+                        }
+
+                    }
+
+                }
+            });
+        })
+
+        function logout() {
+            var userId = localStorage.getExpire("userId");
+            window.localStorage.removeItem('userId')
+            window.localStorage.removeItem('type')
+            window.localStorage.removeItem('loginName')
+            // window.location.href ="www.baidu.com"
+            window.location.href = "/user/loginOut?userId=" + userId;
+        }
+
+        // $('#logout').click(function(){
+        //
+        // })
+
+        $("#searchBtn").click(function () {
+            var contents = $("#searchInput").val()
+            console.log(contents)
+            if (contents != "" && contents != null) {
+                window.open(`/searchRound?content=${contents}`);
+            }
+            return
+
+        })
+
+        $(function () {
+            $.ajax({
+                //其它参数选项请自填
+                url: "/wheather",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (res) {
+                    $(".tiqilei").html(res.data.type)
+                }
+            });
+            clock()
+        })
+
+
+        function clock() {
+            var time = new Date();
+            switch (time.getDay()) {
+                case 1:
+                    week = "星期一";
+                    break;
+                case 2:
+                    week = "星期二";
+                    break;
+                case 3:
+                    week = "星期三";
+                    break;
+                case 4:
+                    week = "星期四";
+                    break;
+                case 5:
+                    week = "星期五";
+                    break;
+                case 6:
+                    week = "星期六";
+                    break;
+                default:
+                    week = "星期天";
+            }
+            var year = time.getFullYear();
+            var month = time.getMonth();
+            var date = time.getDate();
+            $(".riqidate").html("" + year + "-" + (month + 1) + "-" + date + " " + week)
+
+
+        }
+
+        function keyup_submit1(e) {
+            var evt = window.event || e;
+            if (evt.keyCode == 13) {
+
+                var contents = $("#searchInput").val()
+                console.log(contents)
+                if (contents != "" && contents != null) {
+                    window.open(`/searchRound?content=${contents}`);
+                }
+                return
+
+
+            }
+        }
+
+        $(".headertj").click(function () {
+
+            if (null == localStorage.getExpire("userId")) {
+                //跳转登陆
+                window.open("/login");
+                return;
+            } else {
+                if ("EXPERT" == localStorage.getExpire("type")) {
+
+                    toastr.warning('您未具备此权限！');
+
+                    return;
+                }
+
+
+                var title = $("#divTitle1").val();
+                var content = $("#divContent1").val();
+                var keyWord= $("#keyTou").val();
+                var name = $("#name1").val();
+                var phone = $("#phone1").val();
+                var type = $("input[name='leixing1']:checked").val();
+                var createBy = localStorage.getExpire("userId");
+                if (title == null || title == "" || content == null || content == "") {
+                    toastr.warning('请输入发布内容！');
+                    return false
+                }
+
+
+                $.ajax({
+                    url: "/appProductTechnique/addDemand",
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        createBy: createBy,
+                        title: title,
+                        content: content,
+                        keyWord: keyWord,
+                        name: name,
+                        phone: phone,
+                        type: type
+                    }),
+                    async: true,
+                    success: function (data) {
+                        if (10000 == data.code) {
+                            toastr.success('提交成功！');
+                            $("#divTitle1").val("");
+                            $("#divContent1").val("");
+                            $("#keyTou").val("");
+                            $("#name1").val("");
+                            $("#phone1").val("");
+                            $("input[name='leixing1']:checked").val("");
+                            $("#myModals").modal('hide');
+                        }
+
+                    }
+                });
+            }
+
+
+        })
+        $(".header-tj").click(function () {
+            if (null == localStorage.getExpire("userId")) {
+                //跳转登陆
+                window.open("/login");
+                return;
+            } else {
+                var person = $("#person2").val();
+                var time = $("#datepicker1").val();
+                var phone = $("#phone2").val();
+                var morningAfternoon = $("#morningAfternoon2").val();
+                var projectDescription = $("#details2").val();
+                var platId = $("#platIdpt2").val();
+                var equipId = $("#platId2").val();
+                var createBy = localStorage.getExpire("userId");
+                var rentalUnits = $("#rentalUnits2").val();
+                //alert(platId)
+                if (null == platId || "" == platId || "--请选择仪器--" == platId) {
+                    toastr.warning('请选择预约的仪器！');
+                    return;
+                }
+
+
+                $.ajax({
+                    url: "/appEquipmentRent/addIndex",
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        createBy: createBy,
+                        rentPerson: person,
+                        morningAfternoon: morningAfternoon,
+                        rentTime: time,
+                        equipId: equipId,
+                        rentPhone: phone,
+                        projectDescription: projectDescription,
+                        platId: platId,
+                        rentalUnits:rentalUnits
+                    }),
+                    async: true,
+                    success: function (data) {
+                        if (10000 == data.code) {
+
+                            toastr.success('提交成功!');
+                            $('.modal').modal('hide')
+                            $("#datepicker1").val("");
+                            $("#phone2").val("");
+                            $("#morningAfternoon2").val("");
+                            $("#details2").val("");
+                            $("#platIdpt2").val("");
+                            $("#platId2").val("");
+                            $("#person2").val("");
+                            $("#rentalUnits2").val("");
+
+                            // $("#platId option:first").prop("selected", 'selected');
+                            //$("#platId option").eq(0).attr("selected", true);
+
+                        }
+                    }
+                });
+            }
+        })
+    </script>
+</div>
+        </div>
+        <div class="ky_img"></div>
+        <div class="ky_main">
+            <div class="ky_main_center">
+                <p class="ky_title">
+                    <span>当前位置：</span>
+                    <span><a href="/">首页</a>/</span>
+                    <span><a href="/appScientificPlatform/list?parentType=63">科研平台</a></span>
+                </p>
+                <div id="urlId" style="display:none">3</div>
+                <div id="pageId" style="display:none">3</div>
+                <!--<div class="ky_main_tab container">-->
+                <!--<div class="row">-->
+                <!--<div class="col-md-8">农业农村部现代农业装备学科群重点实验室</div>-->
+                <!--<div class="col-md-8">全程机械化科研基地</div>-->
+                <!--<div class="col-md-8">设施农业工程学科重点实验室</div>-->
+                <!--</div>-->
+                <!--</div>-->
+
+
+                <div class="ky_main_tab">
+                    <ul>
+                        <li class="item"><a
+                                href="/appScientificPlatform/list?parentType=63&amp;url=1&amp;pageId=3">现代农业装备</a></li>
+                        <li class="item"><a
+                                href="/appScientificPlatform/list?parentType=64&amp;url=2&amp;pageId=3">设施农业工程</a></li>
+                        <li class="item"><a
+                                href="/appScientificPlatform/list?parentType=65&amp;url=3&amp;pageId=3">全程机械化科研基地</a></li>
+                    </ul>
+                </div>
+                <div id="loadingHtml">
+                    <div class="ky_list ky_list_1">
+                        
+                        
+                 
+                    
+                  
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                         
+                         <div class="ky_list ky_list_3">
+                       <div class="ky_list_top">
+                    <form action="/appScientificPlatform/list?parentType=65" method="post">
+                     <input type="hidden" value="3" id="url" name="url">
+                        <div class="ky_list_top_item">
+                            <span>名称：</span>
+                            <input type="text" placeholder="请输入名称" id="title" name="title" value="">
+                        </div>
+                        <div class="ky_list_top_item">
+                            <span>地址：</span>
+                            <input type="text" placeholder="请输入基地地址" style="width: 554px;" id="address" name="address" value="">
+                            <!-- <input class="unify-submit" type="submit" value="搜索"> -->
+                        </div>
+                        <div class="ky_list_top_item">
+                            <input class="unify-submit" type="submit" value="搜索">
+                        </div>                
+                        </form>
+                    </div>
+
+                            
+                    
+                    <div class="clearfix">
+                                    <div onclick="tiaozhuan(10751002905935872)" class="ky_list_bottom_item">
+                                        <input type="hidden" class="kjId4" value="10751002905935872">
+                                        <div>
+                                            <img src="/nongji/201910210817370629.jpg" class="unify-img-170-120" onerror="this.src='../../images/noimg.jpg'" alt=""/>
+                                            <div class="ky_list_bottom_item_right">
+                                                <span class="ky_list_bottom_item_right_title">北方一季稻全程机械化科研基地建设项目</span>
+                                               <!-- <p>
+                                            		<span>主要农作物：</span>
+                                            		<span th:text="${data.scorpName}"></span>
+                                        		</p>
+                                        		<p>
+                                            		<span>地址：</span>
+                                            		<span th:text="${data.address}"></span>
+                                        		</p> -->
+                                                <a href="/appProductTchnology/getById?id=265" style="margin-top:10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: block">
+                                                    <span>依托单位：</span>
+                                                    <span>东北农业大学</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div onclick="tiaozhuan(10728692023820288)" class="ky_list_bottom_item">
+                                        <input type="hidden" class="kjId4" value="10728692023820288">
+                                        <div>
+                                            <img src="/nongji/201910200921110368.JPG" class="unify-img-170-120" onerror="this.src='../../images/noimg.jpg'" alt=""/>
+                                            <div class="ky_list_bottom_item_right">
+                                                <span class="ky_list_bottom_item_right_title">生猪健康养殖工程与装备科研基地</span>
+                                               <!-- <p>
+                                            		<span>主要农作物：</span>
+                                            		<span th:text="${data.scorpName}"></span>
+                                        		</p>
+                                        		<p>
+                                            		<span>地址：</span>
+                                            		<span th:text="${data.address}"></span>
+                                        		</p> -->
+                                                <a href="/appProductTchnology/getById?id=264" style="margin-top:10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: block">
+                                                    <span>依托单位：</span>
+                                                    <span>重庆市畜牧科学院</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div onclick="tiaozhuan(10623327009505280)" class="ky_list_bottom_item">
+                                        <input type="hidden" class="kjId4" value="10623327009505280">
+                                        <div>
+                                            <img src="/nongji/201910151742140561.JPG" class="unify-img-170-120" onerror="this.src='../../images/noimg.jpg'" alt=""/>
+                                            <div class="ky_list_bottom_item_right">
+                                                <span class="ky_list_bottom_item_right_title">农业农村部油菜全程机械化科研基地</span>
+                                               <!-- <p>
+                                            		<span>主要农作物：</span>
+                                            		<span th:text="${data.scorpName}"></span>
+                                        		</p>
+                                        		<p>
+                                            		<span>地址：</span>
+                                            		<span th:text="${data.address}"></span>
+                                        		</p> -->
+                                                <a href="/appProductTchnology/getById?id=305" style="margin-top:10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: block">
+                                                    <span>依托单位：</span>
+                                                    <span>华中农业大学</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div onclick="tiaozhuan(10602341279203328)" class="ky_list_bottom_item">
+                                        <input type="hidden" class="kjId4" value="10602341279203328">
+                                        <div>
+                                            <img src="/nongji/201910141927580566.jpg" class="unify-img-170-120" onerror="this.src='../../images/noimg.jpg'" alt=""/>
+                                            <div class="ky_list_bottom_item_right">
+                                                <span class="ky_list_bottom_item_right_title">农村农业部柑橘全程机械化科研基地</span>
+                                               <!-- <p>
+                                            		<span>主要农作物：</span>
+                                            		<span th:text="${data.scorpName}"></span>
+                                        		</p>
+                                        		<p>
+                                            		<span>地址：</span>
+                                            		<span th:text="${data.address}"></span>
+                                        		</p> -->
+                                                <a href="/appProductTchnology/getById?id=305" style="margin-top:10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: block">
+                                                    <span>依托单位：</span>
+                                                    <span>华中农业大学</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div onclick="tiaozhuan(10683615338299392)" class="ky_list_bottom_item">
+                                        <input type="hidden" class="kjId4" value="10683615338299392">
+                                        <div>
+                                            <img src="" class="unify-img-170-120" onerror="this.src='../../images/noimg.jpg'" alt=""/>
+                                            <div class="ky_list_bottom_item_right">
+                                                <span class="ky_list_bottom_item_right_title">黄淮海产区花生全程机械化科研基地</span>
+                                               <!-- <p>
+                                            		<span>主要农作物：</span>
+                                            		<span th:text="${data.scorpName}"></span>
+                                        		</p>
+                                        		<p>
+                                            		<span>地址：</span>
+                                            		<span th:text="${data.address}"></span>
+                                        		</p> -->
+                                                <a href="/appProductTchnology/getById?id=273" style="margin-top:10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: block">
+                                                    <span>依托单位：</span>
+                                                    <span>山东省农业机械科学研究院</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div onclick="tiaozhuan(10690531920183296)" class="ky_list_bottom_item">
+                                        <input type="hidden" class="kjId4" value="10690531920183296">
+                                        <div>
+                                            <img src="" class="unify-img-170-120" onerror="this.src='../../images/noimg.jpg'" alt=""/>
+                                            <div class="ky_list_bottom_item_right">
+                                                <span class="ky_list_bottom_item_right_title">北方马铃薯生产全程机械化科研基地（西北地区）</span>
+                                               <!-- <p>
+                                            		<span>主要农作物：</span>
+                                            		<span th:text="${data.scorpName}"></span>
+                                        		</p>
+                                        		<p>
+                                            		<span>地址：</span>
+                                            		<span th:text="${data.address}"></span>
+                                        		</p> -->
+                                                <a href="/appProductTchnology/getById?id=312" style="margin-top:10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: block">
+                                                    <span>依托单位：</span>
+                                                    <span>甘肃农业大学</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div onclick="tiaozhuan(10683494550470656)" class="ky_list_bottom_item">
+                                        <input type="hidden" class="kjId4" value="10683494550470656">
+                                        <div>
+                                            <img src="" class="unify-img-170-120" onerror="this.src='../../images/noimg.jpg'" alt=""/>
+                                            <div class="ky_list_bottom_item_right">
+                                                <span class="ky_list_bottom_item_right_title">黄淮海玉米全程机械化技术集成与装备科研基地</span>
+                                               <!-- <p>
+                                            		<span>主要农作物：</span>
+                                            		<span th:text="${data.scorpName}"></span>
+                                        		</p>
+                                        		<p>
+                                            		<span>地址：</span>
+                                            		<span th:text="${data.address}"></span>
+                                        		</p> -->
+                                                <a href="/appProductTchnology/getById?id=273" style="margin-top:10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: block">
+                                                    <span>依托单位：</span>
+                                                    <span>山东省农业机械科学研究院</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div onclick="tiaozhuan(10661093396971520)" class="ky_list_bottom_item">
+                                        <input type="hidden" class="kjId4" value="10661093396971520">
+                                        <div>
+                                            <img src="" class="unify-img-170-120" onerror="this.src='../../images/noimg.jpg'" alt=""/>
+                                            <div class="ky_list_bottom_item_right">
+                                                <span class="ky_list_bottom_item_right_title">牧草全程机械化科研基地</span>
+                                               <!-- <p>
+                                            		<span>主要农作物：</span>
+                                            		<span th:text="${data.scorpName}"></span>
+                                        		</p>
+                                        		<p>
+                                            		<span>地址：</span>
+                                            		<span th:text="${data.address}"></span>
+                                        		</p> -->
+                                                <a href="/appProductTchnology/getById?id=293" style="margin-top:10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: block">
+                                                    <span>依托单位：</span>
+                                                    <span>中国农业机械化科学研究院呼和浩特分院</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    <div class="state"></div>
+                
+
+
+                </div>
+                        </div>
+                        
+                        
+                        
+                
+         
+                       <!--  <div class="state"  th:if="${map['total']<17}"></div>
+
+
+                         <table class="ky_list_page mainPage" th:if="${map['pages']>18}">
+                        <tr>
+                        <td th:switch="${map['pageNo']}" th:if="${map['pageNo']!=1}">
+                        <p th:case="1"><a th:href="@{/appScientificPlatform/list(pageNo=1,parentType=${map['parentType']},childType=${map['childType']},title=${title},url=${url},company=${company},serialNumber=${serialNumber},pageId=3)}">上一页</a></p >
+                        <p th:case="*"><a th:href="@{/appScientificPlatform/list(pageNo=${map['pageNo']-1},parentType=${map['parentType']},childType=${map['childType']},title=${title},url=${url},company=${company},serialNumber=${serialNumber},pageId=3)}">上一页</a></p >
+
+                        </td>
+                        <td th:switch="${map['pageNo']}"  th:if="${map['pageNo']+1<=map['totals']}">
+                        <p th:case="${map['totals']}"><a th:href="@{/appScientificPlatform/list(pageNo=${map['totals']},parentType=${map['parentType']},childType=${map['childType']},title=${title},url=${url},company=${company},serialNumber=${serialNumber},pageId=3)}">下一页</a></p >
+                        <p th:case="*"><a th:href="@{/appScientificPlatform/list(pageNo=${map['pageNo']+1},parentType=${map['parentType']},childType=${map['childType']},title=${title},url=${url},company=${company},serialNumber=${serialNumber},pageId=3)}">下一页</a></p >
+                        </td>
+                        </tr>
+                        </table> 
+          
+
+                </div> -->
+                <!-- <div class="ky_list ky_list_2">
+                    <div class="ky_list_top">
+                    <form th:action="@{/appScientificPlatform/list?parentType=64}" th:method="post" th:object="${aScientific}">
+                    <input type="hidden" th:field="*{url}" th:value="${url}">
+                        <div class="ky_list_top_item">
+                            <span>名称：</span>
+                            <input type="text" placeholder="请输入名称" th:field="*{title}">
+                        </div>
+                        <div class="ky_list_top_item">
+                            <span>主要农作物：</span>
+                            <select th:field="*{stapleCrops}">
+                            	<option th:value="null" th:text="--请选择--"></option>
+                                <option th:each="data:${map['scorp']}" th:value="${data.id}" th:text="${data.name}"></option>
+                            </select>
+                        </div>
+                        <div class="ky_list_top_item">
+                            <span>基地地址：</span>
+                            <input type="text" placeholder="请输入基地地址" style="width: 554px;" th:field="*{address}">
+                            <input class="unify-submit" type="submit" value="搜索">
+                        </div>
+                        <div class="ky_list_top_item">
+                            <input class="unify-submit" type="submit" value="搜索">
+                        </div>
+                        </form>
+                    </div>
+                     
+                    <div class="ky_list_bottom">
+                        综合性重点实验室
+                        <div class="clearfix">
+                             <div class="nav_tou">
+                                <div class="line_tou"></div>
+                                <h1>综合性重点实验室</h1>
+                            </div>
+                            <div class="clearfix">
+                                <div class="ky_list_bottom_item" onclick='gotoDetail()' th:each="data:${map['lists']}">
+                                    <a th:href="@{/appScientificPlatform/getById(id=${data.id})}" target="_Blank"><img th:src="@{{filePath}(filePath=${data.filePath})}" class="unify-img-170-120" onerror="this.src='../../images/noimg.jpg'" alt=""/>
+                                    <div class="ky_list_bottom_item_right">
+                                        <span class="ky_list_bottom_item_right_title" th:text="${data.title}"></span>
+                                        <p>
+                                            <span>主要农作物：</span>
+                                            <span th:text="${data.scorpName}"></span>
+                                        </p>
+                                        <p>
+                                            <span>地址：</span>
+                                            <span th:text="${data.address}"></span>
+                                        </p>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div> 
+                        专业性重点实验室
+                        <div class="clearfix">
+                            <div class="nav_tou">
+                                <div class="line_tou"></div>
+                                <h1>专业性重点实验室</h1>
+                            </div>
+                            <div class="clearfix">
+                                <div class="ky_list_bottom_item" onclick='gotoDetail()' th:each="data:${map['listy']}">
+                                    <a th:href="@{/appScientificPlatform/getById(id=${data.id})}" target="_Blank"><img th:src="@{{filePath}(filePath=${data.filePath})}" class="unify-img-170-120" onerror="this.src='../../images/noimg.jpg'" alt=""/>
+                                    <div class="ky_list_bottom_item_right">
+                                        <span class="ky_list_bottom_item_right_title" th:text="${data.title}"></span>
+                                        <p>
+                                            <span>主要农作物：</span>
+                                            <span th:text="${data.scorpName}"></span>
+                                        </p>
+                                        <p>
+                                            <span>地址：</span>
+                                            <span th:text="${data.address}"></span>
+                                        </p>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div> 
+                        观测实验站
+                        <div class="clearfix">
+                            <div class="nav_tou">
+                                <div class="line_tou"></div>
+                                <h1>观测实验站</h1>
+                            </div>
+                            <div class="clearfix">
+                                <div class="ky_list_bottom_item" onclick='gotoDetail()' th:each="data:${map['listw']}">
+                                    <a th:href="@{/appScientificPlatform/getById(id=${data.id})}" target="_Blank"><img th:src="@{{filePath}(filePath=${data.filePath})}" class="unify-img-170-120" onerror="this.src='../../images/noimg.jpg'" alt=""/>
+                                    <div class="ky_list_bottom_item_right">
+                                        <span class="ky_list_bottom_item_right_title" th:text="${data.title}"></span>
+                                        <p>
+                                            <span>主要农作物：</span>
+                                            <span th:text="${data.scorpName}"></span>
+                                        </p>
+                                        <p>
+                                            <span>地址：</span>
+                                            <span th:text="${data.address}"></span>
+                                        </p>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                    </div>
+                    <div class="state" th:if="${map['total']<17}"></div>
+
+                    <!-- <table class="ky_list_page mainPage" th:if="${map['pages']>18}">
+                    <tr>
+                    <td th:switch="${map['pageNo']}">
+                    <p th:case="1"><a th:href="@{/appScientificPlatform/list(pageNo=1,parentType=${map['parentType']},childType=${map['childType']},title=${title},url=${url},address=${address},stapleCrops=${stapleCrops},pageId=3)}">上一页</a></p >
+                    <p th:case="*"><a th:href="@{/appScientificPlatform/list(pageNo=${map['pageNo']-1},parentType=${map['parentType']},childType=${map['childType']},title=${title},url=${url},address=${address},stapleCrops=${stapleCrops},pageId=3)}">上一页</a></p >
+
+                    </td>
+                    <td th:switch="${map['pageNo']}"  th:if="${map['pageNo']+1<=map['totals']}">
+                    <p th:case="${map['totals']}"><a th:href="@{/appScientificPlatform/list(pageNo=${map['totals']},parentType=${map['parentType']},childType=${map['childType']},title=${title},url=${url},address=${address},stapleCrops=${stapleCrops},pageId=3)}">下一页</a></p >
+                    <p th:case="*"><a th:href="@{/appScientificPlatform/list(pageNo=${map['pageNo']+1},parentType=${map['parentType']},childType=${map['childType']},title=${title},url=${url},address=${address},stapleCrops=${stapleCrops},pageId=3)}">下一页</a></p >
+                    </td>
+                    </tr>
+                    </table>
+
+                </div> 
+                <div class="ky_list ky_list_3">
+                    <div class="ky_list_top">
+                    <form th:action="@{/appScientificPlatform/list?parentType=65}" th:method="post" th:object="${aScientific}">
+                     <input type="hidden" th:field="*{url}" th:value="${url}">
+                        <div class="ky_list_top_item">
+                            <span>名称：</span>
+                            <input type="text" placeholder="请输入名称" th:field="*{title}">
+                        </div>
+                        <div class="ky_list_top_item">
+                            <span>地址：</span>
+                            <input type="text" placeholder="请输入基地地址" style="width: 554px;" th:field="*{address}">
+                            <input class="unify-submit" type="submit" value="搜索">
+                        </div>
+                        <div class="ky_list_top_item">
+                            <input class="unify-submit" type="submit" value="搜索">
+                        </div>
+                        <input type="submit" value="搜索">
+                        </form>
+                    </div>
+                    <div class="ky_list_bottom" id="">
+                        综合性重点实验室
+                        <div class="clearfix">
+                            <div class="nav_tou">
+                                <div class="line_tou"></div>
+                                <h1>综合性重点实验室</h1>
+                            </div>
+                            <div class="clearfix">
+                                <div class="ky_list_bottom_item" onclick='gotoDetail()' th:each="data:${map['listq']}">
+                                <a th:href="@{/appScientificPlatform/getById(id=${data.id})}" target="_Blank"><img th:src="@{{filePath}(filePath=${data.filePath})}" class="unify-img-161-120" onerror="this.src='../../images/noimg.jpg'" alt=""/>
+                                <div class="ky_list_bottom_item_right">
+                                <span class="ky_list_bottom_item_right_title" th:text="${data.title}"></span>
+                                <p>
+                                <span>地址：</span>
+                                <span th:text="${data.address}"></span>
+                                </p>
+                                <p>
+                                <span>电话：</span>
+                                <span th:text="${data.phone}"></span>
+                                </p>
+                                </div>
+                                </a>
+                                </div>
+                            </div>
+                        </div>
+                        专业性重点实验室
+                        <div class="clearfix">
+                            <div class="nav_tou">
+                                <div class="line_tou"></div>
+                                <h1>专业性重点实验室</h1>
+                            </div>
+                            <div class="clearfix">
+                                <div class="ky_list_bottom_item" onclick='gotoDetail()' th:each="data:${map['listg']}">
+                                <a th:href="@{/appScientificPlatform/getById(id=${data.id})}" target="_Blank"><img th:src="@{{filePath}(filePath=${data.filePath})}" class="unify-img-161-120" onerror="this.src='../../images/noimg.jpg'" alt=""/>
+                                <div class="ky_list_bottom_item_right">
+                                <span class="ky_list_bottom_item_right_title" th:text="${data.title}"></span>
+                                <p>
+                                <span>地址：</span>
+                                <span th:text="${data.address}"></span>
+                                </p>
+                                <p>
+                                <span>电话：</span>
+                                <span th:text="${data.phone}"></span>
+                                </p>
+                                </div>
+                                </a>
+                                </div>
+                            </div>
+                        </div>
+                        观测实验站
+                        <div class="clearfix">
+                            <div class="nav_tou">
+                                <div class="line_tou"></div>
+                                <h1>观测实验站</h1>
+                            </div>
+                            <div class="clearfix">
+                                <div class="ky_list_bottom_item" onclick='gotoDetail()' th:each="data:${map['listn']}">
+                                <a th:href="@{/appScientificPlatform/getById(id=${data.id})}" target="_Blank"><img th:src="@{{filePath}(filePath=${data.filePath})}" class="unify-img-161-120" onerror="this.src='../../images/noimg.jpg'" alt=""/>
+                                <div class="ky_list_bottom_item_right">
+                                <span class="ky_list_bottom_item_right_title" th:text="${data.title}"></span>
+                                <p>
+                                <span>地址：</span>
+                                <span th:text="${data.address}"></span>
+                                </p>
+                                <p>
+                                <span>电话：</span>
+                                <span th:text="${data.phone}"></span>
+                                </p>
+                                </div>
+                                </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                  <!--   <div class="state" th:if="${map['total']<17}"></div>
+                     <!-- <table class="ky_list_page mainPage" th:if="${map['pages']>18}">
+	  			<tr>
+	    		<td th:switch="${map['pageNo']}">
+	      		<p th:case="1"><a th:href="@{/appScientificPlatform/list(pageNo=1,parentType=${map['parentType']},childType=${map['childType']},title=${title},url=${url},address=${address},pageId=3)}">上一页</a></p >
+	      		<p th:case="*"><a th:href="@{/appScientificPlatform/list(pageNo=${map['pageNo']-1},parentType=${map['parentType']},childType=${map['childType']},title=${title},url=${url},address=${address},pageId=3)}">上一页</a></p >
+
+	    		</td>
+	     		<td th:switch="${map['pageNo']}"  th:if="${map['pageNo']+1<=map['totals']}">
+	       		<p th:case="${map['totals']}"><a th:href="@{/appScientificPlatform/list(pageNo=${map['totals']},parentType=${map['parentType']},childType=${map['childType']},title=${title},url=${url},address=${address},pageId=3)}">下一页</a></p >
+	       		<p th:case="*"><a th:href="@{/appScientificPlatform/list(pageNo=${map['pageNo']+1},parentType=${map['parentType']},childType=${map['childType']},title=${title},url=${url},address=${address},pageId=3)}">下一页</a></p >
+	     		</td>
+	  			</tr>
+				</table> -->
+               <!--  </div>  -->
+            </div>
+            </div>
+        </div>
+      
+		</div>
+	 	<div id="footerpage">
+           <div class="foot">
+    <div class="foottop">
+        <ul>         
+            <li  class='menu1'><a href="/appIndustryInformation/searchIndustryInformationSummary?flag=1">行业资讯</a></li>
+            <li  class='menu1'><a href="/appIndustryExperts/list?parentType=24">行业专家</a></li>
+            <li  class='menu1'><a href="/appScientificPlatform/list?parentType=63">科研平台</a></li>
+            <li  class='menu1'><a href="/appResearchProjects/kyxmIndex">科研项目</a></li>
+            <li  class='menu1'><a href="/appInstrumentEquipment/list">仪器设备</a></li>
+            <li  class='menu1'><a href="/appScientificEport/keyanbg">科研报告</a></li>
+            <li  class='menu1'><a href="/appProductTechnique/technique">新产品新技术</a></li>
+            <li  class='menu1'><a href="/appProductTchnology/list">科教单位</a></li>
+            <li  class='menu1'><a href="/appExpertConsultation/njdsj">农机大数据</a></li>
+             <li class='menu1'><a href="/appExpertConsultation/zhuanjiazixun">专家咨询</a></li>
+        </ul>
+        <div class="message">
+            <!-- <div>
+                <div class="footImage"><img src="../../images/foot/icon_QQ.png" alt=""></div>
+                <dl>
+                    <dt>客服QQ：</dt>
+                    <dd>88888888</dd>
+                </dl>
+            </div> -->
+            <div>
+                <div class="footImage"><img src="../../images/foot/icon_email.png" alt=""></div>
+                <dl>
+                    <dt>联系邮箱：</dt>
+                    <dd>njhxxpt@163.com</dd>
+                </dl>
+            </div>
+            <div>
+                <div class="footImage"><img src="../../images/foot/icon_phone.png" alt=""></div>
+                <dl>
+                    <dt>联系电话：</dt>
+                    <dd>025-84346236</dd>
+                </dl>
+            </div>
+            <div>
+                <div class="footImage"><img src="../../images/erweima.jpg" alt=""></div>
+                <dl>
+                    <dt>请关注公众号：</dt>
+                    <dd>全国农机化科技管理信息平台</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="footbottom">
+        <div>
+            <p><a href="https://beian.miit.gov.cn" target="_blank" style="color:#4c78b5">Copyright 2019 njhkj.net All Rights Reserved 全国农机化科技管理信息平台版权所有 苏ICP备2021016995号-1</a></p>
+            <p onclick="gotoSs()" style="display:flex;align-items: center;margin-left:180px;cursor:pointer;"><img src="../../images/sss.png" alt=""></p>
+            
+            <p><span style="margin-right:20px">农业农村部农机化司指导</span><span>全国农机化科技管理信息平台 - 农机行业“互联网＋”服务平台</span></p>
+        </div>
+    </div>
+    <script>
+	function gotoSs(){
+		window.location.href = "http://www.33iot.com"
+	}
+
+
+
+</script>
+</div>
+        </div>
+	</div>
+</body>
+</html>
+<script src="../../other/toastr.min.js"></script>
+
+<script>
+    toastr.options = {
+        closeButton: false,
+        debug: false,
+        progressBar: false,
+        positionClass: "toast-top-center",
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        timeOut: "2000",
+        extendedTimeOut: "1000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut"
+    };
+    
+    function tiaozhuan(data) {
+    	/* var id = $(this).siblings().find('input').val() */
+    	
+    	/* var id = $('.kjId').val(); */
+		window.location.href="/appScientificPlatform/getById?id="+data
+			
+	}
+   
+   
+
+
+    /*   function getParam(paramName) {
+          paramValue = "", isFound = !1;
+          if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+              arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+              while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+          }
+          return paramValue == "" && (paramValue = null), paramValue
+      } */
+    if ($("#pageId").text() != "") {
+        $("#footerpage .menu1").eq(parseInt($("#pageId").text())).addClass('foot-active');
+        $("#footerpage .menu1").eq(parseInt($("#pageId").text())).siblings().removeClass('foot-active');
+        $("#headerpage .menu").eq(parseInt($("#pageId").text())).addClass('menu-active');
+        $("#headerpage .menu").eq(parseInt($("#pageId").text())).siblings().removeClass('menu-active');
+    }
+</script>
+<script>
+    window.onload = function () {
+        $("#headerpage").load("../public/header.html");
+        $("#footerpage").load("../public/footer.html");
+        $('.ky_list_1').show();
+        $('.ky_list_1').siblings().hide();
+        $(".item").eq(parseInt($("#urlId").text()) - 1).addClass('active');
+        $(".item").eq(parseInt($("#urlId").text()) - 1).siblings().removeClass('active');
+        if ($("#urlId").text() == '1') {
+            $('.ky_list_1').show();
+            $('.ky_list_1').siblings().hide();
+        }
+        else if ($("#urlId").text() == '2') {
+            $('.ky_list_2').show();
+            $('.ky_list_2').siblings().hide();
+        }
+        else {
+            $('.ky_list_3').show();
+            $('.ky_list_3').siblings().hide();
+        }
+    }
+    // $('#loadingHtml').load('keyan1.html');
+    /*  $('.item').click(function () {
+         $(this).addClass('active');
+         $(this).siblings().removeClass('active');
+         console.log($(this).attr('data-id'));
+         if($(this).attr('data-id')=='1'){
+             // $('#loadingHtml').load('keyan1.html');
+             $('.ky_list_1').show();
+             $('.ky_list_1').siblings().hide();
+         }
+         else if($(this).attr('data-id')=='2'){
+             $('.ky_list_2').show();
+             $('.ky_list_2').siblings().hide();
+             // $('#loadingHtml').load('keyan2.html');
+         }
+         else {
+             $('.ky_list_3').show();
+             $('.ky_list_3').siblings().hide();
+             // $('#loadingHtml').load('keyan3.html');
+         }
+     }) */
+    /*     function gotoDetail(url){
+            console.log(url);
+            window.location.href = 'detail.html?urlid=3';
+        } */
+    //输入字符查找相应的数据 开始
+	//  简单封装ajax请求
+	function zjSelectAjax(data,arr){
+		$.ajax({
+				url: "/appExpertConsultation/list",
+				type: 'post',
+				dataType: 'json',
+				contentType: 'application/json',
+				data: JSON.stringify(data),
+				success: function(res){
+						for(var i=0;i<res.data.length;i++){
+							arr.push(res.data[i].title)
+						}
+						for(var key in arr){
+							var showLi=$('<li></li>')
+									.html(arr[key]);
+						$(".proposal-list").append(showLi)
+						}
+						// 如果数据超出一定的高度，加滚动条
+						if($(".proposal-box").outerHeight()>300){
+							
+							$(".proposal-box").addClass("proposal-box-auto")
+						}
+				}
+			})
+	}
+	function zjSelect(res){
+		var arr=[];
+		var data={};
+		data.title=res;
+        if(res !==""){
+            //如果数组为空
+            if(!arr){
+                    zjSelectAjax(data,arr)
+            }else{
+                // 如果不为空，清除数据
+                arr=[];
+                $(".proposal-list").empty()
+                    zjSelectAjax(data,arr);
+            }
+
+        }else{
+            $(".proposal-list").empty()
+			$(".proposal-box").removeClass("proposal-box-auto")
+        }
+	}
+        
+        $(document).ready(function(){
+			// 选中列表项中的一个值，把他赋值给input的value
+            $(".proposal-list").on("click","li",function(){
+                // 赋值给value
+                console.log($(this))
+                $(".autocomplete-input").val($(this).html())
+                // 清空列表数据
+                $(".proposal-list").empty()
+                // 清除父元素的边框
+                $(".proposal-box").removeClass("proposal-box-auto")
+            });
+        });
+    //输入字符查找相应的数据 结束
+</script>

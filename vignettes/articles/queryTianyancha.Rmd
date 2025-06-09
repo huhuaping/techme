@@ -1,5 +1,7 @@
 ---
 title: "机构信息库"
+vignette: >
+  %\VignetteIndexEntry{articles-queryTianyan}
 ---
 
 ```{r, include = FALSE}

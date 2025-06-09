@@ -1,8 +1,8 @@
 ---
-title: "Techme数据集"
+title: "02-Techme数据集"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Techme数据集}
+  %\VignetteIndexEntry{techme data set}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
