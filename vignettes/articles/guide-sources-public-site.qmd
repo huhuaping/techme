@@ -977,7 +977,7 @@ techme::PubConvergenceAffirm %>%
 
 - 关于公布2021年农业产业融合发展项目创建名单的[通知](http://www.xccys.moa.gov.cn/cyrh/202104/t20210429_6366991.htm) 50家  包括：国家现代农业产业园、优势特色产业集群、农业产业强镇
 
-#### 国家现代农业产业园（创建）
+#### 国家现代农业产业园（创建-历史存档）
 
 现代农业产业园创建名单数据年份：2017年至今。
 
@@ -993,13 +993,13 @@ techme::PubConvergenceAffirm %>%
 
 - 2017-07-20 11家 关于批准创建第一批国家现代农业产业园的[通知](http://www.moa.gov.cn/nybgb/2017/dqq/201712/t20171230_6133931.htm)
 
-#### 国家现代农业产业园（认定）
+#### 国家现代农业产业园（认定-单独进行公示 staying）
 
 国家现代农业产业园认定名单数据年份：2018年至今。
 
 国家现代农业产业园**认定**由农业部每年单独进行公示。
 
-公示文档村单为`projec-affirm-year-xxxx.html`：
+公示文档存档为`projec-affirm-year-xxxx.html`：
 
 - 【html div】2023-12-26 关于2023年国家现代农业产业园认定名单的[公示](http://www.moa.gov.cn/xw/zxfb/202312/t20231226_6443491.htm)
 
@@ -1010,6 +1010,15 @@ techme::PubConvergenceAffirm %>%
 - 2019-12-22 21+8家 关于认定第二批国家现代农业产业园的[通知](http://www.moa.gov.cn/xw/zxfb/201912/t20191220_6333687.htm) 
 
 -  2018年12月29日 20家 关于认定首批国家现代农业产业园的[通知](http://www.moa.gov.cn/gk/tzgg_1/tfw/201901/t20190103_6166086.htm)  
+
+
+#### 国家现代农业产业园（评估-单独进行公示 Newcoming）
+
+html存档为"park-eval-year-YYYY.html"
+
+- 2024-11-05, 【html list】关于通过2024年国家现代农业产业园绩效评估名单的[公示](http://www.agri.cn/zx/zxfb/202411/t20241105_8685826.htm)
+
+
 
 #### 优势特色产业集群（创建）
 
@@ -1038,7 +1047,14 @@ techme::PubConvergenceAffirm %>%
 - 【xls table】2018年08月05日 农办财〔2018〕70号 关于批准开展2018年农业产业强镇示范建设的[通知](http://www.gov.cn/zhengce/zhengceku/2018-12/31/content_5441182.htm)
 
 
+存档说明：
+
+- 项目`report-tech`下的历史存档"topic/public-site/moa-special-cluster"2023年开始不再使用，而是在`techme`下的"data-raw/public-site/moa-industry-convergence"进行三类项目名单集中处理。
+
+
 ### 数据流程
+
+（0）更新`data-raw/public-site/moa-industry-convergence/code-moa-industry-convergence.R`。
 
 （1）抓取农业产业融合发展项目公示html。一次性处理三类公示名单：
 
@@ -1051,6 +1067,8 @@ techme::PubConvergenceAffirm %>%
 - 添加整理信息
 
 - 依次导出park、cluster、town的年度xlsx
+  
+- xlsx数据包含了省份信息，不需要再匹配。
 
 （2）抓取现代农业产业园认定公示html。
 
@@ -1064,7 +1082,22 @@ techme::PubConvergenceAffirm %>%
 
 （3）`techme`维护数据集
 
-- 循环读取年度xlsx
+- 执行`data-raw/public-site/moa-industry-convergence/wfl_PubConvergence.R`
+
+- 可以直接循环读取年度xlsx，因为xlsx数据包含了省份信息，不需要再匹配。
+
+- 使用`use_data()`更新数据集。
+
+
+#### 注意事项
+
+历史工作流说明：
+
+- 2025年以前，前四个数据集（park-setup、cluster-setup、town-setup、park-affirm），都是使用`wfl_useData_universe.R`进行数据更新。
+- 最重要的是这个工作流采用了一个中间步骤。也即，先导出`.rda`数据文件到`techme/data-raw/public-site`，然后在techme包项目中更新。
+
+- 考虑到xlsx数据包含了省份信息，不需要再匹配。所以2025年开始，将采用更加统一的代码"wfl_PubConvergence.R"，直接循环读取年度xlsx，然后使用`use_data()`更新数据集。
+
 
 ```{r}
 data_names <- c(

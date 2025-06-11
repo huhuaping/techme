@@ -1683,7 +1683,7 @@ choose.nameData <- function() {
 
     # Interactive selection
     repeat {
-        choice <- readline(prompt = "\nEnter option number: ")
+        choice <- readline(prompt = paste0("\nEnter option number (0-", length(use_list), ") : "))
         choice <- as.integer(choice)
 
         if (!is.na(choice)) {
