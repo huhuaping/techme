@@ -8,7 +8,13 @@
 \usage{
 choose.nameData()
 
-wfl.useData(directory.source, file.pattern, name.dt, which.dt = "df_use")
+wfl.useData(
+  directory.source,
+  file.pattern,
+  name.dt,
+  which.dt = "df_use",
+  character.cols = NULL
+)
 }
 \arguments{
 \item{directory.source}{character. The path of the source xlsx files.}
@@ -19,6 +25,8 @@ wfl.useData(directory.source, file.pattern, name.dt, which.dt = "df_use")
 And the name has uniform format style as "AgriMachine", "LivestockBreeding", etc.}
 
 \item{which.dt}{character. The name of the data frame to use, default is "df_use".}
+
+\item{character.cols}{character. The columns to be converted to character, default is NULL.}
 }
 \value{
 character or NULL. The selected data name from the list, or NULL if option 0 is selected.

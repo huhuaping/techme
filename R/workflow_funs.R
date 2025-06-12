@@ -1710,6 +1710,7 @@ choose.nameData <- function() {
 #' @param name.dt character. The name of the data frame.
 #' And the name has uniform format style as "AgriMachine", "LivestockBreeding", etc.
 #' @param which.dt character. The name of the data frame to use, default is "df_use".
+#' @param character.cols character. The columns to be converted to character, default is NULL.
 #'
 #' @return NULL
 #' @keywords internal
@@ -1734,7 +1735,8 @@ choose.nameData <- function() {
 wfl.useData <- function(
     directory.source, file.pattern,
     name.dt,
-    which.dt = "df_use") {
+    which.dt = "df_use",
+    character.cols = NULL) {
     # Input validation
     if (!is.character(directory.source) || length(directory.source) != 1) {
         stop("'directory.source' must be a single character string")
@@ -1775,8 +1777,13 @@ wfl.useData <- function(
     for (i in length(files_path):1) {
         tryCatch(
             {
-                df_tem <- openxlsx::read.xlsx(files_path[i]) # %>%
-                # dplyr::mutate(units = as.character(units)) # not needed for dataset of public site
+                if (is.null(character.cols)) {
+                    df_tem <- openxlsx::read.xlsx(files_path[i])
+                } else {
+                    df_tem <- openxlsx::read.xlsx(files_path[i]) %>%
+                        dplyr::mutate(across(all_of(character.cols), as.character))
+                    message(glue::glue("Convert {length(character.cols)} columns to character: {paste0(character.cols, collapse = ', ')}"))
+                }
                 message(glue::glue("Read file {files_sel[i]} has finished!"))
                 Sys.sleep(0.1)
                 df_use <- dplyr::bind_rows(df_use, df_tem)

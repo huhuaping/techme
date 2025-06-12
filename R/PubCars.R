@@ -19,9 +19,7 @@
 #'   \item{researcher_area}{character, detail research direction witin functional research area }
 #'   \item{researcher_name}{character,  name of researcher}
 #'   \item{researcher_inst}{character, institution of the esearcher}
-#'   \item{province_industry}{ matched province of the chairman for certain industry }
-#'   \item{province_func}{ matched province of the director for certain functional research area }
-#'   \item{province_researcher}{ matched province of the researcher}
+#'   \item{province}{ matched province of the institution}
 #' }
 #'
 #' @source \url{https://www.huhuaping.com/}

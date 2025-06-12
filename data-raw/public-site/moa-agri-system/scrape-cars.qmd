@@ -1,0 +1,763 @@
+---
+title: "现代农业产业技术体系"
+author: "胡华平"
+---
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE, eval = FALSE,
+                      fig.align='center',fig.width=10, fig.height=7) # Places figures on their own pages
+options(
+  htmltools.dir.version = FALSE, 
+  formatR.indent = 2, width = 55, 
+  digits = 2,scipen=999,tinytex.verbose = TRUE,
+  knitr.kable.NA = '',
+  fig.width=12, fig.height=8)
+
+```
+
+```{r}
+require("rvest")
+require("xml2")
+require("httr")
+require("stringr")
+require("tidyverse")
+require("tidyselect")
+require("here")
+require("openxlsx")
+```
+
+\newpage
+
+# 1.研究目标
+
+体系设置和专家名单
+
+- 产业技术研发中心
+
+- 功能研究室
+
+- 综合试验站
+
+
+# 2.资料来源
+
+## 2.1 数据来源
+
+
+农业部网站
+
+
+
+
+
+
+## 2.2 数据进度
+
+China Agricultural Research System，CARS
+
+现代农业产业技术体系[管理平台](http://123.127.160.231/)
+
+- 【附名单pdf】关于公示现代农业产业技术体系首席科学家和岗位科学家候选人名单的[通知](http://www.moa.gov.cn/govpublic/KJJYS/202108/t20210806_6373623.htm) 另[网页](https://www.waizi.org.cn/law/119114.html)
+
+    - pdf[附件](http://www.moa.gov.cn/govpublic/KJJYS/202108/P020210806358525696440.pdf)
+
+
+2007年，原农业部、财政部启动建设国家现代农业产业技术体系（以下简称“产业体系”），聚焦水稻、玉米、小麦、大豆、生猪、奶牛等50个主要农产品组建了50个相应的体系，集合了全国800多个科教和企事业单位的2600多名专家进行科技攻关，形成跨部门、跨区域、跨单位、跨学科的优势科技力量，联合协作解决产业重大问题。
+
+在产业体系中，每个岗位科学家每年有70万元、每个试验站站长每年有50万元基本研发费保障。
+
+技术体系是由原农业部、财政部2007年启动建设的一个创新型科研组织。通过聚焦水稻、小麦、生猪等54个主要农产品，该体系组织汇聚了全国800多个科教和企事业单位的2600多名专家进行攻关，形成跨部门、跨区域、跨单位、跨学科的优势科技力量，联合协作解决产业重大问题。
+
+- 2019-07-16 关于公示现代农业产业技术体系2019年增补岗位科学家候选人名单的[通知](http://www.kjs.moa.gov.cn/gzdt/201907/t20190716_6320991.htm)
+
+- [word名单]2017-03-30 关于公示现代农业产业技术体系“十三五”新增岗位科学家候选人名单的[通知](http://www.moa.gov.cn/gk/tzgg_1/tz/201703/t20170320_5530342.htm)
+
+
+- 【附名单html】（2011-2015）2011-04-02农业部关于印发现代农业产业技术体系建设依托单位和岗位聘用人员名单（2011-2015年）的[通知](http://www.stee.agri.cn/cyjs/201103/t20110313_3136130.htm)
+    
+    - 2011-04-02现代农业产业技术体系建设依托单位和岗位聘用人员名单（2011-2015年）[通知](http://jiuban.moa.gov.cn/zwllm/rsxx/201104/t20110402_1961261.htm)
+    - 2011-04-02农业部办公厅关于印发现代农业产业技术体系执行专家组人员组成名单（2011-2015年）的[通知](http://www.stee.agri.cn/cyjs/201103/t20110313_3136129.htm)
+
+- 【word 名单】（2008-2010）2008-12-22（大麦等40个主要农产品）农业部关于印发现代农业产业技术体系第二批建设依托单位和岗位聘用人员名单的[通知](http://www.stee.agri.cn/cyjs/200903/t20090317_3136148.htm)
+
+- 【word 名单】（2008-2010）2008-12-20（增补）农业部关于印发现代农业产业技术体系第一批试点增补建设依托单位和岗位聘用人员名单的[通知](http://www.stee.agri.cn/cyjs/200903/t20090317_3136144.htm)
+
+- 【word名单】（2007-2010）2007年12月29日 现代农业产业技术体系建设第一批试点建设依托单位和岗位聘用人员[名单](http://www.stee.agri.cn/cyjs/200903/t20090317_3136145.htm)  
+    
+    - 另一链接[html名单](http://jiuban.moa.gov.cn/fwllm/zxbs/xzxk/ggb/201006/t20100606_1533919.htm) 
+
+- 2007年12月12日 现代农业产业技术体系建设实施方案（试行）[农业部科技教育司](http://jiuban.moa.gov.cn/fwllm/zxbs/xzxk/ggb/201006/t20100606_1533918.htm)
+
+
+- 2019-11-15 破解科研生产“两张皮”难题的成功探索——国家现代农业产业技术体系建设成效[综述](http://www.kjs.moa.gov.cn/gzdt/201911/t20191115_6331897.htm)
+
+## 异常提示
+
+- 机构名称存在换行符'\n'
+
+
+# 3.数据抓取流程(data-raw到data-extract)
+
+## 3.1 基本过程
+
+```{r}
+require("rvest")
+require("stringr")
+require("tidyverse")
+require("tidyselect")
+require("openxlsx")
+```
+
+
+## 3.2 抓取html（全部）
+
+
+
+### 2011年名单new
+
+#### 全部名单
+
+```{r}
+#--------------------------
+# this chunk should run only once
+#--------------------------
+
+# files html path
+files_dir <- "html/list-year-2011.html"
+
+# xpath for data table
+css_tbl <-"body > table:nth-child(4) > tbody > tr > td > table:nth-child(2) > tbody > tr > td > table:nth-child(4) > tbody > tr > td > p:nth-child(n+8)"
+Year <- 2011
+
+tbl_raw <- read_html(files_dir,encoding = "GBK") %>%
+  html_nodes(css = css_tbl) %>%
+  html_text() %>%
+  #str_trim(., "both")
+  as_tibble() %>%
+  mutate(value = str_trim(value, "both"))
+
+num_base <- c("一", "二", "三", "四", "五", "六", "七", "八", "九")  
+
+# the html show max '五十'
+num_chn <- c(num_base,"十",
+             paste0("十", num_base),"二十",
+             paste0("二十", num_base),"三十",
+             paste0("三十", num_base),"四十",
+             paste0("四十", num_base),"五十")
+  
+pattern_chn <- paste0(paste0(num_chn,"、"), collapse ="|")
+
+ptn_area_num <- glue::glue("({paste0(num_chn,collapse='|')})(?=、)")
+ptn_area_name <- glue::glue("(?<={pattern_chn})(.+)")
+ptn_area_filter <-glue::glue("{paste0(num_chn,'、',collapse='|')}")
+
+ptn_type_num <- glue::glue("(?<=（)({paste0(num_chn,collapse ='|')})(?=）)")
+ptn_type_name <- glue::glue("(?<={paste0('（',num_chn,'）',collapse ='|')})(.+)")
+ptn_type_filter <- glue::glue("{paste0('（',num_chn,'）',collapse ='|')}")
+
+tbl_all <-  tbl_raw %>%
+  # industry area
+  mutate(area_num = str_extract(value, ptn_area_num),
+         area_name = str_extract(value, ptn_area_name)) %>%
+  fill(., area_num,.direction = "down" ) %>%
+  fill(., area_name,.direction = "down" ) %>%
+  filter(!str_detect(value, ptn_area_filter)) %>%
+  # type of data
+  mutate(type_num = str_extract(value, ptn_type_num),
+         type_name = str_extract(value, ptn_type_name)) %>%
+  fill(., type_num,.direction = "down" ) %>%
+  fill(., type_name,.direction = "down" ) %>%
+  filter(!str_detect(value, ptn_type_filter)) %>%
+  mutate(type_cat = str_extract(type_name, "技术研发中心|技术综合试验站")) %>%
+   # chairman for industry
+  mutate(chairman = str_extract(value, "(?<=首席科学家：)(.+)")) 
+
+```
+
+#### 表1产业体系
+
+```{r}
+
+# =====get the chairman and institution of industry==========
+## chairman is unique!
+id_chairman_industry <-which(!is.na(tbl_all$chairman))
+## search before and next near the chairman
+check <- tibble(index_man = id_chairman_industry,
+      man = tbl_all$value[id_chairman_industry],
+      inst_before = tbl_all$value[id_chairman_industry-1],
+      inst_after = tbl_all$value[id_chairman_industry+1]) %>%
+  mutate(inst_name = ifelse(!str_detect(inst_before,"站长：" ),
+                       inst_before,
+                       ifelse(str_detect(inst_after, "建设依托单位："),
+                              inst_after,
+                              NA))) %>%
+  mutate(index_inst = ifelse(!str_detect(inst_before,"站长：" ),
+                       index_man-1,
+                       ifelse(str_detect(inst_after, "建设依托单位："),
+                              index_man+1,
+                              NA))) %>%
+  # nrow must be the same to `num_chn`
+  mutate(chairman_industry = str_extract(man, "(?<=：)(.+)") ,
+         institution_industry = str_extract(inst_name, "(?<=：)(.+)") ,
+         area_num = num_chn)
+
+
+# =====so we can continue next=====
+
+index_filter <-c(check$index_man, 
+                 check$index_inst[which(!is.na(check$index_inst))]) 
+
+tbl_industry <- tbl_all %>%
+  # match
+  left_join(., select(check, area_num,
+                      chairman_industry, institution_industry),
+            by = "area_num") %>%
+  select(-chairman) %>%
+  # filter rows of chairman and institution
+  .[-index_filter,] %>%
+  # filter `type_cat`
+  filter(type_cat =="技术研发中心") %>%
+  filter(!str_detect(value, "岗位及聘用人员："))
+
+# ======get functional research area========
+tbl_func <- tbl_industry %>%
+  mutate(func_num = str_extract(value, "(\\d{1,2})(?=、)"),
+         func_name = str_extract(value, "(?<=\\d{1,2}、)(.+)")) %>%
+  # check sequence order of number series,totally [233 ok!]
+  # tbl_func$func_num[which(!is.na(tbl_func$func_num))]  
+  fill(func_num) %>%
+  fill(func_name) %>%
+  # filter func
+  filter(!str_detect(value, "\\d{1,2}、")) %>%
+  mutate(func_inst = str_extract(value, "(?<=建设依托单位：)(.+)")) %>%
+  # check total numbers of institution, totally [233 ok!]
+  # tbl_func$func_inst[which(!is.na(tbl_func$func_inst))] %>%
+  fill(func_inst) %>%
+  filter(!str_detect(value, "建设依托单位：")) %>%
+  # get director of func
+  mutate(func_director = str_extract(value, "(?<=研究室主任：)(.+)")) %>%
+  # check total numbers of director,totally [233 ok!]
+  # tbl_func$func_director[which(!is.na(tbl_func$func_director))] %>%
+  fill(func_director) %>%
+  filter(!str_detect(value, "研究室主任：")) #%>%
+
+
+#=====get all researchers info    
+tbl_researcher <- tbl_func %>%  
+  mutate(researcher_area = str_extract(value, "(.+)(?=：)"),
+         researcher_name = str_extract(value, "(?<=：)(.+)(?=（)"),
+         researcher_inst = str_extract(value, "(?<=（)(.+)(?=）)")) %>%
+  select(-value) %>%
+  add_column(year = Year, .before = "area_num")%>%
+  add_column(index = 1:nrow(.), .before = "area_num") %>%
+  # handle the chinese number 
+  mutate(area_num_eng = mgsub::mgsub(area_num,
+                                     num_chn,
+                                     str_pad(1:length(num_chn),
+                                             2,"left","0")),
+         type_num_eng = mgsub::mgsub(type_num,
+                                     num_chn,
+                                     str_pad(1:length(num_chn),
+                                             2,"left","0")))
+  
+```
+
+
+```{r}
+#write out
+names_sel <- c("year", "index", 
+               "area_num_eng", "area_name", 
+                "chairman_industry", "institution_industry",
+               "func_num", "func_name", "func_inst", "func_director",
+               "researcher_area", "researcher_name", "researcher_inst")
+
+tbl_sel <- tbl_researcher %>%
+  select(all_of(names_sel))
+
+xlsx_path <- "xlsx/list-industry-year-2011-wide.xlsx"
+openxlsx::write.xlsx(tbl_sel, xlsx_path)
+```
+
+
+
+#### 表2实验站
+
+```{r}
+tbl_station <- tbl_all %>%
+  filter(type_cat =="技术综合试验站") %>%
+  select(-chairman) %>%
+  mutate(station_num = str_extract(value, "(\\d{1,2})(?=、)"),
+         station_name = str_extract(value, "(?<=、)(.+)")) %>%
+  fill(station_num) %>%
+  fill(station_name) %>%
+  filter(!str_detect(value, "\\d{1,2}、")) %>%
+  mutate(station_isnt = str_extract(value,
+                                    "(?<=建设依托单位：)(.+)(?=；站长)"),
+         station_manager = str_extract(value,
+                                       "(?<=站长：)(.+)")) %>%
+  select(-value) %>%
+  add_column(year = Year, .before = "area_num")%>%
+  add_column(index = 1:nrow(.), .before = "area_num") %>%
+  # handle the chinese number 
+  mutate(area_num_eng = mgsub::mgsub(area_num,
+                                     num_chn,
+                                     str_pad(1:length(num_chn),
+                                             2,"left","0")),
+         type_num_eng = mgsub::mgsub(type_num,
+                                     num_chn,
+                                     str_pad(1:length(num_chn),
+                                             2,"left","0")))
+
+```
+
+
+```{r}
+#write out
+
+xlsx_path <- "xlsx/list-site-year-2011-wide.xlsx"
+openxlsx::write.xlsx(tbl_station, xlsx_path)
+```
+
+
+### 2017年名单
+
+```{r}
+Year <- 2017
+# files html path
+files_dir <- "html/list-year-2017.xlsx"
+
+tbl_raw <- read.xlsx(files_dir, colNames = T, fillMergedCells =T )
+
+
+names(tbl_raw)
+names_eng <- c("index", "area_name", "func_name", "researcher_area", "researcher_name", "researcher_inst")
+tbl_out <- tbl_raw %>%
+  rename_at(vars(names(.)), ~names_eng) %>%
+  mutate(index =1:nrow(.)) %>%
+  add_column(year = Year, .before = "index") %>%
+  mutate(area_num_eng =NA,
+         chairman_industry = NA,
+         institution_industry = NA,
+         func_num = NA,
+         func_inst =NA,
+         func_director =NA,
+         )
+
+```
+
+```{r}
+#write out
+names_sel <- c("year", "index", 
+               "area_num_eng", "area_name", 
+                "chairman_industry", "institution_industry",
+               "func_num", "func_name", "func_inst", "func_director",
+               "researcher_area", "researcher_name", "researcher_inst")
+
+tbl_sel<- tbl_out %>%
+  select(all_of(names_sel))
+
+write.xlsx(tbl_sel, "xlsx/list-industry-year-2017-wide.xlsx")
+```
+
+### 2019年名单
+
+```{r}
+# files html path
+files_dir <- "html/list-year-2019.html"
+
+# xpath for data table
+xpath_tbl <-"/html/body/div[3]/div/div[2]/div/div/div/div/div/div/span/div/table"
+
+Year <- 2019
+
+tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
+  html_nodes(xpath = xpath_tbl) %>%
+  html_table(header = T) %>%
+  .[[1]] %>%
+  as_tibble() 
+
+#names(tbl_raw)
+names_eng <- c("index", "area_name", "func_name", "researcher_area", "researcher_name", "researcher_inst")
+
+tbl_out <- tbl_raw %>%
+  rename_at(vars(names(.)), ~names_eng) %>%
+  mutate(index =1:nrow(.)) %>%
+  add_column(year = Year, .before = "index") %>%
+  mutate(area_num_eng =NA,
+         chairman_industry = NA,
+         institution_industry = NA,
+         func_num = NA,
+         func_inst =NA,
+         func_director =NA,
+         )
+
+```
+
+```{r}
+#write out
+names_sel <- c("year", "index", 
+               "area_num_eng", "area_name", 
+                "chairman_industry", "institution_industry",
+               "func_num", "func_name", "func_inst", "func_director",
+               "researcher_area", "researcher_name", "researcher_inst")
+
+tbl_sel<- tbl_out %>%
+  select(all_of(names_sel))
+
+write.xlsx(tbl_sel, "xlsx/list-industry-year-2019-wide.xlsx")
+```
+
+### 2021年名单
+
+读取全部信息
+
+- 首席科学家
+
+- 岗位科学家
+
+
+
+```{r}
+Year <- 2021
+# files html path
+files_dir <- "html/list-year-2021.xlsx"
+
+tbl_raw <- read.xlsx(files_dir, colNames = T, fillMergedCells =T )
+
+names(tbl_raw)
+
+# target uniform columns names
+names_sel <- c("year", "index", 
+               "area_num_eng", "area_name", 
+                "chairman_industry", "institution_industry",
+               "func_num", "func_name", "func_inst", "func_director",
+               "researcher_area", "researcher_name", "researcher_inst")
+```
+
+##### 岗位科学家名单
+
+```{r}
+names_func <- c("cat","index",
+               #"area_name", "func_name", 
+               "researcher_name", "researcher_area", "researcher_inst")
+
+# knows which varialbes need to be added
+sort(setdiff(names_sel, names_func))
+
+tbl_func <- tbl_raw %>%
+  rename_at(vars(names(.)), ~names_func) %>%
+  # filter 'cat'
+  filter(cat == "岗位科学家") %>%
+  mutate(index =1:nrow(.)) %>%
+  add_column(year = Year, .before = "index") %>%
+  # use `setdiff()` to check
+  mutate(area_name = NA,area_num_eng =NA,
+         chairman_industry = NA,
+         func_director =NA ,func_inst =NA, func_name = NA, func_num = NA,
+         institution_industry = NA) %>%
+  mutate( researcher_area =mgsub::mgsub(researcher_area, 
+                                        c(fixed("\u00a0"),fixed("\n")," "),
+                                        c("", "",""))) %>%
+  # get 'area_name'
+  mutate(area_name = str_extract(researcher_area,
+                                 "(?<=（)(.+)(?=体系）)")) %>%
+  mutate(area_name = mgsub::mgsub(area_name, 
+                                  "(.+）（)",
+                                  "")) %>%
+  # removed last "（）（）"
+  mutate( researcher_area =str_replace(researcher_area,
+                                        "(?<=）)(（.*体系）)","")) %>%
+  # removed "（体系）"
+  mutate( researcher_area =str_replace(researcher_area,
+                                        "(（.*体系）)",""))
+
+```
+
+##### 首席科学家名单
+
+```{r}
+# helper
+names(tbl_raw)
+sort(setdiff(names_sel,names_chairman ))
+```
+
+```{r}
+names_chairman <- c("cat","index",
+               # "func_name", 
+               #"researcher_area", "researcher_name", "researcher_inst",
+               "chairman_industry", "area_name","institution_industry"
+               )
+
+tbl_chairman <- tbl_raw %>%
+  rename_at(vars(names(.)), ~names_chairman) %>%
+  filter(cat == "首席科学家") %>%
+  mutate(index =1:nrow(.)) %>%
+  add_column(year = Year, .before = "index") %>%
+  # use `setdiff()` to check
+  mutate(area_num_eng =NA, 
+         func_name = NA,  func_num = NA,func_inst =NA,func_director =NA,
+         researcher_area = NA, researcher_inst = NA, researcher_name = NA
+         ) %>%
+  mutate(area_name = str_extract(area_name, ".+(?=体系)"))
+
+```
+
+#### 合并两个名单
+
+```{r}
+
+#write out functional researcher list
+
+tbl_out <- bind_rows(tbl_func, tbl_chairman) %>%
+  select(all_of(names_sel))
+
+write.xlsx(tbl_out, "xlsx/list-industry-year-2021-wide.xlsx")
+
+```
+
+
+### 2022年名单
+
+读取全部信息
+
+- 首席科学家
+
+- 岗位科学家
+
+
+
+##### 岗位科学家名单
+
+
+
+```{r}
+Year <- 2022
+# files html path
+files_dir <- "html/list-year-2022.xlsx"
+
+tbl_raw <- read.xlsx(
+  files_dir, sheet = 2,
+  colNames = T, 
+  fillMergedCells =F ) %>%
+  fill(`体系名称`,.direction = "down")
+
+names(tbl_raw)
+
+# target uniform columns names
+names_sel <- c("year", "index", 
+               "area_num_eng", "area_name", 
+                "chairman_industry", "institution_industry",
+               "func_num", "func_name", "func_inst", "func_director",
+               "researcher_area", "researcher_name", "researcher_inst")
+```
+
+```{r}
+names_func <- c("cat","index",
+               "area_name", #"func_name", 
+               "researcher_area", "researcher_name", "researcher_inst")
+
+# knows which varialbes need to be added
+sort(setdiff(names_sel, names_func))
+
+tbl_func <- tbl_raw %>%
+  rename_at(vars(names(.)), ~names_func) %>%
+  # filter 'cat'
+  filter(cat == "岗位科学家") %>%
+  mutate(index =1:nrow(.)) %>%
+  add_column(year = Year, .before = "index") %>%
+  # use `setdiff()` to check
+  mutate(#area_name = NA,
+         area_num_eng =NA,
+         chairman_industry = NA,
+         func_director =NA ,func_inst =NA, func_name = NA, func_num = NA,
+         institution_industry = NA) %>%
+  mutate( researcher_area =mgsub::mgsub(researcher_area, 
+                                        c(fixed("\u00a0"),fixed("\n")," "),
+                                        c("", "",""))) %>%
+  select(all_of(names_sel)) # uniform names
+
+```
+
+##### 首席科学家名单
+
+
+```{r}
+Year <- 2022
+# files html path
+files_dir <- "html/list-year-2022.xlsx"
+
+tbl_raw <- read.xlsx(
+  files_dir, sheet = 1,
+  colNames = T, 
+  fillMergedCells =F ) 
+
+names(tbl_raw)
+
+# target uniform columns names
+names_sel <- c("year", "index", 
+               "area_num_eng", "area_name", 
+                "chairman_industry", "institution_industry",
+               "func_num", "func_name", "func_inst", "func_director",
+               "researcher_area", "researcher_name", "researcher_inst")
+
+
+```
+
+
+
+```{r}
+names_chairman <- c("cat","index",
+               # "func_name", 
+               #"researcher_area", "researcher_name", "researcher_inst",
+                "area_name",
+               "chairman_industry",
+               "institution_industry"
+               )
+
+# helper check names list
+sort(setdiff(names_sel,names_chairman ))
+
+tbl_chairman <- tbl_raw %>%
+  rename_at(vars(names(.)), ~names_chairman) %>%
+  filter(cat == "首席科学家") %>%
+  mutate(index =1:nrow(.)) %>%
+  add_column(year = Year, .before = "index") %>%
+  # use `setdiff()` to check
+  mutate(area_num_eng =NA, 
+         func_director =NA,
+         func_inst =NA,
+         func_name = NA,  
+         func_num = NA,
+         researcher_area = NA,
+         researcher_inst = NA,
+         researcher_name = NA
+         ) %>%
+  select(all_of(names_sel)) # uniform names
+
+```
+
+#### 合并两个名单
+
+```{r}
+# check two table's name
+identical(names(tbl_func),
+          names(tbl_chairman))
+
+#write out functional researcher list
+
+tbl_out <- bind_rows(tbl_func,
+                     tbl_chairman) %>%
+  # tidy
+  mutate(
+    researcher_inst = mgsub::mgsub(
+      researcher_inst,
+      c(fixed("\u00a0"),fixed("\n")," ",
+        "中国农业科学院西部农业研究中心"),
+      c("", "","",
+        "中国农业科学院西部农业研究中心（新疆）"))
+    )
+
+write.xlsx(tbl_out, "xlsx/list-industry-year-2022-wide.xlsx")
+
+```
+
+## 3.3 查询机构的省份信息
+
+### 3.3.1 合并全部数据（2011-2022）
+
+```{r}
+file_dir <- "xlsx/"
+file_name <- list.files(file_dir)
+file_target <- file_name[which(str_detect(file_name, "list-industry-"))]
+file_path <- paste0(file_dir, file_target) 
+
+read_file <- function(path) {
+  df <- openxlsx::read.xlsx(path) %>%
+    mutate_all(., .funs = as.character)
+}
+
+tbl_out <- tibble(url = file_path) %>%
+  mutate(dt = map(url, read_file)) %>%
+  select(-url) %>%
+  unnest(dt) %>%
+  # handle string newline
+  mutate_all(.,.funs = str_replace, 
+             pattern = "\n",
+             replacement = "")
+
+```
+
+
+
+### 3.3.2 机构名称列表（唯一化处理）
+
+```{r}
+require("techme")
+
+data("queryTianyan")
+dt_match <- queryTianyan %>%
+  select(name_origin, province) %>%
+  rename(institution = "name_origin")
+
+data("BasicProvince")
+ptn_province <- paste0(BasicProvince$province, collapse =  "|")
+
+
+list_institution <- tibble(
+  institution =c(
+    tbl_out$institution_industry,
+    tbl_out$researcher_inst) 
+  ) %>%
+  select(institution) %>%
+  unique() %>%
+  filter(!is.na(institution)) %>%
+  left_join(., dt_match, by= "institution" ) %>%
+  # filter obvious province info
+  mutate(
+    province_raw = str_extract(
+      institution, ptn_province)
+         ) %>%
+  mutate(province = ifelse(
+    is.na(province), 
+    province_raw, province)
+    ) %>%
+  filter(is.na(province)) %>%
+  select(institution) %>%
+  arrange(institution)
+
+# check 
+check <- sum(is.na(list_institution$institution))
+if(check > 0) stop("please check the name of institution!")
+
+## So lucky! all institution matched province!
+
+dir_xlsx <- "d:/github/techme/data-raw/data-tidy/hack-tianyan/ship/"
+file_xlsx <- glue::glue("ship-tot{nrow(list_institution)}-{Sys.Date()}.xlsx")
+path_xlsx <- paste0(dir_xlsx, file_xlsx)
+
+openxlsx::write.xlsx(list_institution, path_xlsx)
+
+```
+
+### 3.3.3 在R包techme中进行天眼查
+
+- 循环查询
+
+- 得到结果，并人工确认
+
+- 重新整合更新`qureyTianyan`
+
+- build 并push `techme`
+
+### 3.3.4 在R包techme中上传数据集
+
+- `data-raw/wfl_useData-CARS.R`
+
+- 匹配省份信息
+
+- 数据集名为`PubCars`
+
+
+
+
+

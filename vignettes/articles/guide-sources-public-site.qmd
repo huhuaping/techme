@@ -593,7 +593,7 @@ tbl_id
 ### 文件管理
 
 ```{r}
-dir_tar <- here("topic/public-site/moa-agri-system")
+dir_tar <- here("data-raw/public-site/moa-agri-system")
 fs::dir_tree(dir_tar)
 ```
 
@@ -614,8 +614,10 @@ techme::PubCars %>%
   )
 ```
 
-### 数据进度
+### 数据进度 (update)
 
+
+- [html表格]2024年9月12日,农业农村部关于公示现代农业产业技术体系首席科学家和岗位科学家候选人名单的[通知](http://www.chinafeedm.com/h-nd-27052.html)
 
 - 【html表格】2023年5月24日，农业农村部公示现代农业产业技术体系首席科学家和岗位科学家候选人[名单](https://finance.sina.cn/2023-05-24/detail-imyuwnec7678419.d.html?from=wap)
 
@@ -665,32 +667,27 @@ techme::PubCars %>%
 
 - 合并上述合并两个名单
 
-- 查询机构的省份信息。如有未知机构省份信息，则要进行Tianyan查询补充流程！
-
 - 导出年度xlsx
 
-（2）`techme`维护数据集
+（2）`techme`维护数据集.执行新的代码文件`data-raw/public-site/moa-agri-system/wfl_PubCars.R`
 
 - 循环读取年度xlsx
 
 - 匹配并添加机构省份信息（重要！）
 
-- 导出`rda`数据文件到`techme/data-raw/public-site`
-
-```{r}
-(use_list <- "PubCars")
-```
-
-- 在techme包项目中更新
-
-```
-"D:/github/techme/data-raw/wfl_useData_universe.R"
-use_data()
-use_r()
-document()
-```
+- 使用`use_data()`更新数据集。
 
 ### 注意事项
+
+(1)2025年开始,不再使用中间步骤获得`rda`数据文件，而是直接循环读取年度xlsx，然后使用`use_data()`更新数据集。
+
+- 导出`rda`数据文件到`techme/data-raw/public-site`
+
+- 暂时保留`data-raw/data-tidy/public-site/moa-agri-system/xlsx/list-industry-year-2017-wide.xlsx`，用于备份和前向兼容。
+
+- 不再使用旧有的执行文件`data-raw/wfl_useData_Cars.R`
+
+- 数据集`PubCars`变量集的省份变量进行了调整，删除了三个按科学家身份命名的省份列(`province_chairman`, `province_researcher`, `province_func`),而是统一添加为一个省份列`province`,以符合数据集的规范。
 
 （1）`techme::PubCars`数据集发布更新流程进行了变更。
 
@@ -903,7 +900,7 @@ fs::dir_tree(dir_tar, recurse = FALSE)
 
 ```{r}
 techme::PubConvergencePark %>%
-  head(100) %>%
+  #head(100) %>%
   DT::datatable(
     rownames = FALSE,
     options = list(
@@ -916,7 +913,7 @@ techme::PubConvergencePark %>%
 
 ```{r}
 techme::PubConvergenceCluster %>%
-  head(100) %>%
+  #ead(100) %>%
   DT::datatable(
     rownames = FALSE,
     options = list(
@@ -929,7 +926,7 @@ techme::PubConvergenceCluster %>%
 
 ```{r}
 techme::PubConvergenceTown %>%
-  head(100) %>%
+  #head(100) %>%
   DT::datatable(
     rownames = FALSE,
     options = list(
@@ -1088,6 +1085,11 @@ html存档为"park-eval-year-YYYY.html"
 
 - 使用`use_data()`更新数据集。
 
+#### 政策背景
+
+针对国家现代农业产业园(park)的一篇综合性的分析文章:[历年国家现代农业产业园名单及2024年国家现代农业产业园现状分析](https://mp.weixin.qq.com/s/pDuec-Sjy8XmRJE-x76Klw).文章中一个重要的内容是梳理出了每个产业园区的主导产业类别。
+
+
 
 #### 注意事项
 
@@ -1153,7 +1155,7 @@ document()
 ### 文件管理
 
 ```{r}
-dir_tar <- here("topic/public-site/moa-agrimodern-zone")
+dir_tar <- here("data-raw/public-site/moa-agrimodern-zone")
 fs::dir_tree(dir_tar)
 ```
 
@@ -1174,7 +1176,7 @@ techme::PubAgrimodernZone %>%
   )
 ```
 
-### 数据进度
+### 数据进度(staying)
 
 
 - 【html div】2023-08-01。2023年农业现代化示范区创建名单[公示](https://news.cnstock.com/news,bwkx-202308-5099816.htm)，非官方。
@@ -1203,9 +1205,18 @@ techme::PubAgrimodernZone %>%
 
 - 循环读取年度xlsx
 
-- 导出`rda`数据文件到`techme/data-raw/public`
-
 - 在techme包项目中更新
+
+#### 注意事项
+
+历史工作流说明：
+
+- 2025年以前通过一个中间步骤进行数据框导出，然后更新数据集。
+
+- 2025年开始，直接循环读取年度xlsx，然后使用`use_data()`更新数据集。
+
+
+- 导出`rda`数据文件到`techme/data-raw/public`
 
 ```
 "D:/github/techme/data-raw/wfl_useData_universe.R"
@@ -1239,7 +1250,7 @@ document()
 ### 文件管理
 
 ```{r}
-dir_tar <- here("topic/public-site/moa-freshkeep-county/")
+dir_tar <- here("data-raw/public-site/moa-freshkeep-county/")
 fs::dir_tree(dir_tar)
 ```
 
@@ -1249,7 +1260,7 @@ fs::dir_tree(dir_tar)
 
 ```{r}
 techme::PubFreshKeepCounty %>%
-  head(100) %>%
+  #head(100) %>%
   DT::datatable(
     rownames = FALSE,
     options = list(
@@ -1260,7 +1271,7 @@ techme::PubFreshKeepCounty %>%
   )
 ```
 
-### 数据进度
+### 数据进度(staying)
 
 - 【html jpeg转文字识别转txt】2022年农产品产地冷藏保鲜整县推进试点县名单。已经公示（76个县区），但没有找到完整名单。完整图片名单[参看0](https://mp.weixin.qq.com/s/r1TH0ih3toJePfOTX8JFOA)（保存本地后，图片不可见）；部分名单图片：[参看1](https://www.sohu.com/a/564922569_121106832)；[参看2](https://mp.weixin.qq.com/s?__biz=MzAwNjY2NzM3NA==&mid=2657078567&idx=1&sn=67697b965c0fd9729b8952527ce83454&chksm=80a28026b7d5093033dcd88517a256e5dcf0ec8023b9bf03a176091f798ac401edda8e906f10&scene=27)。
 
@@ -1336,7 +1347,7 @@ R代码文件：
 ### 文件管理
 
 ```{r}
-dir_tar <- here("topic/public-site/moa-rural-infobase/")
+dir_tar <- here("data-raw/public-site/moa-rural-infobase/")
 fs::dir_tree(dir_tar)
 ```
 
@@ -1357,7 +1368,7 @@ techme::PubRuralInfoBase %>%
   )
 ```
 
-### 数据进度
+### 数据进度(staying)
 
 - [html div]2023年12月29日,农业农村部关于认定2023年度农业农村信息化示范基地的[通知](http://www.moa.gov.cn/govpublic/SCYJJXXS/202312/t20231229_6443755.htm)
 
