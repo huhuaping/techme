@@ -179,14 +179,22 @@ techme::PubSKLMost |>
 
 ### 文件管理
 
-当前维护：2024年6月已经迁移到`web-scrape/proj/torch-innocom`项目下）。
+当前维护：
 
-历史维护：在当前项目文件下进行爬取和数据管理。
+    - 2024年6月已经迁移到`web-scrape/proj/torch-innocom`项目下进行数据抓取）。
+    - 然后通过`data-raw/public-site/torch-innocom/wfl-HitechFirmsPub.R`进行数据更新。
+
 
 ```{r}
 dir_tar <- "d:/github/web-scrape/proj/torch-innocom"
 fs::dir_tree(dir_tar, recurse = FALSE)
 ```
+
+
+历史维护：
+
+    - 在当前项目文件下进行爬取和数据管理。
+    - 然后通过`techme::wfl_useData_HitechFirms.R`进行数据更新。
 
 ## 基础设施和大型科研仪器共享
 
@@ -447,7 +455,7 @@ fs::dir_tree(dir_tar)
 
 数据来源：农业农村部/农业机械化管理司（<http://www.moa.gov.cn/>）
 
-## 农作物生产全程机械化示范县
+## 农作物生产全程机械化示范县（waiting）
 
 ### 更新日志
 
