@@ -200,13 +200,14 @@ fs::dir_tree(dir_tar, recurse = FALSE)
 
 ### 更新日志
 
+更新状态：update
+
+- 2025-07-14，完成2024年公示网页的数据抓取、处理和保存。全新定义了数据集`techme::PubOpenShare`。
 - 2024-06-23，完成2023年公示网页的数据抓取、处理和保存。
 
 ### 数据说明
 
-更新状态：update
-
-数据使用：本项目下`update/`
+数据使用：本项目下`techme::PubOpenShare`
 
 统计目标：
 
@@ -218,18 +219,39 @@ fs::dir_tree(dir_tar, recurse = FALSE)
 
 - 关于发布201x年中央级高校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核结果的通知
 
+
 ### 文件体系
 
 ```{r}
-dir_tar <- here::here("topic/public-site/most-jcs-open-share/")
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/public-site/most-jcs-open-share/")
+fs::dir_tree(dir_tar, recurse = FALSE)
 ```
+
+历史维护：
+
+- 2025年以前，在report-tech项目下进行数据抓取和处理(report-tech/topic/public-site/most-jcs-open-share/)。最后合并为所有年份的更新数据表`update/matched-eval-upto-2023-wide.xlsx`。并在报告撰写中直接使用这个数据表。
+
 
 ### 数据集展示
 
-本项目`update/`文件夹下。
+本项目`techme::PubOpenShare`数据集。
+
+```{r}
+techme::PubOpenShare %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = TRUE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
 
 ### 数据进度
+
+- 【doc转xlsx】关于发布2024年中央级高校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核结果的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2024/202410/t20241014_192149.html)
 
 - 【pdf转jpeg转文字识别转txt】2023年7月评价考核结果已经有了，但是没有找到任何公示文件。2023年中央级高校和科研院所等大型科研仪器开放共享评价考核结果通知-国科办基〔2023〕83号。唯一的扫描版pdf版本可以可[参看](http://sysbc.swu.edu.cn/info/1028/1230.htm)。在线识别网站<https://www.online-convert.com/>导航ALL tools/image to text。
 
@@ -258,7 +280,7 @@ fs::dir_tree(dir_tar)
 
 ### 数据流程
 
-（1）处理原始数据
+（1）处理原始数据`data-raw/public-site/most-jcs-open-share/code-most-jcs-open-share.R`
 
 - 抓取html表格（2021年）
 
@@ -286,6 +308,12 @@ fs::dir_tree(dir_tar)
 - 在repo `report-tech`中安装更新后的R包`techme`
 
 - `renv::install("huhuaping/techme")`
+
+（5）导出到`data-tidy`对应的文件夹下
+
+（6）在`data-raw/public-site/most-jcs-open-share/wfl-PubOpenShare.R`中进行数据更新
+
+
 
 ## 国家农业科技园区
 
