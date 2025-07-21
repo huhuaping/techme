@@ -1564,7 +1564,7 @@ fs::dir_tree(dir_tar)
 
 ### 数据说明
 
-更新状态：update
+更新状态：updated
 
 统计类别：
 
@@ -1576,23 +1576,27 @@ fs::dir_tree(dir_tar)
 
 历史口径：
 
+注意事项：
+
+- 公告文件中可能还包括“国家禽畜遗传资源保种场名单”，本数据集此处将不予收集
+
 
 ### 文件管理
 
 ```{r}
-dir_tar <- here("topic/public-site/moa-genetic-resource/")
+dir_tar <- here("data-raw/public-site/moa-genetic-resource/")
 fs::dir_tree(dir_tar)
 ```
 
 ### 数据集展示
 
-本项目内维护，通过`techme`进行数据发布：
+本项目内维护，通过`techme`进行数据发布。执行R代码文件：`data-raw/public-site/moa-genetic-resource/wfl-PubGeneticResource.R`
 
 ```{r}
 techme::PubGeneticResource %>%
   head(100) %>%
   DT::datatable(
-    rownames = FALSE,
+    rownames = TRUE,
     options = list(
       dom = "ftip",
       pageLength = 10,
@@ -1603,6 +1607,8 @@ techme::PubGeneticResource %>%
 
 ### 数据进度
 
+- 【pdf附件】2024年12月29日，农业农村部公告 第865号。确定国家农作物种质资源库(圃)5个、国家畜禽遗传资源保种场13个、 国家农业微生物种质资源库2个,变更国家畜禽遗传资源保种场和基因库建设单位5个(名单见[附件](https://www.moa.gov.cn/govpublic/nybzzj1/202501/t20250103_6468854.htm))。考虑到数量较少，直接通过人工手动录入xlsx。
+
 - 【html tab】2023年12月29日 第二批国家农作物种质资源圃1个、国家农业微生物种质资源库8个的[公告](http://www.moa.gov.cn/govpublic/nybzzj1/202401/t20240117_6446108.html)
 
 - 【pdf名单转htm table】2022-08-10 关于第一批拟确定国家级农作物、农业微生物种质资源库的[公示](http://www.zys.moa.gov.cn/gsgg/202208/t20220810_6406720.htm)
@@ -1610,7 +1616,7 @@ techme::PubGeneticResource %>%
 
 ### 数据流程
 
-（1）抓取名单公示html/pdf。
+（1）抓取名单公示html/pdf。执行R代码文件：`data-raw/public-site/moa-genetic-resource/code-moa-genetic-resource.R`
 
 - 读取html（pdf转html）
 
@@ -1620,31 +1626,23 @@ techme::PubGeneticResource %>%
 
 - 依次导出年度xlsx
 
-（3）`techme`维护数据集
+（3）`techme`维护数据集。执行R代码文件：`data-raw/public-site/moa-genetic-resource/wfl-PubGeneticResource.R`
 
 - 循环读取年度xlsx
 
-- 导出`rda`数据文件到`techme/data-raw/public-site`
 
-```{r}
-(use_list <- "PubGeneticResource")
-```
 
-- 在techme包项目中更新
+历史维护：
 
-```
-"D:/github/techme/data-raw/wfl_useData_universe.R"
-use_data()
-use_r()
-document()
-```
+- 在tech-report/topics/public-site/moa-genetic-resource/目录下进行数据整理，批量读取后导出`rda`数据文件到`techme/data-raw/public-site`。然后在techme包项目中更新。
+
 
 ### 分析设计
 
 R代码文件：
 
-```{r}
-(code_file <-here("report/code/chpt02-03-moa-genetic-resource.R"))
+```r
+code_file <-("report-tech2025/report/code/chpt02-03-moa-genetic-resource.R")
 ```
 
 图表设计：
@@ -1652,6 +1650,9 @@ R代码文件：
 - 制表：旱区省份/最新年份名单列表
 
 
+### 背景知识
+
+- 2024-12-16，种质资源保护利用取得新突破 [农业农村部新闻动态](https://www.moa.gov.cn/xw/zwdt/202412/t20241216_6468043.htm)。持续完善种质资源保护体系。构建了以国家长期库及其复份库为核心，15个中期库、56个种质圃为依托，440个省级库（圃）为补充的农作物种质资源保护体系，国家层面长期保存农作物种质资源56万份。确定了227个国家级畜禽遗传资源保种场（区、库），实现159个国家级保护品种活体保护全覆盖，长期保存畜禽遗传材料135万份。各省区市建立省级保种场（区、库）671个，基本形成了国家和省两级管理、分级负责、有机衔接的畜禽遗传资源保护机制。61个濒危畜禽遗传资源的群体规模持续增长。确定国家级农业微生物库种质资源库27个，初步构建了以国家农业微生物种质资源综合性长期库为核心、地方专业性资源库为支撑的农业微生物种质资源保护与利用体系。 
 
 # 跨部门CROSS
 
