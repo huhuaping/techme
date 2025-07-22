@@ -650,7 +650,7 @@ techme::PubCars %>%
   )
 ```
 
-### 数据进度 (update)
+### 数据进度 (updated)
 
 
 - [html表格]2024年9月12日,农业农村部关于公示现代农业产业技术体系首席科学家和岗位科学家候选人名单的[通知](http://www.chinafeedm.com/h-nd-27052.html)
@@ -798,26 +798,49 @@ fs::dir_tree(dir_tar)
 
 统计口径：
 
-- 第x批农业产业化国家重点龙头企业名单
+- 【维护】年度更新的国家重点龙头企业名单（网页名单更新，每年5月份左右）
 
-- 第x次监测合格农业产业化国家重点龙头企业名单
+- 【维护】第x批农业产业化国家重点龙头企业名单（公示文件）
+
+- 第x次监测合格农业产业化国家重点龙头企业名单（公示文件）
 
 ### 文件管理
 
 ```{r}
-dir_tar <- here("topic/public-site/moa-firm-leader")
+dir_tar <- here("data-raw/public-site/moa-firm-leader")
 fs::dir_tree(dir_tar)
 ```
 
 ### 数据集展示
 
-- 本项目内维护`data-update/`
+根据需要，我们网页更新名单和批次认定名单进行了统一化维护，形成`techme::PubFirmLeader`数据集。
+
+
+```{r}
+techme::PubFirmLeader %>%
+  slice_sample(n = 10, by = batch ) %>%
+  DT::datatable(
+    rownames = TRUE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+
+
 
 ### 数据进度
 
 #### 批次认定
 
-- 【png转txt】2024年3月22日 第八批农业产业化国家重点龙头企业认定名单[公示](https://www.abeedata.com/home/article/detail/id/23163)。2023-08-09 关于开展第八批农业产业化国家重点龙头企业申报工作的[通知](http://www.xccys.moa.gov.cn/nycyh/202309/t20230904_6435775.htm)
+- 第九批农业产业化国家重点龙头企业名单（暂时未看到公示文件）
+
+    - 2025-04-08, 第十一次农业产业化国家重点龙头企业监测拟递补企业名单[公示](https://www.agri.cn/zx/zxfb/202504/t20250408_8724510.htm)。158家。
+
+- 【png转txt】2024年3月22日 第八批农业产业化国家重点龙头企业认定名单[公示](https://www.abeedata.com/home/article/detail/id/23163)。拟认定中和农信农业集团有限公司等333家企业为农业产业化国家重点龙头企业。2023-08-09 关于开展第八批农业产业化国家重点龙头企业申报工作的[通知](http://www.xccys.moa.gov.cn/nycyh/202309/t20230904_6435775.htm)
 
 - 2021-12-22 农业农村部等七部门关于公布第七批农业产业化国家重点龙头企业名单的[通知](http://www.chinatax.gov.cn/chinatax/n810341/n810825/c101434/c5172389/content.html)。 412家。
 
@@ -842,12 +865,18 @@ fs::dir_tree(dir_tar)
 
 #### 名单目录
 
+与批次认定名单不同，以下的名单目录，应该是监测合格名单，每年5月份左右会在网页上更新。更新原因包括：企业改名、监测不合格等。
+
+
+- 【附html】2025-05-27更新。农业产业化国家重点龙头企业[名单](http://www.xccys.moa.gov.cn/nycyh/202305/t20230518_6427885.htm)
 
 - 【附html】2024-05-31更新。农业产业化国家重点龙头企业[名单](http://www.xccys.moa.gov.cn/nycyh/202305/t20230518_6427885.htm)
 
 - 【附html】2023-05-18更新。农业产业化国家重点龙头企业[名单](http://www.xccys.moa.gov.cn/nycyh/202305/t20230518_6427885.htm)
 
 #### 动态监测
+
+- 2025-04-08, 第十一次农业产业化国家重点龙头企业监测拟递补企业名单[公示](https://www.agri.cn/zx/zxfb/202504/t20250408_8724510.htm)。158家。
 
 - 2023年05月16日 关于公布第十次监测合格和递补农业产业化国家重点龙头企业名单的[通知](http://www.moa.gov.cn/govpublic/XZQYJ/202305/t20230516_6427666.htm)
 
@@ -866,31 +895,35 @@ fs::dir_tree(dir_tar)
 - 【附名单html】2003-10-20 关于公布第一次监测合格农业产业化国家重点龙头企业名单的[通知](http://www.moa.gov.cn/nybgb/2003/dyq/201806/t20180624_6153085.htm)
 
 
-### 背景知识
-
-政策文件
-
-- 2018年5月10日 农业产业化国家重点龙头企业认定和运行监测管理[办法](https://www.gov.cn/gongbao/content/2018/content_5338242.htm)
 
 
 ### 数据流程
 
+1. 收集初始资料。执行R代码文件`/data-raw/public-site/moa-firm-leader/code-moa-firm-leader.R`。
 
-（1）搜索最新公示，下载`html`文件到本地
+    （1）搜索最新公示，下载`html`文件到本地。
 
-（2）每个年份独立地抓取`html`页面数据（因为每年都不同），统一数据框，保存为`xlsx`文件
+    （2）每个年份独立地抓取`html`页面数据（因为每年都不同），统一数据框，保存为`xlsx`文件
 
-（3）拷贝文件到R包`techme`，并进行数据创建和更新。
 
-- 本数据集的`xlsx`文件直接在本项目`report-tech`下更新维护，然后自动化拷贝到R包`techme`项目相对应`data-raw/data-tidy/`的文件夹下。
+2. 更新数据集。执行R代码文件`/data-raw/public-site/moa-firm-leader/wfl-PubFirmLeader.R`。
 
-- R包`techme`更新维护，只需要直接执行`update-public/wfl_knitGUI.R`的少数代码行即可！
+    （1）将`xlsx/`拷贝到相对应`data-raw/data-tidy/`的文件夹下。
 
-### 注意事项
 
-（1）企业可能更名
+注意事项：企业可能更名，统计口径变化。
 
-（2）统计口径变化
+
+3. 历史维护：2025年开始正式编制`PubFirmLeader`数据集，2025年以前数据，需要手动维护。
+
+    （1）在项目`report-tech`下，`xlsx/`文件进行批量读取，然后形成`xlsx-update/`文件夹。
+
+### 背景知识
+
+政策文件：
+
+- 2018年5月10日 农业产业化国家重点龙头企业认定和运行监测管理[办法](https://www.gov.cn/gongbao/content/2018/content_5338242.htm)
+
 
 ## 农业产业融合发展
 
@@ -934,6 +967,9 @@ fs::dir_tree(dir_tar, recurse = FALSE)
 
 本项目内维护，通过`techme`进行数据发布：
 
+
+（1.1）国家现代农业产业园【创建】名单：`techme::PubConvergencePark`
+
 ```{r}
 techme::PubConvergencePark %>%
   #head(100) %>%
@@ -946,6 +982,23 @@ techme::PubConvergencePark %>%
     )
   )
 ```
+
+（1.2） 国家现代农业产业园【认定】名单：`techme::PubConvergenceAffirm`
+
+```{r}
+techme::PubConvergenceAffirm %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+（2）优势特色产业集群【建设】名单：`techme::PubConvergenceCluster`
 
 ```{r}
 techme::PubConvergenceCluster %>%
@@ -960,6 +1013,8 @@ techme::PubConvergenceCluster %>%
   )
 ```
 
+（3）农业产业强镇【创建】名单：`techme::PubConvergenceTown`
+
 ```{r}
 techme::PubConvergenceTown %>%
   #head(100) %>%
@@ -973,18 +1028,6 @@ techme::PubConvergenceTown %>%
   )
 ```
 
-```{r}
-techme::PubConvergenceAffirm %>%
-  head(100) %>%
-  DT::datatable(
-    rownames = FALSE,
-    options = list(
-      dom = "ftip",
-      pageLength = 10,
-      scrollX = TRUE
-    )
-  )
-```
 
 
 
@@ -1214,8 +1257,9 @@ techme::PubAgrimodernZone %>%
 
 ### 数据进度(staying)
 
+- 2024年农业现代化示范区创建名单暂未公示。
 
-- 【html div】2023-08-01。2023年农业现代化示范区创建名单[公示](https://news.cnstock.com/news,bwkx-202308-5099816.htm)，非官方。
+- 【html div】2023-08-01。2023年农业现代化示范区创建名单[公示](https://news.cnstock.com/news,bwkx-202308-5099816.htm)，非官方。[官方](http://nyj.xjbt.gov.cn/c/2023-08-01/8293503.shtml)。
 
 - 2022年8月9日 2022年农业现代化示范区创建名单公示（第二批）[公告](http://nyt.hubei.gov.cn/bmdt/yw/mtksn/202208/t20220810_4256547.shtml)
 
@@ -1260,6 +1304,11 @@ use_data()
 use_r()
 document()
 ```
+
+### 背景知识
+
+-  人大建议答复，关于支持米易县国家现代农业产业园创建的建议。[参看](https://www.moa.gov.cn/govpublic/FZJHS/202408/t20240801_6460118.htm)。2021年至2023年，农业农村部会同财政部、国家发展改革委分三批将300个县（市、区）纳入农业现代化示范区建设名单，聚集资源、聚合力量，创新机制、探索模式，扎实推进农业现代化示范区建设，引领带动农业农村现代化加快发展。
+
 
 # MOA农业部/市场与信息化司
 

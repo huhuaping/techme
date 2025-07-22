@@ -1,0 +1,1111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>农业部关于公布第二次监测合格农业产业化国家重点龙头企业名单的通知</title>
+		<link href="/model/style/3.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="/model/jscript/jquery.js"></script>
+		<script type="text/javascript" src="/model/jscript/jquery.form.js"></script>
+		<script type="text/javascript" src="/model/jscript/jquery.cookie.js"></script>
+		<script type="text/javascript" src="/model/jscript/function.js"></script>
+		<script type="text/javascript" src="/model/jscript/jquery.zxxbox.3.0-min.js"></script>
+		<script type="text/javascript" src="/model/jscript/pop.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$(".ztfg_left2 a").click(function(){
+					var ids = $(this).attr("ids");
+					$("#linkids").val(ids) ;
+					$("#linkform").submit();
+					return ;
+				})
+			}) ;
+		</script>
+	</head>
+	<body onkeyup="javascript:enterfind();">
+		<div style="display: none" >
+			<form action="/linkserv" method="post" id="linkform" target="_blank">
+				<input name="rids" type="text"  id="linkids"/>
+			</form>
+		</div>
+		<div style="display: none" id="detail" rjs8="chl323s082.txt"></div>
+<div id="head"><img src="/model/images/head3.jpg"/></div>		<div id="bg">
+			<div id="xlpx2_left">
+				<div class="ztfg_left1">
+					<img src="/model/images/fgzw_dysc.jpg" width="176" height="32"/>
+				</div>
+				<div class="xlpx2_left2">
+					<img src="/model/images/button1.jpg" width="115" height="27" onclick="javascript:PrintMe()" style="cursor: hand;"/>
+					<a href="/pao?fn=chl323s082.txt&action=typeset"><img src="/model/images/button2.jpg"/></a>
+					
+					<img src="/model/images/button4.jpg" width="115" height="27" onclick="javascript:zl()" style="cursor: hand;"/>
+					<!-- <div class="xlpx2_left1">
+						正文转入：
+						<br />
+						<label>
+							<select name="select" id="dic">
+          					 	<option value="psl">请选择</option>
+						    			<option value="4">e</option>		
+						    			<option value="3">dname</option>		
+						    			<option value="2">常用法规</option>		
+							</select>
+						</label>
+					</div> -->
+				</div>
+				<div class="ztfg_left1">
+					<img src="/model/images/fgzw_ftyy2.jpg" width="176" height="32" />
+				</div>
+				<div class="fgzw_ftyy2">
+					<ul>
+											</ul>
+				</div>
+				<div class="ztfg_left1">
+					<img src="/model/images/fgzw_xgfg.jpg" width="176" height="32" />
+				</div>
+				<div class="fgzw_ftyy2">
+					<ul>
+						<li>
+							<a target="_blank" href="/law?fn=chl300s017.txt">农业部关于申报2004年农业产业化项目的通知</a>
+						</li>
+						<li>
+							<a target="_blank" href="/law?fn=chl307s167.txt">农业部、国家发展和改革委员会、财政部、商务部、人民银行、税务总局、证监会、供销总社关于...</a>
+						</li>
+						<li>
+							<a target="_blank" href="/law?fn=chl354s493.txt">农业部等部门关于加快发展农业产业化经营的意见</a>
+						</li>
+						<li>
+							<a target="_blank" href="/law?fn=chl372s434.txt">农业部关于开展农业产业化国家重点龙头企业监测工作的通知</a>
+						</li>
+						<li>
+							<a target="_blank" href="/law?fn=chl372s707.txt">国家农业综合开发办公室关于印发2010年国家农业综合开发产业化经营项目申报指南的通知</a>
+						</li>
+						<li>
+							<a target="_blank" href="/law?fn=chl373s365.txt">财政部、中国农业发展银行关于积极开展合作共同推进农业产业化经营的通知</a>
+						</li>
+						<li>
+							<a target="_blank" href="/law?fn=chl377s641.txt">国家农业综合开发办公室关于印发《2011年国家农业综合开发产业化经营项目申报指南》的通...</a>
+						</li>
+					</ul>
+				</div>
+				<!-- 
+				<div class="ztfg_left1">
+					<a href="#"><img src="/model/images/fgzw_xglw.jpg" width="176"
+							height="32" />
+					</a>
+				</div>
+				<div class="fgzw_ftyy2">
+					<ul>
+						<li>
+							<a href="#">中央补助地方公共卫生专项资金农村卫生人员培训项目管理办法</a>
+						</li>
+						<li>
+							<a href="#">国家税务总局关于下发20090601d版出口商品退税率文库的通知</a>
+						</li>
+						<li>
+							<a href="#">中央补助地方公共卫生专项资金农村卫生人员培训项目管理办法</a>
+						</li>
+					</ul>
+				</div>
+				 -->
+			</div>			<div id="fgzw_right" style="position: relative;">
+				<div class="xlpx2_right0">
+					<div class="xlpx2_right1" id="floattool">
+					<script type="text/javascript">
+				$("#dic").click(function(){
+					 	$.ajax({
+							type: "get",
+							url: "/userlogin",
+							data: "dbname=cook",
+							success: function(data, textStatus){
+						if(data==null||data==""){
+			  			$("#dic").find("option").remove();
+			  			var p = $(".fgzw_right2");
+						var position = p.position();
+						var left = position.left;
+						var top = position.top;
+			  		 $.ajax({
+						type: "get",
+						url: "/userdir",
+						data: "action=ishow&ts=switch&tab=detail",
+						success: function(data, textStatus){
+							$("#wjj5").html(data);
+							$("#wjj5").css({position: "absolute",top:top/2+3,left:-55});
+						},
+						complete: function(XMLHttpRequest, textStatus){
+						//HideLoading();
+						},
+						error: function(){
+						//请求出错处理
+							}
+						});
+			  		  }}})
+				});
+				function zhuce(){
+					$.ajax({
+					type: "get",
+					url: "/userdir",
+					data: "action=ishow&ts=zhuce", 
+					success: function(data, textStatus){
+						//alert(data);
+						$("#wjj5").html(data);
+					},
+					complete: function(XMLHttpRequest, textStatus){
+						//HideLoading();
+					},
+					error: function(){
+						//请求出错处理
+					}
+				  });
+				}
+  		function elect(uu){
+  			$("#wjj5").hide();
+  			 location.reload(); 
+  		}
+			</script>
+							<div id="wjj5" align="center"></div>
+						<table width="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td width="22" height="24" valign="middle">
+									<span class="fdj">按</span>
+								</td>
+								<td width="120" valign="middle">
+									<select id="showinfo" name="select5" onchange="javascript:donchang();">
+										<option value="yes">
+											索引信息+正文
+										</option>
+										<option value="no">
+											正文
+										</option>
+									</select>
+								</td>
+								<td valign="middle">
+									<span class="fdj">显示</span>
+								</td>
+								<td width="130" align="right" valign="middle">
+									<span class="fdj">本篇关键字搜索：</span>
+								</td>
+								<td width="200" valign="middle">
+									 <input name="textfield" type="text" id="kw" size="40" />
+								</td>
+								<td valign="middle">
+									<img src="/model/images/chaxun2.jpg" width="53" height="21" onclick="javascript:FindItIE();" style="cursor:pointer;"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="fgzw_right2" id="fgzw_right2">
+					<ul>
+							<li id="tit">【法规标题】农业部关于公布第二次监测合格农业产业化国家重点龙头企业名单的通知</li>
+							<li>【法规文号】7</li>
+							<li id="tdat">【发布日期】20050603</li>
+							<li>【实施日期】20050603</li>
+							<li id="tdpt">【发布部门】 农业部</li>
+							<li>【效力等级】</li>
+					</ul>
+				</div>
+				<div style="display: none">
+					<form action="/linkserv" method="post" id="links" target="_blank">
+						<input id="txr" name="rids"/>
+					</form>
+				</div>
+				<p>
+					<span class="fgzw_zw">【正文】</span>
+					<span class="fy">
+						
+						<!-- <img style="cursor:pointer;" src="/model/images/fy.gif" onclick="javascript:sub();" width="64" height="20" /> -->
+					</span>
+				</p>
+				<div class="zhengwen" id="maintext">
+					<br/><div align=center ><strong>农业部关于公布第二次监测合格农业产业化国家重点龙头企业名单的通知</strong></div>
+<br><br/><div align=center ><strong>农经发[2005]7号</strong></div>
+<br>各省、自治区、直辖市及新疆生产建设兵团农业产业化主管部门：
+<br>　　根据《农业产业化国家重点龙头企业认定和运行监测管理暂行办法》的规定，在专家对第一、二批国家重点龙头企业监测审核的基础上，全国农业产业化联席会议审定同意北京顺鑫农业股份有限公司等350 家农业产业化国家重点龙头企业监测合格（名单附后）。
+<br><div align=right>农业部</div><div align=right>二○○五年六月三日</div>
+<br><br/><div align=center ><strong>第二次监测合格农业产业化国家重点龙头企业名单</strong></div>
+<br>　　北京顺鑫农业股份有限公司
+<br>　　北京新发地农副产品批发市场中心*
+<br>　　北京三元食品股份有限公司
+<br>　　北京资源亚太饲料科技有限公司
+<br>　　北京汇源饮料食品集团有限公司
+<br>　　北京御香苑畜牧有限公司
+<br>　　北京锦绣大地农业股份有限公司
+<br>　　北京华都集团有限责任公司
+<br>　　北京大发正大有限公司
+<br>　　北京大北农饲料科技有限责任公司
+<br>　　北京八里桥农产品中心批发市场有限公司
+<br>　　中国水产(集团)总公司
+<br>　　国投中鲁果汁股份有限公司
+<br>　　中国种子集团公司
+<br>　　中牧实业股份有限公司
+<br>　　中国粮油食品进出口（集团）有限公司
+<br>　　中华棉花有限公司
+<br>　　中法合营王朝葡萄酿酒有限公司
+<br>　　天津宝迪农业科技股份有限公司
+<br>　　天津挂月集团有限公司
+<br>　　天津科润农业科技股份有限公司
+<br>　　康地万达（天津）有限公司
+<br>　　天津海河乳业有限公司
+<br>　　天津市金钟农副产品有限公司
+<br>　　石家庄三鹿集团股份有限公司*
+<br>　　冀东果菜批发市场
+<br>　　河北保定龙飞集团有限公司
+<br>　　露露集团有限责任公司
+<br>　　河北福成五丰食品股份有限公司
+<br>　　河北裕丰实业股份有限公司
+<br>　　三河汇福粮油集团有限公司
+<br>　　华龙日清食品有限公司*
+<br>　　唐山天申贸易企业(集团)公司
+<br>　　秦皇岛骊骅淀粉股份有限公司
+<br>　　秦皇岛正大有限公司
+<br>　　中国长城葡萄酒有限公司
+<br>　　邯郸市（馆陶）金凤禽蛋农贸批发市场
+<br>　　山西水塔老陈醋股份有限公司
+<br>　　山西穗穗甜玉米（集团）有限公司
+<br>　　山西新绛县蔬菜批发市场
+<br>　　山西古城乳业集团有限公司
+<br>　　山西屯玉种业科技股份有限公司
+<br>　　山西恒康乳业科技股份有限公司
+<br>　　山西粟海集团有限公司
+<br>　　山西忠民集团有限公司
+<br>　　太原六味斋实业有限公司
+<br>　　内蒙古草原兴发股份有限公司
+<br>　　内蒙古伊利实业集团股份有限公司
+<br>　　包头懋菲蒙奶业股份有限公司
+<br>　　内蒙古奈伦集团有限责任公司
+<br>　　内蒙古金河实业集团有限公司
+<br>　　包头华资实业股份有限公司
+<br>　　内蒙古蒙牛乳业股份有限公司
+<br>　　内蒙古盘古集团有限责任公司
+<br>　　内蒙古赛飞亚集团有限责任公司
+<br>　　内蒙古鹿王羊绒(集团)公司
+<br>　　内蒙古呱呱叫实业(集团)有限公司
+<br>　　内蒙古科尔沁牛业股份有限公司
+<br>　　北方绿色食品股份有限公司
+<br>　　沈阳隆迪高科技粮食制品股份有限公司
+<br>　　锦州华顺立民羊业股份有限公司
+<br>　　大连础明集团有限公司
+<br>　　大连华农豆业集团股份有限公司
+<br>　　沈阳副食集团公司
+<br>　　辽宁鲁冰花集团有限公司
+<br>　　辽宁省大连海洋渔业集团公司
+<br>　　辽宁亚洲红企业集团
+<br>　　辽宁富虹油品集团有限公司
+<br>　　辽宁大正（集团）有限公司
+<br>　　大连韩伟企业集团有限公司
+<br>　　大连善岛食品有限公司
+<br>　　大连双兴商品城有限公司
+<br>　　大连三寰集团有限公司
+<br>　　大连天宝绿色食品股份有限公司
+<br>　　吉林德大有限公司
+<br>　　长春大成实业集团有限公司
+<br>　　吉林省长春皓月清真肉业股份有限公司
+<br>　　吉林省吉发实业集团有限公司
+<br>　　吉林敖东药业集团股份有限公司
+<br>　　吉林吉农高新技术发展股份有限公司
+<br>　　吉林华正农牧业开发股份有限公司
+<br>　　长春苗苗豆乳（集团）有限公司
+<br>　　吉林天景食品有限公司
+<br>　　黄龙食品工业有限公司
+<br>　　吉林粮食集团有限公司
+<br>　　黑龙江省大庆市吉泰实业集团有限公司
+<br>　　绿都集团
+<br>　　哈尔滨金星乳业有限责任公司*
+<br>　　克山金鼎亚麻纺织有限责任公司
+<br>　　黑龙江省完达山乳业股份有限公司
+<br>　　黑龙江九三油脂(集团)有限责任公司
+<br>　　黑龙江九三丰缘麦业有限责任公司*
+<br>　　黑龙江省北大荒米业有限公司
+<br>　　大庆市银螺乳业有限公司
+<br>　　黑龙江省穆棱富邦集团有限公司
+<br>　　黑龙江红星集团股份有限公司
+<br>　　黑龙江省桦南白瓜籽集团公司
+<br>　　黑龙江省金秋企业集团有限责任公司
+<br>　　黑龙江龙凤玉米开发有限公司
+<br>　　黑龙江华润酒精有限公司
+<br>　　牡丹江绿特食品批发市场有限公司
+<br>　　上海光明乳业股份有限公司
+<br>　　上海新成食品有限公司
+<br>　　上海孙桥现代农业联合发展有限公司
+<br>　　上海高榕食品有限公司
+<br>　　上海海丰米业有限公司
+<br>　　上海曹安菜篮子股份有限公司
+<br>　　上海农工商超市有限公司
+<br>　　南京奶业（集团）有限公司*
+<br>　　江苏雨润食品产业集团有限公司
+<br>　　海门市京海肉鸡集团公司
+<br>　　鑫缘茧丝绸集团股份有限公司*
+<br>　　江苏高邮鸭集团
+<br>　　江苏金田集团
+<br>　　南京老山药业股份有限公司
+<br>　　江苏宝宝集团公司
+<br>　　江苏恒顺醋业股份有限公司
+<br>　　江苏玖久丝绸股份有限公司
+<br>　　江苏富安茧丝绸股份有限公司
+<br>　　江苏民康油脂有限公司
+<br>　　晨风集团股份有限公司*
+<br>　　徐州维维食品饮料股份有限公司
+<br>　　江苏荷仙食品集团
+<br>　　无锡朝阳股份有限公司
+<br>　　海通食品集团股份有限公司*
+<br>　　浙江丰岛实业集团有限公司
+<br>　　舟山水产品中心批发市场有限责任公司
+<br>　　温州虹丰粮油集团公司
+<br>　　浙江欧诗漫集团有限公司*
+<br>　　浙江金大地生物工程股份有限公司
+<br>　　浙江花神丝绸集团有限公司*
+<br>　　浙江黄岩罐头食品厂
+<br>　　浙江天子果业有限公司
+<br>　　瑞安市华盛水产品加工厂
+<br>　　浙江华发出口茶厂
+<br>　　浙江省义乌农贸城
+<br>　　宁波五洲星集团有限公司
+<br>　　徐龙食品集团有限公司
+<br>　　浙江水产城象山渔贸发展有限公司
+<br>　　黄山山华集团
+<br>　　芜湖金田集团有限公司
+<br>　　安徽芜湖东源集团有限公司
+<br>　　合肥丰乐种业股份有限公司
+<br>　　安徽霞珍集团
+<br>　　安徽庆发柳编集团有限公司*
+<br>　　安徽鸿润（集团）股份有限公司
+<br>　　安徽省福润肉类加工有限公司
+<br>　　安徽和威农业开发股份有限公司
+<br>　　安徽丰原生物化学股份有限公司
+<br>　　安徽大平工贸（集团）有限公司
+<br>　　安徽丰大股份有限公司
+<br>　　安徽安粮国际发展股份有限公司
+<br>　　福建锦溪集团有限公司
+<br>　　福建省安溪茶厂有限公司
+<br>　　福建省晋江福源食品有限公司
+<br>　　泉州华洲水产市场联合发展有限公司
+<br>　　福建三华股份有限公司
+<br>　　厦门如意集团有限公司
+<br>　　福州超大现代农业发展有限公司
+<br>　　福建省圣农实业有限公司
+<br>　　福建远洋渔业集团公司
+<br>　　福建长富集团股份有限公司
+<br>　　福建省闽中有机食品有限公司*
+<br>　　厦门银鹭集团有限公司
+<br>　　厦门惠尔康集团有限公司
+<br>　　厦门涌泉集团有限公司
+<br>　　江西昌顺（集团）有限公司
+<br>　　煌佳南丰密桔科技股份有限公司*
+<br>　　江西德宇集团
+<br>　　正邦集团有限公司*
+<br>　　江西猕猴桃酒业股份有限公司
+<br>　　江西省宁红集团公司
+<br>　　南昌深圳农产品中心批发市场有限公司
+<br>　　山东诸城市对外贸易集团公司
+<br>　　寿光市蔬菜批发市场有限责任公司
+<br>　　山东龙大企业集团有限公司
+<br>　　得利斯集团有限公司
+<br>　　山东金锣企业集团总公司
+<br>　　菱花集团公司
+<br>　　山东凤祥（集团）有限责任公司
+<br>　　山东省高唐蓝山集团总公司
+<br>　　潍坊乐港食品股份有限公司
+<br>　　山东鲁南牧工商联合公司
+<br>　　山东九发食用菌股份有限公司
+<br>　　山东齐鲁大地科技股份有限公司
+<br>　　好当家集团有限公司
+<br>　　山东新昌肉食有限责任公司
+<br>　　山东鲁花集团有限公司*
+<br>　　山东金海缘股份有限公司
+<br>　　淄博得益乳业有限公司
+<br>　　山东凯银集团股份有限公司*
+<br>　　泰安泰山亚细亚食品有限公司
+<br>　　烟台中粮葡萄酿酒有限公司
+<br>　　烟台山村果园绿色生物股份有限公司
+<br>　　肥城银宝食品有限公司
+<br>　　山东六和饲料股份有限公司
+<br>　　山东西王集团有限公司
+<br>　　济南圣泉集团股份有限公司
+<br>　　青岛万福集团股份有限公司
+<br>　　山东大洋食品集团有限公司
+<br>　　青岛康大外贸集团有限公司
+<br>　　青岛九联集团股份有限公司
+<br>　　青岛润德粮油制品有限公司
+<br>　　河南省漯河市双汇实业集团有限责任公司
+<br>　　河南省科迪食品集团股份有限公司
+<br>　　河南华英农业发展股份有限公司
+<br>　　河南固始三高集团有限责任公司
+<br>　　河南众品食业股份有限公司
+<br>　　河南莲花味精股份有限公司*
+<br>　　河南省龙云集团有限公司
+<br>　　河南省北徐集团有限公司
+<br>　　河南省淇县永达食业有限公司
+<br>　　河南邦杰实业集团有限公司
+<br>　　郑州三全食品股份有限公司
+<br>　　河南花花牛实业总公司
+<br>　　河南思念食品股份有限公司
+<br>　　商丘农产品中心批发市场
+<br>　　湖北银欣集团有限公司
+<br>　　湖北健康（集团）股份有限公司
+<br>　　天门金天纺织有限公司
+<br>　　湖北天荣现代农业股份有限公司
+<br>　　武汉多福科技农庄股份有限公司
+<br>　　湖北天种畜牧股份有限公司
+<br>　　湖北荆楚种业股份有限公司
+<br>　　湖北天颐科技股份有限公司
+<br>　　湖北省种子集团公司
+<br>　　湖北民生工贸股份有限公司
+<br>　　湖北万宝粮油股份有限公司
+<br>　　湖北华益油料科技股份有限公司
+<br>　　孝感市南大批发市场
+<br>　　湖南唐人神集团股份有限公司
+<br>　　湖南映武黄花集团有限公司*
+<br>　　湖南省棉麻总公司
+<br>　　湖南金健米业股份有限公司
+<br>　　湖南正虹科技发展股份有限公司
+<br>　　湖南正清制药集团股份有限公司
+<br>　　湘潭市先锋企业集团公司
+<br>　　袁隆平农业高科技股份有限公司
+<br>　　湖南喜阳食品工业集团股份有限公司
+<br>　　湖南洞庭水殖股份有限公司
+<br>　　湖南盛湘粮食购销集团有限公司
+<br>　　湖南油中王实业股份有限公司
+<br>　　湖南益阳粒粒晶粮食购销有限公司
+<br>　　长沙红星农副产品大市场
+<br>　　湖南亚华种业股份有限公司
+<br>　　湖南新五丰股份有限公司
+<br>　　广东温氏食品集团有限公司
+<br>　　深圳市农产品股份有限公司
+<br>　　广东英吉利实业有限公司
+<br>　　广东省农科集团有限公司
+<br>　　汕头大洋（集团）公司
+<br>　　顺德市陈村花卉世界有限公司
+<br>　　广东恒兴集团有限公司
+<br>　　广东省丰收糖业发展有限公司
+<br>　　广州从玉菜业发展有限公司
+<br>　　广州市江丰实业股份有限公司*
+<br>　　广东新华海集团有限公司*
+<br>　　广东肇庆康蓝中密板企业集团公司
+<br>　　广东康辉集团有限公司
+<br>　　广东翼龙实业集团有限公司
+<br>　　广州花卉博览园有限公司
+<br>　　深圳市光明集团有限公司
+<br>　　深圳天俊实业股份有限公司
+<br>　　深圳市农牧实业有限公司
+<br>　　广西贵糖（集团）股份有限公司
+<br>　　广西黑五类食品集团有限责任公司
+<br>　　广西凤糖生化股份有限公司
+<br>　　广西美通食品有限公司
+<br>　　桂林莱茵生物制品有限公司
+<br>　　贵港扬翔饲料有限公司
+<br>　　海南东方大慧淀粉制品有限公司
+<br>　　海南神农大丰种业科技股份有限公司
+<br>　　海口农工贸(罗牛山)股份有限公司
+<br>　　海南裕泰科技饲料有限公司
+<br>　　海南欣商贸易有限公司
+<br>　　重庆皇田农业股份有限公司
+<br>　　重庆海浪科技实业（集团）有限公司
+<br>　　重庆牧业（集团）有限公司
+<br>　　重庆荣达农业发展有限责任公司
+<br>　　重庆三峡果业集团有限公司
+<br>　　重庆市涪陵榨菜（集团）有限公司
+<br>　　重庆市鱼泉产业（集团）有限公司*
+<br>　　重庆市天友乳业有限公司
+<br>　　重庆市三峡牧业集团有限公司
+<br>　　重庆大正畜牧科技股份有限公司
+<br>　　重庆三江羽绒有限公司
+<br>　　重庆星星套装门有限责任公司*
+<br>　　重庆三峡建设集团有限公司
+<br>　　四川际天时股份有限公司
+<br>　　四川格瑞现代农业发展股份有限公司
+<br>　　四川永丰纸业股份有限公司
+<br>　　四川绿色药业科技发展股份有限公司
+<br>　　四川光友薯业有限公司
+<br>　　四川新希望集团有限公司
+<br>　　成都大业国际投资股份有限公司
+<br>　　四川省井研县食品有限责任公司
+<br>　　四川峨眉山竹叶青茶业有限公司
+<br>　　四川华侨凤凰集团股份有限公司
+<br>　　四川绿科高技术农业有限公司
+<br>　　四川禾嘉股份有限公司
+<br>　　四川国基实业有限公司
+<br>　　四川隆生集团有限公司
+<br>　　遵义天阳食品有限公司
+<br>　　贵州信邦制药股份有限公司
+<br>　　领先食品股份有限公司
+<br>　　贵州家诚药业有限责任公司
+<br>　　贵州仙灵药业股份有限公司
+<br>　　贵阳三联乳业有限公司
+<br>　　云南邓川蝶泉乳品有限责任公司
+<br>　　云南永胜映华植物化工（集团）有限公司
+<br>　　云南金泰得三七产业股份有限公司
+<br>　　大理州四方集团有限责任公司
+<br>　　昆明雪兰牛奶有限责任公司
+<br>　　潞西市宏天实业开发有限公司
+<br>　　云南龙城农产品经营股份有限公司
+<br>　　西藏高原之宝牦牛股份有限公司
+<br>　　陕西华圣企业（集团）股份有限公司
+<br>　　咸阳富安果汁有限公司
+<br>　　宝鸡惠民乳品（集团）有限公司
+<br>　　陕西海升果业发展股份有限公司
+<br>　　陕西石羊（集团）股份有限公司
+<br>　　西安银桥股份有限公司
+<br>　　陕西神果股份有限公司
+<br>　　陕西恒兴果汁饮料有限公司
+<br>　　杨凌秦丰农业科技股份有限公司
+<br>　　甘肃荣华实业（集团）股份有限公司
+<br>　　甘肃莫高实业发展股份有限公司
+<br>　　兰州好为尔生物科技股份有限公司
+<br>　　甘肃亚盛实业（集团）股份有限公司
+<br>　　甘肃省敦煌种业股份有限公司
+<br>　　甘肃省临洮县腾胜蔬菜土特产购销有限责任公司
+<br>　　甘肃银河食品集团有限责任公司
+<br>　　宁夏新华百货夏进乳业股份有限公司
+<br>　　宁夏回族自治区西夏王葡萄酒业（集团）公司
+<br>　　宁夏香山酒业集团有限公司
+<br>　　宁夏塞北雪面粉有限公司
+<br>　　青海雪舟三绒集团
+<br>　　青海青稞酒业（集团）有限责任公司
+<br>　　新疆库尔勒香梨股份有限公司
+<br>　　新疆四方实业股份有限公司
+<br>　　新疆天山面粉(集团)有限责任公司
+<br>　　新疆屯河投资股份有限公司
+<br>　　新疆西域种业股份有限公司
+<br>　　新疆纵横股份有限公司
+<br>　　乌鲁木齐北园春(集团)有限责任公司
+<br>　　新疆麦趣尔集团有限责任公司
+<br>　　新疆天康畜牧生物技术股份有限公司
+<br>　　新天国际葡萄酒业有限公司
+<br>　　新疆赛里木现代农业股份有限公司
+<br>　　新疆中基实业股份有限公司
+<br>　　注：带"*"号的为更名企业
+<br>
+<br>
+				</div>
+				<!--/div 摘录条款-->
+				<form action="zl.htm" method="post" enctype="text/plain">
+					<input type="hidden" id=fn name="fn" />
+					<textarea id=slt name="slt" style="display: none"></textarea>
+				</form>
+				<div id=zlbt
+					style="display: none; width: 55; height: 60; top: 300; left: 270; position: absolute; background-color: #CCFFFF;
+					 border: #CCCCCC thin thin thin thin; font-size: 12px;"
+					onMouseMove="MoveIn(this)" onMouseOut="MoveOut(this)">
+					<table width="210" border="0" cellspacing="0" cellpadding="0">
+					  <tr>
+					    <td class="bg1"><table width="204" border="0" align="center" cellpadding="0" cellspacing="0">
+					          <tr>
+					            <td height="25" class="menu"><input name="button" type="button" class="menubtn" value="摘录此条款" onClick="prezl()" /></td>
+					          </tr>
+					          <tr>
+					            <td height="25" class="menu"><input name="button" type="button" class="menubtn" value="全库全文检索" onClick="search()"/></td>
+					          </tr>
+					           <tr>
+					            <td height="25" class="menu"><input name="button" type="button" class="menubtn" value="复制" onClick="copy()"/></td>
+					          </tr>
+					        </table></td>
+					      </tr>
+					    </table></td>
+					  </tr>
+					</table>
+				</div>
+				<!--/div 摘录条款-->
+				<div id="biaozhu">
+					资料提供:法律之星 引用时请对照正式文本
+				</div>
+			</div>
+			<div id="copyright">
+				版权所有：1992-2013 北京中天诺士达科技有限责任公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客服热线：010-65155090 800-810-5148
+			</div>
+		</div><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		</head><body>
+<div id="tip_float" style="position: absolute; display:none;font-size: 12px;"></div>
+		<div style="display: none;">
+			<form method="post" target="_blank" id="cf" name="cf" action="http://trans.law-star.com/jsp/order_1.jsp">
+				<input type="hidden" value="chl323s082.txt" name="id" id="idd">
+			    <input type="hidden" value="1" name="type" id="typee">
+			    <input type="hidden" value="kRi3qndFE7XauFUcjBWQ2EoEGeAs4qFfjuFuPNxggGNVhNE61m8TKg==" name="title" id="titlee">
+				<textarea id="contentd" name="content">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
+clsGQjAdgA==</textarea>
+				<input type="hidden" value="c03ff4e1159693e0aa64ff9f2401735b" name="sign" id="sign">
+			</form>
+			<iframe id="downframe" style="display: none"></iframe>
+		</div>
+		
+		<div style="display: none">
+		<div id="fgzltip" style="height: 100px;width: 150px">
+			<span style="margin-left: 20px;">摘录成功!</span>
+		</div>
+		</div>
+		<div id="fgzxjc" style="font-size: 12px;height: 435px;display: none;">
+			<div id="fgzxjc_title">
+				<img src="/model/images/fgzxjc.gif" width="110" height="21" />
+			</div>
+			<form action="/online?action=correct" method="post" id="correctform">
+				<div id="fgzxjc_di">
+					<p>
+						提示：“法律之星”将为纠错最多的用户提供相关奖品，如有必要，请您填写联系人和联系方式。
+					</p>
+					<table width="96%" border="0" align="center" cellpadding="0"
+						cellspacing="0">
+						<tr>
+							<td width="18%" height="50" align="center">
+								法规标题
+							</td>
+							<td height="20">
+								<input type="text" name="title" id="cor_title" size="87"/>
+							</td>
+						</tr>
+						<tr>
+							<td height="20" align="center" valign="top">
+								错误内容
+							</td>
+							<td>
+								<textarea name="content" cols="68" rows="5" id="cor_content"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td height="30" align="center">
+								联 系 人
+							</td>
+							<td>
+								<input name="username" type="text" id="textfield4" size="18" id="cor_username"/>
+								<span class="zise_huise">（非必填）</span>
+							</td>
+						</tr>
+						<tr>
+							<td height="30" align="center">
+								联系方式
+							</td>
+							<td>
+								<input name="phone" type="text" id="textfield3" size="18" id="cor_phone"/>
+								<span class="zise_huise">（非必填）</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="18%" height="30" align="center" valign="top">
+								具体内容
+							</td>
+							<td>
+								<textarea name="detail" id="textarea3" cols="68" rows="5" id="cor_detail"></textarea>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="anniu2">
+					<input type="button" name="button3" id="sbtcor" value="我要纠错" class="butt" />
+					<input type="reset" name="button" id="button2" value="清空" class="butt" />
+				</div>
+			</form>
+		</div>
+		<script>	
+			function sub(){		
+				var obj = document.getElementById('cf') ;
+				obj.submit() ;
+			}
+		</script>
+		<style>
+			.xlpx2_right1 {
+				position: absolute;
+				top: 0;
+			}
+			
+			.shiyi, .sycontent{
+				text-indent: 28px;
+				background-color: #c7c7c7;
+			}
+			
+			.sycontent {
+				display: none;
+			}
+		</style>
+	<script type="text/javascript">
+			$(document).ready(function(){
+				//$("#fy2 a").click(function(){
+				//	var txt = document.getElementById("txr");
+				//	txt.value = $(this).attr('ids') ;
+				//	document.getElementById("links").submit() ;
+				//}) ;
+				$(".menu").each(function(){
+					$(this).mouseover(function() {
+						$(this).addClass("bg3");
+					});
+					$(this).mouseout(function() {
+						$(this).removeClass();
+					});
+				});
+				
+				$(".shiyi").click(function() {
+					$(this).next().toggle();
+				});
+				$(".shiyi").mouseover(function() {
+					$(this).css("cursor","hand");
+				});
+
+				$(".tips").each(function(){
+					var t;
+					$(this).mouseover(function(){
+						var top = $(this).offset().top + 20;
+						var left = $(this).offset().left;
+						$(this).css("text-decoration", "underline");
+						var rid = $(this).attr("rid");
+						t = setTimeout(function(){
+							$.ajax({
+								type: "get",
+								url: "/dsc",
+								data: "action=showtip&rid="+rid,
+								success: function(data, textStatus){
+									$("#tip_float").html(data);
+									$("#tip_float").css("top", top).css("left", left).show();
+								}
+							});
+						}, 100);
+					});
+
+					$(this).mouseout(function(){
+						clearTimeout(t);
+						$(this).css("text-decoration", "");
+						$("#tip_float").hide();
+					});
+				});
+				
+				$("#dic").change(function(){
+					$("#dic option:selected").each(function () {
+		                str = $(this).val();
+						if(str=="psl"){
+							return false;
+						}
+						rjs8 = $("#detail").attr("rjs8");
+						$.ajax({
+							type: "get",
+							url: "/userdir",
+							data: "action=addbyrjs8&did="+str+"&rjs8="+rjs8,
+							success: function(data, textStatus){
+								if(data.indexOf('true')!=-1){
+									alert("\u6210\u529f\u6dfb\u52a0\u5230\u6307\u5b9a\u7684\u6587\u4ef6\u5939");//添加到指定的文件夹
+								}
+								else if(data.indexOf('no')!=-1){
+									alert("\u672a\u6807\u8bb0\u4efb\u4f55\u6587\u4ef6") ;//未标记任何文件
+								}
+								else{
+									alert("\u6dfb\u52a0\u5931\u8d25\uff0c\u60a8\u53ef\u4ee5\u7ee7\u7eed\u67e5\u8be2\u6570\u636e\uff0c\u6216\u8005\u91cd\u65b0\u542f\u52a8\u6cd5\u5f8b\u4e4b\u661f\u7a0b\u5e8f\u540e\u518d\u64cd\u4f5c") ;//添加失败，您可以继续查询数据，或者重新启动法律之星程序后再操作
+								}
+							},
+							complete: function(XMLHttpRequest, textStatus){
+								//HideLoading();
+							},
+							error: function(){
+								//请求出错处理
+							}
+					    });
+		            });
+				});
+			});
+
+			function closeTip() {
+				$("#tip_float").hide();
+			}
+		
+			function pssub(ids){
+				var txt = document.getElementById("txr");
+				txt.value = ids ;
+				document.getElementById("links").submit() ;
+			}
+			
+			function pssub(ids){
+				var txt = document.getElementById("txr");
+				txt.value = ids ;
+				document.getElementById("links").submit() ;
+			}
+			
+			function donchang(){
+				var dis = $("#showinfo").val();
+				if(dis == 'yes'){
+					$("#fgzw_right2").slideDown();
+				}else{
+					$("#fgzw_right2").slideUp();
+				}
+			}
+			
+			function ts(){
+				window.open("/pao?fn=chl323s082.txt&action=typeset") ;
+			}
+			function zl(){
+				//window.open("/pao?action=showzl") ;
+			
+				$.ajax({
+					type: "POST",
+					url: "/pao?action=showzl",
+					cache: false,
+					success: function(data){
+						if(data.indexOf("\u672a\u6458\u5f55")!= -1) {
+							//$("#zlinfo").html("无");
+							//setTimeout(function(){$("#zlinfo").html("");}, 2000);
+							$.zxxbox.remind("\u8fd8\u6ca1\u6709\u6458\u5f55\u5185\u5bb9\uff01");
+						} else {
+							$("#downframe").attr("src", "/pao?action=showzl");
+						}
+					}
+				});
+			}
+			
+				$("#showinfo").val("yes");
+			donchang();
+  		</script>
+		<script type="text/javascript">
+			var IO = document.getElementById('floattool'), Y = IO, H = 0, IE6;
+			IE6 = window.ActiveXObject && !window.XMLHttpRequest;
+			while (Y) {
+				H += Y.offsetTop;
+				Y = Y.offsetParent;
+			};
+		</script>
+		<script type="text/javascript">
+		$("#correct").click(function(){
+			$.zxxbox($("#fgzxjc"), {title: "在线法规纠错", width: 720,btnclose:true,bgclose:true});
+			var title = document.title;
+			var content = IsIE ? document.selection.createRange().text.toString().trim() : window.getSelection().toString().trim();
+
+			$("#cor_title").val(title);
+			$("#cor_content").val(content);
+
+			$("#sbtcor").click(function(){
+				$('#correctform').ajaxSubmit({
+					success: function (html, status) {
+						if(html == "ok") {
+							alert("提交成功，感谢您对我们法律之星的支持！");
+							$.zxxbox.hide();
+						} else if(html == "nonetwork") {
+							alert("网络故障，请检查您的网络连通情况！");
+						} else {
+							alert(html);
+						}
+					}
+				});
+			});
+		});
+		</script></body>
+		</html>
+	</body>
+</html>
