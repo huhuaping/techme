@@ -1,0 +1,134 @@
+---
+title: "[DT]育繁推企业"
+subtitle: "中国种业大数据平台分地区育繁推一体化企业数量分布"
+---
+
+```{r}
+library(here)
+library(tidyverse)
+library(fs)
+```
+
+
+## 项目说明
+
+更新状态：update
+
+目标网站：中国种业大数据平台/农作物种子管理集成平台/生产经营许可证查询。查询地址（<http://202.127.42.47:6010/XKSite/Home/Index>）。种子生产经营许可。具备API查询功能，根据需要可一年爬取一次。
+
+爬取目标：
+
+- 育繁推一体化种子企业，分地区数量数据集
+
+爬取流程：
+
+- 通过API参数获取XHR下的json。
+
+- 导出为`.rds`数据集。
+
+## 爬取进度
+
+## 背景知识
+
+新《种子法》对种子生产经营许可管理制度作了重大调整，如实行生产经营“两证”合一、下放育繁推一体化许可审批、建立种子生产经营备案制度等。
+
+符合农业农村部规定条件、获得选育生产经营相结合许可证的种子企业就被称为“育繁推一体化种子企业”
+
+- 2022年01月21日 农作物种子生产经营许可管理[办法](http://www.moa.gov.cn/govpublic/CYZCFGS/202201/t20220128_6387889.htm) 
+
+- 2012-09-28 第三十四批发放《农作物种子经营许可证》企业名单 32家育繁推一体化企业《农作物种子经营许可证》[公告http://www.moa.gov.cn/gk/tzgg_1/gg/201209/t20120928_2952767.htm]
+
+
+## 网站分析
+
+### 可爬取性
+
+- 提供API参数化查询接口
+
+- json框架
+
+- 不需要登陆权限
+
+### 简单示例
+
+```{r}
+url_tar <- "http://202.127.42.47:6010/XKSite/Home/Index?str="
+knitr::include_url(url_tar)
+```
+
+
+
+参数集为：陕西省`610000`; 状态有效`isValid=1`；行数`rows=1000`
+
+<http://202.127.42.47:6010/XKSite/Home/GetLicenseList?LicenceNoLike=&ApplyCompanyNameLike=&ProductionManageCrops=&IssuingAuthorityRegionID=610000&PublishDateStart=&PublishDateEnd=&VarietyName=&_search=false&rows=1000&page=1&sidx=&sord=desc&InitialPublishDateStart=&InitialPublishDateEnd=&isValid=1>
+
+天津市 6条记录：<http://202.127.42.47:6010/XKSite/Home/GetLicenseList?LicenceNoLike=&ApplyCompanyNameLike=&ProductionManageCrops=&IssuingAuthorityRegionID=120000&PublishDateStart=&PublishDateEnd=&VarietyName=&_search=false&rows=20&page=1&sidx=&sord=desc&InitialPublishDateStart=&InitialPublishDateEnd=&isValid=>
+
+天津市 市辖区，没有数据：<http://202.127.42.47:6010/XKSite/Home/GetLicenseList?LicenceNoLike=&ApplyCompanyNameLike=&ProductionManageCrops=&IssuingAuthorityRegionID=120100&PublishDateStart=&PublishDateEnd=&VarietyName=&_search=false&rows=20&page=1&sidx=&sord=desc&InitialPublishDateStart=&InitialPublishDateEnd=&isValid=>
+
+获取数据集基本信息（行数rows）：`rows=0`表示没有数据。
+
+"152201" 乌兰浩特市
+
+### API参数
+
+```{r}
+### 构造查询参数----
+url_part1 <- "http://202.127.42.47:6010/XKSite/Home/GetLicenseList?LicenceNoLike=&ApplyCompanyNameLike=&ProductionManageCrops=&IssuingAuthorityRegionID="
+# query 2000 rows 
+url_part2 <- "&PublishDateStart=&PublishDateEnd=&VarietyName=&_search=false&rows=2000&page=1&sidx=&sord=desc&InitialPublishDateStart=&InitialPublishDateEnd=&isValid="
+
+```
+
+可供调用的API参数包括：
+
+- 申请企业：`ApplyCompanyNameLike`
+
+- 证书编号：`LicenceNoLike`
+
+- 作物种类：`ProductionManageCrops`
+
+- 品种名称：`VarietyName`
+
+- 发证日期：起始`PublishDateStart`；结束`PublishDateEnd`
+
+- 初次发证日期：起始`InitialPublishDateStart`；结束`InitialPublishDateEnd`
+
+
+- 区域（授权机构区域）：`IssuingAuthorityRegionID`
+
+
+
+## 爬取流程
+
+### 爬取策略
+
+（1）利用`Docker + RSelenium` 获取省、市、县区的名称和区划编码
+
+（2）通过API参数获取XHR下的json
+
+### 抓取步骤
+
+（1）区域参数抓取：主要是获得省份/市/区、县的ID列表。
+
+- R包准备
+
+- 启动和退出Rselenum（需要网络支持）
+
+- 获得API参数
+
+（2）正式爬取
+
+- 正式爬取json
+
+- 导出数据
+
+（3）对接项目`report-tech`
+
+爬取好后，将数据集拷贝到《旱区技术发展报告》R项目的文件夹目录下：
+
+- 当前对接："D:/github/report-tech/topic/public-site/moa-seed-firm/xlsx/tbl-json-{Year}.rds"
+
+- 历史对接："D:/github/tech-report/data-raw/public-site/moa-seed-firm/xlsx/tbl-json-{Year}.rds"
+
+

@@ -1,0 +1,223 @@
+---
+title: "育繁推一体化企业(种子经营许可证)"
+author: "胡华平"
+date: "`r Sys.Date()`"
+output:
+  bookdown::word_document2:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 4
+    reference_docx: report-reference.docx
+  bookdown::html_document2:
+    number_sections: yes
+    toc: no
+    fig_caption: yes
+    toc_float: yes
+always_allow_html: yes
+---
+
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE, eval = FALSE,
+                      fig.align='center',fig.width=10, fig.height=7) # Places figures on their own pages
+options(
+  htmltools.dir.version = FALSE, 
+  formatR.indent = 2, width = 55, 
+  digits = 2,scipen=999,tinytex.verbose = TRUE,
+  knitr.kable.NA = '',
+  fig.width=12, fig.height=8)
+
+```
+
+
+
+# 1.研究目标
+
+**企业名单**
+
+
+# 2.资料来源
+
+## 2.1 数据来源
+
+中国种业大数据平台，查询[地址](http://202.127.42.145/bigdataNew/)。种子生产经营许可。具备API查询功能！！！
+
+新《种子法》对种子生产经营许可管理制度作了重大调整，如实行生产经营“两证”合一、下放育繁推一体化许可审批、建立种子生产经营备案制度等。
+
+符合农业农村部规定条件、获得选育生产经营相结合许可证的种子企业就被称为“育繁推一体化种子企业”
+
+
+## 2.2 数据进度
+
+
+- 2022年01月21日 农作物种子生产经营许可管理[办法](http://www.moa.gov.cn/govpublic/CYZCFGS/202201/t20220128_6387889.htm) 
+
+- 2012-09-28 第三十四批发放《农作物种子经营许可证》企业名单 32家育繁推一体化企业《农作物种子经营许可证》[公告http://www.moa.gov.cn/gk/tzgg_1/gg/201209/t20120928_2952767.htm]
+
+
+## 异常提示
+
+## 网站分析
+
+- 提供API查询接口
+
+- json框架
+
+- 不需要登陆权限。
+
+# 3.抓取策略
+
+采用独立的Rstudio项目`github/scrape-agrifirm.Rproj`进行爬取和数据管理。
+
+- 爬取好后，将数据集拷贝到本项目（`github/tech-report.Rproj`）的文件夹目录下"D:/github/tech-report/data-raw/public-site/moa-seed-firm/xlsx/tbl-json-2023.rds"
+
+- 根据需要可一年爬取一次
+
+具体策略为：
+
+（1）利用`Docker + RSelenium` 获取省、市、县区的名称和区划编码
+
+（2）通过API参数获取XHR下的json
+
+# 4.数据清洗
+
+
+## 准备R包
+
+```{r}
+require(openxlsx)
+require("rvest")
+require("xml2")
+require("httr")
+require("stringr")
+require("tidyverse")
+require("tidyselect")
+require("here")
+library(lubridate)
+library(janitor)
+
+```
+
+## 读取rds文件
+
+```{r}
+# read rds
+file_path <- here("data-raw/public-site/moa-seed-firm/xlsx/tbl-json-2023.rds")
+tbl_rds <- read_rds(file_path) %>%
+  unnest(dt) 
+```
+
+
+## 处理列格式
+
+```{r}
+date_valid <- lubridate::date("2022-12-31")
+vars_tar <- c('label', 'id', 'type',
+              'LicenceNo', 'ApplyCompanyName',
+              'PrinterProductionManageCrops',
+              'IssuingAuthorityCaption',
+              'InitialPublishDate', 'PublishDate', 
+              'ExpireDate','licence_type')
+tbl_clean <- tbl_rds %>%
+  # clean and filter Licence NO
+  mutate(LicenceNo =str_squish(LicenceNo)) %>%
+  mutate(licence_type = str_extract(LicenceNo, "(^[A-Z]{1,6})") ) %>%
+  #filter(is.na(license_type)) # for check
+  filter(str_detect(licence_type, "A")) %>%
+  # date handling
+  mutate_at(vars(ends_with("Date")),
+            .funs = lubridate::as_date) %>%
+  # 证书有效日期截止
+  filter(ExpireDate > date_valid) %>%
+  select(all_of(vars_tar) ) 
+```
+
+## 处理证书重复行
+
+```{r}
+# 重复情形1：处理证书编号和企业名重复的行，
+## 表明证书过期换领，但是证书编号不便，只是更新有效期
+## 但是有效期还是大于报告日期`date_valid`
+tbl_dup <- tbl_clean %>%  
+  mutate(index = 1:nrow(.)) %>%
+  janitor::get_dupes(LicenceNo, ApplyCompanyName) 
+## 找到重复行里，有效日期最大的行，确定其行序号。
+index_dup <- tbl_dup %>%
+  group_by(LicenceNo) %>%
+  slice_max(ExpireDate) %>% #有效日期最大
+  ungroup() %>%
+  select(index) %>%
+  unlist() %>%
+  unname()
+## 第一次剔除
+tbl_unique <- tbl_clean %>%
+  .[-index_dup,] 
+
+# 重复情形2：证书编号不同，但企业名称和产品名称重复，，
+## 表明证书过期“重新申请”并且重新给了证书编号
+## 但是有效期还是大于报告日期`date_valid`
+tbl_dup2 <- tbl_unique %>%  
+  mutate(index = 1:nrow(.)) %>%
+  janitor::get_dupes(
+    PrinterProductionManageCrops,
+    ApplyCompanyName) 
+## 找到重复行里，有效日期最大的行，确定其行序号。
+index_dup2 <- tbl_dup2 %>%
+  group_by(ApplyCompanyName) %>%
+  slice_max(ExpireDate) %>% #有效日期最大
+  ungroup() %>%
+  select(index) %>%
+  unlist() %>%
+  unname()
+## 第二次剔除
+tbl_unique <- tbl_unique %>%
+  .[-index_dup2,] 
+
+```
+
+## 匹配省区信息
+
+```{r}
+# obtain the province info
+require(techme)
+data("BasicProvince")
+data("ProvinceCity")
+ptn_province <- paste0(BasicProvince$province, collapse = "|")
+ptn_city <- paste0(unique(ProvinceCity$city_clean), collapse = "|")
+
+tbl_info <-  tbl_unique %>%
+  mutate(province_name = str_extract(label, ptn_province),
+         city_clean= str_extract(label, ptn_city)) %>%
+  # match
+  left_join(., select(ProvinceCity, city_clean, province_clean), by = "city_clean") %>%
+  mutate(province = ifelse(is.na(province_name),
+                           province_clean,
+                           province_name)) %>%
+  # special case
+  mutate(
+    province = ifelse(
+      is.na(province) & label=="杨陵市",
+      "陕西",
+      province
+      )
+  ) %>%
+  select(province, all_of(vars_tar))
+
+# check
+check <- sum(is.na(tbl_info$province))
+if (check >0) warning("Povince with NA, please check!")
+
+```
+
+## 导出到data-update/文件夹
+
+```{r}
+date_upto <- "2022-12-31"
+dir_path <- here::here("data-raw","public-site","moa-seed-firm","data-update")
+(path_out <- paste0(dir_path, "/list-seedfirm-upto-", date_upto, ".rds"))
+
+write_rds(tbl_info, path_out)
+```
+
+
+

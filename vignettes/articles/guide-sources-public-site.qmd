@@ -1572,42 +1572,91 @@ fs::dir_tree(dir_tar)
 
 ### 数据说明
 
-更新状态：update
+更新状态：updated
 
-数据使用：`report-tech/`
+数据使用：`techme::PubSeedFirm` (2025年及以后)
 
 数据来源：中国种业大数据平台/农作物种子管理集成平台/生产经营许可证查询。查询地址（<http://202.127.42.47:6010/XKSite/Home/Index>）。种子生产经营许可。具备API查询功能，根据需要可一年爬取一次。
 
 统计类别：
 
-- 育繁推一体化种子企业
+- 育繁推一体化种子企业，旱区省份企业名单
 
 统计口径：
 
 - 通过API参数获取XHR下的json。
 
 
+### 数据集展示
+
+(1)数据抓取，执行R代码文件`data-raw/public-site/moa-seed-firm/code-01-scrape-seed-firm.R`。产生抓取参数数据的`xlsx`文件，以及全部育繁推企业的`.rds`数据文件。
+
+(2)数据整理，执行R代码文件`data-raw/public-site/moa-seed-firm/code-02-clean-seed-firm.R`。产生`data-raw/data-tidy/public-site/moa-seed-firm/data/`目录下的年度`.rds`文件。
+
+(3)数据发布，执行R代码文件`data-raw/public-site/moa-seed-firm/wfl-PubSeedFirm.R`。
+
+```{r}
+techme::PubSeedFirm %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = TRUE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+
 ### 文件管理
 
-历史项目：
-
-- 采用独立的Rstudio项目`github/scrape-agrifirm`进行爬取
 
 当前项目：
 
-- 数据抓取，迁移到`web-scrape/proj/moa-seed-firm`项目下）
+- 2025年，网站数据抓取迁移`techme`项目`data-raw/public-site/moa-seed-firm`下
+
 
 ```{r}
-dir_tar <- "d:/github/web-scrape/proj/moa-seed-firm"
-fs::dir_tree(dir_tar, recurse = FALSE)
-```
-
-- 数据传递，复制数据文件到本项目下
-
-```{r}
-dir_tar <- here("topic/public-site/moa-seed-firm")
+dir_tar <- here("data-raw/public-site/moa-seed-firm")
 fs::dir_tree(dir_tar)
 ```
+
+历史项目：
+ 
+- 2024年，网站数据抓取迁移到统一的网站抓取项目`web-scrape/proj/moa-seed-firm`下
+
+- 2024年以前，采用独立的Rstudio项目`github/scrape-agrifirm`进行爬取
+
+```{r}
+dir_tar <- here::here("data-raw/public-site/moa-seed-firm/")
+fs::dir_tree(dir_tar, recurse = TRUE)
+```
+
+### 背景知识
+
+（1）育繁推一体化企业，是指具有育种、繁殖、推广一体化经营能力的种子企业。
+
+（2）数据集`techme::PubSeedFirm`，仅包含旱区省份的育繁推一体化企业名单。原始数据中包含了全部省份的育繁推一体化企业名单。可以用于后续整理和分析。
+
+
+（3）育繁推企业的类别可以根据"PrinterProductionManageCrops"提供的产品信息进行分类。但是要注意针对具体产品进行人为整理划分为可供分析的大类。例如：
+
+```{r}
+# 
+ptn_raw <-c(
+  "玉米、鲜食、爆裂玉米", "鲜食玉米",
+  "杂交玉米", "玉米种子",
+  "马铃薯种薯", "杂交稻" 
+)
+ptn_clean <-c(
+  "玉米", "玉米",
+  "玉米", "玉米",
+  "马铃薯", "稻"
+)
+```
+
+
 
 ## 国家级种质资源库
 
