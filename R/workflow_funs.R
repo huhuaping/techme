@@ -873,7 +873,7 @@ wfl.tidyTable <- function(dt) {
             # handle cell contain both chn and eng names
             vars = stringr::str_replace_all(vars, "\\r\\n", "_"),
             vars = stringr::str_replace(vars, "(_[a-zA-Z].+)", ""),
-            vars = stringr::str_replace_all(vars, "_|,", ""),
+            vars = stringr::str_replace_all(vars, "_|,|-", ""),
             # handle newline break
             vars = mgsub::mgsub(
                 vars,
@@ -1359,6 +1359,7 @@ get.chnPattern <- function() {
         c("合计", "教育", "科学技术", "农林水"),
         "RDinner", c("经费内部支出"), c("合计"),
         "RDLaborHour", c("人员全时当量"), c("合计"),
+        "RDSource", c("内部支出","经费内部支出"), c("合计", "合计"),
         "RD",
         c("有研发机构的企业数", "有R&D活动的企业数"),
         c("有研发机构", "有RD活动"),
