@@ -335,6 +335,47 @@ techme::RDIntense %>%
   )
 ```
 
+
+## RD人员全时当量`RDLaborHour`
+
+（1）统计目标
+
+- 各地区RD人员全时当量（人年）
+
+### 初始数据文件
+
+初始数据文件（年鉴电子版，xls进行了重命名）
+```{r}
+dir_tar <- "data-raw/tech-yearbook/part01-over/01-labor-hour/"
+fs::dir_tree(dir_tar)
+```
+
+### 清洗后数据文件
+
+清洗后数据文件（标准化xlsx整理表格）
+
+```{r}
+dir_tar <- "data-raw/data-tidy/tech-yearbook/part01-over/01-labor-hour/"
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+```{r}
+techme::RDLaborHour %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+
+
 ## RD活动支出`RDActivity`
 
 ### 数据说明

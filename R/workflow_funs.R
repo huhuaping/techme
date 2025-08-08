@@ -733,8 +733,11 @@ wfl.unpivotXlsx <- function(
     if (!file.exists(file)) {
         stop("File does not exist: ", file)
     }
-    if (!header.mode %in% c("vars-year", "vars", "vars-vars", "year")) {
-        stop("'header.mode' must be one of: 'vars-year', 'vars', 'vars-vars', 'year'")
+    if (!header.mode %in% c(
+        "vars-year", "vars", "vars-vars", "year",
+        "vars-h3", "vars-h4", "vars-h5"
+    )) {
+        stop("'header.mode' must be one of: 'vars-year', 'vars', 'vars-vars', 'year', 'year-vars'")
     }
     if (header.mode == "year" && is.null(vars.add)) {
         stop("'vars.add' must be specified when header.mode is 'year'")
@@ -971,6 +974,10 @@ get.targetList <- function() {
             block1 = "v4", block2 = "ztr",
             block3 = c("jf", "qd")
         ),
+        v4_RDlabor = list(
+            block1 = "v4", block2 = "zh",
+            block3 = c("qsdl")
+        ),
         v4_RDinner = list(
             block1 = "v4", block2 = "zh",
             block3 = "nbzc"
@@ -1045,21 +1052,30 @@ get.targetList <- function() {
 
     # Interactive selection
     repeat {
-        choice <- readline(prompt = "\nEnter option number (1-21): ")
+        choice <- readline(prompt = paste0("\nEnter option number (0-", length(full_list), ") : "))
         choice <- as.integer(choice)
 
-        if (!is.na(choice) && choice >= 1 && choice <= length(full_list)) {
-            selected_name <- names(full_list)[choice]
-            selected_list <- full_list[[choice]]
-            cat(sprintf("\nSelected: %s\n", selected_name))
-            cat("Block identifiers:\n")
-            cat(paste(names(selected_list), selected_list, sep = ": ", collapse = "\n"), "\n")
-            return(selected_list)
+
+        if (!is.na(choice)) {
+            if (choice == 0) {
+                cat("\nReturning NULL as requested\n")
+                return(NULL)
+            } else if (choice >= 1 && choice <= length(full_list)) {
+                selected_name <- names(full_list)[choice]
+                selected_list <- full_list[[choice]]
+                cat(sprintf("\nSelected: %s\n", selected_name))
+                cat("Block identifiers:\n")
+                cat(paste(names(selected_list), selected_list, sep = ": ", collapse = "\n"), "\n")
+                return(selected_list)
+            } else {
+                cat("Invalid option, please try again\n")
+            }
         } else {
-            cat("Invalid option, please try again\n")
+            cat("Invalid input, please enter a number\n")
         }
     }
 }
+
 
 #' Get names from basic variables table
 #' @rdname workflow_funs_match_vars
@@ -1341,9 +1357,8 @@ get.chnPattern <- function() {
         "budget",
         c("地方一般公共预算支出", "教育支出", "科学技术支出", "农林水支出"),
         c("合计", "教育", "科学技术", "农林水"),
-        "RDinner",
-        c("经费内部支出"),
-        c("合计"),
+        "RDinner", c("经费内部支出"), c("合计"),
+        "RDLaborHour", c("人员全时当量"), c("合计"),
         "RD",
         c("有研发机构的企业数", "有R&D活动的企业数"),
         c("有研发机构", "有RD活动"),
@@ -1379,7 +1394,7 @@ get.chnPattern <- function() {
 
     # Interactive selection
     repeat {
-        choice <- readline(prompt = "\nEnter option number (0-14): ")
+        choice <- readline(prompt = paste0("\nEnter option number (0-", nrow(tbl_pattern), ") : "))
         choice <- as.integer(choice)
 
         if (!is.na(choice)) {
@@ -1637,6 +1652,8 @@ choose.nameData <- function() {
         ## yearbook technology
         "RDIntense", # public site
         "RDActivity",
+        "RDSource",
+        "RDLaborHour",
         "MarketPull",
         "MarketPush",
         "HitechFirmsPub", # 10
