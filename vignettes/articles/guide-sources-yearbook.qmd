@@ -437,6 +437,8 @@ dir_tar <- "data-raw/tech-yearbook/part01-over/03-spend-inner/02-source"
 fs::dir_tree(dir_tar)
 ```
 
+### 清洗后数据文件
+
 清洗后数据文件（标准化xlsx整理表格）
 
 ```{r}
@@ -460,8 +462,132 @@ techme::RDSource %>%
 ```
 
 
+## 专利申请`RDPatentAccept`
+
+### 数据说明
+
+（1）统计目标
+
+- 国内三种专利申请受理数按地区分布
+
+### 初始数据文件
+
+初始数据文件（年鉴电子版，xls进行了重命名）
+
+```{r}
+dir_tar <- "data-raw/tech-yearbook/part08-output/01-patent/01-accept/"
+fs::dir_tree(dir_tar)
+```
+
 ### 清洗后数据文件
 
+清洗后数据文件（标准化xlsx整理表格）
+
+```{r}
+dir_tar <- "data-raw/data-tidy/tech-yearbook/part08-output/01-patent/01-accept/"
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+```{r}
+techme::RDPatentAccept %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+
+
+## 专利授权`RDPatentAuthority`
+
+### 数据说明
+
+（1）统计目标
+
+- 国内三种专利申请授权数按地区分布
+
+### 初始数据文件
+
+初始数据文件（年鉴电子版，xls进行了重命名）
+
+```{r}
+dir_tar <- "data-raw/tech-yearbook/part08-output/01-patent/02-authority/"
+fs::dir_tree(dir_tar)
+```
+
+### 清洗后数据文件
+
+清洗后数据文件（标准化xlsx整理表格）
+
+```{r}
+dir_tar <- "data-raw/data-tidy/tech-yearbook/part08-output/01-patent/02-authority/"
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+```{r}
+techme::RDPatentAuthority %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+
+
+## 专利有效`RDPatentValid`
+
+### 数据说明
+
+（1）统计目标
+
+- 国内三种专利有效数按地区分布
+
+### 初始数据文件
+
+初始数据文件（年鉴电子版，xls进行了重命名）
+
+```{r}
+dir_tar <- "data-raw/tech-yearbook/part08-output/01-patent/03-valid/"
+fs::dir_tree(dir_tar)
+```
+
+### 清洗后数据文件
+
+清洗后数据文件（标准化xlsx整理表格）
+
+```{r}
+dir_tar <- "data-raw/data-tidy/tech-yearbook/part08-output/01-patent/03-valid/"
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+```{r}
+techme::RDPatentValid %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
 
 
 ## 国家高新技术企业`IndustryOperation`

@@ -105,6 +105,9 @@ create.dirTable <- function() {
             "01-patent", "02-enrollmark",
             "03-teckmarket-pull", "04-teckmarket-push"
         ),
+        "RD_output_patent",
+        "data-raw/tech-yearbook/part08-output/01-patent/",
+        c("01-accept", "02-authority", "03-valid"),
         "livestock",
         "data-raw/livestock-yearbook/",
         c("02-breeding")
@@ -1006,6 +1009,18 @@ get.targetList <- function() {
             block1 = "v4", block2 = "cy",
             block3 = c("RDhd", "xcp", "qyzl", "jsgz")
         ),
+        v4_PatentAccept = list(
+            block1 = "v4", block2 = "cg",
+            block3 = "zlsq"
+        ),
+        v4_PatentAuthority = list(
+            block1 = "v4", block2 = "cg",
+            block3 = "zlsq2"
+        ),
+        v4_PatentValid = list(
+            block1 = "v4", block2 = "cg",
+            block3 = "zlyx"
+        ),
         v8_livestock_t1 = list(
             block1 = "v8", block2 = "t1",
             block3 = c("zcqc")
@@ -1359,7 +1374,7 @@ get.chnPattern <- function() {
         c("合计", "教育", "科学技术", "农林水"),
         "RDinner", c("经费内部支出"), c("合计"),
         "RDLaborHour", c("人员全时当量"), c("合计"),
-        "RDSource", c("内部支出","经费内部支出"), c("合计", "合计"),
+        "RDSource", c("内部支出", "经费内部支出"), c("合计", "合计"),
         "RD",
         c("有研发机构的企业数", "有R&D活动的企业数"),
         c("有研发机构", "有RD活动"),
@@ -1655,6 +1670,9 @@ choose.nameData <- function() {
         "RDActivity",
         "RDSource",
         "RDLaborHour",
+        "RDPatentAccept",
+        "RDPatentAuthority",
+        "RDPatentValid",
         "MarketPull",
         "MarketPush",
         "HitechFirmsPub", # 10
