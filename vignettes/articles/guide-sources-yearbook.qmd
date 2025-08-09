@@ -590,6 +590,89 @@ techme::RDPatentValid %>%
 ```
 
 
+## 论文国际引用`RDPaperInternational`
+
+### 数据说明
+
+（1）统计目标
+
+- 国外主要检索工具收录我国科技论文按地区分布
+
+### 初始数据文件
+
+初始数据文件（年鉴电子版，xls进行了重命名）
+
+```{r}
+dir_tar <- "data-raw/tech-yearbook/part08-output/05-paper-international/"
+fs::dir_tree(dir_tar)
+```
+
+### 清洗后数据文件
+
+清洗后数据文件（标准化xlsx整理表格）
+
+```{r}
+dir_tar <- "data-raw/data-tidy/tech-yearbook/part08-output/05-paper-international/"
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+```{r}
+techme::RDPaperInternational %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+
+## 植物新品种`RDPlantVariety`
+
+### 数据说明
+
+（1）统计目标
+
+- 农业植物新品种权申请和授权数量（按省份地区分布）
+
+### 初始数据文件
+
+初始数据文件（年鉴电子版，xls进行了重命名）
+
+```{r}
+dir_tar <- "data-raw/tech-yearbook/part08-output/06-plant-variety/"
+fs::dir_tree(dir_tar)
+```
+
+### 清洗后数据文件
+
+清洗后数据文件（标准化xlsx整理表格）
+
+```{r}
+dir_tar <- "data-raw/data-tidy/tech-yearbook/part08-output/06-plant-variety/"
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+```{r}
+techme::RDPlantVariety %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
 ## 国家高新技术企业`IndustryOperation`
 
 ### 数据说明

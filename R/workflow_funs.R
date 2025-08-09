@@ -103,7 +103,7 @@ create.dirTable <- function() {
         "data-raw/tech-yearbook/part08-output/",
         c(
             "01-patent", "02-enrollmark",
-            "03-teckmarket-pull", "04-teckmarket-push"
+            "03-teckmarket-pull", "04-teckmarket-push", "05-paper-international"
         ),
         "RD_output_patent",
         "data-raw/tech-yearbook/part08-output/01-patent/",
@@ -868,6 +868,7 @@ wfl.tidyTable <- function(dt) {
         ) %>%
         dplyr::mutate(
             province = stringr::str_replace(province, " ", ""),
+            province = stringr::str_replace(province, "\\s{1,99}", ""), # remove all visual blank space
             province = stringr::str_replace(province, "\u5730\u65b9\u5408\u8ba1", "\u5168\u56fd") # total of province, total of nation
         ) %>%
         dplyr::filter(!stringr::str_detect(province, "\u4e1c\u90e8|\u4e2d\u90e8|\u897f\u90e8|\u4e1c\u5317")) %>% # east|middle|west|northeast
@@ -1020,6 +1021,10 @@ get.targetList <- function() {
         v4_PatentValid = list(
             block1 = "v4", block2 = "cg",
             block3 = "zlyx"
+        ),
+        v4_PaperInternational = list(
+            block1 = "v4", block2 = "cg",
+            block3 = "gwlw"
         ),
         v8_livestock_t1 = list(
             block1 = "v8", block2 = "t1",
@@ -1673,6 +1678,7 @@ choose.nameData <- function() {
         "RDPatentAccept",
         "RDPatentAuthority",
         "RDPatentValid",
+        "RDPaperInternational",
         "MarketPull",
         "MarketPush",
         "HitechFirmsPub", # 10
