@@ -13,7 +13,7 @@ tbl_dir <- create.dirTable()
 ## use the helper function `choose.filePattern()` to generate the pattern
 prefix_add <- "funds" # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
 pattern_sel <- choose.filePattern(
-    year = c(2022), # may have length 1 or 2
+    year = c(2010), # may have length 1 or 2
     mode = "year_one", # must be one of the following: year_one, year_two, year_onex, year_twox, add_onex, add_one, edited_one, edited_two
     add_info = prefix_add # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
 )
@@ -22,7 +22,7 @@ pattern_sel <- choose.filePattern(
 find_result <- wfl.findFiles(
     dt = tbl_dir, # the directory table
     dir.case = "RD_output", # the case name of the target directory
-    i.final = 5, # the index of the final subdirectory
+    i.final = 6, # the index of the final subdirectory
     pattern = pattern_sel # the regex pattern for table identifier
 )
 
@@ -31,7 +31,7 @@ find_result <- wfl.findFiles(
 
 # Workflow: convert protected xls file to xlsx file----
 ## it should remove the unnecessary sheet (copyright or empty, or other sheet not needed).
-is.unprotected <- FALSE
+is.unprotected <- TRUE
 if (!is.unprotected) {
     ## the default is to remove the sheet named "CNKI"
     file_xlsx <- wfl.Xls2Xlsx(file_path = file_tar, sheet_drop = c("CNKI"))
@@ -128,7 +128,7 @@ df_tidy <- wfl.tidyTable(dt = df_out) %>%
 ##   - there may be useful english words in the variables names, such as "RD经费"
 ##   - so we need to be careful
 
-is_english <- FALSE # default is TRUE, if FALSE, not replace the variables names
+is_english <- TRUE # default is TRUE, if FALSE, not replace the variables names
 if (is_english) {
     df_tidy <- df_tidy %>%
         mutate(
@@ -206,7 +206,7 @@ View(df_add_vars)
 wfl.writeXlsx(
     dt = df_add_vars,
     file_source = file_xlsx,
-    year_target = c(2022), # filter data by year
+    year_target = c(2010), # filter data by year
     prefix_label = NULL # prefix_add # default is NULL, other value may be "funds", "ammount", etc.
 )
 

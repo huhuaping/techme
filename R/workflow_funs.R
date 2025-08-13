@@ -103,7 +103,8 @@ create.dirTable <- function() {
         "data-raw/tech-yearbook/part08-output/",
         c(
             "01-patent", "02-enrollmark",
-            "03-teckmarket-pull", "04-teckmarket-push", "05-paper-international"
+            "03-teckmarket-pull", "04-teckmarket-push",
+            "05-paper-international", "06-plant-variety"
         ),
         "RD_output_patent",
         "data-raw/tech-yearbook/part08-output/01-patent/",
@@ -1026,6 +1027,10 @@ get.targetList <- function() {
             block1 = "v4", block2 = "cg",
             block3 = "gwlw"
         ),
+        v4_PlantVariety = list(
+            block1 = "v4", block2 = "cg",
+            block3 = "zwxpz"
+        ),
         v8_livestock_t1 = list(
             block1 = "v8", block2 = "t1",
             block3 = c("zcqc")
@@ -1679,6 +1684,7 @@ choose.nameData <- function() {
         "RDPatentAuthority",
         "RDPatentValid",
         "RDPaperInternational",
+        "RDPlantVariety",
         "MarketPull",
         "MarketPush",
         "HitechFirmsPub", # 10
