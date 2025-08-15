@@ -1021,7 +1021,7 @@ get.targetList <- function() {
         ),
         v4_PatentValid = list(
             block1 = "v4", block2 = "cg",
-            block3 = "zlyx"
+            block3 = "zlsyx"
         ),
         v4_PaperInternational = list(
             block1 = "v4", block2 = "cg",
@@ -1834,7 +1834,7 @@ wfl.useData <- function(
                 }
                 message(glue::glue("Read file {files_sel[i]} has finished!"))
                 Sys.sleep(0.1)
-                df_use <- dplyr::bind_rows(df_use,  df_tem)
+                df_use <- dplyr::bind_rows(df_use, df_tem)
             },
             error = function(e) {
                 warning(glue::glue("Failed to read file {files_sel[i]}: {e$message}"))
