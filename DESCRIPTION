@@ -1,6 +1,6 @@
 Package: techme
 Title: Generate Research Report with Complex Data Sources
-Version: 0.1.2.9007
+Version: 0.1.2.9008
 Authors@R: 
     person(given = "Kevin",
            family = "Hu",

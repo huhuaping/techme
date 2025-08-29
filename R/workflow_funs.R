@@ -111,7 +111,10 @@ create.dirTable <- function() {
         c("01-accept", "02-authority", "03-valid"),
         "livestock",
         "data-raw/livestock-yearbook/",
-        c("02-breeding")
+        c("02-breeding"),
+        "machine_service",
+        "data-raw/agrimachine-yearbook/",
+        c("machine-service")
     )
     return(tbl_dir)
 }
@@ -1066,6 +1069,14 @@ get.targetList <- function() {
         v8_livestock_t9 = list(
             block1 = "v8", block2 = c("t9"),
             block3 = c("scpt", "scjy")
+        ),
+        v9_machine_service = list(
+            block1 = "v9", block2 = "t1",
+            block3 = c(
+                "fwzz", "zyhzs", "njh", "zyh", "zjfw", "njcyry", "njwx",
+                "cztr", "jstr", "gztr",
+                "zsr"
+            )
         )
     )
 
@@ -1693,6 +1704,8 @@ choose.nameData <- function() {
         "IndustryOperation",
         ## yearbook livestock
         "LivestockBreeding",
+        ## yearbook agri machine
+        "MachineService",
         ## MOST
         "PubNKRDP",
         "PubAgriParkList",
