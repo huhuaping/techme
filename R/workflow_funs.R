@@ -56,6 +56,7 @@ NULL
 #'
 #' @keywords internal
 #' @importFrom tibble tribble
+#' @export create.dirTable
 #'
 #' @examples
 #' \dontrun{
@@ -146,6 +147,7 @@ create.dirTable <- function() {
 #'
 #' @keywords internal
 #' @importFrom glue glue
+#' @export choose.filePattern
 #'
 #' @examples
 #' \dontrun{
@@ -229,6 +231,7 @@ choose.filePattern <- function(year, mode, add_info) {
 #'
 #' @return list of file paths and directory path
 #' @keywords internal
+#' @export wfl.findFiles
 #'
 #' @examples
 #' \dontrun{
@@ -296,6 +299,7 @@ wfl.findFiles <- function(dt, dir.case, i.final, pattern) {
 #' @importFrom stringr str_replace
 #' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
 #' @importFrom XLConnect loadWorkbook getSheets readWorksheet
+#' @export wfl.Xls2Xlsx
 #'
 #' @examples
 #' \dontrun{
@@ -381,8 +385,12 @@ NULL
 #' Note 1: there may be only one table or multiple tables in the sheet
 #' Note 2: when there are multiple tables, these table's alignment may be horizontal or vertical
 #' Note 3: We only assume the only multiple table's alignment is horizontal or vertical, not hybrid alignment.
-
 #' @rdname workflow_funs_unpivot_xlsx
+#' @importFrom magrittr %>%
+#' @importFrom rlang .data
+#' @importFrom glue glue
+#' @export getRange
+
 #' @param dt data.frame. Which is the wb object reading from xlsx file.
 #' @param ith number. when exist multiple table region in one sheet.
 #' @param what character. What is the object function will return, whether "row" or "col".
@@ -540,6 +548,7 @@ getRange <- function(dt, ith, what,
 #' @importFrom stringr str_extract
 #' @importFrom unpivotr as_cells behead
 #' @importFrom magrittr %>%
+#' @export unpivot
 #'
 #' @examples
 #' \dontrun{
@@ -647,6 +656,7 @@ unpivot <- function(dt, rows, cols,
 #' @importFrom stringr str_detect str_extract str_trim
 #' @importFrom unpivotr as_cells
 #' @importFrom magrittr %>%
+#' @export getInfo
 #'
 #' @examples
 #' \dontrun{
@@ -715,7 +725,7 @@ getInfo <- function(dt, unit_pattern) {
 #' @importFrom XLConnect loadWorkbook getSheets readWorksheet
 #' @importFrom magrittr %>%
 #' @importFrom glue glue
-#'
+#' @export wfl.unpivotXlsx
 #' @examples
 #' \dontrun{
 #' wfl.unpivot_xlsx(
@@ -848,6 +858,7 @@ wfl.unpivotXlsx <- function(
 #' @importFrom stringr str_extract str_replace str_replace_all str_trim str_detect
 #' @importFrom mgsub mgsub
 #' @importFrom magrittr %>%
+#' @export wfl.tidyTable
 #'
 #' @examples
 #' \dontrun{
@@ -948,6 +959,7 @@ NULL
 #'
 #' @keywords internal
 #' @importFrom glue glue
+#' @export get.targetList
 #'
 #' @examples
 #' \dontrun{
@@ -1148,6 +1160,7 @@ get.targetList <- function() {
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @importFrom glue glue
+#' @export get.vars
 #'
 #' @examples
 #' \dontrun{
@@ -1235,6 +1248,7 @@ get.vars <- function(df, lang = "eng", block, what = "variables") {
 #' @return character. The best matched word from charvec.
 #' @keywords internal
 #' @importFrom stringdist stringsim
+#' @export get.best.match
 #'
 #' @examples
 #' \dontrun{
@@ -1274,6 +1288,7 @@ get.best.match <- function(word, charvec) {
 #' @importFrom purrr map_chr
 #' @importFrom glue glue
 #' @importFrom magrittr %>%
+#' @export wfl.matchVars
 #'
 #' @examples
 #' \dontrun{
@@ -1376,6 +1391,7 @@ NULL
 #' @importFrom tibble tribble
 #' @importFrom magrittr %>%
 #' @importFrom glue glue
+#' @export get.chnPattern
 #'
 #' @examples
 #' \dontrun{
@@ -1479,6 +1495,7 @@ get.chnPattern <- function() {
 #' @importFrom dplyr mutate rename left_join select filter
 #' @importFrom mgsub mgsub
 #' @importFrom magrittr %>%
+#' @export wfl.addVars
 #'
 #' @examples
 #' \dontrun{
@@ -1547,6 +1564,7 @@ wfl.addVars <- function(dt_left, dt_right) {
 #' @importFrom openxlsx write.xlsx
 #' @importFrom glue glue
 #' @importFrom magrittr %>%
+#' @export wfl.writeXlsx
 #'
 #' @examples
 #' \dontrun{
@@ -1667,6 +1685,7 @@ NULL
 #' @param name.dt character. The name of the data frame.
 #' @return character or NULL. The selected data name from the list, or NULL if option 0 is selected.
 #' @keywords internal
+#' @export choose.nameData
 #'
 #' @examples
 #' \dontrun{
