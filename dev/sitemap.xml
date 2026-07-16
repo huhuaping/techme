@@ -20,6 +20,7 @@
 <url><loc>https://huhuaping.github.io/techme/dev/reference/IndustryRD.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/IndustryTrade.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/LivestockBreeding.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/dev/reference/MachineService.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/MarketPull.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/MarketPush.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/ProvinceCity.html</loc></url>
@@ -33,18 +34,28 @@
 <url><loc>https://huhuaping.github.io/techme/dev/reference/PubConvergenceCluster.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/PubConvergencePark.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/PubConvergenceTown.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/dev/reference/PubFirmLeader.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/PubFreshKeepCounty.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/PubGeneticResource.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/PubMachineCounty.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/PubNKRDP.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/PubObsStation.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/PubObsStationX.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/dev/reference/PubOpenShare.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/PubRuralInfoBase.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/PubSKLMost.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/dev/reference/PubSeedFirm.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/PubStandardXmj.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/PublicBudget.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/RDActivity.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/RDIntense.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/dev/reference/RDLaborHour.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/dev/reference/RDPaperInternational.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/dev/reference/RDPatentAccept.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/dev/reference/RDPatentAuthority.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/dev/reference/RDPatentValid.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/dev/reference/RDPlantVariety.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/dev/reference/RDSource.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/add_footer_asis.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/add_footer_pure.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/convert_xls_as_xlsx.html</loc></url>
@@ -70,5 +81,6 @@
 <url><loc>https://huhuaping.github.io/techme/dev/reference/workflow_funs_match_vars.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/workflow_funs_unpivot_xlsx.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/dev/reference/workflow_funs_use_data.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/dev/reference/workflow_pub_site.html</loc></url>
 </urlset>
 
