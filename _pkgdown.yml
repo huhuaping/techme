@@ -4,11 +4,6 @@ template:
 lang: zh_CN
 development:
   mode: auto
-articles:
-- title: Articles
-  contents:
-  - my-vignette
-  - articles/queryTianyancha
 reference:
 - title: Data Subset from the Agriculture Yearbook
   desc: |
