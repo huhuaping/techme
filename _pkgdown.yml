@@ -81,10 +81,13 @@ reference:
   - add_footer_asis
   - add_footer_pure
   - convert_xls_as_xlsx
+  - convert_xls_to_xlsx
+  - delete_registry
   - document_dt
   - gen_dirs_vec
   - get_excelcnv_exe
   - get_province_of_institution
   - get_vars
   - gg2xlsx
+  - safe_office_folder
 
