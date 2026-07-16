@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Techme数据集 • techme</title>
+<title>02-Techme数据集 • techme</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Techme数据集">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="02-Techme数据集">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">techme</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.2.9008</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,8 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/my-vignette.html">Techme数据集</a></li>
+<li><a class="dropdown-item" href="../articles/my-vignette.html">02-Techme数据集</a></li>
+    <li><a class="dropdown-item" href="../articles/pkg-design.html">01-Techme包设计</a></li>
     <li><a class="dropdown-item" href="../articles/queryTianyancha.html">机构信息库</a></li>
   </ul>
 </li>
@@ -56,10 +57,10 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Techme数据集</h1>
+      <h1>02-Techme数据集</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/huhuaping/techme/blob/master/vignettes/my-vignette.Rmd" class="external-link"><code>vignettes/my-vignette.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/huhuaping/techme/blob/main/vignettes/my-vignette.Rmd" class="external-link"><code>vignettes/my-vignette.Rmd</code></a></small>
       <div class="d-none name"><code>my-vignette.Rmd</code></div>
     </div>
 
@@ -105,29 +106,29 @@ etc., with wide data format.</p>
 <li><p>Totally 16 columns including: variables, chn_full_name,
 short_chn, short_eng, units, block1, block2, block3, block4, chn_block1,
 chn_block2, chn_block3, chn_block4, chn_full, flag, source.</p></li>
-<li><p>Totally 616 rows.</p></li>
+<li><p>Totally 657 rows.</p></li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">varsList</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">kable</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
 <col width="9%">
-<col width="11%">
+<col width="9%">
 <col width="4%">
-<col width="3%">
+<col width="4%">
 <col width="2%">
 <col width="2%">
 <col width="2%">
 <col width="2%">
 <col width="5%">
+<col width="5%">
 <col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="11%">
-<col width="21%">
-<col width="2%">
+<col width="5%">
+<col width="9%">
+<col width="20%">
+<col width="3%">
 <col width="6%">
 </colgroup>
 <thead><tr class="header">
@@ -168,38 +169,38 @@ chn_block2, chn_block3, chn_block4, chn_full, flag, source.</p></li>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
-<td align="left">v4_tzqk_sl_jcxm</td>
-<td align="left">产业投资_全部建成投产项目数</td>
+<td align="left">v4_jyqk_ck_jhz</td>
+<td align="left">经营情况_出口交货值</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
-<td align="left">项</td>
+<td align="left">亿元</td>
 <td align="left">v4</td>
-<td align="left">tzqk</td>
-<td align="left">sl</td>
-<td align="left">jcxm</td>
+<td align="left">jyqk</td>
+<td align="left">ck</td>
+<td align="left">jhz</td>
 <td align="left">科技</td>
-<td align="left">投资情况</td>
-<td align="left">数量</td>
-<td align="left">产业投资_全部建成投产项目数</td>
-<td align="left">科技;投资情况;数量;产业投资_全部建成投产项目数</td>
+<td align="left">经营情况</td>
+<td align="left">出口</td>
+<td align="left">出口交货值</td>
+<td align="left">科技;经营情况;出口;出口交货值</td>
 <td align="left">v2018.6</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
-<td align="left">v5_xmxy_sl_gstj_njdl</td>
-<td align="left">改善农业生产条件_新增农机总动力</td>
+<td align="left">v5_xmtz_jf_industry_yhdk</td>
+<td align="left">产业化经营项目_银行贷款</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
-<td align="left">千瓦</td>
+<td align="left">万元</td>
 <td align="left">v5</td>
-<td align="left">xmxy</td>
-<td align="left">sl</td>
-<td align="left">gstj_njdl</td>
+<td align="left">xmtz</td>
+<td align="left">jf</td>
+<td align="left">industry_yhdk</td>
 <td align="left">农业综合开发</td>
-<td align="left">项目效益</td>
-<td align="left">数量</td>
-<td align="left">改善农业生产条件_新增农机总动力</td>
-<td align="left">农业综合开发;项目效益_数量;改善农业生产条件_新增农机总动力</td>
+<td align="left">项目投资</td>
+<td align="left">经费</td>
+<td align="left">产业化经营项目_银行贷款</td>
+<td align="left">农业综合开发;项目投资_经费;产业化经营项目_银行贷款</td>
 <td align="left">v2018.6</td>
 <td align="left">NA</td>
 </tr>
@@ -222,56 +223,56 @@ chn_block2, chn_block3, chn_block4, chn_full, flag, source.</p></li>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
-<td align="left">v7_sctj_nybm_dmsy</td>
+<td align="left">v6_cz_yszc_nls</td>
 <td align="left">NA</td>
-<td align="left">地膜使用量</td>
-<td align="left">mulch</td>
-<td align="left">吨</td>
-<td align="left">v7</td>
-<td align="left">sctj</td>
-<td align="left">nybm</td>
-<td align="left">dmsy</td>
-<td align="left">农村统计年鉴</td>
-<td align="left">生产条件</td>
-<td align="left">农用薄膜</td>
-<td align="left">地膜使用量</td>
+<td align="left">农林水支出</td>
+<td align="left">agriculture</td>
+<td align="left">亿元</td>
+<td align="left">v6</td>
+<td align="left">cz</td>
+<td align="left">yszc</td>
+<td align="left">nls</td>
+<td align="left">国家统计年鉴</td>
+<td align="left">财政</td>
+<td align="left">预算支出</td>
+<td align="left">农林水</td>
 <td align="left">NA</td>
 <td align="left">v2019.8</td>
-<td align="left">中国农村统计年鉴</td>
+<td align="left">中国统计年鉴</td>
 </tr>
 <tr class="even">
-<td align="left">v8_t7_cczcq_znnc1</td>
+<td align="left">v8_t5_nmcl_zyc</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
-<td align="left">头</td>
+<td align="left">只</td>
 <td align="left">v8</td>
-<td align="left">t7</td>
-<td align="left">cczcq</td>
-<td align="left">znnc1</td>
+<td align="left">t5</td>
+<td align="left">nmcl</td>
+<td align="left">zyc</td>
 <td align="left">种畜禽场站</td>
-<td align="left">表7</td>
-<td align="left">出场种畜禽</td>
-<td align="left">种乳牛场</td>
+<td align="left">表5</td>
+<td align="left">年末存栏</td>
+<td align="left">种鸭场</td>
 <td align="left">NA</td>
 <td align="left">v2021.8</td>
 <td align="left">中国畜牧兽医年鉴</td>
 </tr>
 <tr class="odd">
-<td align="left">v5_rwwc_mj_industry_yzmj</td>
-<td align="left">产业化经营项目_水产养殖面积</td>
+<td align="left">v5_zjtr_jf_yhdk</td>
+<td align="left">银行贷款</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
-<td align="left">万亩</td>
+<td align="left">万元</td>
 <td align="left">v5</td>
-<td align="left">rwwc</td>
-<td align="left">mj</td>
-<td align="left">industry_yzmj</td>
+<td align="left">zjtr</td>
+<td align="left">jf</td>
+<td align="left">yhdk</td>
 <td align="left">农业综合开发</td>
-<td align="left">任务完成</td>
-<td align="left">面积</td>
-<td align="left">产业化经营项目_水产养殖面积</td>
-<td align="left">农业综合开发;任务完成_面积;产业化经营项目_水产养殖面积</td>
+<td align="left">资金投入</td>
+<td align="left">经费</td>
+<td align="left">银行贷款</td>
+<td align="left">农业综合开发;资金投入_经费;银行贷款</td>
 <td align="left">v2018.6</td>
 <td align="left">NA</td>
 </tr>
@@ -312,19 +313,19 @@ chn_block2, chn_block3, chn_block4, chn_full, flag, source.</p></li>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
-<td align="left">v8_t3_zcqc_zgyz</td>
+<td align="left">v8_t1_zcqc_zmc</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">个</td>
 <td align="left">v8</td>
-<td align="left">t3</td>
+<td align="left">t1</td>
 <td align="left">zcqc</td>
-<td align="left">zgyz</td>
+<td align="left">zmc</td>
 <td align="left">种畜禽场站</td>
-<td align="left">表3</td>
+<td align="left">表1</td>
 <td align="left">种畜禽厂</td>
-<td align="left">种公羊站</td>
+<td align="left">种马场</td>
 <td align="left">NA</td>
 <td align="left">v2021.8</td>
 <td align="left">中国畜牧兽医年鉴</td>
@@ -687,8 +688,8 @@ format</strong> data set containing Agricultural Machine statistics
 <ul>
 <li><p>Totally 6 columns including: province, year, chn_block4, value,
 units, variables.</p></li>
-<li><p>Totally 5440 rows.</p></li>
-<li><p>Years range from 2010 to 2022</p></li>
+<li><p>Totally 5792 rows.</p></li>
+<li><p>Years range from 2010 to 2023</p></li>
 <li><p>Variables including: v7_sctj_nyjx_dztlj, v7_sctj_nyjx_dztlj_pt,
 v7_sctj_nyjx_jbmj, v7_sctj_nyjx_jdtlj, v7_sctj_nyjx_jgmj,
 v7_sctj_nyjx_jsgg, v7_sctj_nyjx_jsmj, v7_sctj_nyjx_lhshj,
@@ -699,14 +700,14 @@ v7_sctj_nyjx_xtlj, v7_sctj_nyjx_xtlj_pt, v7_sctj_nyjx_zdl</p></li>
 <code class="sourceCode R"><span><span class="va">AgriMachine</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">kable</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
 <col width="12%">
 <col width="6%">
 <col width="28%">
-<col width="13%">
+<col width="12%">
 <col width="9%">
-<col width="29%">
+<col width="30%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">province</th>
@@ -719,83 +720,83 @@ v7_sctj_nyjx_xtlj, v7_sctj_nyjx_xtlj_pt, v7_sctj_nyjx_zdl</p></li>
 <tbody>
 <tr class="odd">
 <td align="left">山东</td>
-<td align="left">2017</td>
-<td align="left">机收面积</td>
-<td align="right">7872.0000</td>
-<td align="left">千公顷</td>
-<td align="left">v7_sctj_nyjx_jsmj</td>
+<td align="left">2018</td>
+<td align="left">农用排灌柴油机</td>
+<td align="right">NA</td>
+<td align="left">万台</td>
+<td align="left">v7_sctj_nyjx_pgcyj</td>
 </tr>
 <tr class="even">
 <td align="left">安徽</td>
-<td align="left">2017</td>
-<td align="left">机播面积</td>
-<td align="right">5505.3000</td>
-<td align="left">千公顷</td>
-<td align="left">v7_sctj_nyjx_jbmj</td>
-</tr>
-<tr class="odd">
-<td align="left">广西</td>
-<td align="left">2010</td>
-<td align="left">机收面积</td>
-<td align="right">NA</td>
-<td align="left">千公顷</td>
-<td align="left">v7_sctj_nyjx_jsmj</td>
-</tr>
-<tr class="even">
-<td align="left">宁夏</td>
-<td align="left">2012</td>
+<td align="left">2018</td>
 <td align="left">节水灌溉类机械</td>
-<td align="right">0.5300</td>
+<td align="right">21.2000</td>
 <td align="left">万套</td>
 <td align="left">v7_sctj_nyjx_jsgg</td>
 </tr>
 <tr class="odd">
-<td align="left">安徽</td>
+<td align="left">广西</td>
 <td align="left">2011</td>
-<td align="left">小型拖拉机配套农具</td>
-<td align="right">537.4702</td>
-<td align="left">万部</td>
-<td align="left">v7_sctj_nyjx_xtlj_pt</td>
+<td align="left">农用排灌柴油机</td>
+<td align="right">50.4347</td>
+<td align="left">万台</td>
+<td align="left">v7_sctj_nyjx_pgcyj</td>
 </tr>
 <tr class="even">
-<td align="left">上海</td>
-<td align="left">2018</td>
-<td align="left">机耕面积</td>
-<td align="right">280.1000</td>
-<td align="left">千公顷</td>
-<td align="left">v7_sctj_nyjx_jgmj</td>
-</tr>
-<tr class="odd">
-<td align="left">江苏</td>
-<td align="left">2011</td>
-<td align="left">大中型拖拉机配套农具</td>
-<td align="right">19.1700</td>
-<td align="left">万部</td>
-<td align="left">v7_sctj_nyjx_dztlj_pt</td>
-</tr>
-<tr class="even">
-<td align="left">海南</td>
-<td align="left">2012</td>
+<td align="left">宁夏</td>
+<td align="left">2013</td>
 <td align="left">农用水泵</td>
-<td align="right">18.4700</td>
+<td align="right">4.1200</td>
 <td align="left">万台</td>
 <td align="left">v7_sctj_nyjx_nysb</td>
 </tr>
 <tr class="odd">
 <td align="left">安徽</td>
 <td align="left">2011</td>
-<td align="left">联合收获机</td>
-<td align="right">11.8047</td>
-<td align="left">万台</td>
-<td align="left">v7_sctj_nyjx_lhshj</td>
+<td align="left">大中型拖拉机配套农具</td>
+<td align="right">27.6958</td>
+<td align="left">万部</td>
+<td align="left">v7_sctj_nyjx_dztlj_pt</td>
 </tr>
 <tr class="even">
-<td align="left">重庆</td>
-<td align="left">2015</td>
-<td align="left">大中型拖拉机</td>
-<td align="right">0.4100</td>
+<td align="left">贵州</td>
+<td align="left">2019</td>
+<td align="left">农用水泵</td>
+<td align="right">61.8000</td>
 <td align="left">万台</td>
-<td align="left">v7_sctj_nyjx_dztlj</td>
+<td align="left">v7_sctj_nyjx_nysb</td>
+</tr>
+<tr class="odd">
+<td align="left">江苏</td>
+<td align="left">2012</td>
+<td align="left">机耕面积</td>
+<td align="right">NA</td>
+<td align="left">千公顷</td>
+<td align="left">v7_sctj_nyjx_jgmj</td>
+</tr>
+<tr class="even">
+<td align="left">内蒙古</td>
+<td align="left">2010</td>
+<td align="left">农用水泵</td>
+<td align="right">35.9600</td>
+<td align="left">万台</td>
+<td align="left">v7_sctj_nyjx_nysb</td>
+</tr>
+<tr class="odd">
+<td align="left">海南</td>
+<td align="left">2013</td>
+<td align="left">小型拖拉机</td>
+<td align="right">5.2700</td>
+<td align="left">万台</td>
+<td align="left">v7_sctj_nyjx_xtlj</td>
+</tr>
+<tr class="even">
+<td align="left">安徽</td>
+<td align="left">2012</td>
+<td align="left">农用排灌电动机</td>
+<td align="right">114.2300</td>
+<td align="left">万台</td>
+<td align="left">v7_sctj_nyjx_pgddj</td>
 </tr>
 </tbody>
 </table>
@@ -809,8 +810,8 @@ format</strong> data set containing Agricultural Fertilizer statistics
 <ul>
 <li><p>Totally 6 columns including: province, year, chn_block4, value,
 units, variables.</p></li>
-<li><p>Totally 928 rows.</p></li>
-<li><p>Years range from 2010 to 2022</p></li>
+<li><p>Totally 1088 rows.</p></li>
+<li><p>Years range from 2010 to 2023</p></li>
 <li><p>Variables including: v7_sctj_nyhf_df, v7_sctj_nyhf_fhf,
 v7_sctj_nyhf_hj, v7_sctj_nyhf_jf, v7_sctj_nyhf_lf</p></li>
 </ul>
@@ -829,84 +830,84 @@ v7_sctj_nyhf_hj, v7_sctj_nyhf_jf, v7_sctj_nyhf_lf</p></li>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">浙江</td>
-<td align="left">2011</td>
-<td align="left">化肥使用量</td>
-<td align="right">92.1</td>
+<td align="left">新疆</td>
+<td align="left">2019</td>
+<td align="left">磷肥</td>
+<td align="right">64.5</td>
 <td align="left">万吨</td>
-<td align="left">v7_sctj_nyhf_hj</td>
+<td align="left">v7_sctj_nyhf_lf</td>
 </tr>
 <tr class="even">
-<td align="left">湖南</td>
-<td align="left">2012</td>
+<td align="left">浙江</td>
+<td align="left">2016</td>
 <td align="left">化肥使用量</td>
-<td align="right">249.1</td>
+<td align="right">84.5</td>
 <td align="left">万吨</td>
 <td align="left">v7_sctj_nyhf_hj</td>
 </tr>
 <tr class="odd">
 <td align="left">陕西</td>
-<td align="left">2019</td>
+<td align="left">2020</td>
 <td align="left">钾肥</td>
-<td align="right">23.1</td>
+<td align="right">23.0</td>
 <td align="left">万吨</td>
 <td align="left">v7_sctj_nyhf_jf</td>
 </tr>
 <tr class="even">
-<td align="left">陕西</td>
-<td align="left">2014</td>
+<td align="left">云南</td>
+<td align="left">2013</td>
 <td align="left">化肥使用量</td>
-<td align="right">230.2</td>
+<td align="right">219.0</td>
 <td align="left">万吨</td>
 <td align="left">v7_sctj_nyhf_hj</td>
 </tr>
 <tr class="odd">
-<td align="left">山东</td>
-<td align="left">2013</td>
-<td align="left">化肥使用量</td>
-<td align="right">472.7</td>
+<td align="left">北京</td>
+<td align="left">2023</td>
+<td align="left">复合肥</td>
+<td align="right">4.2</td>
 <td align="left">万吨</td>
-<td align="left">v7_sctj_nyhf_hj</td>
+<td align="left">v7_sctj_nyhf_fhf</td>
 </tr>
 <tr class="even">
-<td align="left">江苏</td>
-<td align="left">2012</td>
+<td align="left">上海</td>
+<td align="left">2016</td>
 <td align="left">化肥使用量</td>
-<td align="right">331.0</td>
+<td align="right">9.2</td>
 <td align="left">万吨</td>
 <td align="left">v7_sctj_nyhf_hj</td>
 </tr>
 <tr class="odd">
 <td align="left">天津</td>
-<td align="left">2021</td>
-<td align="left">复合肥</td>
-<td align="right">7.9</td>
+<td align="left">2019</td>
+<td align="left">化肥使用量</td>
+<td align="right">16.2</td>
 <td align="left">万吨</td>
-<td align="left">v7_sctj_nyhf_fhf</td>
+<td align="left">v7_sctj_nyhf_hj</td>
 </tr>
 <tr class="even">
-<td align="left">北京</td>
-<td align="left">2022</td>
+<td align="left">河北</td>
+<td align="left">2021</td>
 <td align="left">复合肥</td>
-<td align="right">3.9</td>
+<td align="right">138.8</td>
 <td align="left">万吨</td>
 <td align="left">v7_sctj_nyhf_fhf</td>
 </tr>
 <tr class="odd">
-<td align="left">重庆</td>
-<td align="left">2012</td>
-<td align="left">化肥使用量</td>
-<td align="right">96.0</td>
+<td align="left">上海</td>
+<td align="left">2019</td>
+<td align="left">钾肥</td>
+<td align="right">0.3</td>
 <td align="left">万吨</td>
-<td align="left">v7_sctj_nyhf_hj</td>
+<td align="left">v7_sctj_nyhf_jf</td>
 </tr>
 <tr class="even">
-<td align="left">上海</td>
-<td align="left">2011</td>
-<td align="left">化肥使用量</td>
-<td align="right">12.0</td>
+<td align="left">全国</td>
+<td align="left">2020</td>
+<td align="left">钾肥</td>
+<td align="right">541.9</td>
 <td align="left">万吨</td>
-<td align="left">v7_sctj_nyhf_hj</td>
+<td align="left">v7_sctj_nyhf_jf</td>
 </tr>
 </tbody>
 </table>
@@ -920,8 +921,8 @@ format</strong> data set containing Agricultural Plastic statistics
 <ul>
 <li><p>Totally 6 columns including: province, year, chn_block4, value,
 units, variables.</p></li>
-<li><p>Totally 1248 rows.</p></li>
-<li><p>Years range from 2010 to 2022</p></li>
+<li><p>Totally 1344 rows.</p></li>
+<li><p>Years range from 2010 to 2023</p></li>
 <li><p>Variables including: v7_sctj_nybm_bmsy, v7_sctj_nybm_dmfg,
 v7_sctj_nybm_dmsy</p></li>
 </ul>
@@ -940,84 +941,84 @@ v7_sctj_nybm_dmsy</p></li>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">福建</td>
-<td align="left">2016</td>
-<td align="left">NA</td>
-<td align="right">31547</td>
-<td align="left">NA</td>
-<td align="left">v7_sctj_nybm_dmsy</td>
-</tr>
-<tr class="even">
-<td align="left">河北</td>
-<td align="left">2018</td>
-<td align="left">NA</td>
-<td align="right">52960</td>
-<td align="left">NA</td>
-<td align="left">v7_sctj_nybm_dmsy</td>
-</tr>
-<tr class="odd">
-<td align="left">河南</td>
-<td align="left">2015</td>
-<td align="left">NA</td>
-<td align="right">74406</td>
-<td align="left">NA</td>
-<td align="left">v7_sctj_nybm_dmsy</td>
-</tr>
-<tr class="even">
-<td align="left">安徽</td>
-<td align="left">2016</td>
-<td align="left">农用薄膜使用量</td>
-<td align="right">96966</td>
-<td align="left">吨</td>
-<td align="left">v7_sctj_nybm_bmsy</td>
-</tr>
-<tr class="odd">
 <td align="left">贵州</td>
-<td align="left">2015</td>
+<td align="left">2016</td>
 <td align="left">NA</td>
-<td align="right">29700</td>
+<td align="right">30758.0</td>
 <td align="left">NA</td>
 <td align="left">v7_sctj_nybm_dmsy</td>
 </tr>
 <tr class="even">
 <td align="left">广西</td>
-<td align="left">2013</td>
+<td align="left">2014</td>
 <td align="left">NA</td>
-<td align="right">409754</td>
+<td align="right">416345.0</td>
 <td align="left">NA</td>
 <td align="left">v7_sctj_nybm_dmfg</td>
 </tr>
 <tr class="odd">
 <td align="left">上海</td>
-<td align="left">2012</td>
+<td align="left">2013</td>
 <td align="left">NA</td>
-<td align="right">23397</td>
+<td align="right">21961.0</td>
 <td align="left">NA</td>
 <td align="left">v7_sctj_nybm_dmfg</td>
 </tr>
 <tr class="even">
 <td align="left">安徽</td>
-<td align="left">2010</td>
+<td align="left">2011</td>
 <td align="left">NA</td>
-<td align="right">37349</td>
+<td align="right">39231.0</td>
 <td align="left">NA</td>
 <td align="left">v7_sctj_nybm_dmsy</td>
 </tr>
 <tr class="odd">
 <td align="left">陕西</td>
-<td align="left">2021</td>
+<td align="left">2022</td>
 <td align="left">地膜使用量</td>
-<td align="right">21493</td>
-<td align="left">吨</td>
+<td align="right">2.1</td>
+<td align="left">万吨</td>
 <td align="left">v7_sctj_nybm_dmsy</td>
 </tr>
 <tr class="even">
 <td align="left">湖北</td>
-<td align="left">2012</td>
+<td align="left">2013</td>
 <td align="left">NA</td>
-<td align="right">36838</td>
+<td align="right">38162.0</td>
 <td align="left">NA</td>
 <td align="left">v7_sctj_nybm_dmsy</td>
+</tr>
+<tr class="odd">
+<td align="left">上海</td>
+<td align="left">2023</td>
+<td align="left">地膜使用量</td>
+<td align="right">0.3</td>
+<td align="left">万吨</td>
+<td align="left">v7_sctj_nybm_dmsy</td>
+</tr>
+<tr class="even">
+<td align="left">内蒙古</td>
+<td align="left">2022</td>
+<td align="left">农用薄膜使用量</td>
+<td align="right">11.5</td>
+<td align="left">万吨</td>
+<td align="left">v7_sctj_nybm_bmsy</td>
+</tr>
+<tr class="odd">
+<td align="left">四川</td>
+<td align="left">2015</td>
+<td align="left">农用薄膜使用量</td>
+<td align="right">132170.0</td>
+<td align="left">吨</td>
+<td align="left">v7_sctj_nybm_bmsy</td>
+</tr>
+<tr class="even">
+<td align="left">西藏</td>
+<td align="left">2015</td>
+<td align="left">NA</td>
+<td align="right">3522.0</td>
+<td align="left">NA</td>
+<td align="left">v7_sctj_nybm_dmfg</td>
 </tr>
 </tbody>
 </table>
@@ -1031,8 +1032,8 @@ format</strong> data set containing Agricultural Pesticide statistics
 <ul>
 <li><p>Totally 6 columns including: province, year, chn_block4, value,
 units, variables.</p></li>
-<li><p>Totally 544 rows.</p></li>
-<li><p>Years range from 2010 to 2022</p></li>
+<li><p>Totally 608 rows.</p></li>
+<li><p>Years range from 2010 to 2023</p></li>
 <li><p>Variables including: v7_sctj_cyny_cysy,
 v7_sctj_cyny_nysy</p></li>
 </ul>
@@ -1059,74 +1060,74 @@ v7_sctj_cyny_nysy</p></li>
 <td align="left">v7_sctj_cyny_nysy</td>
 </tr>
 <tr class="even">
-<td align="left">上海</td>
-<td align="left">2022</td>
-<td align="left">农药使用量</td>
-<td align="right">0.2</td>
-<td align="left">万吨</td>
-<td align="left">v7_sctj_cyny_nysy</td>
-</tr>
-<tr class="odd">
-<td align="left">内蒙古</td>
-<td align="left">2021</td>
-<td align="left">农药使用量</td>
-<td align="right">26692.0</td>
-<td align="left">吨</td>
-<td align="left">v7_sctj_cyny_nysy</td>
-</tr>
-<tr class="even">
-<td align="left">山东</td>
-<td align="left">2011</td>
-<td align="left">农药使用量</td>
-<td align="right">164812.0</td>
-<td align="left">吨</td>
-<td align="left">v7_sctj_cyny_nysy</td>
-</tr>
-<tr class="odd">
 <td align="left">福建</td>
-<td align="left">2018</td>
-<td align="left">农药使用量</td>
-<td align="right">49143.0</td>
-<td align="left">吨</td>
-<td align="left">v7_sctj_cyny_nysy</td>
-</tr>
-<tr class="even">
-<td align="left">贵州</td>
-<td align="left">2011</td>
-<td align="left">农药使用量</td>
-<td align="right">14469.0</td>
-<td align="left">吨</td>
-<td align="left">v7_sctj_cyny_nysy</td>
-</tr>
-<tr class="odd">
-<td align="left">宁夏</td>
-<td align="left">2015</td>
-<td align="left">农药使用量</td>
-<td align="right">2593.0</td>
-<td align="left">吨</td>
-<td align="left">v7_sctj_cyny_nysy</td>
-</tr>
-<tr class="even">
-<td align="left">安徽</td>
-<td align="left">2022</td>
+<td align="left">2019</td>
 <td align="left">农用柴油使用量</td>
-<td align="right">73.8</td>
+<td align="right">81.2</td>
 <td align="left">万吨</td>
 <td align="left">v7_sctj_cyny_cysy</td>
 </tr>
 <tr class="odd">
-<td align="left">安徽</td>
+<td align="left">贵州</td>
 <td align="left">2013</td>
 <td align="left">农药使用量</td>
-<td align="right">117774.0</td>
+<td align="right">13480.0</td>
+<td align="left">吨</td>
+<td align="left">v7_sctj_cyny_nysy</td>
+</tr>
+<tr class="even">
+<td align="left">宁夏</td>
+<td align="left">2017</td>
+<td align="left">农药使用量</td>
+<td align="right">2540.0</td>
+<td align="left">吨</td>
+<td align="left">v7_sctj_cyny_nysy</td>
+</tr>
+<tr class="odd">
+<td align="left">安徽</td>
+<td align="left">2023</td>
+<td align="left">农用柴油使用量</td>
+<td align="right">73.7</td>
+<td align="left">万吨</td>
+<td align="left">v7_sctj_cyny_cysy</td>
+</tr>
+<tr class="even">
+<td align="left">安徽</td>
+<td align="left">2015</td>
+<td align="left">农药使用量</td>
+<td align="right">111048.0</td>
+<td align="left">吨</td>
+<td align="left">v7_sctj_cyny_nysy</td>
+</tr>
+<tr class="odd">
+<td align="left">湖南</td>
+<td align="left">2010</td>
+<td align="left">农药使用量</td>
+<td align="right">118762.0</td>
 <td align="left">吨</td>
 <td align="left">v7_sctj_cyny_nysy</td>
 </tr>
 <tr class="even">
 <td align="left">新疆</td>
-<td align="left">2018</td>
+<td align="left">2019</td>
+<td align="left">农用柴油使用量</td>
+<td align="right">94.2</td>
+<td align="left">万吨</td>
+<td align="left">v7_sctj_cyny_cysy</td>
+</tr>
+<tr class="odd">
+<td align="left">山西</td>
+<td align="left">2020</td>
+<td align="left">农用柴油使用量</td>
+<td align="right">26.0</td>
+<td align="left">万吨</td>
+<td align="left">v7_sctj_cyny_cysy</td>
+</tr>
+<tr class="even">
+<td align="left">黑龙江</td>
+<td align="left">2012</td>
 <td align="left">农药使用量</td>
-<td align="right">23732.0</td>
+<td align="right">80511.0</td>
 <td align="left">吨</td>
 <td align="left">v7_sctj_cyny_nysy</td>
 </tr>
@@ -1153,8 +1154,8 @@ format</strong> data set containing R&amp;D Intense statistics.</p>
 <ul>
 <li><p>Totally 6 columns including: province, year, chn_block4, value,
 units, variables.</p></li>
-<li><p>Totally 768 rows.</p></li>
-<li><p>Years range from 2011 to 2022</p></li>
+<li><p>Totally 832 rows.</p></li>
+<li><p>Years range from 2011 to 2023</p></li>
 <li><p>Variables including: v4_ztr_jf_RD, v4_ztr_qd_RD</p></li>
 </ul>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -1172,82 +1173,82 @@ units, variables.</p></li>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">山西</td>
+<td align="left">甘肃</td>
+<td align="left">2011</td>
+<td align="left">RD强度</td>
+<td align="right">0.97</td>
+<td align="left">%</td>
+<td align="left">v4_ztr_qd_RD</td>
+</tr>
+<tr class="even">
+<td align="left">辽宁</td>
 <td align="left">2019</td>
 <td align="left">RD经费</td>
-<td align="right">191.20</td>
-<td align="left">亿元</td>
-<td align="left">v4_ztr_jf_RD</td>
-</tr>
-<tr class="even">
-<td align="left">黑龙江</td>
-<td align="left">2014</td>
-<td align="left">RD经费</td>
-<td align="right">161.30</td>
+<td align="right">508.50</td>
 <td align="left">亿元</td>
 <td align="left">v4_ztr_jf_RD</td>
 </tr>
 <tr class="odd">
-<td align="left">贵州</td>
-<td align="left">2018</td>
-<td align="left">RD经费</td>
-<td align="right">121.60</td>
-<td align="left">亿元</td>
-<td align="left">v4_ztr_jf_RD</td>
-</tr>
-<tr class="even">
 <td align="left">山西</td>
-<td align="left">2012</td>
+<td align="left">2013</td>
 <td align="left">RD经费</td>
-<td align="right">132.30</td>
-<td align="left">亿元</td>
-<td align="left">v4_ztr_jf_RD</td>
-</tr>
-<tr class="odd">
-<td align="left">陕西</td>
-<td align="left">2015</td>
-<td align="left">RD经费</td>
-<td align="right">393.20</td>
+<td align="right">155.00</td>
 <td align="left">亿元</td>
 <td align="left">v4_ztr_jf_RD</td>
 </tr>
 <tr class="even">
+<td align="left">陕西</td>
+<td align="left">2016</td>
+<td align="left">RD经费</td>
+<td align="right">419.60</td>
+<td align="left">亿元</td>
+<td align="left">v4_ztr_jf_RD</td>
+</tr>
+<tr class="odd">
 <td align="left">北京</td>
-<td align="left">2014</td>
+<td align="left">2015</td>
 <td align="left">RD强度</td>
-<td align="right">5.95</td>
+<td align="right">6.01</td>
 <td align="left">%</td>
 <td align="left">v4_ztr_qd_RD</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">海南</td>
-<td align="left">2015</td>
+<td align="left">2016</td>
 <td align="left">RD经费</td>
-<td align="right">17.00</td>
+<td align="right">21.70</td>
 <td align="left">亿元</td>
 <td align="left">v4_ztr_jf_RD</td>
 </tr>
+<tr class="odd">
+<td align="left">湖南</td>
+<td align="left">2019</td>
+<td align="left">RD强度</td>
+<td align="right">1.98</td>
+<td align="left">%</td>
+<td align="left">v4_ztr_qd_RD</td>
+</tr>
 <tr class="even">
-<td align="left">宁夏</td>
+<td align="left">河北</td>
 <td align="left">2018</td>
 <td align="left">RD强度</td>
-<td align="right">1.23</td>
+<td align="right">1.39</td>
 <td align="left">%</td>
 <td align="left">v4_ztr_qd_RD</td>
 </tr>
 <tr class="odd">
-<td align="left">河北</td>
-<td align="left">2017</td>
-<td align="left">RD强度</td>
-<td align="right">1.33</td>
-<td align="left">%</td>
-<td align="left">v4_ztr_qd_RD</td>
-</tr>
-<tr class="even">
 <td align="left">广西</td>
-<td align="left">2012</td>
+<td align="left">2013</td>
 <td align="left">RD强度</td>
 <td align="right">0.75</td>
+<td align="left">%</td>
+<td align="left">v4_ztr_qd_RD</td>
+</tr>
+<tr class="even">
+<td align="left">安徽</td>
+<td align="left">2020</td>
+<td align="left">RD强度</td>
+<td align="right">2.28</td>
 <td align="left">%</td>
 <td align="left">v4_ztr_qd_RD</td>
 </tr>
@@ -1262,8 +1263,8 @@ format</strong> data set containing R&amp;D Activity statistics .</p>
 <ul>
 <li><p>Totally 6 columns including: province, year, chn_block4, value,
 units, variables.</p></li>
-<li><p>Totally 1664 rows.</p></li>
-<li><p>Years range from 2010 to 2022</p></li>
+<li><p>Totally 1792 rows.</p></li>
+<li><p>Years range from 2010 to 2023</p></li>
 <li><p>Variables including: v4_zh_nbzc_hj, v4_zh_nbzc_jcyj,
 v4_zh_nbzc_syfz, v4_zh_nbzc_yyyj</p></li>
 </ul>
@@ -1282,82 +1283,82 @@ v4_zh_nbzc_syfz, v4_zh_nbzc_yyyj</p></li>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">湖南</td>
-<td align="left">2016</td>
-<td align="left">应用研究</td>
-<td align="right">493659.0</td>
-<td align="left">万元</td>
-<td align="left">v4_zh_nbzc_yyyj</td>
-</tr>
-<tr class="even">
-<td align="left">陕西</td>
-<td align="left">2021</td>
+<td align="left">辽宁</td>
+<td align="left">2019</td>
 <td align="left">合计</td>
-<td align="right">7006207.0</td>
-<td align="left">万元</td>
-<td align="left">v4_zh_nbzc_hj</td>
-</tr>
-<tr class="odd">
-<td align="left">上海</td>
-<td align="left">2018</td>
-<td align="left">合计</td>
-<td align="right">13592022.6</td>
+<td align="right">5084604.0</td>
 <td align="left">万元</td>
 <td align="left">v4_zh_nbzc_hj</td>
 </tr>
 <tr class="even">
 <td align="left">福建</td>
-<td align="left">2013</td>
+<td align="left">2014</td>
 <td align="left">基础研究</td>
-<td align="right">63232.4</td>
+<td align="right">75426.9</td>
 <td align="left">万元</td>
 <td align="left">v4_zh_nbzc_jcyj</td>
 </tr>
 <tr class="odd">
 <td align="left">湖南</td>
-<td align="left">2014</td>
+<td align="left">2015</td>
 <td align="left">基础研究</td>
-<td align="right">115325.9</td>
+<td align="right">136021.5</td>
 <td align="left">万元</td>
 <td align="left">v4_zh_nbzc_jcyj</td>
 </tr>
 <tr class="even">
 <td align="left">广西</td>
-<td align="left">2021</td>
+<td align="left">2022</td>
 <td align="left">基础研究</td>
-<td align="right">156119.0</td>
+<td align="right">171275.0</td>
 <td align="left">万元</td>
 <td align="left">v4_zh_nbzc_jcyj</td>
 </tr>
 <tr class="odd">
 <td align="left">内蒙古</td>
-<td align="left">2019</td>
+<td align="left">2020</td>
 <td align="left">应用研究</td>
-<td align="right">164885.0</td>
+<td align="right">171318.0</td>
 <td align="left">万元</td>
 <td align="left">v4_zh_nbzc_yyyj</td>
 </tr>
 <tr class="even">
 <td align="left">黑龙江</td>
-<td align="left">2013</td>
+<td align="left">2014</td>
 <td align="left">基础研究</td>
-<td align="right">158646.3</td>
+<td align="right">124047.1</td>
 <td align="left">万元</td>
 <td align="left">v4_zh_nbzc_jcyj</td>
 </tr>
 <tr class="odd">
 <td align="left">全国</td>
-<td align="left">2022</td>
+<td align="left">2023</td>
 <td align="left">试验发展</td>
-<td align="right">252769051.0</td>
+<td align="right">274364624.0</td>
 <td align="left">万元</td>
 <td align="left">v4_zh_nbzc_syfz</td>
 </tr>
 <tr class="even">
 <td align="left">黑龙江</td>
-<td align="left">2019</td>
+<td align="left">2020</td>
 <td align="left">基础研究</td>
-<td align="right">256620.0</td>
+<td align="right">230334.0</td>
+<td align="left">万元</td>
+<td align="left">v4_zh_nbzc_jcyj</td>
+</tr>
+<tr class="odd">
+<td align="left">河北</td>
+<td align="left">2017</td>
+<td align="left">基础研究</td>
+<td align="right">105087.1</td>
+<td align="left">万元</td>
+<td align="left">v4_zh_nbzc_jcyj</td>
+</tr>
+<tr class="even">
+<td align="left">广西</td>
+<td align="left">2023</td>
+<td align="left">基础研究</td>
+<td align="right">156901.0</td>
 <td align="left">万元</td>
 <td align="left">v4_zh_nbzc_jcyj</td>
 </tr>
@@ -1372,8 +1373,8 @@ format</strong> data set containing Industry Operation statistics .</p>
 <ul>
 <li><p>Totally 6 columns including: province, year, chn_block4, value,
 units, variables.</p></li>
-<li><p>Totally 672 rows.</p></li>
-<li><p>Years range from 2015 to 2022</p></li>
+<li><p>Totally 1248 rows.</p></li>
+<li><p>Years range from 2010 to 2023</p></li>
 <li><p>Variables including: v4_cy_scjy_lrze, v4_cy_scjy_qys,
 v4_cy_scjy_zyyw</p></li>
 </ul>
@@ -1392,84 +1393,84 @@ v4_cy_scjy_zyyw</p></li>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">湖北</td>
-<td align="left">2022</td>
-<td align="left">利润总额</td>
-<td align="right">332.00000</td>
-<td align="left">亿元</td>
-<td align="left">v4_cy_scjy_lrze</td>
-</tr>
-<tr class="even">
 <td align="left">青海</td>
-<td align="left">2015</td>
+<td align="left">2016</td>
 <td align="left">利润总额</td>
-<td align="right">5.30163</td>
+<td align="right">8.77192</td>
 <td align="left">亿元</td>
 <td align="left">v4_cy_scjy_lrze</td>
 </tr>
-<tr class="odd">
-<td align="left">浙江</td>
-<td align="left">2020</td>
-<td align="left">企业数</td>
-<td align="right">3622.00000</td>
-<td align="left">个.亿元</td>
-<td align="left">v4_cy_scjy_qys</td>
-</tr>
 <tr class="even">
-<td align="left">湖南</td>
-<td align="left">2019</td>
-<td align="left">企业数</td>
-<td align="right">1381.00000</td>
-<td align="left">个</td>
-<td align="left">v4_cy_scjy_qys</td>
+<td align="left">浙江</td>
+<td align="left">2010</td>
+<td align="left">利润总额</td>
+<td align="right">296.30000</td>
+<td align="left">亿元</td>
+<td align="left">v4_cy_scjy_lrze</td>
 </tr>
 <tr class="odd">
 <td align="left">新疆</td>
-<td align="left">2019</td>
+<td align="left">2020</td>
 <td align="left">利润总额</td>
-<td align="right">7.00000</td>
-<td align="left">个,亿元</td>
+<td align="right">21.00000</td>
+<td align="left">亿元</td>
 <td align="left">v4_cy_scjy_lrze</td>
 </tr>
 <tr class="even">
 <td align="left">河南</td>
-<td align="left">2021</td>
+<td align="left">2022</td>
 <td align="left">主营业务收入</td>
-<td align="right">9347.00000</td>
+<td align="right">9282.00000</td>
 <td align="left">亿元</td>
 <td align="left">v4_cy_scjy_zyyw</td>
 </tr>
 <tr class="odd">
+<td align="left">浙江</td>
+<td align="left">2015</td>
+<td align="left">主营业务收入</td>
+<td align="right">5288.06619</td>
+<td align="left">亿元</td>
+<td align="left">v4_cy_scjy_zyyw</td>
+</tr>
+<tr class="even">
 <td align="left">安徽</td>
-<td align="left">2020</td>
+<td align="left">2021</td>
 <td align="left">利润总额</td>
-<td align="right">227.00000</td>
-<td align="left">个.亿元</td>
-<td align="left">v4_cy_scjy_lrze</td>
-</tr>
-<tr class="even">
-<td align="left">山东</td>
-<td align="left">2018</td>
-<td align="left">主营业务收入</td>
-<td align="right">6989.00000</td>
-<td align="left">个,亿元</td>
-<td align="left">v4_cy_scjy_zyyw</td>
-</tr>
-<tr class="odd">
-<td align="left">广西</td>
-<td align="left">2020</td>
-<td align="left">企业数</td>
-<td align="right">448.00000</td>
-<td align="left">个.亿元</td>
-<td align="left">v4_cy_scjy_qys</td>
-</tr>
-<tr class="even">
-<td align="left">河北</td>
-<td align="left">2016</td>
-<td align="left">利润总额</td>
-<td align="right">162.62669</td>
+<td align="right">430.00000</td>
 <td align="left">亿元</td>
 <td align="left">v4_cy_scjy_lrze</td>
+</tr>
+<tr class="odd">
+<td align="left">山东</td>
+<td align="left">2019</td>
+<td align="left">主营业务收入</td>
+<td align="right">5911.00000</td>
+<td align="left">亿元</td>
+<td align="left">v4_cy_scjy_zyyw</td>
+</tr>
+<tr class="even">
+<td align="left">广西</td>
+<td align="left">2010</td>
+<td align="left">利润总额</td>
+<td align="right">55.90000</td>
+<td align="left">亿元</td>
+<td align="left">v4_cy_scjy_lrze</td>
+</tr>
+<tr class="odd">
+<td align="left">河南</td>
+<td align="left">2015</td>
+<td align="left">利润总额</td>
+<td align="right">408.30398</td>
+<td align="left">亿元</td>
+<td align="left">v4_cy_scjy_lrze</td>
+</tr>
+<tr class="even">
+<td align="left">内蒙古</td>
+<td align="left">2021</td>
+<td align="left">企业数</td>
+<td align="right">111.00000</td>
+<td align="left">个</td>
+<td align="left">v4_cy_scjy_qys</td>
 </tr>
 </tbody>
 </table>
@@ -1482,8 +1483,8 @@ format</strong> data set containing Industry R&amp;D statistics .</p>
 <ul>
 <li><p>Totally 6 columns including: province, year, chn_block4, value,
 units, variables.</p></li>
-<li><p>Totally 3520 rows.</p></li>
-<li><p>Years range from 2016 to 2022</p></li>
+<li><p>Totally 3968 rows.</p></li>
+<li><p>Years range from 2016 to 2023</p></li>
 <li><p>Variables including: v4_cy_cytz_gdzc, v4_cy_cytz_jcxm,
 v4_cy_cytz_kgxm, v4_cy_cytz_sgxm, v4_cy_cytz_tzze, v4_cy_jsgz_gmzc,
 v4_cy_jsgz_gzzc, v4_cy_jsgz_xszc, v4_cy_jsgz_yjzc, v4_cy_qyzl_fms,
@@ -1496,6 +1497,14 @@ v4_cy_xcp_kfjf, v4_cy_xcp_kfxm, v4_cy_xcp_xssr</p></li>
 <span>  <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">kable</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
+<colgroup>
+<col width="13%">
+<col width="7%">
+<col width="25%">
+<col width="19%">
+<col width="9%">
+<col width="24%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">province</th>
 <th align="left">year</th>
@@ -1506,84 +1515,84 @@ v4_cy_xcp_kfjf, v4_cy_xcp_kfxm, v4_cy_xcp_xssr</p></li>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">天津</td>
-<td align="left">2019</td>
-<td align="left">开发经费支出</td>
-<td align="right">625142.0</td>
-<td align="left">万元</td>
-<td align="left">v4_cy_xcp_kfjf</td>
-</tr>
-<tr class="even">
-<td align="left">云南</td>
-<td align="left">2019</td>
-<td align="left">技术改造经费支出</td>
-<td align="right">8895.0</td>
-<td align="left">万元</td>
-<td align="left">v4_cy_jsgz_gzzc</td>
-</tr>
-<tr class="odd">
-<td align="left">河南</td>
-<td align="left">2017</td>
-<td align="left">项目经费</td>
-<td align="right">756934.3</td>
-<td align="left">万元</td>
-<td align="left">v4_cy_RDhd_xmjf</td>
-</tr>
-<tr class="even">
-<td align="left">湖南</td>
-<td align="left">2018</td>
-<td align="left">发明专利</td>
-<td align="right">2831.0</td>
-<td align="left">万元</td>
-<td align="left">v4_cy_qyzl_fms</td>
-</tr>
-<tr class="odd">
-<td align="left">浙江</td>
+<td align="left">西藏</td>
 <td align="left">2016</td>
-<td align="left">项目数量</td>
-<td align="right">10089.0</td>
-<td align="left">项</td>
-<td align="left">v4_cy_RDhd_xmsl</td>
+<td align="left">投资额</td>
+<td align="right">3.739200e+00</td>
+<td align="left">亿元</td>
+<td align="left">v4_cy_cytz_tzze</td>
 </tr>
 <tr class="even">
+<td align="left">浙江</td>
+<td align="left">2017</td>
+<td align="left">开发项目数</td>
+<td align="right">1.174200e+04</td>
+<td align="left">项</td>
+<td align="left">v4_cy_xcp_kfxm</td>
+</tr>
+<tr class="odd">
 <td align="left">江苏</td>
-<td align="left">2022</td>
+<td align="left">2023</td>
 <td align="left">专利申请数</td>
-<td align="right">60474.0</td>
+<td align="right">6.691400e+04</td>
 <td align="left">件</td>
 <td align="left">v4_cy_qyzl_sqs</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">贵州</td>
-<td align="left">2022</td>
+<td align="left">2023</td>
 <td align="left">有效专利数</td>
-<td align="right">3787.0</td>
+<td align="right">1.522000e+03</td>
 <td align="left">件</td>
 <td align="left">v4_cy_qyzl_yxs</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">内蒙古</td>
-<td align="left">2022</td>
+<td align="left">2023</td>
 <td align="left">出口</td>
-<td align="right">143151.0</td>
+<td align="right">2.138620e+05</td>
 <td align="left">万元</td>
 <td align="left">v4_cy_xcp_ck</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">内蒙古</td>
-<td align="left">2022</td>
+<td align="left">2023</td>
 <td align="left">开发经费支出</td>
-<td align="right">222866.0</td>
+<td align="right">2.365670e+05</td>
 <td align="left">万元</td>
 <td align="left">v4_cy_xcp_kfjf</td>
 </tr>
+<tr class="odd">
+<td align="left">宁夏</td>
+<td align="left">2018</td>
+<td align="left">技术引进经费支出</td>
+<td align="right">NA</td>
+<td align="left">万元</td>
+<td align="left">v4_cy_jsgz_yjzc</td>
+</tr>
 <tr class="even">
-<td align="left">海南</td>
+<td align="left">河南</td>
+<td align="left">2019</td>
+<td align="left">销售收入</td>
+<td align="right">2.405640e+07</td>
+<td align="left">万元</td>
+<td align="left">v4_cy_xcp_xssr</td>
+</tr>
+<tr class="odd">
+<td align="left">北京</td>
+<td align="left">2018</td>
+<td align="left">专利申请数</td>
+<td align="right">7.796000e+03</td>
+<td align="left">件</td>
+<td align="left">v4_cy_qyzl_sqs</td>
+</tr>
+<tr class="even">
+<td align="left">广东</td>
 <td align="left">2017</td>
-<td align="left">研发机构数</td>
-<td align="right">20.0</td>
-<td align="left">个</td>
-<td align="left">v4_cy_RDhd_yfjgs</td>
+<td align="left">开发经费支出</td>
+<td align="right">1.536649e+07</td>
+<td align="left">万元</td>
+<td align="left">v4_cy_xcp_kfjf</td>
 </tr>
 </tbody>
 </table>
@@ -1599,8 +1608,8 @@ format</strong> data set containing Tech Market Pull statistics .</p>
 <ul>
 <li><p>Totally 6 columns including: province, year, chn_block4, value,
 units, variables.</p></li>
-<li><p>Totally 896 rows.</p></li>
-<li><p>Years range from 2000 to 2022</p></li>
+<li><p>Totally 960 rows.</p></li>
+<li><p>Years range from 2000 to 2023</p></li>
 <li><p>Variables including: v4_cg_jssr_ht, v4_cg_jssr_je</p></li>
 </ul>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -1618,82 +1627,82 @@ units, variables.</p></li>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">河南</td>
-<td align="left">2019</td>
-<td align="left">金额</td>
-<td align="right">4155088.0</td>
-<td align="left">万元</td>
-<td align="left">v4_cg_jssr_je</td>
-</tr>
-<tr class="even">
-<td align="left">浙江</td>
-<td align="left">2021</td>
-<td align="left">数量</td>
-<td align="right">42398.0</td>
-<td align="left">项</td>
-<td align="left">v4_cg_jssr_ht</td>
-</tr>
-<tr class="odd">
-<td align="left">青海</td>
-<td align="left">2015</td>
-<td align="left">金额</td>
-<td align="right">471048.7</td>
-<td align="left">万元</td>
-<td align="left">v4_cg_jssr_je</td>
-</tr>
-<tr class="even">
 <td align="left">江西</td>
-<td align="left">2020</td>
-<td align="left">数量</td>
-<td align="right">5651.0</td>
-<td align="left">项</td>
-<td align="left">v4_cg_jssr_ht</td>
-</tr>
-<tr class="odd">
-<td align="left">湖北</td>
 <td align="left">2022</td>
 <td align="left">数量</td>
-<td align="right">59533.0</td>
+<td align="right">12612</td>
 <td align="left">项</td>
 <td align="left">v4_cg_jssr_ht</td>
 </tr>
 <tr class="even">
+<td align="left">内蒙古</td>
+<td align="left">2000</td>
+<td align="left">金额</td>
+<td align="right">79600</td>
+<td align="left">万元</td>
+<td align="left">v4_cg_jssr_je</td>
+</tr>
+<tr class="odd">
 <td align="left">湖北</td>
-<td align="left">2010</td>
+<td align="left">2013</td>
 <td align="left">数量</td>
-<td align="right">6591.0</td>
+<td align="right">9758</td>
+<td align="left">项</td>
+<td align="left">v4_cg_jssr_ht</td>
+</tr>
+<tr class="even">
+<td align="left">山东</td>
+<td align="left">2000</td>
+<td align="left">数量</td>
+<td align="right">30909</td>
 <td align="left">项</td>
 <td align="left">v4_cg_jssr_ht</td>
 </tr>
 <tr class="odd">
-<td align="left">全国</td>
-<td align="left">2018</td>
+<td align="left">广西</td>
+<td align="left">2020</td>
 <td align="left">数量</td>
-<td align="right">411985.0</td>
+<td align="right">6337</td>
 <td align="left">项</td>
 <td align="left">v4_cg_jssr_ht</td>
 </tr>
 <tr class="even">
 <td align="left">四川</td>
-<td align="left">2010</td>
+<td align="left">2013</td>
 <td align="left">数量</td>
-<td align="right">8331.0</td>
+<td align="right">11729</td>
 <td align="left">项</td>
 <td align="left">v4_cg_jssr_ht</td>
 </tr>
 <tr class="odd">
 <td align="left">甘肃</td>
-<td align="left">2022</td>
+<td align="left">2023</td>
 <td align="left">金额</td>
-<td align="right">5490448.0</td>
+<td align="right">10217970</td>
 <td align="left">万元</td>
 <td align="left">v4_cg_jssr_je</td>
 </tr>
 <tr class="even">
 <td align="left">河南</td>
-<td align="left">2005</td>
+<td align="left">2012</td>
 <td align="left">数量</td>
-<td align="right">5382.0</td>
+<td align="right">5680</td>
+<td align="left">项</td>
+<td align="left">v4_cg_jssr_ht</td>
+</tr>
+<tr class="odd">
+<td align="left">河北</td>
+<td align="left">2023</td>
+<td align="left">数量</td>
+<td align="right">24272</td>
+<td align="left">项</td>
+<td align="left">v4_cg_jssr_ht</td>
+</tr>
+<tr class="even">
+<td align="left">内蒙古</td>
+<td align="left">2019</td>
+<td align="left">数量</td>
+<td align="right">5851</td>
 <td align="left">项</td>
 <td align="left">v4_cg_jssr_ht</td>
 </tr>
@@ -1711,8 +1720,8 @@ format</strong> data set containing Tech Market Push statistics .</p>
 <ul>
 <li><p>Totally 6 columns including: province, year, chn_block4, value,
 units, variables.</p></li>
-<li><p>Totally 896 rows.</p></li>
-<li><p>Years range from 2000 to 2022</p></li>
+<li><p>Totally 960 rows.</p></li>
+<li><p>Years range from 2000 to 2023</p></li>
 <li><p>Variables including: v4_cg_jssc_ht, v4_cg_jssc_je</p></li>
 </ul>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
@@ -1730,84 +1739,84 @@ units, variables.</p></li>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">河北</td>
-<td align="left">2021</td>
-<td align="left">数量</td>
-<td align="right">11739.0</td>
-<td align="left">项</td>
-<td align="left">v4_cg_jssc_ht</td>
-</tr>
-<tr class="even">
-<td align="left">广西</td>
-<td align="left">2017</td>
-<td align="left">数量</td>
-<td align="right">2039.0</td>
-<td align="left">项</td>
-<td align="left">v4_cg_jssc_ht</td>
-</tr>
-<tr class="odd">
-<td align="left">吉林</td>
-<td align="left">2018</td>
+<td align="left">福建</td>
+<td align="left">2019</td>
 <td align="left">金额</td>
-<td align="right">3419460.3</td>
+<td align="right">1395883.0</td>
 <td align="left">万元</td>
 <td align="left">v4_cg_jssc_je</td>
 </tr>
 <tr class="even">
 <td align="left">北京</td>
-<td align="left">2005</td>
+<td align="left">2012</td>
 <td align="left">数量</td>
-<td align="right">37625.0</td>
+<td align="right">59969.0</td>
 <td align="left">项</td>
 <td align="left">v4_cg_jssc_ht</td>
 </tr>
 <tr class="odd">
-<td align="left">山西</td>
-<td align="left">2022</td>
-<td align="left">数量</td>
-<td align="right">1255.0</td>
-<td align="left">项</td>
-<td align="left">v4_cg_jssc_ht</td>
-</tr>
-<tr class="even">
-<td align="left">湖北</td>
-<td align="left">2022</td>
-<td align="left">数量</td>
-<td align="right">76995.0</td>
-<td align="left">项</td>
-<td align="left">v4_cg_jssc_ht</td>
-</tr>
-<tr class="odd">
-<td align="left">山西</td>
-<td align="left">2019</td>
-<td align="left">数量</td>
-<td align="right">965.0</td>
-<td align="left">项</td>
-<td align="left">v4_cg_jssc_ht</td>
-</tr>
-<tr class="even">
-<td align="left">湖北</td>
-<td align="left">2010</td>
+<td align="left">广东</td>
+<td align="left">2000</td>
 <td align="left">金额</td>
-<td align="right">907218.4</td>
+<td align="right">482104.0</td>
+<td align="left">万元</td>
+<td align="left">v4_cg_jssc_je</td>
+</tr>
+<tr class="even">
+<td align="left">内蒙古</td>
+<td align="left">2000</td>
+<td align="left">金额</td>
+<td align="right">60287.0</td>
+<td align="left">万元</td>
+<td align="left">v4_cg_jssc_je</td>
+</tr>
+<tr class="odd">
+<td align="left">山西</td>
+<td align="left">2021</td>
+<td align="left">数量</td>
+<td align="right">1424.0</td>
+<td align="left">项</td>
+<td align="left">v4_cg_jssc_ht</td>
+</tr>
+<tr class="even">
+<td align="left">湖北</td>
+<td align="left">2012</td>
+<td align="left">金额</td>
+<td align="right">1963922.5</td>
 <td align="left">万元</td>
 <td align="left">v4_cg_jssc_je</td>
 </tr>
 <tr class="odd">
 <td align="left">甘肃</td>
-<td align="left">2016</td>
+<td align="left">2018</td>
 <td align="left">数量</td>
-<td align="right">5255.0</td>
+<td align="right">5072.0</td>
 <td align="left">项</td>
 <td align="left">v4_cg_jssc_ht</td>
 </tr>
 <tr class="even">
 <td align="left">宁夏</td>
-<td align="left">2005</td>
+<td align="left">2012</td>
 <td align="left">数量</td>
-<td align="right">323.0</td>
+<td align="right">564.0</td>
 <td align="left">项</td>
 <td align="left">v4_cg_jssc_ht</td>
+</tr>
+<tr class="odd">
+<td align="left">四川</td>
+<td align="left">2022</td>
+<td align="left">金额</td>
+<td align="right">16435301.0</td>
+<td align="left">万元</td>
+<td align="left">v4_cg_jssc_je</td>
+</tr>
+<tr class="even">
+<td align="left">青海</td>
+<td align="left">2014</td>
+<td align="left">金额</td>
+<td align="right">291001.1</td>
+<td align="left">万元</td>
+<td align="left">v4_cg_jssc_je</td>
 </tr>
 </tbody>
 </table>
@@ -1843,14 +1852,6 @@ v4_cy_my_jk</p></li>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">四川</td>
-<td align="left">2018</td>
-<td align="left">进口贸易额</td>
-<td align="right">31073.0000</td>
-<td align="left">百万美元</td>
-<td align="left">v4_cy_my_jk</td>
-</tr>
-<tr class="even">
 <td align="left">贵州</td>
 <td align="left">2017</td>
 <td align="left">进口贸易额</td>
@@ -1858,7 +1859,7 @@ v4_cy_my_jk</p></li>
 <td align="left">百万美元</td>
 <td align="left">v4_cy_my_jk</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">河南</td>
 <td align="left">2017</td>
 <td align="left">贸易总额</td>
@@ -1866,7 +1867,7 @@ v4_cy_my_jk</p></li>
 <td align="left">百万美元</td>
 <td align="left">v4_cy_my_jck</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">宁夏</td>
 <td align="left">2018</td>
 <td align="left">出口贸易额</td>
@@ -1874,7 +1875,7 @@ v4_cy_my_jk</p></li>
 <td align="left">百万美元</td>
 <td align="left">v4_cy_my_ck</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">广东</td>
 <td align="left">2017</td>
 <td align="left">进口贸易额</td>
@@ -1882,7 +1883,7 @@ v4_cy_my_jk</p></li>
 <td align="left">百万美元</td>
 <td align="left">v4_cy_my_jk</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">四川</td>
 <td align="left">2018</td>
 <td align="left">出口贸易额</td>
@@ -1890,7 +1891,7 @@ v4_cy_my_jk</p></li>
 <td align="left">百万美元</td>
 <td align="left">v4_cy_my_ck</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">新疆</td>
 <td align="left">2016</td>
 <td align="left">贸易总额</td>
@@ -1898,7 +1899,7 @@ v4_cy_my_jk</p></li>
 <td align="left">百万美元</td>
 <td align="left">v4_cy_my_jck</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">贵州</td>
 <td align="left">2018</td>
 <td align="left">贸易总额</td>
@@ -1906,7 +1907,7 @@ v4_cy_my_jk</p></li>
 <td align="left">百万美元</td>
 <td align="left">v4_cy_my_jck</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">上海</td>
 <td align="left">2018</td>
 <td align="left">出口贸易额</td>
@@ -1914,13 +1915,21 @@ v4_cy_my_jk</p></li>
 <td align="left">百万美元</td>
 <td align="left">v4_cy_my_ck</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">湖南</td>
 <td align="left">2016</td>
 <td align="left">出口贸易额</td>
 <td align="right">2619.3848</td>
 <td align="left">百万美元</td>
 <td align="left">v4_cy_my_ck</td>
+</tr>
+<tr class="even">
+<td align="left">湖南</td>
+<td align="left">2017</td>
+<td align="left">进口贸易额</td>
+<td align="right">2394.6562</td>
+<td align="left">百万美元</td>
+<td align="left">v4_cy_my_jk</td>
 </tr>
 </tbody>
 </table>
@@ -1941,8 +1950,8 @@ format</strong> data set containing Public Budget statistics.</p>
 <ul>
 <li><p>Totally 6 columns including: province, year, chn_block4, value,
 units, variables.</p></li>
-<li><p>Totally 1628 rows.</p></li>
-<li><p>Years range from 2010 to 2022</p></li>
+<li><p>Totally 1756 rows.</p></li>
+<li><p>Years range from 2010 to 2023</p></li>
 <li><p>Variables including: v6_cz_yszc_hj, v6_cz_yszc_jy,
 v6_cz_yszc_kxjs, v6_cz_yszc_nls</p></li>
 </ul>
@@ -1958,83 +1967,83 @@ v6_cz_yszc_kxjs, v6_cz_yszc_nls</p></li>
 <tbody>
 <tr class="odd">
 <td align="left">甘肃</td>
-<td align="left">2016</td>
-<td align="left">农林水</td>
-<td align="right">488.1000</td>
-<td align="left">亿元</td>
-<td align="left">v6_cz_yszc_nls</td>
-</tr>
-<tr class="even">
-<td align="left">河北</td>
-<td align="left">2013</td>
-<td align="left">科学技术</td>
-<td align="right">49.7600</td>
-<td align="left">亿元</td>
-<td align="left">v6_cz_yszc_kxjs</td>
-</tr>
-<tr class="odd">
-<td align="left">云南</td>
-<td align="left">2018</td>
+<td align="left">2019</td>
 <td align="left">合计</td>
-<td align="right">6075.0300</td>
+<td align="right">3951.60</td>
 <td align="left">亿元</td>
 <td align="left">v6_cz_yszc_hj</td>
 </tr>
 <tr class="even">
 <td align="left">河南</td>
-<td align="left">2022</td>
+<td align="left">2023</td>
 <td align="left">教育</td>
-<td align="right">1895.5700</td>
+<td align="right">1993.35</td>
 <td align="left">亿元</td>
 <td align="left">v6_cz_yszc_jy</td>
 </tr>
 <tr class="odd">
-<td align="left">北京</td>
-<td align="left">2014</td>
-<td align="left">农林水</td>
-<td align="right">343.6680</td>
+<td align="left">云南</td>
+<td align="left">2015</td>
+<td align="left">科学技术</td>
+<td align="right">48.56</td>
 <td align="left">亿元</td>
-<td align="left">v6_cz_yszc_nls</td>
+<td align="left">v6_cz_yszc_kxjs</td>
 </tr>
 <tr class="even">
-<td align="left">广东</td>
-<td align="left">2017</td>
+<td align="left">安徽</td>
+<td align="left">2018</td>
 <td align="left">科学技术</td>
-<td align="right">823.8935</td>
+<td align="right">294.81</td>
 <td align="left">亿元</td>
 <td align="left">v6_cz_yszc_kxjs</td>
 </tr>
 <tr class="odd">
-<td align="left">贵州</td>
-<td align="left">2015</td>
+<td align="left">福建</td>
+<td align="left">2016</td>
 <td align="left">科学技术</td>
-<td align="right">58.6800</td>
+<td align="right">80.28</td>
 <td align="left">亿元</td>
 <td align="left">v6_cz_yszc_kxjs</td>
 </tr>
 <tr class="even">
-<td align="left">重庆</td>
-<td align="left">2018</td>
+<td align="left">宁夏</td>
+<td align="left">2019</td>
 <td align="left">合计</td>
-<td align="right">4540.9500</td>
+<td align="right">1438.29</td>
 <td align="left">亿元</td>
 <td align="left">v6_cz_yszc_hj</td>
 </tr>
 <tr class="odd">
-<td align="left">河北</td>
-<td align="left">2015</td>
+<td align="left">广东</td>
+<td align="left">2016</td>
 <td align="left">科学技术</td>
-<td align="right">45.5000</td>
+<td align="right">742.97</td>
 <td align="left">亿元</td>
 <td align="left">v6_cz_yszc_kxjs</td>
 </tr>
 <tr class="even">
-<td align="left">四川</td>
-<td align="left">2015</td>
+<td align="left">山东</td>
+<td align="left">2016</td>
 <td align="left">科学技术</td>
-<td align="right">96.6900</td>
+<td align="right">167.00</td>
 <td align="left">亿元</td>
 <td align="left">v6_cz_yszc_kxjs</td>
+</tr>
+<tr class="odd">
+<td align="left">黑龙江</td>
+<td align="left">2011</td>
+<td align="left">合计</td>
+<td align="right">2794.08</td>
+<td align="left">亿元</td>
+<td align="left">v6_cz_yszc_hj</td>
+</tr>
+<tr class="even">
+<td align="left">海南</td>
+<td align="left">2021</td>
+<td align="left">教育</td>
+<td align="right">295.10</td>
+<td align="left">亿元</td>
+<td align="left">v6_cz_yszc_jy</td>
 </tr>
 </tbody>
 </table>
@@ -2068,22 +2077,6 @@ variables.</p></li>
 <th align="left">variables</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
-<td align="left">江西</td>
-<td align="left">2016</td>
-<td align="left">种蛋鸡场</td>
-<td align="right">770185</td>
-<td align="left">套</td>
-<td align="left">v8_t4_nmcl_zdjc</td>
-</tr>
-<tr class="even">
-<td align="left">海南</td>
-<td align="left">2016</td>
-<td align="left">种水牛场</td>
-<td align="right">0</td>
-<td align="left">枚</td>
-<td align="left">v8_t8_scpt_zsnc</td>
-</tr>
 <tr class="odd">
 <td align="left">陕西</td>
 <td align="left">2011</td>
@@ -2148,6 +2141,22 @@ variables.</p></li>
 <td align="left">个</td>
 <td align="left">v8_t1_zcqc_zzc</td>
 </tr>
+<tr class="odd">
+<td align="left">北京</td>
+<td align="left">2013</td>
+<td align="left">种羊场</td>
+<td align="right">1300</td>
+<td align="left">只</td>
+<td align="left">v8_t7_cczcq_zyc</td>
+</tr>
+<tr class="even">
+<td align="left">辽宁</td>
+<td align="left">2018</td>
+<td align="left">种绒山羊场</td>
+<td align="right">4617</td>
+<td align="left">只</td>
+<td align="left">v8_t7_nfmccl_zmsyc</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -2184,24 +2193,24 @@ NO_num, NO_num_p1, NO_num_p2, NO_tail.</p></li>
 <code class="sourceCode R"><span><span class="va">PubNKRDP</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">kable</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
-<col width="1%">
+<col width="2%">
 <col width="3%">
-<col width="5%">
+<col width="6%">
 <col width="2%">
 <col width="29%">
 <col width="10%">
 <col width="3%">
 <col width="2%">
-<col width="12%">
+<col width="10%">
 <col width="3%">
 <col width="3%">
 <col width="3%">
 <col width="3%">
 <col width="3%">
-<col width="3%">
-<col width="3%">
+<col width="4%">
+<col width="4%">
 <col width="3%">
 </colgroup>
 <thead><tr class="header">
@@ -2227,25 +2236,6 @@ NO_num, NO_num_p1, NO_num_p2, NO_tail.</p></li>
 <tr class="odd">
 <td align="left">2018</td>
 <td align="left">20191015</td>
-<td align="left">2018YFC0809800</td>
-<td align="left">583</td>
-<td align="left">社区风险监测与防范关键技术研究</td>
-<td align="left">天津大学</td>
-<td align="left">王文俊</td>
-<td align="left">2365</td>
-<td align="left">公共安全风险防控与应急技术装备</td>
-<td align="left">NA</td>
-<td align="left"></td>
-<td align="left">2018</td>
-<td align="left">YFC</td>
-<td align="left">0809800</td>
-<td align="left">08</td>
-<td align="left">09800</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">2018</td>
-<td align="left">20191015</td>
 <td align="left">2018YFC1505700</td>
 <td align="left">832</td>
 <td align="left">青藏高原地-气相互作用及其对下游天气气候的影响</td>
@@ -2262,7 +2252,7 @@ NO_num, NO_num_p1, NO_num_p2, NO_tail.</p></li>
 <td align="left">05700</td>
 <td align="left">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2019</td>
 <td align="left">20191015</td>
 <td align="left">2019YFA0110800</td>
@@ -2281,7 +2271,7 @@ NO_num, NO_num_p1, NO_num_p2, NO_tail.</p></li>
 <td align="left">10800</td>
 <td align="left">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2019</td>
 <td align="left">20191015</td>
 <td align="left">2019YFA0508500</td>
@@ -2300,7 +2290,7 @@ NO_num, NO_num_p1, NO_num_p2, NO_tail.</p></li>
 <td align="left">08500</td>
 <td align="left">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2018</td>
 <td align="left">20191015</td>
 <td align="left">2018YFC1903300</td>
@@ -2319,7 +2309,7 @@ NO_num, NO_num_p1, NO_num_p2, NO_tail.</p></li>
 <td align="left">03300</td>
 <td align="left">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2020</td>
 <td align="left">20201127</td>
 <td align="left">2020YFA0711500</td>
@@ -2338,7 +2328,7 @@ NO_num, NO_num_p1, NO_num_p2, NO_tail.</p></li>
 <td align="left">11500</td>
 <td align="left">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2018</td>
 <td align="left">20191015</td>
 <td align="left">2018YFA0507900</td>
@@ -2357,7 +2347,7 @@ NO_num, NO_num_p1, NO_num_p2, NO_tail.</p></li>
 <td align="left">07900</td>
 <td align="left">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2018</td>
 <td align="left">20191015</td>
 <td align="left">2018YFA0404500</td>
@@ -2376,7 +2366,7 @@ NO_num, NO_num_p1, NO_num_p2, NO_tail.</p></li>
 <td align="left">04500</td>
 <td align="left">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">2018</td>
 <td align="left">20191015</td>
 <td align="left">2018YFC1407000</td>
@@ -2395,7 +2385,7 @@ NO_num, NO_num_p1, NO_num_p2, NO_tail.</p></li>
 <td align="left">07000</td>
 <td align="left">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">2020</td>
 <td align="left">20201223</td>
 <td align="left">2020YFB1711500</td>
@@ -2412,6 +2402,25 @@ NO_num, NO_num_p1, NO_num_p2, NO_tail.</p></li>
 <td align="left">1711500</td>
 <td align="left">17</td>
 <td align="left">11500</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">20201223</td>
+<td align="left">2020YFB2009700</td>
+<td align="left">178</td>
+<td align="left">阀口独立控制型大流量液压 阀关键技术研究与示范应用</td>
+<td align="left">江苏恒立液压股份有限公司</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">制造基础技术与关键部件</td>
+<td align="left">3</td>
+<td align="left"></td>
+<td align="left">2020</td>
+<td align="left">YFB</td>
+<td align="left">2009700</td>
+<td align="left">20</td>
+<td align="left">09700</td>
 <td align="left">NA</td>
 </tr>
 </tbody>
@@ -2445,64 +2454,64 @@ province.</p></li>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">27</td>
-<td align="left">06</td>
-<td align="left">广东河源国家农业科技园区</td>
-<td align="left">广东</td>
-</tr>
-<tr class="even">
 <td align="right">37</td>
 <td align="left">05</td>
 <td align="left">山东泰安国家农业科技园区</td>
 <td align="left">山东</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">11</td>
 <td align="left">02</td>
 <td align="left">新疆昌吉国家农业科技园区</td>
 <td align="left">新疆</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">4</td>
 <td align="left">09</td>
 <td align="left">内蒙古自治区兴安盟国家农业科技园区</td>
 <td align="left">内蒙古</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">11</td>
 <td align="left">09</td>
 <td align="left">安徽黄山国家农业科技园区</td>
 <td align="left">安徽</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">3</td>
 <td align="left">04</td>
 <td align="left">山西运城国家农业科技园区</td>
 <td align="left">山西</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">25</td>
 <td align="left">03</td>
 <td align="left">新疆伊犁国家农业科技园区</td>
 <td align="left">新疆</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">4</td>
 <td align="left">02</td>
 <td align="left">安徽宿州国家农业科技园区</td>
 <td align="left">安徽</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">9</td>
 <td align="left">06</td>
 <td align="left">重庆潼南国家农业科技园区</td>
 <td align="left">重庆</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">22</td>
 <td align="left">06</td>
 <td align="left">湖北荆门国家农业科技园区</td>
 <td align="left">湖北</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="left">03</td>
+<td align="left">广西北海国家农业科技园区</td>
+<td align="left">广西</td>
 </tr>
 </tbody>
 </table>
@@ -2536,74 +2545,74 @@ province.</p></li>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">2019</td>
-<td align="right">23</td>
-<td align="left">浙江金华国家农业科技园区</td>
-<td align="left">ok</td>
-<td align="left">浙江</td>
-</tr>
-<tr class="even">
 <td align="right">2021</td>
 <td align="right">46</td>
 <td align="left">陕西铜川国家农业科技园区</td>
 <td align="left">ok</td>
 <td align="left">陕西</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">2020</td>
 <td align="right">1</td>
 <td align="left">河北石家庄藁城国家农业科技园区</td>
 <td align="left">good</td>
 <td align="left">河北</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">2020</td>
 <td align="right">3</td>
 <td align="left">江苏南通国家农业科技园区</td>
 <td align="left">good</td>
 <td align="left">江苏</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">2019</td>
 <td align="right">6</td>
 <td align="left">贵州毕节国家农业科技园区</td>
 <td align="left">fail</td>
 <td align="left">贵州</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">2019</td>
 <td align="right">40</td>
 <td align="left">河南南阳国家农业科技园区</td>
 <td align="left">ok</td>
 <td align="left">河南</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">2021</td>
 <td align="right">3</td>
 <td align="left">吉林延边国家农业科技园区</td>
 <td align="left">retain</td>
 <td align="left">吉林</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">2019</td>
 <td align="right">43</td>
 <td align="left">湖北潜江国家农业科技园区</td>
 <td align="left">ok</td>
 <td align="left">湖北</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">2021</td>
 <td align="right">9</td>
 <td align="left">辽宁锦州国家农业科技园区</td>
 <td align="left">ok</td>
 <td align="left">辽宁</td>
 </tr>
+<tr class="odd">
+<td align="right">2021</td>
+<td align="right">1</td>
+<td align="left">宁夏银川国家农业科技园区</td>
+<td align="left">cancel</td>
+<td align="left">宁夏</td>
+</tr>
 <tr class="even">
 <td align="right">2021</td>
-<td align="right">8</td>
-<td align="left">深圳宝安国家农业科技园区</td>
-<td align="left">retain</td>
-<td align="left">广东</td>
+<td align="right">13</td>
+<td align="left">江苏镇江国家农业科技园区</td>
+<td align="left">ok</td>
+<td align="left">江苏</td>
 </tr>
 </tbody>
 </table>
@@ -2646,14 +2655,6 @@ doc_num.</p></li>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">2021</td>
-<td align="right">15</td>
-<td align="left">河南信阳国家农业科技园区</td>
-<td align="left">pass</td>
-<td align="left">河南</td>
-<td align="left">国科办农2021-150号</td>
-</tr>
-<tr class="even">
 <td align="right">2017</td>
 <td align="right">34</td>
 <td align="left">安徽蚌埠国家农业科技园区</td>
@@ -2661,7 +2662,7 @@ doc_num.</p></li>
 <td align="left">安徽</td>
 <td align="left">国科办函农2017-767</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">2017</td>
 <td align="right">42</td>
 <td align="left">安徽合肥国家农业科技园区</td>
@@ -2669,7 +2670,7 @@ doc_num.</p></li>
 <td align="left">安徽</td>
 <td align="left">国科办函农2017-767</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">2018</td>
 <td align="right">5</td>
 <td align="left">江苏无锡国家农业科技园区</td>
@@ -2677,7 +2678,7 @@ doc_num.</p></li>
 <td align="left">江苏</td>
 <td align="left">国科办农2018-99</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">2019</td>
 <td align="right">72</td>
 <td align="left">上海崇明国家农业科技园区</td>
@@ -2685,7 +2686,7 @@ doc_num.</p></li>
 <td align="left">上海</td>
 <td align="left">国科办农2019-87</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">2017</td>
 <td align="right">19</td>
 <td align="left">甘肃武威国家农业科技园区</td>
@@ -2693,7 +2694,7 @@ doc_num.</p></li>
 <td align="left">甘肃</td>
 <td align="left">国科办函农2017-767</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">2018</td>
 <td align="right">39</td>
 <td align="left">陕西咸阳国家农业科技园区</td>
@@ -2701,7 +2702,7 @@ doc_num.</p></li>
 <td align="left">陕西</td>
 <td align="left">国科办农2018-99</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">2023</td>
 <td align="right">15</td>
 <td align="left">湖北咸宁国家农业科技园区</td>
@@ -2709,7 +2710,7 @@ doc_num.</p></li>
 <td align="left">湖北</td>
 <td align="left">国科办农2023-60</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">2021</td>
 <td align="right">31</td>
 <td align="left">新疆博尔塔拉国家农业科技园区</td>
@@ -2717,12 +2718,20 @@ doc_num.</p></li>
 <td align="left">新疆</td>
 <td align="left">国科办农2021-150号</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">2019</td>
 <td align="right">5</td>
 <td align="left">河北辛集国家农业科技园区</td>
 <td align="left">pass</td>
 <td align="left">河北</td>
+<td align="left">国科办农2019-87</td>
+</tr>
+<tr class="even">
+<td align="right">2019</td>
+<td align="right">8</td>
+<td align="left">广西贺州国家农业科技园区</td>
+<td align="left">pass</td>
+<td align="left">广西</td>
 <td align="left">国科办农2019-87</td>
 </tr>
 </tbody>
@@ -2738,8 +2747,8 @@ format</strong> data set containing Details of Hi-tech Firms Numbers on
 Public Site.</p>
 <ul>
 <li><p>Totally 4 columns including: index, year, province, num.</p></li>
-<li><p>Totally 186 rows.</p></li>
-<li><p>Years range from 2018 to 2023</p></li>
+<li><p>Totally 217 rows.</p></li>
+<li><p>Years range from 2018 to 2024</p></li>
 </ul>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">HitechFirmsPub</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -2754,64 +2763,184 @@ Public Site.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">8</td>
-<td align="right">2020</td>
-<td align="left">黑龙江</td>
-<td align="right">1270</td>
-</tr>
-<tr class="even">
 <td align="right">10</td>
-<td align="right">2019</td>
+<td align="right">2020</td>
 <td align="left">江苏</td>
-<td align="right">10689</td>
-</tr>
-<tr class="odd">
-<td align="right">20</td>
-<td align="right">2022</td>
-<td align="left">广西</td>
-<td align="right">1376</td>
+<td align="right">13114</td>
 </tr>
 <tr class="even">
 <td align="right">20</td>
-<td align="right">2020</td>
+<td align="right">2023</td>
 <td align="left">广西</td>
-<td align="right">1021</td>
+<td align="right">1281</td>
 </tr>
 <tr class="odd">
+<td align="right">20</td>
+<td align="right">2021</td>
+<td align="left">广西</td>
+<td align="right">1484</td>
+</tr>
+<tr class="even">
 <td align="right">13</td>
-<td align="right">2018</td>
+<td align="right">2019</td>
 <td align="left">福建</td>
-<td align="right">1636</td>
+<td align="right">1951</td>
+</tr>
+<tr class="odd">
+<td align="right">14</td>
+<td align="right">2018</td>
+<td align="left">江西</td>
+<td align="right">1868</td>
 </tr>
 <tr class="even">
 <td align="right">18</td>
-<td align="right">2019</td>
+<td align="right">2020</td>
 <td align="left">湖南</td>
-<td align="right">2637</td>
+<td align="right">4071</td>
 </tr>
 <tr class="odd">
 <td align="right">5</td>
-<td align="right">2021</td>
+<td align="right">2022</td>
 <td align="left">内蒙古</td>
-<td align="right">481</td>
+<td align="right">681</td>
 </tr>
 <tr class="even">
 <td align="right">18</td>
-<td align="right">2023</td>
+<td align="right">2024</td>
 <td align="left">湖南</td>
-<td align="right">6487</td>
+<td align="right">6083</td>
 </tr>
 <tr class="odd">
 <td align="right">19</td>
-<td align="right">2019</td>
+<td align="right">2020</td>
 <td align="left">广东</td>
-<td align="right">17254</td>
+<td align="right">20279</td>
 </tr>
 <tr class="even">
 <td align="right">30</td>
-<td align="right">2021</td>
+<td align="right">2022</td>
 <td align="left">宁夏</td>
-<td align="right">142</td>
+<td align="right">216</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="pubopenshare">PubOpenShare<a class="anchor" aria-label="anchor" href="#pubopenshare"></a>
+</h4>
+<p><strong>数据来源</strong>：科学技术部火炬高技术产业开发中心<a href="http://www.innocom.gov.cn" class="external-link uri">http://www.innocom.gov.cn</a>。</p>
+<p><strong>说明</strong>：本数据集直接在<code>techme</code>项目下进行原始数据（data-raw）的清洗和整理（“techme/data-raw/public-site/most-jcs-open-share/xlsx/”），再经由”techme/data-raw/public-site/most-jcs-open-share/wfl-PubOpenShare.R”进行批量读取和数据集编译。</p>
+<p><strong><code>PubOpenShare</code></strong>：A <strong>wide
+format</strong> data set containing Details of Evaluation result of
+Major Scientific Infrastructure and Large-scale Scientific Instruments
+Sharing.</p>
+<ul>
+<li><p>Totally 6 columns including: year, index, institution, result,
+administrator, province.</p></li>
+<li><p>Totally 2453 rows.</p></li>
+<li><p>Years range from 2018 to 2024</p></li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">PubOpenShare</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">kable</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="5%">
+<col width="6%">
+<col width="48%">
+<col width="7%">
+<col width="21%">
+<col width="10%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="right">index</th>
+<th align="left">institution</th>
+<th align="left">result</th>
+<th align="left">administrator</th>
+<th align="left">province</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="right">92</td>
+<td align="left">中国林业科学研究院资源信息研究所</td>
+<td align="left">良好</td>
+<td align="left">国家林业和草原局</td>
+<td align="left">北京</td>
+</tr>
+<tr class="even">
+<td align="right">2019</td>
+<td align="right">291</td>
+<td align="left">中国中医科学院中药研究所</td>
+<td align="left">合格</td>
+<td align="left">国家中医药管理局</td>
+<td align="left">北京</td>
+</tr>
+<tr class="odd">
+<td align="right">2019</td>
+<td align="right">146</td>
+<td align="left">中国科学院遥感与数字地球研究所</td>
+<td align="left">合格</td>
+<td align="left">中国科学院</td>
+<td align="left">北京</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="right">277</td>
+<td align="left">国家海洋局东海分局</td>
+<td align="left">合格</td>
+<td align="left">自然资源部</td>
+<td align="left">上海</td>
+</tr>
+<tr class="odd">
+<td align="right">2022</td>
+<td align="right">151</td>
+<td align="left">中国科学院深圳先进技术研究院</td>
+<td align="left">合格</td>
+<td align="left">NA</td>
+<td align="left">广东</td>
+</tr>
+<tr class="even">
+<td align="right">2019</td>
+<td align="right">82</td>
+<td align="left">中国科学院植物研究所</td>
+<td align="left">良好</td>
+<td align="left">中国科学院</td>
+<td align="left">北京</td>
+</tr>
+<tr class="odd">
+<td align="right">2024</td>
+<td align="right">239</td>
+<td align="left">中国农业科学院草原研究所</td>
+<td align="left">合格</td>
+<td align="left"></td>
+<td align="left">内蒙古</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="right">324</td>
+<td align="left">中国医学科学院肿瘤医院</td>
+<td align="left">合格</td>
+<td align="left">国家卫生健康委员会</td>
+<td align="left">北京</td>
+</tr>
+<tr class="odd">
+<td align="right">2019</td>
+<td align="right">85</td>
+<td align="left">中国农业科学院农业质量标准与检测技术研究所</td>
+<td align="left">良好</td>
+<td align="left">农业农村部</td>
+<td align="left">北京</td>
+</tr>
+<tr class="even">
+<td align="right">2021</td>
+<td align="right">15</td>
+<td align="left">清华大学</td>
+<td align="left">优秀</td>
+<td align="left">NA</td>
+<td align="left">北京</td>
 </tr>
 </tbody>
 </table>
@@ -2830,126 +2959,137 @@ format</strong> data set containing Details of Evaluation result of
 National Agricultural Sci-tech Details list of Observe Stations of MOA
 and MOE.</p>
 <ul>
-<li><p>Totally 6 columns including: officer, year, index, name,
-institution, province.</p></li>
-<li><p>Totally 158 rows.</p></li>
-<li><p>Years range from 2018 to 2019</p></li>
+<li><p>Totally 7 columns including: officer, year, index, name,
+institution, administrator, province.</p></li>
+<li><p>Totally 324 rows.</p></li>
+<li><p>Years range from 2018 to 2021</p></li>
 </ul>
-<!---CARS from MOA----><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<!---CARS from MOA----><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"PubCars"</span><span class="op">)</span></span></code></pre></div>
 <p><strong><code>PubCars</code></strong>：A <strong>wide format</strong>
 data set containing Details of China Agricultural Research System(CARS)
 from MOA.</p>
 <ul>
-<li><p>Totally 16 columns including: year, index, area_num_eng,
+<li><p>Totally 14 columns including: year, index, area_num_eng,
 area_name, chairman_industry, institution_industry, func_num, func_name,
 func_inst, func_director, researcher_area, researcher_name,
-researcher_inst, province_industry, province_func,
-province_researcher.</p></li>
-<li><p>Totally 1934 rows.</p></li>
-<li><p>Years range from 2011 to 2023</p></li>
+researcher_inst, province.</p></li>
+<li><p>Totally 1783 rows.</p></li>
+<li><p>Years range from 2011 to 2024</p></li>
 </ul>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">PubObsStation</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">kable</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table style="width:100%;" class="table">
 <colgroup>
-<col width="6%">
 <col width="4%">
+<col width="2%">
+<col width="3%">
+<col width="28%">
+<col width="40%">
+<col width="14%">
 <col width="5%">
-<col width="49%">
-<col width="27%">
-<col width="7%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">officer</th>
-<th align="right">year</th>
+<th align="left">year</th>
 <th align="left">index</th>
 <th align="left">name</th>
 <th align="left">institution</th>
+<th align="left">administrator</th>
 <th align="left">province</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">MOE</td>
-<td align="right">2019</td>
+<td align="left">MOA</td>
+<td align="left">2019</td>
+<td align="left">19</td>
+<td align="left">国家农业科学渔业资源环境秦皇岛观测实验站</td>
+<td align="left">中国水产科学研究院北戴河中心实验站</td>
+<td align="left">NA</td>
+<td align="left">河北</td>
+</tr>
+<tr class="even">
+<td align="left">MOST</td>
+<td align="left">2019</td>
 <td align="left">18</td>
-<td align="left">湖北咸宁长江中游农业环境监测与保护教育部野外科学观测研究站</td>
-<td align="left">华中农业大学</td>
-<td align="left">湖北</td>
+<td align="left">青海瓦里关大气成分本底国家野外科学观测研究站</td>
+<td align="left">中国气象科学研究院、青海省气象局</td>
+<td align="left">气象局</td>
+<td align="left">北京</td>
+</tr>
+<tr class="odd">
+<td align="left">MOA</td>
+<td align="left">2018</td>
+<td align="left">19</td>
+<td align="left">国家土壤质量雁山观测实验站</td>
+<td align="left">桂林市农业科学院</td>
+<td align="left">NA</td>
+<td align="left">广西</td>
 </tr>
 <tr class="even">
 <td align="left">MOA</td>
-<td align="right">2018</td>
-<td align="left">24</td>
-<td align="left">国家植物保护信阳观测实验站</td>
-<td align="left">信阳市农业科学院</td>
+<td align="left">2019</td>
+<td align="left">69</td>
+<td align="left">国家农业科学农业环境拉萨观测实验站</td>
+<td align="left">中国科学院地理科学与资源研究所</td>
+<td align="left">NA</td>
+<td align="left">北京</td>
+</tr>
+<tr class="odd">
+<td align="left">MOST</td>
+<td align="left">2019</td>
+<td align="left">85</td>
+<td align="left">西藏林芝高山森林生态系统国家野外科学观测研究站</td>
+<td align="left">西藏农牧学院</td>
+<td align="left">西藏自治区科技厅、林草局</td>
+<td align="left">西藏</td>
+</tr>
+<tr class="even">
+<td align="left">MOA</td>
+<td align="left">2019</td>
+<td align="left">30</td>
+<td align="left">国家农业科学土壤质量武川观测实验站</td>
+<td align="left">内蒙古农牧业科学院</td>
+<td align="left">NA</td>
+<td align="left">内蒙古</td>
+</tr>
+<tr class="odd">
+<td align="left">MOST</td>
+<td align="left">2019</td>
+<td align="left">76</td>
+<td align="left">海南三亚海水环境材料腐蚀国家野外科学观测研究站</td>
+<td align="left">中国船舶重工集团公司第七二五研究所</td>
+<td align="left">国资委</td>
 <td align="left">河南</td>
 </tr>
-<tr class="odd">
-<td align="left">MOA</td>
-<td align="right">2019</td>
-<td align="left">54</td>
-<td align="left">国家农业科学农业环境晋中观测实验站</td>
-<td align="left">山西省农业科学院</td>
-<td align="left">山西</td>
-</tr>
 <tr class="even">
-<td align="left">MOA</td>
-<td align="right">2019</td>
-<td align="left">17</td>
-<td align="left">国家农业科学渔业资源环境武汉观测实验站</td>
-<td align="left">中国水产科学研究院长江水产研究所</td>
-<td align="left">湖北</td>
+<td align="left">MOST</td>
+<td align="left">2021</td>
+<td align="left">63</td>
+<td align="left">西藏那曲高寒草地生态系统国家野外科学观测研究站</td>
+<td align="left">中国科学院地理科学与资源研究所、中国科学院青藏高原研究所、西藏大学</td>
+<td align="left">西藏自治区科学技术厅</td>
+<td align="left">北京</td>
 </tr>
 <tr class="odd">
 <td align="left">MOA</td>
-<td align="right">2019</td>
-<td align="left">36</td>
-<td align="left">国家农业科学农业环境六合观测实验站</td>
-<td align="left">江苏省农业科学院</td>
-<td align="left">江苏</td>
+<td align="left">2018</td>
+<td align="left">1</td>
+<td align="left">国家土壤质量德州观测实验站</td>
+<td align="left">中国农业科学院农业资源与农业区划研究所</td>
+<td align="left">NA</td>
+<td align="left">北京</td>
 </tr>
 <tr class="even">
-<td align="left">MOA</td>
-<td align="right">2018</td>
-<td align="left">26</td>
-<td align="left">国家土壤质量进贤观测实验站</td>
-<td align="left">江西省红壤研究所</td>
-<td align="left">江西</td>
-</tr>
-<tr class="odd">
-<td align="left">MOE</td>
-<td align="right">2019</td>
-<td align="left">38</td>
-<td align="left">波密地质灾害教育部野外科学观测研究站</td>
-<td align="left">西藏大学</td>
-<td align="left">西藏</td>
-</tr>
-<tr class="even">
-<td align="left">MOA</td>
-<td align="right">2019</td>
-<td align="left">15</td>
-<td align="left">国家农业科学农业环境大理观测实验站</td>
-<td align="left">农业农村部环境保护科研监测所</td>
-<td align="left">天津</td>
-</tr>
-<tr class="odd">
-<td align="left">MOA</td>
-<td align="right">2019</td>
-<td align="left">64</td>
-<td align="left">国家农业科学农业环境日喀则观测实验站</td>
-<td align="left">西藏自治区农牧科学院</td>
-<td align="left">西藏</td>
-</tr>
-<tr class="even">
-<td align="left">MOA</td>
-<td align="right">2018</td>
-<td align="left">29</td>
-<td align="left">国家土壤质量深州观测实验站</td>
-<td align="left">河北省农林科学院</td>
-<td align="left">河北</td>
+<td align="left">MOST</td>
+<td align="left">2021</td>
+<td align="left">48</td>
+<td align="left">辽宁盘锦湿地生态系统国家野外科学观测研究站</td>
+<td align="left">沈阳农业大学</td>
+<td align="left">辽宁省科学技术厅</td>
+<td align="left">辽宁</td>
 </tr>
 </tbody>
 </table>
@@ -2966,17 +3106,17 @@ name_origin, name_change, mark.</p></li>
 <li><p>Totally 287 rows.</p></li>
 <li><p>Years range from 2010 to 2020</p></li>
 </ul>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">PubBreedingXmj</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">kable</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
 <col width="5%">
 <col width="6%">
 <col width="9%">
 <col width="25%">
-<col width="33%">
+<col width="31%">
 <col width="12%">
 <col width="9%">
 </colgroup>
@@ -2990,78 +3130,6 @@ name_origin, name_change, mark.</p></li>
 <th align="left">mark</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
-<td align="left">2011</td>
-<td align="left">1</td>
-<td align="left">北京</td>
-<td align="left">国家生猪核心育种场</td>
-<td align="left">北京六马养猪科技有限公司</td>
-<td align="left">NA</td>
-<td align="left">遴选公示</td>
-</tr>
-<tr class="even">
-<td align="left">2019</td>
-<td align="left">4</td>
-<td align="left">甘肃</td>
-<td align="left">国家肉牛核心育种场</td>
-<td align="left">甘肃共裕高新农牧科技开发有限公司</td>
-<td align="left">NA</td>
-<td align="left">遴选公示</td>
-</tr>
-<tr class="odd">
-<td align="left">2014</td>
-<td align="left">8</td>
-<td align="left">四川</td>
-<td align="left">国家蛋鸡良种扩繁推广基地</td>
-<td align="left">四川圣迪乐村生态食品股份有限公司</td>
-<td align="left">NA</td>
-<td align="left">遴选公示</td>
-</tr>
-<tr class="even">
-<td align="left">2015</td>
-<td align="left">14</td>
-<td align="left">广东</td>
-<td align="left">国家生猪核心育种场</td>
-<td align="left">肇庆市益信原种猪场有限公司</td>
-<td align="left">NA</td>
-<td align="left">遴选公示</td>
-</tr>
-<tr class="odd">
-<td align="left">2019</td>
-<td align="left">9</td>
-<td align="left">四川</td>
-<td align="left">国家肉羊核心育种场</td>
-<td align="left">四川南江黄羊原种场</td>
-<td align="left">NA</td>
-<td align="left">遴选公示</td>
-</tr>
-<tr class="even">
-<td align="left">2015</td>
-<td align="left">5</td>
-<td align="left">浙江</td>
-<td align="left">国家生猪核心育种场</td>
-<td align="left">杭州大观山种猪育种有限公司</td>
-<td align="left">NA</td>
-<td align="left">遴选公示</td>
-</tr>
-<tr class="odd">
-<td align="left">2013</td>
-<td align="left">7</td>
-<td align="left">山东</td>
-<td align="left">国家生猪核心育种场</td>
-<td align="left">山东益生种畜禽股份有限公司</td>
-<td align="left">NA</td>
-<td align="left">遴选公示</td>
-</tr>
-<tr class="even">
-<td align="left">2012</td>
-<td align="left">11</td>
-<td align="left">湖北</td>
-<td align="left">国家生猪核心育种场</td>
-<td align="left">湖北省畜牧兽医局桑梓湖种猪场</td>
-<td align="left">NA</td>
-<td align="left">遴选公示</td>
-</tr>
 <tr class="odd">
 <td align="left">2019</td>
 <td align="left">1</td>
@@ -3080,6 +3148,78 @@ name_origin, name_change, mark.</p></li>
 <td align="left">NA</td>
 <td align="left">遴选公示</td>
 </tr>
+<tr class="odd">
+<td align="left">2018</td>
+<td align="left">2</td>
+<td align="left">广东</td>
+<td align="left">国家肉鸡核心育种场</td>
+<td align="left">台山市科朗现代农业有限公司</td>
+<td align="left">NA</td>
+<td align="left">遴选公示</td>
+</tr>
+<tr class="even">
+<td align="left">2015</td>
+<td align="left">11</td>
+<td align="left">陕西</td>
+<td align="left">国家肉牛核心育种场</td>
+<td align="left">陕西省秦川肉牛良种繁育中心</td>
+<td align="left">NA</td>
+<td align="left">遴选公示</td>
+</tr>
+<tr class="odd">
+<td align="left">2017</td>
+<td align="left">4</td>
+<td align="left">湖南</td>
+<td align="left">国家肉牛核心育种场</td>
+<td align="left">湖南天华实业有限公司</td>
+<td align="left">NA</td>
+<td align="left">遴选公示</td>
+</tr>
+<tr class="even">
+<td align="left">2010</td>
+<td align="left">7</td>
+<td align="left">海南</td>
+<td align="left">国家生猪核心育种场</td>
+<td align="left">海南罗牛山种猪育种有限公司</td>
+<td align="left">NA</td>
+<td align="left">遴选公示</td>
+</tr>
+<tr class="odd">
+<td align="left">2012</td>
+<td align="left">15</td>
+<td align="left">广西</td>
+<td align="left">国家生猪核心育种场</td>
+<td align="left">桂林美冠原种猪育种有限责任公司</td>
+<td align="left">NA</td>
+<td align="left">遴选公示</td>
+</tr>
+<tr class="even">
+<td align="left">2015</td>
+<td align="left">8</td>
+<td align="left">江西</td>
+<td align="left">国家生猪核心育种场</td>
+<td align="left">井冈山市傲新华富育种有限公司</td>
+<td align="left">NA</td>
+<td align="left">遴选公示</td>
+</tr>
+<tr class="odd">
+<td align="left">2010</td>
+<td align="left">4</td>
+<td align="left">江西</td>
+<td align="left">国家生猪核心育种场</td>
+<td align="left">江西省原种猪场有限公司</td>
+<td align="left">NA</td>
+<td align="left">遴选公示</td>
+</tr>
+<tr class="even">
+<td align="left">2015</td>
+<td align="left">13</td>
+<td align="left">广西</td>
+<td align="left">国家肉鸡良种扩繁推广基地</td>
+<td align="left">隆安凤鸣农牧有限公司</td>
+<td align="left">NA</td>
+<td align="left">遴选公示</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -3095,17 +3235,17 @@ com_name.</p></li>
 <li><p>Totally 3377 rows.</p></li>
 <li><p>Years range from 2010 to 2020</p></li>
 </ul>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">PubStandardXmj</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">kable</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table style="width:100%;" class="table">
+<table class="table">
 <colgroup>
+<col width="6%">
 <col width="7%">
-<col width="8%">
-<col width="13%">
-<col width="14%">
-<col width="56%">
+<col width="11%">
+<col width="12%">
+<col width="62%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">year</th>
@@ -3116,74 +3256,74 @@ com_name.</p></li>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">2017</td>
-<td align="left">129</td>
-<td align="left">大连</td>
-<td align="left">肉鸡</td>
-<td align="left">大连新宇牧业有限公司</td>
+<td align="left">2015</td>
+<td align="left">54</td>
+<td align="left">辽宁</td>
+<td align="left">生猪</td>
+<td align="left">盘山县庆隆三元猪业有限公司</td>
 </tr>
 <tr class="even">
-<td align="left">2020</td>
-<td align="left">87</td>
-<td align="left">河南</td>
-<td align="left">奶牛</td>
-<td align="left">滑县光明生态示范奶牛养殖有限公司</td>
-</tr>
-<tr class="odd">
 <td align="left">2011</td>
-<td align="left">46</td>
-<td align="left">山西</td>
-<td align="left">肉牛</td>
-<td align="left">山西鼎胜农牧科技开发有限公司</td>
-</tr>
-<tr class="even">
-<td align="left">2020</td>
-<td align="left">15</td>
-<td align="left">山西</td>
+<td align="left">383</td>
+<td align="left">四川</td>
 <td align="left">生猪</td>
-<td align="left">正大畜禽（大同）有限公司</td>
+<td align="left">遂宁安居区金龟村曾白林生猪养殖专业合作社顺木养殖场</td>
 </tr>
 <tr class="odd">
 <td align="left">2017</td>
-<td align="left">331</td>
-<td align="left">河南</td>
+<td align="left">180</td>
+<td align="left">江苏</td>
 <td align="left">生猪</td>
-<td align="left">通许牧原农牧有限公司第四分场</td>
+<td align="left">南通赛天蓬牧业有限公司</td>
 </tr>
 <tr class="even">
-<td align="left">2015</td>
-<td align="left">120</td>
-<td align="left">浙江</td>
-<td align="left">生猪</td>
-<td align="left">浙江美保龙种猪育种有限公司</td>
+<td align="left">2016</td>
+<td align="left">439</td>
+<td align="left">广西</td>
+<td align="left">肉羊</td>
+<td align="left">大新县福隆乡楚烽养殖场</td>
 </tr>
 <tr class="odd">
-<td align="left">2017</td>
-<td align="left">140</td>
-<td align="left">吉林</td>
-<td align="left">肉鸡</td>
-<td align="left">榆树市刘家合心村正榆肉鸡养殖专业合作社</td>
-</tr>
-<tr class="even">
 <td align="left">2010</td>
-<td align="left">52</td>
-<td align="left">河北</td>
-<td align="left">奶牛</td>
-<td align="left">康保县树棠牧业有限公司</td>
-</tr>
-<tr class="odd">
-<td align="left">2015</td>
-<td align="left">245</td>
-<td align="left">湖南</td>
-<td align="left">生猪</td>
-<td align="left">永安农牧开发责任有限公司</td>
+<td align="left">83</td>
+<td align="left">吉林</td>
+<td align="left">蛋鸡</td>
+<td align="left">九台市龙嘉镇秀文养殖场</td>
 </tr>
 <tr class="even">
-<td align="left">2019</td>
-<td align="left">6</td>
-<td align="left">河北</td>
-<td align="left">肉鸭</td>
-<td align="left">河北乐寿鸭业有限责任公司养殖一分公司</td>
+<td align="left">2014</td>
+<td align="left">184</td>
+<td align="left">河南</td>
+<td align="left">蛋鸡</td>
+<td align="left">河南三高农牧股份有限公司第五养鸡场</td>
+</tr>
+<tr class="odd">
+<td align="left">2010</td>
+<td align="left">142</td>
+<td align="left">浙江</td>
+<td align="left">肉鸡</td>
+<td align="left">杭州萧山志伟家禽有限公司</td>
+</tr>
+<tr class="even">
+<td align="left">2017</td>
+<td align="left">443</td>
+<td align="left">广东</td>
+<td align="left">肉牛</td>
+<td align="left">高州市春色养殖专业合作社</td>
+</tr>
+<tr class="odd">
+<td align="left">2017</td>
+<td align="left">243</td>
+<td align="left">江西</td>
+<td align="left">生猪</td>
+<td align="left">江西省正邦养殖有限公司龙南分公司桃江良种猪场</td>
+</tr>
+<tr class="even">
+<td align="left">2013</td>
+<td align="left">268</td>
+<td align="left">四川</td>
+<td align="left">肉牛</td>
+<td align="left">广安市广安区三合肉牛养殖专业合作社</td>
 </tr>
 </tbody>
 </table>
@@ -3201,7 +3341,7 @@ com_name.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
