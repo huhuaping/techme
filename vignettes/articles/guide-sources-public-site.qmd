@@ -1,7 +1,5 @@
 ---
 title: "网站数据来源"
-vignette: >
-  %\VignetteIndexEntry{guide sources public site}
 ---
 
 ```{r}

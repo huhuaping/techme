@@ -1,7 +1,5 @@
 ---
 title: "年鉴数据来源"
-vignette: >
-  %\VignetteIndexEntry{guide sources yearbook}
 ---
 
 ```{r}
