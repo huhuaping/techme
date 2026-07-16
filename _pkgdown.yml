@@ -3,7 +3,7 @@ template:
   bootstrap: 5
 lang: zh_CN
 development:
-  mode: auto
+  mode: release
 reference:
 - title: Data Subset from the Agriculture Yearbook
   desc: |
