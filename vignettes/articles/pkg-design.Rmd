@@ -1,5 +1,7 @@
 ---
 title: "01-Techme包设计"
+vignette: >
+  %\VignetteIndexEntry{pkg design}
 ---
 
 ## 数据集安全性：暂时不对外开放
@@ -69,4 +71,3 @@ title: "01-Techme包设计"
 
 - 自动生成变量名：如v04_gx_nbzh_jcyj
 - 自动生成摘要标签： 如“高校_内部支出_基础研究”
-
