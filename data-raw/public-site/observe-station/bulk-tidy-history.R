@@ -2,8 +2,7 @@
 # ==== prepare ====
 ## load pacakge
 
-require(devtools)
-load_all()
+source("data-raw/deps/load-dev.R")
 
 source("data-raw/set-global.R")
 

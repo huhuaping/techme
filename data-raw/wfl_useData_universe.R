@@ -1,8 +1,6 @@
 # write document
-require(devtools)
-library(glue)
+source("data-raw/deps/load-dev.R")
 library(here)
-load_all()
 
 source("data-raw/update-yearbook/wfl_useData.R", encoding = "UTF-8")
 

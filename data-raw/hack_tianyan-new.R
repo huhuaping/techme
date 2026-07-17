@@ -1,7 +1,6 @@
 ## code to prepare `hack_tianyan` dataset goes here
 source("data-raw/set-global.R")
-require(devtools)
-load_all()
+source("data-raw/deps/load-dev.R")
 
 # ===== your list =======
 ## it should  be unique and exclusive from 'queryTianyan'
@@ -17,10 +16,8 @@ list_ins <- openxlsx::read.xlsx(url_xlsx) %>%
 ##  load R pkgs
 library("RSelenium")
 library("xml2")
-require("rvest")
-require("stringr")
-require("tidyverse")
-require("tidyselect")
+source("data-raw/deps/load-core.R")
+source("data-raw/deps/load-scrape.R")
 
 
 #-------part 01 start docker + RSelenium-------
@@ -158,7 +155,7 @@ for (i in 1:length(list_ins)) {
     # get the address
     ## div contact col
     xpath_p41 <- "//div[contains(@class, 'index_contact-row')]//div[contains(@class, 'index_contact-col') ]"
-    xpath_p42 <- "/span[text() = '地址：']/following-sibling::span[1]"
+    xpath_p42 <- "/span[text() = '地址�?]/following-sibling::span[1]"
 
     xpath_sel <- paste0(xpath_p0, xpath_p41, xpath_p42)
 

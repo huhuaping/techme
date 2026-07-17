@@ -2,9 +2,8 @@
 
 require(unpivotr)
 library(XLConnect)
-library(tidyverse)
+source("data-raw/deps/load-core.R")
 library(readxl)
-library(glue)
 
 #-----construct file system and dir path----
 file_dir <- glue::glue("{dir_media}{dir_final}")

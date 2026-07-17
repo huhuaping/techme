@@ -59,8 +59,7 @@ PubStandardXmj <- tbl_result
 usethis::use_data(PubStandardXmj, overwrite = TRUE)
 
 # write document
-require(devtools)
-load_all()
+source("data-raw/deps/load-dev.R")
 use_r("Pub-StandardXmj")
 document_dt(PubStandardXmj)
 document()

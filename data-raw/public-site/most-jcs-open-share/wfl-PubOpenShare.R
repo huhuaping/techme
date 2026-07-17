@@ -2,8 +2,7 @@
 
 # ==== prepare ====
 ## load pacakge
-require(devtools)
-load_all()
+source("data-raw/deps/load-dev.R")
 source("data-raw/set-global.R")
 
 # ==== file path====
@@ -35,8 +34,7 @@ usethis::use_data(PubOpenShare,
 )
 
 # ====write document=====
-require(devtools)
-load_all()
+source("data-raw/deps/load-dev.R")
 use_r("PubOpenShare.R")
 document_dt(PubOpenShare)
 document()

@@ -66,8 +66,7 @@ LivestockBreeding <- df_use_units
 usethis::use_data(LivestockBreeding, overwrite = TRUE)
 
 # ====write document=====
-require(devtools)
-load_all()
+source("data-raw/deps/load-dev.R")
 use_r("Livestock-Breeding.R")
 document_dt(LivestockBreeding)
 document()

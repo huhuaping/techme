@@ -3,7 +3,7 @@
 ## code to prepare `unpivot_xls` dataset goes here
 require(unpivotr)
 library(XLConnect)
-library(tidyverse)
+source("data-raw/deps/load-core.R")
 #library(readxl)
 library(glue)
 
@@ -15,7 +15,7 @@ file_edited_path <- str_replace(file_unlocked_path, "unlocked", "edited")
 ## create new sheet and save save change to xls
 XLConnect::createSheet(wb, "add.sheet")
 XLConnect::saveWorkbook(wb,file = file_edited_path )
-#input <- tibble(myvalue="åœ° åŒº") # must be data.frame
+#input <- tibble(myvalue="åœ?åŒ?) # must be data.frame
 #writeWorksheet(wb, input, sheet = getSheets(wb)[1],
                #startRow = 3, startCol = 10)
 

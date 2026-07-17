@@ -1,6 +1,6 @@
 ## code to prepare `varsList` dataset goes here
 library("openxlsx")
-library(tidyverse)
+source("data-raw/deps/load-core.R")
 library("dplyr")
 library("stringr")
 library("usethis")

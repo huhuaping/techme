@@ -1,5 +1,4 @@
-require(devtools)
-load_all()
+source("data-raw/deps/load-dev.R")
 library(here)
 
 # Workflow: get target directory and  files ----
@@ -49,7 +48,7 @@ message(glue::glue("The target xlsx file is: {file_xlsx}"))
 
 ## check the xlsx file and may need to add "åœ°åŒº" to table column
 ## step 1: open the xlsx file
-## step 2ï¼š check the first column name
+## step 2ï¼?check the first column name
 ## step 3ï¼šcheck and save the log detail for yearly update
 ##         log information:
 ##         - dir.case
@@ -64,11 +63,11 @@ log_xlsx <- tibble::tribble(
 
 
 # Workflow: unpivot xlsx file ----
-## setting 1ï¼š whether drop columns and specify the header mode.
+## setting 1ï¼?whether drop columns and specify the header mode.
 cols_drop <- c(2) # drop the second column, as it is the english region column
 ## cols_drop <- NULL
 
-## setting 2ï¼š choose header mode
+## setting 2ï¼?choose header mode
 ## change mode on conditions if needed in `wfl_unpivot_livestock.R`
 header_mode <- c(
     "year", "vars", "vars-year", "vars-vars",
@@ -76,10 +75,10 @@ header_mode <- c(
 )
 (mode_sel <- header_mode[2])
 
-## setting 3ï¼š specify the regex pattern for table identifier
-# pattern_table <- "^åœ°.*åŒº" # not to use "ç»­è¡¨" !
+## setting 3ï¼?specify the regex pattern for table identifier
+# pattern_table <- "^åœ?*åŒ? # not to use "ç»­è¡¨" !
 
-## setting 4ï¼š specify the target block list
+## setting 4ï¼?specify the target block list
 ## use the target list by `get.targetList()`
 ## this function is interactive, you can choose the target list from the console
 list_block <- get.targetList()
@@ -111,10 +110,10 @@ df_out <- wfl.unpivotXlsx(
     header.mode = mode_sel, # default is "vars-year"
     vars.add = NULL, # vars_spc[2, ], # default is NULL, only used when header mode is "year"
     cols.drop = cols_drop, # default is NULL
-    pattern.table = "^åœ°.*åŒº", # default is "^åœ°.*åŒº"
-    reg_start = "^åœ°.*åŒº", # getRange() argument
-    reg_end = "^æ–°.*ç–†", # getRange() argument
-    unit_pattern = "å•ä½:|å•ä½ï¼š" # getInfo() argument
+    pattern.table = "^åœ?*åŒ?, # default is "^åœ?*åŒ?
+    reg_start = "^åœ?*åŒ?, # getRange() argument
+    reg_end = "^æ–?*ç–?, # getRange() argument
+    unit_pattern = "å•ä½:|å•ä½ï¼? # getInfo() argument
 )
 
 # View(df_out)

@@ -2,8 +2,7 @@
 # ==== prepare ====
 ## load pacakge
 
-require(devtools)
-load_all()
+source("data-raw/deps/load-dev.R")
 
 source("data-raw/set-global.R")
 
@@ -109,7 +108,7 @@ df_read <- readxl::read_excel(mypath)
 # =====step 6.3: match institution with province =====
 
 source("data-raw/update-public/wfl_matchProvince.R")
-myptn <- "、"
+myptn <- "�?
 df_province <- match_province(df = df_read,
                               ptn_inst = myptn)
 df_province <- df_read %>%
@@ -167,7 +166,7 @@ get_vars(varsList,lang = "eng", block = mytar, what = "chn_block4" )
 ## replacement pattern by collection
 tbl_pattern <- tribble(
   ~case, ~ptn, ~rpl,
-  "machine", c("谷物联合收割机"), c("联合收获机")#,
+  "machine", c("谷物联合收割�?), c("联合收获�?)#,
 )
 
 ## get my pattern
@@ -267,8 +266,7 @@ use_mydata(name.dt = name_dt,
 
 
 # ====step 12: write document=====
-require(devtools)
-load_all()
+source("data-raw/deps/load-dev.R")
 use_r("Pub-MachineCounty.R")
 # use my custom function  to help writing document
 do.call(techme::document_dt, list(as.name(name_dt)))

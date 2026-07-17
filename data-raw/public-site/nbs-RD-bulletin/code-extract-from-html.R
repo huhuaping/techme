@@ -1,9 +1,7 @@
 ## =====load pkgs=====
 library("xml2")
-require("rvest")
-require("stringr")
-require("tidyverse")
-require("tidyselect")
+source("data-raw/deps/load-core.R")
+source("data-raw/deps/load-scrape.R")
 library(here)
 library(openxlsx)
 library(fs)
@@ -63,14 +61,14 @@ write.xlsx(tbl_tidy, here(path_files))
 dir_from <- here("topic/public-site/nbs-RD-bulletin/")
 dir_to <- "D:/github/techme/data-raw/public-site/nbs-RD-bulletin/"
 
-### 第一次拷贝----
+### 第一次拷�?---
 ### 需要拷贝整个文件夹
 isFirst <- FALSE
 if (isFirst) {
   fs::dir_create(path = dir_to)
   fs::dir_copy(
     path = paste0(dir_from, "/02-xls"),
-    new_path = paste0(dir_to, "02-xls"), # 不需要斜杆!
+    new_path = paste0(dir_to, "02-xls"), # 不需要斜�?
     overwrite = TRUE
   )
 }
@@ -78,6 +76,6 @@ if (isFirst) {
 ### 只需要拷贝特定xlsx文件
 fs::file_copy(
   path = here(path_files),
-  new_path = paste0(dir_to, "02-xls/", name_files), # 不需要斜杆!
+  new_path = paste0(dir_to, "02-xls/", name_files), # 不需要斜�?
   overwrite = TRUE
 )

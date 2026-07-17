@@ -2,8 +2,7 @@
 
 # ==== prepare ====
 ## load pacakge
-require(devtools)
-load_all()
+source("data-raw/deps/load-dev.R")
 source("data-raw/set-global.R")
 
 # ==== file path====
@@ -36,8 +35,7 @@ usethis::use_data(PubFirmLeader,
 )
 
 # ====write document=====
-require(devtools)
-load_all()
+source("data-raw/deps/load-dev.R")
 use_r("PubFirmLeader.R")
 document_dt(PubFirmLeader)
 document()

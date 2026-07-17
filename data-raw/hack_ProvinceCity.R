@@ -2,7 +2,7 @@
 
 require("jsonlite")
 require("tidyjson")
-require("tidyverse")
+source("data-raw/deps/load-core.R")
 require(httr2)
 library(here)
 
@@ -13,7 +13,7 @@ path_to <- here("data-raw/xlsx/province-city.json")
 city <- fromJSON(path_to,simplifyVector = F)
 
 # 省份regex模式
-ptn <- c("维吾尔","回族","壮族","自治区","省","市")
+ptn <- c("维吾�?,"回族","壮族","自治�?,"�?,"�?)
 rpl <- rep("", length(ptn))
 # 地市regrex模式
 path_from <- here("data-raw/xlsx/chinese-minorities.txt")
@@ -28,7 +28,7 @@ dt_city <-   tidyjson::spread_all(city) %>%
   rename(city = "name",
          index = "document.id") %>%
   mutate(province_clean = mgsub::mgsub(province, ptn, rpl) ) %>%
-  mutate(city_clean = str_extract(city, "(.*)(?=市|自治州|地区|盟)")) %>%
+  mutate(city_clean = str_extract(city, "(.*)(?=市|自治州|地区|�?")) %>%
   mutate(city_clean = ifelse(is.na(city_clean)|city_clean=="",
                              "uncheck",
                              city_clean)) %>%
@@ -40,7 +40,7 @@ dt_city <-   tidyjson::spread_all(city) %>%
   mutate(
     city_clean = mgsub::mgsub(
       city_clean,
-      c("蒙古", "哈萨克"),
+      c("蒙古", "哈萨�?),
       rep("", 2)
       )
   )

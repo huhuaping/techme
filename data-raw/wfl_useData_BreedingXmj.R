@@ -55,8 +55,7 @@ PubBreedingXmj <- tbl_result
 usethis::use_data(PubBreedingXmj, overwrite = TRUE)
 
 # write document
-require(devtools)
-load_all()
+source("data-raw/deps/load-dev.R")
 use_r("Pub-BreedingXmj")
 document_dt(PubBreedingXmj)
 document()

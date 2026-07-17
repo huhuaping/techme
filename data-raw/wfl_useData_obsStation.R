@@ -67,8 +67,7 @@ PubObsStation <- tbl_out
 usethis::use_data(PubObsStation, overwrite = TRUE)
 
 # write document
-require(devtools)
-load_all()
+source("data-raw/deps/load-dev.R")
 use_r("Pub-ObsStation")
 document_dt(PubObsStation)
 document()

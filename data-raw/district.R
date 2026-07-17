@@ -1,7 +1,7 @@
 ## code to prepare `district` dataset goes here
 
 ##====full district info ====
-library("tidyverse")
+source("data-raw/deps/load-core.R")
 full_name <- c("id", "name", "parent_id", "initial", "initials",
                "pinyin", "extra", "suffix", "code", "area_code", "order")
 
@@ -30,8 +30,7 @@ BasicDistrict <- district_added
 usethis::use_data(BasicDistrict, overwrite = TRUE)
 
 # write document
-require(devtools)
-load_all()
+source("data-raw/deps/load-dev.R")
 use_r("BasicDistrict")
 document_dt(BasicDistrict)
 document()
@@ -71,8 +70,7 @@ BasicTelcode <- dt_district
 usethis::use_data(BasicTelcode, overwrite = TRUE)
 
 # write document
-require(devtools)
-load_all()
+source("data-raw/deps/load-dev.R")
 use_r("BasicTelcode")
 document_dt(BasicTelcode)
 document()
