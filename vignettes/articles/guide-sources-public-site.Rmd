@@ -1,14 +1,31 @@
 ---
 title: "网站数据来源"
+vignette: >
+  %\VignetteIndexEntry{guide sources public site}
 ---
 
-```{r}
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
 library(tidyverse)
 library(here)
 library(fs)
 library(knitr)
 library(techme)
 library(DT)
+
+safe_dir_tree <- function(path, ...) {
+  if (!fs::dir_exists(path)) {
+    cat("*目录不存在：*", path, "\n\n")
+    return(invisible(NULL))
+  }
+  fs::dir_tree(path, ...)
+}
 ```
 
 # NBS国家统计局
@@ -32,7 +49,7 @@ library(DT)
 
 ```{r}
 dir_tar <- here::here("data-raw/public-site/nbs-RD-bulletin")
-fs::dir_tree(dir_tar, recurse = FALSE)
+safe_dir_tree(dir_tar, recurse = FALSE)
 ```
 
 ### 数据集展示
@@ -109,7 +126,7 @@ techme::RDIntense %>%
 
 ```{r}
 dir_tar <- here("data-raw/data-tidy/public-site/most-SKL")
-fs::dir_tree(dir_tar, recurse = FALSE)
+safe_dir_tree(dir_tar, recurse = FALSE)
 ```
 
 ### 数据集展示
@@ -185,7 +202,7 @@ techme::PubSKLMost |>
 
 ```{r}
 dir_tar <- "d:/github/web-scrape/proj/torch-innocom"
-fs::dir_tree(dir_tar, recurse = FALSE)
+safe_dir_tree(dir_tar, recurse = FALSE)
 ```
 
 
@@ -222,7 +239,7 @@ fs::dir_tree(dir_tar, recurse = FALSE)
 
 ```{r}
 dir_tar <- here::here("data-raw/public-site/most-jcs-open-share/")
-fs::dir_tree(dir_tar, recurse = FALSE)
+safe_dir_tree(dir_tar, recurse = FALSE)
 ```
 
 历史维护：
@@ -343,7 +360,7 @@ techme::PubOpenShare %>%
 
 ```{r}
 dir_tar <- here::here("data-raw/public-site/agri-park")
-fs::dir_tree(dir_tar, recurse = FALSE)
+safe_dir_tree(dir_tar, recurse = FALSE)
 ```
 
 ### 数据集展示
@@ -474,7 +491,7 @@ techme::PubAgriParkEval %>%
 
 ```{r}
 dir_tar <- here("topic/public-site/moa-keylab")
-fs::dir_tree(dir_tar)
+safe_dir_tree(dir_tar)
 ```
 
 # MOA农业部/农业机械化管理司
@@ -512,8 +529,8 @@ fs::dir_tree(dir_tar)
 ### 文件体系
 
 ```{r}
-dir_tar <- here::here("topic/public-site/moa-machine-county")
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/public-site/moa-machine-county")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -628,7 +645,7 @@ tbl_id
 
 ```{r}
 dir_tar <- here("data-raw/public-site/moa-agri-system")
-fs::dir_tree(dir_tar)
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -774,7 +791,7 @@ names(techme::PubCars)
 
 ```{r}
 dir_tar <- here("topic/public-site/moa-agri-alliance")
-fs::dir_tree(dir_tar)
+safe_dir_tree(dir_tar)
 ```
 
 
@@ -806,7 +823,7 @@ fs::dir_tree(dir_tar)
 
 ```{r}
 dir_tar <- here("data-raw/public-site/moa-firm-leader")
-fs::dir_tree(dir_tar)
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -958,7 +975,7 @@ techme::PubFirmLeader %>%
 
 ```{r}
 dir_tar <- here::here("data-raw/public-site/moa-industry-convergence")
-fs::dir_tree(dir_tar, recurse = FALSE)
+safe_dir_tree(dir_tar, recurse = FALSE)
 ```
 
 ### 数据集展示
@@ -1233,7 +1250,7 @@ document()
 
 ```{r}
 dir_tar <- here("data-raw/public-site/moa-agrimodern-zone")
-fs::dir_tree(dir_tar)
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -1334,7 +1351,7 @@ document()
 
 ```{r}
 dir_tar <- here("data-raw/public-site/moa-freshkeep-county/")
-fs::dir_tree(dir_tar)
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -1431,7 +1448,7 @@ R代码文件：
 
 ```{r}
 dir_tar <- here("data-raw/public-site/moa-rural-infobase/")
-fs::dir_tree(dir_tar)
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -1530,7 +1547,7 @@ R代码文件：
 
 ```{r}
 dir_tar <- here("topic/public-site/moa-cooperation")
-fs::dir_tree(dir_tar)
+safe_dir_tree(dir_tar)
 ```
 
 # MOA农业部/种业管理司
@@ -1563,7 +1580,7 @@ fs::dir_tree(dir_tar)
 
 ```{r}
 dir_tar <- here("topic/public-site/moa-seed-base")
-fs::dir_tree(dir_tar)
+safe_dir_tree(dir_tar)
 ```
 
 ## 育繁推一体化企业(scrape)
@@ -1617,7 +1634,7 @@ techme::PubSeedFirm %>%
 
 ```{r}
 dir_tar <- here("data-raw/public-site/moa-seed-firm")
-fs::dir_tree(dir_tar)
+safe_dir_tree(dir_tar)
 ```
 
 历史项目：
@@ -1628,7 +1645,7 @@ fs::dir_tree(dir_tar)
 
 ```{r}
 dir_tar <- here::here("data-raw/public-site/moa-seed-firm/")
-fs::dir_tree(dir_tar, recurse = TRUE)
+safe_dir_tree(dir_tar, recurse = TRUE)
 ```
 
 ### 背景知识
@@ -1681,7 +1698,7 @@ ptn_clean <-c(
 
 ```{r}
 dir_tar <- here("data-raw/public-site/moa-genetic-resource/")
-fs::dir_tree(dir_tar)
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -1787,7 +1804,7 @@ code_file <-("report-tech2025/report/code/chpt02-03-moa-genetic-resource.R")
 
 ```{r}
 dir_tar <- here("data-raw/public-site/observe-station")
-fs::dir_tree(dir_tar)
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示

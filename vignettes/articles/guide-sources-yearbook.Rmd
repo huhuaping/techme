@@ -1,4 +1,4 @@
----
+﻿---
 title: "年鉴数据来源"
 vignette: >
   %\VignetteIndexEntry{guide sources yearbook}
@@ -20,6 +20,14 @@ library(fs)
 library(knitr)
 library(techme)
 library(DT)
+
+safe_dir_tree <- function(path, ...) {
+  if (!fs::dir_exists(path)) {
+    cat("*目录不存在：*", path, "\n\n")
+    return(invisible(NULL))
+  }
+  fs::dir_tree(path, ...)
+}
 ```
 
 
@@ -68,8 +76,8 @@ library(DT)
 初始数据文件（年鉴电子版，xls进行了重命名）
 
 ```{r}
-dir_tar <- "data-raw/nation-yearbook/part07-finance/02-public-budget/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/nation-yearbook/part07-finance/02-public-budget/")
+safe_dir_tree(dir_tar)
 ```
 
 
@@ -78,8 +86,8 @@ fs::dir_tree(dir_tar)
 清洗后数据文件（标准化xlsx整理表格）
 
 ```{r}
-dir_tar <- "data-raw/data-tidy/nation-yearbook/part07-finance/02-public-budget"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/nation-yearbook/part07-finance/02-public-budget")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -126,8 +134,8 @@ techme::PublicBudget %>%
 
 ```{r}
 #dir_tar <- here::here("topic/rural-yearbook")
-dir_tar <- "data-raw/rural-yearbook/part03-agri-produce/01-machine/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/rural-yearbook/part03-agri-produce/01-machine/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
@@ -136,8 +144,8 @@ fs::dir_tree(dir_tar)
 
 ```{r}
 #dir_tar <- here::here("topic/rural-yearbook")
-dir_tar <- "data-raw/data-tidy/rural-yearbook/part03-agri-produce/01-machine/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/rural-yearbook/part03-agri-produce/01-machine/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -182,8 +190,8 @@ techme::AgriMachine %>%
 
 ```{r}
 #dir_tar <- here::here("topic/rural-yearbook")
-dir_tar <- "data-raw/rural-yearbook/part03-agri-produce/02-fertilizer/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/rural-yearbook/part03-agri-produce/02-fertilizer/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
@@ -192,8 +200,8 @@ fs::dir_tree(dir_tar)
 
 ```{r}
 #dir_tar <- here::here("topic/rural-yearbook")
-dir_tar <- "data-raw/data-tidy/rural-yearbook/part03-agri-produce/02-fertilizer"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/rural-yearbook/part03-agri-produce/02-fertilizer")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -232,8 +240,8 @@ techme::AgriFertilizer %>%
 初始数据文件（年鉴电子版，xls进行了重命名）
 
 ```{r}
-dir_tar <- "data-raw/rural-yearbook/part03-agri-produce/03-plastic/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/rural-yearbook/part03-agri-produce/03-plastic/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
@@ -241,8 +249,8 @@ fs::dir_tree(dir_tar)
 清洗后数据文件（标准化xlsx整理表格）
 
 ```{r}
-dir_tar <- "data-raw/data-tidy/rural-yearbook/part03-agri-produce/03-plastic/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/rural-yearbook/part03-agri-produce/03-plastic/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -284,8 +292,8 @@ techme::AgriPlastic %>%
 
 ```{r}
 #dir_tar <- here::here("topic/rural-yearbook")
-dir_tar <- "data-raw/rural-yearbook/part03-agri-produce/04-pesticide/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/rural-yearbook/part03-agri-produce/04-pesticide/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
@@ -294,8 +302,8 @@ fs::dir_tree(dir_tar)
 
 ```{r}
 #dir_tar <- here::here("topic/rural-yearbook")
-dir_tar <- "data-raw/data-tidy/rural-yearbook/part03-agri-produce/04-pesticide/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/rural-yearbook/part03-agri-produce/04-pesticide/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -363,8 +371,8 @@ techme::RDIntense %>%
 
 ```{r}
 #dir_tar <- here::here("topic/rural-yearbook")
-dir_tar <- "data-raw/tech-yearbook/part01-over/03-spend-inner/01-activity/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/tech-yearbook/part01-over/03-spend-inner/01-activity/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
@@ -373,8 +381,8 @@ fs::dir_tree(dir_tar)
 
 ```{r}
 #dir_tar <- here::here("topic/rural-yearbook")
-dir_tar <- "data-raw/data-tidy/tech-yearbook/part01-over/03-spend-inner/01-activity/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/tech-yearbook/part01-over/03-spend-inner/01-activity/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -403,8 +411,8 @@ techme::RDActivity %>%
 
 初始数据文件（年鉴电子版，xls进行了重命名）
 ```{r}
-dir_tar <- "data-raw/tech-yearbook/part01-over/01-labor-hour/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/tech-yearbook/part01-over/01-labor-hour/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
@@ -412,8 +420,8 @@ fs::dir_tree(dir_tar)
 清洗后数据文件（标准化xlsx整理表格）
 
 ```{r}
-dir_tar <- "data-raw/data-tidy/tech-yearbook/part01-over/01-labor-hour/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/tech-yearbook/part01-over/01-labor-hour/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -444,8 +452,8 @@ techme::RDLaborHour %>%
 
 初始数据文件（年鉴电子版，xls进行了重命名）
 ```{r}
-dir_tar <- "data-raw/tech-yearbook/part01-over/03-spend-inner/02-source"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/tech-yearbook/part01-over/03-spend-inner/02-source")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
@@ -453,8 +461,8 @@ fs::dir_tree(dir_tar)
 清洗后数据文件（标准化xlsx整理表格）
 
 ```{r}
-dir_tar <- "data-raw/data-tidy/tech-yearbook/part01-over/03-spend-inner/02-source"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/tech-yearbook/part01-over/03-spend-inner/02-source")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -486,8 +494,8 @@ techme::RDSource %>%
 初始数据文件（年鉴电子版，xls进行了重命名）
 
 ```{r}
-dir_tar <- "data-raw/tech-yearbook/part08-output/01-patent/01-accept/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/tech-yearbook/part08-output/01-patent/01-accept/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
@@ -495,8 +503,8 @@ fs::dir_tree(dir_tar)
 清洗后数据文件（标准化xlsx整理表格）
 
 ```{r}
-dir_tar <- "data-raw/data-tidy/tech-yearbook/part08-output/01-patent/01-accept/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/tech-yearbook/part08-output/01-patent/01-accept/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -529,8 +537,8 @@ techme::RDPatentAccept %>%
 初始数据文件（年鉴电子版，xls进行了重命名）
 
 ```{r}
-dir_tar <- "data-raw/tech-yearbook/part08-output/01-patent/02-authority/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/tech-yearbook/part08-output/01-patent/02-authority/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
@@ -538,8 +546,8 @@ fs::dir_tree(dir_tar)
 清洗后数据文件（标准化xlsx整理表格）
 
 ```{r}
-dir_tar <- "data-raw/data-tidy/tech-yearbook/part08-output/01-patent/02-authority/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/tech-yearbook/part08-output/01-patent/02-authority/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -572,8 +580,8 @@ techme::RDPatentAuthority %>%
 初始数据文件（年鉴电子版，xls进行了重命名）
 
 ```{r}
-dir_tar <- "data-raw/tech-yearbook/part08-output/01-patent/03-valid/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/tech-yearbook/part08-output/01-patent/03-valid/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
@@ -581,8 +589,8 @@ fs::dir_tree(dir_tar)
 清洗后数据文件（标准化xlsx整理表格）
 
 ```{r}
-dir_tar <- "data-raw/data-tidy/tech-yearbook/part08-output/01-patent/03-valid/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/tech-yearbook/part08-output/01-patent/03-valid/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -614,8 +622,8 @@ techme::RDPatentValid %>%
 初始数据文件（年鉴电子版，xls进行了重命名）
 
 ```{r}
-dir_tar <- "data-raw/tech-yearbook/part08-output/05-paper-international/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/tech-yearbook/part08-output/05-paper-international/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
@@ -623,8 +631,8 @@ fs::dir_tree(dir_tar)
 清洗后数据文件（标准化xlsx整理表格）
 
 ```{r}
-dir_tar <- "data-raw/data-tidy/tech-yearbook/part08-output/05-paper-international/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/tech-yearbook/part08-output/05-paper-international/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -656,8 +664,8 @@ techme::RDPaperInternational %>%
 初始数据文件（年鉴电子版，xls进行了重命名）
 
 ```{r}
-dir_tar <- "data-raw/tech-yearbook/part08-output/06-plant-variety/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/tech-yearbook/part08-output/06-plant-variety/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
@@ -665,8 +673,8 @@ fs::dir_tree(dir_tar)
 清洗后数据文件（标准化xlsx整理表格）
 
 ```{r}
-dir_tar <- "data-raw/data-tidy/tech-yearbook/part08-output/06-plant-variety/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/tech-yearbook/part08-output/06-plant-variety/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -698,8 +706,8 @@ techme::RDPlantVariety %>%
 初始数据文件（年鉴电子版，xls进行了重命名）
 
 ```{r}
-dir_tar <- "data-raw/tech-yearbook/part05-industry/01-operation/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/tech-yearbook/part05-industry/01-operation/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
@@ -707,8 +715,8 @@ fs::dir_tree(dir_tar)
 清洗后数据文件（标准化xlsx整理表格）
 
 ```{r}
-dir_tar <- "data-raw/data-tidy/tech-yearbook/part05-industry/01-operation/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/tech-yearbook/part05-industry/01-operation/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -741,8 +749,8 @@ techme::IndustryOperation %>%
 初始数据文件（年鉴电子版，xls进行了重命名）
 
 ```{r}
-dir_tar <- "data-raw/tech-yearbook/part08-output/03-teckmarket-pull/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/tech-yearbook/part08-output/03-teckmarket-pull/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
@@ -750,8 +758,8 @@ fs::dir_tree(dir_tar)
 清洗后数据文件（标准化xlsx整理表格）
 
 ```{r}
-dir_tar <- "data-raw/data-tidy/tech-yearbook/part08-output/03-teckmarket-pull/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/tech-yearbook/part08-output/03-teckmarket-pull/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -784,8 +792,8 @@ techme::MarketPull %>%
 初始数据文件（年鉴电子版，xls进行了重命名）
 
 ```{r}
-dir_tar <- "data-raw/tech-yearbook/part08-output/04-teckmarket-push/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/tech-yearbook/part08-output/04-teckmarket-push/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
@@ -793,8 +801,8 @@ fs::dir_tree(dir_tar)
 清洗后数据文件（标准化xlsx整理表格）
 
 ```{r}
-dir_tar <- "data-raw/data-tidy/tech-yearbook/part08-output/04-teckmarket-push/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/tech-yearbook/part08-output/04-teckmarket-push/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
@@ -899,15 +907,15 @@ tbl_pattern
 ### 初始数据文件
 
 ```{r}
-dir_tar <- "data-raw/agrimachine-yearbook/machine-service/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/agrimachine-yearbook/machine-service/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 清洗后数据文件
 
 ```{r}
-dir_tar <- "data-raw/data-tidy/agrimachine-yearbook/machine-service/"
-fs::dir_tree(dir_tar)
+dir_tar <- here::here("data-raw/data-tidy/agrimachine-yearbook/machine-service/")
+safe_dir_tree(dir_tar)
 ```
 
 ### 数据集展示
