@@ -15,10 +15,11 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 URL: https://github.com/huhuaping/techme, https://huhuaping.github.io/techme/
 BugReports: https://github.com/huhuaping/techme/issues
-Suggests: 
+Suggests:
     knitr,
-    rmarkdown
-Imports: 
+    rmarkdown,
+    testthat (>= 3.0.0)
+Imports:
     dplyr,
     fs,
     magrittr,
@@ -47,4 +48,6 @@ VignetteBuilder:
     knitr
 Config/testthat/edition: 3
 Config/potools/style: explicit
+Config/Needs/dev: pkgload, devtools, roxygen2, desc, rcmdcheck
+Config/Needs/data-raw: here, readxl, rvest, xml2, httr, httr2, RSelenium, jsonlite, tidyjson, lubridate, janitor, readtext, zip, svDialogs, bookdown, scales, gridExtra, ggthemes, ggrepel, png, jpeg, ggplot2, tidyverse, DT
 Config/Needs/website: usethis, servr, quarto, DT, here, knitr, tidyverse, fs, glue, magrittr

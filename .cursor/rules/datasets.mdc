@@ -1,0 +1,55 @@
+---
+description: 标准数据集 roxygen 文档与命名规范
+globs: R/*Pub*.R,R/tech-*.R,R/Agri*.R,R/Basic*.R,R/RD*.R,R/Industry*.R,R/Market*.R,R/Livestock*.R,R/Machine*.R,R/Province*.R,R/varsList.R
+alwaysApply: false
+---
+
+# 数据集文档规范
+
+## 命名前缀
+
+| 前缀 | 来源 | 示例 |
+|------|------|------|
+| `Agri*` | 农村统计年鉴 | `AgriFertilizer` |
+| `RD*` / `Industry*` / `Market*` | 科技统计年鉴 | `RDPatentValid`, `IndustryRD` |
+| `Pub*` | 政府公开网站 | `PubConvergencePark` |
+| `Basic*` | 基础地理/区划 | `BasicProvince` |
+| `Livestock*` / `MachineService` | 专题章节 | `LivestockBreeding` |
+
+## roxygen 模板
+
+```r
+#' Dataset Title
+#'
+#' Brief description of content and source.
+#'
+#' @format A data frame:
+#' \describe{
+#'   \item{province}{character. Province name.}
+#'   \item{year}{character. Year.}
+#'   \item{value}{numeric. Value.}
+#'   \item{units}{character. Unit of measurement.}
+#'   \item{variables}{character. Coded variable name.}
+#' }
+#'
+#' @source Source description
+#'
+#' @examples
+#' \dontrun{
+#' str(DatasetName)
+#' }
+"DatasetName"
+```
+
+## pkgdown 分组
+
+新增数据集后更新 [`_pkgdown.yml`](../../_pkgdown.yml) 的 `reference` 对应 `contents` 列表。
+
+## 数据写入
+
+- 仅通过 `data-raw` 流水线 → `usethis::use_data(DatasetName, overwrite = TRUE)` 更新。
+- 禁止手改 `data/DatasetName.rda`。
+
+## vignette 补充
+
+在 `vignettes/my-vignette.Rmd` 补充变量清单说明（中文）。

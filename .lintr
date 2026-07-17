@@ -1,0 +1,13 @@
+linters: linters_with_defaults(
+    line_length_linter(120),
+    object_usage_linter(null_ok = TRUE),
+    commented_code_linter = NULL
+  )
+
+exclusions: list(
+    "data-raw" = linters_with_defaults(
+      line_length_linter(120),
+      object_usage_linter = NULL,
+      commented_code_linter = NULL
+    )
+  )

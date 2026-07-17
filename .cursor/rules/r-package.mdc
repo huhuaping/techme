@@ -1,0 +1,42 @@
+---
+description: R 包源码编写规范（R/ 目录）
+globs: R/**
+alwaysApply: false
+---
+
+# R 包源码规范
+
+## 文档
+
+- 使用 roxygen2 + markdown（`@description`、`@param`、`@return`、`@examples`）。
+- 示例依赖本地路径或大数据集时用 `\dontrun{}` 包裹。
+- 修改任何导出函数或新增 `@export` 后运行 `devtools::document()`。
+
+## 导入
+
+- 精确导入：`@importFrom package function`，避免 `@import entire-package`。
+- 管道：`magrittr::%>%`。
+- 数据框列引用：优先 `rlang::.data$col`。
+
+## 命名约定
+
+| 前缀/模式 | 用途 | 示例 |
+|-----------|------|------|
+| `wfl.*` | 工作流函数 | `wfl.matchVars`, `wfl.useData` |
+| `get_*` / `get.*` | 查询函数 | `get_vars` |
+| `fun-*` 文件 | 报告/文档工具 | `fun-footer.R` |
+| `tech-*` 文件 | 科技年鉴数据集桩 | `tech-RDPatentValid.R` |
+| `Pub*` | 公开网站数据集 | `PubConvergencePark.R` |
+| `Agri*` | 农村统计年鉴 | `AgriFertilizer.R` |
+| `Basic*` | 基础参考数据 | `BasicProvince.R` |
+
+## 错误处理
+
+- 输入校验：`stop("'dt' must be a data.frame")` 等明确消息。
+- 软问题：`warning()`（变量不匹配、单位异常）。
+- 文件 I/O：`tryCatch()` 包裹。
+
+## 禁止
+
+- 手改 `NAMESPACE` 或 `man/`。
+- 在 `R/` 中硬编码绝对路径（除已有 legacy 注释）；新代码用参数传递路径。

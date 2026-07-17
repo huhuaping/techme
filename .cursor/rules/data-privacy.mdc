@@ -1,0 +1,33 @@
+---
+description: data-raw 原始数据安全与隐私约束
+globs: data-raw/**
+alwaysApply: false
+---
+
+# data-raw 数据安全规则
+
+## 敏感数据
+
+- `data-raw/` 含年鉴原始 xls、政府网站抓取 html、天眼查等机构信息。
+- **禁止**在 Agent 对话、commit message 或 PR 描述中粘贴原始数据行、列值或完整表格。
+
+## 允许的操作
+
+- 读取脚本逻辑（`.R`、`.Rmd`、`.qmd`）以理解流水线。
+- 引用文件路径、变量名、目录结构。
+- 讨论统计口径、单位、年份覆盖等元信息。
+
+## Git 与 diff
+
+- 不对大体积 `.xls`/`.xlsx`/`.html` 做全文 diff 讨论。
+- 不主动 `git add` 原始数据文件，除非用户明确要求。
+
+## 清洗产物
+
+- 清洗后 xlsx 存放于 `data-raw/data-tidy/`，仍可能含敏感信息，同样禁止粘贴内容。
+- 最终发布仅通过 `usethis::use_data()` 写入 `data/*.rda`。
+
+## 爬虫注意
+
+- 天眼查等爬虫需 Docker Selenium，遵守网站 ToS。
+- 不在自动化中存储或传输账号凭证。

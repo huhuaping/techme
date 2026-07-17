@@ -1,0 +1,51 @@
+---
+description: varsList 变量区块命名体系
+globs: R/varsList.R,R/get_vars.R,data-raw/**/wfl_matchVars*
+alwaysApply: false
+---
+
+# varsList 变量命名体系
+
+## 区块命名法（block1–block4）
+
+按「区-部-节-点」四级编码：
+
+| 区块 | 含义 | 示例 |
+|------|------|------|
+| block1 | 最高分区 | `v04` = 科技 |
+| block2 | 分部 | `gx` = 高校 |
+| block3 | 小节 | `nbzh` = 内部支出 |
+| block4 | 具体点值 | `jcyj` = 基础研究 |
+
+完整变量名：`v04_gx_nbzh_jcyj` → 摘要标签「高校_内部支出_基础研究」。
+
+## 版本迭代
+
+- 变量体系变更时记录版本号（如 `v2019.8`）。
+- **新增变量**：按最新规则直接添加。
+- **调整命名**：不删除旧记录，在其后新增一条并附版本号与变更依据。
+
+## 附属信息
+
+每条变量记录应含：单位（unit）、block1–block4 中英文含义。
+
+## 查询 API
+
+```r
+get_vars(df = varsList, lang = "eng",
+         block = list(block1 = "v4", block2 = "gx", block3 = "nbzh", block4 = "jcyj"),
+         what = "variables")
+```
+
+`what` 可选：`"variables"`（默认）、`"short_chn"`、`"short_eng"`。
+
+## wfl.matchVars 参数
+
+- `block_target`：目标 block 组合
+- `block_lang`：`"eng"` 或 `"chn"`
+- `header_mode`：`"vars"` 或 `"year"`（year 模式需手动指定 `vars_spc`）
+
+## 禁止
+
+- 删除 varsList 中已有变量记录（仅追加）。
+-  invent 不符合 block 层级的新命名模式。

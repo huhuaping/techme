@@ -1,0 +1,48 @@
+---
+description: data-raw 数据清洗流水线规范
+globs: data-raw/**
+alwaysApply: false
+---
+
+# data-raw 流水线规范
+
+## 目录规范
+
+| 来源 | 原始资料 | 清洗产物 |
+|------|----------|----------|
+| 年鉴 | `data-raw/xxx-yearbook/` | `data-raw/data-tidy/xxx-yearbook/` |
+| 公开网站 | `data-raw/public-site/` | `data-raw/data-tidy/xxx-web/{html,xlsx}/` |
+
+年鉴类型：`tech-yearbook`、`rural-yearbook`、`nation-yearbook`、`agrimachine-yearbook`、`livestock-yearbook`。
+
+## 年鉴 9 步流水线
+
+入口脚本：`data-raw/wfl_knitAll.R` 或 `data-raw/update-yearbook/wfl_knitGUI.R`。
+
+```
+1. wfl_files.R      — 选文件
+2. wfl_genDirs.R    — 建目录
+3. wfl_rename.R     — 重命名（可选）
+4. wfl_unlock.R     — 解除 Excel 保护 [人工/Windows]
+5. wfl_editXls.R    — 手工编辑 xlsx [必须人工]
+6. wfl_unpivot.R    — 宽转长
+7. wfl_tidy.R       — 清洗
+8. wfl_matchVars.R  — 变量名匹配 varsList
+9. wfl_matchData.R  — 导出到 data-tidy
+→ wfl_useData_*.R   — usethis::use_data() 写入 data/
+```
+
+## 脚本模式
+
+- 流水线通过 `source("data-raw/wfl_*.R")` 逐步执行，非单一函数调用。
+- 配置项在入口脚本顶部：`dir_final`、`dir_media`、`file_sel`、`cols_drop`、`header_mode`。
+- 步骤 4、5 含交互或 Office 依赖，Agent 须标注「需用户手动执行」。
+
+## 公开数据
+
+- 各数据源目录下找 `code-*.R` 或 `.qmd` 模板。
+- 机构省份匹配：`wfl.queryInstituton()` → `wfl.write2ship()`（见 `R/workflow_pub.R`）。
+
+## 最终发布
+
+清洗完成后 **必须** 经 `wfl.useData()` 或 `usethis::use_data()` 写入 `data/*.rda`，然后 `devtools::document()`。
