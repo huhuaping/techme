@@ -1,12 +1,25 @@
 ---
 title: "年鉴数据来源"
+vignette: >
+  %\VignetteIndexEntry{guide sources yearbook}
 ---
 
-```{r}
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
 library(tidyverse)
 library(magrittr)
 library(here)
 library(glue)
+library(fs)
+library(knitr)
+library(techme)
+library(DT)
 ```
 
 
