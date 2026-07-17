@@ -1,0 +1,2208 @@
+# 网站数据来源
+
+``` r
+
+library(tidyverse)
+#> ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+#> ✔ dplyr     1.2.1     ✔ readr     2.2.0
+#> ✔ forcats   1.0.1     ✔ stringr   1.6.0
+#> ✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+#> ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+#> ✔ purrr     1.2.2     
+#> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+#> ✖ dplyr::filter() masks stats::filter()
+#> ✖ dplyr::lag()    masks stats::lag()
+#> ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+library(here)
+#> here() starts at /home/runner/work/techme/techme
+library(fs)
+library(knitr)
+library(techme)
+library(DT)
+
+safe_dir_tree <- function(path, ...) {
+  if (!fs::dir_exists(path)) {
+    cat("*目录不存在：*", path, "\n\n")
+    return(invisible(NULL))
+  }
+  fs::dir_tree(path, ...)
+}
+```
+
+## NBS国家统计局
+
+### 全国科技经费投入
+
+#### 更新日志\[OK\]
+
+- 2025-06-02，R包`techme`项目完成数据的更新上传。
+- 2024-06-15，R包`techme`项目完成数据的更新上传。
+
+#### 数据说明
+
+数据集`RDIntense`：虽然通过公开查询获得html数据，但是从本质上来看，这里还是按照年鉴数据的流程进行操作!数据先导出`raw`，然后再`tidy`，最后再匹配元信息`meta`，然后成为包数据`RDIntense`。
+
+（1）公开查询：国家统计局<https://www.stats.gov.cn/>（全国科技经费投入统计公报），包括经费（亿元）和强度。
+
+（2）《中国科技统计年鉴》part02-firm（企业）各地区研究与试验发展(R&D)经费内部支出（万元）、“各地区研究与试验发展(R&D)经费投入强度”
+
+#### 文件体系
+
+``` r
+
+dir_tar <- here::here("data-raw/public-site/nbs-RD-bulletin")
+safe_dir_tree(dir_tar, recurse = FALSE)
+#> /home/runner/work/techme/techme/data-raw/public-site/nbs-RD-bulletin
+#> ├── 01-html
+#> ├── 02-xls
+#> ├── code-bulk-raw-from-pkg.R
+#> ├── code-extract-from-html.R
+#> └── wfl-RDIntense.R
+```
+
+#### 数据集展示
+
+``` r
+
+techme::RDIntense %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 数据进度
+
+- 2024年10月02日
+  [2023年全国科技经费投入统计公报](https://www.stats.gov.cn/sj/zxfb/202410/t20241002_1956810.html)
+
+- 2023年9月18日
+  [2022年全国科技经费投入统计公报](https://www.stats.gov.cn/sj/zxfb/202309/t20230918_1942920.html)
+
+- 2022年8月31日
+  [2021年全国科技经费投入统计公报](https://www.stats.gov.cn/sj/zxfb/202302/t20230203_1901565.html)
+
+往年数据集已经归集整理好了。
+
+#### 数据流程
+
+数据抓取和整理在本项目完成，然后拷贝xlsx文件并在通过R包`techme`进行更新管理。
+
+（1）在本项目下完成html数据抓取、清洗和导出。
+
+- 在线搜索并下载html网页
+
+- 执行数据抓取、清洗、导出（`code-extract-from-html.R`）
+
+- 导出为xlsx文件，例如`02-xls/raw-2022.xlsx`
+
+（2）在R包`techme`项目下执行工作流`wfl-RDIntense.R`，完成数据更新、核对和标准化等流程。
+
+- 读取初始xlsx文件（读取`02-xls/raw-2022.xlsx`文件），并完成数据清洗和标准化等流程。
+
+- 匹配好变量名后存放xlsx文件于`data-tidy/`对应文件夹下（例如`02-xls/2022.xlsx`）。
+
+- 执行`usethis::use_data(RDIntense, overwrite = TRUE)`，更新R包数据集。
+
+## MOST科技部
+
+### 科技部重点实验室
+
+#### 数据说明
+
+更新状态：stay
+
+数据来源：<https://www.most.gov.cn/>
+
+统计类别：
+
+- 国家重点实验室
+
+- 省部共建国家重点实验室
+
+- 企业国家重点实验室
+
+统计口径：
+
+- 当前公示为：农业农村部学科群重点实验室名单
+
+- 历史公示为：农业部重点实验室及农业科学观测实验站名单
+
+#### 文件体系
+
+``` r
+
+dir_tar <- here("data-raw/data-tidy/public-site/most-SKL")
+safe_dir_tree(dir_tar, recurse = FALSE)
+#> /home/runner/work/techme/techme/data-raw/data-tidy/public-site/most-SKL
+#> └── xlsx
+```
+
+#### 数据集展示
+
+``` r
+
+techme::PubSKLMost %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 背景知识
+
+##### 陕西省数量
+
+@LuYang2024
+报导提到：陕西省共有全国（国家）重点实验室45个，按照科技部国家重点实验室遴选工作安排，已完成10个领域全国重点实验室重组申报工作。目前，已获批建设全国重点实验室34个，推荐申请重组新建3个。西安交大拥有全省高校中数量最多的全国（国家）重点实验室，9个全国（国家）重点实验室涉及能源、制造、材料、信息等多个领域。西安理工大学西北旱区生态水利国家重点实验室[^1]，围绕大西线调水、黄河流域生态保护和高质量发展、乡村振兴与海绵城市建设等国家战略和重大工程开展科学研究。
+
+关于西北农林科技大学，通过比对发现当前数据集[`techme::PubSKLMost`](https://huhuaping.github.io/techme/reference/PubSKLMost.md)中包含了西北农林科技大学的两个重点实验室：作物抗逆与高效生产全国重点实验室、黄土高原土壤侵蚀与旱地农业国家重点实验室（中科院水保所）。具体可参看西北农林科技大学国家科研基地<https://kyy.nwsuaf.edu.cn/kyjd/gjjkyjd/index.htm>。
+
+``` r
+
+techme::PubSKLMost |>
+  filter(province == "陕西") |>
+  DT::datatable(
+    caption = "陕西省国家重点实验室",
+    rownames = FALSE,
+    options = list(
+      dom = "tip",
+      pageLength = 12
+    )
+  )
+```
+
+### 高新企业认定(scrape)
+
+#### 数据说明
+
+更新状态：update
+
+数据使用：`data("HitechFirmsPub", package = "techme")`
+
+数据来源：科技部/火炬中/高新企业认定管理网（<http://www.innocom.gov.cn/>）
+
+统计类别：
+
+- 我国各省区高新技术企业的数量趋势和关系
+
+统计口径：
+
+- 高新企业认定管理网发布的“认定高新技术企业名单”相关数据整理出来。
+
+- 先快速抓取高新技术企业的数量。通过直接抓取html
+  的文本，然后再加正则`regex`表达式进行筛选
+
+#### 文件管理
+
+当前维护：
+
+    - 2024年6月已经迁移到`web-scrape/proj/torch-innocom`项目下进行数据抓取）。
+    - 然后通过`data-raw/public-site/torch-innocom/wfl-HitechFirmsPub.R`进行数据更新。
+
+``` r
+
+dir_tar <- "d:/github/web-scrape/proj/torch-innocom"
+safe_dir_tree(dir_tar, recurse = FALSE)
+#> *目录不存在：* d:/github/web-scrape/proj/torch-innocom
+```
+
+历史维护：
+
+    - 在当前项目文件下进行爬取和数据管理。
+    - 然后通过`techme::wfl_useData_HitechFirms.R`进行数据更新。
+
+### 基础设施和大型科研仪器共享
+
+#### 更新日志
+
+更新状态：update
+
+- 2025-07-14，完成2024年公示网页的数据抓取、处理和保存。全新定义了数据集[`techme::PubOpenShare`](https://huhuaping.github.io/techme/reference/PubOpenShare.md)。
+- 2024-06-23，完成2023年公示网页的数据抓取、处理和保存。
+
+#### 数据说明
+
+数据使用：本项目下[`techme::PubOpenShare`](https://huhuaping.github.io/techme/reference/PubOpenShare.md)
+
+统计目标：
+
+- 中央级高校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核结果
+
+数据来源：科学技术部/基础司（<https://www.most.gov.cn/>）
+
+当前统计口径：
+
+- 关于发布201x年中央级高校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核结果的通知
+
+#### 文件体系
+
+``` r
+
+dir_tar <- here::here("data-raw/public-site/most-jcs-open-share/")
+safe_dir_tree(dir_tar, recurse = FALSE)
+#> /home/runner/work/techme/techme/data-raw/public-site/most-jcs-open-share/
+#> ├── code-most-jcs-open-share.R
+#> ├── html
+#> ├── update
+#> ├── wfl-PubOpenShare.R
+#> └── xlsx-raw
+```
+
+历史维护：
+
+- 2025年以前，在report-tech项目下进行数据抓取和处理(report-tech/topic/public-site/most-jcs-open-share/)。最后合并为所有年份的更新数据表`update/matched-eval-upto-2023-wide.xlsx`。并在报告撰写中直接使用这个数据表。
+
+#### 数据集展示
+
+本项目[`techme::PubOpenShare`](https://huhuaping.github.io/techme/reference/PubOpenShare.md)数据集。
+
+``` r
+
+techme::PubOpenShare %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = TRUE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 数据进度
+
+- 【doc转xlsx】关于发布2024年中央级高校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核结果的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2024/202410/t20241014_192149.html)
+
+- 【pdf转jpeg转文字识别转txt】2023年7月评价考核结果已经有了，但是没有找到任何公示文件。2023年中央级高校和科研院所等大型科研仪器开放共享评价考核结果通知-国科办基〔2023〕83号。唯一的扫描版pdf版本可以可[参看](http://sysbc.swu.edu.cn/info/1028/1230.htm)。在线识别网站<https://www.online-convert.com/>导航ALL
+  tools/image to text。
+
+  - 2023年06月29日,关于开展2023年中央级高等学校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核工作的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2023/202306/t20230630_186826.html)
+
+- 【附名单word】关于发布2022年中央级高校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核结果的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2022/202209/t20220927_182645.html)
+
+- 【附名单html】2021年12月02日
+  关于发布2021年中央级高校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核结果的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2021/202112/t20211209_178495.html)
+
+- 【附名单html】关于发布2020年中央级高校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核结果的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2020/202011/t20201128_169791.md)
+
+  - 关于开展2020年中央级高等学校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核工作的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2020/202006/t20200630_157576.md)
+
+- 【附名单html】关于发布2019年中央级高校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核结果的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2019/201911/t20191120_150067.md)
+
+  - 关于开展2019年中央级高等学校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核工作的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2019/201905/t20190522_146744.md)
+
+- 【附名单html】关于发布2018年中央级高校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核结果的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2018/201812/t20181227_144357.md)
+
+  - 关于开展2018年中央级高校和科研院所重大科研基础设施和大型科研仪器开放共享评价考核工作的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2018/201808/t20180801_141000.md)
+
+- 关于开展重大科研基础设施和大型科研仪器开放共享试点评价考核工作的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2017/201712/t20171215_136863.md)
+
+#### 背景知识
+
+- 关于印发《国家重大科研基础设施和大型科研仪器开放共享管理办法》的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/fgzc/gfxwj/gfxwj2017/201709/t20170922_135054.md)
+
+#### 数据流程
+
+（1）处理原始数据`data-raw/public-site/most-jcs-open-share/code-most-jcs-open-share.R`
+
+- 抓取html表格（2021年）
+
+- 抓取word表格（2022）：word转xlsx
+
+- 抓取pdf表格txt（2023年）：pdf转jpeg转txt。在线识别网站<https://www.online-convert.com/>导航ALL
+  tools/image to text。
+
+（2）合并全部年份数据
+
+（3）处理和识别机构名称
+
+- 机构名称列表（唯一化处理）
+
+- （若存在较多未知机构名称）在R包`techme`中进行天眼查
+
+- （若未知机构名称较少）在R包`techme`中进行手动添加
+
+（4）匹配省份和地区信息
+
+- 重新整合更新`qureyTianyan`
+
+- build 并push `techme`
+
+- 在repo `report-tech`中安装更新后的R包`techme`
+
+- `renv::install("huhuaping/techme")`
+
+（5）导出到`data-tidy`对应的文件夹下
+
+（6）在`data-raw/public-site/most-jcs-open-share/wfl-PubOpenShare.R`中进行数据更新
+
+### 国家农业科技园区
+
+#### 数据说明
+
+更新状态：stay
+
+数据来源：科学技术部/农村科技司（<https://www.most.gov.cn/>）
+
+数据使用：
+
+- 名单数据：`data("PubAgriParkList", package = "techme")`
+
+- 验收数据：`data("PubAgriParkCheck", package = "techme")`
+
+- 评估数据：`data("PubAgriParkEval", package = "techme")`
+
+统计目标/统计口径：
+
+- 国家农业科技园区名单
+
+- 国家农业科技园区验收结果
+
+- 国家农业科技园区评估结果
+
+#### 文件体系
+
+``` r
+
+dir_tar <- here::here("data-raw/public-site/agri-park")
+safe_dir_tree(dir_tar, recurse = FALSE)
+#> /home/runner/work/techme/techme/data-raw/public-site/agri-park
+#> ├── 01-check-raw
+#> ├── 02-eval-raw
+#> ├── 03-list-raw
+#> ├── bulk-tidy-history.R
+#> ├── data-update
+#> ├── scrape-agri-park.Rmd
+#> └── xlsx
+```
+
+#### 数据集展示
+
+名单数据集：[`techme::PubAgriParkList`](https://huhuaping.github.io/techme/reference/PubAgriParkList.md)
+
+``` r
+
+techme::PubAgriParkList %>%
+  #head(20) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+验收数据集：[`techme::PubAgriParkCheck`](https://huhuaping.github.io/techme/reference/PubAgriParkCheck.md)
+
+``` r
+
+techme::PubAgriParkCheck %>%
+  #head(20) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+评估数据集：[`techme::PubAgriParkEval`](https://huhuaping.github.io/techme/reference/PubAgriParkEval.md)
+
+``` r
+
+techme::PubAgriParkEval %>%
+  #head(20) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 数据进度
+
+###### **名单公示**
+
+09-2020;08-2018; 07-2016;06-2015; 05-2013;04-2011; 03-2010;02-2003;
+01-2001.
+
+- 2020年12月27日关于开展第九批国家农业科技园区建设的[通知](http://www.gov.cn/zhengce/zhengceku/2020-12/27/content_5573792.htm)
+  - 关于开展第九批国家农业科技园区申报工作的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2019/201911/t20191104_149728.md)
+- 科技部办公厅关于第八批国家农业科技园区建设的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2018/201812/t20181224_144277.md)
+
+###### **验收** update
+
+- 【附名单html表格】2023年06月01日
+  科技部办公厅关于公布第九批国家农业科技园区验收结果的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2023/202306/t20230601_186415.html)
+
+- 科技部办公厅关于公布第八批国家农业科技园区验收结果的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2021/202112/t20211221_178654.html)
+
+  - （word）农村司关于第八批国家农业科技园区验收结果公示的[公告](https://www.most.gov.cn/tztg/202112/t20211206_178363.html)
+
+- 关于公布国家农业科技园区第七批验收结果和2019年综合评估结果的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2019/201911/t20191119_150024.md)
+
+  - 2019.10.30
+    农村司关于第七批国家农业科技园区验收结果公示的[公告](http://www.most.gov.cn/tztg/201910/t20191029_149628.htm)
+
+- 2018年12月07日
+  技部办公厅关于公布2018年国家农业科技园区验收结果的[通知](http://www.gov.cn/zhengce/zhengceku/2018-12/31/content_5446196.htm)
+
+- 2017年关于公布第五批国家农业科技园区验收结果的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2017/201711/t20171128_136490.md)
+
+###### **评估**update
+
+- 【html附表】2023年01月10日
+  科技部办公厅关于公布2022年国家农业科技园区复评结果的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2023/202301/t20230110_184184.html)。【对2020年综合评估结果为不达标整改的5个园区开展复评】
+
+- 科技部办公厅关于公布2021年国家农业科技园区综合评估结果的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2021/202112/t20211222_178687.html)
+
+- 关于公布2020年国家农业科技园区综合评估结果的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2020/202012/t20201224_171990.html)
+
+- 关于公布国家农业科技园区第七批验收结果和2019年综合评估结果的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2019/201911/t20191119_150024.md)
+
+#### 数据流程
+
+在`techme`项目下进行维护。
+
+#### 背景知识
+
+科技部
+[农村科技司](https://www.most.gov.cn/zzjg/jgsz/ncs/ncsjgsz/)。机构调整，职能可能调整到农业部。
+
+- 2018-01-22，国家农业科技园区发展规划（2018—2025年）。[链接](https://www.ncsti.gov.cn/zcfg/zcwj/201811/t20181123_13272.html)。
+
+- 科技部、农业农村部、水利部、林草局中科院、中国农业银行关于印发《国家农业科技园区管理办法》的[通知](https://www.gov.cn/gongbao/content/2020/content_5535330.htm)
+
+## MOA农业部
+
+### MOA农业部重点实验室
+
+#### 数据说明
+
+更新状态：
+
+数据来源：农业农村部/科技教育司<http://www.moa.gov.cn>
+
+统计类别：
+
+（1）学科群重点实验室(stay)
+
+（2）企业重点实验室(new)
+
+（3）部省共建重点实验室(new)
+
+（4）休闲农业重点实验室（建设项目）
+
+#### 文件体系
+
+``` r
+
+dir_tar <- here("topic/public-site/moa-keylab")
+safe_dir_tree(dir_tar)
+#> *目录不存在：* /home/runner/work/techme/techme/topic/public-site/moa-keylab
+```
+
+## MOA农业部/农业机械化管理司
+
+数据来源：农业农村部/农业机械化管理司（<http://www.moa.gov.cn/>）
+
+### 农作物生产全程机械化示范县（waiting）
+
+#### 更新日志
+
+- 2024-06-13，完成2024年公示网页的数据抓取、处理和保存。完成该数据集在R包`techme`的首次数据上传。
+
+#### 数据说明
+
+更新状态：update
+
+数据使用：[`techme::PubMachineCounty`](https://huhuaping.github.io/techme/reference/PubMachineCounty.md)
+
+统计目标：
+
+- 农业生产全程机械化示范县（新口径）
+
+- 农作物生产全程机械化示范县（旧口径）
+
+- 全程机械化科研基地建设项目
+
+当前统计口径：
+
+- 第x批农业生产全程机械化示范县创建名单
+
+历史统计口径：
+
+- 全国第x批率先基本实现主要农作物生产全程机械化示范县（市、区）名单。2022年最后一次评选（第七批次）。
+
+#### 文件体系
+
+``` r
+
+dir_tar <- here::here("data-raw/public-site/moa-machine-county")
+safe_dir_tree(dir_tar)
+#> /home/runner/work/techme/techme/data-raw/public-site/moa-machine-county
+#> ├── code-moa-machine-county.R
+#> ├── html
+#> │   ├── list-year-2016.html
+#> │   ├── list-year-2017.html
+#> │   ├── list-year-2018.html
+#> │   ├── list-year-2019.html
+#> │   ├── list-year-2020.html
+#> │   ├── list-year-2021.html
+#> │   ├── list-year-2022.html
+#> │   ├── list-year-2024.html
+#> │   └── research-base-year-2022.html
+#> └── xlsx
+#>     ├── list-year-2016.xlsx
+#>     ├── list-year-2017.xlsx
+#>     ├── list-year-2018.xlsx
+#>     ├── list-year-2019.xlsx
+#>     ├── list-year-2020.xlsx
+#>     ├── list-year-2021.xlsx
+#>     ├── list-year-2022.xlsx
+#>     └── list-year-2024.xlsx
+```
+
+#### 数据集展示
+
+``` r
+
+techme::PubMachineCounty %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 数据进度
+
+##### 农业生产全程机械化示范县
+
+- 2024年3月1日，农业农村部办公厅关于公布第一批农业生产全程机械化示范县创建名单的[通知](http://www.njhs.moa.gov.cn/tzggjzcjd/202403/t20240305_6450708.htm)
+
+##### 农作物生产全程机械化示范县
+
+2022年最后一次评选（第七批次），后续公示变更为“农业生产全程机械化示范县”。
+
+- 2022年12月28日，农业农村部办公厅关于公布全国第七批率先基本实现主要农作物生产全程机械化示范县（市、区）名单的[通知](http://www.moa.gov.cn/govpublic/NYJXHGLS/202212/t20221228_6417860.htm)
+
+- 2021年12月23日，农业农村部办公厅关于公布全国第六批率先基本实现主要农作物生产全程机械化示范县（市、区）名单的[通知](http://www.moa.gov.cn/govpublic/NYJXHGLS/202112/t20211223_6385412.htm)
+
+- 2020-01-07，农业农村部办公厅关于公布全国第四批率先基本实现主要农作物生产全程机械化示范县（市、区）名单的[通知](http://www.njhs.moa.gov.cn/tzggjzcjd/202001/t20200107_6334434.htm)
+
+- 2019-01-03，农业农村部办公厅关于公布全国第三批率先基本实现主要农作物生产全程机械化示范县（市、区）名单的[通知](http://www.njhs.moa.gov.cn/tzggjzcjd/201901/t20190103_6314903.htm)
+
+- 2017-12-18，关于全国第二批基本实现主要农作物生产全程机械化示范县名单的[公示
+  doc](http://www.njhs.moa.gov.cn/tzgg/201904/t20190428_6244363.htm)
+  [或者html](http://www.moa.gov.cn/nybgb/2018/201801/201801/t20180129_6135937.htm)
+
+- 2016年5月30日，全国首批基本实现主要农作物生产全程机械化示范县（市、区）[名单](http://www.moa.gov.cn/nybgb/2016/diliuqi/201712/t20171219_6102567.htm)
+
+##### 全程机械化科研基地建设项目
+
+农机装备补短板加力推进（[网页](http://www.moa.gov.cn/ztzl/2023fzcj/202312/t20231228_6443670.htm)）
+
+#### 数据流程
+
+（1）搜索最新公示，下载`html`文件到本地
+
+（2）每个年份独立地抓取`html`页面数据（因为每年都不同），统一数据框，保存为`xlsx`文件
+
+（3）拷贝文件到R包`techme`，并进行数据创建和更新。
+
+- 本数据集的`xlsx`文件直接在本项目`report-tech`下更新维护，然后自动化拷贝到R包`techme`项目相对应`data-raw/data-tidy/`的文件夹下。
+
+- R包`techme`更新维护，只需要直接执行`update-public/wfl_knitGUI.R`的少数代码行即可！
+
+#### 注意事项
+
+（1）统计口径变化：
+
+2022年以后，“农作物生产全程机械化示范县”最后一次评选（第七批次），公示变更为“农业生产全程机械化示范县”。
+
+- 变更前，公示类别`id`仅为：“农作物”示范县
+
+- 变更后，公示类别`id`包括：“农作物”、“养殖”、“设施种植”
+
+为了保证数据的一致性和兼容性，对公示类别`id`编码进行了统一处理：
+
+``` r
+
+tbl_id <- tribble(
+  ~id, ~cat,
+  1, "农作物", # 实际上id取值小于665，都可以设定为该类别
+  666, "养殖",
+  777, "设施种植"#,
+  #888,
+)
+tbl_id
+#> # A tibble: 3 × 2
+#>      id cat     
+#>   <dbl> <chr>   
+#> 1     1 农作物  
+#> 2   666 养殖    
+#> 3   777 设施种植
+```
+
+## MOA农业部/科技教育司
+
+数据来源：农业农村部/科技教育司<http://www.moa.gov.cn>
+
+### 现代农业产业技术体系
+
+#### 数据说明
+
+更新状态：update/2023
+
+统计类别：China Agricultural Research System(CARS)
+
+- 首席科学家
+
+- 岗位科学家
+
+- 研究室主任
+
+统计口径：
+
+- 当前公示为：现代农业产业技术体系首席科学家和岗位科学家候选人名单
+
+其他信息：
+
+- 现代农业产业技术体系[管理平台](http://123.127.160.231/)
+
+#### 文件管理
+
+``` r
+
+dir_tar <- here("data-raw/public-site/moa-agri-system")
+safe_dir_tree(dir_tar)
+#> /home/runner/work/techme/techme/data-raw/public-site/moa-agri-system
+#> ├── R
+#> │   └── get.province.R
+#> ├── code-moa-agri-system.R
+#> ├── data-update
+#> │   ├── list-scientist-uptoyear-2019.xlsx
+#> │   └── list-site-uptoyear-2011.xlsx
+#> ├── html
+#> │   ├── list-year-2007-batch01.doc
+#> │   ├── list-year-2007-batch01.html
+#> │   ├── list-year-2007-batch01.xlsx
+#> │   ├── list-year-2008-batch01-add.doc
+#> │   ├── list-year-2008-batch01-add.html
+#> │   ├── list-year-2008-batch01-add.xlsx
+#> │   ├── list-year-2008-batch02.doc
+#> │   ├── list-year-2008-batch02.html
+#> │   ├── list-year-2008-batch02.xlsx
+#> │   ├── list-year-2011.html
+#> │   ├── list-year-2017.html
+#> │   ├── list-year-2017.xlsx
+#> │   ├── list-year-2019.html
+#> │   ├── list-year-2021.html
+#> │   ├── list-year-2021.pdf
+#> │   ├── list-year-2021.xlsx
+#> │   ├── list-year-2022.html
+#> │   ├── list-year-2022.pdf
+#> │   ├── list-year-2022.xlsx
+#> │   ├── list-year-2023.html
+#> │   ├── list-year-2023.xlsx
+#> │   ├── list-year-2024.html
+#> │   └── list-year-2024.xlsx
+#> ├── scrape-cars.qmd
+#> ├── wfl_PubCars.R
+#> └── xlsx
+#>     ├── list-industry-year-2011-wide.xlsx
+#>     ├── list-industry-year-2017-wide.xlsx
+#>     ├── list-industry-year-2019-wide.xlsx
+#>     ├── list-industry-year-2021-wide.xlsx
+#>     ├── list-industry-year-2022-wide.xlsx
+#>     ├── list-industry-year-2023-wide.xlsx
+#>     ├── list-industry-year-2024-wide.xlsx
+#>     └── list-site-year-2011-wide.xlsx
+```
+
+#### 数据集展示
+
+本项目内维护，通过`techme`进行数据发布：
+
+``` r
+
+techme::PubCars %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 数据进度 (updated)
+
+- \[html表格\]2024年9月12日,农业农村部关于公示现代农业产业技术体系首席科学家和岗位科学家候选人名单的[通知](http://www.chinafeedm.com/h-nd-27052.md)
+
+- 【html表格】2023年5月24日，农业农村部公示现代农业产业技术体系首席科学家和岗位科学家候选人[名单](https://finance.sina.cn/2023-05-24/detail-imyuwnec7678419.d.html?from=wap)
+
+> 【暂时没有名单】关于开展2023年现代农业产业技术体系首席科学家和岗位科学家申报工作的[通知](http://www.moa.gov.cn/govpublic/KJJYS/202305/t20230509_6427166.htm)
+
+- 【附名单pdf】2022年6月17日，关于公示现代农业产业技术体系首席科学家和岗位科学家候选人名单的[通知](http://www.moa.gov.cn/xw/zxfb/202206/t20220617_6402757.htm)。共131名，可快速完美转换为xlsx。
+
+- 【附名单pdf】关于公示现代农业产业技术体系首席科学家和岗位科学家候选人名单的[通知](http://www.moa.gov.cn/govpublic/KJJYS/202108/t20210806_6373623.htm)
+  另[网页](https://www.waizi.org.cn/law/119114.html)。pdf[附件](http://www.moa.gov.cn/govpublic/KJJYS/202108/P020210806358525696440.pdf)
+
+- 【html】2019-07-16，关于公示现代农业产业技术体系2019年增补岗位科学家候选人名单的[通知](http://www.kjs.moa.gov.cn/gzdt/201907/t20190716_6320991.htm)
+
+- 【word名单】2017-03-30，关于公示现代农业产业技术体系“十三五”新增岗位科学家候选人名单的[通知](http://www.moa.gov.cn/gk/tzgg_1/tz/201703/t20170320_5530342.htm)
+
+- 【附名单html】（2011-2015）2011-04-02，农业部关于印发现代农业产业技术体系建设依托单位和岗位聘用人员名单（2011-2015年）的[通知](http://www.stee.agri.cn/cyjs/201103/t20110313_3136130.htm)
+
+  - 2011-04-02现代农业产业技术体系建设依托单位和岗位聘用人员名单（2011-2015年）[通知](http://jiuban.moa.gov.cn/zwllm/rsxx/201104/t20110402_1961261.htm)
+
+  - 2011-04-02农业部办公厅关于印发现代农业产业技术体系执行专家组人员组成名单（2011-2015年）的[通知](http://www.stee.agri.cn/cyjs/201103/t20110313_3136129.htm)
+
+- 【word
+  名单】（2008-2010）2008-12-22，（大麦等40个主要农产品）农业部关于印发现代农业产业技术体系第二批建设依托单位和岗位聘用人员名单的[通知](http://www.stee.agri.cn/cyjs/200903/t20090317_3136148.htm)
+
+- 【word
+  名单】（2008-2010）2008-12-20，（增补）农业部关于印发现代农业产业技术体系第一批试点增补建设依托单位和岗位聘用人员名单的[通知](http://www.stee.agri.cn/cyjs/200903/t20090317_3136144.htm)
+
+- 【word名单】（2007-2010）2007年12月29日，现代农业产业技术体系建设第一批试点建设依托单位和岗位聘用人员[名单](http://www.stee.agri.cn/cyjs/200903/t20090317_3136145.htm)。另一链接[html名单](http://jiuban.moa.gov.cn/fwllm/zxbs/xzxk/ggb/201006/t20100606_1533919.htm)
+
+#### 背景知识
+
+2022年08月03日，关于印发《现代农业产业技术体系建设专项管理办法》的[通知](http://www.moa.gov.cn/govpublic/KJJYS/202208/t20220803_6406153.htm)
+
+2019-11-15，破解科研生产“两张皮”难题的成功探索——国家现代农业产业技术体系建设成效[综述](http://www.kjs.moa.gov.cn/gzdt/201911/t20191115_6331897.htm)
+
+2007年12月12日，现代农业产业技术体系建设实施方案（试行）[农业部科技教育司](http://jiuban.moa.gov.cn/fwllm/zxbs/xzxk/ggb/201006/t20100606_1533918.htm)
+
+2007年，原农业部、财政部启动建设国家现代农业产业技术体系（以下简称“产业体系”），聚焦水稻、玉米、小麦、大豆、生猪、奶牛等50个主要农产品组建了50个相应的体系，集合了全国800多个科教和企事业单位的2600多名专家进行科技攻关，形成跨部门、跨区域、跨单位、跨学科的优势科技力量，联合协作解决产业重大问题。在产业体系中，每个岗位科学家每年有70万元、每个试验站站长每年有50万元基本研发费保障。技术体系是由原农业部、财政部2007年启动建设的一个创新型科研组织。通过聚焦水稻、小麦、生猪等54个主要农产品，该体系组织汇聚了全国800多个科教和企事业单位的2600多名专家进行攻关，形成跨部门、跨区域、跨单位、跨学科的优势科技力量，联合协作解决产业重大问题。
+
+#### 数据流程
+
+（1）读取html或手动转换为xlsx，然后再读取原始数据。
+
+- 处理岗位科学家名单
+
+- 处理首席科学家名单
+
+- 合并上述合并两个名单
+
+- 导出年度xlsx
+
+（2）`techme`维护数据集.执行新的代码文件`data-raw/public-site/moa-agri-system/wfl_PubCars.R`
+
+- 循环读取年度xlsx
+
+- 匹配并添加机构省份信息（重要！）
+
+- 使用`use_data()`更新数据集。
+
+#### 注意事项
+
+(1)2025年开始,不再使用中间步骤获得`rda`数据文件，而是直接循环读取年度xlsx，然后使用`use_data()`更新数据集。
+
+- 导出`rda`数据文件到`techme/data-raw/public-site`
+
+- 暂时保留`data-raw/data-tidy/public-site/moa-agri-system/xlsx/list-industry-year-2017-wide.xlsx`，用于备份和前向兼容。
+
+- 不再使用旧有的执行文件`data-raw/wfl_useData_Cars.R`
+
+- 数据集`PubCars`变量集的省份变量进行了调整，删除了三个按科学家身份命名的省份列(`province_chairman`,
+  `province_researcher`,
+  `province_func`),而是统一添加为一个省份列`province`,以符合数据集的规范。
+
+（1）[`techme::PubCars`](https://huhuaping.github.io/techme/reference/PubCars.md)数据集发布更新流程进行了变更。
+
+当前更新发布：
+
+- 当前【年度数据】处理代码文件：“report-tech/topic/public-site/moa-agri-system/code-moa-agri-system.R”
+
+- 当前【更新发布】代码文件：“techme/data-raw/wfl_useData_universe.R”
+
+- 当前年度数据存放：“techme/data-raw/data-tidy/public-site/moa-agri-system/xlsx”
+
+历史更新发布：
+
+- 历史【更新发布】代码文件：“techme/data-raw/wfl_useData_Cars.R”
+
+- 历史年度数据存放：“techme/data-raw/data-tidy/public-site/moa-agri-system/xlsx”（从`report-tech/`项目中将整理好的年度数据拷贝过去）
+
+（2）保持数据集结构的前向兼容性。尽管实现了对早年数据集的一致性和兼容性，但是目前的变量集相对比较复杂。体现在：a.扁平数据形态，变量比较多，不是很友好。b.后续年度中，很多变量的缺省值较多，带来数据稀松性。
+
+``` r
+
+names(techme::PubCars)
+#>  [1] "year"                 "index"                "area_num_eng"        
+#>  [4] "area_name"            "chairman_industry"    "institution_industry"
+#>  [7] "func_num"             "func_name"            "func_inst"           
+#> [10] "func_director"        "researcher_area"      "researcher_name"     
+#> [13] "researcher_inst"      "province"
+```
+
+### 国家农业科技创新联盟
+
+#### 数据说明
+
+更新状态：stay/保持，2023
+
+数据来源：农业农村部/科技教育司<http://www.moa.gov.cn>；联盟官网<https://nastia.caas.cn/index.htm>。
+
+统计类别：
+
+- 专业联盟
+
+- 产业联盟
+
+- 区域联盟
+
+统计口径：
+
+- 202x年度国家农业科技创新联盟认定名单
+
+- 官网名单/联盟名录（<https://nastia.caas.cn/lmml/zylm/index.htm#>）
+
+#### 文件管理
+
+当前主要通过MOST发文抓取，可以考虑使用联盟官网抓取。
+
+``` r
+
+dir_tar <- here("topic/public-site/moa-agri-alliance")
+safe_dir_tree(dir_tar)
+#> *目录不存在：* /home/runner/work/techme/techme/topic/public-site/moa-agri-alliance
+```
+
+## MOA农业部/乡村产业发展司
+
+### 农业产业化国家重点龙头企业
+
+#### 数据说明
+
+更新状态：update
+
+数据来源：农业农村部/乡村产业发展司<http://www.xccys.moa.gov.cn/>
+
+统计类别：
+
+- 农业产业化国家重点龙头企业名单
+
+- 监测合格农业产业化国家重点龙头企业名单
+
+统计口径：
+
+- 【维护】年度更新的国家重点龙头企业名单（网页名单更新，每年5月份左右）
+
+- 【维护】第x批农业产业化国家重点龙头企业名单（公示文件）
+
+- 第x次监测合格农业产业化国家重点龙头企业名单（公示文件）
+
+#### 文件管理
+
+``` r
+
+dir_tar <- here("data-raw/public-site/moa-firm-leader")
+safe_dir_tree(dir_tar)
+#> /home/runner/work/techme/techme/data-raw/public-site/moa-firm-leader
+#> ├── code-moa-firm-leader.R
+#> ├── data-update
+#> │   ├── batch-upto-year-2021.xlsx
+#> │   ├── batch-upto-year-2024.xlsx
+#> │   └── list-full-upto-year-2023.xlsx
+#> ├── html
+#> │   ├── batch-01-year-2000.docx
+#> │   ├── batch-01-year-2000.html
+#> │   ├── batch-02-year-2002.html
+#> │   ├── batch-03-year-2004.html
+#> │   ├── batch-04-year-2008.html
+#> │   ├── batch-05-year-2011.html
+#> │   ├── batch-06-year-2019.html
+#> │   ├── batch-07-year-2021.html
+#> │   ├── batch-08-year-2024.html
+#> │   ├── batch-08-year-2024.txt
+#> │   ├── check-01-year-2003.html
+#> │   ├── check-02-year-2005.html
+#> │   ├── check-04-year-2010.html
+#> │   ├── check-07-year-2016.html
+#> │   ├── check-08-year-2018.html
+#> │   ├── check-09-year-2020.html
+#> │   ├── check-10-year-2023.html
+#> │   ├── check-10-year-2023.ofd
+#> │   ├── list-full-year-2023.html
+#> │   └── list-full-year-2025.html
+#> ├── wfl-PubFirmLeader.R
+#> └── xlsx
+#>     ├── batch-01-year-2000.xlsx
+#>     ├── batch-02-year-2002.xlsx
+#>     ├── batch-03-year-2004.xlsx
+#>     ├── batch-04-year-2008.xlsx
+#>     ├── batch-05-year-2011.xlsx
+#>     ├── batch-06-year-2019.xlsx
+#>     ├── batch-07-year-2021.xlsx
+#>     ├── batch-08-year-2024.xlsx
+#>     ├── list-full-year-2023.xlsx
+#>     └── list-full-year-2025.xlsx
+```
+
+#### 数据集展示
+
+根据需要，我们网页更新名单和批次认定名单进行了统一化维护，形成[`techme::PubFirmLeader`](https://huhuaping.github.io/techme/reference/PubFirmLeader.md)数据集。
+
+``` r
+
+techme::PubFirmLeader %>%
+  slice_sample(n = 10, by = batch ) %>%
+  DT::datatable(
+    rownames = TRUE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 数据进度
+
+##### 批次认定
+
+- 第九批农业产业化国家重点龙头企业名单（暂时未看到公示文件）
+
+  - 2025-04-08,
+    第十一次农业产业化国家重点龙头企业监测拟递补企业名单[公示](https://www.agri.cn/zx/zxfb/202504/t20250408_8724510.htm)。158家。
+
+- 【png转txt】2024年3月22日
+  第八批农业产业化国家重点龙头企业认定名单[公示](https://www.abeedata.com/home/article/detail/id/23163)。拟认定中和农信农业集团有限公司等333家企业为农业产业化国家重点龙头企业。2023-08-09
+  关于开展第八批农业产业化国家重点龙头企业申报工作的[通知](http://www.xccys.moa.gov.cn/nycyh/202309/t20230904_6435775.htm)
+
+- 2021-12-22
+  农业农村部等七部门关于公布第七批农业产业化国家重点龙头企业名单的[通知](http://www.chinatax.gov.cn/chinatax/n810341/n810825/c101434/c5172389/content.md)。
+  412家。
+
+  - 农业农村部办公厅关于开展第七批农业产业化国家重点龙头企业申报工作的[通知](http://www.moa.gov.cn/govpublic/XZQYJ/202105/t20210513_6367634.htm)
+
+- 【附名单html】关于递补128家企业为农业产业化国家重点龙头企业的[通知](http://www.moa.gov.cn/govpublic/XZQYJ/202012/t20201215_6358153.htm)
+
+- 【附名单word】关于公布第六批农业产业化国家重点龙头企业名单的[通知](http://www.moa.gov.cn/govpublic/XZQYJ/201912/t20191203_6332742.htm)
+
+- 【附名单html】2011-12-28
+  关于公布第五批农业产业化国家重点龙头企业名单的[通知](http://www.hzjjs.moa.gov.cn/zcjd/201202/t20120227_6289044.htm)
+
+- 【附名单html】2008-08-01
+  关于公布第四批农业产业化国家重点龙头企业名单的[通知](http://www.moa.gov.cn/nybgb/2008/dshiq/201806/t20180611_6151668.htm)
+
+- 【附名单html】2004-09-03
+  关于公布第三批农业产业化国家重点龙头企业名单的[通知](http://www.moa.gov.cn/nybgb/2004/dshiq/201806/t20180624_6153044.htm)
+
+- 【附名单html】2002-12-31
+  关于公布第二批农业产业化国家重点龙头企业名单的[通知](http://hubei.chinatax.gov.cn/hbsw/zcwj/zcfgk/qysds/412869.htm)
+
+- 【附名单html、word】 2000-10-26
+  关于公布【第一批】农业产业化国家重点龙头企业名单的[通知word](http://shanxi.chinatax.gov.cn/zcfg/detail/sx-11400-3815-1697452)。[html名单](http://www.cpba.org.cn/page/dongtai/article.asp?id=2368)
+
+##### 名单目录
+
+与批次认定名单不同，以下的名单目录，应该是监测合格名单，每年5月份左右会在网页上更新。更新原因包括：企业改名、监测不合格等。
+
+- 【附html】2025-05-27更新。农业产业化国家重点龙头企业[名单](http://www.xccys.moa.gov.cn/nycyh/202305/t20230518_6427885.htm)
+
+- 【附html】2024-05-31更新。农业产业化国家重点龙头企业[名单](http://www.xccys.moa.gov.cn/nycyh/202305/t20230518_6427885.htm)
+
+- 【附html】2023-05-18更新。农业产业化国家重点龙头企业[名单](http://www.xccys.moa.gov.cn/nycyh/202305/t20230518_6427885.htm)
+
+##### 动态监测
+
+- 2025-04-08,
+  第十一次农业产业化国家重点龙头企业监测拟递补企业名单[公示](https://www.agri.cn/zx/zxfb/202504/t20250408_8724510.htm)。158家。
+
+- 2023年05月16日
+  关于公布第十次监测合格和递补农业产业化国家重点龙头企业名单的[通知](http://www.moa.gov.cn/govpublic/XZQYJ/202305/t20230516_6427666.htm)
+
+- 【附名单html】农业农村部关于公布第九次监测合格农业产业化国家重点龙头企业名单的[通知](http://www.moa.gov.cn/govpublic/XZQYJ/202012/t20201215_6358150.htm)
+
+- 2020年05月13日
+  农业农村部办公厅关于开展农业产业化国家重点龙头企业监测工作的[通知](https://www.gov.cn/zhengce/zhengceku/2020-05/15/content_5511883.htm)
+
+- 【附名单html】2018年12月05日
+  关于公布第八次监测合格农业产业化国家重点龙头企业名单的[通知](http://www.moa.gov.cn/govpublic/XZQYJ/201812/t20181205_6164387.htm)
+
+- 【附名单html】2016年10月14日
+  关于公布第七次监测合格农业产业化国家重点龙头企业名单的[通知](http://www.moa.gov.cn/nybgb/2016/shiyiqi/201711/t20171128_5922432.htm)
+
+- 【附名单html】2010-04-20
+  关于公布第四次监测合格农业产业化国家重点龙头企业名单的[通知](http://www.moa.gov.cn/nybgb/2010/dsiq/201805/t20180530_6148356.htm)
+
+- 【附名单html】2005-06-03
+  关于公布第二次监测合格农业产业化国家重点龙头企业名单的[通知](http://fgcx.bjcourt.gov.cn:4601/law?fn=chl323s082.txt)
+
+- 【附名单html】2003-10-20
+  关于公布第一次监测合格农业产业化国家重点龙头企业名单的[通知](http://www.moa.gov.cn/nybgb/2003/dyq/201806/t20180624_6153085.htm)
+
+#### 数据流程
+
+1.  收集初始资料。执行R代码文件`/data-raw/public-site/moa-firm-leader/code-moa-firm-leader.R`。
+
+    （1）搜索最新公示，下载`html`文件到本地。
+
+    （2）每个年份独立地抓取`html`页面数据（因为每年都不同），统一数据框，保存为`xlsx`文件
+
+2.  更新数据集。执行R代码文件`/data-raw/public-site/moa-firm-leader/wfl-PubFirmLeader.R`。
+
+    （1）将`xlsx/`拷贝到相对应`data-raw/data-tidy/`的文件夹下。
+
+注意事项：企业可能更名，统计口径变化。
+
+3.  历史维护：2025年开始正式编制`PubFirmLeader`数据集，2025年以前数据，需要手动维护。
+
+    （1）在项目`report-tech`下，`xlsx/`文件进行批量读取，然后形成`xlsx-update/`文件夹。
+
+#### 背景知识
+
+政策文件：
+
+- 2018年5月10日
+  农业产业化国家重点龙头企业认定和运行监测管理[办法](https://www.gov.cn/gongbao/content/2018/content_5338242.htm)
+
+### 农业产业融合发展
+
+#### 数据说明
+
+更新状态：update
+
+数据来源：农业农村部/乡村产业发展司/产业融合<http://www.xccys.moa.gov.cn/cyrh/>
+
+统计类别：
+
+- 国家现代农业产业园：创建（产业融合发展`park-setup`）；认定（单独公示`park-affirm`）
+
+- 优势特色产业集群：创建（`cluster-setup`）
+
+- 农业产业强镇：创建（`town-setup`）
+
+当前统计口径：
+
+- 202x年农业产业融合发展项目创建名单（2021年开始），包括现代农业产业园【创建】、优势特色产业集群建设名单和农业产业强镇建设名单
+
+-关于202x年国家现代农业产业园【认定】名单的公示
+
+历史口径（2021年以前）：
+
+- 202x年国家现代农业产业园【创建】名单；关于【认定】第x批国家现代农业产业园的通知；
+
+- 202x年优势特色产业集群建设名单
+
+- 202x年农业产业强镇建设名单
+
+#### 文件管理
+
+``` r
+
+dir_tar <- here::here("data-raw/public-site/moa-industry-convergence")
+safe_dir_tree(dir_tar, recurse = FALSE)
+#> /home/runner/work/techme/techme/data-raw/public-site/moa-industry-convergence
+#> ├── code-moa-industry-convergence.R
+#> ├── data-update
+#> ├── html
+#> ├── wfl_PubConvergence.R
+#> └── xlsx
+```
+
+#### 数据集展示
+
+本项目内维护，通过`techme`进行数据发布：
+
+（1.1）国家现代农业产业园【创建】名单：[`techme::PubConvergencePark`](https://huhuaping.github.io/techme/reference/PubConvergencePark.md)
+
+``` r
+
+techme::PubConvergencePark %>%
+  #head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+（1.2）
+国家现代农业产业园【认定】名单：[`techme::PubConvergenceAffirm`](https://huhuaping.github.io/techme/reference/PubConvergenceAffirm.md)
+
+``` r
+
+techme::PubConvergenceAffirm %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+（2）优势特色产业集群【建设】名单：[`techme::PubConvergenceCluster`](https://huhuaping.github.io/techme/reference/PubConvergenceCluster.md)
+
+``` r
+
+techme::PubConvergenceCluster %>%
+  #ead(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+（3）农业产业强镇【创建】名单：[`techme::PubConvergenceTown`](https://huhuaping.github.io/techme/reference/PubConvergenceTown.md)
+
+``` r
+
+techme::PubConvergenceTown %>%
+  #head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 数据进度
+
+##### 农业产业融合发展项目(update)
+
+农业产业融合发展项目名单数据年份：2021年至今。
+
+农业产业融合发展项目（project）公示，包括三类项目名单：国家现代农业产业园（创建park）、优势特色产业集群（cluster）和农业产业强镇（town）。
+
+2021年及以后对三类项目创建进行集中公示，公示文档存档为：`projec-setup-year-xxxx.html`
+
+- 2025年3月27日,
+  2025年农业产业融合发展项目立项名单公示[公告](https://www.yanqitong.cn/guojiazhengce/19710.html)
+
+- 2024年4月1日，非官方发布。2024年农业产业融合发展项目立项名单[公示](https://baijiahao.baidu.com/s?id=1795115862984744494&wfr=spider&for=pc)
+
+- 2023年4月26日
+  关于公布2023年农业产业融合发展项目创建名单的[通知](http://www.moa.gov.cn/gk/cwgk_1/cwgl/202304/t20230428_6426485.htm)
+
+  - 关于做好2023年农业产业融合发展项目申报工作的[通知](http://www.moa.gov.cn/gk/cwgk_1/nybt/202303/t20230316_6423242.htm)
+
+- 2022年4月27日
+  关于公布2022年农业产业融合发展项目创建名单的[通知](https://www.moa.gov.cn/gk/cwgk_1/cwgl/202204/t20220428_6397980.htm)
+  包括：国家现代农业产业园、优势特色产业集群、农业产业强镇
+
+- 关于公布2021年农业产业融合发展项目创建名单的[通知](http://www.xccys.moa.gov.cn/cyrh/202104/t20210429_6366991.htm)
+  50家 包括：国家现代农业产业园、优势特色产业集群、农业产业强镇
+
+##### 国家现代农业产业园（创建-历史存档）
+
+现代农业产业园创建名单数据年份：2017年至今。
+
+现代农业产业园**创建**（还可见发展规划司）。2020年以后现代农业产业园**创建**按农业产业融合发展项目进行公示。
+
+历史公示材料存档为`park-setup-year-xxxx.html`：
+
+- 2020年04月27日 31+8家
+  关于公布2020年国家现代农业产业园创建名单的[通知](http://www.ghs.moa.gov.cn/tzgg/202004/t20200430_6342814.htm)
+
+- 2019-06-13 45+7家
+  2019年国家现代农业产业园创建名单公示[公告](http://www.ghs.moa.gov.cn/tzgg/201906/t20190613_6317006.htm)
+
+- 2018-06-22 21家
+  关于2018年国家现代农业产业园创建名单的[公示](http://www.ghs.moa.gov.cn/tzgg/201904/t20190418_6180995.htm)
+
+- 2017-07-20 11家
+  关于批准创建第一批国家现代农业产业园的[通知](http://www.moa.gov.cn/nybgb/2017/dqq/201712/t20171230_6133931.htm)
+
+##### 国家现代农业产业园（认定-单独进行公示 staying）
+
+国家现代农业产业园认定名单数据年份：2018年至今。
+
+国家现代农业产业园**认定**由农业部每年单独进行公示。
+
+公示文档存档为`projec-affirm-year-xxxx.html`：
+
+- 【html div】2023-12-26
+  关于2023年国家现代农业产业园认定名单的[公示](http://www.moa.gov.cn/xw/zxfb/202312/t20231226_6443491.htm)
+
+- 【html div】2022年01月21日
+  农业农村部财政部关于认定第四批国家现代农业产业园的[通知](http://www.moa.gov.cn/govpublic/FZJHS/202201/t20220125_6387615.htm)
+
+- 2020-12-14
+  关于第三批国家现代农业产业园认定名单的[公示](http://www.farmchina.org.cn/ShowArticles.php?url=BjpWMwtrCTwCMgVpBj8DZFEw)。另见38个！第三批国家现代农业产业园认定名单来了，河南这两地上榜[链接](http://news.china.com.cn/live/2021-01/11/content_1113178.htm)
+
+- 2019-12-22 21+8家
+  关于认定第二批国家现代农业产业园的[通知](http://www.moa.gov.cn/xw/zxfb/201912/t20191220_6333687.htm)
+
+- 2018年12月29日 20家
+  关于认定首批国家现代农业产业园的[通知](http://www.moa.gov.cn/gk/tzgg_1/tfw/201901/t20190103_6166086.htm)
+
+##### 国家现代农业产业园（评估-单独进行公示 Newcoming）
+
+html存档为”park-eval-year-YYYY.html”
+
+- 2024-11-05, 【html
+  list】关于通过2024年国家现代农业产业园绩效评估名单的[公示](http://www.agri.cn/zx/zxfb/202411/t20241105_8685826.htm)
+
+##### 优势特色产业集群（创建）
+
+优势特色产业集群创建名单数据年份：2020年至今。
+
+2021年开始农业产业融合发展项目公示包括了优势特色产业集群创建名单。
+
+历史公示材料存档为`cluster-setup-year-2020.html` - 2020-04-20
+2020年优势特色产业集群建设名单公示[公告](http://www.moa.gov.cn/xw/zxfb/202004/t20200420_6341954.htm)
+直接处理为xlsx
+
+- 历史工作项目”data-raw/public-site/moa-special-cluster”迁移到本项目。
+
+##### 农业产业强镇建设名单（创建）
+
+农业产业强镇创建名单数据年份：2018年至今。
+
+2021年开始农业产业融合发展项目公示包括了农业产业强镇创建名单。
+
+历史公示材料存档为`cluster-setup-year-2020.html`。历史公示材料来源：乡村产业发展司
+\> [农产品加工](http://www.xccys.moa.gov.cn/ncpjg/)。
+
+- 【附名单html
+  div】关于公布2020年农业产业强镇建设名单的[通知](http://www.moa.gov.cn/nybgb/2020/202006/202007/t20200708_6348273.htm)
+
+- 【html table】2019年7月20日
+  公厅关于批准开展2019年农业产业强镇建设的[通知](http://www.moa.gov.cn/nybgb/2019/201908/202001/t20200108_6334509.htm)
+
+- 【xls table】2018年08月05日 农办财〔2018〕70号
+  关于批准开展2018年农业产业强镇示范建设的[通知](http://www.gov.cn/zhengce/zhengceku/2018-12/31/content_5441182.htm)
+
+存档说明：
+
+- 项目`report-tech`下的历史存档”topic/public-site/moa-special-cluster”2023年开始不再使用，而是在`techme`下的”data-raw/public-site/moa-industry-convergence”进行三类项目名单集中处理。
+
+#### 数据流程
+
+（0）更新`data-raw/public-site/moa-industry-convergence/code-moa-industry-convergence.R`。
+
+（1）抓取农业产业融合发展项目公示html。一次性处理三类公示名单：
+
+- 读取公示文件html/txt
+
+- 清洗数据表
+
+- 匹配省区信息
+
+- 添加整理信息
+
+- 依次导出park、cluster、town的年度xlsx
+
+- xlsx数据包含了省份信息，不需要再匹配。
+
+（2）抓取现代农业产业园认定公示html。
+
+- 读取html。通过notepad，事先编辑`<div class="park-confirm">`
+
+- 匹配省区信息
+
+- 添加整理信息
+
+- 依次导出park-affirm年度xlsx
+
+（3）`techme`维护数据集
+
+- 执行`data-raw/public-site/moa-industry-convergence/wfl_PubConvergence.R`
+
+- 可以直接循环读取年度xlsx，因为xlsx数据包含了省份信息，不需要再匹配。
+
+- 使用`use_data()`更新数据集。
+
+##### 政策背景
+
+针对国家现代农业产业园(park)的一篇综合性的分析文章:[历年国家现代农业产业园名单及2024年国家现代农业产业园现状分析](https://mp.weixin.qq.com/s/pDuec-Sjy8XmRJE-x76Klw).文章中一个重要的内容是梳理出了每个产业园区的主导产业类别。
+
+##### 注意事项
+
+历史工作流说明：
+
+- 2025年以前，前四个数据集（park-setup、cluster-setup、town-setup、park-affirm），都是使用`wfl_useData_universe.R`进行数据更新。
+
+- 最重要的是这个工作流采用了一个中间步骤。也即，先导出`.rda`数据文件到`techme/data-raw/public-site`，然后在techme包项目中更新。
+
+- 考虑到xlsx数据包含了省份信息，不需要再匹配。所以2025年开始，将采用更加统一的代码”wfl_PubConvergence.R”，直接循环读取年度xlsx，然后使用`use_data()`更新数据集。
+
+``` r
+
+data_names <- c(
+  "park-setup","cluster-setup", "town-setup",
+  "park-affirm"  # 产业园认定
+)
+data_names
+#> [1] "park-setup"    "cluster-setup" "town-setup"    "park-affirm"
+```
+
+- 导出`rda`数据文件到`techme/data-raw/public-site`
+
+``` r
+
+use_list <- c(
+  "PubConvergencePark",
+  "PubConvergenceCluster",
+  "PubConvergenceTown",
+  "PubConvergenceAffirm"  # 产业园认定
+)
+use_list
+#> [1] "PubConvergencePark"    "PubConvergenceCluster" "PubConvergenceTown"   
+#> [4] "PubConvergenceAffirm"
+```
+
+- 在techme包项目中更新
+
+&nbsp;
+
+    "D:/github/techme/data-raw/wfl_useData_universe.R"
+    use_data()
+    use_r()
+    document()
+
+## MOA农业部/发展规划司
+
+数据来源：农业农村部/发展规划司<http://www.moa.gov.cn/>
+
+### 农业现代化示范区
+
+#### 数据说明
+
+更新状态：update
+
+统计类别：
+
+- 农业现代化示范区创建名单
+
+当前统计口径：
+
+- 202x年农业现代化示范区创建名单公示
+
+历史口径：
+
+#### 文件管理
+
+``` r
+
+dir_tar <- here("data-raw/public-site/moa-agrimodern-zone")
+safe_dir_tree(dir_tar)
+#> /home/runner/work/techme/techme/data-raw/public-site/moa-agrimodern-zone
+#> ├── code-moa-agrimodern-zone.R
+#> ├── data-update
+#> │   └── list-zone-upto-year-2022.xlsx
+#> ├── html
+#> │   ├── list-year-2021.html
+#> │   ├── list-year-2022.html
+#> │   └── list-year-2023.html
+#> └── xlsx
+#>     ├── list-year-2021.xlsx
+#>     ├── list-year-2022.xlsx
+#>     └── list-year-2023.xlsx
+```
+
+#### 数据集展示
+
+本项目内维护，通过`techme`进行数据发布：
+
+``` r
+
+techme::PubAgrimodernZone %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 数据进度(staying)
+
+- 2024年农业现代化示范区创建名单暂未公示。
+
+- 【html
+  div】2023-08-01。2023年农业现代化示范区创建名单[公示](https://news.cnstock.com/news,bwkx-202308-5099816.htm)，非官方。[官方](http://nyj.xjbt.gov.cn/c/2023-08-01/8293503.smd)。
+
+- 2022年8月9日
+  2022年农业现代化示范区创建名单公示（第二批）[公告](http://nyt.hubei.gov.cn/bmdt/yw/mtksn/202208/t20220810_4256547.smd)
+
+  - 关于开展2022年农业现代化示范区创建工作的[通知](https://www.gov.cn/zhengce/zhengceku/2022-04/27/content_5687511.htm)
+
+- 2021-11-19
+  关于创建农业现代化示范区名单（第一批）公示[公告](https://www.moa.gov.cn/govpublic/FZJHS/202112/t20211210_6384493.htm)。另[参看](https://www.moa.gov.cn/xw/zxfb/202111/t20211119_6382561.htm)
+
+#### 数据流程
+
+（1）抓取公示html文件。
+
+- 读取公示文件html
+
+- 清洗数据表
+
+- 匹配省区信息
+
+- 添加整理信息
+
+- 导出年度xlsx
+
+（2）`techme`维护数据集
+
+- 循环读取年度xlsx
+
+- 在techme包项目中更新
+
+##### 注意事项
+
+历史工作流说明：
+
+- 2025年以前通过一个中间步骤进行数据框导出，然后更新数据集。
+
+- 2025年开始，直接循环读取年度xlsx，然后使用`use_data()`更新数据集。
+
+- 导出`rda`数据文件到`techme/data-raw/public`
+
+&nbsp;
+
+    "D:/github/techme/data-raw/wfl_useData_universe.R"
+    use_data()
+    use_r()
+    document()
+
+#### 背景知识
+
+- 人大建议答复，关于支持米易县国家现代农业产业园创建的建议。[参看](https://www.moa.gov.cn/govpublic/FZJHS/202408/t20240801_6460118.htm)。2021年至2023年，农业农村部会同财政部、国家发展改革委分三批将300个县（市、区）纳入农业现代化示范区建设名单，聚集资源、聚合力量，创新机制、探索模式，扎实推进农业现代化示范区建设，引领带动农业农村现代化加快发展。
+
+## MOA农业部/市场与信息化司
+
+数据来源：农业农村部/市场与信息化司<http://www.scs.moa.gov.cn/>
+
+### 农产品产地冷藏保鲜整县推进试点
+
+#### 数据说明
+
+更新状态：update
+
+统计类别：
+
+- 农产品产地冷藏保鲜整县推进试点县名单
+
+当前统计口径：
+
+- 202x年农产品产地冷藏保鲜整县推进试点名单
+
+历史口径：
+
+#### 文件管理
+
+``` r
+
+dir_tar <- here("data-raw/public-site/moa-freshkeep-county/")
+safe_dir_tree(dir_tar)
+#> /home/runner/work/techme/techme/data-raw/public-site/moa-freshkeep-county/
+#> ├── code-moa-freshkeep-county.R
+#> ├── html
+#> │   ├── list-year-2021.html
+#> │   ├── list-year-2022.html
+#> │   └── list-year-2022.txt
+#> └── xlsx
+#>     ├── list-year-2021.xlsx
+#>     └── list-year-2022.xlsx
+```
+
+#### 数据集展示
+
+本项目内维护，通过`techme`进行数据发布：
+
+``` r
+
+techme::PubFreshKeepCounty %>%
+  #head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 数据进度(staying)
+
+- 【html
+  jpeg转文字识别转txt】2022年农产品产地冷藏保鲜整县推进试点县名单。已经公示（76个县区），但没有找到完整名单。完整图片名单[参看0](https://mp.weixin.qq.com/s/r1TH0ih3toJePfOTX8JFOA)（保存本地后，图片不可见）；部分名单图片：[参看1](https://www.sohu.com/a/564922569_121106832)；[参看2](https://mp.weixin.qq.com/s?__biz=MzAwNjY2NzM3NA==&mid=2657078567&idx=1&sn=67697b965c0fd9729b8952527ce83454&chksm=80a28026b7d5093033dcd88517a256e5dcf0ec8023b9bf03a176091f798ac401edda8e906f10&scene=27)。
+
+- 【html div】2021年07月23日【word名单】农业农村部办公厅
+  财政部办公厅关于公布2021年农产品产地冷藏保鲜整县推进试点名单的[通知](http://www.moa.gov.cn/govpublic/SCYJJXXS/202107/t20210729_6373117.htm)。[又见](https://finance.sina.cn/2021-06-24/detail-ikqciyzk1567342.d.html)
+
+#### 背景知识
+
+—
+2022全国农产品产地冷藏保鲜整县推进现场会在茶陵[召开](http://www.chaling.gov.cn/c11043/20220830/i1921885.md)
+
+- 农业农村部办公厅财政部办公厅关于做好2022年农产品产地冷藏保鲜设施建设工作的[通知](http://www.moa.gov.cn/xw/bmdt/202206/t20220606_6401685.htm)
+
+#### 数据流程
+
+（1）抓取名单公示html/txt。
+
+- 读取html。通过notepad，事先编辑`<div class="fresh">`
+
+- 匹配省区信息
+
+- 添加整理信息
+
+- 依次导出年度xlsx
+
+（3）`techme`维护数据集
+
+- 循环读取年度xlsx
+
+- 导出`rda`数据文件到`techme/data-raw/public-site`
+
+``` r
+
+(use_list <- "PubFreshKeepCounty")
+#> [1] "PubFreshKeepCounty"
+```
+
+- 在techme包项目中更新
+
+&nbsp;
+
+    "D:/github/techme/data-raw/wfl_useData_universe.R"
+    use_data()
+    use_r()
+    document()
+
+#### 分析设计
+
+R代码文件：
+
+``` r
+
+(code_file <-here("report/code/chpt02-03-moa-genetic-resource.R"))
+#> [1] "/home/runner/work/techme/techme/report/code/chpt02-03-moa-genetic-resource.R"
+```
+
+图表设计：
+
+- 制表：旱区省份/最新年份名单列表
+
+### 全国农业农村信息化示范基地
+
+#### 数据说明
+
+更新状态：update
+
+统计类别：
+
+- 全国农业农村信息化示范基地名单
+
+当前统计口径：
+
+- 关于认定202x年度农业农村信息化示范基地的通知
+
+历史口径：
+
+#### 文件管理
+
+``` r
+
+dir_tar <- here("data-raw/public-site/moa-rural-infobase/")
+safe_dir_tree(dir_tar)
+#> /home/runner/work/techme/techme/data-raw/public-site/moa-rural-infobase/
+#> ├── code-moa-rural-infobase.R
+#> ├── html
+#> │   ├── list-year-2021.html
+#> │   └── list-year-2023.html
+#> └── xlsx
+#>     ├── list-year-2021.xlsx
+#>     └── list-year-2023.xlsx
+```
+
+#### 数据集展示
+
+本项目内维护，通过`techme`进行数据发布：
+
+``` r
+
+techme::PubRuralInfoBase %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 数据进度(staying)
+
+- \[html
+  div\]2023年12月29日,农业农村部关于认定2023年度农业农村信息化示范基地的[通知](http://www.moa.gov.cn/govpublic/SCYJJXXS/202312/t20231229_6443755.htm)
+
+- 【html
+  div】2021年09月28日，农业农村部关于认定2021年度农业农村信息化示范基地的[通知](http://www.moa.gov.cn/nybgb/2021/202111/202112/t20211222_6385259.htm)
+
+  - 农业农村部办公厅关于申报2021年度全国农业农村信息化示范基地的[通知](http://www.moa.gov.cn/govpublic/SCYJJXXS/202103/t20210315_6363724.htm)
+
+#### 数据流程
+
+（1）抓取名单公示html。
+
+- 读取html。通过notepad，事先编辑`<div class="info">`
+
+- 匹配省区信息
+
+- 添加整理信息
+
+- 依次导出年度xlsx
+
+（3）`techme`维护数据集
+
+- 循环读取年度xlsx
+
+- 导出`rda`数据文件到`techme/data-raw/public-site`
+
+``` r
+
+(use_list <- "PubFreshKeepCounty")
+#> [1] "PubFreshKeepCounty"
+```
+
+- 在techme包项目中更新
+
+&nbsp;
+
+    "D:/github/techme/data-raw/wfl_useData_universe.R"
+    use_data()
+    use_r()
+    document()
+
+#### 分析设计
+
+R代码文件：
+
+``` r
+
+(code_file <-here("report/code/chpt02-03-moa-genetic-resource.R"))
+#> [1] "/home/runner/work/techme/techme/report/code/chpt02-03-moa-genetic-resource.R"
+```
+
+图表设计：
+
+- 制表：旱区省份/最新年份名单列表
+
+## MOA农业部/农村合作经济指导司
+
+数据来源：农业农村部/农村合作经济指导司<http://www.hzjjs.moa.gov.cn/>
+
+### 农民合作社示范社
+
+#### 数据说明
+
+更新状态：stay
+
+统计类别：
+
+- 国家农民合作社示范社
+
+- 全国农民用水合作示范组织
+
+当前统计口径：
+
+- 202x年国家农民合作社示范社和全国农民用水合作示范组织名单
+
+- 第x次监测合格国家农民合作社示范社名单
+
+#### 文件管理
+
+``` r
+
+dir_tar <- here("topic/public-site/moa-cooperation")
+safe_dir_tree(dir_tar)
+#> *目录不存在：* /home/runner/work/techme/techme/topic/public-site/moa-cooperation
+```
+
+## MOA农业部/种业管理司
+
+数据来源：农业农村部/种业管理司<http://www.zys.moa.gov.cn/>
+
+### 区域性良种繁育基地和制种大县
+
+#### 数据说明
+
+更新状态：coming
+
+统计类别：
+
+- 区域性良种繁育基地
+
+- 制种大县（2022年开始认定）
+
+统计口径：
+
+- 202x年国家畜禽核心育种场等遴选核验结果
+
+- 202x年国家级制种大县和区域性良种繁育基地认定结果
+
+- 认定第x批国家区域性良种繁育基地
+
+#### 文件管理
+
+``` r
+
+dir_tar <- here("topic/public-site/moa-seed-base")
+safe_dir_tree(dir_tar)
+#> *目录不存在：* /home/runner/work/techme/techme/topic/public-site/moa-seed-base
+```
+
+### 育繁推一体化企业(scrape)
+
+#### 数据说明
+
+更新状态：updated
+
+数据使用：[`techme::PubSeedFirm`](https://huhuaping.github.io/techme/reference/PubSeedFirm.md)
+(2025年及以后)
+
+数据来源：中国种业大数据平台/农作物种子管理集成平台/生产经营许可证查询。查询地址（<http://202.127.42.47:6010/XKSite/Home/Index>）。种子生产经营许可。具备API查询功能，根据需要可一年爬取一次。
+
+统计类别：
+
+- 育繁推一体化种子企业，旱区省份企业名单
+
+统计口径：
+
+- 通过API参数获取XHR下的json。
+
+#### 数据集展示
+
+(1)数据抓取，执行R代码文件`data-raw/public-site/moa-seed-firm/code-01-scrape-seed-firm.R`。产生抓取参数数据的`xlsx`文件，以及全部育繁推企业的`.rds`数据文件。
+
+(2)数据整理，执行R代码文件`data-raw/public-site/moa-seed-firm/code-02-clean-seed-firm.R`。产生`data-raw/data-tidy/public-site/moa-seed-firm/data/`目录下的年度`.rds`文件。
+
+(3)数据发布，执行R代码文件`data-raw/public-site/moa-seed-firm/wfl-PubSeedFirm.R`。
+
+``` r
+
+techme::PubSeedFirm %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = TRUE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 文件管理
+
+当前项目：
+
+- 2025年，网站数据抓取迁移`techme`项目`data-raw/public-site/moa-seed-firm`下
+
+``` r
+
+dir_tar <- here("data-raw/public-site/moa-seed-firm")
+safe_dir_tree(dir_tar)
+#> /home/runner/work/techme/techme/data-raw/public-site/moa-seed-firm
+#> ├── code-01-scrape-seed-firm.R
+#> ├── code-02-tidy-seed-firm.R
+#> ├── data
+#> │   ├── table-json-2023.rds
+#> │   ├── table-json-2024.rds
+#> │   ├── table-json-2025.rds
+#> │   ├── table-parameters-id-2025.xlsx
+#> │   └── table-parameters-id.xlsx
+#> ├── guide-scrape-seed-firm.qmd
+#> ├── scrape-seed-firm.Rmd
+#> └── wfl-PubSeedFirm.R
+```
+
+历史项目：
+
+- 2024年，网站数据抓取迁移到统一的网站抓取项目`web-scrape/proj/moa-seed-firm`下
+
+- 2024年以前，采用独立的Rstudio项目`github/scrape-agrifirm`进行爬取
+
+``` r
+
+dir_tar <- here::here("data-raw/public-site/moa-seed-firm/")
+safe_dir_tree(dir_tar, recurse = TRUE)
+#> /home/runner/work/techme/techme/data-raw/public-site/moa-seed-firm/
+#> ├── code-01-scrape-seed-firm.R
+#> ├── code-02-tidy-seed-firm.R
+#> ├── data
+#> │   ├── table-json-2023.rds
+#> │   ├── table-json-2024.rds
+#> │   ├── table-json-2025.rds
+#> │   ├── table-parameters-id-2025.xlsx
+#> │   └── table-parameters-id.xlsx
+#> ├── guide-scrape-seed-firm.qmd
+#> ├── scrape-seed-firm.Rmd
+#> └── wfl-PubSeedFirm.R
+```
+
+#### 背景知识
+
+（1）育繁推一体化企业，是指具有育种、繁殖、推广一体化经营能力的种子企业。
+
+（2）数据集[`techme::PubSeedFirm`](https://huhuaping.github.io/techme/reference/PubSeedFirm.md)，仅包含旱区省份的育繁推一体化企业名单。原始数据中包含了全部省份的育繁推一体化企业名单。可以用于后续整理和分析。
+
+（3）育繁推企业的类别可以根据”PrinterProductionManageCrops”提供的产品信息进行分类。但是要注意针对具体产品进行人为整理划分为可供分析的大类。例如：
+
+``` r
+
+# 
+ptn_raw <-c(
+  "玉米、鲜食、爆裂玉米", "鲜食玉米",
+  "杂交玉米", "玉米种子",
+  "马铃薯种薯", "杂交稻" 
+)
+ptn_clean <-c(
+  "玉米", "玉米",
+  "玉米", "玉米",
+  "马铃薯", "稻"
+)
+```
+
+### 国家级种质资源库
+
+#### 数据说明
+
+更新状态：updated
+
+统计类别：
+
+- 国家级农作物、农业微生物种质资源库名单
+
+当前统计口径：
+
+- 关于第x批拟确定国家级农作物、农业微生物种质资源库的公示
+
+历史口径：
+
+注意事项：
+
+- 公告文件中可能还包括“国家禽畜遗传资源保种场名单”，本数据集此处将不予收集
+
+#### 文件管理
+
+``` r
+
+dir_tar <- here("data-raw/public-site/moa-genetic-resource/")
+safe_dir_tree(dir_tar)
+#> /home/runner/work/techme/techme/data-raw/public-site/moa-genetic-resource/
+#> ├── code-moa-genetic-resource.R
+#> ├── html
+#> │   ├── list-year-2022-batch-01.htm
+#> │   └── list-year-2023-batch-02.html
+#> ├── wfl-PubGeneticResource.R
+#> └── xlsx
+#>     ├── list-year-2022-batch-01.xlsx
+#>     ├── list-year-2023-batch-02.xlsx
+#>     └── list-year-2024-batch-03.xlsx
+```
+
+#### 数据集展示
+
+本项目内维护，通过`techme`进行数据发布。执行R代码文件：`data-raw/public-site/moa-genetic-resource/wfl-PubGeneticResource.R`
+
+``` r
+
+techme::PubGeneticResource %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = TRUE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 数据进度
+
+- 【pdf附件】2024年12月29日，农业农村部公告
+  第865号。确定国家农作物种质资源库(圃)5个、国家畜禽遗传资源保种场13个、
+  国家农业微生物种质资源库2个,变更国家畜禽遗传资源保种场和基因库建设单位5个(名单见[附件](https://www.moa.gov.cn/govpublic/nybzzj1/202501/t20250103_6468854.htm))。考虑到数量较少，直接通过人工手动录入xlsx。
+
+- 【html tab】2023年12月29日
+  第二批国家农作物种质资源圃1个、国家农业微生物种质资源库8个的[公告](http://www.moa.gov.cn/govpublic/nybzzj1/202401/t20240117_6446108.md)
+
+- 【pdf名单转htm table】2022-08-10
+  关于第一批拟确定国家级农作物、农业微生物种质资源库的[公示](http://www.zys.moa.gov.cn/gsgg/202208/t20220810_6406720.htm)
+
+#### 数据流程
+
+（1）抓取名单公示html/pdf。执行R代码文件：`data-raw/public-site/moa-genetic-resource/code-moa-genetic-resource.R`
+
+- 读取html（pdf转html）
+
+- 清洗数据
+
+- 添加整理信息
+
+- 依次导出年度xlsx
+
+（3）`techme`维护数据集。执行R代码文件：`data-raw/public-site/moa-genetic-resource/wfl-PubGeneticResource.R`
+
+- 循环读取年度xlsx
+
+历史维护：
+
+- 在tech-report/topics/public-site/moa-genetic-resource/目录下进行数据整理，批量读取后导出`rda`数据文件到`techme/data-raw/public-site`。然后在techme包项目中更新。
+
+#### 分析设计
+
+R代码文件：
+
+``` r
+
+code_file <-("report-tech2025/report/code/chpt02-03-moa-genetic-resource.R")
+```
+
+图表设计：
+
+- 制表：旱区省份/最新年份名单列表
+
+#### 背景知识
+
+- 2024-12-16，种质资源保护利用取得新突破
+  [农业农村部新闻动态](https://www.moa.gov.cn/xw/zwdt/202412/t20241216_6468043.htm)。持续完善种质资源保护体系。构建了以国家长期库及其复份库为核心，15个中期库、56个种质圃为依托，440个省级库（圃）为补充的农作物种质资源保护体系，国家层面长期保存农作物种质资源56万份。确定了227个国家级畜禽遗传资源保种场（区、库），实现159个国家级保护品种活体保护全覆盖，长期保存畜禽遗传材料135万份。各省区市建立省级保种场（区、库）671个，基本形成了国家和省两级管理、分级负责、有机衔接的畜禽遗传资源保护机制。61个濒危畜禽遗传资源的群体规模持续增长。确定国家级农业微生物库种质资源库27个，初步构建了以国家农业微生物种质资源综合性长期库为核心、地方专业性资源库为支撑的农业微生物种质资源保护与利用体系。
+
+## 跨部门CROSS
+
+### 国家野外科学观测研究站
+
+#### 数据说明
+
+更新状态：stay
+
+数据使用：`data("PubObsStationX", package = "techme")`
+
+数据来源：科技部（<https://www.most.gov.cn/>）、农业农村部、教育部、自然资源部
+
+统计类别(文件路径及格式规范)：
+
+- 原始资料：认定获批`list`(html/list-moa-year-\*.html)
+
+- 原始资料：评价验收`eval`(html-eval/eval-moa-year-\*.html)
+
+- 处理后：认定获批`list`(xlsx/list-moa-year-\*.xlsx)
+
+- 处理后：评价验收`eval`(xlsx-eval/eval-moa-year-\*.xlsx)
+
+统计口径：
+
+- MOST科技部：202x年国家野外科学观测研究站评估结果、批准建设国家野外科学观测研究站、发布国家野外科学观测研究站优化调整名单（历史文件`public-site/most-NORS/`）。
+
+- MOA农业部：确定第x批国家农业科学观测实验站；“十三五”农业部重点实验室及科学观测实验站建设名单；“十四五”农业农村部学科群重点实验室名单。
+
+- MOE教育部：201x年教育部野外科学观测研究站名单。
+
+- MON自然资源部：自然资源部野外科学观测研究站名单；野外科学观测研究站评估结果。
+
+#### 文件管理
+
+目前在`techme`项目下进行维护更新，可考虑回迁到本项目下。
+
+``` r
+
+dir_tar <- here("data-raw/public-site/observe-station")
+safe_dir_tree(dir_tar)
+#> /home/runner/work/techme/techme/data-raw/public-site/observe-station
+#> ├── bulk-tidy-history.R
+#> ├── html
+#> │   ├── list-moa-year-2018-batch01.html
+#> │   ├── list-moa-year-2018-batch01.xlsx
+#> │   ├── list-moa-year-2019-batch02.html
+#> │   ├── list-moe-year-2019.html
+#> │   ├── list-most-year-2019.html
+#> │   └── list-most-year-2021.html
+#> ├── scrape-observe-station.qmd
+#> ├── wfl_PubObsStation.R
+#> └── xlsx
+#>     ├── list-moa-year-2018-batch01.xlsx
+#>     ├── list-moa-year-2019-batch02.xlsx
+#>     ├── list-moe-year-2019.xlsx
+#>     ├── list-most-year-2019.xlsx
+#>     └── list-most-year-2021.xlsx
+```
+
+#### 数据集展示
+
+本项目内维护，通过`techme`进行数据发布。
+
+版本数据集1[`techme::PubObsStation`](https://huhuaping.github.io/techme/reference/PubObsStation.md)：
+
+``` r
+
+techme::PubObsStation %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+版本数据集2[`techme::PubObsStationX`](https://huhuaping.github.io/techme/reference/PubObsStationX.md)：
+
+``` r
+
+techme::PubObsStationX %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 数据进度
+
+（1）科技部:
+
+- 2023年04月25日 国家野外科学观测研究站评估结果通气会在京召开
+  科技部科技评估中心[新闻](https://ncste.org/importantnews/3338.html)
+
+  - 目前没有找到名单（科技部办公厅关于发布2021年批准建设的69个国家野外科学观测研究站评估结果的通知）[参看](http://www.stdaily.com/index/kejixinwen/202304/8a2789f4976b45d8933c4969e660e75f.smd)
+
+  - 国家野外科学观测研究站综合评议会[顺利召开](https://mp.weixin.qq.com/s/UM8smEHpn57irknRmsdsvA)
+
+- 2021年10月09日
+  科技部关于批准建设甘肃甘南草原生态系统等69个国家野外科学观测研究站的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2021/202110/t20211011_177210.html)。新批准建设69个。
+
+- 2019年09月06日
+  科技部办公厅关于开展野外科学观测研究站调研和推荐布局建议的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2019/201909/t20190906_148669.md)
+
+- 2019年06月27日 国科发基〔2019〕218号
+  科技部关于发布国家野外科学观测研究站优化调整名单的[通知](http://www.gov.cn/zhengce/zhengceku/2019-12/03/content_5457742.htm)
+
+- 2019年06月20日
+  《国家野外科学观测研究站建设发展方案（2019－2025）》的[通知](http://www.gov.cn/zhengce/zhengceku/2019-12/03/content_5457738.htm)
+
+（2）农业部:
+
+- 关于印发第三批国家农业科学观测实验站名单的通知。目前没有找到文件，但可参看[报道](https://www.catas.cn/contents/3217/230349.html)。部分名单省内唯一入选高校！青岛农业大学获批国家农业科学观测实验站，[图片参看](https://mp.weixin.qq.com/s/QN70jGkbgW920fE1SnIDpQ)。农科（条件）函
+  \[2022\]19号 确定第三批32个国家农业科学观测实验站。
+
+- 2020-01-02
+  农业农村部办公厅关于确定第二批国家农业科学观测实验站的[通知](http://www.moa.gov.cn/nybgb/2019/201907/202001/t20200102_6334210.htm)
+  80个：html表格
+
+  - 2019年11月06日
+    关于国家农业环境商丘观测实验站等建设项目的[公示](http://www.moa.gov.cn/govpublic/FZJHS/201911/t20191106_6331464.htm)
+
+- 2018年01月30日
+  农业部办公厅关于确定第一批国家农业科学观测实验站的[通知](http://www.moa.gov.cn/govpublic/KJJYS/201802/t20180201_6136233.htm)
+  36个：docx附件
+
+- 【word名单】2016年12月29日
+  “十三五”农业部重点实验室及科学观测实验站建设名单的[通知](http://www.moa.gov.cn/gk/tzgg_1/tz/201612/t20161230_5422181.htm)
+
+（3）教育部:
+
+- 2019年8月31日
+  教育部关于公布2019年教育部野外科学观测研究站名单的[通知](http://www.moe.gov.cn/srcsite/A16/s7062/201909/t20190930_401836.md)
+  [科塔网 统计](https://www.sciping.com/30353.html)
+
+（4）自然资源部：
+
+- 【word名单】2021年3月24日
+  自然资源部办公厅关于公布野外科学观测研究站评估结果的[通知](https://www.gov.cn/zhengce/zhengceku/2021-04/26/content_5602359.htm)
+
+- 【xls名单】2019年10月29日
+  关于公布部分野外科学观测研究站名单的[通知](http://gi.mnr.gov.cn/201912/t20191226_2492027.md)
+
+#### 数据流程
+
+（1）抓取公示资料html/pdf。
+
+- 读取html（pdf转html）
+
+- 清洗数据
+
+- 添加整理信息
+
+- 依次导出年度xlsx
+
+（2）匹配省份信息
+
+- 与`queryTianyan`匹配，获得未匹配的`institution`列表，导出到`data-tidy/hack-tianyan/ship/ship-tot2-yyyy-mm-dd.xlsx`
+
+- 执行代码文件为`data-raw/hack_tianyan-new.R`
+
+  - 通过`天眼查`平台进行docker+RSeninium查询，获得查询结果，并保存到`data-tidy/hack-tianyan/hub/match-tianyan-tot2-yyyy-mm-dd.xlsx`
+  - 需要人工确认或调整上述xlsx文件
+  - 使用`use_data`更新`queryTianyan`数据集
+
+- 再次与`queryTianyan`匹配，全部`institution`都匹配完成province，获得tbl_out列表。导出到对应文件夹，例如`data-tidy/obs-station/xlsx/list-moa-year-*.xlsx`。
+
+- 使用`use_data`更新`PubObsStation`数据集
+
+#### 背景知识
+
+National Observation and Research Station(NORS)
+
+- Grassland Ecosystems 2024-06-17 07:00
+  甘肃。[国家生态系统观测研究网络历史沿革](https://mp.weixin.qq.com/s/6WVjn5ayd_h5PeN81NkrQA)
+
+- 山东高校圈 2023-12-10 02:00
+  山东。【科创基地】国家野外科学观测研究站<https://mp.weixin.qq.com/s/nGua7ziwlN8vB5m88ZjGxQ>
+
+- 国家生态系统观测研究网络<http://www.cnern.ac.cn/index.action>
+
+[^1]: 经过比对可以看到，该实验室实际具体类别为省部共建重点实验室。

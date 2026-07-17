@@ -1,7 +1,11 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://huhuaping.github.io/techme/404.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/AGENTS.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/CONTRIBUTING.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/LICENSE-text.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/LICENSE.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/articles/guide-sources-public-site.html</loc></url>
+<url><loc>https://huhuaping.github.io/techme/articles/guide-sources-yearbook.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/articles/index.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/articles/my-vignette.html</loc></url>
 <url><loc>https://huhuaping.github.io/techme/articles/pkg-design.html</loc></url>
