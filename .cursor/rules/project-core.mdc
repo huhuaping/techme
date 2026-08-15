@@ -43,7 +43,7 @@ devtools::document()
 
 - CNKI xls 转换依赖 `excelcnv.exe`（仅 Windows + Office）。
 - 不在 Linux/macOS 环境假设该工具可用。
-- 源文件 UTF-8 无 BOM；改中文后跑 `python scripts/check-utf8.py`。见 `encoding-utf8` 规则。
+- 源文件 UTF-8 无 BOM。写入约定见 `encoding-utf8` 规则；`afterFileEdit` hook 会抽查。乱码修复用 `techme-encoding-utf8`。
 
 ## 工作流 Skills
 

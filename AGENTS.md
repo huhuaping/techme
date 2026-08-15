@@ -73,7 +73,7 @@ wfl_files → wfl_genDirs → [wfl_rename] → wfl_unlock → wfl_editXls
 - CNKI 加密 xls 转换依赖 Microsoft Office 的 `excelcnv.exe`（`get_excelcnv_exe()` 自动查找）。
 - 含 `readline()` 的交互脚本（如 `wfl.writeXlsx`）须用户在 **RStudio 中手动执行**，Agent 不可无人值守运行。
 - 路径使用正斜杠或 `here::here()`，避免硬编码反斜杠。
-- 源文件 **UTF-8 无 BOM**。禁止按 GBK 读写后再另存，禁止把非法字节写成 `?` / U+FFFD。改含中文的文件后运行 `python scripts/check-utf8.py`。
+- 源文件 **UTF-8 无 BOM**。对话改文件遵守 `encoding-utf8` 规则；写入后由 `.cursor/hooks.json` 的 `afterFileEdit` 抽查。禁止按 GBK 读写后再另存，禁止把非法字节写成 `?` / U+FFFD。
 
 ## 与 tech-report 联动
 

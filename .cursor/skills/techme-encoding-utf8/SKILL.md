@@ -8,9 +8,13 @@ description: >-
 
 # techme UTF-8 乱码诊断与修复
 
-Windows + Cursor Agent 改写含中文的源文件时，UTF-8 三字节汉字的**最后续字节**可能被写成 `0x3F`（`?`），文件变成非法 UTF-8。编辑器再保存会变成 U+FFFD，原字节丢失。
+本 skill **只负责事后修复**。对话中改文件的预防靠：
 
-详细字节对照见 [reference.md](reference.md)。
+- 始终生效规则 `.cursor/rules/encoding-utf8.mdc`（局部补丁、禁止 replace 写回）
+- `afterFileEdit` hook（`.cursor/hooks.json`）写入后检查，失败则注入上下文
+- 工作区 `.vscode/settings.json`：`files.encoding=utf8`，`files.autoGuessEncoding=false`
+
+Windows 上批量重写时，UTF-8 三字节汉字的最后续字节可能被写成 `0x3F`（`?`）。编辑器再保存会变成 U+FFFD。字节对照见 [reference.md](reference.md)。
 
 ## 何时使用
 

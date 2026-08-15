@@ -1,21 +1,25 @@
 ---
-description: Windows 下 UTF-8/中文源文件写入约束，防止乱码与 U+FFFD
+description: 对话中改文件时保持 UTF-8，避免中文乱码（写入约定 + afterFileEdit hook）
 alwaysApply: true
 ---
 
-# UTF-8 与中文源文件
+# 改文件时保持 UTF-8
 
-本仓库源文件（`.R` `.Rmd` `.qmd` `.md` `.mdc`）一律 **UTF-8 无 BOM**。中文注释、正则（如 `地.*区`）、XPath 必须保持合法三字节序列。
+源文件（`.R` `.Rmd` `.qmd` `.md` `.mdc`）为 **UTF-8 无 BOM**。本规则在每次对话中生效；`afterFileEdit` hook 会在写入后抽查。乱码修复 SOP 见 `techme-encoding-utf8` skill。
 
-## 写入
+## 怎么改（优先）
 
-- 用编辑器/Write 工具直接写 UTF-8；不要先按 GBK/cp936/latin-1 解码再另存。
-- **禁止** `errors="replace"` / `errors="ignore"` 后再写回源文件（会变成 `?` 或 U+FFFD，不可逆）。
-- **禁止** PowerShell `>` / `Out-File` 导出源文件（默认 UTF-16 LE）。需要脚本写文件时用 Python `Path.write_bytes(text.encode("utf-8"))`，字面量用 `\uXXXX`。
-- 保持该文件原有换行（CRLF 或 LF），不要整文件改换行。
-- 批量改写含中文的文件后，运行 `python scripts/check-utf8.py -- <paths>`。
+- 含中文的文件优先 **StrReplace / 局部补丁**，不要整文件重写。
+- 直接以 UTF-8 写入。不要按 GBK、cp936、latin-1 解码后再存。
+- 需要脚本写文件时：Python `Path.write_bytes(text.encode("utf-8"))`，字面量用 `\uXXXX`。
 
-## 发现乱码时
+## 禁止
 
-- 不要在编辑器里打开并保存（会把非法字节固化成 U+FFFD）。
-- 读取 `.cursor/skills/techme-encoding-utf8/SKILL.md`，从最后一个合法 UTF-8 的 git 版本恢复。
+- `errors="replace"` / `errors="ignore"` 后写回（会变成 `?` 或 U+FFFD）。
+- PowerShell `>` / `Out-File` 导出源文件（默认 UTF-16 LE）。
+- 整文件改换行（保持该文件原有 CRLF 或 LF）。
+- 对已损坏文件「打开并保存」。
+
+## 写完
+
+hook 若注入 UTF-8 失败上下文：立刻按 skill 从 git 历史恢复，不要继续改别的文件。主动自检：`python scripts/check-utf8.py <paths>`。

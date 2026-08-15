@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "hooks": {
+    "afterFileEdit": [
+      {
+        "command": "python .cursor/hooks/check_utf8_after_edit.py",
+        "timeout": 15
+      }
+    ]
+  }
+}
