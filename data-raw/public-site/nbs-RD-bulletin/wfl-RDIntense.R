@@ -12,7 +12,7 @@ View(tbl_dir)
 ## use the helper function `choose.filePattern()` to generate the pattern
 prefix_add <- NULL # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
 pattern_sel <- choose.filePattern(
-    year = c(2023), # may have length 1 or 2
+    year = c(2024), # may have length 1 or 2
     mode = "year_onex", # must be one of the following: year_one, year_two, year_onex, year_twox, add_onex, add_one, edited_one, edited_two
     add_info = prefix_add # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
 )
@@ -212,9 +212,11 @@ View(df_add_vars)
 wfl.writeXlsx(
     dt = df_add_vars,
     file_source = file_xlsx,
-    year_target = c(2023), # filter data by year
+    year_target = c(2024), # filter data by year
     prefix_label = prefix_add # default is NULL, other value may be "funds", "ammount", etc.
 )
+
+# ! important: check the units column of the data set and make sure it contain the correct units character!!!.
 
 # Workflow: use data----
 ## settings 1: directory and file pattern
@@ -236,7 +238,7 @@ wfl.useData(
     directory.source = dir_tidy,
     file.pattern = file_ptn, # xlsx file name pattern
     name.dt = name_dt, # data name for use_data()
-    which.dt = "df_units" # default is "df_use", other value is "df_units"
+    which.dt = "df_use" # default is "df_use", other value is "df_units"
 )
 
 ## Check and view the data by `do.call()`

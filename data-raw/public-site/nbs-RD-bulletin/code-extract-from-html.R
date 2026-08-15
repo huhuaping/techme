@@ -7,14 +7,14 @@ library(openxlsx)
 library(fs)
 
 ## ====files html path====
-dir_media <- "data-raw/data-tidy/public-site/nbs-RD-bulletin/"
+dir_media <- "data-raw/public-site/nbs-RD-bulletin/"
 dir_final <- "01-html"
 files_dir <- paste0(dir_media, dir_final)
 files_html <- list.files((files_dir))
 page_url <- str_c(files_dir, files_html, sep = "/")
 
 ## ====specify the year====
-year <- 2023
+year <- 2024
 indx <- str_detect(files_html, paste0(year))
 page <- page_url[indx]
 i_len <- length(page)
@@ -29,9 +29,11 @@ tbl_raw <- read_html(x = page[i], encoding = "UTF-8") %>%
   .[[3]] %>%
   as_tibble()
 
+View(tbl_raw)
 ## ==== tidy table ====
 list_chn <- c("地区", "RD经费", "RD强度")
 tbl_tidy <- tbl_raw %>%
+  select(1, 2, 3) %>%
   rename_all(., ~list_chn) %>%
   # .[row_range,] %>%
   # double-byte space (Unicode \u3000)
@@ -43,8 +45,11 @@ tbl_tidy <- tbl_raw %>%
   )) %>%
   rename_all(., ~ all_of(list_chn)) %>%
   # add_column("年份"=year, .before = "省份") %>%
-  filter(!is.na(`地区`))
+  filter(!is.na(`地区`)) %>%
+  filter(!str_detect(`地区`, "注：")) %>%
+  mutate_at(vars(starts_with("RD")), ~ as.numeric(.))
 
+str(tbl_tidy)
 ## ==== write out the xlsx files====
 
 # files path
@@ -73,9 +78,13 @@ if (isFirst) {
   )
 }
 ### 后续更新拷贝----
-### 只需要拷贝特定xlsx文件
+### 只需要拷贝特定xlsx文件到tidy文件夹
+(dir_to_tidy <-str_replace(dir_to, "data-raw","data-raw/data-tidy"))
+(file_to_tidy <- paste0(dir_to_tidy, "02-xls/", year, ".xlsx"))
 fs::file_copy(
   path = here(path_files),
-  new_path = paste0(dir_to, "02-xls/", name_files), # 不需要斜杆!
+  new_path = file_to_tidy,
   overwrite = TRUE
 )
+
+cat("拷贝完成: ", file_to_tidy)
