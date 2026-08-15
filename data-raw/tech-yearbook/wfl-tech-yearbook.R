@@ -213,7 +213,7 @@ View(df_add_vars)
 wfl.writeXlsx(
     dt = df_add_vars,
     file_source = file_xlsx,
-    year_target = c(2023), # filter data by year
+    year_target = c(2024), # filter data by year
     prefix_label = NULL # prefix_add # default is NULL, other value may be "funds", "ammount", etc.
 )
 
@@ -242,7 +242,7 @@ wfl.useData(
 )
 
 ## Check and view the data by `do.call()`
-load_all() # must refresh and load the package again
+devtools::load_all() # must refresh and load the package again
 do.call("View", list(as.name(name_dt)))
 
 
