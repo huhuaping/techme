@@ -10,18 +10,18 @@ tbl_dir <- create.dirTable()
 
 ## setting 2: specify the regex pattern for table identifier
 ## use the helper function `choose.filePattern()` to generate the pattern
-prefix_add <- NULL # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
+prefix_add <- "amount" # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
 pattern_sel <- choose.filePattern(
     year = c(2024), # may have length 1 or 2
-    mode = "year_one", # must be one of the following: year_one, year_two, year_onex, year_twox, add_onex, add_one, edited_one, edited_two
+    mode = "add_one", # must be one of the following: year_one, year_two, year_onex, year_twox, add_onex, add_one, edited_one, edited_two
     add_info = prefix_add # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
 )
 
 ##  run the function to find target directory and files ----
 find_result <- wfl.findFiles(
     dt = tbl_dir, # the directory table
-    dir.case = "RD_output_patent", # the case name of the target directory
-    i.final = 3, # the index of the final subdirectory
+    dir.case = "RD_output", # the case name of the target directory
+    i.final = 4, # the index of the final subdirectory
     pattern = pattern_sel # the regex pattern for table identifier
 )
 
@@ -53,8 +53,6 @@ log_xlsx <- tibble::tribble(
     "agri_prod", 2, "地区", "data-raw/rural-yearbook/part03-agri-produce/02-fertilizer/raw-2022-2023.xlsx"
 )
 
-
-
 # Workflow: unpivot xlsx file ----
 ## setting 1: whether drop columns and specify the header mode.
 cols_drop <- c(2) # drop the second column, as it is the english region column
@@ -66,7 +64,7 @@ header_mode <- c(
     "year", "vars", "vars-year", "vars-vars",
     "vars-h3", "vars-h4", "vars-h5"
 )
-(mode_sel <- header_mode[4]) # "vars-vars"; "vars" leaves most vars empty on this table
+(mode_sel <- header_mode[1]) # "vars-vars"; "vars" leaves most vars empty on this table
 
 ## setting 3： specify the regex pattern for table identifier
 # pattern_table <- "^地.*区" # not to use "续表" !
@@ -101,7 +99,7 @@ vars_spc <- get.vars(
 df_out <- wfl.unpivotXlsx(
     file = file_xlsx,
     header.mode = mode_sel, # default is "vars-year"
-    vars.add = NULL, # vars_spc[2, ], # default is NULL, only used when header mode is "year"
+    vars.add = vars_spc[1, ], # vars_spc[2, ], # default is NULL, only used when header mode is "year"
     cols.drop = cols_drop, # default is NULL
     pattern.table = "^地.*区", # default is "^地.*区"
     reg_start = "^地.*区", # getRange() argument
@@ -111,14 +109,6 @@ df_out <- wfl.unpivotXlsx(
 
 # View(df_out)
 
-# check the missing variables names
-n_miss_vars <- sum(is.na(df_out$vars) | str_trim(df_out$vars) == "")
-if (n_miss_vars > 0) {
-    message(glue::glue(
-        "{n_miss_vars}/{nrow(df_out)} rows have empty vars after unpivot. ",
-        "This table needs header.mode = 'vars-vars' (header_mode[4])."
-    ))
-}
 
 # Workflow: tidy unpivoted table from xlsx file ----
 ## footnotes / blank cells become NA in value; drop rows with no variable name
@@ -216,7 +206,7 @@ wfl.writeXlsx(
     dt = df_add_vars,
     file_source = file_xlsx,
     year_target = c(2024), # filter data by year
-    prefix_label = NULL # prefix_add # default is NULL, other value may be "funds", "ammount", etc.
+    prefix_label = "amount" # prefix_add # default is NULL, other value may be "funds", "ammount", etc.
 )
 
 # Workflow: use data----
