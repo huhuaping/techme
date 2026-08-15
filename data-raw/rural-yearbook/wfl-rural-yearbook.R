@@ -20,7 +20,7 @@ pattern_sel <- choose.filePattern(
 find_result <- wfl.findFiles(
     dt = tbl_dir, # the directory table
     dir.case = "agri_prod", # the case name of the target directory
-    i.final = 1, # the index of the final subdirectory
+    i.final = 2, # the index of the final subdirectory
     pattern = pattern_sel # the regex pattern for table identifier
 )
 
@@ -107,7 +107,7 @@ df_out <- wfl.unpivotXlsx(
     unit_pattern = "单位:|单位：" # getInfo() argument
 )
 
-View(df_out)
+# View(df_out)
 
 # Workflow: tidy unpivoted table from xlsx file ----
 ## may message in the console " Variable 'value' contains NA values after conversion to numeric."
@@ -118,7 +118,7 @@ df_tidy <- wfl.tidyTable(dt = df_out) %>%
         vars, value, units
     )
 
-View(df_tidy)
+# View(df_tidy)
 
 # Workflow: match and check variables names to the varsList ----
 
@@ -131,7 +131,7 @@ df_vars_matched <- wfl.matchVars(
     block_lang = "eng" # default value is "eng"
 )
 
-View(df_vars_matched)
+#View(df_vars_matched)
 
 ## check the raw variables names in the varsList ----
 vars_spc # see before
