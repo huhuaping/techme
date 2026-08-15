@@ -876,9 +876,17 @@ wfl.tidyTable <- function(dt) {
         stop("Missing required columns: ", paste(missing_cols, collapse = ", "))
     }
 
+    # yearbook cells may be blank, dash, or a footnote; only parse plain numbers
+    value_chr <- stringr::str_trim(as.character(dt$value))
+    value_chr[value_chr %in% c("", "-", "--", "*", "\u2014", "\u2013", "\u2026", "...")] <- NA_character_
+    is_plain_number <- !is.na(value_chr) &
+        stringr::str_detect(value_chr, "^[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?$")
+    value_num <- rep(NA_real_, length(value_chr))
+    value_num[is_plain_number] <- as.numeric(value_chr[is_plain_number])
+
     dt_tidy <- dt %>%
         dplyr::mutate(
-            value = as.numeric(value),
+            value = value_num,
             year = stringr::str_extract(year, "\\d{4}")
         ) %>%
         dplyr::mutate(
@@ -915,11 +923,12 @@ wfl.tidyTable <- function(dt) {
     if (any(is.na(dt_tidy$year))) {
         warning("Variable 'year' missing in some rows, please check.")
     }
-    if (any(is.na(dt_tidy$vars))) {
-        warning("Variable 'vars' missing in some rows, please check.")
-    }
-    if (any(is.na(dt_tidy$value))) {
-        warning("Variable 'value' contains NA values after conversion to numeric.")
+    n_miss_vars <- sum(is.na(dt_tidy$vars) | stringr::str_trim(dt_tidy$vars) == "")
+    if (n_miss_vars > 0) {
+        warning(
+            n_miss_vars, "/", nrow(dt_tidy),
+            " rows have empty 'vars'. Check header.mode (this table may need 'vars-vars')."
+        )
     }
 
     return(dt_tidy)

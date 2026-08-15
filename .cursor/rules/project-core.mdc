@@ -14,7 +14,8 @@ alwaysApply: true
 
 - 用中文回复用户。
 - **最小改动**：只改任务相关文件，不做无关重构。
-- 匹配现有命名、导入风格（`@importFrom`、`%>%` 管道）与 roxygen markdown 风格。
+- 匹配现有命名、导入风格（`@importFrom`、管道）与 roxygen markdown 风格。
+- R 写法见 `r-style`：tidyverse 优先、新代码用 `|>`、注释给人看、少隐式状态。
 
 ## 禁止手改的文件
 

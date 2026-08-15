@@ -1,0 +1,40 @@
+---
+title: "FAQ：<一句话主题>"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{FAQ：<一句话主题>}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+> **工程 FAQ 系列** · 文件名 `faq-<topic>.Rmd` · 面向维护者，不替代 `AGENTS.md` 与 Cursor Skill。
+
+## 一句话
+
+<结论：是什么、怎么处理。>
+
+## 症状
+
+- <如何判断遇到了这个问题>
+
+## 来源与根因
+
+<何时发生、为什么发生。>
+
+## 解决办法
+
+1. <立即做 / 不要做>
+2. <仓库内约定与检查命令>
+
+## 相关文档
+
+- Cursor Skill：`.cursor/skills/...`
+- 规则：`.cursor/rules/...`

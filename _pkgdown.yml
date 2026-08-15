@@ -4,6 +4,18 @@ template:
 lang: zh_CN
 development:
   mode: release
+articles:
+- title: 设计与数据来源
+  desc: 包设计理念，以及年鉴 / 公开网站数据的维护说明。
+  contents:
+  - articles/pkg-design
+  - articles/guide-sources-yearbook
+  - articles/guide-sources-public-site
+  - articles/queryTianyancha
+- title: 工程 FAQ
+  desc: 开发与维护中的故障说明（编码、Windows、流水线）。新文章请使用 faq-*.Rmd。
+  contents:
+  - starts_with("articles/faq-")
 reference:
 - title: Data Subset from the Agriculture Yearbook
   desc: |

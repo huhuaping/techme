@@ -19,7 +19,8 @@ description: >-
 | 类型 | 位置 | 生成方式 |
 |------|------|----------|
 | 函数/数据集帮助 | `man/*.Rd` | `devtools::document()` |
-| 设计文章 | `vignettes/articles/` | knitr/Quarto 渲染 |
+| 设计 / 来源指南 | `vignettes/articles/`（`pkg-design`、`guide-*`） | knitr 渲染，pkgdown Articles |
+| 工程 FAQ | `vignettes/articles/faq-*.Rmd` | 固定结构，见下节 |
 | 数据集概览 | `vignettes/my-vignette.Rmd` | vignette 构建 |
 | 静态站点 | `docs/` | `pkgdown::build_site()` |
 
@@ -68,10 +69,23 @@ pkgdown::build_site()
 
 ### Step 5 — vignette 文章
 
-`vignettes/articles/` 含 pkg-design、queryTianyancha 等。注意：
+`vignettes/articles/` 在 `.Rbuildignore` 中，**不打进源码包**，但 `pkgdown::build_site()` 仍会渲染并挂到站点 Articles。
 
-- 该目录在 `.Rbuildignore` 中，不打包进 R 包
-- 可在 pkgdown 中手动链接或作为内部参考
+两类文章：
+
+| 前缀 | 用途 | 导航分组（`_pkgdown.yml`） |
+|------|------|---------------------------|
+| `pkg-design`、`guide-*`、既有工作流文 | 设计与数据来源 | 设计与数据来源 |
+| `faq-*.Rmd` | 工程故障 FAQ | 工程 FAQ（`starts_with("articles/faq-")`） |
+
+新增 FAQ：复制 `_faq-template.Rmd`（下划线稿，站点不收录）为 `faq-<topic>.Rmd`。必须包含：
+
+- YAML：`html_vignette` + `%\VignetteEncoding{UTF-8}`
+- 章节顺序：一句话 → 症状 → 来源与根因 → 解决办法 → 相关文档
+- 少 `eval`，不依赖 Office / 本地年鉴路径
+- 不粘贴 `data-raw/` 原始表内容
+
+首篇范例：`faq-encoding-utf8.Rmd`。
 
 ## 检查清单
 

@@ -66,7 +66,7 @@ header_mode <- c(
     "year", "vars", "vars-year", "vars-vars",
     "vars-h3", "vars-h4", "vars-h5"
 )
-(mode_sel <- header_mode[4])
+(mode_sel <- header_mode[4]) # "vars-vars"; "vars" leaves most vars empty on this table
 
 ## setting 3： specify the regex pattern for table identifier
 # pattern_table <- "^地.*区" # not to use "续表" !
@@ -111,10 +111,18 @@ df_out <- wfl.unpivotXlsx(
 
 # View(df_out)
 
+n_miss_vars <- sum(is.na(df_out$vars) | str_trim(df_out$vars) == "")
+if (n_miss_vars > 0) {
+    message(glue::glue(
+        "{n_miss_vars}/{nrow(df_out)} rows have empty vars after unpivot. ",
+        "This table needs header.mode = 'vars-vars' (header_mode[4])."
+    ))
+}
+
 # Workflow: tidy unpivoted table from xlsx file ----
-## may message in the console " Variable 'value' contains NA values after conversion to numeric."
-## it is ok, just ignore it
+## footnotes / blank cells become NA in value; drop rows with no variable name
 df_tidy <- wfl.tidyTable(dt = df_out) %>%
+    filter(!is.na(vars), str_trim(vars) != "") %>%
     select(
         province, year,
         vars, value, units

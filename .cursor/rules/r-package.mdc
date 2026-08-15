@@ -15,7 +15,7 @@ alwaysApply: false
 ## 导入
 
 - 精确导入：`@importFrom package function`，避免 `@import entire-package`。
-- 管道：`magrittr::%>%`。
+- 管道：新代码用 `|>`；未改动的旧管道可保留 `%>%`。同一条管道内不要混用。
 - 数据框列引用：优先 `rlang::.data$col`。
 
 ## 命名约定
