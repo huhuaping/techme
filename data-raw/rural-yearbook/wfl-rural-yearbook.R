@@ -20,7 +20,7 @@ pattern_sel <- choose.filePattern(
 find_result <- wfl.findFiles(
     dt = tbl_dir, # the directory table
     dir.case = "agri_prod", # the case name of the target directory
-    i.final = 3, # the index of the final subdirectory
+    i.final = 4, # the index of the final subdirectory
     pattern = pattern_sel # the regex pattern for table identifier
 )
 
