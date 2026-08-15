@@ -21,7 +21,7 @@ pattern_sel <- choose.filePattern(
 find_result <- wfl.findFiles(
     dt = tbl_dir, # the directory table
     dir.case = "RD_inner", # the case name of the target directory
-    i.final = 1, # the index of the final subdirectory
+    i.final = 2, # the index of the final subdirectory
     pattern = pattern_sel # the regex pattern for table identifier
 )
 
@@ -128,6 +128,7 @@ df_tidy <- wfl.tidyTable(dt = df_out) %>%
         vars, value, units
     )
 
+View(df_tidy)
 ## Replace the english snake name in the variables names if needed
 ## Replace any of following: "Total", "BasicResearch", "AppliedResearch", "Development", etc.
 ## Use regex pattern to replace the variables names
@@ -204,7 +205,7 @@ df_add_vars <- wfl.addVars(
     dt_right = df_vars_matched_check
 )
 
-View(df_add_vars)
+#View(df_add_vars)
 
 # Workflow: write out xlsx file ----
 
