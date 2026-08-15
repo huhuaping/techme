@@ -1,4 +1,4 @@
-## R包准�?---
+## R包准备----
 require(openxlsx)
 source("data-raw/deps/load-core.R")
 source("data-raw/deps/load-scrape.R")
@@ -162,10 +162,10 @@ write.xlsx(tbl_all, here::here(path_out))
 
 
 ## 正式爬取json----
-# 天津�?6条记录：http://202.127.42.47:6010/XKSite/Home/GetLicenseList?LicenceNoLike=&ApplyCompanyNameLike=&ProductionManageCrops=&IssuingAuthorityRegionID=120000&PublishDateStart=&PublishDateEnd=&VarietyName=&_search=false&rows=20&page=1&sidx=&sord=desc&InitialPublishDateStart=&InitialPublishDateEnd=&isValid=
+# 天津市 6条记录：http://202.127.42.47:6010/XKSite/Home/GetLicenseList?LicenceNoLike=&ApplyCompanyNameLike=&ProductionManageCrops=&IssuingAuthorityRegionID=120000&PublishDateStart=&PublishDateEnd=&VarietyName=&_search=false&rows=20&page=1&sidx=&sord=desc&InitialPublishDateStart=&InitialPublishDateEnd=&isValid=
 # 天津市市辖区，没有数据：http://202.127.42.47:6010/XKSite/Home/GetLicenseList?LicenceNoLike=&ApplyCompanyNameLike=&ProductionManageCrops=&IssuingAuthorityRegionID=120100&PublishDateStart=&PublishDateEnd=&VarietyName=&_search=false&rows=20&page=1&sidx=&sord=desc&InitialPublishDateStart=&InitialPublishDateEnd=&isValid=
-# 获取数据集基本信息（行数rows）：`rows=0`表示没有数据�?
-# "152201" 乌兰浩特�?
+# 获取数据集基本信息（行数rows）：`rows=0`表示没有数据。
+# "152201" 乌兰浩特市
 
 ### 辅助函数----
 ## get the datasets
@@ -190,7 +190,7 @@ get_dataset <- function(url) {
 }
 
 
-### 构造查询参�?---
+### 构造查询参数----
 url_part1 <- "http://202.127.42.47:6010/XKSite/Home/GetLicenseList?LicenceNoLike=&ApplyCompanyNameLike=&ProductionManageCrops=&IssuingAuthorityRegionID="
 # query 2000 rows
 url_part2 <- "&PublishDateStart=&PublishDateEnd=&VarietyName=&_search=false&rows=2000&page=1&sidx=&sord=desc&InitialPublishDateStart=&InitialPublishDateEnd=&isValid="
@@ -224,13 +224,13 @@ tbl_check <- tbl_json %>%
   unnest(dt)
 
 
-### 导出到xlsx/文件�?---
+### 导出到xlsx/文件夹----
 (path_out <- here(glue("data-raw/public-site/moa-seed-firm/data/table-json-{Year}.rds"))) # change here
 saveRDS(tbl_json, path_out)
 
 
-### 拷贝到报告文件夹�?---
-# 爬取好后，将数据集拷贝到《旱区技术发展报告》Rstudio项目的文件夹目录�?D:/github/tech-report/data-raw/public-site/moa-seed-firm/xlsx/tbl-json-2023.rds"
+### 拷贝到报告文件夹下----
+# 爬取好后，将数据集拷贝到《旱区技术发展报告》Rstudio项目的文件夹目录下"D:/github/tech-report/data-raw/public-site/moa-seed-firm/xlsx/tbl-json-2023.rds"
 
 # (path_from <- path_out)
 # (path_to <- glue("D:/github/tech-report/data-raw/public-site/moa-seed-firm/xlsx/tbl-json-{Year}.rds"))

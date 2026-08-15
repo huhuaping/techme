@@ -1,0 +1,9 @@
+# Treat source and docs as text. Bytes in the repo are UTF-8 (no BOM).
+# Do not set eol=lf here: Windows working trees already use core.autocrlf.
+*.R text
+*.Rmd text
+*.qmd text
+*.md text
+*.mdc text
+*.yml text
+*.yaml text

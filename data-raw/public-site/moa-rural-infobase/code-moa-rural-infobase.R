@@ -1,5 +1,5 @@
 
-## R包准�?---
+## R包准备----
 require(openxlsx)
 #require("xml2")
 source("data-raw/deps/load-core.R")
@@ -9,7 +9,7 @@ library(glue)
 library(techme)
 
 
-## techme维护数据�?---
+## techme维护数据集----
 
 ### 准备基本参数----
 
@@ -74,12 +74,12 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   mutate(
     value = mgsub::mgsub(
       value,
-      c(fixed("\u00a0"),fixed("\n")," ", "�?), # special character
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
       c("", "","", ".")),
     value = str_trim(value)) %>%
   filter(value!="") %>% # drop empty row
   # 识别类型
-  mutate(type = str_extract(value, "(?<=�?(.+)(?=\\�?")) %>%
+  mutate(type = str_extract(value, "(?<=、)(.+)(?=\\（)")) %>%
   fill(type, .direction = "down") %>%
   filter(!str_detect(value, "）：$"))
 
@@ -106,12 +106,12 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   mutate(
     value = mgsub::mgsub(
       value,
-      c(fixed("\u00a0"),fixed("\n")," ", "�?), # special character
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
       c("", "","", ".")),
     value = str_trim(value)) %>%
   filter(value!="") %>% # drop empty row
   # 识别类型
-  mutate(type = str_extract(value, "(?<=�?(.+)(?=\\�?")) %>%
+  mutate(type = str_extract(value, "(?<=、)(.+)(?=\\（)")) %>%
   fill(type, .direction = "down") %>%
   filter(!str_detect(value, "）：$"))
 
@@ -125,7 +125,7 @@ tbl_out <- tbl_raw %>%
   ungroup() %>%
   select(year, type, index, name)
 
-## [init]匹配省区信息1：初�?---
+## [init]匹配省区信息1：初步----
 # obtain the province info
 require(techme)
 data("BasicProvince")
@@ -148,15 +148,15 @@ tbl_info <- tbl_raw  %>%
   # 处理异常省区关系
   mutate(
     province = ifelse(
-      is.na(province) & str_detect(name,"北大荒农垦集�?),
-      c("黑龙�?),
+      is.na(province) & str_detect(name,"北大荒农垦集团"),
+      c("黑龙江"),
       province
     )
   ) 
 
 tbl_check2 <- tbl_info %>%
   filter(is.na(province))
-if (nrow(tbl_check)>0) warning("存在省份信息缺省情况�?)
+if (nrow(tbl_check)>0) warning("存在省份信息缺省情况！")
 
 ## [init]匹配机构信息----
 ### 机构名称列表（唯一化处理）----
@@ -184,7 +184,7 @@ list_institution <- tbl_out %>%
   mutate(
     institution = map_chr(
       .x = institution_raw,
-      .f = function(x) as.character(unlist(str_split(x, pattern='�?))[[1]]) 
+      .f = function(x) as.character(unlist(str_split(x, pattern='、'))[[1]]) 
     )
   ) %>%
   select(institution) %>%
@@ -249,8 +249,8 @@ tbl_province <- tbl_wide %>%
   # 处理异常省区关系
   mutate(
     province = ifelse(
-      is.na(province) & str_detect(name,"北大荒农垦集�?),
-      c("黑龙�?),
+      is.na(province) & str_detect(name,"北大荒农垦集团"),
+      c("黑龙江"),
       province
     )
   ) 
@@ -272,7 +272,7 @@ tbl_inst <- tbl_province %>%
   mutate(
     institution = map_chr(
       .x = institution_raw,
-      .f = function(x) as.character(unlist(str_split(x, pattern='�?))[[1]]) 
+      .f = function(x) as.character(unlist(str_split(x, pattern='、'))[[1]]) 
     )
   ) %>%
   # match `queryTianyan`

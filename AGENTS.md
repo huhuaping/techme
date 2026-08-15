@@ -38,6 +38,7 @@
 | R 包工程化（check、test） | [.cursor/skills/techme-r-package-check/SKILL.md](.cursor/skills/techme-r-package-check/SKILL.md) |
 | 文档与 pkgdown 维护 | [.cursor/skills/techme-pkgdown-docs/SKILL.md](.cursor/skills/techme-pkgdown-docs/SKILL.md) |
 | 与 tech-report 联动 | [.cursor/skills/techme-report-bridge/SKILL.md](.cursor/skills/techme-report-bridge/SKILL.md) |
+| UTF-8/中文乱码修复 | [.cursor/skills/techme-encoding-utf8/SKILL.md](.cursor/skills/techme-encoding-utf8/SKILL.md) |
 
 ## 常用 R 命令
 
@@ -72,6 +73,7 @@ wfl_files → wfl_genDirs → [wfl_rename] → wfl_unlock → wfl_editXls
 - CNKI 加密 xls 转换依赖 Microsoft Office 的 `excelcnv.exe`（`get_excelcnv_exe()` 自动查找）。
 - 含 `readline()` 的交互脚本（如 `wfl.writeXlsx`）须用户在 **RStudio 中手动执行**，Agent 不可无人值守运行。
 - 路径使用正斜杠或 `here::here()`，避免硬编码反斜杠。
+- 源文件 **UTF-8 无 BOM**。禁止按 GBK 读写后再另存，禁止把非法字节写成 `?` / U+FFFD。改含中文的文件后运行 `python scripts/check-utf8.py`。
 
 ## 与 tech-report 联动
 
@@ -90,12 +92,14 @@ wfl_files → wfl_genDirs → [wfl_rename] → wfl_unlock → wfl_editXls
 - 更新数据集走 `data-raw` 流水线 → `use_data()`，不直接编辑 `.rda`
 - 新增变量先查/扩 `varsList`，遵循 block 命名法
 - 保持最小改动范围，匹配现有命名与风格
+- 写入源文件保持合法 UTF-8；乱码按 `techme-encoding-utf8` 从 git 历史恢复
 
 ### 禁止
 
 - 手改 `NAMESPACE`、`man/*.Rd`、`data/*.rda`
 - 在对话中粘贴 `data-raw/` 原始数据内容
 - 未经请求做全仓库重构
+- 对已损坏的 UTF-8 文件执行「打开并保存」或 `errors="replace"` 后写回
 
 ## 推荐 Agent 指令模板
 

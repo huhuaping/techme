@@ -155,7 +155,7 @@ for (i in 1:length(list_ins)) {
     # get the address
     ## div contact col
     xpath_p41 <- "//div[contains(@class, 'index_contact-row')]//div[contains(@class, 'index_contact-col') ]"
-    xpath_p42 <- "/span[text() = '地址�?]/following-sibling::span[1]"
+    xpath_p42 <- "/span[text() = '地址：']/following-sibling::span[1]"
 
     xpath_sel <- paste0(xpath_p0, xpath_p41, xpath_p42)
 

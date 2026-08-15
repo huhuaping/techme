@@ -1,4 +1,4 @@
-## 准备R�?---
+## 准备R包----
 source("data-raw/deps/load-core.R")
 source("data-raw/deps/load-scrape.R")
 require("here")
@@ -43,10 +43,10 @@ tbl_out <- tbl_raw %>%
   mutate(province = str_extract(name, pattern_list)) %>%
   # hand the extra city
   #mutate(province= mgsub::mgsub(province, list_extra, list_norm)) %>%
-  mutate(county=gsub("(.+省|自治�?", "", name, perl=T)) %>%
-  mutate(county=gsub("(.*北京市|天津市|上海�?", "", county, perl=T)) %>%
+  mutate(county=gsub("(.+省|自治区)", "", name, perl=T)) %>%
+  mutate(county=gsub("(.*北京市|天津市|上海市)", "", county, perl=T)) %>%
   add_column(year=Year, .before = "index") %>%
-  add_column(batch ="第一�?, .before = "index") %>%
+  add_column(batch ="第一批", .before = "index") %>%
   add_column(id= 1:nrow(.), .before = "index") %>%
   select(-name)
 
@@ -79,12 +79,12 @@ tbl_out <- tbl_raw %>%
   # hand the extra city
   mutate(province= mgsub::mgsub(province, list_extra, list_norm)) %>%
   #filter(is.na(province))
-  mutate(county = map(county, .f = function(county){unlist(str_split(county, "�?))})) %>%
+  mutate(county = map(county, .f = function(county){unlist(str_split(county, "、"))})) %>%
   #select(-county) %>%
   unnest(county) %>%
   #rename_at(all_of(names(.)), ~title_list) %>%
   add_column(year=Year, .before = "index") %>%
-  add_column(batch ="第二�?, .before = "index") %>%
+  add_column(batch ="第二批", .before = "index") %>%
   add_column(id= 1:nrow(.), .before = "index")
 
 # files csv path
@@ -112,12 +112,12 @@ tbl_out <- tbl_raw %>%
   # hand the extra city
   mutate(province= mgsub::mgsub(province, list_extra, list_norm)) %>%
   #filter(is.na(province))
-  mutate(county = map(county, .f = function(county){unlist(str_split(county, "�?))})) %>%
+  mutate(county = map(county, .f = function(county){unlist(str_split(county, "、"))})) %>%
   #select(-county) %>%
   unnest(county) %>%
   #rename_at(all_of(names(.)), ~title_list) %>%
   add_column(year=Year, .before = "index") %>%
-  add_column(batch ="第三�?, .before = "index") %>%
+  add_column(batch ="第三批", .before = "index") %>%
   add_column(id= 1:nrow(.), .before = "index")
 
 # files csv path
@@ -145,12 +145,12 @@ tbl_out <- tbl_raw %>%
   # hand the extra city
   mutate(province= mgsub::mgsub(province, list_extra, list_norm)) %>%
   #filter(is.na(province))
-  mutate(county = map(county, .f = function(county){unlist(str_split(county, "�?))})) %>%
+  mutate(county = map(county, .f = function(county){unlist(str_split(county, "、"))})) %>%
   #select(-county) %>%
   unnest(county) %>%
   #rename_at(all_of(names(.)), ~title_list) %>%
   add_column(year=Year, .before = "index") %>%
-  add_column(batch ="第四�?, .before = "index") %>%
+  add_column(batch ="第四批", .before = "index") %>%
   add_column(id= 1:nrow(.), .before = "index")
 
 # files csv path
@@ -179,12 +179,12 @@ tbl_out <- tbl_raw %>%
   mutate(province= mgsub::mgsub(province, list_extra, list_norm)) %>%
   #filter(is.na(province))
   mutate(county = str_squish(county),
-         county = map(county, .f = function(county){unlist(str_split(county, "�?))})) %>%
+         county = map(county, .f = function(county){unlist(str_split(county, "、"))})) %>%
   #select(-county) %>%
   unnest(county) %>%
   #rename_at(all_of(names(.)), ~title_list) %>%
   add_column(year=Year, .before = "index") %>%
-  add_column(batch ="第五�?, .before = "index") %>%
+  add_column(batch ="第五批", .before = "index") %>%
   add_column(id= 1:nrow(.), .before = "index")
 
 # files csv path
@@ -213,16 +213,16 @@ tbl_out <- tbl_raw %>%
   mutate(province= mgsub::mgsub(province, list_extra, list_norm)) %>%
   #filter(is.na(province))
   mutate(county = str_squish(county),
-         county = map(county, .f = function(county){unlist(str_split(county, "�?))})) %>%
+         county = map(county, .f = function(county){unlist(str_split(county, "、"))})) %>%
   #select(-county) %>%
   unnest(county) %>%
   #rename_at(all_of(names(.)), ~title_list) %>%
   add_column(year=Year, .before = "index") %>%
-  add_column(batch ="第六�?, .before = "index") %>%
+  add_column(batch ="第六批", .before = "index") %>%
   add_column(id= 1:nrow(.), .before = "index") %>%
   mutate(province = ifelse(
     is.na(province),
-    "黑龙�?, province) # special case
+    "黑龙江", province) # special case
   )
 
 # files csv path
@@ -249,16 +249,16 @@ tbl_out <- tbl_raw %>%
   mutate(province= mgsub::mgsub(province, list_extra, list_norm)) %>%
   #filter(is.na(province))
   mutate(county = str_squish(county),
-         county = map(county, .f = function(county){unlist(str_split(county, "�?))})) %>%
+         county = map(county, .f = function(county){unlist(str_split(county, "、"))})) %>%
   #select(-county) %>%
   unnest(county) %>%
   #rename_at(all_of(names(.)), ~title_list) %>%
   add_column(year=Year, .before = "index") %>%
-  add_column(batch ="第七�?, .before = "index") %>%
+  add_column(batch ="第七批", .before = "index") %>%
   add_column(id= 1:nrow(.), .before = "index") %>%
   mutate(province = ifelse(
     is.na(province),
-    "黑龙�?, province) # special case "北大荒农垦集团有限公�?
+    "黑龙江", province) # special case "北大荒农垦集团有限公司"
   )
 
 
@@ -269,12 +269,12 @@ tbl_out <- tbl_raw %>%
 write.xlsx(tbl_out, path_out)
 
 ### 抓取year 2024(html table)----
-#### 第一批农业生产全程机械化示范县创建名�?
-#### 为了保持前向兼容，需要设定如下编码体�?
+#### 第一批农业生产全程机械化示范县创建名单
+#### 为了保持前向兼容，需要设定如下编码体系
 
 tbl_id <- tribble(
   ~id, ~cat,
-  1, "农作�?, # 实际上id取值小�?65，都可以设定为该类别
+  1, "农作物", # 实际上id取值小于665，都可以设定为该类别
   666, "养殖",
   777, "设施种植"#,
   #888,
@@ -303,13 +303,13 @@ tbl_out <- tbl_raw %>%
   # extract the province 
   mutate(province = str_extract(province, pattern_list)) %>%
   mutate(county = str_squish(county), # 去掉空格
-         county = map(county, .f = function(county){unlist(str_split(county, "�?))})) %>%
+         county = map(county, .f = function(county){unlist(str_split(county, "、"))})) %>%
   unnest(county) %>%
   group_by(id, province) %>%
   mutate(index = row_number()) %>%
   ungroup() %>%
   add_column(year=Year, .before = "index") %>%
-  add_column(batch ="第一�?, .before = "index") %>%
+  add_column(batch ="第一批", .before = "index") %>%
   select(year, batch, id, index, province, county)
 
 # files csv path
@@ -321,22 +321,22 @@ write.xlsx(tbl_out, path_out)
 dir_from <- here("topic/public-site/moa-machine-county/")
 dir_to <- "D:/github/techme/data-raw/data-tidy/public-site/moa-machine-county/"
 
-### 第一次拷�?---
+### 第一次拷贝----
 ### 需要拷贝整个文件夹
 isFirst <- TRUE
 if (isFirst){
   fs::dir_create(path = dir_to)
   fs::dir_copy(
     path = paste0(dir_from, "/xlsx"), 
-    new_path = paste0(dir_to, "xlsx"), #不需要斜�?
+    new_path = paste0(dir_to, "xlsx"), #不需要斜杆!
     overwrite = TRUE
   )  
 }
 ### 后续更新拷贝----
 ### 只需要拷贝特定xlsx文件
 
-## 导出为分析数�?---
-### 读取并处理成分析数据�?
+## 导出为分析数据----
+### 读取并处理成分析数据集
 
 dir_path <- here::here("data-raw","public-site","moa-machine-county","xlsx")
 

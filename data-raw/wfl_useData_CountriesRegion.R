@@ -40,7 +40,7 @@ un_m49_tidy <- un_m49  %>%
   ) %>%
   select(all_of(col_list))
 
-#====中英文国别信息对�?===
+#====中英文国别信息对应====
 
 country_region <- left_join(
   iso_country, un_m49_tidy,

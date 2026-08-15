@@ -1,5 +1,5 @@
 
-## R包准�?---
+## R包准备----
 require(openxlsx)
 #require("xml2")
 source("data-raw/deps/load-core.R")
@@ -7,7 +7,7 @@ source("data-raw/deps/load-scrape.R")
 require("here")
 
 
-## techme维护数据�?---
+## techme维护数据集----
 
 ### 准备基本参数----
 
@@ -72,7 +72,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   mutate(
     value = mgsub::mgsub(
       value,
-      c(fixed("\u00a0"),fixed("\n")," ", "�?), # special character
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
       c("", "","", ".")),
     value = str_trim(value)) %>%
   filter(value!="") %>% # drop empty row
@@ -107,7 +107,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   mutate(
     value = mgsub::mgsub(
       value,
-      c(fixed("\u00a0"),fixed("\n")," ", "�?), # special character
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
       c("", "","", ".")),
     value = str_trim(value)) %>%
   filter(value!="") #%>% # drop empty row
@@ -141,7 +141,7 @@ tbl_raw <- read_html(files_dir,encoding = "gbk") %>%
   mutate(
     value = mgsub::mgsub(
       value,
-      c(fixed("\u00a0"),fixed("\n")," ", "�?), # special character
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
       c("", "","", ".")),
     value = str_trim(value)) %>%
   filter(value!="") #%>% # drop empty row
@@ -170,15 +170,15 @@ tbl_info <- tbl_raw  %>%
   # 处理异常省区关系
   mutate(
     province = ifelse(
-      is.na(province) & str_detect(name,"北大荒农垦集�?),
-      c("黑龙�?),
+      is.na(province) & str_detect(name,"北大荒农垦集团"),
+      c("黑龙江"),
       province
     )
   ) 
 
 tbl_check <- tbl_info %>%
   filter(is.na(province))
-if (nrow(tbl_check)>0) warning("存在省份信息缺省情况�?)
+if (nrow(tbl_check)>0) warning("存在省份信息缺省情况！")
 
 ## 添加整理信息----  
 tbl_out <- tbl_info %>% 

@@ -48,7 +48,7 @@ if (!is.unprotected & file.ext == ".xls") {
 }
 message(glue::glue("The target xlsx file is: {file_xlsx}"))
 
-## setting 4ï¼?specify the target block list
+## setting 4ï¼š specify the target block list
 ## use the target list by `get.targetList()`
 ## this function is interactive, you can choose the target list from the console
 # list_block <- get.targetList()
@@ -76,12 +76,12 @@ View(tbl_read)
 
 ## tidy the table
 ### institution should not be multiples, and should be extracted
-### the only one which before "ã€? if there are multiple institutions
+### the only one which before "ã€" if there are multiple institutions
 tbl_tidy <- tbl_read %>%
   mutate(
     institution_first = ifelse(
-      str_detect(institution, "ã€?),
-      str_extract(institution, "(.*?)(?=ã€?"),
+      str_detect(institution, "ã€"),
+      str_extract(institution, "(.*?)(?=ã€)"),
       institution
     )
   ) %>%

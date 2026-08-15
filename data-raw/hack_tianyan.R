@@ -42,12 +42,12 @@ tbl_uniqueInst <- tbl_uniqueNO %>%
 data("ProvinceCity")
 dt_city <- ProvinceCity
 
-index_city <- which(str_detect(unique(dt_city$city),"�?))
+index_city <- which(str_detect(unique(dt_city$city),"市"))
 list_city <- unique(dt_city$city)[index_city]
 ptn_city<- paste0(list_city, collapse = "|")
 
 list_province <- unique(dt_city$province) %>%
-  str_replace(., c("回族自治区|维吾尔自治区|壮族自治区|自治区|省|�?), "")
+  str_replace(., c("回族自治区|维吾尔自治区|壮族自治区|自治区|省|市"), "")
 ptn_province <- paste0(list_province, collapse = "|")
 
 
@@ -61,7 +61,7 @@ tbl_uniqueInst_exclude <- tbl_uniqueInst %>%
                            province)) %>%
   # simplify the name of province
   mutate(province = str_replace(province,
-                                c("自治区|省|�?),
+                                c("自治区|省|市"),
                                 "")) %>%
 
   filter(is.na(province))
@@ -179,7 +179,7 @@ for (i in 53:length(list_ins)) {
   # scraping tel
   ## css selector may change
 
-  xpath_tel <- "//span[contains(@class, 'label') and text() = '电话�?]/following-sibling::span[1]"
+  xpath_tel <- "//span[contains(@class, 'label') and text() = '电话：']/following-sibling::span[1]"
   isExist <- as.logical(length(remDr$findElement("xpath",xpath_tel)))
   if (!isExist) stop("xpath 'tel' failed, please check!")
   tel[i] <- remDr$findElement("xpath",
@@ -188,8 +188,8 @@ for (i in 53:length(list_ins)) {
 
 
 
-  xpath_opt <- c("//span[contains(@class, 'label') and text() = '地址�?]/following-sibling::span[1]",
-                 "//span[contains(@class, 'label') and text() = '地址�?]/following-sibling::div[1]/div[contains(@class, 'detail-content')]")
+  xpath_opt <- c("//span[contains(@class, 'label') and text() = '地址：']/following-sibling::span[1]",
+                 "//span[contains(@class, 'label') and text() = '地址：']/following-sibling::div[1]/div[contains(@class, 'detail-content')]")
   xpath_address <- paste0(xpath_opt, collapse = "|")
   isExist <- as.logical(length(remDr$findElement("xpath",xpath_address)))
   address[i] <- remDr$findElement("xpath",
@@ -249,12 +249,12 @@ tbl_check$index[id_false]
 data("ProvinceCity")
 dt_city <- ProvinceCity
 
-index_city <- which(str_detect(unique(dt_city$city),"�?))
+index_city <- which(str_detect(unique(dt_city$city),"市"))
 list_city <- unique(dt_city$city)[index_city]
 ptn_city<- paste0(list_city, collapse = "|")
 
 list_province <- unique(dt_city$province) %>%
-  str_replace(., c("回族自治区|维吾尔自治区|壮族自治区|自治区|省|�?), "")
+  str_replace(., c("回族自治区|维吾尔自治区|壮族自治区|自治区|省|市"), "")
 ptn_province <- paste0(list_province, collapse = "|")
 
 tbl_province <- tbl_out %>%
@@ -267,7 +267,7 @@ tbl_province <- tbl_out %>%
                            province)) %>%
   # simplify the name of province
   mutate(province = str_replace(province,
-                                c("自治区|省|�?),
+                                c("自治区|省|市"),
                                 ""))
 
 

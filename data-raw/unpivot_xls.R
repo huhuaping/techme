@@ -48,7 +48,7 @@ for (i in 1: sheetnum){
 } # end loop i
 
 #------function to get range of pivot table----
-getRange <- function(dt, reg_start="^åœ?*åŒ?, reg_end ="^æ–?*ç–?){
+getRange <- function(dt, reg_start="^åœ°.*åŒº", reg_end ="^æ–°.*ç–†"){
   pivot_start <- which(str_detect(dt$Col1, reg_start))
   pivot_end <- which(str_detect(dt$Col1, reg_end ))
 

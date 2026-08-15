@@ -1,10 +1,10 @@
 ## code to prepare four `PubConvergencexxxx` datasets goes here
 ## we will maitain four datasets:
-## - PubConvergencePark: 国家现代农业产业园创建名�?
+## - PubConvergencePark: 国家现代农业产业园创建名单
 ## - PubConvergenceCluster: 优势特色产业集群创建名单
 ## - PubConvergenceTown: 农业产业强镇创建名单
-## - PubConvergenceAffirm: 国家现代农业产业园认定名�?单独进行公示) staying
-## - PubConvergenceEval: 国家现代农业产业园绩效评估名�?单独进行公示) newcoming
+## - PubConvergenceAffirm: 国家现代农业产业园认定名单(单独进行公示) staying
+## - PubConvergenceEval: 国家现代农业产业园绩效评估名单(单独进行公示) newcoming
 
 
 source("data-raw/deps/load-dev.R")
@@ -55,7 +55,7 @@ if (!is.unprotected & file.ext == ".xls") {
 }
 message(glue::glue("The target xlsx file is: {file_xlsx}"))
 
-## setting 4�?specify the target block list
+## setting 4： specify the target block list
 ## use the target list by `get.targetList()`
 ## this function is interactive, you can choose the target list from the console
 # list_block <- get.targetList()
@@ -83,12 +83,12 @@ View(tbl_read)
 
 ## tidy the table
 ### institution should not be multiples, and should be extracted
-### the only one which before "�? if there are multiple institutions
+### the only one which before "、" if there are multiple institutions
 tbl_tidy <- tbl_read %>%
   mutate(
     institution_first = ifelse(
-      str_detect(institution, "�?),
-      str_extract(institution, "(.*?)(?=�?"),
+      str_detect(institution, "、"),
+      str_extract(institution, "(.*?)(?=、)"),
       institution
     )
   ) %>%

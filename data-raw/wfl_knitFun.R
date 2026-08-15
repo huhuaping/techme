@@ -62,8 +62,8 @@ df_vars_matched
 ## target search
 get_vars(varsList,lang = "eng", block = target, what = "chn_block4" )
 ## replace characters
-ptn <- c("有研发机构的企业�?, "有R&D活动的企业数")
-rpl <- c("有研发机�?, "有RD活动")
+ptn <- c("有研发机构的企业数", "有R&D活动的企业数")
+rpl <- c("有研发机构", "有RD活动")
 df_tidy <- df_tidy %>%
   mutate(vars= mgsub::mgsub(vars, ptn, rpl))
 ## rerun the function

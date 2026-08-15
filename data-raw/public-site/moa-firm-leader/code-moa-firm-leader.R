@@ -1,4 +1,4 @@
-# R包准�?---
+# R包准备----
 
 require(openxlsx)
 source("data-raw/deps/load-core.R")
@@ -7,8 +7,8 @@ require("here")
 
 
 # 3.1最新完整名单list----
-# 并没有区分批次，仅供参�?
-# 省份信息很有规律，可以手动添�?
+# 并没有区分批次，仅供参考
+# 省份信息很有规律，可以手动添加
 
 ## 读取2025年html----
 ## 保存html后直接手动转换为xlsx，手动添加省份列
@@ -90,7 +90,7 @@ path_out <- paste0("xlsx/list-full-year-", Year, ".xlsx")
 write.xlsx(tbl_info, path_out)
 
 
-## 导出为分析数�?---
+## 导出为分析数据----
 
 dir_path <- here::here("data-raw", "public-site", "moa-firm-leader", "xlsx")
 files_xlsx <- list.files(dir_path)
@@ -503,7 +503,7 @@ tbl_check <- tbl_info %>%
 ## 异常处理----
 
 
-# 根据公司名称，初步判明属地应该为北京的公�?
+# 根据公司名称，初步判明属地应该为北京的公司
 
 ##  year 2004, batch 3, correct the last two firms
 if (i == 3) {
@@ -520,7 +520,7 @@ if (i == 8) {
   tbl_info$province[c(1)] <- "北京"
 }
 
-## 导出到xlsx/文件�?---
+## 导出到xlsx/文件夹----
 
 # files csv path
 dir_path <- here::here("topic", "public-site", "moa-firm-leader")
@@ -528,7 +528,7 @@ dir_path <- here::here("topic", "public-site", "moa-firm-leader")
 (path_out <- paste0(dir_path, "/xlsx/", file_save))
 write.xlsx(tbl_info, path_out)
 
-## 导出为分析数�?---
+## 导出为分析数据----
 
 dir_path <- here::here("topic", "public-site", "moa-firm-leader", "xlsx")
 files_xlsx <- list.files(dir_path)

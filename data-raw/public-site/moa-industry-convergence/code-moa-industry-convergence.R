@@ -1,4 +1,4 @@
-## R包准�?---
+## R包准备----
 require(openxlsx)
 #require("xml2")
 source("data-raw/deps/load-core.R")
@@ -7,7 +7,7 @@ require("here")
 library(glue)
 
 
-## techme维护数据�?---
+## techme维护数据集----
 
 ### 准备基本参数----
 
@@ -18,7 +18,7 @@ k <- 3 # 选择
 ### 循环读取----
 data_names <- c(
   "park-setup","cluster-setup", "town-setup",
-  "park-affirm"  # 产业园认�?
+  "park-affirm"  # 产业园认定
 )
 (type_tar <- data_names[k])
 (files_target <- files_xlsx[which(str_detect(files_xlsx, type_tar))])
@@ -42,7 +42,7 @@ use_list <- c(
   "PubConvergencePark",
   "PubConvergenceCluster",
   "PubConvergenceTown",
-  "PubConvergenceAffirm"  # 产业园认�?
+  "PubConvergenceAffirm"  # 产业园认定
 )
 dir_path <- "D:/github/techme/data-raw/public-site/"
 (data_path <- glue("{dir_path}{use_list[k]}.rda"))
@@ -70,18 +70,18 @@ files_dir <- here(
 tbl_raw <- read_lines(files_dir,skip_empty_rows = TRUE) %>%
   as_tibble()
 
-#### 清洗数据�?---
+#### 清洗数据表----
 tbl_tidy <- tbl_raw %>%
   mutate(
     type = case_when(
-      str_detect(value,"现代农业产业园项�?) ~ "park",
+      str_detect(value,"现代农业产业园项目") ~ "park",
       str_detect(value,"优势特色产业集群项目") ~ "cluster",
       str_detect(value,"农业产业强镇项目") ~ "town"
       )
   ) %>%
   # 填充分组
   fill(type, .direction = "down") %>%
-  # 去掉分组标志�?
+  # 去掉分组标志行
   filter(!str_detect(value, "附件")) %>%
   # 去掉空格
   mutate(value = str_trim(value, side = "both")) %>%
@@ -92,8 +92,8 @@ tbl_tidy <- tbl_raw %>%
   # 获得名称
   mutate(
     name = ifelse(
-      str_detect(value, "�?),  
-      str_extract(value, "(?<=�?(.+)"),
+      str_detect(value, "："),  
+      str_extract(value, "(?<=：)(.+)"),
       value
       )
   ) %>%
@@ -101,7 +101,7 @@ tbl_tidy <- tbl_raw %>%
   mutate(
     name = ifelse(
       type == "park",
-      str_c(name, "现代农业产业�?),
+      str_c(name, "现代农业产业园"),
       name
     )
   )
@@ -117,7 +117,7 @@ ptn_city <- paste0(unique(ProvinceCity$city_clean), collapse = "|")
 tbl_info <- tbl_tidy  %>%
   # 获得部分省份信息
   mutate(
-    province_read = str_extract(value, "(.+)(?=�?") 
+    province_read = str_extract(value, "(.+)(?=：)") 
   ) %>%
   # 获得全部省区信息
   mutate(
@@ -137,8 +137,8 @@ tbl_info <- tbl_tidy  %>%
       is.na(province_clean),
       mgsub::mgsub(
         province_read,
-        c("北大荒农垦集�?), 
-        c("黑龙�?)
+        c("北大荒农垦集团"), 
+        c("黑龙江")
         ),
       province_clean
     )
@@ -154,7 +154,7 @@ tbl_out <- tbl_info %>%
   mutate(index = row_number(type)) %>%
   ungroup() %>%
   select(type, year, index, name, province_clean) %>%
-  # 重命�?
+  # 重命名
   rename(province = province_clean)
 
 #### check province contains NA
@@ -198,25 +198,25 @@ tbl_town <- tbl_out %>%
   # 合并同省份的乡镇信息
   group_by(province) %>%
   mutate(
-    name = str_c(name, collapse = "�?)
+    name = str_c(name, collapse = "、")
   ) %>%
   ungroup() %>%
   distinct(year, province, name) %>%
   # 计算乡镇数量
-  mutate(n = str_count(name, "�?) +1) %>%
+  mutate(n = str_count(name, "、") +1) %>%
   # 重新添加序号
   mutate(index = 1:nrow(.)) %>%
-  # 重命�?
+  # 重命名
   rename( "town" = "name") %>%
   select(year, index, province, town, n)
 
 View(tbl_town)
 write.xlsx(tbl_town, file_path)
 
-## 现代农业产业园认�?---
+## 现代农业产业园认定----
 
 ### 读取html----
-#### 通过notepad，事先编�?div class="park-confirm">
+#### 通过notepad，事先编辑<div class="park-confirm">
 Year <- 2018
 files_dir <- here(
   "topic/public-site/moa-industry-convergence", # dir
@@ -255,8 +255,8 @@ tbl_info <- tbl_raw  %>%
   # 处理异常识别
   mutate(
     province_clean = ifelse(
-      is.na(province_clean) & str_detect(value, "北大�?),
-      "黑龙�?,
+      is.na(province_clean) & str_detect(value, "北大荒"),
+      "黑龙江",
       province_clean
     )
   )
@@ -370,7 +370,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   mutate(
     value = mgsub::mgsub(
       value,
-      c(fixed("\u00a0"),fixed("\n")," ", "�?), # special character
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
       c("", "","", ".")),
     value = str_trim(value)) %>%
   filter(value!="") %>% # drop empty row
@@ -403,7 +403,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   mutate(
     value = mgsub::mgsub(
       value,
-      c(fixed("\u00a0"),fixed("\n")," ", "�?), # special character
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
       c("", "","", ".")),
     value = str_trim(value)) %>%
   filter(value!="") %>% # drop empty row
@@ -439,7 +439,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   mutate(
     value = mgsub::mgsub(
       value,
-      c(fixed("\u00a0"),fixed("\n")," ", "�?), # special character
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
       c("", "","", ".")),
     value = str_trim(value)) %>%
   filter(value!="") %>% # drop empty row
@@ -451,14 +451,14 @@ tbl_out <- tbl_raw %>%
   add_column(year = Year, .before = "index")
 
 
-### 导出到xlsx/文件�?---
+### 导出到xlsx/文件夹----
 
 # files csv path
 (path_out)
 write.xlsx(tbl_out, path_out)
 
 
-### 导出为分析数�?---
+### 导出为分析数据----
 
 #### 批量读取xlsx----
 
@@ -508,8 +508,8 @@ tbl_info <-  tbl_out %>%
   mutate(
     province =ifelse(
       # case NA: index 2022-50
-      name=="北大荒农垦集团有限公司北安分公司现代农业产业�?,
-      "黑龙�?,
+      name=="北大荒农垦集团有限公司北安分公司现代农业产业园",
+      "黑龙江",
       province)
   )
 # fill province, 
@@ -526,7 +526,7 @@ tbl_check <- tbl_info %>%
   ungroup() %>%
   arrange(year,index)
 
-#### 导出到data-update/文件�?---
+#### 导出到data-update/文件夹----
 dir_path <- here::here("data-raw","public-site","moa-industry-convergence","data-update")
 (path_out <- paste0(dir_path, "/park-setup-upto-year-", max(years_target), ".xlsx"))
 write.xlsx(tbl_info, path_out)
@@ -559,7 +559,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   mutate(
     value = mgsub::mgsub(
       value,
-      c(fixed("\u00a0"),fixed("\n")," ", "�?), # special character
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
       c("", "","", ".")),
     value = str_trim(value)) %>%
   filter(value!="") #%>% # drop empty row
@@ -593,7 +593,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   mutate(
     value = mgsub::mgsub(
       value,
-      c(fixed("\u00a0"),fixed("\n")," ", "�?), # special character
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
       c("", "","", ".")),
     value = str_trim(value)) %>%
   filter(value!="") %>% # drop empty row
@@ -605,12 +605,12 @@ tbl_out <- tbl_raw %>%
   add_column(year = Year, .before = "index")
 
 
-### 导出到xlsx/文件�?---
+### 导出到xlsx/文件夹----
 # files csv path
 (path_out)
 write.xlsx(tbl_out, path_out)
 
-### 导出为分析数�?---
+### 导出为分析数据----
 
 #### 批量读取xlsx----
 
@@ -657,8 +657,8 @@ tbl_info <-  tbl_out %>%
   mutate(
     province =ifelse(
       # case NA: index 2023-39
-      is.na(province) & str_detect(name, "北大�?),
-      "黑龙�?,
+      is.na(province) & str_detect(name, "北大荒"),
+      "黑龙江",
       province)
   )
 # fill province, 
@@ -675,7 +675,7 @@ tbl_check <- tbl_info %>%
   ungroup() %>%
   arrange(year,index)
 
-#### 导出到data-update/文件�?---
+#### 导出到data-update/文件夹----
 dir_path <- here::here("data-raw","public-site","moa-industry-convergence","data-update")
 (path_out <- paste0(dir_path, "/cluster-setup-upto-year-", max(years_target), ".xlsx"))
 write.xlsx(tbl_info, path_out)
@@ -759,15 +759,15 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   mutate(
     value = mgsub::mgsub(
       value,
-      c(fixed("\u00a0"),fixed("\n")," ", "�?), # special character
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
       c("", "","", ".")),
     value = str_trim(value)) %>%
   filter(value!="") 
 
 tbl_out <- tbl_raw %>% 
-  separate(value, into = c("province", "town"), sep = "�?) %>%
+  separate(value, into = c("province", "town"), sep = "：") %>%
   # count towns
-  mutate(n = str_count(town, "�?) +1) %>%
+  mutate(n = str_count(town, "、") +1) %>%
   mutate(index = 1:nrow(.)) %>%
   add_column(year = Year, .before = "index") %>%
   mutate(n = as.numeric(n)) %>%
@@ -797,28 +797,28 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   mutate(
     value = mgsub::mgsub(
       value,
-      c(fixed("\u00a0"),fixed("\n")," ", "�?), # special character
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
       c("", "","", ".")),
     value = str_trim(value)) %>%
   filter(value!="") #%>% # drop empty row
 #mutate(value = str_extract(value, "(?<=\\.).+"))
 
 tbl_out <- tbl_raw %>% 
-  separate(value, into = c("province", "town"), sep = "�?) %>%
+  separate(value, into = c("province", "town"), sep = "：") %>%
   # count towns
-  mutate(n = str_count(town, "�?) +1) %>%
+  mutate(n = str_count(town, "、") +1) %>%
   mutate(index = 1:nrow(.)) %>%
   add_column(year = Year, .before = "index") %>%
   mutate(n = as.numeric(n)) %>%
   select(year, index, province, town, n)
 
-### 导出到xlsx/文件�?---
+### 导出到xlsx/文件夹----
 
 # files csv path
 (path_out)
 write.xlsx(tbl_out, path_out)
 
-### 导出为分析数�?---
+### 导出为分析数据----
 #### 批量读取xlsx----
 
 dir_path <- here::here("topic","public-site","moa-industry-convergence","xlsx")
@@ -867,8 +867,8 @@ tbl_info <-  tbl_out %>%
   mutate(
     province =ifelse(
       # case NA: index 2023-39
-      is.na(province) & str_detect(province_source, "北大�?),
-      "黑龙�?,
+      is.na(province) & str_detect(province_source, "北大荒"),
+      "黑龙江",
       province)
   ) %>%
   select(year, index, province, town, n) 
@@ -884,7 +884,7 @@ tbl_check <- tbl_info %>%
   ungroup() %>%
   arrange(year,index)
 
-#### 导出到data-update/文件�?---
+#### 导出到data-update/文件夹----
 dir_path <- here::here("data-raw","public-site","moa-industry-convergence","data-update")
 (path_out <- paste0(dir_path, "/town-setup-upto-year-", max(years_target), ".xlsx"))
 write.xlsx(tbl_info, path_out)
@@ -896,12 +896,12 @@ tbl_export <- tbl_info %>%
   # 合并同省份的乡镇信息
   group_by(year, province) %>%
   mutate(
-    town = str_c(town, collapse = "�?)
+    town = str_c(town, collapse = "、")
   ) %>%
   ungroup() %>%
   distinct(year, province, town) %>%
   # 计算乡镇数量
-  mutate(n = str_count(town, "�?) +1) %>%
+  mutate(n = str_count(town, "、") +1) %>%
   group_by(year) %>%
   # 重新添加序号
   mutate(index = row_number(year)) %>%

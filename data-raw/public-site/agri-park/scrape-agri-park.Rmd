@@ -1,6 +1,6 @@
 ---
 title: "国家农业科技园区"
-author: "胡华�?
+author: "胡华平"
 date: "`r Sys.Date()`"
 output:
   bookdown::word_document2:
@@ -65,13 +65,13 @@ require("here")
 - 科技部办公厅关于第八批国家农业科技园区建设的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2018/201812/t20181224_144277.html)
 
 
-**验收**�?
+**验收**：
 
 - 关于公布国家农业科技园区第七批验收结果和2019年综合评估结果的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2019/201911/t20191119_150024.html)
 
     - 2019.10.30 农村司关于第七批国家农业科技园区验收结果公示的[公告](http://www.most.gov.cn/tztg/201910/t20191029_149628.htm)
 
-- 2018�?2�?7�?技部办公厅关于公布2018年国家农业科技园区验收结果的[通知](http://www.gov.cn/zhengce/zhengceku/2018-12/31/content_5446196.htm)
+- 2018年12月07日 技部办公厅关于公布2018年国家农业科技园区验收结果的[通知](http://www.gov.cn/zhengce/zhengceku/2018-12/31/content_5446196.htm)
 
 - 2017年关于公布第五批国家农业科技园区验收结果的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2017/201711/t20171128_136490.html)
 
@@ -86,7 +86,7 @@ require("here")
 ## 异常提示
 
 
-**评价验收**�?
+**评价验收**：
 
 - 2017 xlsx
 - 2018 html
@@ -268,8 +268,8 @@ doc_text <- readtext(files_dir) %>%
   .[[1]]  
 
 # case coexist pass and fail
-row_point1 <- which(str_detect(doc_text,"验收通过的园�?))
-row_point2 <- which(str_detect(doc_text,"验收不通过的园�?))
+row_point1 <- which(str_detect(doc_text,"验收通过的园区"))
+row_point2 <- which(str_detect(doc_text,"验收不通过的园区"))
 range_pass <- (row_point1 + 1):(row_point2 -1)
 range_fail <- (row_point2 + 1):length(doc_text)
 
@@ -277,7 +277,7 @@ range_fail <- (row_point2 + 1):length(doc_text)
 row_point1 <- which(str_detect(doc_text,"通过验收"))
 range_pass <- (row_point1 + 1):length(doc_text)
 
-docnum <- "国科办农2021-150�?
+docnum <- "国科办农2021-150号"
 tbl_out <- doc_text %>%
   as_tibble() %>%
   mutate(result=ifelse(
@@ -306,7 +306,7 @@ write.xlsx(tbl_out, path_out)
 ```
 
 
-### 3.3 导出为分析数�?
+### 3.3 导出为分析数据
 
 
 ```{r}
@@ -370,13 +370,13 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
          value = str_trim(value))
 
 # detect head
-row_point <- which(str_detect(tbl_raw$value,"优秀|达标|不达�?))
+row_point <- which(str_detect(tbl_raw$value,"优秀|达标|不达标"))
 
 range_good <- (row_point[1] + 1):(row_point[2] -1)
 range_ok <- (row_point[2] + 1):(row_point[3] -1)
 range_fail <- (row_point[3] + 1):length(tbl_raw)
 
-result_chn <- c("优秀","达标","不达�?)
+result_chn <- c("优秀","达标","不达标")
 result_eng <- c("good", "ok", "fail")
 ptn_result <- paste0(result_chn, collapse = "|")
 
@@ -443,13 +443,13 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
          value = str_trim(value))
 
 # detect head
-row_point <- which(str_detect(tbl_raw$value,"优秀|达标|不达�?))
+row_point <- which(str_detect(tbl_raw$value,"优秀|达标|不达标"))
 
 range_good <- (row_point[1] + 1):(row_point[2] -1)
 range_ok <- (row_point[2] + 1):(row_point[3] -1)
 range_fail <- (row_point[3] + 1):length(tbl_raw)
 
-result_chn <- c("优秀","达标","不达�?)
+result_chn <- c("优秀","达标","不达标")
 result_eng <- c("good", "ok", "fail")
 ptn_result <- paste0(result_chn, collapse = "|")
 
@@ -516,7 +516,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
                               c("", "","")),
          value = str_trim(value)) %>%
   filter(value!="") %>%
-  filter(!str_detect(value,"�?))
+  filter(!str_detect(value,"、"))
 
 # detect head
 row_point <- which(str_detect(tbl_raw$value,"优秀|达标|不达标的园区|保留园区资格|取消园区资格"))
@@ -527,7 +527,7 @@ range_fail <- (row_point[3] + 1):(row_point[4] -1)
 range_retain <- (row_point[4] + 1):(row_point[5] -1)
 range_cancel <- (row_point[5] + 1):length(tbl_raw)
 
-result_chn <- c("优秀","达标","不达�?,"保留","取消")
+result_chn <- c("优秀","达标","不达标","保留","取消")
 result_eng <- c("good", "ok", "fail","retain","cancel")
 ptn_result <- paste0(result_chn, collapse = "|")
 
@@ -595,7 +595,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
          value = str_trim(value)) %>%
   filter(value!="") %>%
   mutate(value = str_replace(value, "河南郑州", "1.河南郑州")) #%>%
-  #filter(!str_detect(value,"�?))
+  #filter(!str_detect(value,"、"))
 
 # detect head
 row_point <- which(str_detect(tbl_raw$value,"保留园区资格|取消园区资格"))
@@ -606,7 +606,7 @@ row_point <- which(str_detect(tbl_raw$value,"保留园区资格|取消园区资�
 range_retain <- (row_point[1] + 1):(row_point[2] -1)
 range_cancel <- (row_point[2] + 1):length(tbl_raw)
 
-result_chn <- c("优秀","达标","不达�?,"保留","取消")
+result_chn <- c("优秀","达标","不达标","保留","取消")
 result_eng <- c("good", "ok", "fail","retain","cancel")
 ptn_result <- paste0(result_chn, collapse = "|")
 

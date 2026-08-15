@@ -1,4 +1,4 @@
-## R包准�?---
+## R包准备----
 source("data-raw/deps/load-core.R")
 source("data-raw/deps/load-scrape.R")
 require("here")
@@ -6,7 +6,7 @@ library(glue)
 require("openxlsx")
 require("techme")
 
-## 抓取html表格�?021年）----
+## 抓取html表格（2021年）----
 
 Year <- 2021
 
@@ -58,7 +58,7 @@ tbl_out <- tbl_raw %>%
     institution = mgsub::mgsub(
       institution,
       c(" "),
-      c("�?)
+      c("、")
     )
   )
 
@@ -72,7 +72,7 @@ path_out <- paste0("xlsx/eval-", Year, "-wide.xlsx")
 write.xlsx(tbl_out, path_out)
 
 
-## 抓取pdf表格txt�?023年）----
+## 抓取pdf表格txt（2023年）----
 
 Year <- 2023
 
@@ -127,7 +127,7 @@ tbl_out <- tbl_raw %>%
 #   institution = mgsub::mgsub(
 #     institution,
 #     c(" "),
-#     c("�?)
+#     c("、")
 #   )
 # )
 
@@ -141,7 +141,7 @@ tbl_out %>%
 write.xlsx(tbl_out, here(path_out))
 
 
-# 2024年数据处�?---
+# 2024年数据处理----
 ## 经过doc转xlsx处理
 
 Year <- 2024
@@ -164,18 +164,18 @@ tbl_out <- read.xlsx(file_path) %>%
   mutate(institution = mgsub::mgsub(
     institution,
     c(" "),
-    c("�?)
+    c("、")
   )) %>%
-  # 特殊机构�?
+  # 特殊机构，
   mutate(institution = mgsub::mgsub(
     institution,
     c(
-      "中国科学院、水利部成都山地灾害与环境研究所", # 实际上是一家机�?
-      "中国医学科学院血液病医院（中国医学科学院血液学研究所�?
+      "中国科学院、水利部成都山地灾害与环境研究所", # 实际上是一家机构
+      "中国医学科学院血液病医院（中国医学科学院血液学研究所）"
     ),
     c(
       "中国科学院水利部成都山地灾害与环境研究所",
-      "中国医学科学院血液病医院（血液学研究所�?
+      "中国医学科学院血液病医院（血液学研究所）"
     ) # queryTianyan已经存在
   ))
 
@@ -221,7 +221,7 @@ list_institution <- tbl_out %>%
   mutate(
     institution = map_chr(
       .x = institution_raw,
-      .f = function(x) as.character(unlist(str_split(x, pattern = "�?))[[1]])
+      .f = function(x) as.character(unlist(str_split(x, pattern = "、"))[[1]])
     )
   ) %>%
   select(institution) %>%
@@ -258,7 +258,7 @@ openxlsx::write.xlsx(list_institution, path_xlsx)
 # - 在repo `tech-report`中安装更新后的R包`techme`
 # - `renv::install("huhuaping/techme")`
 
-# 匹配省份和地区信�?---
+# 匹配省份和地区信息----
 
 ## 获得queryTianyan和ProvinceCity数据----
 
@@ -277,7 +277,7 @@ ptn_province <- paste0(unique(ProvinceCity$province_clean), collapse = "|")
 ptn_city <- paste0(unique(ProvinceCity$city_clean), collapse = "|")
 
 # 循环处理xlsx文件----
-## 导出到data-tidy对应的文件夹�?
+## 导出到data-tidy对应的文件夹下
 list_xlsx <- list.files(here("data-raw/public-site/most-jcs-open-share/xlsx-raw/"), full.names = TRUE)
 list_years <- str_extract(list_xlsx, "\\d{4}")
 
@@ -290,11 +290,11 @@ for (i in seq_along(list_xlsx)) {
   tbl_province <- tbl_wide %>%
     # replicate new columns
     mutate(institution_raw = institution) %>%
-    # use only the first institution, 只分析排序第一的主管机�?
+    # use only the first institution, 只分析排序第一的主管机构
     mutate(
       institution = map_chr(
         .x = institution_raw,
-        .f = function(x) as.character(unlist(str_split(x, pattern = "�?))[[1]])
+        .f = function(x) as.character(unlist(str_split(x, pattern = "、"))[[1]])
       )
     ) %>%
     # match `queryTianyan`
@@ -343,14 +343,14 @@ for (i in seq_along(list_xlsx)) {
     message(glue::glue("Good! No NA province in {Year} xlsx file!"))
   }
 
-  ## 创建目录文件�?
+  ## 创建目录文件夹
   dir_tar <- here("data-raw/data-tidy/public-site/most-jcs-open-share/xlsx/")
   if (!dir.exists(dir_tar)) {
     dir.create(dir_tar, recursive = TRUE)
     message(glue::glue("The {dir_tar} directory has been created!"))
   }
 
-  ## 导出数据�?---
+  ## 导出数据集----
   path_xlsx <- glue::glue("{dir_tar}/eval-{Year}.xlsx")
   openxlsx::write.xlsx(tbl_province, here(path_xlsx))
   message(glue::glue("The {Year} xlsx file has been exported to {path_xlsx}!"))

@@ -10,9 +10,9 @@ tbl_dir <- create.dirTable()
 
 ## setting 2: specify the regex pattern for table identifier
 ## use the helper function `choose.filePattern()` to generate the pattern
-prefix_add <- "funds" # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
+prefix_add <- NULL # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
 pattern_sel <- choose.filePattern(
-    year = c(2023), # may have length 1 or 2
+    year = c(2024), # may have length 1 or 2
     mode = "year_one", # must be one of the following: year_one, year_two, year_onex, year_twox, add_onex, add_one, edited_one, edited_two
     add_info = prefix_add # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
 )
@@ -20,8 +20,8 @@ pattern_sel <- choose.filePattern(
 ##  run the function to find target directory and files ----
 find_result <- wfl.findFiles(
     dt = tbl_dir, # the directory table
-    dir.case = "RD_output_patent", # the case name of the target directory
-    i.final = 3, # the index of the final subdirectory
+    dir.case = "RD_inner", # the case name of the target directory
+    i.final = 1, # the index of the final subdirectory
     pattern = pattern_sel # the regex pattern for table identifier
 )
 
@@ -30,7 +30,7 @@ find_result <- wfl.findFiles(
 
 # Workflow: convert protected xls file to xlsx file----
 ## it should remove the unnecessary sheet (copyright or empty, or other sheet not needed).
-is.unprotected <- TRUE
+is.unprotected <- FALSE  # default is FALSE, if TRUE, not convert the xls file to xlsx file
 if (!is.unprotected) {
     ## the default is to remove the sheet named "CNKI"
     file_xlsx <- wfl.Xls2Xlsx(file_path = file_tar, sheet_drop = c("CNKI"))
@@ -41,8 +41,8 @@ message(glue::glue("The target xlsx file is: {file_xlsx}"))
 
 ## check the xlsx file and may need to add "åœ°åŒº" to table column
 ## step 1: open the xlsx file
-## step 2ï¼?check the first column name
-## step 3ï¼šcheck and save the log detail for yearly update
+## step 2: check the first column name
+## step 3: check and save the log detail for yearly update
 ##         log information:
 ##         - dir.case
 ##         - i.final
@@ -56,11 +56,11 @@ log_xlsx <- tibble::tribble(
 
 
 # Workflow: unpivot xlsx file ----
-## setting 1ï¼?whether drop columns and specify the header mode.
+## setting 1: whether drop columns and specify the header mode.
 cols_drop <- c(2) # drop the second column, as it is the english region column
 ## cols_drop <- NULL
 
-## setting 2ï¼?choose header mode
+## setting 2: choose header mode
 ## change mode on conditions if needed in `wfl_unpivot_livestock.R`
 header_mode <- c(
     "year", "vars", "vars-year", "vars-vars",
@@ -68,10 +68,10 @@ header_mode <- c(
 )
 (mode_sel <- header_mode[4])
 
-## setting 3ï¼?specify the regex pattern for table identifier
-# pattern_table <- "^åœ?*åŒ? # not to use "ç»­è¡¨" !
+## setting 3ï¼š specify the regex pattern for table identifier
+# pattern_table <- "^åœ°.*åŒº" # not to use "ç»­è¡¨" !
 
-## setting 4ï¼?specify the target block list
+## setting 4ï¼š specify the target block list
 ## use the target list by `get.targetList()`
 ## this function is interactive, you can choose the target list from the console
 list_block <- get.targetList()
@@ -103,10 +103,10 @@ df_out <- wfl.unpivotXlsx(
     header.mode = mode_sel, # default is "vars-year"
     vars.add = NULL, # vars_spc[2, ], # default is NULL, only used when header mode is "year"
     cols.drop = cols_drop, # default is NULL
-    pattern.table = "^åœ?*åŒ?, # default is "^åœ?*åŒ?
-    reg_start = "^åœ?*åŒ?, # getRange() argument
-    reg_end = "^æ–?*ç–?, # getRange() argument
-    unit_pattern = "å•ä½:|å•ä½ï¼? # getInfo() argument
+    pattern.table = "^åœ°.*åŒº", # default is "^åœ°.*åŒº"
+    reg_start = "^åœ°.*åŒº", # getRange() argument
+    reg_end = "^æ–°.*ç–†", # getRange() argument
+    unit_pattern = "å•ä½:|å•ä½ï¼š" # getInfo() argument
 )
 
 # View(df_out)

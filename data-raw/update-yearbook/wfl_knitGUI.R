@@ -157,8 +157,8 @@ df_unpivot <- loop_unpivot(
 source("data-raw/update-yearbook/wfl_tidy.R", encoding = "UTF-8")
 
 # only for budget data collection
-# budget_ptn <- c("地方一般公共预算支�?,"教育支出","科学技术支�?,"农林水支�?)
-# budget_rpl <- c("合计","教育","科学技�?,"农林�?)
+# budget_ptn <- c("地方一般公共预算支出","教育支出","科学技术支出","农林水支出")
+# budget_rpl <- c("合计","教育","科学技术","农林水")
 df_tidy <- getTidy(dt = df_unpivot) %>%
   select(province, year,
          vars, value, units)  #%>%
@@ -235,34 +235,34 @@ get_vars(varsList,lang = "eng", block = mytar, what = "chn_block4" )
 ## replacement pattern by collection
 tbl_pattern <- tribble(
   ~case, ~ptn, ~rpl,
-  "machine", c("谷物联合收割�?), c("联合收获�?),
-  "fertilizer", c("农用化肥施用�?), c("化肥使用�?),
-  "plastic", c("农用塑料薄膜使用�?), c("农用薄膜使用�?),
+  "machine", c("谷物联合收割机"), c("联合收获机"),
+  "fertilizer", c("农用化肥施用量"), c("化肥使用量"),
+  "plastic", c("农用塑料薄膜使用量"), c("农用薄膜使用量"),
   "budget",
-    c("地方一般公共预算支�?,"教育支出","科学技术支�?,"农林水支�?),
-    c("合计","教育","科学技�?,"农林�?),
+    c("地方一般公共预算支出","教育支出","科学技术支出","农林水支出"),
+    c("合计","教育","科学技术","农林水"),
   "RDinner",
     c("经费内部支出"),
     c("合计"),
   "RD",
-    c("有研发机构的企业�?, "有R&D活动的企业数"),
-    c("有研发机�?, "有RD活动"),
+    c("有研发机构的企业数", "有R&D活动的企业数"),
+    c("有研发机构", "有RD活动"),
   "IndustryRD",
-    c("新产品开发项目数","新产品开发经费支�?,
-      "新产品销售收�?,"有效发明专利�?,
-      "引进境外技术经费支�?, "引进境外技术消化吸收经费支�?),
-    c("开发项目数","开发经费支�?,
-      "销售收�?,"有效专利�?,
-      "技术引进经费支�?, "消化吸收经费支出"),
+    c("新产品开发项目数","新产品开发经费支出",
+      "新产品销售收入","有效发明专利数",
+      "引进境外技术经费支出", "引进境外技术消化吸收经费支出"),
+    c("开发项目数","开发经费支出",
+      "销售收入","有效专利数",
+      "技术引进经费支出", "消化吸收经费支出"),
   "operation", c("营业收入"), c("主营业务收入"),
   "trade", c("进出口贸易总额"), c("贸易总额"),
   "livestock tab01", c("种畜禽场总数"),c("总数"),
   "livestock tab04",
-    c("祖代及以上场","祖代蛋鸡�?,"父母代场"),
+    c("祖代及以上场","祖代蛋鸡场","父母代场"),
     c("祖代及以上蛋鸡场","祖代及以上蛋鸡场","父母代蛋鸡场"),
-  "livestock tab07", c("种羊细场�?), c("种细毛羊�?),
+  "livestock tab07", c("种羊细场毛"), c("种细毛羊场"),
   "livestock tab08",
-    c("祖代蛋鸡�?,"祖代以上肉鸡�?),
+    c("祖代蛋鸡场","祖代以上肉鸡场"),
     c("祖代及以上蛋鸡场","祖代及以上肉鸡场")
 )
 
@@ -328,7 +328,7 @@ mytidy <- list(
 
 ## file path
 (files_tidy <- mytidy$mod_year)
-#(files_tidy <- mytidy$mod_prefix_year)  # only技术输�?输出
+#(files_tidy <- mytidy$mod_prefix_year)  # only技术输入/输出
 
 
 (tidy_path <-paste0(dir_sub1, dir_sub2,"/",files_tidy))

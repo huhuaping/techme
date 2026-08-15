@@ -41,7 +41,7 @@ message(glue::glue("The target xlsx file is: {file_xlsx}"))
 
 ## check the xlsx file and may need to add "地区" to table column
 ## step 1: open the xlsx file
-## step 2�?check the first column name
+## step 2： check the first column name
 ## step 3：check and save the log detail for yearly update
 ##         log information:
 ##         - dir.case
@@ -55,11 +55,11 @@ log_xlsx <- tibble::tribble(
 
 
 # Workflow: unpivot xlsx file ----
-## setting 1�?whether drop columns and specify the header mode.
+## setting 1： whether drop columns and specify the header mode.
 cols_drop <- c(2) # drop the second column, as it is the english region column
 ## cols_drop <- NULL
 
-## setting 2�?choose header mode
+## setting 2： choose header mode
 ## change mode on conditions if needed in `wfl_unpivot_livestock.R`
 header_mode <- c(
     "year", "vars", "vars-year", "vars-vars",
@@ -67,10 +67,10 @@ header_mode <- c(
 )
 (mode_sel <- header_mode[2])
 
-## setting 3�?specify the regex pattern for table identifier
-# pattern_table <- "^�?*�? # not to use "续表" !
+## setting 3： specify the regex pattern for table identifier
+# pattern_table <- "^地.*区" # not to use "续表" !
 
-## setting 4�?specify the target block list
+## setting 4： specify the target block list
 ## use the target list by `get.targetList()`
 ## this function is interactive, you can choose the target list from the console
 list_block <- get.targetList()
@@ -102,10 +102,10 @@ df_out <- wfl.unpivotXlsx(
     header.mode = mode_sel, # default is "vars-year"
     vars.add = NULL, # default is NULL, only used when header mode is "year"
     cols.drop = cols_drop, # default is NULL
-    pattern.table = "^�?*�?, # default is "^�?*�?
-    reg_start = "^�?*�?, # getRange() argument
-    reg_end = "^�?*�?, # getRange() argument
-    unit_pattern = "单位:|单位�? # getInfo() argument
+    pattern.table = "^地.*区", # default is "^地.*区"
+    reg_start = "^地.*区", # getRange() argument
+    reg_end = "^新.*疆", # getRange() argument
+    unit_pattern = "单位:|单位：" # getInfo() argument
 )
 
 View(df_out)
@@ -137,7 +137,7 @@ if (is_english) {
 is_select <- TRUE
 if (is_select) {
     df_tidy <- df_tidy %>%
-        filter(vars %in% c("地方一般公共预算支�?, "教育支出", "科学技术支�?, "农林水支�?))
+        filter(vars %in% c("地方一般公共预算支出", "教育支出", "科学技术支出", "农林水支出"))
 }
 
 View(df_tidy)

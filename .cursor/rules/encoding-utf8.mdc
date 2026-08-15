@@ -1,0 +1,21 @@
+---
+description: Windows 下 UTF-8/中文源文件写入约束，防止乱码与 U+FFFD
+alwaysApply: true
+---
+
+# UTF-8 与中文源文件
+
+本仓库源文件（`.R` `.Rmd` `.qmd` `.md` `.mdc`）一律 **UTF-8 无 BOM**。中文注释、正则（如 `地.*区`）、XPath 必须保持合法三字节序列。
+
+## 写入
+
+- 用编辑器/Write 工具直接写 UTF-8；不要先按 GBK/cp936/latin-1 解码再另存。
+- **禁止** `errors="replace"` / `errors="ignore"` 后再写回源文件（会变成 `?` 或 U+FFFD，不可逆）。
+- **禁止** PowerShell `>` / `Out-File` 导出源文件（默认 UTF-16 LE）。需要脚本写文件时用 Python `Path.write_bytes(text.encode("utf-8"))`，字面量用 `\uXXXX`。
+- 保持该文件原有换行（CRLF 或 LF），不要整文件改换行。
+- 批量改写含中文的文件后，运行 `python scripts/check-utf8.py -- <paths>`。
+
+## 发现乱码时
+
+- 不要在编辑器里打开并保存（会把非法字节固化成 U+FFFD）。
+- 读取 `.cursor/skills/techme-encoding-utf8/SKILL.md`，从最后一个合法 UTF-8 的 git 版本恢复。

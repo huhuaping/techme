@@ -1,4 +1,4 @@
-# R包准�?---
+# R包准备----
 source("data-raw/deps/load-core.R")
 source("data-raw/deps/load-scrape.R")
 require("openxlsx")
@@ -26,26 +26,26 @@ tbl_raw <- read_html(files_dir, encoding = "GBK") %>%
   as_tibble() %>%
   mutate(value = str_trim(value, "both"))
 
-num_base <- c("一", "�?, "�?, "�?, "�?, "�?, "�?, "�?, "�?)
+num_base <- c("一", "二", "三", "四", "五", "六", "七", "八", "九")
 
 # the html show max '五十'
 num_chn <- c(
-  num_base, "�?,
-  paste0("�?, num_base), "二十",
+  num_base, "十",
+  paste0("十", num_base), "二十",
   paste0("二十", num_base), "三十",
   paste0("三十", num_base), "四十",
   paste0("四十", num_base), "五十"
 )
 
-pattern_chn <- paste0(paste0(num_chn, "�?), collapse = "|")
+pattern_chn <- paste0(paste0(num_chn, "、"), collapse = "|")
 
-ptn_area_num <- glue::glue("({paste0(num_chn,collapse='|')})(?=�?")
+ptn_area_num <- glue::glue("({paste0(num_chn,collapse='|')})(?=、)")
 ptn_area_name <- glue::glue("(?<={pattern_chn})(.+)")
-ptn_area_filter <- glue::glue("{paste0(num_chn,'�?,collapse='|')}")
+ptn_area_filter <- glue::glue("{paste0(num_chn,'、',collapse='|')}")
 
-ptn_type_num <- glue::glue("(?<=�?({paste0(num_chn,collapse ='|')})(?=�?")
-ptn_type_name <- glue::glue("(?<={paste0('�?,num_chn,'�?,collapse ='|')})(.+)")
-ptn_type_filter <- glue::glue("{paste0('�?,num_chn,'�?,collapse ='|')}")
+ptn_type_num <- glue::glue("(?<=（)({paste0(num_chn,collapse ='|')})(?=）)")
+ptn_type_name <- glue::glue("(?<={paste0('（',num_chn,'）',collapse ='|')})(.+)")
+ptn_type_filter <- glue::glue("{paste0('（',num_chn,'）',collapse ='|')}")
 
 tbl_all <- tbl_raw %>%
   # industry area
@@ -69,7 +69,7 @@ tbl_all <- tbl_raw %>%
   mutate(chairman = str_extract(value, "(?<=首席科学家：)(.+)"))
 
 
-### �?产业体系----
+### 表1产业体系----
 
 #### get the chairman and institution of industry----
 ## chairman is unique!
@@ -81,24 +81,24 @@ check <- tibble(
   inst_before = tbl_all$value[id_chairman_industry - 1],
   inst_after = tbl_all$value[id_chairman_industry + 1]
 ) %>%
-  mutate(inst_name = ifelse(!str_detect(inst_before, "站长�?),
+  mutate(inst_name = ifelse(!str_detect(inst_before, "站长："),
     inst_before,
-    ifelse(str_detect(inst_after, "建设依托单位�?),
+    ifelse(str_detect(inst_after, "建设依托单位："),
       inst_after,
       NA
     )
   )) %>%
-  mutate(index_inst = ifelse(!str_detect(inst_before, "站长�?),
+  mutate(index_inst = ifelse(!str_detect(inst_before, "站长："),
     index_man - 1,
-    ifelse(str_detect(inst_after, "建设依托单位�?),
+    ifelse(str_detect(inst_after, "建设依托单位："),
       index_man + 1,
       NA
     )
   )) %>%
   # nrow must be the same to `num_chn`
   mutate(
-    chairman_industry = str_extract(man, "(?<=�?(.+)"),
-    institution_industry = str_extract(inst_name, "(?<=�?(.+)"),
+    chairman_industry = str_extract(man, "(?<=：)(.+)"),
+    institution_industry = str_extract(inst_name, "(?<=：)(.+)"),
     area_num = num_chn
   )
 
@@ -121,27 +121,27 @@ tbl_industry <- tbl_all %>%
   # filter rows of chairman and institution
   .[-index_filter, ] %>%
   # filter `type_cat`
-  filter(type_cat == "技术研发中�?) %>%
+  filter(type_cat == "技术研发中心") %>%
   filter(!str_detect(value, "岗位及聘用人员："))
 
 #### get functional research area======
 
 tbl_func <- tbl_industry %>%
   mutate(
-    func_num = str_extract(value, "(\\d{1,2})(?=�?"),
-    func_name = str_extract(value, "(?<=\\d{1,2}�?(.+)")
+    func_num = str_extract(value, "(\\d{1,2})(?=、)"),
+    func_name = str_extract(value, "(?<=\\d{1,2}、)(.+)")
   ) %>%
   # check sequence order of number series,totally [233 ok!]
   # tbl_func$func_num[which(!is.na(tbl_func$func_num))]
   fill(func_num) %>%
   fill(func_name) %>%
   # filter func
-  filter(!str_detect(value, "\\d{1,2}�?)) %>%
-  mutate(func_inst = str_extract(value, "(?<=建设依托单位�?(.+)")) %>%
+  filter(!str_detect(value, "\\d{1,2}、")) %>%
+  mutate(func_inst = str_extract(value, "(?<=建设依托单位：)(.+)")) %>%
   # check total numbers of institution, totally [233 ok!]
   # tbl_func$func_inst[which(!is.na(tbl_func$func_inst))] %>%
   fill(func_inst) %>%
-  filter(!str_detect(value, "建设依托单位�?)) %>%
+  filter(!str_detect(value, "建设依托单位：")) %>%
   # get director of func
   mutate(func_director = str_extract(value, "(?<=研究室主任：)(.+)")) %>%
   # check total numbers of director,totally [233 ok!]
@@ -153,9 +153,9 @@ tbl_func <- tbl_industry %>%
 #### get all researchers info =====
 tbl_researcher <- tbl_func %>%
   mutate(
-    researcher_area = str_extract(value, "(.+)(?=�?"),
-    researcher_name = str_extract(value, "(?<=�?(.+)(?=�?"),
-    researcher_inst = str_extract(value, "(?<=�?(.+)(?=�?")
+    researcher_area = str_extract(value, "(.+)(?=：)"),
+    researcher_name = str_extract(value, "(?<=：)(.+)(?=（)"),
+    researcher_inst = str_extract(value, "(?<=（)(.+)(?=）)")
   ) %>%
   select(-value) %>%
   add_column(year = Year, .before = "area_num") %>%
@@ -199,26 +199,26 @@ openxlsx::write.xlsx(tbl_sel, xlsx_path)
 
 
 
-### �?实验�?---
+### 表2实验站----
 
 tbl_station <- tbl_all %>%
   filter(type_cat == "技术综合试验站") %>%
   select(-chairman) %>%
   mutate(
-    station_num = str_extract(value, "(\\d{1,2})(?=�?"),
-    station_name = str_extract(value, "(?<=�?(.+)")
+    station_num = str_extract(value, "(\\d{1,2})(?=、)"),
+    station_name = str_extract(value, "(?<=、)(.+)")
   ) %>%
   fill(station_num) %>%
   fill(station_name) %>%
-  filter(!str_detect(value, "\\d{1,2}�?)) %>%
+  filter(!str_detect(value, "\\d{1,2}、")) %>%
   mutate(
     station_isnt = str_extract(
       value,
-      "(?<=建设依托单位�?(.+)(?=；站�?"
+      "(?<=建设依托单位：)(.+)(?=；站长)"
     ),
     station_manager = str_extract(
       value,
-      "(?<=站长�?(.+)"
+      "(?<=站长：)(.+)"
     )
   ) %>%
   select(-value) %>%
@@ -357,7 +357,7 @@ names_sel <- c(
 )
 
 
-### 岗位科学家名�?---
+### 岗位科学家名单----
 
 
 names_func <- c(
@@ -372,7 +372,7 @@ sort(setdiff(names_sel, names_func))
 tbl_func <- tbl_raw %>%
   rename_at(vars(names(.)), ~names_func) %>%
   # filter 'cat'
-  filter(cat == "岗位科学�?) %>%
+  filter(cat == "岗位科学家") %>%
   mutate(index = 1:nrow(.)) %>%
   add_column(year = Year, .before = "index") %>%
   # use `setdiff()` to check
@@ -390,7 +390,7 @@ tbl_func <- tbl_raw %>%
   # get 'area_name'
   mutate(area_name = str_extract(
     researcher_area,
-    "(?<=�?(.+)(?=体系�?"
+    "(?<=（)(.+)(?=体系）)"
   )) %>%
   mutate(area_name = mgsub::mgsub(
     area_name,
@@ -400,17 +400,17 @@ tbl_func <- tbl_raw %>%
   # removed last "（）（）"
   mutate(researcher_area = str_replace(
     researcher_area,
-    "(?<=�?(�?*体系�?", ""
+    "(?<=）)(（.*体系）)", ""
   )) %>%
   # removed "（体系）"
   mutate(researcher_area = str_replace(
     researcher_area,
-    "(�?*体系�?", ""
+    "(（.*体系）)", ""
   ))
 
 
 
-### 首席科学家名�?---
+### 首席科学家名单----
 
 
 # helper
@@ -428,7 +428,7 @@ names_chairman <- c(
 
 tbl_chairman <- tbl_raw %>%
   rename_at(vars(names(.)), ~names_chairman) %>%
-  filter(cat == "首席科学�?) %>%
+  filter(cat == "首席科学家") %>%
   mutate(index = 1:nrow(.)) %>%
   add_column(year = Year, .before = "index") %>%
   # use `setdiff()` to check
@@ -454,7 +454,7 @@ write.xlsx(tbl_out, "xlsx/list-industry-year-2021-wide.xlsx")
 
 ## 2022年xlsx名单----
 
-### 岗位科学家名�?---
+### 岗位科学家名单----
 Year <- 2022
 # files html path
 files_dir <- "html/list-year-2022.xlsx"
@@ -492,7 +492,7 @@ sort(setdiff(names_sel, names_func))
 tbl_func <- tbl_raw %>%
   rename_at(vars(names(.)), ~names_func) %>%
   # filter 'cat'
-  filter(cat == "岗位科学�?) %>%
+  filter(cat == "岗位科学家") %>%
   mutate(index = 1:nrow(.)) %>%
   add_column(year = Year, .before = "index") %>%
   # use `setdiff()` to check
@@ -509,7 +509,7 @@ tbl_func <- tbl_raw %>%
   )) %>%
   select(all_of(names_sel)) # uniform names
 
-### 首席科学家名�?---
+### 首席科学家名单----
 Year <- 2022
 # files html path
 files_dir <- "html/list-year-2022.xlsx"
@@ -546,7 +546,7 @@ sort(setdiff(names_sel, names_chairman))
 
 tbl_chairman <- tbl_raw %>%
   rename_at(vars(names(.)), ~names_chairman) %>%
-  filter(cat == "首席科学�?) %>%
+  filter(cat == "首席科学家") %>%
   mutate(index = 1:nrow(.)) %>%
   add_column(year = Year, .before = "index") %>%
   # use `setdiff()` to check
@@ -580,11 +580,11 @@ tbl_out <- bind_rows(
       researcher_inst,
       c(
         fixed("\u00a0"), fixed("\n"), " ",
-        "中国农业科学院西部农业研究中�?
+        "中国农业科学院西部农业研究中心"
       ),
       c(
         "", "", "",
-        "中国农业科学院西部农业研究中心（新疆�?
+        "中国农业科学院西部农业研究中心（新疆）"
       )
     )
   )
@@ -601,7 +601,7 @@ file_path <- glue("list-year-{Year}.xlsx")
 (file_tar <- glue("{dir_path}/{file_path}"))
 # xpath for data table
 
-### 岗位科学家名�?---
+### 岗位科学家名单----
 tbl_raw <- read.xlsx(
   file_tar,
   sheet = "scientist",
@@ -631,7 +631,7 @@ sort(setdiff(names_sel, names_func))
 tbl_func <- tbl_raw %>%
   rename_at(vars(names(.)), ~names_func) %>%
   # filter 'cat'
-  filter(cat == "岗位科学�?) %>%
+  filter(cat == "岗位科学家") %>%
   mutate(index = 1:nrow(.)) %>%
   add_column(year = Year, .before = "index") %>%
   # use `setdiff()` to check
@@ -648,7 +648,7 @@ tbl_func <- tbl_raw %>%
   )) %>%
   select(all_of(names_sel)) # uniform names
 
-### 首席科学家名�?---
+### 首席科学家名单----
 tbl_raw <- read.xlsx(
   file_tar,
   sheet = "chairman",
@@ -681,7 +681,7 @@ sort(setdiff(names_sel, names_chairman))
 
 tbl_chairman <- tbl_raw %>%
   rename_at(vars(names(.)), ~names_chairman) %>%
-  filter(cat == "首席科学�?) %>%
+  filter(cat == "首席科学家") %>%
   mutate(index = 1:nrow(.)) %>%
   add_column(year = Year, .before = "index") %>%
   # use `setdiff()` to check
@@ -715,11 +715,11 @@ tbl_out <- bind_rows(
       researcher_inst,
       c(
         fixed("\u00a0"), fixed("\n"), " ",
-        "中国农业科学院西部农业研究中�?
+        "中国农业科学院西部农业研究中心"
       ),
       c(
         "", "", "",
-        "中国农业科学院西部农业研究中心（新疆�?
+        "中国农业科学院西部农业研究中心（新疆）"
       )
     )
   )
@@ -741,7 +741,7 @@ file_path <- glue("list-year-{Year}.xlsx")
 (file_tar <- glue("{dir_path}/{file_path}"))
 # xpath for data table
 
-### 岗位科学家名�?---
+### 岗位科学家名单----
 tbl_raw <- read.xlsx(
   file_tar,
   sheet = "scientist",
@@ -773,7 +773,7 @@ sort(setdiff(names_sel, names_func))
 tbl_func <- tbl_raw %>%
   rename_at(vars(names(.)), ~names_func) %>%
   # filter 'cat'
-  filter(cat == "岗位科学�?) %>%
+  filter(cat == "岗位科学家") %>%
   mutate(index = 1:nrow(.)) %>%
   add_column(year = Year, .before = "index") %>%
   # use `setdiff()` to check
@@ -790,7 +790,7 @@ tbl_func <- tbl_raw %>%
   )) %>%
   select(all_of(names_sel)) # uniform names
 
-### 首席科学家名�?---
+### 首席科学家名单----
 tbl_raw <- read.xlsx(
   file_tar,
   sheet = "chairman",
@@ -823,7 +823,7 @@ sort(setdiff(names_sel, names_chairman))
 
 tbl_chairman <- tbl_raw %>%
   rename_at(vars(names(.)), ~names_chairman) %>%
-  filter(cat == "首席科学�?) %>%
+  filter(cat == "首席科学家") %>%
   mutate(index = 1:nrow(.)) %>%
   add_column(year = Year, .before = "index") %>%
   # use `setdiff()` to check
@@ -857,11 +857,11 @@ tbl_out <- bind_rows(
       researcher_inst,
       c(
         fixed("\u00a0"), fixed("\n"), " ",
-        "中国农业科学院西部农业研究中�?
+        "中国农业科学院西部农业研究中心"
       ),
       c(
         "", "", "",
-        "中国农业科学院西部农业研究中心（新疆�?
+        "中国农业科学院西部农业研究中心（新疆）"
       )
     )
   )
@@ -877,7 +877,7 @@ write.xlsx(tbl_out, file_tar)
 
 # 查询机构的省份信息：初步处理----
 
-## 合并全部数据�?011-2023�?---
+## 合并全部数据（2011-2023）----
 
 file_dir <- "xlsx/"
 file_name <- list.files(file_dir)
@@ -1010,11 +1010,11 @@ tbl_read <- tbl_read %>%
       researcher_inst,
       c(
         fixed("\u00a0"), fixed("\n"), " ",
-        "中国农业科学院西部农业研究中�?
+        "中国农业科学院西部农业研究中心"
       ),
       c(
         "", "", "",
-        "中国农业科学院西部农业研究中心（新疆�?
+        "中国农业科学院西部农业研究中心（新疆）"
       )
     )
   )

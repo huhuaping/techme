@@ -108,7 +108,7 @@ df_read <- readxl::read_excel(mypath)
 # =====step 6.3: match institution with province =====
 
 source("data-raw/update-public/wfl_matchProvince.R")
-myptn <- "�?
+myptn <- "、"
 df_province <- match_province(df = df_read,
                               ptn_inst = myptn)
 df_province <- df_read %>%
@@ -166,7 +166,7 @@ get_vars(varsList,lang = "eng", block = mytar, what = "chn_block4" )
 ## replacement pattern by collection
 tbl_pattern <- tribble(
   ~case, ~ptn, ~rpl,
-  "machine", c("谷物联合收割�?), c("联合收获�?)#,
+  "machine", c("谷物联合收割机"), c("联合收获机")#,
 )
 
 ## get my pattern

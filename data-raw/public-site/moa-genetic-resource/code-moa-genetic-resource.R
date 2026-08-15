@@ -1,4 +1,4 @@
-## R包准�?---
+## R包准备----
 require(openxlsx)
 source("data-raw/deps/load-core.R")
 source("data-raw/deps/load-scrape.R")
@@ -28,7 +28,7 @@ tbl_raw <- read_html(files_dir, encoding = "UTF-8") %>%
 # 清洗数据
 names_eng <- c("index", "name", "institution", "province_read")
 tbl_tidy <- tbl_raw %>%
-  # 重命�?
+  # 重命名
   rename_all(., ~names_eng) %>%
   # 去掉空格
   mutate_all(
@@ -39,8 +39,8 @@ tbl_tidy <- tbl_raw %>%
   # 类别变量
   mutate(
     type = case_when(
-      name == "国家库（圃）名称" ~ "农作�?,
-      name == "国家库名�? ~ "农业微生�?
+      name == "国家库（圃）名称" ~ "农作物",
+      name == "国家库名称" ~ "农业微生物"
     )
   ) %>%
   fill(type, .direction = "down") %>%
@@ -65,7 +65,7 @@ tbl_raw <- read_html(files_dir, encoding = "UTF-8") %>%
 # 清洗数据
 names_eng <- c("index", "name", "institution", "province_read")
 tbl_tidy <- tbl_raw %>%
-  # 重命�?
+  # 重命名
   rename_all(., ~names_eng) %>%
   # 去掉空格
   mutate_all(
@@ -76,8 +76,8 @@ tbl_tidy <- tbl_raw %>%
   # 类别变量
   mutate(
     type = case_when(
-      name == "国家级库（圃）名�? ~ "农作�?,
-      name == "国家级库名称" ~ "农业微生�?
+      name == "国家级库（圃）名称" ~ "农作物",
+      name == "国家级库名称" ~ "农业微生物"
     )
   ) %>%
   fill(type, .direction = "down") %>%
@@ -108,15 +108,15 @@ tbl_info <- tbl_tidy %>%
   # 处理异常省区关系
   mutate(
     province = ifelse(
-      is.na(province) & str_detect(name, "北大荒农垦集�?),
-      c("黑龙�?),
+      is.na(province) & str_detect(name, "北大荒农垦集团"),
+      c("黑龙江"),
       province
     )
   )
 
 tbl_check <- tbl_info %>%
   filter(is.na(province))
-if (nrow(tbl_check) > 0) warning("存在省份信息缺省情况�?)
+if (nrow(tbl_check) > 0) warning("存在省份信息缺省情况！")
 
 ## 添加整理信息----
 tbl_out <- tbl_info %>%
@@ -135,7 +135,7 @@ write.xlsx(tbl_out, file_path)
 
 
 
-## techme维护数据�?---
+## techme维护数据集----
 
 ### 准备基本参数----
 
