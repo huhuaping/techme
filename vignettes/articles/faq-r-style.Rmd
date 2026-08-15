@@ -97,6 +97,7 @@ df_tidy <- wfl.tidyTable(dt = df_out) |>
 | `vignettes/articles/pkg-design.Rmd` | 数据包设计理念 |
 | `vignettes/articles/faq-encoding-utf8.Rmd` | 源文件 UTF-8 / 中文乱码 |
 | `vignettes/articles/faq-cursor-r-outline.Rmd` | Cursor 里 R 脚本 Outline 为空 |
+| `vignettes/articles/faq-cursor-slack.Rmd` | Cursor IDE 与 Slack 的关联和互动 |
 
 ## 本系列约定
 

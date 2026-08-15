@@ -13,7 +13,7 @@ articles:
   - articles/guide-sources-public-site
   - articles/queryTianyancha
 - title: 工程 FAQ
-  desc: 开发与维护中的故障与约定（编码、R 风格、Cursor Outline、Windows、流水线）。新文章请使用 faq-*.Rmd。
+  desc: 开发与维护中的故障与约定（编码、R 风格、Cursor Outline、Cursor 与 Slack、Windows、流水线）。新文章请使用 faq-*.Rmd。
   contents:
   - starts_with("articles/faq-")
 reference:

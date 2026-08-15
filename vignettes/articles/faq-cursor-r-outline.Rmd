@@ -103,6 +103,7 @@ REditorSupport.r 启动
 | `.Rprofile` | 对 vscode-R / callr 跳过 renv 的实际判断 |
 | `vignettes/articles/faq-r-style.Rmd` | 年鉴入口脚本怎么写、为何依赖 `# ... ----` 分段 |
 | `vignettes/articles/faq-encoding-utf8.Rmd` | 源文件 UTF-8 / 中文乱码 |
+| `vignettes/articles/faq-cursor-slack.Rmd` | Cursor IDE 与 Slack 的关联和互动 |
 | `AGENTS.md` | Windows 上 R 扩展与交互脚本的约束 |
 | `.cursor/skills/techme-pkgdown-docs/SKILL.md` | 工程 FAQ 的写法与收录 |
 
