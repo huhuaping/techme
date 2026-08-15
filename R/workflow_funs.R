@@ -839,7 +839,7 @@ wfl.unpivotXlsx <- function(
             # Add units information to output
             df_out <- df_out %>%
                 dplyr::mutate(
-                    units = stringr::str_extract(vars, "(?<=\\()(.+)(?=\\))"),
+                    units = same_units,
                     units = stringr::str_trim(units)
                 ) %>%
                 dplyr::mutate(units = dplyr::if_else(is.na(units), same_units, units))
@@ -923,7 +923,7 @@ wfl.tidyTable <- function(dt) {
             vars = stringr::str_replace(vars, "\\.", ""),
             # handle cell contains units within round brackets
             vars = stringr::str_replace_all(vars, "(\\(.+\\))", ""), # for units characters in the round brackets, e.g. (million)
-            vars = stringr::str_replace_all(vars, "(（.+）)", ""), # for units characters in the chinese round brackets, e.g.
+            vars = stringr::str_replace_all(vars, "(\\uff08.+\\uff09)", ""), # for units characters in the chinese round brackets, e.g. \uff08 million \uff09
             vars = mgsub::mgsub(
                 vars,
                 c(" ", "#", "R&D"),
