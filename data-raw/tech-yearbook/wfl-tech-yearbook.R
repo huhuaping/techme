@@ -20,8 +20,8 @@ pattern_sel <- choose.filePattern(
 ##  run the function to find target directory and files ----
 find_result <- wfl.findFiles(
     dt = tbl_dir, # the directory table
-    dir.case = "RD_industry", # the case name of the target directory
-    i.final = 2, # the index of the final subdirectory
+    dir.case = "RD_output_patent", # the case name of the target directory
+    i.final = 3, # the index of the final subdirectory
     pattern = pattern_sel # the regex pattern for table identifier
 )
 
