@@ -822,6 +822,17 @@ wfl.unpivotXlsx <- function(
         } # end of table loop
 
         # Process units information
+        ## helper function: extract the first unit from the variable name
+        ## First () or fullwidth paren pair (\uff08 / \uff09). ASCII-only source.
+        extract_first_unit <- function(x) {
+            piece <- stringr::str_extract(
+                x,
+                "[(\uff08]([^()\uff08\uff09]+)[)\uff09]"
+            )
+            piece <- stringr::str_replace_all(piece, "[()\uff08\uff09]", "")
+            stringr::str_trim(piece)
+        }
+        ## if contains same units, then use this information as the units, otherwise should extract the first unit from the variable name
         same_units <- getInfo(dt, unit_pattern = unit_pattern)
         if (length(same_units) == 1) {
             message(glue::glue("Variables in sheet {j} have same units: {same_units}"))
@@ -837,7 +848,7 @@ wfl.unpivotXlsx <- function(
             # extract units from vars
             df_out <- df_out %>%
                 dplyr::mutate(
-                    units = stringr::str_extract(vars, "(?<=\\()(.+)(?=\\))"),
+                    units = extract_first_unit(vars),
                     units = stringr::str_trim(units)
                 )
         } else {
@@ -911,7 +922,8 @@ wfl.tidyTable <- function(dt) {
             vars = stringr::str_replace(vars, "\\d", ""),
             vars = stringr::str_replace(vars, "\\.", ""),
             # handle cell contains units within round brackets
-            vars = stringr::str_replace(vars, "(\\(.+\\))", ""),
+            vars = stringr::str_replace_all(vars, "(\\(.+\\))", ""), # for units characters in the round brackets, e.g. (million)
+            vars = stringr::str_replace_all(vars, "(（.+）)", ""), # for units characters in the chinese round brackets, e.g.
             vars = mgsub::mgsub(
                 vars,
                 c(" ", "#", "R&D"),
