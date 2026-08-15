@@ -20,8 +20,8 @@ pattern_sel <- choose.filePattern(
 ##  run the function to find target directory and files ----
 find_result <- wfl.findFiles(
     dt = tbl_dir, # the directory table
-    dir.case = "RD_inner", # the case name of the target directory
-    i.final = 2, # the index of the final subdirectory
+    dir.case = "RD_industry", # the case name of the target directory
+    i.final = 1, # the index of the final subdirectory
     pattern = pattern_sel # the regex pattern for table identifier
 )
 
@@ -66,7 +66,7 @@ header_mode <- c(
     "year", "vars", "vars-year", "vars-vars",
     "vars-h3", "vars-h4", "vars-h5"
 )
-(mode_sel <- header_mode[4]) # "vars-vars"; "vars" leaves most vars empty on this table
+(mode_sel <- header_mode[2]) # "vars-vars"; "vars" leaves most vars empty on this table
 
 ## setting 3： specify the regex pattern for table identifier
 # pattern_table <- "^地.*区" # not to use "续表" !
@@ -106,11 +106,12 @@ df_out <- wfl.unpivotXlsx(
     pattern.table = "^地.*区", # default is "^地.*区"
     reg_start = "^地.*区", # getRange() argument
     reg_end = "^新.*疆", # getRange() argument
-    unit_pattern = "单位:|单位：" # getInfo() argument
+    unit_pattern = "单位:|单位：" # send to the `getInfo()` argument
 )
 
 # View(df_out)
 
+# check the missing variables names
 n_miss_vars <- sum(is.na(df_out$vars) | str_trim(df_out$vars) == "")
 if (n_miss_vars > 0) {
     message(glue::glue(
@@ -128,7 +129,7 @@ df_tidy <- wfl.tidyTable(dt = df_out) %>%
         vars, value, units
     )
 
-View(df_tidy)
+#View(df_tidy)
 ## Replace the english snake name in the variables names if needed
 ## Replace any of following: "Total", "BasicResearch", "AppliedResearch", "Development", etc.
 ## Use regex pattern to replace the variables names
