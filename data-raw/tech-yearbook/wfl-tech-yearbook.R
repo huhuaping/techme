@@ -12,7 +12,7 @@ tbl_dir <- create.dirTable()
 ## use the helper function `choose.filePattern()` to generate the pattern
 prefix_add <- NULL # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
 pattern_sel <- choose.filePattern(
-    year = c(2023), # may have length 1 or 2
+    year = c(2024), # may have length 1 or 2
     mode = "year_one", # must be one of the following: year_one, year_two, year_onex, year_twox, add_onex, add_one, edited_one, edited_two
     add_info = prefix_add # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
 )
@@ -21,7 +21,7 @@ pattern_sel <- choose.filePattern(
 find_result <- wfl.findFiles(
     dt = tbl_dir, # the directory table
     dir.case = "RD_output", # the case name of the target directory
-    i.final = 5, # the index of the final subdirectory
+    i.final = 6, # the index of the final subdirectory
     pattern = pattern_sel # the regex pattern for table identifier
 )
 
@@ -64,7 +64,7 @@ header_mode <- c(
     "year", "vars", "vars-year", "vars-vars",
     "vars-h3", "vars-h4", "vars-h5"
 )
-(mode_sel <- header_mode[4]) # "vars-vars"; "vars" leaves most vars empty on this table
+(mode_sel <- header_mode[2]) # "vars-vars"; "vars" leaves most vars empty on this table
 
 ## setting 3： specify the regex pattern for table identifier
 # pattern_table <- "^地.*区" # not to use "续表" !
@@ -207,7 +207,7 @@ df_add_vars <- wfl.addVars(
 wfl.writeXlsx(
     dt = df_add_vars,
     file_source = file_xlsx,
-    year_target = c(2023), # filter data by year
+    year_target = c(2024), # filter data by year
     prefix_label = prefix_add # prefix_add # default is NULL, other value may be "funds", "ammount", etc.
 )
 
