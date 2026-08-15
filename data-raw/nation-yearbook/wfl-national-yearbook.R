@@ -6,14 +6,14 @@ library(here)
 ## setting 1: data.frame of the directory collection from my data base----
 ## obtain the directory table by custom function `create.dirTable()`
 tbl_dir <- create.dirTable()
-View(tbl_dir)
+#View(tbl_dir)
 
 ## setting 2: specify the regex pattern for table identifier
 ## use the helper function `choose.filePattern()` to generate the pattern
 prefix_add <- NULL # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
 pattern_sel <- choose.filePattern(
-    year = c(2023), # may have length 1 or 2
-    mode = "year_one", # must be one of the following: year_one, year_two, year_onex, year_twox, add_onex, add_one, edited_one, edited_two
+    year = c(2024), # may have length 1 or 2
+    mode = "year_onex", # must be one of the following: year_one, year_two, year_onex, year_twox, add_onex, add_one, edited_one, edited_two
     add_info = prefix_add # default is NULL, other value may be "amount", "funds", only used when mode is "add_onex", "add_one", "edited_one"
 )
 
@@ -30,12 +30,12 @@ find_result <- wfl.findFiles(
 
 # Workflow: convert protected xls file to xlsx file----
 ## it should remove the unnecessary sheet (copyright or empty, or other sheet not needed).
-is.unprotected <- FALSE
+is.unprotected <- TRUE
 if (!is.unprotected) {
     ## the default is to remove the sheet named "CNKI"
     file_xlsx <- wfl.Xls2Xlsx(file_path = file_tar, sheet_drop = c("CNKI"))
 } else {
-    file_xlsx <- str_replace(file_tar, "\\.xls", "\\.xlsx")
+    file_xlsx <- str_replace(file_tar, "\\.xls$", "\\.xlsx")
 }
 message(glue::glue("The target xlsx file is: {file_xlsx}"))
 
@@ -57,7 +57,7 @@ log_xlsx <- tibble::tribble(
 # Workflow: unpivot xlsx file ----
 ## setting 1： whether drop columns and specify the header mode.
 cols_drop <- c(2) # drop the second column, as it is the english region column
-## cols_drop <- NULL
+#cols_drop <- NULL
 
 ## setting 2： choose header mode
 ## change mode on conditions if needed in `wfl_unpivot_livestock.R`
@@ -177,7 +177,7 @@ if (!is.null(chn_pairs)) {
         mutate(vars = mgsub::mgsub(vars, ptn, rpl))
 }
 
-View(df_tidy)
+#View(df_tidy)
 
 ## rerun the variable matching function and check again
 df_vars_matched_check <- wfl.matchVars(
@@ -209,7 +209,7 @@ View(df_add_vars)
 wfl.writeXlsx(
     dt = df_add_vars,
     file_source = file_xlsx,
-    year_target = c(2023), # filter data by year
+    year_target = c(2024), # filter data by year
     prefix_label = prefix_add # default is NULL, other value may be "funds", "ammount", etc.
 )
 
