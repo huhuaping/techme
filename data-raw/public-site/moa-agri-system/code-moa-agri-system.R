@@ -6,8 +6,6 @@ require(techme)
 require(glue)
 require(here)
 
-Year <- 2026
-
 # 读取公示信息----
 
 ## 2011年html名单----
