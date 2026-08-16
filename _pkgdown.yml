@@ -5,6 +5,10 @@ lang: zh_CN
 development:
   mode: release
 articles:
+- title: 数据集概览
+  desc: 标准数据集与 varsList 变量清单。
+  contents:
+  - my-vignette
 - title: 设计与数据来源
   desc: 包设计理念，以及年鉴 / 公开网站数据的维护说明。
   contents:

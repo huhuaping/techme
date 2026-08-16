@@ -69,6 +69,7 @@ techme::RDIntense %>%
 
 ### 数据进度
 
+- 2025年9月29日 [2024年全国科技经费投入统计公报](https://www.stats.gov.cn/sj/zxfb/202509/t20250929_1961429.html)
 
 - 2024年10月02日 [2023年全国科技经费投入统计公报](https://www.stats.gov.cn/sj/zxfb/202410/t20241002_1956810.html)
 
@@ -284,7 +285,7 @@ techme::PubOpenShare %>%
     - 关于开展2019年中央级高等学校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核工作的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2019/201905/t20190522_146744.html)
 
 - 【附名单html】关于发布2018年中央级高校和科研院所等单位重大科研基础设施和大型科研仪器开放共享评价考核结果的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2018/201812/t20181227_144357.html)
-    
+
     - 关于开展2018年中央级高校和科研院所重大科研基础设施和大型科研仪器开放共享评价考核工作的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2018/201808/t20180801_141000.html)
 
 - 关于开展重大科研基础设施和大型科研仪器开放共享试点评价考核工作的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2017/201712/t20171215_136863.html)
@@ -423,7 +424,7 @@ techme::PubAgriParkEval %>%
 
 - 2020年12月27日关于开展第九批国家农业科技园区建设的[通知](http://www.gov.cn/zhengce/zhengceku/2020-12/27/content_5573792.htm)
     - 关于开展第九批国家农业科技园区申报工作的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2019/201911/t20191104_149728.html)
-    
+
 - 科技部办公厅关于第八批国家农业科技园区建设的[通知](http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2018/201812/t20181224_144277.html)
 
 
@@ -677,23 +678,23 @@ techme::PubCars %>%
 -  【附名单pdf】2022年6月17日，关于公示现代农业产业技术体系首席科学家和岗位科学家候选人名单的[通知](http://www.moa.gov.cn/xw/zxfb/202206/t20220617_6402757.htm)。共131名，可快速完美转换为xlsx。
 
 - 【附名单pdf】关于公示现代农业产业技术体系首席科学家和岗位科学家候选人名单的[通知](http://www.moa.gov.cn/govpublic/KJJYS/202108/t20210806_6373623.htm) 另[网页](https://www.waizi.org.cn/law/119114.html)。pdf[附件](http://www.moa.gov.cn/govpublic/KJJYS/202108/P020210806358525696440.pdf)
-    
+
 - 【html】2019-07-16，关于公示现代农业产业技术体系2019年增补岗位科学家候选人名单的[通知](http://www.kjs.moa.gov.cn/gzdt/201907/t20190716_6320991.htm)
 
 - 【word名单】2017-03-30，关于公示现代农业产业技术体系“十三五”新增岗位科学家候选人名单的[通知](http://www.moa.gov.cn/gk/tzgg_1/tz/201703/t20170320_5530342.htm)
 
 
 - 【附名单html】（2011-2015）2011-04-02，农业部关于印发现代农业产业技术体系建设依托单位和岗位聘用人员名单（2011-2015年）的[通知](http://www.stee.agri.cn/cyjs/201103/t20110313_3136130.htm)
-    
+
     - 2011-04-02现代农业产业技术体系建设依托单位和岗位聘用人员名单（2011-2015年）[通知](http://jiuban.moa.gov.cn/zwllm/rsxx/201104/t20110402_1961261.htm)
-    
+
     - 2011-04-02农业部办公厅关于印发现代农业产业技术体系执行专家组人员组成名单（2011-2015年）的[通知](http://www.stee.agri.cn/cyjs/201103/t20110313_3136129.htm)
 
 - 【word 名单】（2008-2010）2008-12-22，（大麦等40个主要农产品）农业部关于印发现代农业产业技术体系第二批建设依托单位和岗位聘用人员名单的[通知](http://www.stee.agri.cn/cyjs/200903/t20090317_3136148.htm)
 
 - 【word 名单】（2008-2010）2008-12-20，（增补）农业部关于印发现代农业产业技术体系第一批试点增补建设依托单位和岗位聘用人员名单的[通知](http://www.stee.agri.cn/cyjs/200903/t20090317_3136144.htm)
 
-- 【word名单】（2007-2010）2007年12月29日，现代农业产业技术体系建设第一批试点建设依托单位和岗位聘用人员[名单](http://www.stee.agri.cn/cyjs/200903/t20090317_3136145.htm)。另一链接[html名单](http://jiuban.moa.gov.cn/fwllm/zxbs/xzxk/ggb/201006/t20100606_1533919.htm) 
+- 【word名单】（2007-2010）2007年12月29日，现代农业产业技术体系建设第一批试点建设依托单位和岗位聘用人员[名单](http://www.stee.agri.cn/cyjs/200903/t20090317_3136145.htm)。另一链接[html名单](http://jiuban.moa.gov.cn/fwllm/zxbs/xzxk/ggb/201006/t20100606_1533919.htm)
 
 
 ### 背景知识
@@ -1098,9 +1099,9 @@ techme::PubConvergenceTown %>%
 
 - 2020-12-14 关于第三批国家现代农业产业园认定名单的[公示](http://www.farmchina.org.cn/ShowArticles.php?url=BjpWMwtrCTwCMgVpBj8DZFEw)。另见38个！第三批国家现代农业产业园认定名单来了，河南这两地上榜[链接](http://news.china.com.cn/live/2021-01/11/content_1113178.htm)
 
-- 2019-12-22 21+8家 关于认定第二批国家现代农业产业园的[通知](http://www.moa.gov.cn/xw/zxfb/201912/t20191220_6333687.htm) 
+- 2019-12-22 21+8家 关于认定第二批国家现代农业产业园的[通知](http://www.moa.gov.cn/xw/zxfb/201912/t20191220_6333687.htm)
 
--  2018年12月29日 20家 关于认定首批国家现代农业产业园的[通知](http://www.moa.gov.cn/gk/tzgg_1/tfw/201901/t20190103_6166086.htm)  
+-  2018年12月29日 20家 关于认定首批国家现代农业产业园的[通知](http://www.moa.gov.cn/gk/tzgg_1/tfw/201901/t20190103_6166086.htm)
 
 
 #### 国家现代农业产业园（评估-单独进行公示 Newcoming）
@@ -1158,7 +1159,7 @@ html存档为"park-eval-year-YYYY.html"
 - 添加整理信息
 
 - 依次导出park、cluster、town的年度xlsx
-  
+
 - xlsx数据包含了省份信息，不需要再匹配。
 
 （2）抓取现代农业产业园认定公示html。
@@ -1638,7 +1639,7 @@ safe_dir_tree(dir_tar)
 ```
 
 历史项目：
- 
+
 - 2024年，网站数据抓取迁移到统一的网站抓取项目`web-scrape/proj/moa-seed-firm`下
 
 - 2024年以前，采用独立的Rstudio项目`github/scrape-agrifirm`进行爬取
@@ -1658,11 +1659,11 @@ safe_dir_tree(dir_tar, recurse = TRUE)
 （3）育繁推企业的类别可以根据"PrinterProductionManageCrops"提供的产品信息进行分类。但是要注意针对具体产品进行人为整理划分为可供分析的大类。例如：
 
 ```{r}
-# 
+#
 ptn_raw <-c(
   "玉米、鲜食、爆裂玉米", "鲜食玉米",
   "杂交玉米", "玉米种子",
-  "马铃薯种薯", "杂交稻" 
+  "马铃薯种薯", "杂交稻"
 )
 ptn_clean <-c(
   "玉米", "玉米",
@@ -1765,7 +1766,7 @@ code_file <-("report-tech2025/report/code/chpt02-03-moa-genetic-resource.R")
 
 ### 背景知识
 
-- 2024-12-16，种质资源保护利用取得新突破 [农业农村部新闻动态](https://www.moa.gov.cn/xw/zwdt/202412/t20241216_6468043.htm)。持续完善种质资源保护体系。构建了以国家长期库及其复份库为核心，15个中期库、56个种质圃为依托，440个省级库（圃）为补充的农作物种质资源保护体系，国家层面长期保存农作物种质资源56万份。确定了227个国家级畜禽遗传资源保种场（区、库），实现159个国家级保护品种活体保护全覆盖，长期保存畜禽遗传材料135万份。各省区市建立省级保种场（区、库）671个，基本形成了国家和省两级管理、分级负责、有机衔接的畜禽遗传资源保护机制。61个濒危畜禽遗传资源的群体规模持续增长。确定国家级农业微生物库种质资源库27个，初步构建了以国家农业微生物种质资源综合性长期库为核心、地方专业性资源库为支撑的农业微生物种质资源保护与利用体系。 
+- 2024-12-16，种质资源保护利用取得新突破 [农业农村部新闻动态](https://www.moa.gov.cn/xw/zwdt/202412/t20241216_6468043.htm)。持续完善种质资源保护体系。构建了以国家长期库及其复份库为核心，15个中期库、56个种质圃为依托，440个省级库（圃）为补充的农作物种质资源保护体系，国家层面长期保存农作物种质资源56万份。确定了227个国家级畜禽遗传资源保种场（区、库），实现159个国家级保护品种活体保护全覆盖，长期保存畜禽遗传材料135万份。各省区市建立省级保种场（区、库）671个，基本形成了国家和省两级管理、分级负责、有机衔接的畜禽遗传资源保护机制。61个濒危畜禽遗传资源的群体规模持续增长。确定国家级农业微生物库种质资源库27个，初步构建了以国家农业微生物种质资源综合性长期库为核心、地方专业性资源库为支撑的农业微生物种质资源保护与利用体系。
 
 # 跨部门CROSS
 
@@ -1847,10 +1848,10 @@ techme::PubObsStationX %>%
 
 （1）科技部:
 
-- 2023年04月25日 国家野外科学观测研究站评估结果通气会在京召开 科技部科技评估中心[新闻](https://ncste.org/importantnews/3338.html) 
+- 2023年04月25日 国家野外科学观测研究站评估结果通气会在京召开 科技部科技评估中心[新闻](https://ncste.org/importantnews/3338.html)
 
   - 目前没有找到名单（科技部办公厅关于发布2021年批准建设的69个国家野外科学观测研究站评估结果的通知）[参看](http://www.stdaily.com/index/kejixinwen/202304/8a2789f4976b45d8933c4969e660e75f.shtml)
-  
+
   - 国家野外科学观测研究站综合评议会[顺利召开](https://mp.weixin.qq.com/s/UM8smEHpn57irknRmsdsvA)
 
 - 2021年10月09日 科技部关于批准建设甘肃甘南草原生态系统等69个国家野外科学观测研究站的[通知](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2021/202110/t20211011_177210.html)。新批准建设69个。
@@ -1905,7 +1906,7 @@ techme::PubObsStationX %>%
 - 与`queryTianyan`匹配，获得未匹配的`institution`列表，导出到`data-tidy/hack-tianyan/ship/ship-tot2-yyyy-mm-dd.xlsx`
 
 - 执行代码文件为`data-raw/hack_tianyan-new.R`
-    
+
     - 通过`天眼查`平台进行docker+RSeninium查询，获得查询结果，并保存到`data-tidy/hack-tianyan/hub/match-tianyan-tot2-yyyy-mm-dd.xlsx`
     - 需要人工确认或调整上述xlsx文件
     - 使用`use_data`更新`queryTianyan`数据集

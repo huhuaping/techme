@@ -1,4 +1,4 @@
-test_that("get_vars returns character vector for valid block", {
+test_that("get_vars returns a one-column data.frame for valid block", {
   data(varsList, envir = environment())
 
   block_sel <- list(
@@ -10,18 +10,21 @@ test_that("get_vars returns character vector for valid block", {
 
   result <- get_vars(df = varsList, block = block_sel, what = "variables")
 
-  expect_type(result, "character")
-  expect_true(length(result) > 0)
+  expect_s3_class(result, "data.frame")
+  expect_named(result, "variables")
+  expect_gt(nrow(result), 0)
+  expect_type(result$variables, "character")
 })
 
 test_that("get_vars filters by eng block levels", {
   data(varsList, envir = environment())
 
-  block_sel <- list(block1 = "v04")
+  block_sel <- list(block1 = "v4")
   result <- get_vars(df = varsList, lang = "eng", block = block_sel, what = "variables")
 
-  expect_type(result, "character")
-  expect_true(all(grepl("^v04", result)))
+  expect_s3_class(result, "data.frame")
+  expect_gt(nrow(result), 0)
+  expect_true(all(grepl("^v4", result$variables)))
 })
 
 test_that("get_vars returns short labels", {
@@ -36,6 +39,7 @@ test_that("get_vars returns short labels", {
 
   result <- get_vars(df = varsList, block = block_sel, what = "short_chn")
 
-  expect_type(result, "character")
-  expect_true(nchar(result[1]) > 0)
+  expect_s3_class(result, "data.frame")
+  expect_named(result, "short_chn")
+  expect_gt(nrow(result), 0)
 })

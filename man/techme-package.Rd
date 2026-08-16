@@ -20,5 +20,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Kevin Hu \email{huhuaping01@hotmail.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
 
+Authors:
+\itemize{
+  \item Kevin Hu \email{huhuaping01@hotmail.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+}
+
 }
 \keyword{internal}
