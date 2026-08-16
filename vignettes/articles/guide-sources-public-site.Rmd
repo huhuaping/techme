@@ -36,6 +36,9 @@ safe_dir_tree <- function(path, ...) {
 
 2. 科技部开放共享评估结果，数据集`techme::PubOpenShare`。已完成：html文件、pdf文件、xlsx文件（pdf转xlsx）、使用天眼查机构名称、更新queryTianyan、更新PubOpenShare数据集。
 
+3. 农业农村部龙头企业名单，数据集`techme::PubFirmLeader`。已完成：html文件、xlsx文件（html转xlsx）、更新PubFirmLeader数据集。
+
+
 ## 待检查数据来源
 
 1. 高新技术企业名单，数据集`techme::HitechFirmsPub`。目前网站无法访问，需要检查数据来源。
@@ -1704,13 +1707,17 @@ ptn_clean <-c(
 
 更新状态：updated
 
+数据来源：参看全国农作物种质资源信息平台<https://ncgrip.cgris.net> 【文件下载】栏目
+
 统计类别：
 
 - 国家级农作物、农业微生物种质资源库名单
 
 当前统计口径：
 
-- 关于第x批拟确定国家级农作物、农业微生物种质资源库的公示
+- 第x批国家农作物种质资源库(圃)名单
+- 第x批农业微生物种质资源库名单(2022年开始认定)
+- 第x批国家畜禽遗传资源保种场(基因库)名单（2022年开始认定）
 
 历史口径：
 
@@ -1745,12 +1752,32 @@ techme::PubGeneticResource %>%
 
 ### 数据进度
 
-- 【pdf附件】2024年12月29日，农业农村部公告 第865号。确定国家农作物种质资源库(圃)5个、国家畜禽遗传资源保种场13个、 国家农业微生物种质资源库2个,变更国家畜禽遗传资源保种场和基因库建设单位5个(名单见[附件](https://www.moa.gov.cn/govpublic/nybzzj1/202501/t20250103_6468854.htm))。考虑到数量较少，直接通过人工手动录入xlsx。
 
-- 【html tab】2023年12月29日 第二批国家农作物种质资源圃1个、国家农业微生物种质资源库8个的[公告](http://www.moa.gov.cn/govpublic/nybzzj1/202401/t20240117_6446108.html)
+#### 批次公示名单html/pdf
 
-- 【pdf名单转htm table】2022-08-10 关于第一批拟确定国家级农作物、农业微生物种质资源库的[公示](http://www.zys.moa.gov.cn/gsgg/202208/t20220810_6406720.htm)
+- 【pdf附件转xlsx】2025年，（第四批）国家农作物种质资源库(圃)，平台网站"文件下载"栏目[公示](https://ncgrip.cgris.net/web/download)，公示日期2026年1月9日。新增确定（第四批）国家农作物种质资源库(圖)3个、（第五批）国家畜禽遗传资源保种场(基因库)7个,变更6个国家畜禽遗传资源保种场的建设单位。见pdf[附件]：'data-raw/public-site/moa-genetic-resource/html/list-year-2025-batch-04.pdf'。
 
+    - html转载中国兽医协会[参看](https://www.cvma.org.cn/6849/202601/72785.html)
+
+
+- 【pdf附件转xlsx】2024年，（第三批）国家农作物种质资源库(圃)，平台网站"文件下载"栏目[公示](https://ncgrip.cgris.net/web/download)。见附件[pdf]：'data-raw/public-site/moa-genetic-resource/html/list-year-2024-batch-03.pdf'。
+
+  - 【pdf附件转xlsx】2024年12月29日，农业农村部公告 第865号。确定（第三批）国家农作物种质资源库(圃)5个、（第四批）国家畜禽遗传资源保种场13个、 （第三批）国家农业微生物种质资源库2个,变更国家畜禽遗传资源保种场和基因库建设单位5个(名单见[附件](https://www.moa.gov.cn/govpublic/nybzzj1/202501/t20250103_6468854.htm))。考虑到数量较少，直接通过人工手动录入xlsx。
+
+- 【html tab转xlsx】2023年12月29日 第二批国家农作物种质资源圃1个、国家农业微生物种质资源库8个的[公告](http://www.moa.gov.cn/govpublic/nybzzj1/202401/t20240117_6446108.html)
+
+- 【pdf名单转htm table转xlsx】2022-08-10 关于第一批拟确定国家级农作物、农业微生物种质资源库的[公示](http://www.zys.moa.gov.cn/gsgg/202208/t20220810_6406720.htm)
+
+#### 全部库圃列表
+
+平台介绍：可直接通过【全国农作物种质资源信息平台】平台数据html参数化爬取：<https://ncgrip.cgris.net/web/home/protection>。国家农作物种质资源库圃列表，农业农村部建设了以国家长期库及其复份库为核心，18个中期库、58个种质圃和3个试管苗库为依托的农作物种质资源保护体系。
+
+数据类别：国家农作物种质资源库圃列表
+
+查询参数：<https://ncgrip.cgris.net/srv/api/coops/list?pageNum=1&pageSize=10000>
+
+- pageNum：页码
+- pageSize：每页条数
 
 ### 数据流程
 

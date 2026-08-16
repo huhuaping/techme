@@ -9,6 +9,20 @@ library(glue)
 ## 解析html----
 
 
+### 2024 pdf 转xlsx （手工）----
+# files html path
+Year <- 2024
+batch <- "03"
+(files_dir <- here(
+  "data-raw/public-site/moa-genetic-resource/", # dir
+  glue::glue("html/list-year-{Year}-batch-{batch}.html")
+)) # file
+(path_out <- str_replace_all(files_dir, "html", "xlsx"))
+
+## 人工处理xlsx文件后拷贝到data-tidy目录下
+path_to_tidy <- here("data-raw/data-tidy/public-site/moa-genetic-resource/xlsx")
+
+
 ### 2023 html <div>----
 # files html path
 Year <- 2023
