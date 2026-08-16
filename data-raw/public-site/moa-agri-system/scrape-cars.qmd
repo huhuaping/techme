@@ -7,8 +7,8 @@ author: "胡华平"
 knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE, eval = FALSE,
                       fig.align='center',fig.width=10, fig.height=7) # Places figures on their own pages
 options(
-  htmltools.dir.version = FALSE, 
-  formatR.indent = 2, width = 55, 
+  htmltools.dir.version = FALSE,
+  formatR.indent = 2, width = 55,
   digits = 2,scipen=999,tinytex.verbose = TRUE,
   knitr.kable.NA = '',
   fig.width=12, fig.height=8)
@@ -64,13 +64,19 @@ China Agricultural Research System，CARS
 
 技术体系是由原农业部、财政部2007年启动建设的一个创新型科研组织。通过聚焦水稻、小麦、生猪等54个主要农产品，该体系组织汇聚了全国800多个科教和企事业单位的2600多名专家进行攻关，形成跨部门、跨区域、跨单位、跨学科的优势科技力量，联合协作解决产业重大问题。
 
+- [html表格]2026年5月28日，（中国饲料工业信息网转载发布）关于公示现代农业产业技术体系首席科学家和岗位科学家名单的[通知](http://www.chinafeed.com.cn/dongtai/show-83932.html)。将2026年度遴选的11位首席科学家和153名岗位科学家名单予以公示。
+
 - 2019-07-16 关于公示现代农业产业技术体系2019年增补岗位科学家候选人名单的[通知](http://www.kjs.moa.gov.cn/gzdt/201907/t20190716_6320991.htm)
+
+- 2025年没有查询到任何年度公示文件，疑似没有公示或者没有进行遴选。
+
+- [html表格]2024年9月12日,农业农村部关于公示现代农业产业技术体系首席科学家和岗位科学家候选人名单的[通知](http://www.chinafeedm.com/h-nd-27052.html)
 
 - [word名单]2017-03-30 关于公示现代农业产业技术体系“十三五”新增岗位科学家候选人名单的[通知](http://www.moa.gov.cn/gk/tzgg_1/tz/201703/t20170320_5530342.htm)
 
 
 - 【附名单html】（2011-2015）2011-04-02农业部关于印发现代农业产业技术体系建设依托单位和岗位聘用人员名单（2011-2015年）的[通知](http://www.stee.agri.cn/cyjs/201103/t20110313_3136130.htm)
-    
+
     - 2011-04-02现代农业产业技术体系建设依托单位和岗位聘用人员名单（2011-2015年）[通知](http://jiuban.moa.gov.cn/zwllm/rsxx/201104/t20110402_1961261.htm)
     - 2011-04-02农业部办公厅关于印发现代农业产业技术体系执行专家组人员组成名单（2011-2015年）的[通知](http://www.stee.agri.cn/cyjs/201103/t20110313_3136129.htm)
 
@@ -78,9 +84,9 @@ China Agricultural Research System，CARS
 
 - 【word 名单】（2008-2010）2008-12-20（增补）农业部关于印发现代农业产业技术体系第一批试点增补建设依托单位和岗位聘用人员名单的[通知](http://www.stee.agri.cn/cyjs/200903/t20090317_3136144.htm)
 
-- 【word名单】（2007-2010）2007年12月29日 现代农业产业技术体系建设第一批试点建设依托单位和岗位聘用人员[名单](http://www.stee.agri.cn/cyjs/200903/t20090317_3136145.htm)  
-    
-    - 另一链接[html名单](http://jiuban.moa.gov.cn/fwllm/zxbs/xzxk/ggb/201006/t20100606_1533919.htm) 
+- 【word名单】（2007-2010）2007年12月29日 现代农业产业技术体系建设第一批试点建设依托单位和岗位聘用人员[名单](http://www.stee.agri.cn/cyjs/200903/t20090317_3136145.htm)
+
+    - 另一链接[html名单](http://jiuban.moa.gov.cn/fwllm/zxbs/xzxk/ggb/201006/t20100606_1533919.htm)
 
 - 2007年12月12日 现代农业产业技术体系建设实施方案（试行）[农业部科技教育司](http://jiuban.moa.gov.cn/fwllm/zxbs/xzxk/ggb/201006/t20100606_1533918.htm)
 
@@ -130,7 +136,7 @@ tbl_raw <- read_html(files_dir,encoding = "GBK") %>%
   as_tibble() %>%
   mutate(value = str_trim(value, "both"))
 
-num_base <- c("一", "二", "三", "四", "五", "六", "七", "八", "九")  
+num_base <- c("一", "二", "三", "四", "五", "六", "七", "八", "九")
 
 # the html show max '五十'
 num_chn <- c(num_base,"十",
@@ -138,7 +144,7 @@ num_chn <- c(num_base,"十",
              paste0("二十", num_base),"三十",
              paste0("三十", num_base),"四十",
              paste0("四十", num_base),"五十")
-  
+
 pattern_chn <- paste0(paste0(num_chn,"、"), collapse ="|")
 
 ptn_area_num <- glue::glue("({paste0(num_chn,collapse='|')})(?=、)")
@@ -164,7 +170,7 @@ tbl_all <-  tbl_raw %>%
   filter(!str_detect(value, ptn_type_filter)) %>%
   mutate(type_cat = str_extract(type_name, "技术研发中心|技术综合试验站")) %>%
    # chairman for industry
-  mutate(chairman = str_extract(value, "(?<=首席科学家：)(.+)")) 
+  mutate(chairman = str_extract(value, "(?<=首席科学家：)(.+)"))
 
 ```
 
@@ -198,8 +204,8 @@ check <- tibble(index_man = id_chairman_industry,
 
 # =====so we can continue next=====
 
-index_filter <-c(check$index_man, 
-                 check$index_inst[which(!is.na(check$index_inst))]) 
+index_filter <-c(check$index_man,
+                 check$index_inst[which(!is.na(check$index_inst))])
 
 tbl_industry <- tbl_all %>%
   # match
@@ -218,7 +224,7 @@ tbl_func <- tbl_industry %>%
   mutate(func_num = str_extract(value, "(\\d{1,2})(?=、)"),
          func_name = str_extract(value, "(?<=\\d{1,2}、)(.+)")) %>%
   # check sequence order of number series,totally [233 ok!]
-  # tbl_func$func_num[which(!is.na(tbl_func$func_num))]  
+  # tbl_func$func_num[which(!is.na(tbl_func$func_num))]
   fill(func_num) %>%
   fill(func_name) %>%
   # filter func
@@ -236,15 +242,15 @@ tbl_func <- tbl_industry %>%
   filter(!str_detect(value, "研究室主任：")) #%>%
 
 
-#=====get all researchers info    
-tbl_researcher <- tbl_func %>%  
+#=====get all researchers info
+tbl_researcher <- tbl_func %>%
   mutate(researcher_area = str_extract(value, "(.+)(?=：)"),
          researcher_name = str_extract(value, "(?<=：)(.+)(?=（)"),
          researcher_inst = str_extract(value, "(?<=（)(.+)(?=）)")) %>%
   select(-value) %>%
   add_column(year = Year, .before = "area_num")%>%
   add_column(index = 1:nrow(.), .before = "area_num") %>%
-  # handle the chinese number 
+  # handle the chinese number
   mutate(area_num_eng = mgsub::mgsub(area_num,
                                      num_chn,
                                      str_pad(1:length(num_chn),
@@ -253,14 +259,14 @@ tbl_researcher <- tbl_func %>%
                                      num_chn,
                                      str_pad(1:length(num_chn),
                                              2,"left","0")))
-  
+
 ```
 
 
 ```{r}
 #write out
-names_sel <- c("year", "index", 
-               "area_num_eng", "area_name", 
+names_sel <- c("year", "index",
+               "area_num_eng", "area_name",
                 "chairman_industry", "institution_industry",
                "func_num", "func_name", "func_inst", "func_director",
                "researcher_area", "researcher_name", "researcher_inst")
@@ -292,7 +298,7 @@ tbl_station <- tbl_all %>%
   select(-value) %>%
   add_column(year = Year, .before = "area_num")%>%
   add_column(index = 1:nrow(.), .before = "area_num") %>%
-  # handle the chinese number 
+  # handle the chinese number
   mutate(area_num_eng = mgsub::mgsub(area_num,
                                      num_chn,
                                      str_pad(1:length(num_chn),
@@ -341,8 +347,8 @@ tbl_out <- tbl_raw %>%
 
 ```{r}
 #write out
-names_sel <- c("year", "index", 
-               "area_num_eng", "area_name", 
+names_sel <- c("year", "index",
+               "area_num_eng", "area_name",
                 "chairman_industry", "institution_industry",
                "func_num", "func_name", "func_inst", "func_director",
                "researcher_area", "researcher_name", "researcher_inst")
@@ -368,7 +374,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   html_nodes(xpath = xpath_tbl) %>%
   html_table(header = T) %>%
   .[[1]] %>%
-  as_tibble() 
+  as_tibble()
 
 #names(tbl_raw)
 names_eng <- c("index", "area_name", "func_name", "researcher_area", "researcher_name", "researcher_inst")
@@ -389,8 +395,8 @@ tbl_out <- tbl_raw %>%
 
 ```{r}
 #write out
-names_sel <- c("year", "index", 
-               "area_num_eng", "area_name", 
+names_sel <- c("year", "index",
+               "area_num_eng", "area_name",
                 "chairman_industry", "institution_industry",
                "func_num", "func_name", "func_inst", "func_director",
                "researcher_area", "researcher_name", "researcher_inst")
@@ -421,8 +427,8 @@ tbl_raw <- read.xlsx(files_dir, colNames = T, fillMergedCells =T )
 names(tbl_raw)
 
 # target uniform columns names
-names_sel <- c("year", "index", 
-               "area_num_eng", "area_name", 
+names_sel <- c("year", "index",
+               "area_num_eng", "area_name",
                 "chairman_industry", "institution_industry",
                "func_num", "func_name", "func_inst", "func_director",
                "researcher_area", "researcher_name", "researcher_inst")
@@ -432,7 +438,7 @@ names_sel <- c("year", "index",
 
 ```{r}
 names_func <- c("cat","index",
-               #"area_name", "func_name", 
+               #"area_name", "func_name",
                "researcher_name", "researcher_area", "researcher_inst")
 
 # knows which varialbes need to be added
@@ -449,13 +455,13 @@ tbl_func <- tbl_raw %>%
          chairman_industry = NA,
          func_director =NA ,func_inst =NA, func_name = NA, func_num = NA,
          institution_industry = NA) %>%
-  mutate( researcher_area =mgsub::mgsub(researcher_area, 
+  mutate( researcher_area =mgsub::mgsub(researcher_area,
                                         c(fixed("\u00a0"),fixed("\n")," "),
                                         c("", "",""))) %>%
   # get 'area_name'
   mutate(area_name = str_extract(researcher_area,
                                  "(?<=（)(.+)(?=体系）)")) %>%
-  mutate(area_name = mgsub::mgsub(area_name, 
+  mutate(area_name = mgsub::mgsub(area_name,
                                   "(.+）（)",
                                   "")) %>%
   # removed last "（）（）"
@@ -477,7 +483,7 @@ sort(setdiff(names_sel,names_chairman ))
 
 ```{r}
 names_chairman <- c("cat","index",
-               # "func_name", 
+               # "func_name",
                #"researcher_area", "researcher_name", "researcher_inst",
                "chairman_industry", "area_name","institution_industry"
                )
@@ -488,7 +494,7 @@ tbl_chairman <- tbl_raw %>%
   mutate(index =1:nrow(.)) %>%
   add_column(year = Year, .before = "index") %>%
   # use `setdiff()` to check
-  mutate(area_num_eng =NA, 
+  mutate(area_num_eng =NA,
          func_name = NA,  func_num = NA,func_inst =NA,func_director =NA,
          researcher_area = NA, researcher_inst = NA, researcher_name = NA
          ) %>%
@@ -531,15 +537,15 @@ files_dir <- "html/list-year-2022.xlsx"
 
 tbl_raw <- read.xlsx(
   files_dir, sheet = 2,
-  colNames = T, 
+  colNames = T,
   fillMergedCells =F ) %>%
   fill(`体系名称`,.direction = "down")
 
 names(tbl_raw)
 
 # target uniform columns names
-names_sel <- c("year", "index", 
-               "area_num_eng", "area_name", 
+names_sel <- c("year", "index",
+               "area_num_eng", "area_name",
                 "chairman_industry", "institution_industry",
                "func_num", "func_name", "func_inst", "func_director",
                "researcher_area", "researcher_name", "researcher_inst")
@@ -547,7 +553,7 @@ names_sel <- c("year", "index",
 
 ```{r}
 names_func <- c("cat","index",
-               "area_name", #"func_name", 
+               "area_name", #"func_name",
                "researcher_area", "researcher_name", "researcher_inst")
 
 # knows which varialbes need to be added
@@ -565,7 +571,7 @@ tbl_func <- tbl_raw %>%
          chairman_industry = NA,
          func_director =NA ,func_inst =NA, func_name = NA, func_num = NA,
          institution_industry = NA) %>%
-  mutate( researcher_area =mgsub::mgsub(researcher_area, 
+  mutate( researcher_area =mgsub::mgsub(researcher_area,
                                         c(fixed("\u00a0"),fixed("\n")," "),
                                         c("", "",""))) %>%
   select(all_of(names_sel)) # uniform names
@@ -582,14 +588,14 @@ files_dir <- "html/list-year-2022.xlsx"
 
 tbl_raw <- read.xlsx(
   files_dir, sheet = 1,
-  colNames = T, 
-  fillMergedCells =F ) 
+  colNames = T,
+  fillMergedCells =F )
 
 names(tbl_raw)
 
 # target uniform columns names
-names_sel <- c("year", "index", 
-               "area_num_eng", "area_name", 
+names_sel <- c("year", "index",
+               "area_num_eng", "area_name",
                 "chairman_industry", "institution_industry",
                "func_num", "func_name", "func_inst", "func_director",
                "researcher_area", "researcher_name", "researcher_inst")
@@ -601,7 +607,7 @@ names_sel <- c("year", "index",
 
 ```{r}
 names_chairman <- c("cat","index",
-               # "func_name", 
+               # "func_name",
                #"researcher_area", "researcher_name", "researcher_inst",
                 "area_name",
                "chairman_industry",
@@ -617,10 +623,10 @@ tbl_chairman <- tbl_raw %>%
   mutate(index =1:nrow(.)) %>%
   add_column(year = Year, .before = "index") %>%
   # use `setdiff()` to check
-  mutate(area_num_eng =NA, 
+  mutate(area_num_eng =NA,
          func_director =NA,
          func_inst =NA,
-         func_name = NA,  
+         func_name = NA,
          func_num = NA,
          researcher_area = NA,
          researcher_inst = NA,
@@ -663,7 +669,7 @@ write.xlsx(tbl_out, "xlsx/list-industry-year-2022-wide.xlsx")
 file_dir <- "xlsx/"
 file_name <- list.files(file_dir)
 file_target <- file_name[which(str_detect(file_name, "list-industry-"))]
-file_path <- paste0(file_dir, file_target) 
+file_path <- paste0(file_dir, file_target)
 
 read_file <- function(path) {
   df <- openxlsx::read.xlsx(path) %>%
@@ -675,7 +681,7 @@ tbl_out <- tibble(url = file_path) %>%
   select(-url) %>%
   unnest(dt) %>%
   # handle string newline
-  mutate_all(.,.funs = str_replace, 
+  mutate_all(.,.funs = str_replace,
              pattern = "\n",
              replacement = "")
 
@@ -700,7 +706,7 @@ ptn_province <- paste0(BasicProvince$province, collapse =  "|")
 list_institution <- tibble(
   institution =c(
     tbl_out$institution_industry,
-    tbl_out$researcher_inst) 
+    tbl_out$researcher_inst)
   ) %>%
   select(institution) %>%
   unique() %>%
@@ -712,14 +718,14 @@ list_institution <- tibble(
       institution, ptn_province)
          ) %>%
   mutate(province = ifelse(
-    is.na(province), 
+    is.na(province),
     province_raw, province)
     ) %>%
   filter(is.na(province)) %>%
   select(institution) %>%
   arrange(institution)
 
-# check 
+# check
 check <- sum(is.na(list_institution$institution))
 if(check > 0) stop("please check the name of institution!")
 

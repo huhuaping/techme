@@ -32,11 +32,15 @@ safe_dir_tree <- function(path, ...) {
 
 ## 已手动下载并保存到本地
 
-1. 科技部开放共享评估结果，数据集`techme::PubOpenShare`。已获得：html文件、pdf文件、xlsx文件（pdf转xlsx）。后续重要工作：使用天眼查机构名称。
+1. 现代农业产业技术体系首席科学家和岗位科学家名单，数据集`techme::PubCars`。已完成：html文件、pdf文件、xlsx文件（pdf转xlsx）、使用天眼查机构名称、更新queryTianyan、更新PubCars数据集。
+
+2. 科技部开放共享评估结果，数据集`techme::PubOpenShare`。已获得：html文件、pdf文件、xlsx文件（pdf转xlsx）。后续重要工作：使用天眼查机构名称。
 
 ## 待检查数据来源
 
-1. 国家科技成果转移转化示范区评估验收。关于吉林长吉图国家科技成果转移转化示范区评估验收结果，[参看](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2025/202511/t20251104_195126.html)。需要检查数据来源。
+1. 高新技术企业名单，数据集`techme::HitechFirmsPub`。目前网站无法访问，需要检查数据来源。
+
+2. 国家科技成果转移转化示范区评估验收。关于吉林长吉图国家科技成果转移转化示范区评估验收结果，[参看](https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/qtwj/qtwj2025/202511/t20251104_195126.html)。需要检查数据来源。
 
 # NBS国家统计局
 

@@ -200,6 +200,66 @@ tbl_out <- tibble(url = file_path) %>%
 
 View(tbl_out)
 
+
+# 2025年数据处理----
+## 经过pdf转xlsx处理
+
+Year <- 2025
+
+file_dir <- here("data-raw/public-site/most-jcs-open-share/html/")
+file_name <- list.files(file_dir)
+file_id <- which(str_detect(
+  file_name,
+  glue::glue("year-{Year}\\.xlsx")
+))
+(file_sel <- file_name[file_id])
+(file_path <- paste0(file_dir, "/", file_sel))
+
+tbl_out <- read.xlsx(file_path) %>%
+  setNames(c("index", "institution", "result")) %>%
+  add_column(year = Year, .before = "index") %>%
+  mutate(administrator = "") %>%
+  mutate(index = as.numeric(index)) %>%
+  # 处理多个机构
+  mutate(institution = mgsub::mgsub(
+    institution,
+    c(" "),
+    c("、")
+  )) %>%
+  # 特殊机构，
+  mutate(institution = mgsub::mgsub(
+    institution,
+    c(
+      "中国科学院、水利部成都山地灾害与环境研究所", # 实际上是一家机构
+      "中国医学科学院血液病医院（中国医学科学院血液学研究所）"
+    ),
+    c(
+      "中国科学院水利部成都山地灾害与环境研究所",
+      "中国医学科学院血液病医院（血液学研究所）"
+    ) # queryTianyan已经存在
+  ))
+
+# 导出
+(path_out <- glue("data-raw/public-site/most-jcs-open-share/xlsx/eval-{Year}-wide.xlsx"))
+write.xlsx(tbl_out, here(path_out))
+
+## 合并全部年份数据----
+
+file_dir <- here("data-raw/public-site/most-jcs-open-share/xlsx-raw/")
+file_name <- list.files(file_dir)
+file_path <- fs::dir_ls(file_dir)
+
+tbl_out <- tibble(url = file_path) %>%
+  mutate(dt = map(url, openxlsx::read.xlsx)) %>%
+  select(-url) %>%
+  # unify column type
+  mutate(dt = map(dt, .f = function(df) {
+    out <- df %>% mutate(administrator = as.character(administrator))
+  })) %>%
+  unnest(dt)
+
+View(tbl_out)
+
 ## 机构名称列表（唯一化处理）----
 
 data("queryTianyan")
@@ -240,15 +300,14 @@ list_institution <- tbl_out %>%
 
 # check
 (check <- sum(!is.na(list_institution$institution)))
-if (check > 0) stop("please check the name of institution!")
+if (check > 0) stop(glue::glue("Bad! Please check the name of institution! {check} institutions are not matched!")) else message(glue::glue("Good! all {nrow(list_institution)} institutions are matched!"))
 
-dir_xlsx <- "d:/github/techme/data-raw/data-tidy/hack-tianyan/ship/"
+# 导出未匹配省份的机构列表到tianyan项目中
+dir_xlsx <- here("data-raw/data-tidy/hack-tianyan/ship/")
 file_xlsx <- glue::glue("ship-tot{nrow(list_institution)}-{Sys.Date()}.xlsx")
-(path_xlsx <- paste0(dir_xlsx, file_xlsx))
-
+(path_xlsx <- paste0(dir_xlsx, "/", file_xlsx))
 openxlsx::write.xlsx(list_institution, path_xlsx)
-
-
+message(glue::glue("The unmatched institutions list has been exported to {path_xlsx}!"))
 
 ## 在R包techme中进行天眼查----
 # - 循环查询#
@@ -278,10 +337,11 @@ ptn_city <- paste0(unique(ProvinceCity$city_clean), collapse = "|")
 
 # 循环处理xlsx文件----
 ## 导出到data-tidy对应的文件夹下
-list_xlsx <- list.files(here("data-raw/public-site/most-jcs-open-share/xlsx-raw/"), full.names = TRUE)
+list_xlsx <- list.files(here("data-raw/public-site/most-jcs-open-share/xlsx/"), full.names = TRUE)
 list_years <- str_extract(list_xlsx, "\\d{4}")
 
-i <- 1
+## 推荐选择只处理某个年份的数据，例如2025年。没必要再处理全部之前的年份数据。
+i <- 8 # 2025年
 
 for (i in seq_along(list_xlsx)) {
   Year <- list_years[i]

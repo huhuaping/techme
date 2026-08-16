@@ -21,7 +21,7 @@ df_use <- NULL
 for (i in length(files_path):1) {
     df_tem <- openxlsx::read.xlsx(files_path[i]) %>%
         mutate(administrator = as.character(administrator))
-    print(glue::glue("Export file {files_sel[i]} has finished!"))
+    print(glue::glue("Reading file {files_sel[i]} has finished!"))
     Sys.sleep(0.1)
     df_use <- bind_rows(df_use, df_tem)
 }
@@ -32,6 +32,10 @@ PubOpenShare <- df_use
 usethis::use_data(PubOpenShare,
     overwrite = TRUE
 )
+
+## show the dataset
+devtools::load_all()
+View(PubOpenShare)
 
 # ====write document=====
 source("data-raw/deps/load-dev.R")
