@@ -6,6 +6,8 @@ require(techme)
 require(glue)
 require(here)
 
+Year <- 2026
+
 # 读取公示信息----
 
 ## 2011年html名单----
@@ -875,11 +877,160 @@ file_path <- glue("list-industry-year-{Year}-wide.xlsx")
 (file_tar <- glue("{dir_path}/{file_path}"))
 write.xlsx(tbl_out, file_tar)
 
+
+
+## 2026年html转xlsx名单----
+
+### 复制2024年xlsx文件，重命名为2026年xlsx文件，人工从2026年html中提取数据，并粘贴到2026年xlsx文件中。
+
+
+Year <- 2026
+# files html path
+dir_path <- here("data-raw/public-site/moa-agri-system/html/")
+file_path <- glue("list-year-{Year}.xlsx")
+(file_tar <- glue("{dir_path}/{file_path}"))
+# xpath for data table
+
+### 岗位科学家名单----
+tbl_raw <- read.xlsx(
+  file_tar,
+  sheet = "scientist",
+  colNames = T,
+  fillMergedCells = F
+) # %>%
+# fill(`体系名称`,.direction = "down")
+
+View(tbl_raw)
+
+# target uniform columns names
+names_sel <- c(
+  "year", "index",
+  "area_num_eng", "area_name",
+  "chairman_industry", "institution_industry",
+  "func_num", "func_name", "func_inst", "func_director",
+  "researcher_area", "researcher_name", "researcher_inst"
+)
+
+names_func <- c(
+  "cat", "index",
+  "area_name", # "func_name",
+  "researcher_area", "researcher_name", "researcher_inst"
+)
+
+# knows which varialbes need to be added
+sort(setdiff(names_sel, names_func))
+
+tbl_func <- tbl_raw %>%
+  rename_at(vars(names(.)), ~names_func) %>%
+  # filter 'cat'
+  filter(cat == "岗位科学家") %>%
+  mutate(index = 1:nrow(.)) %>%
+  add_column(year = Year, .before = "index") %>%
+  # use `setdiff()` to check
+  mutate( # area_name = NA,
+    area_num_eng = NA,
+    chairman_industry = NA,
+    func_director = NA, func_inst = NA, func_name = NA, func_num = NA,
+    institution_industry = NA
+  ) %>%
+  mutate(researcher_area = mgsub::mgsub(
+    researcher_area,
+    c(fixed("\u00a0"), fixed("\n"), " "),
+    c("", "", "")
+  )) %>%
+  select(all_of(names_sel)) # uniform names
+
+### 首席科学家名单----
+tbl_raw <- read.xlsx(
+  file_tar,
+  sheet = "chairman",
+  colNames = T,
+  fillMergedCells = F
+)
+
+names(tbl_raw)
+
+# target uniform columns names
+names_sel <- c(
+  "year", "index",
+  "area_num_eng", "area_name",
+  "chairman_industry", "institution_industry",
+  "func_num", "func_name", "func_inst", "func_director",
+  "researcher_area", "researcher_name", "researcher_inst"
+)
+
+names_chairman <- c(
+  "cat", "index",
+  # "func_name",
+  # "researcher_area", "researcher_name", "researcher_inst",
+  "area_name",
+  "chairman_industry",
+  "institution_industry"
+)
+
+# helper check names list
+sort(setdiff(names_sel, names_chairman))
+
+tbl_chairman <- tbl_raw %>%
+  rename_at(vars(names(.)), ~names_chairman) %>%
+  filter(cat == "首席科学家") %>%
+  mutate(index = 1:nrow(.)) %>%
+  add_column(year = Year, .before = "index") %>%
+  # use `setdiff()` to check
+  mutate(
+    area_num_eng = NA,
+    func_director = NA,
+    func_inst = NA,
+    func_name = NA,
+    func_num = NA,
+    researcher_area = NA,
+    researcher_inst = NA,
+    researcher_name = NA
+  ) %>%
+  select(all_of(names_sel)) # uniform names
+
+### 合并两个名单----
+# check two table's name
+identical(
+  names(tbl_func),
+  names(tbl_chairman)
+)
+
+# write out functional researcher list
+tbl_out <- bind_rows(
+  tbl_func,
+  tbl_chairman
+) %>%
+  # tidy
+  mutate(
+    researcher_inst = mgsub::mgsub(
+      researcher_inst,
+      c(
+        fixed("\u00a0"), fixed("\n"), " ",
+        "中国农业科学院西部农业研究中心"
+      ),
+      c(
+        "", "", "",
+        "中国农业科学院西部农业研究中心（新疆）"
+      )
+    )
+  )
+
+View(tbl_out)
+
+### 导出年度xlsx----
+
+dir_path <- here("data-raw/public-site/moa-agri-system/xlsx/")
+file_path <- glue("list-industry-year-{Year}-wide.xlsx")
+(file_tar <- glue("{dir_path}/{file_path}"))
+write.xlsx(tbl_out, file_tar)
+
+
 # 查询机构的省份信息：初步处理----
 
-## 合并全部数据（2011-2023）----
+## 合并全部数据（2011-2026）----
 
-file_dir <- "xlsx/"
+file_dir <- "data-raw/public-site/moa-agri-system/xlsx/"
 file_name <- list.files(file_dir)
 file_target <- file_name[which(str_detect(file_name, "list-industry-"))]
 file_path <- paste0(file_dir, file_target)
@@ -935,15 +1086,17 @@ list_institution <- tibble(
     is.na(province),
     province_raw, province
   )) %>%
-  filter(is.na(province)) %>%
-  select(institution) %>%
+  #filter(is.na(province)) %>%
+  #select(institution) %>%
   arrange(institution)
 
 # check
-check <- sum(is.na(list_institution$institution))
-if (check > 0) stop("please check the name of institution!")
+check <- sum(!is.na(list_institution$institution))
+if (check > 0) stop(glue("Bad luck! please check the name of institution! There are {check} institutions not matched province!")) else cat("So lucky! all institution matched province!")
 
-## So lucky! all institution matched province!
+## 拷贝到文件夹 techme/data-raw/data-tidy/hack-tianyan/ship/，准备后续天眼查询
+### 如果需要查询的机构机构较多，则需要批量查询，走Tianyan查工作流（Rselenium + 天眼查接口）
+### 如果需要查询的机构机构较少，则直接手动查询，并直接写入到hub/目录下新创建xlsx文件（需要符合hub/目录下xlsx文件的格式）
 
 dir_xlsx <- "d:/github/techme/data-raw/data-tidy/hack-tianyan/ship/"
 file_xlsx <- glue::glue("ship-tot{nrow(list_institution)}-{Sys.Date()}.xlsx")

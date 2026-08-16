@@ -297,3 +297,7 @@ if (nrow(check) > 0) warning("there exist duplicate name_origin")
 queryTianyan <- dt_hub
 
 usethis::use_data(queryTianyan, overwrite = TRUE)
+
+## show the dataset
+devtools::load_all()
+View(queryTianyan)
