@@ -461,6 +461,34 @@ tbl_out <- tbl_raw %>%
   add_column(year = Year, .before = "index") %>%
   add_column(batch = 8, .before = "index")
 
+
+### batch 11: 2025 (txt)----
+## directory
+dir_path <- here::here("data-raw", "public-site", "moa-firm-leader", "html")
+## target html
+files_html <- list.files(dir_path)
+files_target <- files_html[which(str_detect(files_html, "^batch.+?\\.txt$"))]
+url_html <- paste0(dir_path, "/", files_target)
+years_target <- str_extract_all(files_target, "(\\d{4})") %>%
+  unlist() %>%
+  as.numeric(.)
+## my selection
+i <- 2
+(Year <- years_target[i])
+(files_dir <- url_html[i])
+(file_save <- str_replace(files_target[i], "txt", "xlsx"))
+
+tbl_raw <- read_lines(file = files_dir) %>%
+  as_tibble()
+
+tbl_out <- tbl_raw %>%
+  rename("name" = "value") %>%
+  add_column(index = 1:nrow(.), .before = "name") %>%
+  add_column(year = Year, .before = "index") %>%
+  add_column(batch = 11, .before = "index")
+
+View(tbl_out)
+
 ## 匹配信息----
 
 # obtain the province info
@@ -502,57 +530,35 @@ tbl_check <- tbl_info %>%
 
 ## 异常处理----
 
-
-# 根据公司名称，初步判明属地应该为北京的公司
-
+# 根据公司名称，初步判明属地应该为北京的公司，手动添加province列
 ##  year 2004, batch 3, correct the last two firms
-if (i == 3) {
-  tbl_info$province[c(209, 210)] <- "北京"
-}
+tbl_info$province[c(209, 210)] <- "北京"
 
 # year 2011, batch 5, correct the last two firms
-if (i == 5) {
-  tbl_info$province[c(358, 359)] <- "北京"
-}
+tbl_info$province[c(358, 359)] <- "北京"
 
 # year 2024, batch 8,
-if (i == 8) {
-  tbl_info$province[c(1)] <- "北京"
-}
+tbl_info$province[c(1)] <- "北京"
 
-## 导出到xlsx/文件夹----
+# year 2025, batch 11,
+## batch 8 直接跳到batch 11
+tbl_info$province[c(1,2)] <- "北京"
+
+
+## 保存xlsx文件到data-raw/public-site/moa-firm-leader/xlsx/文件夹----
 
 # files csv path
-dir_path <- here::here("topic", "public-site", "moa-firm-leader")
+dir_path <- here::here("data-raw", "public-site", "moa-firm-leader")
 
 (path_out <- paste0(dir_path, "/xlsx/", file_save))
 write.xlsx(tbl_info, path_out)
 
-## 导出为分析数据----
+# 拷贝导出xlsx文件到data-raw/data-tidy/public-site/moa-firm-leader/xlsx/文件夹----
 
-dir_path <- here::here("topic", "public-site", "moa-firm-leader", "xlsx")
-files_xlsx <- list.files(dir_path)
+dir_path_tidy <- here::here("data-raw", "data-tidy", "public-site", "moa-firm-leader", "xlsx")
+fs::file_copy(path_out, dir_path_tidy)
+message(glue::glue("The xlsx file has been copied to {dir_path_tidy}!"))
 
-(files_target <- files_xlsx[which(str_detect(files_xlsx, "batch"))])
 
-(url_xlsx <- paste0(dir_path, "/", files_target))
-
-years_target <- str_extract_all(files_target, "(\\d{4})") %>%
-  unlist() %>%
-  as.numeric(.)
-
-tbl_out <- NULL
-
-i <- 1
-for (i in 1:length(files_target)) {
-  tbl_tem <- read.xlsx(url_xlsx[i]) %>%
-    mutate(index = as.numeric(index))
-
-  tbl_out <- bind_rows(tbl_out, tbl_tem)
-}
-
-dir_path <- here::here("topic", "public-site", "moa-firm-leader")
-
-(path_out <- paste0(dir_path, "/data-update/batch-upto-year-", max(years_target), ".xlsx"))
-
-write.xlsx(tbl_out, path_out)
+# 更新数据集----
+## 在wfl-PubFirmLeader.R中更新数据集
