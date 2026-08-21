@@ -14,7 +14,8 @@ use_list <- c(
   "PubFreshKeepCounty",
   "PubRuralInfoBase",
   "PubCars",
-  "PubGeneticResource"
+  "PubGeneticResource",
+  "PubGeneticResourceCrop"
 )
 
 # read data

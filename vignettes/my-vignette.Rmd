@@ -558,6 +558,28 @@ PubObsStation %>%
   kable()
 ```
 
+### PubGeneticResourceCrop
+
+```{r,echo=FALSE}
+data("PubGeneticResourceCrop")
+```
+
+> **说明**：本数据集在`techme`项目下参数化爬取全国农作物种质资源信息平台库圃列表（"techme/data-raw/public-site/moa-genetic-resource/"），清洗后的xlsx经由`wfl-PubGeneticResource.R`编译。与按年度批次公示的`PubGeneticResource`口径不同。
+
+**`PubGeneticResourceCrop`**：A **wide format** data set containing the full list of national crop germplasm resource banks and nurseries.
+
+- Totally `r dim(PubGeneticResourceCrop)[2]` columns including: `r paste0(names(PubGeneticResourceCrop), collapse =", ")`.
+
+- Totally `r dim(PubGeneticResourceCrop)[1]` rows.
+
+- Years range from `r min(PubGeneticResourceCrop$year)` to `r max(PubGeneticResourceCrop$year)`
+
+```{r}
+PubGeneticResourceCrop %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
 ### PubBreedingXmj
 
 ```{r,echo=FALSE}

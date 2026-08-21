@@ -1,0 +1,31 @@
+#' Details of National Crop Germplasm Resource Banks and Nurseries
+#'
+#' A data set containing the full list of national crop germplasm resource
+#'   banks and nurseries from the National Crop Germplasm Resources Information
+#'   Platform, which is public at
+#'   \url{https://ncgrip.cgris.net/web/home/protection},
+#'   with wide data format. Includes long-term banks, mid-term banks,
+#'   germplasm nurseries, and in vitro banks. Maintained from 2026 onward,
+#'   distinct from the year-by-year approved batch list
+#'   \code{PubGeneticResource}.
+#'
+#' @format A data frame:
+#' \describe{
+#'   \item{year}{integer, the scrape / update year of this snapshot}
+#'   \item{index}{integer, the ordered index of the list}
+#'   \item{determineYear}{integer, the official recognition year of the bank
+#'     or nursery}
+#'   \item{province}{character, province in reduced Chinese}
+#'   \item{nature}{character, type of the facility
+#'   \item{title}{character, name of the bank or nursery}
+#'   \item{institution}{character, name of the supporting institution}
+#' }
+#'
+#' @source National Crop Germplasm Resources Information Platform,
+#'   \url{https://ncgrip.cgris.net/web/home/protection}
+#'
+#' @examples
+#' \dontrun{
+#' str(PubGeneticResourceCrop)
+#' }
+"PubGeneticResourceCrop"

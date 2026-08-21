@@ -12,7 +12,7 @@ core <- c(
   "AgriMachine", "AgriFertilizer", "AgriPesticide", "AgriPlastic",
   "PublicBudget", "RDIntense", "RDActivity", "RDLaborHour", "RDSource",
   "PubCars", "HitechFirmsPub", "PubSeedFirm", "PubFirmLeader",
-  "MachineService", "PubOpenShare", "PubGeneticResource", "PubAgrimodernZone",
+  "MachineService", "PubOpenShare", "PubGeneticResource", "PubGeneticResourceCrop", "PubAgrimodernZone",
   "PubConvergence", "PubConvergenceDemo", "PubConvergenceZone",
   "PubAgriPark", "PubObsStation", "IndustryRD", "IndustryOperation"
 )

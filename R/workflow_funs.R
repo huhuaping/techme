@@ -1772,7 +1772,8 @@ choose.nameData <- function() {
         "PubRuralInfoBase",
         ## moa-agri-system
         "PubCars",
-        "PubGeneticResource"
+        "PubGeneticResource",
+        "PubGeneticResourceCrop"
     )
 
     # Display all options

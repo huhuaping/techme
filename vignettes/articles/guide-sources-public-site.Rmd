@@ -584,6 +584,7 @@ techme::PubMachineCounty %>%
 
 - 2021年12月23日，农业农村部办公厅关于公布全国第六批率先基本实现主要农作物生产全程机械化示范县（市、区）名单的[通知](http://www.moa.gov.cn/govpublic/NYJXHGLS/202112/t20211223_6385412.htm)
 
+- [html表格]2020年12月22日，【非官方公示-农小峰网站】农业农村部办公厅关于公布全国第五批率先基本实现主要农作物生产全程机械化示范县（市、区）名单的[通知](https://www.abeedata.com/home/article/detail/id/8172.html)
 
 - 2020-01-07，农业农村部办公厅关于公布全国第四批率先基本实现主要农作物生产全程机械化示范县（市、区）名单的[通知](http://www.njhs.moa.gov.cn/tzggjzcjd/202001/t20200107_6334434.htm)
 
@@ -1713,17 +1714,22 @@ ptn_clean <-c(
 
 - 国家级农作物、农业微生物种质资源库名单
 
-当前统计口径：
+当前统计口径1:年度批次公示名单(数据集`techme::PubGeneticResource`)：
 
 - 第x批国家农作物种质资源库(圃)名单
 - 第x批农业微生物种质资源库名单(2022年开始认定)
 - 第x批国家畜禽遗传资源保种场(基因库)名单（2022年开始认定）
 
+当前统计口径2:农作物种质资源库圃列表 (数据集`techme::PubGeneticResourceCrop`)：
+
+- 全部国家农作物种质资源库(圃)名单，来自全国农作物种质资源信息平台<https://ncgrip.cgris.net/web/home/protection>。包括：种质圃、中期圃、试管苗库等
+- 参数化爬取<https://ncgrip.cgris.net/srv/api/coops/list?pageNum=1&pageSize=10000>
+
 历史口径：
 
 注意事项：
 
-- 公告文件中可能还包括“国家禽畜遗传资源保种场名单”，本数据集此处将不予收集
+- 公告文件中可能还包括“国家禽畜遗传资源保种场名单”，本数据集于2026年开始系统收集。
 
 
 ### 文件管理
@@ -1737,8 +1743,25 @@ safe_dir_tree(dir_tar)
 
 本项目内维护，通过`techme`进行数据发布。执行R代码文件：`data-raw/public-site/moa-genetic-resource/wfl-PubGeneticResource.R`
 
+批次公示名单（`PubGeneticResource`）：
+
 ```{r}
 techme::PubGeneticResource %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = TRUE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+农作物种质资源库圃列表（`PubGeneticResourceCrop`）：
+
+```{r}
+techme::PubGeneticResourceCrop %>%
   head(100) %>%
   DT::datatable(
     rownames = TRUE,
@@ -1778,6 +1801,9 @@ techme::PubGeneticResource %>%
 
 - pageNum：页码
 - pageSize：每页条数
+- 接口 JSON：`code` / `msg` / `total` / `rows`（库圃记录在 `rows`，不是 `data$list`）
+- 主要字段：`title` 名称、`supportUnit` 依托单位、`nature` 类型（长期库/中期库/种质圃/试管苗库）、`province` 所在地、`determineYear` 认定年份、`crops` / `majorCrops` 保存作物
+- 平台介绍中的库圃数量为建设口径；列表条数以接口 `total` 为准。
 
 ### 数据流程
 
@@ -1791,9 +1817,11 @@ techme::PubGeneticResource %>%
 
 - 依次导出年度xlsx
 
+（2）参数化爬取全部库圃列表。同一脚本上段，得到 `tbl_crop_raw`，后续形成 `PubGeneticResourceCrop`。
+
 （3）`techme`维护数据集。执行R代码文件：`data-raw/public-site/moa-genetic-resource/wfl-PubGeneticResource.R`
 
-- 循环读取年度xlsx
+- 循环读取年度xlsx（`list-year-` → `PubGeneticResource`；`list-crops-year-` → `PubGeneticResourceCrop`）
 
 
 
