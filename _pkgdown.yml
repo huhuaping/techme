@@ -72,6 +72,7 @@ reference:
   - PubGeneticResource
   - PubGeneticResourceCrop
   - PubMachineCounty
+  - PubMachineCountyCase
   - PubOpenShare
   - PubRuralInfoBase
   - PubSeedFirm

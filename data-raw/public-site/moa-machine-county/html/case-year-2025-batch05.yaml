@@ -1,0 +1,159 @@
+# 特色经济作物适宜品种全程机械化生产模式与典型案例
+# 本文件对应第五批。
+#
+# R 读取示例：
+#   yml <- yaml::read_yaml(path)
+#   tbl <- dplyr::bind_rows(yml$cases) |>
+#     dplyr::mutate(year = yml$year, batch = yml$batch, .before = 1)
+#
+# 字段约定：
+#   year/batch     与文件名 case-year-{year}-batch{batch} 对齐
+#   title          公示原文标题（权威字段，不做改写）
+#   province/place 从标题解析；解析不到则为 null
+#   crop           标题中的作物/品种；解析不到则为 null
+
+year: 2025
+batch: 5
+batch_label: 第五批
+series: 特色经济作物适宜品种全程机械化生产模式与典型案例
+title: 关于发布第五批特色经济作物适宜品种全程机械化生产模式与典型案例的通知
+notice: null
+doc_no: 农机化总站〔2026〕6号
+pub_date: 2026-01-08
+url: https://news.nongji360.com/html/2026/01/272369.shtml
+url_alt: null
+
+cases:
+  - id: 1
+    category: 蔬菜
+    index: 1
+    title: 绿叶菜固定道全程机械化生产模式与典型案例
+    province: null
+    place: null
+    crop: 绿叶菜
+  - id: 2
+    category: 蔬菜
+    index: 2
+    title: 露地胡萝卜全程机械化无人化生产模式与典型案例
+    province: null
+    place: null
+    crop: 胡萝卜
+  - id: 3
+    category: 蔬菜
+    index: 3
+    title: 北京露地生菜全程机械化智能化生产模式与典型案例
+    province: 北京
+    place: null
+    crop: 生菜
+  - id: 4
+    category: 林果
+    index: 1
+    title: 山西盐湖丹霞红梨机械化生产模式与典型案例
+    province: 山西
+    place: 盐湖
+    crop: 丹霞红梨
+  - id: 5
+    category: 林果
+    index: 2
+    title: 山西临猗大卫嘎啦苹果机械化生产模式与典型案例
+    province: 山西
+    place: 临猗
+    crop: 大卫嘎啦苹果
+  - id: 6
+    category: 林果
+    index: 3
+    title: 甘肃礼县矮砧密植苹果机械化智能化生产模式与典型案例
+    province: 甘肃
+    place: 礼县
+    crop: 苹果
+  - id: 7
+    category: 林果
+    index: 4
+    title: 江西金溪翠冠梨新型棚架机械化生产模式与典型案例
+    province: 江西
+    place: 金溪
+    crop: 翠冠梨
+  - id: 8
+    category: 林果
+    index: 5
+    title: 江西新余蜜桔机械化生产模式与典型案例
+    province: 江西
+    place: 新余
+    crop: 蜜桔
+  - id: 9
+    category: 林果
+    index: 6
+    title: 重庆长寿柑橘机械化生产模式与典型案例
+    province: 重庆
+    place: 长寿
+    crop: 柑橘
+  - id: 10
+    category: 茶叶
+    index: 1
+    title: 贵州金沙碾茶机械化加工模式与典型案例
+    province: 贵州
+    place: 金沙
+    crop: 碾茶
+  - id: 11
+    category: 茶叶
+    index: 2
+    title: 贵州荔波茶园机械化生产模式与典型案例
+    province: 贵州
+    place: 荔波
+    crop: 茶叶
+  - id: 12
+    category: 茶叶
+    index: 3
+    title: 福建安溪铁观音茶机械化加工模式与典型案例
+    province: 福建
+    place: 安溪
+    crop: 铁观音
+  - id: 13
+    category: 茶叶
+    index: 4
+    title: 江苏仪征绿杨春茶叶机械化生产模式与典型案例
+    province: 江苏
+    place: 仪征
+    crop: 绿杨春
+  - id: 14
+    category: 茶叶
+    index: 5
+    title: 浙江杭州桐庐龙井茶叶机械化生产模式与典型案例
+    province: 浙江
+    place: 桐庐
+    crop: 龙井
+  - id: 15
+    category: 中药材
+    index: 1
+    title: 甘肃民乐板蓝根机械化生产模式与典型案例
+    province: 甘肃
+    place: 民乐
+    crop: 板蓝根
+  - id: 16
+    category: 中药材
+    index: 2
+    title: 山西陵川潞党参机械化生产模式与典型案例
+    province: 山西
+    place: 陵川
+    crop: 潞党参
+  - id: 17
+    category: 中药材
+    index: 3
+    title: 山西盐湖丹参机械化生产模式与典型案例
+    province: 山西
+    place: 盐湖
+    crop: 丹参
+  - id: 18
+    category: 中药材
+    index: 4
+    title: 安徽太和桔梗机械化生产模式与典型案例
+    province: 安徽
+    place: 太和
+    crop: 桔梗
+  - id: 19
+    category: 中药材
+    index: 5
+    title: 广西罗汉果机械化生产模式与典型案例
+    province: 广西
+    place: null
+    crop: 罗汉果

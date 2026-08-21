@@ -528,15 +528,26 @@ safe_dir_tree(dir_tar)
 
 ### 数据说明
 
-更新状态：update
+更新状态：waiting (2026-08-21)
 
-数据使用：`techme::PubMachineCounty`
+数据使用：
 
-统计目标：
+- 农业生产全程机械化示范县数据集(已开发)：`techme::PubMachineCounty`；
+- 特色经济作物适宜品种全程机械化生产模式与典型案例数据集(已开发)：`techme::PubMachineCountyCase`
+- 全程机械化科研基地建设项目数据集（待开发）：`techme::PubMachineCountyResearch`
+
+
+统计目标1：农业生产全程机械化示范县（数据集：`techme::PubMachineCounty`）
 
 - 农业生产全程机械化示范县（新口径）
 
 - 农作物生产全程机械化示范县（旧口径）
+
+统计目标2：特色经济作物适宜品种全程机械化生产模式与典型案例（数据集：`techme::PubMachineCountyCase`）
+
+- 第x批特色经济作物适宜品种全程机械化生产模式与典型案例
+
+统计目标3：全程机械化科研基地建设项目（数据集：`techme::PubMachineCountyResearch`）
 
 - 全程机械化科研基地建设项目
 
@@ -557,8 +568,25 @@ safe_dir_tree(dir_tar)
 
 ### 数据集展示
 
+农业生产全程机械化示范县数据集：`techme::PubMachineCounty`
+
 ```{r}
 techme::PubMachineCounty %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+特色经济作物适宜品种全程机械化生产模式与典型案例数据集：`techme::PubMachineCountyCase`
+
+```{r}
+techme::PubMachineCountyCase %>%
   head(100) %>%
   DT::datatable(
     rownames = FALSE,
@@ -573,6 +601,8 @@ techme::PubMachineCounty %>%
 ### 数据进度
 
 #### 农业生产全程机械化示范县
+
+- 第二批公示名单还没有公布（截止2026-08-21）
 
 - 2024年3月1日，农业农村部办公厅关于公布第一批农业生产全程机械化示范县创建名单的[通知](http://www.njhs.moa.gov.cn/tzggjzcjd/202403/t20240305_6450708.htm)
 
@@ -593,6 +623,19 @@ techme::PubMachineCounty %>%
 - 2017-12-18，关于全国第二批基本实现主要农作物生产全程机械化示范县名单的[公示 doc](http://www.njhs.moa.gov.cn/tzgg/201904/t20190428_6244363.htm)  [或者html](http://www.moa.gov.cn/nybgb/2018/201801/201801/t20180129_6135937.htm)
 
 - 2016年5月30日，全国首批基本实现主要农作物生产全程机械化示范县（市、区）[名单](http://www.moa.gov.cn/nybgb/2016/diliuqi/201712/t20171219_6102567.htm)
+
+#### 特色经济作物适宜品种全程机械化生产模式与典型案例
+
+- 2026年1月8日，【非官方发布】关于发布第五批特色经济作物适宜品种全程机械化生产模式与典型案例的通知<https://news.nongji360.com/html/2026/01/272369.shtml>。本地存档html文件：`data-raw/public-site/moa-machine-county/html/case-year-2025-batch05.html`，整理得到yaml文件：`data-raw/public-site/moa-machine-county/yaml/case-year-2025-batch05.yaml`
+
+
+- 2024-12-27,关于推介第四批特色经济作物适宜品种全程机械化生产模式与典型案例的函<https://njhs.moa.gov.cn/qcjxhtjxd/202412/t20241227_6468613.htm>。本地存档html文件：`data-raw/public-site/moa-machine-county/html/case-year-2024-batch04.html`，整理得到yaml文件：`data-raw/public-site/moa-machine-county/yaml/case-year-2024-batch04.yaml`
+
+- 2023-12-11,关于发布第三批特色经济作物适宜品种全程机械化生产模式与典型案例的通知<https://njhs.moa.gov.cn/qcjxhtjxd/202312/t20231211_6442501.htm>。本地存档html文件：`data-raw/public-site/moa-machine-county/html/case-year-2023-batch03.html`，整理得到yaml文件：`data-raw/public-site/moa-machine-county/yaml/case-year-2023-batch03.yaml`
+
+- 2022-12-23,关于发布第二批特色经济作物适宜品种全程机械化生产模式与典型案例的通知<https://njhs.moa.gov.cn/tzggjzcjd/202212/t20221223_6417494.htm>。本地存档html文件：`data-raw/public-site/moa-machine-county/html/case-year-2022-batch02.html`，整理得到yaml文件：`data-raw/public-site/moa-machine-county/yaml/case-year-2022-batch02.yaml`
+
+- 2022-03-14，【word转xlsx】关于推介蔬菜中药材适宜品种全程机械化生产模式与典型案例的通知<https://njhs.moa.gov.cn/tzggjzcjd/202203/t20220314_6392141.htm>。补充来源(包含完整的两个附件word)：<https://news.nongji360.com/html/2022/03/257115.shtml>。本地存档html文件：`data-raw/public-site/moa-machine-county/html/case-year-2021-batch01.html`，整理得到yaml文件：`data-raw/public-site/moa-machine-county/yaml/case-year-2021-batch01.yaml`。
 
 #### 全程机械化科研基地建设项目
 

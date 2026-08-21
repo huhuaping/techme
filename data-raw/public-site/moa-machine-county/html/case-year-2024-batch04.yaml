@@ -1,0 +1,194 @@
+# 特色经济作物适宜品种全程机械化生产模式与典型案例
+# 本文件对应第四批。
+#
+# R 读取示例：
+#   yml <- yaml::read_yaml(path)
+#   tbl <- dplyr::bind_rows(yml$cases) |>
+#     dplyr::mutate(year = yml$year, batch = yml$batch, .before = 1)
+#
+# 字段约定：
+#   year/batch     与文件名 case-year-{year}-batch{batch} 对齐
+#   title          公示原文标题（权威字段，不做改写）
+#   province/place 从标题解析；解析不到则为 null
+#   crop           标题中的作物/品种；解析不到则为 null
+
+year: 2024
+batch: 4
+batch_label: 第四批
+series: 特色经济作物适宜品种全程机械化生产模式与典型案例
+title: 关于推介第四批特色经济作物适宜品种全程机械化生产模式与典型案例的函
+notice: null
+doc_no: 农机装〔2024〕184号
+pub_date: 2024-12-27
+url: https://njhs.moa.gov.cn/qcjxhtjxd/202412/t20241227_6468613.htm
+url_alt: null
+
+cases:
+  - id: 1
+    category: 蔬菜
+    index: 1
+    title: 基于国产甘蓝收获机的露地甘蓝全程机械化生产模式与典型案例
+    province: null
+    place: null
+    crop: 甘蓝
+  - id: 2
+    category: 蔬菜
+    index: 2
+    title: 露地辣椒全程无人化生产模式与典型案例
+    province: null
+    place: null
+    crop: 辣椒
+  - id: 3
+    category: 蔬菜
+    index: 3
+    title: 武汉露地白萝卜全程机械化生产模式与典型案例
+    province: 湖北
+    place: 武汉
+    crop: 白萝卜
+  - id: 4
+    category: 蔬菜
+    index: 4
+    title: 北京露地胡萝卜全程机械化生产模式与典型案例
+    province: 北京
+    place: 北京
+    crop: 胡萝卜
+  - id: 5
+    category: 蔬菜
+    index: 5
+    title: 日光温室果菜轨道辅助生产机械化模式与典型案例
+    province: null
+    place: null
+    crop: 果菜
+  - id: 6
+    category: 蔬菜
+    index: 6
+    title: 新疆吐鲁番哈密瓜“双膜种植”机械化生产模式与典型案例
+    province: 新疆
+    place: 吐鲁番
+    crop: 哈密瓜
+  - id: 7
+    category: 林果
+    index: 1
+    title: 山西隰县玉露香梨机械化生产模式和典型案例
+    province: 山西
+    place: 隰县
+    crop: 玉露香梨
+  - id: 8
+    category: 林果
+    index: 2
+    title: 山西稷山板枣机械化生产模式与典型案例
+    province: 山西
+    place: 稷山
+    crop: 板枣
+  - id: 9
+    category: 林果
+    index: 3
+    title: 浙江浦江柑橘机械化生产模式与典型案例
+    province: 浙江
+    place: 浦江
+    crop: 柑橘
+  - id: 10
+    category: 林果
+    index: 4
+    title: 江西赣南脐橙机械化生产模式与典型案例
+    province: 江西
+    place: 赣南
+    crop: 脐橙
+  - id: 11
+    category: 林果
+    index: 5
+    title: 江西丘陵地区设施鲜食葡萄机械化生产模式与典型案例
+    province: 江西
+    place: 丘陵地区
+    crop: 鲜食葡萄
+  - id: 12
+    category: 林果
+    index: 6
+    title: 新疆南疆鲜食/制干葡萄机械化生产模式与典型案例
+    province: 新疆
+    place: 南疆
+    crop: 鲜食/制干葡萄
+  - id: 13
+    category: 林果
+    index: 7
+    title: 江苏连云港葡萄智能化生产模式与典型案例
+    province: 江苏
+    place: 连云港
+    crop: 葡萄
+  - id: 14
+    category: 林果
+    index: 8
+    title: 浙江兰溪丘陵山地杨梅机械化生产模式与典型案例
+    province: 浙江
+    place: 兰溪
+    crop: 杨梅
+  - id: 15
+    category: 茶叶
+    index: 1
+    title: 江苏溧阳上旺福地茶叶全程机械化生产模式与典型案例
+    province: 江苏
+    place: 溧阳
+    crop: 茶叶
+  - id: 16
+    category: 茶叶
+    index: 2
+    title: 安徽名优绿茶黄山毛峰（黄山徽州）连续化、自动化、智能化生产模式与典型案例
+    province: 安徽
+    place: 黄山徽州
+    crop: 黄山毛峰
+  - id: 17
+    category: 茶叶
+    index: 3
+    title: 浙江诸暨低山丘陵茶叶机械化生产模式和典型案例
+    province: 浙江
+    place: 诸暨
+    crop: 茶叶
+  - id: 18
+    category: 中药材
+    index: 1
+    title: 内蒙古乌兰浩特赤芍种植机械化生产模式与典型案例
+    province: 内蒙古
+    place: 乌兰浩特
+    crop: 赤芍
+  - id: 19
+    category: 中药材
+    index: 2
+    title: 山西五寨黄芪机械化种植生产模式与典型案例
+    province: 山西
+    place: 五寨
+    crop: 黄芪
+  - id: 20
+    category: 中药材
+    index: 3
+    title: 甘肃陇西黄芪种子繁育全程机械化生产模式及典型案例
+    province: 甘肃
+    place: 陇西
+    crop: 黄芪
+  - id: 21
+    category: 中药材
+    index: 4
+    title: 甘肃黄芪种苗繁育全程机械化生产模式与典型案例
+    province: 甘肃
+    place: null
+    crop: 黄芪
+  - id: 22
+    category: 中药材
+    index: 5
+    title: 江苏沛县牛蒡机械化生产模式与典型案例
+    province: 江苏
+    place: 沛县
+    crop: 牛蒡
+  - id: 23
+    category: 中药材
+    index: 6
+    title: 广西金槐机械化生产模式与典型案例
+    province: 广西
+    place: null
+    crop: 金槐
+  - id: 24
+    category: 中药材
+    index: 7
+    title: 贵州兴仁薏苡机械化生产模式与典型案例
+    province: 贵州
+    place: 兴仁
+    crop: 薏苡

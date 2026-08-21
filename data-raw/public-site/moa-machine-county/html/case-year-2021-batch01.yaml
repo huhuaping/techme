@@ -1,0 +1,208 @@
+# 特色经济作物适宜品种全程机械化生产模式与典型案例
+# 本文件对应第一批（通知标题尚未使用“第一批/特色经济作物”口径）。
+#
+# R 读取示例：
+#   yml <- yaml::read_yaml(path)
+#   tbl <- dplyr::bind_rows(yml$cases) |>
+#     dplyr::mutate(year = yml$year, batch = yml$batch, .before = 1)
+#
+# 字段约定：
+#   year/batch     与文件名 case-year-{year}-batch{batch} 对齐
+#   title          公示原文标题（权威字段，不做改写）
+#   province/place 从标题解析；解析不到则为 null
+#   crop           标题中的作物/品种；解析不到则为 null
+
+year: 2021
+batch: 1
+batch_label: 第一批
+series: 特色经济作物适宜品种全程机械化生产模式与典型案例
+title:  关于推介蔬菜中药材适宜品种全程机械化生产模式与典型案例的通知
+notice: null
+doc_no: 农机科〔2022〕29号
+pub_date: 2022-03-14
+url: https://njhs.moa.gov.cn/tzggjzcjd/202203/t20220314_6392141.htm
+url_alt: https://news.nongji360.com/html/2022/03/257115.shtml
+
+cases:
+  - id: 1
+    category: 蔬菜
+    index: 1
+    title: 江苏常熟结球甘蓝机械化生产模式与典型案例
+    province: 江苏
+    place: 常熟
+    crop: 甘蓝
+  - id: 2
+    category: 蔬菜
+    index: 2
+    title: 北京露地结球甘蓝机械化生产模式与典型案例
+    province: 北京
+    place: null
+    crop: 甘蓝
+  - id: 3
+    category: 蔬菜
+    index: 3
+    title: 武汉市露地结球甘蓝机械化生产模式与典型案例
+    province: 湖北
+    place: 武汉
+    crop: 甘蓝
+  - id: 4
+    category: 蔬菜
+    index: 4
+    title: 江苏响水西兰花机械化生产模式与典型案例
+    province: 江苏
+    place: 响水
+    crop: 西兰花
+  - id: 5
+    category: 蔬菜
+    index: 5
+    title: 上海设施茎叶类蔬菜机械化生产模式与典型案例
+    province: 上海
+    place: null
+    crop: 茎叶类蔬菜
+  - id: 6
+    category: 蔬菜
+    index: 6
+    title: 上海设施中棵青梗菜机械化生产模式与典型案例
+    province: 上海
+    place: null
+    crop: 中棵青梗菜
+  - id: 7
+    category: 蔬菜
+    index: 7
+    title: 北京设施果菜机械化生产模式与典型案例
+    province: 北京
+    place: null
+    crop: 果菜
+  - id: 8
+    category: 蔬菜
+    index: 8
+    title: 武汉市韭菜机械化生产模式与典型案例
+    province: 湖北
+    place: 武汉
+    crop: 韭菜
+  - id: 9
+    category: 蔬菜
+    index: 9
+    title: 湖北钟祥露地白萝卜机械化生产模式与典型案例
+    province: 湖北
+    place: 钟祥
+    crop: 白萝卜
+  - id: 10
+    category: 蔬菜
+    index: 10
+    title: 成都胡萝卜机械化生产模式与典型案例
+    province: 四川
+    place: 成都
+    crop: 胡萝卜
+  - id: 11
+    category: 蔬菜
+    index: 11
+    title: 日本大葱机械化生产模式与典型案例
+    province: 山东
+    place: 青岛
+    crop: 大葱
+  - id: 12
+    category: 蔬菜
+    index: 12
+    title: 山东章丘大葱机械化生产模式与典型案例
+    province: 山东
+    place: 章丘
+    crop: 大葱
+  - id: 13
+    category: 蔬菜
+    index: 13
+    title: 山东大蒜机械化生产模式与典型案例
+    province: 山东
+    place: 章丘
+    crop: 大蒜
+  - id: 14
+    category: 蔬菜
+    index: 14
+    title: 北京露地结球甘蓝无人化生产模式与典型案例
+    province: 北京
+    place: null
+    crop: 甘蓝
+  - id: 15
+    category: 中药材
+    index: 1
+    title: 山东省道地中药材丹参机械化生产模式与典型案例
+    province: 山东
+    place: 青岛
+    crop: 丹参
+  - id: 16
+    category: 中药材
+    index: 2
+    title: 宁夏根茎类中药材（黄芪）机械化生产模式与典型案例
+    province: 宁夏
+    place: null
+    crop: 黄芪
+  - id: 17
+    category: 中药材
+    index: 3
+    title: 甘肃陇西黄芪全程机械化生产模式与典型案例
+    province: 甘肃
+    place: 陇西
+    crop: 黄芪
+  - id: 18
+    category: 中药材
+    index: 4
+    title: 甘肃渭源党参全程机械化生产模式与典型案例
+    province: 甘肃
+    place: null
+    crop: 党参
+  - id: 19
+    category: 中药材
+    index: 5
+    title: 甘肃根茎类中药材（当归）机械化生产模式与典型案例
+    province: 甘肃
+    place: 岷县
+    crop: 当归
+  - id: 20
+    category: 中药材
+    index: 6
+    title: 河北省柴胡—玉米全程机械化生产模式与典型案例
+    province: 河北
+    place: null
+    crop: 柴胡
+  - id: 21
+    category: 中药材
+    index: 7
+    title: 广西贵港市艾草生产机械化技术模式及典型案例
+    province: 广西
+    place: 贵港
+    crop: 艾草
+  - id: 22
+    category: 中药材
+    index: 8
+    title: 贵州安龙白及机械化生产模式与典型案例
+    province: 贵州
+    place: 安龙
+    crop: 白及
+  - id: 23
+    category: 中药材
+    index: 9
+    title: 山西黄芩机械化生产模式与典型案例
+    province: 山西
+    place: 万荣县
+    crop: 黄芩
+  - id: 24
+    category: 中药材
+    index: 10
+    title: 山西远志机械化生产模式与案例
+    province: 山西
+    place: 侯马市
+    crop: null
+  - id: 25
+    category: 中药材
+    index: 11
+    title: 东北人参种植机械化生产模式与典型案例
+    province: 吉林
+    place: 集安市
+    crop: 人参
+  - id: 26
+    category: 中药材
+    index: 12
+    title: 辽宁省龙胆草种植机械化生产模式与典型案例
+    province: 辽宁
+    place: 清原县
+    crop: 龙胆草
