@@ -1,0 +1,929 @@
+# 2026年农业产业融合发展项目拟立项名单
+# 本文件对照 html/project-setup-year-2026.html 整理，作为 2026 年起的权威中间层。
+#
+# R 读取示例：
+#   yml <- yaml::read_yaml(path)
+#   tbl_park <- dplyr::bind_rows(yml$park) |>
+#     dplyr::mutate(year = yml$year, .before = 1)
+#
+# 字段约定：
+#   year                 立项年份，与文件名 project-setup-year-{year} 对齐
+#   name_raw             公示原文（已去掉序号）
+#   name                 与往年 xlsx 的 name 对齐；park 补全「现代农业产业园」
+#   province             BasicProvince 简称；兵团/农垦按往年规则归并
+#   province_raw         公示原文中的省区或垦区主体
+#   place                park 去掉省区后的县市区；解析不到则为 null
+#   towns / n_town       town 的乡镇序列及其个数；xlsx 再按 province 合并
+#
+# 导出 xlsx 列（与往年一致，可 bind_rows）：
+#   park/cluster: year, index, name, province
+#   town:         year, index, province, town, n
+
+year: 2026
+title: 2026年农业产业融合发展项目立项名单公示公告
+source: 农业农村部计划财务司
+url: https://yanqitong.cn/guojiazhengce/26723.html
+pub_date: 2026-04-02
+park:
+  - index: 1
+    name_raw: 北京市大兴区
+    name: 北京市大兴区现代农业产业园
+    province: 北京
+    province_raw: 北京市
+    place: 大兴区
+  - index: 2
+    name_raw: 天津市东丽区
+    name: 天津市东丽区现代农业产业园
+    province: 天津
+    province_raw: 天津市
+    place: 东丽区
+  - index: 3
+    name_raw: 河北省玉田县
+    name: 河北省玉田县现代农业产业园
+    province: 河北
+    province_raw: 河北省
+    place: 玉田县
+  - index: 4
+    name_raw: 河北省怀来县
+    name: 河北省怀来县现代农业产业园
+    province: 河北
+    province_raw: 河北省
+    place: 怀来县
+  - index: 5
+    name_raw: 山西省清徐县
+    name: 山西省清徐县现代农业产业园
+    province: 山西
+    province_raw: 山西省
+    place: 清徐县
+  - index: 6
+    name_raw: 内蒙古自治区土默特右旗
+    name: 内蒙古自治区土默特右旗现代农业产业园
+    province: 内蒙古
+    province_raw: 内蒙古自治区
+    place: 土默特右旗
+  - index: 7
+    name_raw: 内蒙古自治区林西县
+    name: 内蒙古自治区林西县现代农业产业园
+    province: 内蒙古
+    province_raw: 内蒙古自治区
+    place: 林西县
+  - index: 8
+    name_raw: 辽宁省新民市
+    name: 辽宁省新民市现代农业产业园
+    province: 辽宁
+    province_raw: 辽宁省
+    place: 新民市
+  - index: 9
+    name_raw: 吉林省舒兰市
+    name: 吉林省舒兰市现代农业产业园
+    province: 吉林
+    province_raw: 吉林省
+    place: 舒兰市
+  - index: 10
+    name_raw: 黑龙江省肇东市
+    name: 黑龙江省肇东市现代农业产业园
+    province: 黑龙江
+    province_raw: 黑龙江省
+    place: 肇东市
+  - index: 11
+    name_raw: 江苏省宿迁市宿豫区
+    name: 江苏省宿迁市宿豫区现代农业产业园
+    province: 江苏
+    province_raw: 江苏省
+    place: 宿迁市宿豫区
+  - index: 12
+    name_raw: 江苏省徐州市铜山区
+    name: 江苏省徐州市铜山区现代农业产业园
+    province: 江苏
+    province_raw: 江苏省
+    place: 徐州市铜山区
+  - index: 13
+    name_raw: 浙江省常山县
+    name: 浙江省常山县现代农业产业园
+    province: 浙江
+    province_raw: 浙江省
+    place: 常山县
+  - index: 14
+    name_raw: 安徽省宿松县
+    name: 安徽省宿松县现代农业产业园
+    province: 安徽
+    province_raw: 安徽省
+    place: 宿松县
+  - index: 15
+    name_raw: 安徽省寿县
+    name: 安徽省寿县现代农业产业园
+    province: 安徽
+    province_raw: 安徽省
+    place: 寿县
+  - index: 16
+    name_raw: 福建省邵武市
+    name: 福建省邵武市现代农业产业园
+    province: 福建
+    province_raw: 福建省
+    place: 邵武市
+  - index: 17
+    name_raw: 福建省尤溪县
+    name: 福建省尤溪县现代农业产业园
+    province: 福建
+    province_raw: 福建省
+    place: 尤溪县
+  - index: 18
+    name_raw: 江西省丰城市
+    name: 江西省丰城市现代农业产业园
+    province: 江西
+    province_raw: 江西省
+    place: 丰城市
+  - index: 19
+    name_raw: 山东省聊城市茌平区
+    name: 山东省聊城市茌平区现代农业产业园
+    province: 山东
+    province_raw: 山东省
+    place: 聊城市茌平区
+  - index: 20
+    name_raw: 山东省高青县
+    name: 山东省高青县现代农业产业园
+    province: 山东
+    province_raw: 山东省
+    place: 高青县
+  - index: 21
+    name_raw: 山东省利津县
+    name: 山东省利津县现代农业产业园
+    province: 山东
+    province_raw: 山东省
+    place: 利津县
+  - index: 22
+    name_raw: 河南省杞县
+    name: 河南省杞县现代农业产业园
+    province: 河南
+    province_raw: 河南省
+    place: 杞县
+  - index: 23
+    name_raw: 河南省济源市
+    name: 河南省济源市现代农业产业园
+    province: 河南
+    province_raw: 河南省
+    place: 济源市
+  - index: 24
+    name_raw: 湖北省石首市
+    name: 湖北省石首市现代农业产业园
+    province: 湖北
+    province_raw: 湖北省
+    place: 石首市
+  - index: 25
+    name_raw: 湖北省鄂州市鄂城区
+    name: 湖北省鄂州市鄂城区现代农业产业园
+    province: 湖北
+    province_raw: 湖北省
+    place: 鄂州市鄂城区
+  - index: 26
+    name_raw: 湖南省耒阳市
+    name: 湖南省耒阳市现代农业产业园
+    province: 湖南
+    province_raw: 湖南省
+    place: 耒阳市
+  - index: 27
+    name_raw: 湖南省祁阳市
+    name: 湖南省祁阳市现代农业产业园
+    province: 湖南
+    province_raw: 湖南省
+    place: 祁阳市
+  - index: 28
+    name_raw: 湖南省南县
+    name: 湖南省南县现代农业产业园
+    province: 湖南
+    province_raw: 湖南省
+    place: 南县
+  - index: 29
+    name_raw: 广东省广州市南沙区
+    name: 广东省广州市南沙区现代农业产业园
+    province: 广东
+    province_raw: 广东省
+    place: 广州市南沙区
+  - index: 30
+    name_raw: 广东省佛山市三水区
+    name: 广东省佛山市三水区现代农业产业园
+    province: 广东
+    province_raw: 广东省
+    place: 佛山市三水区
+  - index: 31
+    name_raw: 广东省东源县
+    name: 广东省东源县现代农业产业园
+    province: 广东
+    province_raw: 广东省
+    place: 东源县
+  - index: 32
+    name_raw: 广西壮族自治区融安县
+    name: 广西壮族自治区融安县现代农业产业园
+    province: 广西
+    province_raw: 广西壮族自治区
+    place: 融安县
+  - index: 33
+    name_raw: 海南省澄迈县
+    name: 海南省澄迈县现代农业产业园
+    province: 海南
+    province_raw: 海南省
+    place: 澄迈县
+  - index: 34
+    name_raw: 重庆市梁平区
+    name: 重庆市梁平区现代农业产业园
+    province: 重庆
+    province_raw: 重庆市
+    place: 梁平区
+  - index: 35
+    name_raw: 四川省绵阳市安州区
+    name: 四川省绵阳市安州区现代农业产业园
+    province: 四川
+    province_raw: 四川省
+    place: 绵阳市安州区
+  - index: 36
+    name_raw: 四川省雅安市名山区
+    name: 四川省雅安市名山区现代农业产业园
+    province: 四川
+    province_raw: 四川省
+    place: 雅安市名山区
+  - index: 37
+    name_raw: 四川省南部县
+    name: 四川省南部县现代农业产业园
+    province: 四川
+    province_raw: 四川省
+    place: 南部县
+  - index: 38
+    name_raw: 贵州省道真仡佬族苗族自治县
+    name: 贵州省道真仡佬族苗族自治县现代农业产业园
+    province: 贵州
+    province_raw: 贵州省
+    place: 道真仡佬族苗族自治县
+  - index: 39
+    name_raw: 云南省保山市隆阳区
+    name: 云南省保山市隆阳区现代农业产业园
+    province: 云南
+    province_raw: 云南省
+    place: 保山市隆阳区
+  - index: 40
+    name_raw: 云南省弥渡县
+    name: 云南省弥渡县现代农业产业园
+    province: 云南
+    province_raw: 云南省
+    place: 弥渡县
+  - index: 41
+    name_raw: 西藏自治区尼木县
+    name: 西藏自治区尼木县现代农业产业园
+    province: 西藏
+    province_raw: 西藏自治区
+    place: 尼木县
+  - index: 42
+    name_raw: 陕西省岐山县
+    name: 陕西省岐山县现代农业产业园
+    province: 陕西
+    province_raw: 陕西省
+    place: 岐山县
+  - index: 43
+    name_raw: 陕西省定边县
+    name: 陕西省定边县现代农业产业园
+    province: 陕西
+    province_raw: 陕西省
+    place: 定边县
+  - index: 44
+    name_raw: 甘肃省兰州新区
+    name: 甘肃省兰州新区现代农业产业园
+    province: 甘肃
+    province_raw: 甘肃省
+    place: 兰州新区
+  - index: 45
+    name_raw: 甘肃省永昌县
+    name: 甘肃省永昌县现代农业产业园
+    province: 甘肃
+    province_raw: 甘肃省
+    place: 永昌县
+  - index: 46
+    name_raw: 青海省久治县
+    name: 青海省久治县现代农业产业园
+    province: 青海
+    province_raw: 青海省
+    place: 久治县
+  - index: 47
+    name_raw: 宁夏回族自治区海原县
+    name: 宁夏回族自治区海原县现代农业产业园
+    province: 宁夏
+    province_raw: 宁夏回族自治区
+    place: 海原县
+  - index: 48
+    name_raw: 新疆维吾尔自治区巴楚县
+    name: 新疆维吾尔自治区巴楚县现代农业产业园
+    province: 新疆
+    province_raw: 新疆维吾尔自治区
+    place: 巴楚县
+  - index: 49
+    name_raw: 新疆维吾尔自治区精河县
+    name: 新疆维吾尔自治区精河县现代农业产业园
+    province: 新疆
+    province_raw: 新疆维吾尔自治区
+    place: 精河县
+  - index: 50
+    name_raw: 广东农垦高州
+    name: 广东农垦高州现代农业产业园
+    province: 广东
+    province_raw: 广东农垦
+    place: 高州
+cluster:
+  - index: 1
+    name_raw: 河北省驴产业集群
+    name: 河北省驴产业集群
+    province: 河北
+    province_raw: 河北省
+    place: null
+  - index: 2
+    name_raw: 河北省冀中南蛋鸡产业集群
+    name: 河北省冀中南蛋鸡产业集群
+    province: 河北
+    province_raw: 河北省
+    place: null
+  - index: 3
+    name_raw: 山西省临汾中药材产业集群
+    name: 山西省临汾中药材产业集群
+    province: 山西
+    province_raw: 山西省
+    place: null
+  - index: 4
+    name_raw: 内蒙古自治区骆驼产业集群
+    name: 内蒙古自治区骆驼产业集群
+    province: 内蒙古
+    province_raw: 内蒙古自治区
+    place: null
+  - index: 5
+    name_raw: 内蒙古自治区呼伦贝尔甜菜产业集群
+    name: 内蒙古自治区呼伦贝尔甜菜产业集群
+    province: 内蒙古
+    province_raw: 内蒙古自治区
+    place: null
+  - index: 6
+    name_raw: 辽宁省辽东中药材产业集群
+    name: 辽宁省辽东中药材产业集群
+    province: 辽宁
+    province_raw: 辽宁省
+    place: null
+  - index: 7
+    name_raw: 吉林省延边长白山道地中药材产业集群
+    name: 吉林省延边长白山道地中药材产业集群
+    province: 吉林
+    province_raw: 吉林省
+    place: null
+  - index: 8
+    name_raw: 黑龙江省肉牛产业集群
+    name: 黑龙江省肉牛产业集群
+    province: 黑龙江
+    province_raw: 黑龙江省
+    place: null
+  - index: 9
+    name_raw: 江苏省肉鸭产业集群
+    name: 江苏省肉鸭产业集群
+    province: 江苏
+    province_raw: 江苏省
+    place: null
+  - index: 10
+    name_raw: 浙江省金华地方猪产业集群
+    name: 浙江省金华地方猪产业集群
+    province: 浙江
+    province_raw: 浙江省
+    place: null
+  - index: 11
+    name_raw: 安徽省皖北小麦产业集群
+    name: 安徽省皖北小麦产业集群
+    province: 安徽
+    province_raw: 安徽省
+    place: null
+  - index: 12
+    name_raw: 安徽省鳜鱼产业集群
+    name: 安徽省鳜鱼产业集群
+    province: 安徽
+    province_raw: 安徽省
+    place: null
+  - index: 13
+    name_raw: 福建省福州茉莉花茶产业集群
+    name: 福建省福州茉莉花茶产业集群
+    province: 福建
+    province_raw: 福建省
+    place: null
+  - index: 14
+    name_raw: 福建省牡蛎产业集群
+    name: 福建省牡蛎产业集群
+    province: 福建
+    province_raw: 福建省
+    place: null
+  - index: 15
+    name_raw: 江西省赣州赣南脐橙产业集群
+    name: 江西省赣州赣南脐橙产业集群
+    province: 江西
+    province_raw: 江西省
+    place: null
+  - index: 16
+    name_raw: 山东省甘薯产业集群
+    name: 山东省甘薯产业集群
+    province: 山东
+    province_raw: 山东省
+    place: null
+  - index: 17
+    name_raw: 山东省生猪产业集群
+    name: 山东省生猪产业集群
+    province: 山东
+    province_raw: 山东省
+    place: null
+  - index: 18
+    name_raw: 河南省生猪产业集群
+    name: 河南省生猪产业集群
+    province: 河南
+    province_raw: 河南省
+    place: null
+  - index: 19
+    name_raw: 湖北省黄冈中药材产业集群
+    name: 湖北省黄冈中药材产业集群
+    province: 湖北
+    province_raw: 湖北省
+    place: null
+  - index: 20
+    name_raw: 湖南省株洲麻鸭产业集群
+    name: 湖南省株洲麻鸭产业集群
+    province: 湖南
+    province_raw: 湖南省
+    place: null
+  - index: 21
+    name_raw: 湖南省长沙都市蔬菜产业集群
+    name: 湖南省长沙都市蔬菜产业集群
+    province: 湖南
+    province_raw: 湖南省
+    place: null
+  - index: 22
+    name_raw: 广东省肉桂产业集群
+    name: 广东省肉桂产业集群
+    province: 广东
+    province_raw: 广东省
+    place: null
+  - index: 23
+    name_raw: 广西壮族自治区对虾产业集群
+    name: 广西壮族自治区对虾产业集群
+    province: 广西
+    province_raw: 广西壮族自治区
+    place: null
+  - index: 24
+    name_raw: 广西壮族自治区玉林陆川猪产业集群
+    name: 广西壮族自治区玉林陆川猪产业集群
+    province: 广西
+    province_raw: 广西壮族自治区
+    place: null
+  - index: 25
+    name_raw: 海南省热带水果产业集群
+    name: 海南省热带水果产业集群
+    province: 海南
+    province_raw: 海南省
+    place: null
+  - index: 26
+    name_raw: 重庆市肉鸡产业集群
+    name: 重庆市肉鸡产业集群
+    province: 重庆
+    province_raw: 重庆市
+    place: null
+  - index: 27
+    name_raw: 四川省内江黑猪产业集群
+    name: 四川省内江黑猪产业集群
+    province: 四川
+    province_raw: 四川省
+    place: null
+  - index: 28
+    name_raw: 四川省川中丘陵柠檬产业集群
+    name: 四川省川中丘陵柠檬产业集群
+    province: 四川
+    province_raw: 四川省
+    place: null
+  - index: 29
+    name_raw: 贵州省肉牛产业集群
+    name: 贵州省肉牛产业集群
+    province: 贵州
+    province_raw: 贵州省
+    place: null
+  - index: 30
+    name_raw: 云南省昆明鲜切花产业集群
+    name: 云南省昆明鲜切花产业集群
+    province: 云南
+    province_raw: 云南省
+    place: null
+  - index: 31
+    name_raw: 云南省小浆果(蓝莓)产业集群
+    name: 云南省小浆果(蓝莓)产业集群
+    province: 云南
+    province_raw: 云南省
+    place: null
+  - index: 32
+    name_raw: 西藏自治区葡萄产业集群
+    name: 西藏自治区葡萄产业集群
+    province: 西藏
+    province_raw: 西藏自治区
+    place: null
+  - index: 33
+    name_raw: 陕西省安康富硒魔芋产业集群
+    name: 陕西省安康富硒魔芋产业集群
+    province: 陕西
+    province_raw: 陕西省
+    place: null
+  - index: 34
+    name_raw: 陕西省咸阳渭北苹果产业集群
+    name: 陕西省咸阳渭北苹果产业集群
+    province: 陕西
+    province_raw: 陕西省
+    place: null
+  - index: 35
+    name_raw: 甘肃省天水花牛苹果产业集群
+    name: 甘肃省天水花牛苹果产业集群
+    province: 甘肃
+    province_raw: 甘肃省
+    place: null
+  - index: 36
+    name_raw: 青海省高原牦牛产业集群
+    name: 青海省高原牦牛产业集群
+    province: 青海
+    province_raw: 青海省
+    place: null
+  - index: 37
+    name_raw: 宁夏回族自治区盐碱渔业产业集群
+    name: 宁夏回族自治区盐碱渔业产业集群
+    province: 宁夏
+    province_raw: 宁夏回族自治区
+    place: null
+  - index: 38
+    name_raw: 新疆维吾尔自治区辣椒产业集群
+    name: 新疆维吾尔自治区辣椒产业集群
+    province: 新疆
+    province_raw: 新疆维吾尔自治区
+    place: null
+  - index: 39
+    name_raw: 新疆维吾尔自治区设施西甜瓜产业集群
+    name: 新疆维吾尔自治区设施西甜瓜产业集群
+    province: 新疆
+    province_raw: 新疆维吾尔自治区
+    place: null
+  - index: 40
+    name_raw: 新疆生产建设兵团肉牛产业集群
+    name: 新疆生产建设兵团肉牛产业集群
+    province: 新疆
+    province_raw: 新疆生产建设兵团
+    place: null
+town:
+  - index: 1
+    province: 北京
+    province_raw: 北京市
+    towns:
+      - 通州区漷县镇
+      - 平谷区马坊镇
+    n_town: 2
+  - index: 2
+    province: 天津
+    province_raw: 天津市
+    towns:
+      - 静海区大邱庄镇
+      - 蓟州区下窝头镇
+    n_town: 2
+  - index: 3
+    province: 河北
+    province_raw: 河北省
+    towns:
+      - 辛集市旧城镇
+      - 保定市涿州市百尺竿镇
+      - 沧州市南皮县乌马营镇
+      - 秦皇岛市卢龙县印庄镇
+      - 保定市曲阳县下河镇
+      - 承德市宽城满族自治县龙须门镇
+      - 廊坊市霸州市康仙庄镇
+      - 石家庄市元氏县马村镇
+      - 邢台市临西县老官寨镇
+      - 张家口市蔚县宋家庄镇
+      - 邯郸市肥乡区毛演堡镇
+    n_town: 11
+  - index: 4
+    province: 山西
+    province_raw: 山西省
+    towns:
+      - 运城市平陆县张店镇
+      - 长治市潞城区微子镇
+      - 晋城市沁水县郑村镇
+      - 运城市盐湖区王范乡
+      - 晋城市阳城县次营镇
+    n_town: 5
+  - index: 5
+    province: 内蒙古
+    province_raw: 内蒙古自治区
+    towns:
+      - 锡林郭勒盟苏尼特右旗乌日根塔拉镇
+      - 鄂尔多斯市鄂托克前旗城川镇
+      - 呼和浩特市土默特左旗毕克齐镇
+      - 包头市九原区哈业胡同镇
+      - 赤峰市元宝山区美丽河镇
+      - 巴彦淖尔市五原县和胜乡
+    n_town: 6
+  - index: 6
+    province: 辽宁
+    province_raw: 辽宁省
+    towns:
+      - 抚顺市新宾满族自治县响水河子乡
+      - 本溪市桓仁满族自治县北甸子乡
+      - 葫芦岛市连山区沙河营乡
+      - 葫芦岛市建昌县牤牛营子乡
+      - 鞍山市千山区大屯镇
+      - 朝阳市龙城区边杖子镇
+    n_town: 6
+  - index: 7
+    province: 吉林
+    province_raw: 吉林省
+    towns:
+      - 延边朝鲜族自治州延吉市朝阳川镇
+      - 辽源市东丰县三合满族朝鲜族乡
+      - 吉林市磐石市黑石镇
+    n_town: 3
+  - index: 8
+    province: 黑龙江
+    province_raw: 黑龙江省
+    towns:
+      - 绥化市海伦市共合镇
+    n_town: 1
+  - index: 9
+    province: 江苏
+    province_raw: 江苏省
+    towns:
+      - 宿迁市泗洪县半城镇
+      - 扬州市广陵区沙头镇
+      - 徐州市丰县范楼镇
+      - 连云港市赣榆区石桥镇
+      - 苏州市常熟市董浜镇
+      - 淮安市涟水县高沟镇
+      - 无锡市江阴市徐霞客镇
+      - 南通市海门区四甲镇
+      - 盐城市阜宁县益林镇
+    n_town: 9
+  - index: 10
+    province: 浙江
+    province_raw: 浙江省
+    towns:
+      - 台州市三门县浦坝港镇
+      - 嘉兴市海盐县通元镇
+      - 金华市武义县王宅镇
+      - 温州市泰顺县仕阳镇
+      - 舟山市普陀区桃花镇
+      - 丽水市缙云县新建镇
+    n_town: 6
+  - index: 11
+    province: 安徽
+    province_raw: 安徽省
+    towns:
+      - 滁州市天长市汊涧镇
+      - 淮北市烈山区烈山镇
+      - 宣城市旌德县云乐镇
+      - 六安市霍邱县花园镇
+      - 淮南市潘集区古沟回族乡
+      - 蚌埠市五河县朱顶镇
+      - 黄山市祁门县芦溪乡
+      - 池州市青阳县乔木乡
+    n_town: 8
+  - index: 12
+    province: 福建
+    province_raw: 福建省
+    towns:
+      - 漳州市漳浦县石榴镇
+      - 莆田市仙游县大济镇
+      - 宁德市福安市潭头镇
+      - 福州市永泰县葛岭镇
+      - 三明市将乐县高唐镇
+      - 龙岩市漳平市新桥镇
+    n_town: 6
+  - index: 13
+    province: 江西
+    province_raw: 江西省
+    towns:
+      - 九江市共青城市苏家垱乡
+      - 赣州市全南县中寨乡
+      - 萍乡市湘东区荷尧镇
+      - 南昌市东湖区扬子洲镇
+      - 赣州市于都县车溪乡
+    n_town: 5
+  - index: 14
+    province: 山东
+    province_raw: 山东省
+    towns:
+      - 聊城市冠县店子镇
+      - 济南市莱芜区大王庄镇
+      - 东营市广饶县大码头镇
+      - 滨州市无棣县埕口镇
+      - 淄博市临淄区凤凰镇
+      - 烟台市牟平区水道镇
+      - 威海市荣成市港西镇
+      - 枣庄市滕州市洪绪镇
+      - 潍坊市青州市弥河镇
+      - 菏泽市单县龙王庙镇
+      - 济宁市梁山县杨营镇
+      - 日照市五莲县潮河镇
+      - 临沂市蒙阴县高都镇
+    n_town: 13
+  - index: 15
+    province: 河南
+    province_raw: 河南省
+    towns:
+      - 许昌市襄城县汾陈镇
+      - 漯河市召陵区召陵镇
+      - 新乡市卫辉市柳庄乡
+      - 洛阳市洛宁县上戈镇
+      - 平顶山市宝丰县周庄镇
+      - 周口市鹿邑县太清宫镇
+      - 驻马店市正阳县大林镇
+      - 鹤壁市淇滨区上峪乡
+      - 商丘市永城市龙岗镇
+      - 三门峡市湖滨区磁钟乡
+      - 濮阳市濮阳县胡状镇
+      - 郑州市登封市君召乡
+    n_town: 12
+  - index: 16
+    province: 湖北
+    province_raw: 湖北省
+    towns:
+      - 孝感市安陆市赵棚镇
+      - 随州市随县高城镇
+      - 武汉市黄陂区木兰乡
+      - 黄石市阳新县浮屠镇
+      - 宜昌市夷陵区邓村乡
+      - 荆门市京山市孙桥镇
+      - 咸宁市崇阳县白霓镇
+      - 黄冈市黄州区堵城镇
+      - 恩施土家族苗族自治州建始县长梁镇
+      - 襄阳市襄州区峪山镇
+    n_town: 10
+  - index: 17
+    province: 湖南
+    province_raw: 湖南省
+    towns:
+      - 郴州市桂东县清泉镇
+      - 怀化市麻阳苗族自治县岩门镇
+      - 邵阳市隆回县小沙江镇
+      - 株洲市芦淞区白关镇
+      - 益阳市桃江县马迹塘镇
+      - 常德市津市市白衣镇
+      - 永州市回龙圩管理区回龙圩镇
+      - 衡阳市祁东县黄土铺镇
+      - 长沙市浏阳市普迹镇
+      - 岳阳市平江县伍市镇
+    n_town: 10
+  - index: 18
+    province: 广东
+    province_raw: 广东省
+    towns:
+      - 云浮市云城区前锋镇
+      - 肇庆市高要区蚬岗镇
+      - 清远市清城区飞来峡镇
+      - 江门市新会区三江镇
+      - 茂名市茂南区袂花镇
+      - 佛山市南海区狮山镇
+      - 梅州市梅县区桃尧镇
+      - 广州市白云区钟落潭镇
+      - 揭阳市揭西县五经富镇
+    n_town: 9
+  - index: 19
+    province: 广西
+    province_raw: 广西壮族自治区
+    towns:
+      - 百色市田东县祥周镇
+      - 崇左市龙州县水口镇
+      - 玉林市北流市西埌镇
+      - 贺州市八步区莲塘镇
+      - 桂林市平乐县二塘镇
+      - 柳州市融安县大将镇
+      - 贵港市覃塘区樟木镇
+      - 桂林市龙胜各族自治县瓢里镇
+    n_town: 8
+  - index: 20
+    province: 海南
+    province_raw: 海南省
+    towns:
+      - 文昌市铺前镇
+      - 儋州市雅星镇
+      - 澄迈县文儒镇
+    n_town: 3
+  - index: 21
+    province: 重庆
+    province_raw: 重庆市
+    towns:
+      - 忠县马灌镇
+      - 大足区铁山镇
+      - 合川区铜溪镇
+      - 开州区大进镇
+      - 江津区白沙镇
+    n_town: 5
+  - index: 22
+    province: 四川
+    province_raw: 四川省
+    towns:
+      - 巴中市通江县兴隆镇
+      - 乐山市马边彝族自治县苏坝镇
+      - 广元市昭化区清水镇
+      - 绵阳市江油市方水镇
+      - 泸州市纳溪区护国镇
+      - 攀枝花市盐边县红格镇
+      - 广安市武胜县胜利镇
+      - 凉山彝族自治州会东县铁柳镇
+      - 甘孜藏族自治州理塘县禾尼乡
+      - 宜宾市珙县底洞镇
+      - 成都市大邑县䢺江镇
+      - 雅安市芦山县大川镇
+    n_town: 12
+  - index: 23
+    province: 贵州
+    province_raw: 贵州省
+    towns:
+      - 黔东南苗族侗族自治州镇远县江古镇
+      - 黔东南苗族侗族自治州台江县台盘乡
+      - 遵义市习水县永安镇
+      - 毕节市大方县六龙镇
+      - 黔南布依族苗族自治州平塘县大塘镇
+      - 贵阳市花溪区马铃布依族苗族乡
+    n_town: 6
+  - index: 24
+    province: 云南
+    province_raw: 云南省
+    towns:
+      - 保山市隆阳区丙麻乡
+      - 临沧市凤庆县营盘镇
+      - 丽江市古城区七河镇
+      - 文山壮族苗族自治州麻栗坡县猛硐瑶族乡
+      - 西双版纳傣族自治州景洪市勐龙镇
+      - 德宏傣族景颇族自治州瑞丽市勐秀乡
+      - 玉溪市元江哈尼族彝族傣族自治县曼来镇
+      - 昆明市寻甸回族彝族自治县倘甸镇
+      - 曲靖市沾益区盘江镇
+    n_town: 9
+  - index: 25
+    province: 西藏
+    province_raw: 西藏自治区
+    towns:
+      - 拉萨市林周县春堆乡
+      - 拉萨市曲水县南木乡
+      - 山南市扎囊县桑耶镇
+    n_town: 3
+  - index: 26
+    province: 陕西
+    province_raw: 陕西省
+    towns:
+      - 宝鸡市眉县金渠镇
+      - 商洛市丹凤县峦庄镇
+      - 铜川市宜君县哭泉镇
+      - 渭南市澄城县王庄镇
+      - 汉中市西乡县柳树镇
+      - 榆林市神木市尔林兔镇
+    n_town: 6
+  - index: 27
+    province: 甘肃
+    province_raw: 甘肃省
+    towns:
+      - 临夏回族自治州临夏县黄泥湾镇
+      - 陇南市康县大南峪镇
+      - 庆阳市镇原县新集镇
+      - 张掖市临泽县倪家营镇
+      - 白银市景泰县草窝滩镇
+      - 武威市古浪县干城镇
+    n_town: 6
+  - index: 28
+    province: 青海
+    province_raw: 青海省
+    towns:
+      - 海南藏族自治州贵南县过马营镇
+      - 海北藏族自治州祁连县峨堡镇
+      - 果洛藏族自治州班玛县赛来塘镇
+    n_town: 3
+  - index: 29
+    province: 宁夏
+    province_raw: 宁夏回族自治区
+    towns:
+      - 固原市泾源县泾河源镇
+      - 银川市贺兰县洪广镇
+    n_town: 2
+  - index: 30
+    province: 新疆
+    province_raw: 新疆维吾尔自治区
+    towns:
+      - 和田地区洛浦县多鲁镇
+      - 克孜勒苏柯尔克孜自治州阿图什市阿扎克镇
+      - 阿克苏地区新和县塔什艾日克镇
+      - 喀什地区岳普湖县岳普湖乡
+      - 塔城地区托里县多拉特乡
+      - 喀什地区伽师县英买里镇
+      - 喀什地区泽普县奎依巴格镇
+      - 巴音郭楞蒙古自治州且末县阿羌镇
+    n_town: 8
+  - index: 31
+    province: 新疆
+    province_raw: 新疆生产建设兵团
+    towns:
+      - 第七师一三七团
+      - 第五师八十一团双桥镇
+      - 第六师奇台农场
+    n_town: 3
+  - index: 32
+    province: 广东
+    province_raw: 广东省农垦总局
+    towns:
+      - 火星农场
+      - 红峰农场
+    n_town: 2

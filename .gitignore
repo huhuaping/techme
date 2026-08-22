@@ -7,3 +7,8 @@ docs/
 inst/doc
 /doc/
 /Meta/
+
+# Quarto 预览缓存与 JVM 崩溃日志，不入库
+.quarto/
+hs_err_pid*.log
+

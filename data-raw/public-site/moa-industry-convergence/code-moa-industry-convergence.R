@@ -57,6 +57,119 @@ save(tbl_out, file = data_path)
 
 ## 农业产业融合发展项目----
 
+### 1.2026年农业产业融合发展项目html转yaml----
+### html文件路径：data-raw/public-site/moa-industry-convergence/html/project-setup-year-2026.html
+### yaml文件路径：data-raw/public-site/moa-industry-convergence/yaml/project-setup-year-2026.yaml
+###
+### yaml 对照公示 html 手工整理（本脚本不解析 html），作为 2026 年起的权威中间层。
+### 规范对齐 moa-machine-county 的公示 yaml，并保证能落到往年 xlsx 列：
+### - 顶层标量：year / title / source / url / pub_date
+### - 三类名单分键：park / cluster / town
+### - park/cluster 条目：index, name_raw, name, province, province_raw, place
+###     name 与往年 xlsx 对齐（park 补全「现代农业产业园」后缀）
+###     province 用 BasicProvince 简称；兵团/农垦按往年规则归并
+### - town 条目：index, province, province_raw, towns（序列）, n_town
+###     导出 xlsx 时按 province 合并，town 拼成顿号串（与往年 town-setup 一致）
+### - 导出 xlsx 列：park/cluster = year,index,name,province；town = year,index,province,town,n
+###
+### 以后改名单：先改 yaml，再从下面「yaml转xlsx」重跑。
+
+### 2.2026年农业产业融合发展项目yaml转xlsx----
+### 分类别转xlsx，包括
+### a.现代农业产业园项目xlsx,文件名：/xlsx/project-setup-year-2026-park.xlsx
+### b.优势特色产业集群项目xlsx,文件名：/xlsx/project-setup-year-2026-cluster.xlsx
+### c.农业产业强镇项目xlsx,文件名：/xlsx/project-setup-year-2026-town.xlsx
+### 同时另存为往年循环读取用的 {type}-setup-year-2026.xlsx，列与 2025 完全一致
+
+Year <- 2026
+require("yaml")
+dir_case <- here("data-raw/public-site/moa-industry-convergence")
+file_yaml <- here(dir_case, glue("yaml/project-setup-year-{Year}.yaml"))
+dir_xlsx <- here(dir_case, "xlsx")
+dir.create(dir_xlsx, recursive = TRUE, showWarnings = FALSE)
+if (!file.exists(file_yaml)) {
+  stop("未找到 2026 年公示 yaml：", file_yaml)
+} else {
+  message(glue("已找到 2026 年公示 yaml：{file_yaml}"))
+}
+
+# yaml::read_yaml() 会把 null 收成 NULL，先转成 NA 再逐条拼行
+yaml_chr <- function(x) {
+  if (is.null(x) || length(x) == 0L) NA_character_ else as.character(x)
+}
+yaml_int <- function(x) {
+  if (is.null(x) || length(x) == 0L) NA_integer_ else as.integer(x)
+}
+
+yml_read <- yaml::read_yaml(file_yaml)
+if (is.null(yml_read$park) || is.null(yml_read$cluster) || is.null(yml_read$town)) {
+  stop("YAML 缺少 park/cluster/town 列表：", file_yaml)
+}
+
+tbl_park <- purrr::map_dfr(yml_read$park, function(item) {
+  tibble::tibble(
+    year = yaml_int(yml_read$year),
+    index = yaml_int(item$index),
+    name = yaml_chr(item$name),
+    province = yaml_chr(item$province)
+  )
+})
+
+tbl_cluster <- purrr::map_dfr(yml_read$cluster, function(item) {
+  tibble::tibble(
+    year = yaml_int(yml_read$year),
+    index = yaml_int(item$index),
+    name = yaml_chr(item$name),
+    province = yaml_chr(item$province)
+  )
+})
+
+# 往年 town-setup 是一省一行；兵团/农垦已归并到同一简称，这里再按省合并
+tbl_town <- purrr::map_dfr(yml_read$town, function(item) {
+  towns <- if (is.null(item$towns)) character() else as.character(unlist(item$towns))
+  tibble::tibble(
+    year = yaml_int(yml_read$year),
+    province = yaml_chr(item$province),
+    town = paste(towns, collapse = "、"),
+    n = length(towns)
+  )
+}) |>
+  dplyr::group_by(year, province) |>
+  dplyr::summarise(
+    town = paste(town, collapse = "、"),
+    n = sum(n),
+    .groups = "drop"
+  ) |>
+  dplyr::mutate(index = dplyr::row_number()) |>
+  dplyr::select(year, index, province, town, n)
+# 检查数据
+if (interactive()) {
+  View(tbl_park)
+  View(tbl_cluster)
+  View(tbl_town)
+}
+
+# 新工作流文件名 + 往年 {type}-setup-year-{Year}.xlsx 别名，后者给文件头循环 bind 用
+## 同时写入data-raw和data-tidy文件夹下：
+## - data-raw/public-site/moa-industry-convergence/xlsx/
+## - data-raw/data-tidy/public-site/moa-industry-convergence/xlsx
+write_type_xlsx <- function(dt, type_key) {
+  dir_raw <- here("data-raw/public-site/moa-industry-convergence/xlsx/")
+  dir_tidy <- here("data-raw/data-tidy/public-site/moa-industry-convergence/xlsx/")
+  #dir.create(dir_raw, recursive = TRUE, showWarnings = FALSE)
+  dir.create(dir_tidy, recursive = TRUE, showWarnings = FALSE)
+  path_raw <- here(dir_raw, glue("{type_key}-setup-year-{Year}.xlsx"))
+  path_tidy <- here(dir_tidy, glue("{type_key}-setup-year-{Year}.xlsx"))
+  openxlsx::write.xlsx(dt, path_raw, overwrite = TRUE)
+  openxlsx::write.xlsx(dt, path_tidy, overwrite = TRUE)
+  message(glue("已写出raw xlsx：{basename(path_raw)} 与 tidy xlsx：{basename(path_tidy)}（{nrow(dt)} 行）"))
+}
+write_type_xlsx(tbl_park, "park")
+write_type_xlsx(tbl_cluster, "cluster")
+write_type_xlsx(tbl_town, "town")
+
+
+
 ### html转txt----
 
 #### 读取公示文件txt----
@@ -92,7 +205,7 @@ tbl_tidy <- tbl_raw %>%
   # 获得名称
   mutate(
     name = ifelse(
-      str_detect(value, "："),  
+      str_detect(value, "："),
       str_extract(value, "(?<=：)(.+)"),
       value
       )
@@ -105,7 +218,7 @@ tbl_tidy <- tbl_raw %>%
       name
     )
   )
- 
+
 #### 匹配省区信息----
 # obtain the province info
 require(techme)
@@ -117,7 +230,7 @@ ptn_city <- paste0(unique(ProvinceCity$city_clean), collapse = "|")
 tbl_info <- tbl_tidy  %>%
   # 获得部分省份信息
   mutate(
-    province_read = str_extract(value, "(.+)(?=：)") 
+    province_read = str_extract(value, "(.+)(?=：)")
   ) %>%
   # 获得全部省区信息
   mutate(
@@ -137,7 +250,7 @@ tbl_info <- tbl_tidy  %>%
       is.na(province_clean),
       mgsub::mgsub(
         province_read,
-        c("北大荒农垦集团"), 
+        c("北大荒农垦集团"),
         c("黑龙江")
         ),
       province_clean
@@ -145,8 +258,8 @@ tbl_info <- tbl_tidy  %>%
   ) %>%
   select(-value)
 
-#### 添加整理信息----  
-tbl_out <- tbl_info %>% 
+#### 添加整理信息----
+tbl_out <- tbl_info %>%
   # 添加年份信息
   mutate(year = Year) %>%
   # 添加序号信息
@@ -263,10 +376,10 @@ tbl_info <- tbl_raw  %>%
 # 核验省份是否齐全
 tbl_check <- tbl_info %>%
   filter(is.na(province_clean))
-  
-### 添加整理信息----  
-tbl_out <- tbl_info %>% 
-  rename("name" = "value", "province"="province_clean") %>% 
+
+### 添加整理信息----
+tbl_out <- tbl_info %>%
+  rename("name" = "value", "province"="province_clean") %>%
   # 添加年份信息
   mutate(year = Year) %>%
   # 添加序号信息
@@ -310,7 +423,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   filter(value!="") %>% # drop empty row
   mutate(value = str_extract(value, "(?<=\\.).+"))
 
-tbl_out <- tbl_raw %>% 
+tbl_out <- tbl_raw %>%
   rename("name" = "value") %>%
   add_column(index = 1:nrow(.), .before = "name") %>%
   add_column(year = Year, .before = "index")
@@ -340,7 +453,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   filter(value!="") %>% # drop empty row
   mutate(value = str_extract(value, "(?<=\\.).+"))
 
-tbl_out <- tbl_raw %>% 
+tbl_out <- tbl_raw %>%
   rename("name" = "value") %>%
   add_column(index = 1:nrow(.), .before = "name") %>%
   add_column(year = Year, .before = "index")
@@ -364,7 +477,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   html_nodes(css =  css_tar) %>%
   html_table() %>% # get two tables
   bind_rows() %>%  # combine tables
-  as_tibble() %>% 
+  as_tibble() %>%
   rename("value" = "X1") %>%
   # clean
   mutate(
@@ -376,7 +489,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   filter(value!="") %>% # drop empty row
   mutate(value = str_extract(value, "(?<=\\.).+"))
 
-tbl_out <- tbl_raw %>% 
+tbl_out <- tbl_raw %>%
   rename("name" = "value") %>%
   add_column(index = 1:nrow(.), .before = "name") %>%
   add_column(year = Year, .before = "index")
@@ -409,7 +522,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   filter(value!="") %>% # drop empty row
   mutate(value = str_extract(value, "(?<=\\.).+"))
 
-tbl_out <- tbl_raw %>% 
+tbl_out <- tbl_raw %>%
   rename("name" = "value") %>%
   add_column(index = 1:nrow(.), .before = "name") %>%
   add_column(year = Year, .before = "index")
@@ -445,7 +558,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   filter(value!="") %>% # drop empty row
   mutate(value = str_extract(value, "(?<=\\.).+"))
 
-tbl_out <- tbl_raw %>% 
+tbl_out <- tbl_raw %>%
   rename("name" = "value") %>%
   add_column(index = 1:nrow(.), .before = "name") %>%
   add_column(year = Year, .before = "index")
@@ -479,10 +592,10 @@ tbl_out <- NULL
 
 i <- 1
 for (i in length(files_target):1) {
-  
+
   tbl_tem <- read.xlsx(url_xlsx[i]) %>%
     mutate(index = as.numeric(index))
-  
+
   tbl_out <- bind_rows(tbl_out, tbl_tem)
 }
 
@@ -512,7 +625,7 @@ tbl_info <-  tbl_out %>%
       "黑龙江",
       province)
   )
-# fill province, 
+# fill province,
 # assumed the firs firm is identified exactly
 #fill(province, .direction = "down")
 
@@ -553,7 +666,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   html_nodes(css =  css_tar) %>%
   html_table() %>% # get two tables
   bind_rows() %>%  # combine tables
-  as_tibble() %>% 
+  as_tibble() %>%
   rename("value" = "X2") %>%
   # clean
   mutate(
@@ -565,7 +678,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   filter(value!="") #%>% # drop empty row
 #mutate(value = str_extract(value, "(?<=\\.).+"))
 
-tbl_out <- tbl_raw %>% 
+tbl_out <- tbl_raw %>%
   rename("name" = "value") %>%
   add_column(index = 1:nrow(.), .before = "name") %>%
   add_column(year = Year, .before = "index") %>%
@@ -599,7 +712,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   filter(value!="") %>% # drop empty row
   mutate(value = str_extract(value, "(?<=\\.).+"))
 
-tbl_out <- tbl_raw %>% 
+tbl_out <- tbl_raw %>%
   rename("name" = "value") %>%
   add_column(index = 1:nrow(.), .before = "name") %>%
   add_column(year = Year, .before = "index")
@@ -628,10 +741,10 @@ years_target <- str_extract_all(files_target, "(\\d{4})") %>%
 tbl_out <- NULL
 i <- 1
 for (i in length(files_target):1) {
-  
+
   tbl_tem <- read.xlsx(url_xlsx[i]) %>%
     mutate(index = as.numeric(index))
-  
+
   tbl_out <- bind_rows(tbl_out, tbl_tem)
 }
 
@@ -661,7 +774,7 @@ tbl_info <-  tbl_out %>%
       "黑龙江",
       province)
   )
-# fill province, 
+# fill province,
 # assumed the firs firm is identified exactly
 #fill(province, .direction = "down")
 
@@ -697,12 +810,12 @@ Year <- 2018
 # xpath for data table
 css_tar <-"div.cluster"
 
-tbl_raw <- read.xlsx(files_dir, 
-                     rows = 4:37, 
-                     colNames = FALSE ) 
+tbl_raw <- read.xlsx(files_dir,
+                     rows = 4:37,
+                     colNames = FALSE )
 
-names_chn <- c("index", "province", "town", "n")  
-tbl_out <- tbl_raw %>% 
+names_chn <- c("index", "province", "town", "n")
+tbl_out <- tbl_raw %>%
   rename_all(., ~names_chn)  %>%
   mutate(index = 1:nrow(.)) %>%
   add_column(year = Year, .before = "index") %>%
@@ -728,8 +841,8 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   as_tibble() %>%
   filter(`序号`!="合计")
 
-names_chn <- c("index", "province", "town", "n")  
-tbl_out <- tbl_raw %>% 
+names_chn <- c("index", "province", "town", "n")
+tbl_out <- tbl_raw %>%
   rename_all(., ~names_chn)  %>%
   mutate(index = 1:nrow(.)) %>%
   add_column(year = Year, .before = "index") %>%
@@ -762,9 +875,9 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
       c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
       c("", "","", ".")),
     value = str_trim(value)) %>%
-  filter(value!="") 
+  filter(value!="")
 
-tbl_out <- tbl_raw %>% 
+tbl_out <- tbl_raw %>%
   separate(value, into = c("province", "town"), sep = "：") %>%
   # count towns
   mutate(n = str_count(town, "、") +1) %>%
@@ -803,7 +916,7 @@ tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
   filter(value!="") #%>% # drop empty row
 #mutate(value = str_extract(value, "(?<=\\.).+"))
 
-tbl_out <- tbl_raw %>% 
+tbl_out <- tbl_raw %>%
   separate(value, into = c("province", "town"), sep = "：") %>%
   # count towns
   mutate(n = str_count(town, "、") +1) %>%
@@ -835,10 +948,10 @@ tbl_out <- NULL
 
 i <- 1
 for (i in length(files_target):1) {
-  
+
   tbl_tem <- read.xlsx(url_xlsx[i]) %>%
     mutate(index = as.numeric(index))
-  
+
   tbl_out <- bind_rows(tbl_out, tbl_tem)
 }
 
@@ -854,7 +967,7 @@ ptn_city <- paste0(unique(ProvinceCity$city_clean), collapse = "|")
 
 tbl_info <-  tbl_out %>%
   rename("province_source" = "province") %>%
-  # clean 
+  # clean
   mutate(province_name = str_extract(province_source, ptn_province),
          city_clean= str_extract(province_source, ptn_city)) %>%
   # match
@@ -863,7 +976,7 @@ tbl_info <-  tbl_out %>%
                            province_clean,
                            province_name)) %>%
   # filter(is.na(province))
-  # special case 
+  # special case
   mutate(
     province =ifelse(
       # case NA: index 2023-39
@@ -871,7 +984,7 @@ tbl_info <-  tbl_out %>%
       "黑龙江",
       province)
   ) %>%
-  select(year, index, province, town, n) 
+  select(year, index, province, town, n)
 
 # check
 check <- sum(is.na(tbl_info$province))
@@ -927,6 +1040,6 @@ for (i in 1:length(years_tar)){
 
 tbl_check <- tbl_export %>%
   group_by(province) %>%
-  summarise(n = sum(n)) 
-  
+  summarise(n = sum(n))
+
 
