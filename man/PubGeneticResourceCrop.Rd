@@ -12,7 +12,7 @@ A data frame:
 \item{determineYear}{integer, the official recognition year of the bank
 or nursery}
 \item{province}{character, province in reduced Chinese}
-\item{nature}{character, type of the facility
+\item{nature}{character, type of the facility}
 \item{title}{character, name of the bank or nursery}
 \item{institution}{character, name of the supporting institution}
 }

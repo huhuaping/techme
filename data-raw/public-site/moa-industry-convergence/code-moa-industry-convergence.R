@@ -84,7 +84,7 @@ save(tbl_out, file = data_path)
 Year <- 2026
 require("yaml")
 dir_case <- here("data-raw/public-site/moa-industry-convergence")
-file_yaml <- here(dir_case, glue("yaml/project-setup-year-{Year}.yaml"))
+file_yaml <- here(dir_case, glue("xlsx/project-setup-year-{Year}.yaml"))
 dir_xlsx <- here(dir_case, "xlsx")
 dir.create(dir_xlsx, recursive = TRUE, showWarnings = FALSE)
 if (!file.exists(file_yaml)) {

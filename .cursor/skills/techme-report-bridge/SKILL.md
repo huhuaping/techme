@@ -62,7 +62,7 @@ D:/github/tech-report/data-raw/public-site/{source}/xlsx/tbl-json-{Year}.rds
 报告端安装并加载（建议钉 tag）：
 
 ```r
-# remotes::install_github("huhuaping/techme@v0.1.2.9008")
+# remotes::install_github("huhuaping/techme@v0.1.2.9009")
 library(techme)
 data(RDPatentValid)
 ```

@@ -19,8 +19,10 @@ A data frame:
 \item{func_director}{character, name of director in  functional research area  }
 \item{researcher_area}{character, detail research direction witin functional research area }
 \item{researcher_name}{character,  name of researcher}
-\item{researcher_inst}{character, institution of the esearcher}
-\item{province}{ matched province of the institution}
+\item{researcher_inst}{character, institution of the researcher}
+\item{province_industry}{character, matched province of the industry chairman institution}
+\item{province_func}{character, matched province of the functional-area director institution}
+\item{province_researcher}{character, matched province of the researcher institution}
 }
 }
 \source{
