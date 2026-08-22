@@ -72,7 +72,7 @@ cases:
     title: 山西隰县玉露香梨机械化生产模式和典型案例
     province: 山西
     place: 隰县
-    crop: 玉露香梨
+    crop: 香梨
   - id: 8
     category: 林果
     index: 2
@@ -100,14 +100,14 @@ cases:
     title: 江西丘陵地区设施鲜食葡萄机械化生产模式与典型案例
     province: 江西
     place: 丘陵地区
-    crop: 鲜食葡萄
+    crop: 葡萄
   - id: 12
     category: 林果
     index: 6
     title: 新疆南疆鲜食/制干葡萄机械化生产模式与典型案例
     province: 新疆
     place: 南疆
-    crop: 鲜食/制干葡萄
+    crop: 葡萄
   - id: 13
     category: 林果
     index: 7
@@ -134,8 +134,8 @@ cases:
     index: 2
     title: 安徽名优绿茶黄山毛峰（黄山徽州）连续化、自动化、智能化生产模式与典型案例
     province: 安徽
-    place: 黄山徽州
-    crop: 黄山毛峰
+    place: 徽州
+    crop: 茶叶
   - id: 17
     category: 茶叶
     index: 3

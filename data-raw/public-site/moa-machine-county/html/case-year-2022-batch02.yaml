@@ -79,7 +79,7 @@ cases:
     title: 江西柑橘（南丰金秋砂糖桔）机械化生产模式与典型案例
     province: 江西
     place: 南丰
-    crop: 金秋砂糖桔
+    crop: 砂糖桔
   - id: 9
     category: 林果
     index: 6
@@ -135,14 +135,14 @@ cases:
     title: 宁夏贺兰山东麓酿酒葡萄机械化生产模式与典型案例
     province: 宁夏
     place: 贺兰山东麓
-    crop: 酿酒葡萄
+    crop: 葡萄
   - id: 17
     category: 林果
     index: 14
     title: 新疆玛纳斯酿酒葡萄机械化生产模式与典型案例
     province: 新疆
     place: 玛纳斯
-    crop: 酿酒葡萄
+    crop: 葡萄
   - id: 18
     category: 茶叶
     index: 1
@@ -163,14 +163,14 @@ cases:
     title: 浙西北低山丘陵白化茶（安吉龙王）机械化生产模式与典型案例
     province: 浙江
     place: 安吉
-    crop: 白化茶
+    crop: 白茶
   - id: 21
     category: 茶叶
     index: 4
     title: 浙北缓坡白化茶（安吉雅思清和）机械化生产模式与典型案例
     province: 浙江
     place: 安吉
-    crop: 白化茶
+    crop: 白茶
   - id: 22
     category: 茶叶
     index: 5
