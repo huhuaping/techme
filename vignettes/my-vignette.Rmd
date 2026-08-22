@@ -580,6 +580,28 @@ PubGeneticResourceCrop %>%
   kable()
 ```
 
+### PubMachineCountyCase
+
+```{r,echo=FALSE}
+data("PubMachineCountyCase")
+```
+
+> **说明**：本数据集在`techme`项目下整理农业农村部特色经济作物全程机械化生产模式与典型案例公示名单（"techme/data-raw/public-site/moa-machine-county/"），yaml 经 `code-moa-machine-county-case.R` 展开为 xlsx，再由 `wfl-PubMachineCounty.R` 编译。
+
+**`PubMachineCountyCase`**：A **wide format** data set containing typical cases of full-process mechanization for specialty economic crops.
+
+- Totally `r dim(PubMachineCountyCase)[2]` columns including: `r paste0(names(PubMachineCountyCase), collapse =", ")`.
+
+- Totally `r dim(PubMachineCountyCase)[1]` rows.
+
+- Years range from `r min(PubMachineCountyCase$year)` to `r max(PubMachineCountyCase$year)`
+
+```{r}
+PubMachineCountyCase %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
 ### PubBreedingXmj
 
 ```{r,echo=FALSE}
