@@ -9,8 +9,8 @@ library(lubridate)
 library(janitor)
 
 ## 基本参数----
-Year <- 2025 # 抓取年份
-date_valid <- "2024-12-31" # 证书有效截止期，也即这一天之前是有效的
+Year <- 2026 # 抓取年份
+date_valid <- "2025-12-31" # 证书有效截止期，也即这一天之前是有效的
 
 ## 读取rds文件----
 (file_path <- here(glue("data-raw/public-site/moa-seed-firm/data/table-json-{Year}.rds"))) # change here
@@ -45,11 +45,12 @@ tbl_clean <- tbl_rds %>%
 ## 处理证书重复行----
 
 # 重复情形1：处理证书编号和企业名重复的行，
-## 表明证书过期换领，但是证书编号不便，只是更新有效期
+## 表明证书过期换领，但是证书编号不变，只是更新有效期
 ## 但是有效期还是大于报告日期`date_valid`
 tbl_dup <- tbl_clean %>%
   mutate(index = 1:nrow(.)) %>%
   janitor::get_dupes(LicenceNo, ApplyCompanyName)
+cat("重复情形1：", nrow(tbl_dup), "行\n")
 ## 找到重复行里，有效日期最大的行，确定其行序号。
 index_dup <- tbl_dup %>%
   group_by(LicenceNo) %>%
@@ -71,6 +72,7 @@ tbl_dup2 <- tbl_unique %>%
     PrinterProductionManageCrops,
     ApplyCompanyName
   )
+cat("重复情形2：", nrow(tbl_dup2), "行\n")
 ## 找到重复行里，有效日期最大的行，确定其行序号。
 index_dup2 <- tbl_dup2 %>%
   group_by(ApplyCompanyName) %>%
@@ -82,7 +84,7 @@ index_dup2 <- tbl_dup2 %>%
 ## 第二次剔除
 tbl_unique <- tbl_unique %>%
   .[-index_dup2, ]
-
+cat("重复情形2剔除后：", nrow(tbl_unique), "行\n")
 
 
 ## 匹配省区信息----
@@ -114,11 +116,11 @@ tbl_info <- tbl_unique %>%
     )
   ) %>%
   select(province, all_of(vars_tar))
-
+view(tbl_info)
 # check
 check <- sum(is.na(tbl_info$province))
 if (check > 0) warning("Povince with NA, please check!")
-
+cat("省区匹配后：", nrow(tbl_info), "行\n")
 
 ## 导出到data-update/文件夹----
 

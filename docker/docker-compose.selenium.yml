@@ -1,0 +1,29 @@
+# 项目 B 用：无头 Selenium（RSelenium 连 localhost:5555）
+# 勿映射主机 5901（Windows 常保留 5901–6000）
+
+name: techme-selenium
+
+services:
+  chrome:
+    image: selenium/standalone-chrome:latest
+    container_name: projectb-chrome
+    shm_size: 2gb
+    ports:
+      - "5555:4444"
+    environment:
+      - SE_NODE_MAX_SESSIONS=1
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+    restart: "no"
+
+  chrome-debug:
+    profiles: ["debug"]
+    image: selenium/standalone-chrome-debug:latest
+    container_name: projectb-chrome-debug
+    shm_size: 2gb
+    ports:
+      - "5555:4444"
+      - "15900:5900"
+    environment:
+      - SE_NODE_MAX_SESSIONS=1
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+    restart: "no"

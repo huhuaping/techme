@@ -1501,7 +1501,7 @@ R代码文件：
 
 - 制表：旱区省份/最新年份名单列表
 
-## 全国农业农村信息化示范基地
+## 全国农业农村信息化示范基地（staying）
 
 ### 数据说明
 
@@ -1543,6 +1543,8 @@ techme::PubRuralInfoBase %>%
 ```
 
 ### 数据进度(staying)
+
+根据公告文件，总共认定名单计划数量为200个基地，两个批次认定已基本达到计划目标数量。推测以后不再继续认定。
 
 - [html div]2023年12月29日,农业农村部关于认定2023年度农业农村信息化示范基地的[通知](http://www.moa.gov.cn/govpublic/SCYJJXXS/202312/t20231229_6443755.htm)
 
@@ -1703,6 +1705,23 @@ techme::PubSeedFirm %>%
 
 当前项目：
 
+- 2026年，docker selenium启动直接通过项目下指令代码在Cursor IDE中terminal运行`docker compose -f docker/docker-compose.selenium.yml up -d`启动。
+
+```
+# 启动（无头）
+docker compose -f docker/docker-compose.selenium.yml up -d chrome
+
+# 就绪检查（约等 10–20 秒，应含 Selenium Grid ready）
+curl http://127.0.0.1:5555/status
+
+# 停止
+docker compose -f docker/docker-compose.selenium.yml --profile debug down
+
+# 调试可视化（仅用于开发调试）：
+docker compose -f docker/docker-compose.selenium.yml --profile debug up -d chrome-debug
+# VNC: localhost:15900，密码多为 secret
+```
+
 - 2025年，网站数据抓取迁移`techme`项目`data-raw/public-site/moa-seed-firm`下
 
 
@@ -1753,7 +1772,7 @@ ptn_clean <-c(
 
 更新状态：updated
 
-数据来源：参看全国农作物种质资源信息平台<https://ncgrip.cgris.net> 【文件下载】栏目
+数据来源：参看全国农作物种质资源信息平台<https://ncgrip.cgris.net> 【文件下载】栏目。参考资源2（中国作物种质资源信息网）：<https://www.cgris.net/home>，可以查询具体作物种质资源信息。
 
 统计类别：
 
