@@ -646,16 +646,34 @@ PubXmjBreeding %>%
 data("PubStandardXmj")
 ```
 
-**`PubStandardXmj`**：A **wide format** data set containing details of Officer' Livestock Breeding List from MOA (Xmj).
+> **已弃用**：请改用 `PubXmjStandard`。本对象为 2010–2020 快照，将在后续版本移除。
+
+**`PubStandardXmj`**：A **wide format** data set containing details of Officer' Livestock Standard List from MOA (Xmj).
 
 - Totally `r dim(PubStandardXmj)[2]` columns including: `r paste0(names(PubStandardXmj), collapse =", ")`.
 
 - Totally `r dim(PubStandardXmj)[1]` rows.
 
-- Years range from `r min(PubStandardXmj$year)` to `r max(PubStandardXmj$year)` 
+- Years range from `r min(PubStandardXmj$year)` to `r max(PubStandardXmj$year)`
+
+### PubXmjStandard
+
+```{r,echo=FALSE}
+data("PubXmjStandard")
+```
+
+> **说明**：本数据集在 `techme` 项目下整理农业农村部畜禽养殖标准化示范场认定名单（`data-raw/public-site/moa-xmj-standard/`）。2010–2020 年由 `scrape-standard.Rmd` 清洗（无 2012 年公示）；2021 年起 YAML 经 `code-scrape-standard.R` 展开为 tidy xlsx，再由 `wfl-PubXmjStandard.R` 编译。这是当前唯一应使用的名单。
+
+**`PubXmjStandard`**：A **wide format** data set containing livestock standardized demonstration farms from MOA designation notices.
+
+- Totally `r dim(PubXmjStandard)[2]` columns including: `r paste0(names(PubXmjStandard), collapse =", ")`.
+
+- Totally `r dim(PubXmjStandard)[1]` rows.
+
+- Years range from `r min(PubXmjStandard$year)` to `r max(PubXmjStandard$year)`
 
 ```{r}
-PubStandardXmj %>%
+PubXmjStandard %>%
   sample_n(size = 10) %>%
   kable()
 ```

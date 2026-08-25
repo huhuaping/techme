@@ -1,0 +1,67 @@
+# 畜禽养殖标准化示范场 YAML 中间层（2021 年起，仅认定名单）
+#
+# 定位：
+#   公示原文（html/pdf）→ 本目录 year-{YYYY}.yaml →
+#   code-scrape-standard.R 展开为 xlsx/year-{YYYY}.xlsx →
+#   再清洗为 data-tidy/.../xlsx/tidy-year-{YYYY}.xlsx
+#
+# 文件名 year-{YYYY}.yaml 中的 YYYY 是通知所指业务年份，不是发文年份。
+#
+# R 读取并展开为 tidy 列（与 2010–2020 public-site/xlsx/year-{YYYY}.xlsx 对齐）：
+#   yml <- yaml::read_yaml(path)
+#   rows <- list()
+#   for (ax in yml$annexes) {
+#     for (g in ax$groups) {
+#       for (it in g$items) {
+#         rows[[length(rows) + 1]] <- tibble::tibble(
+#           year = yml$year,
+#           index = it$index,
+#           area_name = g$area_name,
+#           prod_name = it$prod_name,
+#           com_name = it$com_name
+#         )
+#       }
+#     }
+#   }
+#   tbl <- dplyr::bind_rows(rows)
+#
+# 目标 tidy 列（与历史 scrape-standard.Rmd / year-*.xlsx 一致）：
+#   year, index, area_name, prod_name, com_name
+#
+# 口径约定：
+#   - 本次只收录「认定名单」（附件 1）。复验通过名单不入库，也不写空 annex。
+#   - index 为附件表全年流水序号（1..n），与历史 tidy 的 index=1:nrow 一致，
+#     不是分省重起。
+#   - area_name 用公示「省份」列原文（天津、河北、内蒙古 等），
+#     不改写成「天津市」。xlsx 阶段把「新疆生产建设兵团」收成「新疆」。
+#   - province 与 area_name 相同，留给以后 use_data 与 BasicProvince 对齐。
+#   - prod_name / com_name 沿用公示原文，不做历史别名改写
+#     （不把「种鸡」改成「蛋鸡」，不把「奶绵羊」改成「绵羊」）。
+#   - 省份单元格在表内向下合并：只在该省首行出现，YAML 写在 groups[].area_name，
+#     条目继承。
+#   - 已有 area_name 一律不改写。
+#
+# 字段一览（* 为目标 tidy 列；其余供维护，xlsx 阶段可丢弃）：
+#   year*            业务年份
+#   mark             认定名单（本批只有这一类）
+#   annex            附件序号
+#   annex_kind       认定
+#   area_name*       公示省份（写在 groups[].area_name）
+#   province         与 area_name 相同
+#   index*           附件全年原序号
+#   prod_name*       畜种
+#   com_name*        创建/单位名称
+#
+# 每年文件顶层键：year, title, doc_no, effective_date, pub_date,
+#   url, url_alt, source, source_files, counts, annexes.
+
+schema_version: 1
+dataset: PubXmjStandard
+mark_values:
+  - 认定名单
+tidy_columns:
+  - year
+  - index
+  - area_name
+  - prod_name
+  - com_name

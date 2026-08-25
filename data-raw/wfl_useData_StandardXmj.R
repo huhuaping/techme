@@ -1,4 +1,6 @@
 ## code to prepare `wfl_useData_StandardXmj` dataset goes here
+# 已弃用。新名单请用 data-raw/public-site/moa-xmj-standard/wfl-PubXmjStandard.R
+# 生成 techme::PubXmjStandard。本脚本不再维护。
 source("data-raw/set-global.R")
 
 # =====create dir====

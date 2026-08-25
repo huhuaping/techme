@@ -1662,9 +1662,36 @@ R代码文件：
 ### 文件管理
 
 ```{r}
-dir_tar <- here("topic/public-site/moa-cooperation")
+dir_tar <- here("data-raw/public-site/moa-cooperation")
 safe_dir_tree(dir_tar)
 ```
+
+### 数据集展示
+
+拟创建为`techme::PubCooperation`数据集。目前暂时未创建开发（2026年8月25日）。
+
+
+### 数据进度
+
+<!-- 2023年度及以后年份名单未见公示信息。 -->
+
+<!---**名单**--->
+
+- 【word附表 转html】 2023年4月10日。关于公布2022年国家农民合作社示范社和全国农民用水合作示范组织名单的[通知](http://www.moa.gov.cn/nybgb/2023/202305/202305/t20230526_6428667.htm)。农经发〔2023〕1号。认定北京聚兰兴养殖专业合作社等1919家农民合作社为国家农民合作社示范社，杭锦后旗沙海镇沙沟农民用水户协会等54家农民用水合作组织为全国农民用水合作示范组织，现将名单予以公布。
+
+- 【html附表】2021年6月11日 关于公布2020年国家农民合作社示范社和全国农民用水合作示范组织名单的[通知](http://www.moa.gov.cn/nybgb/2021/202107/202111/t20211104_6381339.htm)
+
+    - 2021年05月12日(word)关于公示国家农民合作社示范社和全国农民用水合作示范组织名单的[公告](http://www.moa.gov.cn/govpublic/NCJJTZ/202105/t20210512_6367631.htm)
+
+<!---**监测**--->
+
+- 【无名单】农业农村部关于公布第三次监测合格国家农民合作社示范社名单的[通知](http://www.hzjjs.moa.gov.cn/nchzjj/202011/t20201112_6356218.htm)
+
+- 【pdf】2018年6月6日 农业农村部关于公布第二次监测合格国家农民合作社示范社名单的[通知](http://dara.gd.gov.cn/tzgg2272/content/post_1558173.html)
+
+- 【html】2015年12月14日 农业部关于公布第一次监测合格国家农民合作社示范社名单的[通知](http://www.moa.gov.cn/nybgb/2016/diyiqi/201711/t20171125_5919534.htm)
+
+
 
 # MOA农业部/种业管理司
 
@@ -1978,6 +2005,7 @@ code_file <-("report-tech2025/report/code/chpt02-03-moa-genetic-resource.R")
 
 数据来源：农业农村部网站
 
+
 ## 国家核心育种场
 
 数据说明：
@@ -2092,6 +2120,92 @@ techme::PubXmjBreeding %>%
 - 农业部办公厅2015年关于公布第一批国家肉鸡核心育种场和国家肉鸡良种扩繁推广基地名单的[通知](http://www.moa.gov.cn/nybgb/2015/shiyiqi/201712/t20171219_6104097.htm)
 
     - 2020年关于补齐肉鸡产业发展短板、做强肉鸡产业的[建议](http://www.moa.gov.cn/govpublic/xmsyj/202011/t20201103_6355681.htm)
+
+
+## 畜禽养殖标准化示范场
+
+数据说明：
+
+更新状态：updated（`techme::PubXmjStandard`，2026-08-25 入库）。
+
+- 目标变量：year(年份)	index(序号)	area_name(省份)	prod_name(畜禽品种名称)	com_name(养殖场名称)
+
+数据类别：畜禽养殖标准化示范场名单，包括：认定名单（重点收集）、复验通过名单（暂未处理，未来可能处理）。
+
+数据口径：
+
+- 202x年农业农村部畜禽养殖标准化示范场名单（历史文件`public-site/moa-xmj-standard/html`）。
+
+### 文件管理
+
+```{r}
+dir_tar <- here("data-raw/public-site/moa-xmj-standard")
+safe_dir_tree(dir_tar)
+```
+
+- 初始公示文件：`data-raw/public-site/moa-xmj-standard/html/`，包括 html、pdf、word 等格式文档。
+
+- 公示整理为初始 xlsx 文件：`data-raw/public-site/moa-xmj-standard/xlsx/`，xlsx 格式文档 `year-{YYYY}.xlsx`。
+
+- 清洗后文件：`data-raw/data-tidy/public-site/moa-xmj-standard/xlsx/`，xlsx 格式文档 `tidy-year-{YYYY}.xlsx`。标准化变量名称。目标变量：year（年份）	index（序号）	area_name（省份，公示短名；新疆生产建设兵团收成新疆）	prod_name（畜禽品种名称）	com_name（养殖场名称）。
+
+### 数据集展示
+
+数据使用：`techme::PubXmjStandard`（2010 年及以后，缺 2012 年公示；仅认定名单）。`techme::PubStandardXmj` 为 2010–2020 旧快照，**已弃用**，请改用 `PubXmjStandard`；将在后续版本从包中移除。
+
+(1) 2021 年及以后：公示原文整理为 `yaml/year-{YYYY}.yaml`，执行 `data-raw/public-site/moa-xmj-standard/code-scrape-standard.R`，写出 `xlsx/year-{YYYY}.xlsx` 与 `data-tidy/.../xlsx/tidy-year-{YYYY}.xlsx`。
+
+(2) 2010–2020 年：历史 tidy 已在 `data-raw/data-tidy/public-site/moa-xmj-standard/xlsx/tidy-year-{YYYY}.xlsx`（源目录无 2012 年文件）。
+
+(3) 数据发布，执行 `data-raw/public-site/moa-xmj-standard/wfl-PubXmjStandard.R`。
+
+```{r}
+techme::PubXmjStandard %>%
+  dplyr::count(year) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 15,
+      scrollX = TRUE
+    )
+  )
+```
+
+### 数据进度
+
+<!-- 2024年及以后年份认定名单未见公示信息 -->
+
+- 【通知创建，但没有公示结果名单】2024-02-08。关于开展2024年畜禽养殖标准化示范创建活动的[通知](https://www.hunan.gov.cn/zqt/zcsd/202402/t20240218_32861720.html)
+
+- 【html pdf附件，转载非官方】2023年12月6日。关于公布2023年畜禽养殖标准化示范场名单的[通知](https://www.waizi.org.cn/law/210204.html)。农办牧〔2023〕30号。确定天津市滨海新区大港港泰鑫晁蛋鸡养殖场等191家养殖场为2023年农业农村部畜禽养殖标准化示范场（附件1 认定名单）。经现场审核，天津农垦康嘉生态养殖有限公司第五分公司等149家养殖场复验合格（附件2 复验通过名单），一并予以公布。
+
+- 【html pdf附件，转载非官方】2022年11月23日。关于公布2022年畜禽养殖标准化示范场名单的[通知](https://www.wygczx.cn/news/detail/id/103.html)。农办牧〔2022〕32号。确定天津富优农业科技有限公司等207家畜禽养殖场为2022年农业农村部畜禽养殖标准化示范场（附件1 认定名单）。经现场审核，广宗牧原农牧有限公司（二场）等102家养殖场复验合格（附件2 复验通过名单），一并予以公布。。
+
+- 【html pdf附件，转载非官方】2021年12月15日。关于公布2021年畜禽养殖标准化示范场名单的[通知](https://www.waizi.org.cn/law/125642.html)。农办牧〔2021〕49号。确定天津市惠康种猪育种有限公司等193家畜禽养殖场为2021年农业农村部畜禽养殖标准化示范场（附件1 认定名单）。经现场审核，天津市宁河原种猪场有限责任公司等78家养殖场通过复验（附件2 复验通过名单 下载自<https://nynct.fujian.gov.cn/ztzl/dwyqfk/tztg/202212/P020221202580802578293.p>），一并予以公布。
+
+<!-- 以上为2026年08月25日新增条目。 -->
+
+- 【附名单 word】2020年农业农村部畜禽养殖标准化示范场名单[公示](http://www.moa.gov.cn/govpublic/xmsyj/202012/t20201223_6358630.htm)
+
+- 农业农村部办公厅关于公布2019年畜禽养殖标准化示范场名单的[通知](http://www.moa.gov.cn/nybgb/2019/201912/202004/t20200410_6341206.htm)
+
+- 【附名单 Excel】农业农村部2018年畜禽养殖标准化示范场名单[公示](http://www.moa.gov.cn/xw/zxfb/201812/t20181212_6164807.htm)
+
+- 关于公布2017年畜禽养殖标准化示范场名单的[通知](http://www.moa.gov.cn/gk/tzgg_1/tfw/201712/t20171227_6126063.htm)
+
+- 关于公布2016年畜禽养殖标准化示范场名单的[通知](http://www.moa.gov.cn/gk/tzgg_1/tfw/201612/t20161209_5402699.htm)
+
+- 关于公布2015年畜禽标准化示范场名单的[通知](http://www.moa.gov.cn/nybgb/2015/shierqi/201712/t20171219_6104136.htm)
+
+- 关于公布2014年畜禽标准化示范场的[通知](http://www.moa.gov.cn/nybgb/2014/shier/201712/t20171219_6111624.htm)
+
+- 农业部办公厅关于公布2013年畜禽标准化示范场名单的[通知](http://www.moa.gov.cn/nybgb/2013/qsyq/201805/t20180509_6141669.htm)
+
+- 【附名单 word】农业部办公厅关于公布2011年第一批畜禽标准化示范场名单的[通知](https://www.moa.gov.cn/gk/zcjd/201110/t20111018_2363998.htm)
+
+- 【附名单 word】农业部办公厅2010年关于公布第二批畜禽标准化示范场名单的[通知](http://www.moa.gov.cn/govpublic/XMYS/201012/t20101214_1790209.htm)
+
 
 # 跨部门CROSS
 

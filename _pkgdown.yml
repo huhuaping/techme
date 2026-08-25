@@ -77,6 +77,7 @@ reference:
   - PubRuralInfoBase
   - PubSeedFirm
   - PubXmjBreeding
+  - PubXmjStandard
 - title: Data Subset for the special chapter
   desc: |
     Data sets focus on special topics, including livestocks（畜牧业） et. al.
@@ -84,6 +85,7 @@ reference:
   - PubBreedingXmj
   - PubXmjBreeding
   - PubStandardXmj
+  - PubXmjStandard
   - LivestockBreeding
   - MachineService
 - title: Some elementary dataset used in the report

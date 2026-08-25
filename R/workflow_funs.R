@@ -1757,8 +1757,8 @@ choose.nameData <- function() {
         "PubObsStationX", # new version
         ## moa-xmj-breeding（PubBreedingXmj 已弃用，下版移除）
         "PubXmjBreeding",
-        ## moa-xmj-standard
-        "PubStandardXmj",
+        ## moa-xmj-standard（PubStandardXmj 已弃用，下版移除）
+        "PubXmjStandard",
         ## moa-industry-convergence
         "PubConvergencePark", # 15
         "PubConvergenceCluster",

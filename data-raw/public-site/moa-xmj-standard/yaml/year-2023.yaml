@@ -1,0 +1,700 @@
+# 畜禽养殖标准化示范场年度公示中间层（认定名单）
+# 字段与展开方式见同目录 _schema.yaml。
+# 本文件对照 html/year-2023.html 及附件 html/year-2023-01.pdf 整理。
+#
+# R 读取示例：
+#   yml <- yaml::read_yaml(path)
+#   tbl <- purrr::map_dfr(yml$annexes, function(ax) {
+#     purrr::map_dfr(ax$groups, function(g) {
+#       dplyr::bind_rows(g$items) |>
+#         dplyr::mutate(
+#           year = yml$year, area_name = g$area_name,
+#           .before = 1
+#         )
+#     })
+#   })
+#
+year: 2023
+title: 农业农村部办公厅关于公布2023年畜禽养殖标准化示范场名单的通知
+doc_no: 农办牧〔2023〕30号
+effective_date: '2023-12-06'
+pub_date: '2023-12-18'
+url: https://www.waizi.org.cn/law/210204.html
+url_alt: http://www.moa.gov.cn/govpublic/xmsyj/202312/P020231212597316489977.pdf
+source: 农业农村部畜牧兽医局
+source_files:
+  html: html/year-2023.html
+  attachments:
+  - html/year-2023-01.pdf
+counts:
+  认定名单: 191
+  合计: 191
+annexes:
+- annex: 1
+  mark: 认定名单
+  annex_kind: 认定
+  title: 2023年农业农村部畜禽养殖标准化示范场名单
+  groups:
+  - area_name: 天津
+    province: 天津
+    items:
+    - index: 1
+      prod_name: 蛋鸡
+      com_name: 天津市滨海新区大港港泰鑫晁蛋鸡养殖场
+    - index: 2
+      prod_name: 蛋鸡
+      com_name: 天津金亚麻农业科技有限公司
+  - area_name: 河北
+    province: 河北
+    items:
+    - index: 3
+      prod_name: 蛋鸡
+      com_name: 保定兴芮农牧发展有限公司
+    - index: 4
+      prod_name: 蛋鸡
+      com_name: 曲周县北农大禽业有限公司
+    - index: 5
+      prod_name: 生猪
+      com_name: 沧州伟嘉畜牧有限公司
+    - index: 6
+      prod_name: 生猪
+      com_name: 新河牧原农牧有限公司(第六分场二区)
+    - index: 7
+      prod_name: 蛋鸡
+      com_name: 石家庄峪口禽业有限公司
+    - index: 8
+      prod_name: 肉牛
+      com_name: 围场满族蒙古族自治县新瑞农业开发有限公司
+    - index: 9
+      prod_name: 生猪
+      com_name: 秦皇岛水米田农牧有限公司
+    - index: 10
+      prod_name: 奶牛
+      com_name: 河北康宏牧业有限公司
+    - index: 11
+      prod_name: 生猪
+      com_name: 定州市添旺养殖集团有限公司
+  - area_name: 山西
+    province: 山西
+    items:
+    - index: 12
+      prod_name: 生猪
+      com_name: 山西昕广欣种猪育种有限公司
+    - index: 13
+      prod_name: 蛋鸡
+      com_name: 山西惠鑫铭农牧股份有限公司
+    - index: 14
+      prod_name: 奶牛
+      com_name: 山西永济市超人奶业有限责任公司(信昌牧场)
+    - index: 15
+      prod_name: 蛋鸡
+      com_name: 沁县宇辰农业综合开发有限公司
+    - index: 16
+      prod_name: 奶牛
+      com_name: 山西九牛农业开发有限公司
+    - index: 17
+      prod_name: 肉牛
+      com_name: 山西东合丰牧肉牛养殖专业合作社
+    - index: 18
+      prod_name: 蛋鸡
+      com_name: 长治县金华恒通禽业有限公司
+    - index: 19
+      prod_name: 肉牛
+      com_name: 山西宝睿生态牧业发展有限公司
+  - area_name: 内蒙古
+    province: 内蒙古
+    items:
+    - index: 20
+      prod_name: 奶牛
+      com_name: 内蒙古优然牧业有限责任公司托克托县分公司
+    - index: 21
+      prod_name: 肉牛
+      com_name: 内蒙古中农兴安种牛科技有限公司
+    - index: 22
+      prod_name: 肉羊
+      com_name: 内蒙古三阳牧业有限公司
+    - index: 23
+      prod_name: 肉牛
+      com_name: 扎鲁特旗百顺养殖专业合作社
+    - index: 24
+      prod_name: 肉羊
+      com_name: 扎鲁特旗新利生态农场
+    - index: 25
+      prod_name: 肉牛
+      com_name: 内蒙古鹏莱农牧业有限公司
+    - index: 26
+      prod_name: 肉牛
+      com_name: 通辽市高林屯种畜繁育中心
+    - index: 27
+      prod_name: 肉牛
+      com_name: 内蒙古佳刍牧业有限公司
+    - index: 28
+      prod_name: 生猪
+      com_name: 内蒙古开鲁牧原农牧有限公司(开鲁三场)
+  - area_name: 辽宁
+    province: 辽宁
+    items:
+    - index: 29
+      prod_name: 蛋鸡
+      com_name: 大连韩伟养鸡有限公司旅顺分公司
+    - index: 30
+      prod_name: 生猪
+      com_name: 彰武新望农牧有限公司彰武县彰新望分公司
+    - index: 31
+      prod_name: 生猪
+      com_name: 新民金泰扬翔农牧有限责任公司
+    - index: 32
+      prod_name: 生猪
+      com_name: 阜新伟嘉畜牧科技发展有限公司
+    - index: 33
+      prod_name: 奶牛
+      com_name: 宽甸优源牧业有限公司
+  - area_name: 黑龙江
+    province: 黑龙江
+    items:
+    - index: 34
+      prod_name: 肉牛
+      com_name: 龙江元盛食品有限公司雪牛分公司
+    - index: 35
+      prod_name: 奶山羊
+      com_name: 黑龙江绿能生态牧业有限公司
+    - index: 36
+      prod_name: 奶牛
+      com_name: 青冈县山东屯荷斯坦奶牛繁育场
+    - index: 37
+      prod_name: 肉鸡
+      com_name: 黑龙江北三峡养殖有限公司(宝泉岭商品鸡1 场)
+    - index: 38
+      prod_name: 生猪
+      com_name: 鸡东县禧旺养殖场
+    - index: 39
+      prod_name: 奶牛
+      com_name: 黑龙江省牡丹江农垦将军奶牛养殖专业合作社
+  - area_name: 上海
+    province: 上海
+    items:
+    - index: 40
+      prod_name: 肉羊
+      com_name: 上海万禾农业科技发展有限公司
+    - index: 41
+      prod_name: 生猪
+      com_name: 光明农牧科技有限公司(海湾畜牧场)
+    - index: 42
+      prod_name: 生猪
+      com_name: 上海中新农业有限公司
+  - area_name: 江苏
+    province: 江苏
+    items:
+    - index: 43
+      prod_name: 蛋鸡
+      com_name: 徐州市立华畜禽有限公司(种鸡场)
+    - index: 44
+      prod_name: 生猪
+      com_name: 连云港立华牧业有限公司(下车种猪二场)
+    - index: 45
+      prod_name: 生猪
+      com_name: 江苏比米农牧科技有限公司(高沟育肥场)
+    - index: 46
+      prod_name: 生猪
+      com_name: 泗洪德康农牧科技有限公司(太平种猪场)
+    - index: 47
+      prod_name: 生猪
+      com_name: 中粮家佳康(江苏)有限公司东台分公司(梁南垦区第二猪场)
+  - area_name: 浙江
+    province: 浙江
+    items:
+    - index: 48
+      prod_name: 生猪
+      com_name: 浙江清渚农牧有限公司
+    - index: 49
+      prod_name: 生猪
+      com_name: 正大猪业(余姚)有限公司
+    - index: 50
+      prod_name: 生猪
+      com_name: 苍南县威农畜牧养殖有限公司
+    - index: 51
+      prod_name: 肉鸡
+      com_name: 湖州南浔温氏畜牧有限公司(云北小区)
+    - index: 52
+      prod_name: 生猪
+      com_name: 嘉兴市青莲养殖科技有限公司
+    - index: 53
+      prod_name: 奶牛
+      com_name: 浙江荷鹭乳业有限公司
+  - area_name: 安徽
+    province: 安徽
+    items:
+    - index: 54
+      prod_name: 生猪
+      com_name: 蚌埠鹏睿农牧产业有限公司(中陈核心育种场)
+    - index: 55
+      prod_name: 鹅
+      com_name: 安徽展羽生态农业开发有限公司(军明白鹅良种繁育场)
+    - index: 56
+      prod_name: 肉鸡
+      com_name: 淮北慧赢农业发展有限公司
+    - index: 57
+      prod_name: 蛋鸡
+      com_name: 太和县高欣牧业有限公司
+    - index: 58
+      prod_name: 肉鸡
+      com_name: 安徽益新农业科技有限公司
+    - index: 59
+      prod_name: 蛋鸡
+      com_name: 安徽德基禽业生态园有限公司
+  - area_name: 福建
+    province: 福建
+    items:
+    - index: 60
+      prod_name: 蛋鸡
+      com_name: 莆田天顺利邦农业开发有限公司
+    - index: 61
+      prod_name: 生猪
+      com_name: 泉州绿之园农林业开发有限公司
+    - index: 62
+      prod_name: 蛋鸡
+      com_name: 福建省融胜禽业有限公司
+    - index: 63
+      prod_name: 生猪
+      com_name: 福建创佰佳畜牧育种有限公司
+    - index: 64
+      prod_name: 蛋鸡
+      com_name: 福州市华翔农业发展有限公司
+    - index: 65
+      prod_name: 奶牛
+      com_name: 南平市建阳区吉翔牧业有限公司
+  - area_name: 江西
+    province: 江西
+    items:
+    - index: 66
+      prod_name: 生猪
+      com_name: 崇义柯恩农牧有限公司
+    - index: 67
+      prod_name: 生猪
+      com_name: 鹰潭新六科技有限公司(黄庄基地)
+    - index: 68
+      prod_name: 蛋鸡
+      com_name: 江西胜华禽业有限公司
+    - index: 69
+      prod_name: 生猪
+      com_name: 江西金兴牧业有限公司(人和养猪场)
+    - index: 70
+      prod_name: 生猪
+      com_name: 高安市新街景贤种猪场
+    - index: 71
+      prod_name: 生猪
+      com_name: 铅山县温氏畜牧有限公司(汪二猪场)
+    - index: 72
+      prod_name: 生猪
+      com_name: 南丰天农食品有限公司(太和种猪场)
+    - index: 73
+      prod_name: 蛋鸭
+      com_name: 江西天韵农业开发股份有限公司
+    - index: 74
+      prod_name: 生猪
+      com_name: 井冈山市新盛农产品开发有限公司鹏盛养殖场
+  - area_name: 山东
+    province: 山东
+    items:
+    - index: 75
+      prod_name: 肉鸡
+      com_name: 山东省鼎立农牧科技有限公司(辛安场)
+    - index: 76
+      prod_name: 奶牛
+      com_name: 山东得益乳业股份有限公司高青第三牧场
+    - index: 77
+      prod_name: 肉鸡
+      com_name: 济南天润牧业有限公司
+    - index: 78
+      prod_name: 蛋鸡
+      com_name: 正大蛋业(山东)有限公司
+    - index: 79
+      prod_name: 生猪
+      com_name: 东营蓝海生态养殖有限公司
+    - index: 80
+      prod_name: 蛋鸡
+      com_name: 威海市小山前农牧发展有限公司
+    - index: 81
+      prod_name: 生猪
+      com_name: 德州华育种猪有限公司(德州一场)
+    - index: 82
+      prod_name: 肉牛
+      com_name: 山东现代畜牧科技有限公司
+    - index: 83
+      prod_name: 生猪
+      com_name: 青岛新万福食品有限公司(青山猪场)
+    - index: 84
+      prod_name: 肉鸡
+      com_name: 山东智典农牧发展有限公司
+    - index: 85
+      prod_name: 肉鸡
+      com_name: 成武思玛特食品有限公司南鲁分公司
+    - index: 86
+      prod_name: 蛋鸡
+      com_name: 聊城创新畜禽养殖有限公司
+    - index: 87
+      prod_name: 奶牛
+      com_name: 泰安金兰奶牛养殖有限公司
+    - index: 88
+      prod_name: 蛋鸡
+      com_name: 日照喜农商业发展有限公司
+  - area_name: 河南
+    province: 河南
+    items:
+    - index: 89
+      prod_name: 生猪
+      com_name: 河南秀博科技有限公司
+    - index: 90
+      prod_name: 生猪
+      com_name: 河南新大义马养殖有限公司(义马繁殖二场)
+    - index: 91
+      prod_name: 生猪
+      com_name: 濮阳新六农牧科技有限公司(霍营场)
+    - index: 92
+      prod_name: 生猪
+      com_name: 固始县牧原农牧有限公司(固始一场)
+    - index: 93
+      prod_name: 生猪
+      com_name: 正阳牧原农牧有限公司(第六分场)
+    - index: 94
+      prod_name: 生猪
+      com_name: 嵩县鑫豕海养殖有限公司(养猪场)
+    - index: 95
+      prod_name: 奶牛
+      com_name: 平顶山优然牧业有限责任公司
+    - index: 96
+      prod_name: 肉羊
+      com_name: 洛阳龙须坡农牧有限公司
+    - index: 97
+      prod_name: 肉牛
+      com_name: 河南福牛牧业有限公司(斛山牛场)
+    - index: 98
+      prod_name: 奶牛
+      com_name: 三门峡程宇奶牛养殖有限公司
+    - index: 99
+      prod_name: 奶牛
+      com_name: 河南盛全农牧有限公司
+    - index: 100
+      prod_name: 蛋鸡
+      com_name: 漯河市晖源农牧有限公司
+  - area_name: 湖北
+    province: 湖北
+    items:
+    - index: 101
+      prod_name: 生猪
+      com_name: 咸宁正大农牧食品有限公司(青山种猪场)
+    - index: 102
+      prod_name: 生猪
+      com_name: 枝江市宜合众畜牧有限公司
+    - index: 103
+      prod_name: 蛋鸡
+      com_name: 湖北九邦现代农业有限公司
+    - index: 104
+      prod_name: 肉牛
+      com_name: 湖北鑫慧牛业有限公司
+    - index: 105
+      prod_name: 生猪
+      com_name: 湖北华大牧业有限公司(庙头养殖场)
+    - index: 106
+      prod_name: 蛋鸭
+      com_name: 湖北神丹健康食品有限公司(蛋鸭场)
+    - index: 107
+      prod_name: 生猪
+      com_name: 武汉合一军兵农牧有限公司
+    - index: 108
+      prod_name: 生猪
+      com_name: 湖北华健硒园农牧科技有限公司建始硒都黑猪原种场
+  - area_name: 湖南
+    province: 湖南
+    items:
+    - index: 109
+      prod_name: 生猪
+      com_name: 湖南龙华农牧发展有限公司(秩堂分场)
+    - index: 110
+      prod_name: 奶牛
+      com_name: 湖南优氏牧业科技有限公司(双龙奶牛养殖场)
+    - index: 111
+      prod_name: 生猪
+      com_name: 湖南泰淼鲜丰食品有限公司(天心堰种猪场)
+    - index: 112
+      prod_name: 生猪
+      com_name: 郴州润阳生态农业有限公司
+    - index: 113
+      prod_name: 肉鸡
+      com_name: 湘潭立华牧业有限公司(桃树种鸡场)
+    - index: 114
+      prod_name: 生猪
+      com_name: 湖南信旺农牧发展有限公司(铁冲场)
+    - index: 115
+      prod_name: 生猪
+      com_name: 永州温氏畜牧有限公司(富家桥种猪场)
+    - index: 116
+      prod_name: 生猪
+      com_name: 武冈家家康农业综合开发有限公司(泻油种猪繁育基地)
+    - index: 117
+      prod_name: 肉羊
+      com_name: 浏阳市浏安农业科技综合开发有限公司
+    - index: 118
+      prod_name: 生猪
+      com_name: 花垣县益豚生态农业有限公司
+  - area_name: 广东
+    province: 广东
+    items:
+    - index: 119
+      prod_name: 生猪
+      com_name: 广东德兴食品股份有限公司汕头神山北欧农场
+    - index: 120
+      prod_name: 蛋鸡
+      com_name: 广州壹号生物技术有限公司(新村养殖基地)
+    - index: 121
+      prod_name: 奶牛
+      com_name: 陆丰市新澳良种奶牛养殖有限公司
+    - index: 122
+      prod_name: 生猪
+      com_name: 河源兴泰农牧股份有限公司
+    - index: 123
+      prod_name: 肉鸡
+      com_name: 广东天农食品集团股份有限公司(禾仓种鸡场)
+    - index: 124
+      prod_name: 生猪
+      com_name: 韶关金新农畜牧养殖有限公司
+    - index: 125
+      prod_name: 生猪
+      com_name: 广东湛江雷州牧原农牧有限公司(第十一分场)
+    - index: 126
+      prod_name: 生猪
+      com_name: 阳西县丰沃生态农业有限公司
+  - area_name: 广西
+    province: 广西
+    items:
+    - index: 127
+      prod_name: 生猪
+      com_name: 南宁市西乡塘牧原农牧有限公司(一场)
+    - index: 128
+      prod_name: 生猪
+      com_name: 鹿寨傲农畜牧养殖有限公司
+    - index: 129
+      prod_name: 生猪
+      com_name: 恭城县大信农牧有限公司(上莫坪生猪繁育场)
+    - index: 130
+      prod_name: 生猪
+      com_name: 广西农垦永新畜牧集团那梭牧业有限公司(那梭农场十一队母猪场)
+    - index: 131
+      prod_name: 生猪
+      com_name: 贺州广东温氏畜禽有限公司(羊头种猪场)
+    - index: 132
+      prod_name: 生猪
+      com_name: 广西农垦永新畜牧集团金光有限公司(松树岭原种猪场)
+    - index: 133
+      prod_name: 生猪
+      com_name: 浦北启鑫农业科技有限公司
+    - index: 134
+      prod_name: 肉鸡
+      com_name: 广西参皇养殖集团有限公司育种分公司
+    - index: 135
+      prod_name: 蛋鸡
+      com_name: 广西爱咯乐农牧科技有限公司
+    - index: 136
+      prod_name: 生猪
+      com_name: 广西凤之翔食品有限公司合浦西场分公司
+  - area_name: 海南
+    province: 海南
+    items:
+    - index: 137
+      prod_name: 肉鸡
+      com_name: 海南罗牛山文昌鸡育种有限公司(育种场)
+    - index: 138
+      prod_name: 生猪
+      com_name: 海南农垦坤牧农业发展有限公司
+  - area_name: 重庆
+    province: 重庆
+    items:
+    - index: 139
+      prod_name: 蛋鸡
+      com_name: 重庆市长寿区标杆养鸡股份合作社(葛兰镇中华村蛋鸡场)
+    - index: 140
+      prod_name: 生猪
+      com_name: 重庆市合川区德康生猪养殖有限公司二郎种猪场
+  - area_name: 四川
+    province: 四川
+    items:
+    - index: 141
+      prod_name: 生猪
+      com_name: 四川牧原农牧有限公司(金堂一场)
+    - index: 142
+      prod_name: 生猪
+      com_name: 大竹县国牧农业集团有限公司
+    - index: 143
+      prod_name: 生猪
+      com_name: 南充市高坪温氏畜牧有限公司(鹤鸣种猪场)
+    - index: 144
+      prod_name: 生猪
+      com_name: 仁寿德康农牧有限公司(同意育肥场)
+    - index: 145
+      prod_name: 生猪
+      com_name: 盐亭新好农牧有限公司(裕荣种猪场)
+    - index: 146
+      prod_name: 生猪
+      com_name: 苍溪温氏畜牧有限公司(歧坪种猪场)
+    - index: 147
+      prod_name: 生猪
+      com_name: 四川恒通内江猪保种繁育有限公司
+    - index: 148
+      prod_name: 生猪
+      com_name: 荣县德康食品有限公司(乐德镇大屋村楼层种猪场)
+    - index: 149
+      prod_name: 生猪
+      com_name: 四川正大畜牧有限公司(雷公山种猪场)
+    - index: 150
+      prod_name: 生猪
+      com_name: 乐山新希望农牧有限公司(金峰种猪场)
+    - index: 151
+      prod_name: 生猪
+      com_name: 攀枝花市怡帆新能源开发有限公司
+    - index: 152
+      prod_name: 生猪
+      com_name: 蓬安德康种猪繁育有限公司(兴旺镇海田三青沟良繁种猪场)
+  - area_name: 贵州
+    province: 贵州
+    items:
+    - index: 153
+      prod_name: 生猪
+      com_name: 贵阳富之源农业科技有限公司
+    - index: 154
+      prod_name: 肉鸡
+      com_name: 安顺市立华牧业有限公司(板当种鸡场)
+    - index: 155
+      prod_name: 生猪
+      com_name: 施秉县新希望六和养殖有限公司(翁塘猪场)
+    - index: 156
+      prod_name: 生猪
+      com_name: 遵义温氏畜牧有限公司(尚嵇猪场)
+  - area_name: 云南
+    province: 云南
+    items:
+    - index: 157
+      prod_name: 生猪
+      com_name: 建水温氏畜牧有限公司(青龙种猪场)
+    - index: 158
+      prod_name: 生猪
+      com_name: 禄丰双丰良种猪有限公司
+    - index: 159
+      prod_name: 生猪
+      com_name: 曲靖新排养殖有限公司
+    - index: 160
+      prod_name: 肉牛
+      com_name: 德宏州尚善品味农业有限公司(养瑞牛幸福家园肉牛核心繁育基地)
+    - index: 161
+      prod_name: 奶牛
+      com_name: 鹤庆县现代农业庄园有限公司(鹤庆县现代农业奶牛有机养殖场)
+    - index: 162
+      prod_name: 蛋鸡
+      com_name: 香格里拉市森吉尼达生物资源开发有限公司(尼西鸡养殖基地)
+    - index: 163
+      prod_name: 奶牛
+      com_name: 云南大理云端牧业有限公司(剑川羊岑奶牛养殖场)
+    - index: 164
+      prod_name: 肉鸡
+      com_name: 弥勒新广农牧科技有限公司(种鸡养殖基地)
+  - area_name: 西藏
+    province: 西藏
+    items:
+    - index: 165
+      prod_name: 奶牛
+      com_name: 西藏山南森布日牧场有限公司
+    - index: 166
+      prod_name: 牦牛
+      com_name: 林周净牧农牧发展有限公司
+  - area_name: 陕西
+    province: 陕西
+    items:
+    - index: 167
+      prod_name: 生猪
+      com_name: 蓝田石羊畜牧科技有限公司
+    - index: 168
+      prod_name: 生猪
+      com_name: 白水牧原农牧有限公司(九场)
+    - index: 169
+      prod_name: 蛋鸡
+      com_name: 咸阳康大现代农业有限公司
+    - index: 170
+      prod_name: 肉鸡
+      com_name: 蒲城好邦种禽有限公司
+    - index: 171
+      prod_name: 肉羊
+      com_name: 延安劳山羚晟牧业有限公司
+    - index: 172
+      prod_name: 生猪
+      com_name: 安康汉阴金硕现代农业有限公司
+  - area_name: 甘肃
+    province: 甘肃
+    items:
+    - index: 173
+      prod_name: 奶牛
+      com_name: 甘肃省武威金宇浩睿农牧业有限公司
+    - index: 174
+      prod_name: 生猪
+      com_name: 甘肃省凉州牧原农牧有限公司(第5 分厂)
+    - index: 175
+      prod_name: 肉牛
+      com_name: 高台县林峰牧业有限公司
+    - index: 176
+      prod_name: 肉鸡
+      com_name: 甘肃圣越农牧发展有限公司(杨岘子肉鸡二场)
+    - index: 177
+      prod_name: 生猪
+      com_name: 兰州天欣养殖有限公司(段家川猪场)
+    - index: 178
+      prod_name: 奶牛
+      com_name: 甘肃云鑫实业有限公司
+  - area_name: 青海
+    province: 青海
+    items:
+    - index: 179
+      prod_name: 蛋鸡
+      com_name: 青海化青生物科技开发有限公司
+    - index: 180
+      prod_name: 肉羊
+      com_name: 德令哈伊明农牧有限公司(柴达木农牧标准化养殖基地)
+    - index: 181
+      prod_name: 肉牛
+      com_name: 门源县皇城老牧人生态畜牧业专业合作社
+  - area_name: 宁夏
+    province: 宁夏
+    items:
+    - index: 182
+      prod_name: 奶牛
+      com_name: 宁夏阜民丰牧业发展有限责任公司
+    - index: 183
+      prod_name: 肉牛
+      com_name: 固原市丰霖源牧业有限公司
+    - index: 184
+      prod_name: 奶牛
+      com_name: 宁夏农垦乳业股份有限公司(渠口牧场)
+  - area_name: 新疆
+    province: 新疆
+    items:
+    - index: 185
+      prod_name: 奶牛
+      com_name: 巴楚天润牧业有限公司
+    - index: 186
+      prod_name: 生猪
+      com_name: 阿克苏市宏盛牧业有限责任公司
+    - index: 187
+      prod_name: 肉牛
+      com_name: 新疆刀郎庄园新农业集团股份有限公司(莎车县西门塔尔良种牛繁育中心)
+    - index: 188
+      prod_name: 肉牛
+      com_name: 新疆刀郎庄园新农业集团股份有限公司(巴楚县西门塔尔牛良种繁育中心)
+    - index: 189
+      prod_name: 生猪
+      com_name: 吉木萨尔大北农农牧开发有限公司(种猪场)
+  - area_name: 新疆生产建设兵团
+    province: 新疆生产建设兵团
+    items:
+    - index: 190
+      prod_name: 肉羊
+      com_name: 图木舒克安欣牧业有限责任公司(51 团湖羊繁育基地)
+    - index: 191
+      prod_name: 生猪
+      com_name: 新疆芳草湖天康畜牧科技有限公司

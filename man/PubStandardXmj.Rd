@@ -21,8 +21,15 @@ A data frame:
 PubStandardXmj
 }
 \description{
+\strong{Deprecated.} Use \link{PubXmjStandard} instead. This 2010–2020 snapshot
+will be removed in a future release.
+}
+\details{
 A data set containing detail information of Officer Livestock Standard List
 from the public site MOA (Xmj) \url{http://www.moa.gov.cn},
 with wide data format.
+
+Superseded by \link{PubXmjStandard}, which covers 2010 onward (no 2012 gazette)
+and keeps \code{area_name} as printed. Do not use this object in new code.
 }
 \keyword{datasets}
