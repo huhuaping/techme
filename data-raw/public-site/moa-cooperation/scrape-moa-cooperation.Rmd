@@ -1,0 +1,422 @@
+---
+title: "农民合作社示范社"
+author: "胡华平"
+date: "`r Sys.Date()`"
+output:
+  bookdown::word_document2:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 4
+    reference_docx: report-reference.docx
+  bookdown::html_document2:
+    number_sections: yes
+    toc: no
+    fig_caption: yes
+    toc_float: yes
+always_allow_html: yes
+---
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE, eval = FALSE,
+                      fig.align='center',fig.width=10, fig.height=7) # Places figures on their own pages
+options(
+  htmltools.dir.version = FALSE, 
+  formatR.indent = 2, width = 55, 
+  digits = 2,scipen=999,tinytex.verbose = TRUE,
+  knitr.kable.NA = '',
+  fig.width=12, fig.height=8)
+
+```
+
+```{r}
+require("rvest")
+require("xml2")
+require("httr")
+require("stringr")
+require("tidyverse")
+require("tidyselect")
+require("here")
+require("openxlsx")
+```
+
+\newpage
+
+# 1.研究目标
+
+**评估情况**
+
+
+# 2.资料来源
+
+## 2.1 数据来源
+
+农业农村部
+
+## 2.2 数据进度
+
+<!---**名单**--->
+
+- 【word附表 转html】2023-05-26 关于公布2022年国家农民合作社示范社和全国农民用水合作示范组织名单的[通知](http://www.moa.gov.cn/nybgb/2023/202305/202305/t20230526_6428667.htm)
+
+- 【html附表】2021年6月11日 关于公布2020年国家农民合作社示范社和全国农民用水合作示范组织名单的[通知](http://www.moa.gov.cn/nybgb/2021/202107/202111/t20211104_6381339.htm)
+
+    - 2021年05月12日(word)关于公示国家农民合作社示范社和全国农民用水合作示范组织名单的[公告](http://www.moa.gov.cn/govpublic/NCJJTZ/202105/t20210512_6367631.htm)
+    
+<!---**监测**--->    
+
+- 【无名单】农业农村部关于公布第三次监测合格国家农民合作社示范社名单的[通知](http://www.hzjjs.moa.gov.cn/nchzjj/202011/t20201112_6356218.htm)
+
+- 【pdf】2018年6月6日 农业农村部关于公布第二次监测合格国家农民合作社示范社名单的[通知](http://dara.gd.gov.cn/tzgg2272/content/post_1558173.html)
+
+- 【html】2015年12月14日 农业部关于公布第一次监测合格国家农民合作社示范社名单的[通知](http://www.moa.gov.cn/nybgb/2016/diyiqi/201711/t20171125_5919534.htm)
+
+
+## 异常提示
+
+
+
+# 3.数据抓取流程
+
+
+## 3.1 认定名单
+
+### 抓取html表格（2021年）
+
+```{r}
+#--------------------------
+# this chunk should run only once
+#--------------------------
+
+#--------------------------
+# this chunk should run only once
+#--------------------------
+Year <- 2021
+
+# files html path
+file_dir <- "html/"
+file_name <- list.files(file_dir)
+file_id <- which(str_detect(file_name, 
+                       glue::glue("^list-year-{Year}.?html$")))
+file_sel <- file_name[file_id]
+file_path <- paste0(file_dir, file_sel) 
+
+# read raw html table
+xpath_tbl <- "//div[@class='TRS_PreAppend']//table"
+tbl_raw <- read_html(file_path,encoding = "UTF-8") %>%
+  html_nodes(xpath = xpath_tbl) %>%
+  html_table(fill = T, 
+             header = F) %>%
+  .[[1]] 
+
+
+# tidy table
+
+## list all cats
+cats_list<- c("农业农村","林草","供销")
+
+## match province
+require("techme")
+data("ProvinceCity")
+province_list <- unique(ProvinceCity$province_clean)
+
+tbl_out <- tbl_raw %>%
+  # clean blank placeholder
+  mutate(
+    across(
+      everything(),
+      ~mgsub::mgsub(.x,
+                    c(" ","\u00a0"), 
+                    c("",""))
+                )
+         ) %>%
+  # extract cats
+  mutate(cat = ifelse(X1 %in% cats_list, X1, NA)) %>%
+  # extract province
+  mutate(province = ifelse(X1 %in% province_list, X1, NA)) %>%
+  # extract cooperation
+  mutate(
+    name = ifelse(
+      is.na(cat)&is.na(province),
+      str_c(X1,"；",X2),
+      NA)
+    ) %>%
+  # fill province downward
+  fill(province, .direction = "down") %>%
+  # remove rows 
+  filter(!(is.na(cat)&is.na(name))) %>%
+  # fill cat downward
+  fill(cat, .direction = "down") %>%
+  # remove rows
+  filter(!is.na(name)) %>%
+  # remove special  row 
+  filter(X1 !="新疆兵团") %>%
+  select(province, cat,  name) %>%
+  # group combine
+  mutate(name = str_replace(name, "；$","")) %>%
+  group_by(province, cat) %>%
+  mutate(name= str_c(name, collapse = "；")) %>%
+  distinct() %>%
+  # split firms with special pattern
+  mutate(
+    name = map(
+      name, 
+      ~unlist(str_split(.x,pattern = "；")) # my function
+      )
+    ) %>%
+  # unnesting all firms within group
+  unnest(cols = name) %>% # 1759 firms
+  mutate(year = Year, 
+         index = row_number() # grouped before
+         ) %>%
+  select(year, index, province, cat, name) %>%
+  ungroup()  # important
+
+# write out
+path_out <- paste0("xlsx/list-year-",Year, "-wide.xlsx")
+write.xlsx(tbl_out, path_out)
+
+```
+
+
+
+### 抓取html表格（2023年）
+
+```{r}
+#--------------------------
+# this chunk should run only once
+#--------------------------
+
+#--------------------------
+# this chunk should run only once
+#--------------------------
+Year <- 2022
+
+# files html path
+file_dir <- "data-raw/public-site/moa-cooperation/html/"
+file_name <- list.files(file_dir)
+file_id <- which(str_detect(file_name, 
+                       glue::glue("^list-year-{Year}.?html$")))
+file_sel <- file_name[file_id]
+file_path <- paste0(file_dir, file_sel) 
+
+# read raw html table
+css_tar <- "table.cooperation"
+tbl_raw <- read_html(file_path,encoding = "UTF-8") %>%
+  html_nodes(css = css_tar) %>%
+  html_table(fill = T, 
+             header = F) %>%
+  .[[1]] 
+
+
+# tidy table
+
+## list all cats
+cats_list<- c("农业农村","林草","供销")
+
+## match province
+require("techme")
+data("ProvinceCity")
+province_list <- unique(ProvinceCity$province_clean)
+
+tbl_out <- tbl_raw %>%
+  # clean blank placeholder
+  mutate(
+    across(
+      everything(),
+      ~mgsub::mgsub(.x,
+                    c(" ","\u00a0"), 
+                    c("",""))
+                )
+         ) %>%
+  # extract cats
+  mutate(cat = ifelse(X1 %in% cats_list, X1, NA)) %>%
+  # extract province
+  mutate(province = ifelse(X1 %in% province_list, X1, NA)) %>%
+  # extract cooperation
+  mutate(
+    name = ifelse(
+      is.na(cat)&is.na(province),
+      str_c(X1,"；",X2),
+      NA)
+    ) %>%
+  # fill province downward
+  fill(province, .direction = "down") %>%
+  # remove rows 
+  filter(!(is.na(cat)&is.na(name))) %>%
+  # fill cat downward
+  fill(cat, .direction = "down") %>%
+  # remove rows
+  filter(!is.na(name)) %>%
+  # remove special  row 
+  filter(X1 !="新疆兵团") %>%
+  select(province, cat,  name) %>%
+  # group combine
+  mutate(name = str_replace(name, "；$","")) %>%
+  group_by(province, cat) %>%
+  mutate(name= str_c(name, collapse = "；")) %>%
+  distinct() %>%
+  # split firms with special pattern
+  mutate(
+    name = map(
+      name, 
+      ~unlist(str_split(.x,pattern = "；")) # my function
+      )
+    ) %>%
+  # unnesting all firms within group
+  unnest(cols = name) %>% # 1759 firms
+  mutate(year = Year, 
+         index = row_number() # grouped before
+         ) %>%
+  select(year, index, province, cat, name) %>%
+  ungroup()  # important
+
+# write out
+(path_out <- paste0("data-raw/public-site/moa-cooperation/xlsx/list-year-",Year, "-wide.xlsx"))
+write.xlsx(tbl_out, path_out)
+
+```
+
+
+## 3.3 合并全部年份数据
+
+```{r}
+file_dir <- "data-raw/public-site/moa-cooperation/xlsx/"
+(file_name <- list.files(file_dir))
+file_path <- paste0(file_dir, file_name) 
+
+tbl_out <- tibble(url = file_path) %>%
+  mutate(dt = map(url, openxlsx::read.xlsx)) %>%
+  select(-url) %>%
+  unnest(dt)
+
+```
+
+
+
+
+## 3.4 匹配省份和地区信息
+
+```{r}
+# files xlsx path
+tbl_wide <- tbl_out 
+
+require("techme")
+data(BasicProvince)
+Year <- 2023
+
+tbl_province <- tbl_wide %>%
+  # match the region 
+  left_join(., BasicProvince, by = "province") 
+
+# just for check 
+
+check <- sum(is.na(tbl_province$province))
+
+if (check > 0) {
+  warning(glue::glue("{check} province not indentified, please check it!"))
+  which(is.na(tbl_province$province))
+  }
+
+# write out
+dir_tar <- "data-raw/public-site/moa-cooperation/data-update/"
+(path_xlsx <- glue::glue("{dir_tar}matched-list-upto-{Year}-wide.xlsx"))
+openxlsx::write.xlsx(tbl_province, path_xlsx)
+
+```
+
+## 3.5 手动编辑
+
+
+- 手动复制一份前述`r path_xlsx`文件，命名为`r path_xlsx_edited`
+
+- 手动编辑xlsx，剔除不需要的行（非涉农领域）
+
+- 供后续最终的报告分析使用
+
+### 识别果品产品（2022专题）
+
+```{r}
+Year <- 2021
+path_xlsx <- glue::glue("data-update/matched-list-upto-{Year}-wide.xlsx")
+tbl_province <- openxlsx::read.xlsx(path_xlsx)
+
+# specify 
+fruit_fuzzy <- c("果蔬","蔬果","果树","林果",
+               "果品","果满园","果园","水果",
+               "果苑")
+ptn_fuzzy <- paste0(fruit_fuzzy, collapse = "|")
+
+fruit_items <-c("苹果", "樱桃",
+                "猕猴桃","葡萄")
+ptn_items <- paste0(fruit_items, collapse = "|")
+
+fruit_pear <- c("果梨","金梨","蜜梨","玉梨",
+               "刺梨","香梨")
+ptn_pear <- paste0(fruit_pear, collapse = "|")
+
+fruit_peach <- c("寿桃","桃果","黄桃","红桃","蜜桃")
+ptn_peach <- paste0(fruit_peach, collapse = "|")
+
+fruit_jujube <- c("冬枣","枣业","红枣","鲜枣","枣树")
+ptn_jujube  <- paste0(fruit_jujube , collapse = "|")
+
+fruit_hard  <- c("核桃","果榛","榛子","板栗")
+ptn_hard <- paste0(fruit_hard, collapse = "|")
+
+fruit_melon <- c("瓜果","哈密瓜", "西瓜","甜瓜")
+ptn_melon <- paste0(fruit_melon, collapse = "|")
+
+fruit_other <- c("柿饼","山楂", "李种植")
+ptn_other <- paste0(fruit_other, collapse = "|")
+
+# not use here
+fruit_south <- c("蜜柚","脐橙","柑桔","柑橘","黄果柑")
+ptn_south <- paste0(fruit_south, collapse = "|")
+
+# combine all 
+ptn_all <- paste0(
+  c(fruit_fuzzy, fruit_items,
+    fruit_pear, fruit_peach,
+    fruit_jujube, fruit_hard,
+    fruit_melon, fruit_other),
+  collapse = "|"
+  )
+
+tbl_hand <- tbl_province %>%
+  # extract product
+  mutate(
+    product_detail = str_extract_all(
+      name,ptn_all)
+    ) %>%
+  # handle character(0)
+  mutate(
+    product_detail = ifelse(
+      product_detail =="character(0)",
+      "", product_detail)
+    ) %>%
+  # only for check
+  #filter(product_detail !=""#,
+         #region_pro =="旱区",
+         #province == "陕西"
+         #) %>%
+  # type detect
+  mutate(
+    product_type = mgsub::mgsub(
+      product_detail,
+      c(ptn_fuzzy, ptn_peach, ptn_pear, ptn_jujube, 
+        ptn_melon, ptn_hard, ptn_other),
+      c("果品(一般)", "桃", "梨","枣",
+        "瓜果", "坚果","其他")
+    )
+  )
+
+
+```
+
+导出用于分析
+
+```{r}
+path_xlsx <- glue::glue("data-update/matched-list-upto-{Year}-wide-fruit-hand.xlsx")
+openxlsx::write.xlsx(tbl_hand,path_xlsx)
+```
+

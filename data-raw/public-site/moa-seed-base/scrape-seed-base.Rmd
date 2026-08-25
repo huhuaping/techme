@@ -1,0 +1,467 @@
+---
+title: "国家区域性良种繁育基地和制种大县"
+author: "胡华平"
+date: "`r Sys.Date()`"
+output:
+  bookdown::word_document2:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 4
+    reference_docx: report-reference.docx
+  bookdown::html_document2:
+    number_sections: yes
+    toc: no
+    fig_caption: yes
+    toc_float: yes
+always_allow_html: yes
+---
+
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE, eval = FALSE,
+                      fig.align='center',fig.width=10, fig.height=7) # Places figures on their own pages
+options(
+  htmltools.dir.version = FALSE, 
+  formatR.indent = 2, width = 55, 
+  digits = 2,scipen=999,tinytex.verbose = TRUE,
+  knitr.kable.NA = '',
+  fig.width=12, fig.height=8)
+
+```
+
+
+
+# 1.研究目标
+
+**创建名单**
+
+
+
+# 2.资料来源
+
+## 2.1 数据来源
+
+农业部种业司 
+
+
+## 2.2 数据进度
+
+
+包括区域性良种繁育基地和制种大县：
+
+- 【ofd名单转html名单】2022-04-07 关于公布国家级制种大县和区域性良种繁育基地认定结果的[通知](http://www.zzj.moa.gov.cn/gzdt/202204/t20220407_6395684.htm)
+
+  - 2021年10月15日 关于认定制种大县和区域性良种繁育基地的[通知](http://www.moa.gov.cn/govpublic/nybzzj1/202110/t20211018_6379647.htm)
+
+- 【html名单】2019年6月13日 农业农村部关于认定第二批国家区域性良种繁育基地的[通知](http://www.moa.gov.cn/nybgb/2019/201907/202001/t20200103_6334257.htm)
+
+- 【html名单】2017年1月19日 农业部关于认定第一批区域性良种繁育基地的[通知](http://www.moa.gov.cn/nybgb/2017/derq/201712/t20171227_6130859.htm) 
+
+
+## 异常提示
+
+
+
+
+# 3.数据抓取流程
+
+## 3.0 R包准备
+
+```{r}
+require(openxlsx)
+require("rvest")
+require("xml2")
+require("httr")
+require("stringr")
+require("tidyverse")
+require("tidyselect")
+require("here")
+
+```
+
+
+## 3.1国家区域性良种繁育基地base
+
+### 解析html
+
+#### 2017 batch1 html <div>
+
+```{r}
+# files html path
+Year <- 2017
+(files_dir <- here(
+  "data-raw/public-site/moa-seed-base/", # dir
+  glue::glue("html/list-year-{Year}.html")))   # file
+(path_out <- str_replace_all(files_dir, "html", "xlsx"))
+
+# xpath for data table
+css_tar <-"div.base"
+
+tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
+  html_nodes(css =  css_tar) %>%
+  html_text() %>%
+  #paste0() %>%
+  str_split("\n\t") %>% # split by "\n"
+  unlist() %>%
+  as_tibble() %>%
+  # clean
+  mutate(
+    value = mgsub::mgsub(
+      value,
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
+      c("", "","", ".")),
+    value = str_trim(value)) %>%
+  filter(value!="") %>% # drop empty row
+  # extract info
+  mutate(type = str_extract(value, "(?<=（)(.+)(?=）)")) %>%
+  mutate(name = str_extract(value, "(.+)(?=（)")) 
+  
+tbl_out <- tbl_raw %>% 
+  add_column(index = 1:nrow(.), .before = "name") %>%
+  add_column(year = Year, .before = "index") %>%
+  select(year, index, type, name )
+```
+
+
+#### 2019 batch2 html <div>
+
+```{r}
+# files html path
+Year <- 2021
+(files_dir <- here(
+  "data-raw/public-site/moa-seed-base/", # dir
+  glue::glue("html/list-year-{Year}.html")))   # file
+(path_out <- str_replace_all(files_dir, "html", "xlsx"))
+
+# xpath for data table
+css_tar <-"div.base"
+
+tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
+  html_nodes(css =  css_tar) %>%
+  html_text() %>%
+  str_split("\n\t") %>% # split by "\n"
+  unlist() %>%
+  as_tibble() %>%
+  # clean
+  mutate(
+    value = mgsub::mgsub(
+      value,
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
+      c("", "","", ".")),
+    value = str_trim(value)) %>%
+  filter(value!="") %>% # drop empty row
+  # extract info
+  mutate(type = str_extract(value, "(?<=、)(.+)")) %>%
+  fill(type, .direction = "down") %>%
+  filter(!str_detect(value, "、"))
+  
+tbl_out <- tbl_raw %>% 
+  rename("name" = "value") %>%
+  add_column(index = 1:nrow(.), .before = "name") %>%
+  add_column(year = Year, .before = "index") %>%
+  select(year, index, type, name )
+```
+
+
+#### 2022 batch3 html <div>
+
+```{r}
+# files html path
+Year <- 2022
+(files_dir <- here(
+  "data-raw/public-site/moa-seed-base/", # dir
+  glue::glue("html/list-year-{Year}.html")))   # file
+(path_out <- str_replace_all(files_dir, "html", "xlsx"))
+
+# xpath for data table
+css_tar <-"div.base"
+
+tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
+  html_nodes(css =  css_tar) %>%
+  html_text() %>%
+  str_split("\r\n\t") %>% # split by "\n"
+  unlist() %>%
+  as_tibble() %>%
+  # clean
+  mutate(
+    value = mgsub::mgsub(
+      value,
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
+      c("", "","", ".")),
+    value = str_trim(value)) %>%
+  filter(value!="") %>% # drop empty row
+  # extract info
+  ## get type
+  mutate(type = str_extract(value, "(?<=：)(.+)")) %>% 
+  fill(type, .direction = "down") %>%
+  filter(!str_detect(value, "："))
+  
+tbl_out <- tbl_raw %>% 
+  rename("name" = "value") %>%
+  add_column(index = 1:nrow(.), .before = "name") %>%
+  add_column(year = Year, .before = "index") %>%
+  select(year, index, type, name )
+```
+
+### 导出到xlsx/文件夹
+
+```{r}
+# files csv path
+(path_out)
+write.xlsx(tbl_out, path_out)
+```
+
+### 导出为分析数据
+
+#### 批量读取xlsx
+
+```{r}
+dir_path <- here::here("data-raw","public-site","moa-seed-base","xlsx")
+
+files_xlsx <- list.files(dir_path)
+
+
+files_target <- files_xlsx[which(str_detect(files_xlsx, "list-year")) ]
+
+url_xlsx <- paste0(dir_path, "/", files_target)
+
+years_target <- str_extract_all(files_target, "(\\d{4})") %>%
+  unlist() %>%
+  as.numeric(.)
+
+tbl_out <- NULL
+
+i <- 1
+for (i in length(files_target):1) {
+  
+  tbl_tem <- read.xlsx(url_xlsx[i]) %>%
+    mutate(index = as.numeric(index))
+  
+  tbl_out <- bind_rows(tbl_out, tbl_tem)
+}
+
+
+```
+
+#### 匹配省区信息
+
+```{r}
+# obtain the province info
+require(techme)
+data("BasicProvince")
+data("ProvinceCity")
+ptn_province <- paste0(BasicProvince$province, collapse = "|")
+ptn_city <- paste0(unique(ProvinceCity$city_clean), collapse = "|")
+
+tbl_info <-  tbl_out %>%
+  mutate(province_name = str_extract(name, ptn_province),
+         city_clean= str_extract(name, ptn_city)) %>%
+  # match
+  left_join(., select(ProvinceCity, city_clean, province_clean), by = "city_clean") %>%
+  mutate(province = ifelse(is.na(province_name),
+                           province_clean,
+                           province_name)) %>%
+  select(year, index, type, name, province)
+
+# check
+check <- sum(is.na(tbl_info$province))
+if (check >0) warning("Povince with NA, please check!")
+
+tbl_check <- tbl_info %>%
+  group_by(year) %>%
+  slice_tail(n = 3) %>%
+  ungroup() %>%
+  arrange(year,index)
+    
+
+```
+
+#### 导出到data-update/文件夹
+
+```{r}
+dir_path <- here::here("data-raw","public-site","moa-seed-base","data-update")
+(path_out <- paste0(dir_path, "/list-base-upto-year-", max(years_target), ".xlsx"))
+
+write.xlsx(tbl_info, path_out)
+```
+
+
+
+## 3.2国家级制种大县county
+
+### 解析html
+
+#### 2022 html <div>
+
+```{r}
+# files html path
+Year <- 2022
+(files_dir <- here(
+  "data-raw/public-site/moa-seed-base/", # dir
+  glue::glue("html/list-year-{Year}.html")))   # file
+(path_out <- str_replace_all(files_dir, "html", "xlsx"))
+(path_out <- str_replace_all(path_out, "list", "county"))
+
+# xpath for data table
+css_tar <-"div.county" # change here
+
+tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
+  html_nodes(css =  css_tar) %>%
+  html_text() %>%
+  str_split("\r\n\t") %>% # split by "\n"
+  unlist() %>%
+  as_tibble() %>%
+  # clean
+  mutate(
+    value = mgsub::mgsub(
+      value,
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
+      c("", "","", ".")),
+    value = str_trim(value)) %>%
+  filter(value!="") %>% # drop empty row
+  # extract info
+  ## get type
+  mutate(type = str_extract(value, "(?<=：)(.+)")) %>% 
+  fill(type, .direction = "down") %>%
+  filter(!str_detect(value, "："))
+  
+tbl_out <- tbl_raw %>% 
+  rename("name" = "value") %>%
+  add_column(index = 1:nrow(.), .before = "name") %>%
+  add_column(year = Year, .before = "index") %>%
+  select(year, index, type, name )
+
+#only for check
+tbl_check <- tbl_out %>%
+  mutate(n = str_count(name, pattern="、")+1) %>%
+  summarise(tot =sum(n))
+
+```
+
+
+#### 2013 html <div>
+
+```{r}
+# files html path
+Year <- 2013
+(files_dir <- here(
+  "data-raw/public-site/moa-seed-base/", # dir
+  glue::glue("html/county-year-{Year}.html")))   # file
+(path_out <- str_replace_all(files_dir, "html", "xlsx"))
+
+# xpath for data table
+css_tar <-"div.county" # change here
+
+tbl_raw <- read_html(files_dir,encoding = "UTF-8") %>%
+  html_nodes(css =  css_tar) %>%
+  html_text() %>%
+  str_split("\n") %>% # split by "\n"
+  unlist() %>%
+  as_tibble() %>%
+  # clean
+  mutate(
+    value = mgsub::mgsub(
+      value,
+      c(fixed("\u00a0"),fixed("\n")," ", "．"), # special character
+      c("", "","", ".")),
+    value = str_trim(value)) %>%
+  filter(value!="") %>% # drop empty row
+  # extract info
+  ## get type
+  mutate(type = str_extract(value, "玉米|水稻")) %>% 
+  fill(type, .direction = "down") %>%
+  filter(!str_detect(value, "国家级"))
+  
+tbl_out <- tbl_raw %>% 
+  rename("name" = "value") %>%
+  add_column(index = 1:nrow(.), .before = "name") %>%
+  add_column(year = Year, .before = "index") %>%
+  select(year, index, type, name )
+
+#only for check
+tbl_check <- tbl_out %>%
+  mutate(n = str_count(name, pattern="、")+1) %>%
+  summarise(tot =sum(n))
+
+  
+```
+
+### 导出到xlsx/文件夹
+
+```{r}
+# files csv path
+(path_out)
+write.xlsx(tbl_out, path_out)
+```
+
+### 导出为分析数据
+
+#### 批量读取xlsx
+
+```{r}
+dir_path <- here::here("data-raw","public-site","moa-seed-base","xlsx")
+files_xlsx <- list.files(dir_path)
+# change here
+files_target <- files_xlsx[which(str_detect(files_xlsx, "county-year")) ]
+
+url_xlsx <- paste0(dir_path, "/", files_target)
+
+years_target <- str_extract_all(files_target, "(\\d{4})") %>%
+  unlist() %>%
+  as.numeric(.)
+
+tbl_out <- NULL
+
+i <- 1
+for (i in length(files_target):1) {
+  
+  tbl_tem <- read.xlsx(url_xlsx[i]) %>%
+    mutate(index = as.numeric(index))
+  
+  tbl_out <- bind_rows(tbl_out, tbl_tem)
+}
+
+
+```
+
+#### 匹配省区信息
+
+```{r}
+# obtain the province info
+require(techme)
+data("BasicProvince")
+data("ProvinceCity")
+ptn_province <- paste0(BasicProvince$province, collapse = "|")
+ptn_city <- paste0(unique(ProvinceCity$city_clean), collapse = "|")
+
+tbl_info <-  tbl_out %>%
+  mutate(province_name = str_extract(name, ptn_province),
+         city_clean= str_extract(name, ptn_city)) %>%
+  # match
+  left_join(., select(ProvinceCity, city_clean, province_clean), by = "city_clean") %>%
+  mutate(province = ifelse(is.na(province_name),
+                           province_clean,
+                           province_name)) %>%
+  select(year, index, type, name, province)
+
+# check
+check <- sum(is.na(tbl_info$province))
+if (check >0) warning("Povince with NA, please check!")
+
+tbl_check <- tbl_info %>%
+  group_by(year) %>%
+  slice_tail(n = 3) %>%
+  ungroup() %>%
+  arrange(year,index)
+    
+
+```
+
+#### 导出到data-update/文件夹
+
+```{r}
+dir_path <- here::here("data-raw","public-site","moa-seed-base","data-update")
+(path_out <- paste0(dir_path, "/list-county-upto-year-", max(years_target), ".xlsx"))
+
+write.xlsx(tbl_info, path_out)
+```
