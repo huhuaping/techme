@@ -1,7 +1,29 @@
-# 项目 B 用：无头 Selenium（RSelenium 连 localhost:5555）
-# 勿映射主机 5901（Windows 常保留 5901–6000）
+# 可复制 Selenium Compose 模板（业务仓库请改 name / container_name）
+# 用法（仓库根目录，假设本文件位于 docker/docker-compose.selenium.yml）:
+#   curl.exe http://127.0.0.1:5555/status            # Selenium 4
+#   curl.exe http://127.0.0.1:5555/wd/hub/status     # Selenium 3 / RSelenium
+#
+# 三套服务都映射主机 5555：不要同时 up。
+#
+# A. 现行 RSelenium 1.7.9（JSON Wire；依赖已废弃的 *-debug 镜像）:
+#   docker compose -f docker/docker-compose.selenium.yml --profile debug-legacy up -d chrome-debug-legacy
+#   VNC → localhost:15900（勿用主机 5901；密码多为 secret）
+#
+# B. 迁移方向：CRAN selenium（https://cran.r-project.org/package=selenium）+ Selenium 4:
+#   docker compose -f docker/docker-compose.selenium.yml up -d chrome
+#   调试: docker compose -f docker/docker-compose.selenium.yml --profile debug up -d chrome-debug
+#   noVNC → http://127.0.0.1:17900/    VNC → localhost:15900
+#
+# 用完拆除（务必带上 debug 与 debug-legacy，否则对应容器可能残留）:
+#   1) 拆容器 + 网络（日常用；保留镜像，下次 up 不必重拉）:
+#      docker compose -f docker/docker-compose.selenium.yml --profile debug --profile debug-legacy down --remove-orphans
+#   2) 连本 compose 用过的镜像一并删除（腾磁盘；下次 up 会重新拉取 1–2GB+。
+#      仅当确定本机其它项目也不再用 standalone-chrome / *-debug 时）:
+#      docker compose -f docker/docker-compose.selenium.yml --profile debug --profile debug-legacy down --remove-orphans --rmi all
+#
+# Windows PowerShell 请用 curl.exe，勿用 curl 别名（Invoke-WebRequest）
 
-name: techme-selenium
+name: projectb-selenium
 
 services:
   chrome:
@@ -13,17 +35,32 @@ services:
     environment:
       - SE_NODE_MAX_SESSIONS=1
       - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - SE_START_VNC=false
     restart: "no"
 
   chrome-debug:
     profiles: ["debug"]
-    image: selenium/standalone-chrome-debug:latest
+    image: selenium/standalone-chrome:latest
     container_name: projectb-chrome-debug
     shm_size: 2gb
     ports:
       - "5555:4444"
+      # Avoid host 5901 (often in Windows excluded port range 5901-6000)
       - "15900:5900"
+      - "17900:7900"
     environment:
       - SE_NODE_MAX_SESSIONS=1
       - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+    restart: "no"
+
+  # RSelenium 1.7.9 备用：Selenium 3 JSON Wire。镜像已废弃，勿作新项目默认。
+  # 可选钉死末代标签: selenium/standalone-chrome-debug:3.141.59
+  chrome-debug-legacy:
+    profiles: ["debug-legacy"]
+    image: selenium/standalone-chrome-debug:latest
+    container_name: projectb-chrome-debug-legacy
+    shm_size: 2gb
+    ports:
+      - "5555:4444"
+      - "15900:5900"
     restart: "no"
