@@ -76,11 +76,13 @@ reference:
   - PubOpenShare
   - PubRuralInfoBase
   - PubSeedFirm
+  - PubXmjBreeding
 - title: Data Subset for the special chapter
   desc: |
     Data sets focus on special topics, including livestocks（畜牧业） et. al.
   contents:
   - PubBreedingXmj
+  - PubXmjBreeding
   - PubStandardXmj
   - LivestockBreeding
   - MachineService

@@ -1,0 +1,708 @@
+# 国家畜禽核心育种场年度公示中间层
+# 字段与展开方式见同目录 _schema.yaml。
+# 本文件对照 html/year-2024-all.* 及附件整理，作为 2021 年起的权威中间层。
+#
+# R 读取示例：
+#   yml <- yaml::read_yaml(path)
+#   tbl <- purrr::map_dfr(yml$annexes, function(ax) {
+#     purrr::map_dfr(ax$groups, function(g) {
+#       dplyr::bind_rows(g$items) |>
+#         dplyr::mutate(
+#           year = yml$year, mark = ax$mark, type = g$type,
+#           .before = 1
+#         )
+#     })
+#   })
+
+year: 2024
+title: 农业农村部办公厅关于公布2024年国家畜禽核心育种场增补名单等信息的通知
+doc_no: 农办种〔2025〕4号
+effective_date: '2025-03-06'
+pub_date: '2025-03-17'
+url: https://www.moa.gov.cn/govpublic/nybzzj1/202503/t20250317_6471791.htm
+url_alt: null
+source: 农业农村部种业管理司
+source_files:
+  html: html/year-2024-all.html
+  attachments:
+  - html/year-2024-all.pdf
+counts:
+  遴选公示: 19
+  核验通过: 35
+  资格取消: 14
+  名称变更: 12
+  合计: 80
+annexes:
+- annex: 1
+  mark: 遴选公示
+  annex_kind: 增补
+  title: 2024年国家畜禽核心育种场、良种扩繁推广场增补名单
+  groups:
+  - type: 国家生猪核心育种场
+    items:
+    - index: 1
+      name_origin: 北京六马大好河山农牧科技有限公司
+      name_change: null
+      province_raw: 北京市
+      province: 北京
+      breed: 大白猪
+      note: null
+    - index: 2
+      name_origin: 江西裕隆牧业有限公司
+      name_change: null
+      province_raw: 江西省
+      province: 江西
+      breed: 大白猪
+      note: null
+  - type: 国家奶牛核心育种场
+    items:
+    - index: 1
+      name_origin: 乐源君邦牧业威县有限公司
+      name_change: null
+      province_raw: 河北省
+      province: 河北
+      breed: 中国荷斯坦牛
+      note: null
+    - index: 2
+      name_origin: 北安农垦长鑫牧场专业合作社
+      name_change: null
+      province_raw: 黑龙江省
+      province: 黑龙江
+      breed: 中国荷斯坦牛
+      note: null
+    - index: 3
+      name_origin: 现代牧业（商河）有限公司
+      name_change: null
+      province_raw: 山东省
+      province: 山东
+      breed: 中国荷斯坦牛
+      note: null
+  - type: 国家肉牛核心育种场
+    items:
+    - index: 1
+      name_origin: 内蒙古勤桐牧业发展有限责任公司
+      name_change: null
+      province_raw: 内蒙古自治区
+      province: 内蒙古
+      breed: 华西牛
+      note: null
+    - index: 2
+      name_origin: 多伦县盛祥养殖专业合作社
+      name_change: null
+      province_raw: 内蒙古自治区
+      province: 内蒙古
+      breed: 华西牛
+      note: null
+    - index: 3
+      name_origin: 吉林省吉信华西牛育种有限公司
+      name_change: null
+      province_raw: 吉林省
+      province: 吉林
+      breed: 华西牛
+      note: null
+    - index: 4
+      name_origin: 双辽市润佳农牧业有限公司
+      name_change: null
+      province_raw: 吉林省
+      province: 吉林
+      breed: 华西牛
+      note: null
+    - index: 5
+      name_origin: 荆门华中农业开发有限公司
+      name_change: null
+      province_raw: 湖北省
+      province: 湖北
+      breed: 安格斯牛
+      note: null
+  - type: 国家羊核心育种场
+    items:
+    - index: 1
+      name_origin: 东乌珠穆沁旗赫希格畜牧业发展有限责任公司
+      name_change: null
+      province_raw: 内蒙古自治区
+      province: 内蒙古
+      breed: 乌珠穆沁羊
+      note: null
+    - index: 2
+      name_origin: 山东嬴泰农牧科技有限公司
+      name_change: null
+      province_raw: 山东省
+      province: 山东
+      breed: 鲁中肉羊
+      note: null
+    - index: 3
+      name_origin: 甘肃羊如祥农业有限公司
+      name_change: null
+      province_raw: 甘肃省
+      province: 甘肃
+      breed: 湖羊
+      note: null
+    - index: 4
+      name_origin: 新疆西域沐羊人农牧科技有限公司
+      name_change: null
+      province_raw: 新疆维吾尔自治区
+      province: 新疆
+      breed: 皮山红羊
+      note: null
+  - type: 国家水禽核心育种场
+    items:
+    - index: 1
+      name_origin: 吉林正方农牧股份有限公司
+      name_change: null
+      province_raw: 吉林省
+      province: 吉林
+      breed: 中畜长白半番鸭配套系
+      note: null
+    - index: 2
+      name_origin: 沭阳众客种禽有限公司
+      name_change: null
+      province_raw: 江苏省
+      province: 江苏
+      breed: 益扬1号肉鸭配套系
+      note: null
+    - index: 3
+      name_origin: 龙岩市龙盛市场管理集团有限公司
+      name_change: null
+      province_raw: 福建省
+      province: 福建
+      breed: 龙岩山麻鸭
+      note: null
+  - type: 国家肉鸡良种扩繁推广场
+    items:
+    - index: 1
+      name_origin: 北京市独乐河禽业有限公司
+      name_change: null
+      province_raw: 北京市
+      province: 北京
+      breed: 沃德188肉鸡配套系
+      note: null
+  - type: 国家水禽良种扩繁推广场
+    items:
+    - index: 1
+      name_origin: 吉林正方农牧股份有限公司
+      name_change: null
+      province_raw: 吉林省
+      province: 吉林
+      breed: 中畜长白半番鸭配套系
+      note: null
+- annex: 2
+  mark: 核验通过
+  annex_kind: 核验
+  title: 国家畜禽核心育种场、良种扩繁推广场通过核验名单
+  groups:
+  - type: 国家生猪核心育种场
+    items:
+    - index: 1
+      name_origin: 河南省谊发牧业有限责任公司
+      name_change: null
+      province_raw: 河南省
+      province: 河南
+      breed: 大白猪
+      note: null
+    - index: 2
+      name_origin: 广西一遍天原种猪有限责任公司
+      name_change: null
+      province_raw: 广西壮族自治区
+      province: 广西
+      breed: 大白猪
+      note: null
+  - type: 国家奶牛核心育种场
+    items:
+    - index: 3
+      name_origin: 塔城地区种牛场
+      name_change: null
+      province_raw: 新疆维吾尔自治区
+      province: 新疆
+      breed: 新疆褐牛
+      note: null
+  - type: 国家肉牛核心育种场
+    items:
+    - index: 4
+      name_origin: 呼伦贝尔农垦谢尔塔拉农牧场有限公司
+      name_change: null
+      province_raw: 内蒙古自治区
+      province: 内蒙古
+      breed: 三河牛
+      note: 原名称：海拉尔农牧场管理局谢尔塔拉农牧场
+    - index: 5
+      name_origin: 长春新牧科技有限公司
+      name_change: null
+      province_raw: 吉林省
+      province: 吉林
+      breed: 西门塔尔牛
+      note: null
+    - index: 6
+      name_origin: 河南腾宇种业科技有限公司
+      name_change: null
+      province_raw: 河南省
+      province: 河南
+      breed: 西门塔尔牛
+      note: 原名称：河南省鼎元种牛育种有限公司
+    - index: 7
+      name_origin: 泌阳县夏南牛科技开发有限公司
+      name_change: null
+      province_raw: 河南省
+      province: 河南
+      breed: 夏南牛
+      note: null
+    - index: 8
+      name_origin: 平顶山市羴牛畜禽良种繁育有限公司
+      name_change: null
+      province_raw: 河南省
+      province: 河南
+      breed: 郏县红牛
+      note: null
+    - index: 9
+      name_origin: 四川省阳平种牛场
+      name_change: null
+      province_raw: 四川省
+      province: 四川
+      breed: 西门塔尔牛
+      note: null
+    - index: 10
+      name_origin: 云南农业职业技术学院资产经营有限公司
+      name_change: null
+      province_raw: 云南省
+      province: 云南
+      breed: 西门塔尔牛
+      note: 原名称：云南省种畜繁育推广中心
+    - index: 11
+      name_origin: 甘肃共裕高新农牧科技开发有限公司
+      name_change: null
+      province_raw: 甘肃省
+      province: 甘肃
+      breed: 西门塔尔牛
+      note: null
+  - type: 国家羊核心育种场
+    items:
+    - index: 12
+      name_origin: 呼伦贝尔农垦哈达图农牧场有限公司
+      name_change: null
+      province_raw: 内蒙古自治区
+      province: 内蒙古
+      breed: 呼伦贝尔羊
+      note: 原名称：呼伦贝尔农垦科技发展有限责任公司
+    - index: 13
+      name_origin: 内蒙古草原金峰畜牧有限公司
+      name_change: null
+      province_raw: 内蒙古自治区
+      province: 内蒙古
+      breed: 昭乌达肉羊
+      note: null
+    - index: 14
+      name_origin: 苏尼特右旗苏尼特羊良种科技有限责任公司
+      name_change: null
+      province_raw: 内蒙古自治区
+      province: 内蒙古
+      breed: 苏尼特羊
+      note: null
+    - index: 15
+      name_origin: 长兴永盛牧业有限公司
+      name_change: null
+      province_raw: 浙江省
+      province: 浙江
+      breed: 湖羊
+      note: null
+    - index: 16
+      name_origin: 杭州庞大农业开发有限公司
+      name_change: null
+      province_raw: 浙江省
+      province: 浙江
+      breed: 湖羊
+      note: null
+    - index: 17
+      name_origin: 成都蜀新黑山羊产业发展有限责任公司
+      name_change: null
+      province_raw: 四川省
+      province: 四川
+      breed: 川中黑山羊
+      note: null
+    - index: 18
+      name_origin: 四川南江黄羊原种场
+      name_change: null
+      province_raw: 四川省
+      province: 四川
+      breed: 南江黄羊
+      note: null
+    - index: 19
+      name_origin: 云南立新羊业有限公司
+      name_change: null
+      province_raw: 云南省
+      province: 云南
+      breed: 云上黑山羊
+      note: null
+    - index: 20
+      name_origin: 龙陵县黄山羊核心种羊有限责任公司
+      name_change: null
+      province_raw: 云南省
+      province: 云南
+      breed: 龙陵黄山羊
+      note: null
+    - index: 21
+      name_origin: 甘肃中盛华美羊产业发展有限公司
+      name_change: null
+      province_raw: 甘肃省
+      province: 甘肃
+      breed: 湖羊
+      note: null
+    - index: 22
+      name_origin: 武威普康养殖有限公司
+      name_change: null
+      province_raw: 甘肃省
+      province: 甘肃
+      breed: 湖羊
+      note: null
+    - index: 23
+      name_origin: 红寺堡区天源良种羊繁育养殖有限公司
+      name_change: null
+      province_raw: 宁夏回族自治区
+      province: 宁夏
+      breed: 滩羊
+      note: null
+    - index: 24
+      name_origin: 拜城县种羊场
+      name_change: null
+      province_raw: 新疆维吾尔自治区
+      province: 新疆
+      breed: 中国美利奴羊
+      note: null
+  - type: 国家蛋鸡核心育种场
+    items:
+    - index: 25
+      name_origin: 北京中农榜样蛋鸡育种有限责任公司
+      name_change: null
+      province_raw: 北京市
+      province: 北京
+      breed: 农大3号蛋鸡配套系、农大5号蛋鸡配套系
+      note: null
+    - index: 26
+      name_origin: 北京市华都峪口家禽育种有限公司
+      name_change: null
+      province_raw: 北京市
+      province: 北京
+      breed: 京红1号蛋鸡配套系、京粉1号蛋鸡配套系、京粉6号蛋鸡配套系
+      note: null
+    - index: 27
+      name_origin: 扬州翔龙禽业发展有限公司
+      name_change: null
+      province_raw: 江苏省
+      province: 江苏
+      breed: 苏禽绿壳蛋鸡配套系
+      note: null
+    - index: 28
+      name_origin: 荣达禽业股份有限公司
+      name_change: null
+      province_raw: 安徽省
+      province: 安徽
+      breed: 凤达1号蛋鸡配套系
+      note: 原名称：安徽荣达禽业开发有限公司
+  - type: 国家蛋鸡良种扩繁推广场
+    items:
+    - index: 29
+      name_origin: 北京市华都峪口禽业有限责任公司
+      name_change: null
+      province_raw: 北京市
+      province: 北京
+      breed: 京红1号蛋鸡配套系、京粉1号蛋鸡配套系
+      note: null
+    - index: 30
+      name_origin: 华裕农业科技有限公司
+      name_change: null
+      province_raw: 河北省
+      province: 河北
+      breed: 海兰灰蛋鸡配套系
+      note: null
+    - index: 31
+      name_origin: 扬州翔龙禽业发展有限公司
+      name_change: null
+      province_raw: 江苏省
+      province: 江苏
+      breed: 苏禽绿壳蛋鸡配套系
+      note: null
+    - index: 32
+      name_origin: 山东峪口禽业有限公司
+      name_change: null
+      province_raw: 山东省
+      province: 山东
+      breed: 京红1号蛋鸡配套系
+      note: null
+    - index: 33
+      name_origin: 湖北峪口禽业有限公司
+      name_change: null
+      province_raw: 湖北省
+      province: 湖北
+      breed: 京红1号蛋鸡配套系、京粉6号蛋鸡配套系
+      note: null
+    - index: 34
+      name_origin: 四川圣罗兰农业科技有限公司
+      name_change: null
+      province_raw: 四川省
+      province: 四川
+      breed: 罗曼粉蛋鸡配套系
+      note: 原名称：四川圣迪乐村生态食品股份有限公司
+    - index: 35
+      name_origin: 宁夏晓鸣农牧股份有限公司
+      name_change: null
+      province_raw: 宁夏回族自治区
+      province: 宁夏
+      breed: 海兰褐蛋鸡配套系、海兰灰蛋鸡配套系
+      note: null
+- annex: 3
+  mark: 资格取消
+  annex_kind: 取消
+  title: 国家畜禽核心育种场、良种扩繁推广场和核心种公畜站取消资格名单
+  groups:
+  - type: 国家生猪核心育种场
+    items:
+    - index: 1
+      name_origin: 中道农牧有限公司
+      name_change: null
+      province_raw: 河北省
+      province: 河北
+      breed: 大白猪
+      note: null
+    - index: 2
+      name_origin: 湖北省正嘉原种猪场有限公司桑梓湖种猪场大悟基地
+      name_change: null
+      province_raw: 湖北省
+      province: 湖北
+      breed: 大白猪
+      note: null
+    - index: 3
+      name_origin: 佳和农牧股份有限公司汨罗分公司
+      name_change: null
+      province_raw: 湖南省
+      province: 湖南
+      breed: 大白猪
+      note: null
+    - index: 4
+      name_origin: 犍为巨星农牧科技有限公司
+      name_change: null
+      province_raw: 四川省
+      province: 四川
+      breed: 大白猪
+      note: null
+    - index: 5
+      name_origin: 云南西南天佑牧业科技有限责任公司
+      name_change: null
+      province_raw: 云南省
+      province: 云南
+      breed: 大白猪
+      note: null
+  - type: 国家羊核心育种场
+    items:
+    - index: 6
+      name_origin: 黑龙江农垦大山羊业有限公司
+      name_change: null
+      province_raw: 黑龙江省
+      province: 黑龙江
+      breed: 德国肉用美利奴羊
+      note: null
+    - index: 7
+      name_origin: 合肥博大牧业科技开发有限责任公司
+      name_change: null
+      province_raw: 安徽省
+      province: 安徽
+      breed: 黄淮山羊
+      note: null
+    - index: 8
+      name_origin: 陕西黑萨牧业有限公司
+      name_change: null
+      province_raw: 陕西省
+      province: 陕西
+      breed: 萨福克羊
+      note: null
+  - type: 国家肉鸡核心育种场
+    items:
+    - index: 9
+      name_origin: 广东金种农牧科技股份有限公司
+      name_change: null
+      province_raw: 广东省
+      province: 广东
+      breed: 金种麻黄鸡配套系
+      note: null
+    - index: 10
+      name_origin: 广西鸿光农牧有限公司
+      name_change: null
+      province_raw: 广西壮族自治区
+      province: 广西
+      breed: 鸿光黑鸡配套系、鸿光麻鸡配套系
+      note: null
+  - type: 国家蛋鸡良种扩繁推广场
+    items:
+    - index: 11
+      name_origin: 河南省惠民禽业有限公司
+      name_change: null
+      province_raw: 河南省
+      province: 河南
+      breed: 罗曼褐蛋鸡配套系
+      note: null
+    - index: 12
+      name_origin: 四川省正鑫农业科技有限公司
+      name_change: null
+      province_raw: 四川省
+      province: 四川
+      breed: 罗曼粉蛋鸡配套系
+      note: null
+  - type: 国家肉鸡良种扩繁推广场
+    items:
+    - index: 13
+      name_origin: 广西鸿光农牧有限公司
+      name_change: null
+      province_raw: 广西壮族自治区
+      province: 广西
+      breed: 鸿光黑鸡配套系、鸿光麻鸡配套系
+      note: null
+  - type: 国家核心种公猪站
+    items:
+    - index: 14
+      name_origin: 山东傲农种猪有限公司
+      name_change: null
+      province_raw: 山东省
+      province: 山东
+      breed: 大白猪、长白猪、杜洛克猪
+      note: null
+- annex: 4
+  mark: 名称变更
+  annex_kind: 变更
+  title: 国家畜禽核心育种场、良种扩繁推广场信息变更名单
+  groups:
+  - type: null
+    items:
+    - index: 1
+      name_origin: 海拉尔农牧场管理局谢尔塔拉农牧场
+      name_change: 呼伦贝尔农垦谢尔塔拉农牧场有限公司
+      province_raw: 内蒙古自治区
+      province: 内蒙古
+      breed: null
+      note: null
+      change_kinds:
+      - 名称
+    - index: 2
+      name_origin: 呼伦贝尔农垦科技发展有限责任公司
+      name_change: 呼伦贝尔农垦哈达图农牧场有限公司
+      province_raw: 内蒙古自治区
+      province: 内蒙古
+      breed: null
+      note: null
+      change_kinds:
+      - 名称
+    - index: 3
+      name_origin: 江苏省永康农牧科技有限公司
+      name_change: 连云港立华牧业有限公司
+      province_raw: 江苏省
+      province: 江苏
+      breed: null
+      note: null
+      address_origin: 江苏省常州市金坛区朱林镇咀头村
+      address_change: 江苏省连云港市灌云县龙苴前埠村三组
+      legal_origin: 孔祥凯
+      legal_change: 李雁
+      change_kinds:
+      - 名称
+      - 场址
+      - 法人
+    - index: 4
+      name_origin: 安徽荣达禽业开发有限公司
+      name_change: 荣达禽业股份有限公司
+      province_raw: 安徽省
+      province: 安徽
+      breed: null
+      note: null
+      change_kinds:
+      - 名称
+    - index: 5
+      name_origin: 江西省原种猪场有限公司吉安分公司
+      name_change: 江西省原种猪场有限公司吉水分公司
+      province_raw: 江西省
+      province: 江西
+      breed: null
+      note: null
+      address_origin: 江西省吉安县安塘乡
+      address_change: 江西省吉安市吉水县白水镇
+      legal_origin: 周少鹏
+      legal_change: 付于根
+      change_kinds:
+      - 名称
+      - 场址
+      - 法人
+    - index: 6
+      name_origin: 山东无棣华兴渤海黑牛种业股份有限公司
+      name_change: 山东省棣牛良种繁育有限公司
+      province_raw: 山东省
+      province: 山东
+      breed: null
+      note: null
+      change_kinds:
+      - 名称
+    - index: 7
+      name_origin: 河南省谊发牧业有限责任公司
+      name_change: null
+      province_raw: 河南省
+      province: 河南
+      breed: null
+      note: null
+      address_origin: 河南省鹤壁市浚县白寺前岗
+      address_change: 河南省鹤壁市浚县小河镇东王渡村东1200米
+      change_kinds:
+      - 场址
+    - index: 8
+      name_origin: 河南省鼎元种牛育种有限公司
+      name_change: 河南腾宇种业科技有限公司
+      province_raw: 河南省
+      province: 河南
+      breed: null
+      note: null
+      change_kinds:
+      - 名称
+    - index: 9
+      name_origin: 湘村高科农业股份有限公司
+      name_change: 湖南泽农农业发展有限公司
+      province_raw: 湖南省
+      province: 湖南
+      breed: null
+      note: null
+      legal_origin: 杨文莲
+      legal_change: 杨扬
+      change_kinds:
+      - 名称
+      - 法人
+    - index: 10
+      name_origin: 湖南新五丰股份有限公司湘潭分公司
+      name_change: 湖南新五丰股份有限公司浏阳分公司
+      province_raw: 湖南省
+      province: 湖南
+      breed: null
+      note: null
+      address_origin: 湖南省湘潭市湘潭县易俗河镇青光村
+      address_change: 湖南省长沙市浏阳市葛家镇新宏村
+      legal_origin: 邓小龙
+      legal_change: 沙垣坤
+      change_kinds:
+      - 名称
+      - 场址
+      - 法人
+    - index: 11
+      name_origin: 四川圣迪乐村生态食品股份有限公司
+      name_change: 四川圣罗兰农业科技有限公司
+      province_raw: 四川省
+      province: 四川
+      breed: null
+      note: null
+      address_origin: 四川省梓潼县经济技术产业园区圣迪乐村
+      address_change: 四川省绵阳市游仙区松垭镇
+      legal_origin: 郭文广
+      legal_change: 王光富
+      change_kinds:
+      - 名称
+      - 场址
+      - 法人
+    - index: 12
+      name_origin: 云南省种畜繁育推广中心
+      name_change: 云南农业职业技术学院资产经营有限公司
+      province_raw: 云南省
+      province: 云南
+      breed: null
+      note: null
+      change_kinds:
+      - 名称

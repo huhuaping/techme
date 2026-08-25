@@ -13,7 +13,7 @@
 | 目录 | 职责 |
 |------|------|
 | `R/` | 包源码：工作流函数（`wfl.*`）、数据集桩、工具函数 |
-| `data/` | 52 个标准 `.rda` 数据集（`LazyData: true`） |
+| `data/` | 53 个标准 `.rda` 数据集（`LazyData: true`） |
 | `data-raw/` | 原始数据 + 清洗脚本（`.Rbuildignore` 排除，不打包） |
 | `man/` | roxygen 自动生成的 `.Rd`（禁止手改） |
 | `vignettes/` | 设计文档与数据集说明 |
@@ -26,7 +26,7 @@
 - 公开网站：`data-raw/public-site/` → 成品：`data-raw/data-tidy/xxx-web/{html,xlsx}/`
 - 年度更新入口：`data-raw/update-yearbook/`、`data-raw/update-public/`
 
-## 六大工作流（Skills）
+## 工作流 Skills
 
 执行任务前，读取对应 Skill：
 
@@ -34,6 +34,7 @@
 |--------|-----------|
 | 年鉴数据年度更新 | [.cursor/skills/techme-yearbook-update/SKILL.md](.cursor/skills/techme-yearbook-update/SKILL.md) |
 | 公开网站数据抓取与更新 | [.cursor/skills/techme-public-site-update/SKILL.md](.cursor/skills/techme-public-site-update/SKILL.md) |
+| 附件文本抽取（html/pdf/docx） | [.cursor/skills/techme-read-attachments/SKILL.md](.cursor/skills/techme-read-attachments/SKILL.md) |
 | 新增/调整数据集与 varsList | [.cursor/skills/techme-new-dataset/SKILL.md](.cursor/skills/techme-new-dataset/SKILL.md) |
 | R 包工程化（check、test） | [.cursor/skills/techme-r-package-check/SKILL.md](.cursor/skills/techme-r-package-check/SKILL.md) |
 | 文档与 pkgdown 维护 | [.cursor/skills/techme-pkgdown-docs/SKILL.md](.cursor/skills/techme-pkgdown-docs/SKILL.md) |
@@ -93,6 +94,7 @@ wfl_files → wfl_genDirs → [wfl_rename] → wfl_unlock → wfl_editXls
 - 新增变量先查/扩 `varsList`，遵循 block 命名法
 - 保持最小改动范围，匹配现有命名与风格
 - 写入源文件保持合法 UTF-8；乱码按 `techme-encoding-utf8` 从 git 历史恢复
+- 读 html/pdf/docx 等附件时按 `techme-read-attachments` 选 MCP，不在对话中粘贴 `data-raw/` 原始表
 
 ### 禁止
 

@@ -1,4 +1,7 @@
 ## code to prepare `wfl_useData_BreedingXmj` dataset goes here
+# 已弃用。新名单请用 data-raw/public-site/moa-xmj-breeding/wfl-PubXmjBreeding.R
+# 生成 techme::PubXmjBreeding。本脚本不再维护。
+
 
 source("data-raw/set-global.R")
 

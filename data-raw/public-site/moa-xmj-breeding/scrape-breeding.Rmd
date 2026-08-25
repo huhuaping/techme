@@ -1,0 +1,1245 @@
+---
+title: "现代农业产业技术体系"
+author: "胡华平"
+date: "`r Sys.Date()`"
+output:
+  bookdown::word_document2:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 4
+    reference_docx: report-reference.docx
+  bookdown::html_document2:
+    number_sections: yes
+    toc: no
+    fig_caption: yes
+    toc_float: yes
+always_allow_html: yes
+---
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE, eval = FALSE,
+                      fig.align='center',fig.width=10, fig.height=7) # Places figures on their own pages
+options(
+  htmltools.dir.version = FALSE, 
+  formatR.indent = 2, width = 55, 
+  digits = 2,scipen=999,tinytex.verbose = TRUE,
+  knitr.kable.NA = '',
+  fig.width=12, fig.height=8)
+
+```
+
+```{r}
+require("rvest")
+require("xml2")
+require("httr")
+require("stringr")
+require("tidyverse")
+require("tidyselect")
+require("here")
+require("openxlsx")
+```
+
+\newpage
+
+# 1.研究目标
+
+体系设置和专家名单
+
+- 产业技术研发中心
+
+- 功能研究室
+
+- 综合试验站
+
+
+# 2.资料来源
+
+## 2.1 数据来源
+
+
+农业部网站
+
+
+
+
+
+
+## 2.2 数据进度
+
+<!---00 全体--->
+
+- 【附名单word】关于公布2020年国家核心育种场等核验结果和变更名称的[通知](http://www.moa.gov.cn/govpublic/nybzzj1/202101/t20210111_6359726.htm)
+
+- 【附名单 html】关于公布2018年核心育种场等名单和部分国家核心育种场变更名称与取消资格的[通知](http://www.moa.gov.cn/nybgb/2018/201812/201901/t20190106_6166186.htm)
+
+<!---01 生猪--->
+
+
+- 【附名单 html】农业部办公厅2017年关于部分国家生猪核心育种场变更名称和取消资格的[通知](http://www.moa.gov.cn/nybgb/2017/dbq/201801/t20180103_6134013.htm)
+
+- 农业部办公厅关于公布2015年国家生猪核心育种场名单的[通知](http://www.moa.gov.cn/nybgb/2015/jiuqi/201712/t20171219_6103781.htm)
+
+- 农业部办公厅关于公布2013年国家生猪核心育种场评审结果的[通知](https://www.moa.gov.cn/gk/zcjd/201311/t20131107_3669169.htm)
+
+
+- 【附名单 html】农业部办公厅2012年关于公布国家生猪核心育种场名单的[通知](http://www.moa.gov.cn/gk/zcjd/201210/t20121010_2957437.htm)
+
+- 农业部办公厅关于公布2011年国家生猪核心育种场名单的[通知](https://www.moa.gov.cn/gk/zcjd/201111/t20111125_2417690.htm)
+
+- 农业部办公厅关于公布第二批国家生猪核心育种场名单的[通知](http://www.moa.gov.cn/nybgb/2010/dseq/201806/t20180604_6151036.htm)
+
+
+- 【附名单 html】农业部办公厅2010年关于公布第一批国家生猪核心育种场名单的[通知](http://www.moa.gov.cn/nybgb/2010/dsyq/201806/t20180604_6151009.htm)
+
+<!---02 牛羊--->
+
+- 【附名单 html】农业农村部办公厅关于公布2019年国家肉牛和肉羊核心育种场名单的[通知](http://www.moa.gov.cn/nybgb/2019/201909/202001/t20200109_6334618.htm)
+
+- 【附名单 html】农业部办公厅2017年关于公布第三批国家肉牛核心育种场名单的[通知](http://www.moa.gov.cn/govpublic/XMYS/201711/t20171101_5856545.htm)
+
+
+- 【无名单】农业部办公厅2015年关于公布第二批国家肉牛核心育种场名单的[通知](https://www.moa.gov.cn/gk/zcjd/201904/t20190429_6287186.htm)
+
+    - 【附名单 html】[牛羊天地](http://news.niuyangtd.com/m/view.php?aid=2799)
+
+- 农业部办公厅关于2014年公布第一批国家肉牛核心育种场名单的[通知](http://www.moa.gov.cn/gk/zcjd/201409/t20140911_4051633.htm)
+
+<!---03 鸡--->
+
+- 农业部办公厅2016年关于公布第二批国家蛋鸡良种扩繁推广基地名单的[通知](http://www.moa.gov.cn/nybgb/2016/dishiqi/201711/t20171126_5919605.htm)
+
+- 农业部办公厅关于2014年公布第一批国家蛋鸡核心育种场和国家蛋鸡良种扩繁推广基地名单的[通知](http://www.moa.gov.cn/nybgb/2014/shi/201712/t20171219_6111543.htm)
+
+- 农业部办公厅2015年关于公布第一批国家肉鸡核心育种场和国家肉鸡良种扩繁推广基地名单的[通知](http://www.moa.gov.cn/nybgb/2015/shiyiqi/201712/t20171219_6104097.htm)
+
+    - 2020年关于补齐肉鸡产业发展短板、做强肉鸡产业的[建议](http://www.moa.gov.cn/govpublic/xmsyj/202011/t20201103_6355681.htm)
+
+
+## 异常提示
+
+- 机构名称存在换行符'\n'
+
+
+# 3.数据抓取流程(data-raw到data-extract)
+
+## 3.1 基本过程
+
+```{r}
+require("rvest")
+require("stringr")
+require("tidyverse")
+require("tidyselect")
+require("openxlsx")
+```
+
+
+## 3.2 分别抓取html
+
+
+### year-2010-pig-batch-01名单html table
+
+```{r}
+# ====files html path====
+files_path <- "html/year-2010-pig-batch-01.html"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read table 1====
+# xpath  table
+css_tbl <-"body > div.main.bjjM.hd_wzxq > div.border.pd_rl_24.hd_zbftMPContent > div.arc_body.mg_auto.w_855.pd_b_35 > div.TRS_Editor > div > p:nth-child(n+7)"
+
+tbl_raw1 <- read_html(files_path,encoding = "UTF-8") %>%
+  html_nodes(css = css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  mutate_all(., str_trim, side = "both") %>%
+  filter(!(value %in% c(NA, ""))) %>%
+  mutate( value =mgsub::mgsub(value, 
+                                        c(fixed("\u00a0"),fixed("\n")," "),
+                                        c("", "",""))) %>%
+  mutate(value = str_replace(value, "．|、", ".")) %>%
+  mutate(type = str_extract(value, "(?<=批)(.+)(?=名单)")) %>%
+  mutate(index_detect = str_extract(value, ".+(?=\\.)")) %>%
+  fill(type) %>%
+  filter(!is.na(index_detect)) %>%
+  separate(col= value, into = c("index", "name_origin"),
+           sep = "\\.")%>%
+  add_column(year = Year) %>%
+  add_column(mark = "遴选公示") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+# ====write out====
+name_extract <- str_extract(files_path, "(?<=/)(.+)(?=\\.)")
+(path_out <- glue::glue("xlsx/{name_extract}.xlsx"))
+openxlsx::write.xlsx(tbl_raw1, path_out)
+```
+
+### year-2010-pig-batch-02名单html table
+
+```{r}
+# ====files html path====
+files_path <- "html/year-2010-pig-batch-02.html"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read table 1====
+# xpath  table
+css_tbl <-"body > div.main.bjjM.hd_wzxq > div.border.pd_rl_24.hd_zbftMPContent > div.arc_body.mg_auto.w_855.pd_b_35 > div.TRS_Editor > div > p:nth-child(n+7)"
+
+tbl_raw1 <- read_html(files_path,encoding = "UTF-8") %>%
+  html_nodes(css = css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  mutate_all(., str_trim, side = "both") %>%
+  filter(!(value %in% c(NA, ""))) %>%
+  mutate( value =mgsub::mgsub(value, 
+                                        c(fixed("\u00a0"),fixed("\n")," "),
+                                        c("", "",""))) %>%
+  mutate(value = str_replace(value, "．|、", ".")) %>%
+  mutate(type = str_extract(value, "(?<=批)(.+)(?=名单)")) %>%
+  mutate(index_detect = str_extract(value, ".+(?=\\.)")) %>%
+  fill(type) %>%
+  filter(!is.na(index_detect)) %>%
+  separate(col= value, into = c("index", "name_origin"),
+           sep = "\\.")%>%
+  add_column(year = Year) %>%
+  add_column(mark = "遴选公示") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+# ====write out====
+name_extract <- str_extract(files_path, "(?<=/)(.+)(?=\\.)")
+(path_out <- glue::glue("xlsx/{name_extract}.xlsx"))
+openxlsx::write.xlsx(tbl_raw1, path_out)
+```
+
+### year-2011-pig名单html table
+
+```{r}
+# ====files html path====
+files_path <- "html/year-2011-pig.html"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read table 1====
+# xpath  table
+css_tbl <-"#TRS_AUTOADD > p:nth-child(n+6)"
+
+tbl_raw1 <- read_html(files_path,encoding = "UTF-8") %>%
+  html_nodes(css = css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  mutate_all(., str_trim, side = "both") %>%
+  filter(!(value %in% c(NA, ""))) %>%
+  mutate( value =mgsub::mgsub(value, 
+                                        c(fixed("\u00a0"),fixed("\n")," "),
+                                        c("", "",""))) %>%
+  mutate(value = str_replace(value, "．|、", ".")) %>%
+  mutate(type = str_extract(value, "(?<=年)(.+)(?=名单)")) %>%
+  mutate(index_detect = str_extract(value, ".+(?=\\.)")) %>%
+  fill(type) %>%
+  filter(!is.na(index_detect)) %>%
+  separate(col= value, into = c("index", "name_origin"),
+           sep = "\\.")%>%
+  add_column(year = Year) %>%
+  add_column(mark = "遴选公示") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+# ====write out====
+name_extract <- str_extract(files_path, "(?<=/)(.+)(?=\\.)")
+(path_out <- glue::glue("xlsx/{name_extract}.xlsx"))
+openxlsx::write.xlsx(tbl_raw1, path_out)
+```
+
+### year-2012-pig名单html table
+
+```{r}
+# ====files html path====
+files_path <- "html/year-2012-pig.html"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read table 1====
+# xpath  table
+css_tbl <-"body > div.main.boxcenter.container_xxgk.clearfix.xxgkmain > div.ggnr > div > div.gsj_htmlcon > div.gsj_htmlcon_bot > div > p:nth-child(n+10)"
+
+tbl_raw1 <- read_html(files_path,encoding = "UTF-8") %>%
+  html_nodes(css = css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  mutate_all(., str_trim, side = "both") %>%
+  filter(!(value %in% c(NA, ""))) %>%
+  mutate( value =mgsub::mgsub(value, 
+                                        c(fixed("\u00a0"),fixed("\n")," "),
+                                        c("", "",""))) %>%
+  mutate(value = str_replace(value, "．|、", ".")) %>%
+  mutate(type = str_extract(value, "(?<=年)(.+)(?=名单)")) %>%
+  mutate(index_detect = str_extract(value, ".+(?=\\.)")) %>%
+  fill(type) %>%
+  filter(!is.na(index_detect)) %>%
+  separate(col= value, into = c("index", "name_origin"),
+           sep = "\\.")%>%
+  add_column(year = Year) %>%
+  add_column(mark = "遴选公示") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+# ====write out====
+name_extract <- str_extract(files_path, "(?<=/)(.+)(?=\\.)")
+(path_out <- glue::glue("xlsx/{name_extract}.xlsx"))
+openxlsx::write.xlsx(tbl_raw1, path_out)
+```
+
+### year-2013-pig名单html table
+
+```{r}
+# ====files html path====
+files_path <- "html/year-2013-pig.html"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read table 1====
+# xpath  table
+css_tbl <-"body > div.main.boxcenter.container_xxgk.clearfix.xxgkmain > div.ggnr > div > div.gsj_htmlcon > div.gsj_htmlcon_bot > p:nth-child(n+10)"
+
+tbl_raw1 <- read_html(files_path,encoding = "UTF-8") %>%
+  html_nodes(css = css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  mutate_all(., str_trim, side = "both") %>%
+  filter(!(value %in% c(NA, ""))) %>%
+  mutate( value =mgsub::mgsub(value, 
+                                        c(fixed("\u00a0"),fixed("\n")," "),
+                                        c("", "",""))) %>%
+  mutate(value = str_replace(value, "．|、", ".")) %>%
+  mutate(type = str_extract(value, "(?<=年)(.+)(?=名单)")) %>%
+  mutate(index_detect = str_extract(value, ".+(?=\\.)")) %>%
+  fill(type) %>%
+  filter(!is.na(index_detect)) %>%
+  separate(col= value, into = c("index", "name_origin"),
+           sep = "\\.")%>%
+  add_column(year = Year) %>%
+  add_column(mark = "遴选公示") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+# ====write out====
+name_extract <- str_extract(files_path, "(?<=/)(.+)(?=\\.)")
+(path_out <- glue::glue("xlsx/{name_extract}.xlsx"))
+openxlsx::write.xlsx(tbl_raw1, path_out)
+```
+
+### year-2014-chichen-batch-01名单html table
+
+```{r}
+# ====files html path====
+files_path <- "html/year-2014-chichen-batch-01.html"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read table 1====
+# xpath  table
+css_tbl <-"body > div.main.bjjM.hd_wzxq > div.border.pd_rl_24.hd_zbftMPContent > div.arc_body.mg_auto.w_855.pd_b_35 > div.TRS_PreAppend > p:nth-child(n+13)"
+
+tbl_raw1 <- read_html(files_path,encoding = "UTF-8") %>%
+  html_nodes(css = css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  mutate_all(., str_trim, side = "both") %>%
+  filter(!(value %in% c(NA, ""))) %>%
+  mutate( value =mgsub::mgsub(value, 
+                                        c(fixed("\u00a0"),fixed("\n")," "),
+                                        c("", "",""))) %>%
+  mutate(value = str_replace(value, "．|、", ".")) %>%
+  mutate(type = str_extract(value, "(?<=第一批)(.+)(?=名单)")) %>%
+  mutate(index_detect = str_extract(value, ".+(?=\\.)")) %>%
+  fill(type) %>%
+  filter(!is.na(index_detect)) %>%
+  separate(col= value, into = c("index", "name_origin"),
+           sep = "\\.")%>%
+  add_column(year = Year) %>%
+  add_column(mark = "遴选公示") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+# ====write out====
+name_extract <- str_extract(files_path, "(?<=/)(.+)(?=\\.)")
+(path_out <- glue::glue("xlsx/{name_extract}.xlsx"))
+openxlsx::write.xlsx(tbl_raw1, path_out)
+```
+
+### year-2014-cow-batch-01 名单html table
+
+```{r}
+# ====files html path====
+files_path <- "html/year-2014-cow-batch-01.html"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read table 1====
+# xpath  table
+## [XPath to extract text after br tags in R](https://stackoverflow.com/questions/11252407/xpath-to-extract-text-after-br-tags-in-r)
+css_tbl <-"/html/body/div[2]/div[4]/div/div[1]/div[2]/p[2]/text()[preceding-sibling::br]"
+
+
+tbl_raw1 <- read_html(files_path,encoding = "UTF-8") %>%
+  html_nodes(xpath = css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  mutate_all(., str_trim, side = "both") %>%
+  filter(!(value %in% c(NA, ""))) %>%
+  mutate( value =mgsub::mgsub(value, 
+                                        c(fixed("\u00a0"),fixed("\n")," "),
+                                        c("", "",""))) %>%
+  mutate(value = str_replace(value, "．|、", ".")) %>%
+  mutate(type = str_extract(value, "(?<=第一批)(.+)(?=名单)")) %>%
+  mutate(index_detect = str_extract(value, ".+(?=\\.)")) %>%
+  fill(type) %>%
+  filter(!is.na(index_detect)) %>%
+  separate(col= value, into = c("index", "name_origin"),
+           sep = "\\.")%>%
+  add_column(year = Year) %>%
+  add_column(mark = "遴选公示") 
+
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+
+# ====write out====
+name_extract <- str_extract(files_path, "(?<=/)(.+)(?=\\.)")
+(path_out <- glue::glue("xlsx/{name_extract}.xlsx"))
+openxlsx::write.xlsx(tbl_raw1, path_out)
+
+```
+
+### year-2015-chichen-batch-01名单html table
+
+```{r}
+# ====files html path====
+files_path <- "html/year-2015-chichen-batch-01.html"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read table 1====
+# xpath  table
+css_tbl <-"body > div.main.bjjM.hd_wzxq > div.border.pd_rl_24.hd_zbftMPContent > div.arc_body.mg_auto.w_855.pd_b_35 > div.TRS_PreAppend > p:nth-child(n+13)"
+
+tbl_raw1 <- read_html(files_path,encoding = "UTF-8") %>%
+  html_nodes(css = css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  mutate_all(., str_trim, side = "both") %>%
+  filter(!(value %in% c(NA, ""))) %>%
+  mutate( value =mgsub::mgsub(value, 
+                                        c(fixed("\u00a0"),fixed("\n")," "),
+                                        c("", "",""))) %>%
+  mutate(value = str_replace(value, "．|、", ".")) %>%
+  mutate(type = str_extract(value, "(?<=第一批)(.+)(?=名单)")) %>%
+  mutate(index_detect = str_extract(value, ".+(?=\\.)")) %>%
+  fill(type) %>%
+  filter(!is.na(index_detect)) %>%
+  separate(col= value, into = c("index", "name_origin"),
+           sep = "\\.")%>%
+  add_column(year = Year) %>%
+  add_column(mark = "遴选公示") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+# ====write out====
+name_extract <- str_extract(files_path, "(?<=/)(.+)(?=\\.)")
+(path_out <- glue::glue("xlsx/{name_extract}.xlsx"))
+openxlsx::write.xlsx(tbl_raw1, path_out)
+```
+
+### year-2015-cow-batch-02.html 名单html table
+
+```{r}
+# ====files html path====
+files_path <- "html/year-2015-cow-batch-02.html"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read table 1====
+# xpath  table
+css_tbl <-"#content > p:nth-child(n+7)"
+
+tbl_raw1 <- read_html(files_path,encoding = "UTF-8") %>%
+  html_nodes(css = css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  mutate_all(., str_trim, side = "both") %>%
+  filter(!(value %in% c(NA, ""))) %>%
+  mutate( value =mgsub::mgsub(value, 
+                                        c(fixed("\u00a0"),fixed("\n")," "),
+                                        c("", "",""))) %>%
+  mutate(value = str_replace(value, "．|、", ".")) %>%
+  separate(col= value, into = c("index", "name_origin"),
+           sep = "\\.")%>%
+  add_column(year = Year) %>%
+  add_column(type = "国家肉牛核心育种场") %>%
+  add_column(mark = "遴选公示") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+
+# ====write out====
+name_extract <- str_extract(files_path, "(?<=/)(.+)(?=\\.)")
+(path_out <- glue::glue("xlsx/{name_extract}.xlsx"))
+openxlsx::write.xlsx(tbl_raw1, path_out)
+
+```
+
+### year-2015-pig 名单html table
+
+```{r}
+# ====files html path====
+files_path <- "html/year-2015-pig.html"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read table 1====
+# xpath  table
+css_tbl <-"body > div.main.bjjM.hd_wzxq > div.border.pd_rl_24.hd_zbftMPContent > div.arc_body.mg_auto.w_855.pd_b_35 > div.TRS_PreAppend > span > p:nth-child(n+2)"
+
+tbl_raw1 <- read_html(files_path,encoding = "UTF-8") %>%
+  html_nodes(css = css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  mutate_all(., str_trim, side = "both") %>%
+  filter(!(value %in% c(NA, ""))) %>%
+  mutate( value =mgsub::mgsub(value, 
+                                        c(fixed("\u00a0"),fixed("\n")," "),
+                                        c("", "",""))) %>%
+  mutate(value = str_replace(value, "．", ".")) %>%
+  separate(col= value, into = c("index", "name_origin"),
+           sep = "\\.")%>%
+  add_column(year = Year) %>%
+  add_column(type = "国家生猪核心育种场") %>%
+  add_column(mark = "遴选公示") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+
+# ====write out====
+name_extract <- str_extract(files_path, "(?<=/)(.+)(?=\\.)")
+(path_out <- glue::glue("xlsx/{name_extract}.xlsx"))
+openxlsx::write.xlsx(tbl_raw1, path_out)
+
+```
+
+### year-2016-chichen-batch-02 名单html table
+
+```{r}
+# ====files html path====
+files_path <- "html/year-2016-chichen-batch-02.html"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read table 1====
+# xpath  table
+css_tbl <-"body > div.main.bjjM.hd_wzxq > div.border.pd_rl_24.hd_zbftMPContent > div.arc_body.mg_auto.w_855.pd_b_35 > div.TRS_PreAppend > p:nth-child(n+15)"
+
+tbl_raw1 <- read_html(files_path,encoding = "UTF-8") %>%
+  html_nodes(css = css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  mutate_all(., str_trim, side = "both") %>%
+  filter(!(value %in% c(NA, ""))) %>%
+  mutate( value =mgsub::mgsub(value, 
+                                        c(fixed("\u00a0"),fixed("\n")," "),
+                                        c("", "",""))) %>%
+  mutate(value = str_replace(value, "(?<=宁夏九三零生态农牧有限公司)(.+)", "")) %>%
+  mutate(value = str_replace(value, "．", ".")) %>%
+  separate(col= value, into = c("index", "name_origin"),
+           sep = "\\.")%>%
+  add_column(year = Year) %>%
+  add_column(type = "国家蛋鸡良种扩繁推广基地") %>%
+  add_column(mark = "遴选公示") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+
+# ====write out====
+name_extract <- str_extract(files_path, "(?<=/)(.+)(?=\\.)")
+(path_out <- glue::glue("xlsx/{name_extract}.xlsx"))
+openxlsx::write.xlsx(tbl_raw1, path_out)
+
+```
+
+### year-2017-cow-batch-03 名单html table
+
+```{r}
+# ====files html path====
+files_path <- "html/year-2017-cow-batch-03.html"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read table 1====
+# xpath  table
+css_tbl <-"body > div.main.boxcenter.container_xxgk.clearfix.xxgkmain > div.ggnr > div > div.gsj_htmlcon > div.gsj_htmlcon_bot > div > p:nth-child(n+16)"
+
+tbl_raw1 <- read_html(files_path,encoding = "UTF-8") %>%
+  html_nodes(css = css_tbl) %>%
+  html_text() %>%
+  as_tibble() %>%
+  mutate_all(., str_trim, side = "both") %>%
+  filter(!(value %in% c(NA, ""))) %>%
+  mutate(value = str_replace(value, " ", "")) %>%
+  separate(col= value, into = c("index", "name_origin"),
+           sep = "\\.")%>%
+  add_column(year = Year) %>%
+  add_column(type = "国家肉牛核心育种场") %>%
+  add_column(mark = "遴选公示") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+
+# ====write out====
+name_extract <- str_extract(files_path, "(?<=/)(.+)(?=\\.)")
+(path_out <- glue::glue("xlsx/{name_extract}.xlsx"))
+openxlsx::write.xlsx(tbl_raw1, path_out)
+
+```
+
+### year-2017-pig名单html table
+
+```{r}
+# ====files html path====
+files_path <- "html/year-2017-pig.html"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read table 1====
+# xpath  table
+xpath_tbl <-"/html/body/div[4]/div[1]/div[2]/div[1]/div/div/table"
+
+my_header <- c("index", "name_origin", "name_change")
+tbl_raw1 <- read_html(files_path,encoding = "UTF-8") %>%
+  html_nodes(xpath = xpath_tbl) %>%
+  html_table(header = T, fill = T) %>%
+  .[[1]] %>%
+  as_tibble() %>%
+  # rename
+  rename_all(.,~my_header) %>%
+  mutate_all(., str_trim, side = "both") %>%
+  rename_all(.,~my_header) %>%
+  add_column(year = Year) %>%
+  add_column(type = "国家生猪核心育种场") %>%
+  add_column(mark = "名称变更") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+
+# ====write out====
+
+(path_out <- glue::glue("xlsx/year-{Year}-pig.xlsx"))
+openxlsx::write.xlsx(tbl_raw1, path_out)
+
+```
+
+### year-2018-all名单xlsx
+
+```{r}
+#==== files html path====
+files_path <- "html/year-2018-all.xlsx"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read sheet 1====
+my_header <- c( "type", "index", "name_origin", "area_name")
+tbl_raw1 <- openxlsx::read.xlsx(files_path, colNames = T,
+                               sheet = 1) %>%
+  rename_all(.,~my_header) %>%
+  add_column(year = Year) %>%
+  add_column(mark = "遴选公示") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+
+## ====read sheet 2====
+my_header <- c("index", "area_name", "name_origin", "name_change")
+tbl_raw2 <- openxlsx::read.xlsx(files_path, colNames = T,
+                               sheet = 2) %>%
+  rename_all(.,~my_header) %>%
+  add_column(year = Year) %>%
+  add_column(mark = "名称变更")
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw2)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw2[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw2 <- tbl_raw2 %>%
+  select(all_of(header_full)) %>%
+  mutate(area_name = as.character(area_name))
+
+# ==== combind and tidy ====
+tbl_tidy <- bind_rows(tbl_raw1, tbl_raw2) %>%
+  mutate_all(str_trim)
+
+# ====write out====
+
+(path_out <- glue::glue("xlsx/year-{Year}-all.xlsx"))
+openxlsx::write.xlsx(tbl_tidy, path_out)
+
+```
+
+### year-2019-cow-sheep名单html table
+
+```{r}
+# ====files html path====
+files_path <- "html/year-2019-cow-sheep.html"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read table 1====
+# xpath  table
+xpath_tbl <-"/html/body/div[4]/div[1]/div[2]/div[1]/div/div/div[1]/table"
+
+my_header <- c("index", "name_origin", "area_name")
+tbl_raw1 <- read_html(files_path,encoding = "UTF-8") %>%
+  html_nodes(xpath = xpath_tbl) %>%
+  html_table(header = T, fill = T) %>%
+  .[[1]] %>%
+  as_tibble() %>%
+  # rename
+  rename_all(.,~my_header) %>%
+  mutate_all(., str_trim, side = "both") %>%
+  rename_all(.,~my_header) %>%
+  add_column(year = Year) %>%
+  add_column(type = "国家肉牛核心育种场") %>%
+  add_column(mark = "遴选公示") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+
+## ====read sheet 2====
+# xpath  table
+xpath_tbl <-"/html/body/div[4]/div[1]/div[2]/div[1]/div/div/div[2]/table"
+
+my_header <- c("index", "name_origin", "area_name")
+tbl_raw2 <- read_html(files_path,encoding = "UTF-8") %>%
+  html_nodes(xpath = xpath_tbl) %>%
+  html_table(header = T, fill = T) %>%
+  .[[1]] %>%
+  as_tibble() %>%
+  # rename
+  rename_all(.,~my_header) %>%
+  mutate_all(., str_trim, side = "both") %>%
+  rename_all(.,~my_header) %>%
+  add_column(year = Year) %>%
+  add_column(type = "国家肉羊核心育种场") %>%
+  add_column(mark = "遴选公示") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw2)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw2[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw2 <- tbl_raw2 %>%
+  select(all_of(header_full)) %>%
+  mutate(area_name = as.character(area_name))
+
+# ==== combind and tidy ====
+tbl_tidy <- bind_rows(tbl_raw1, tbl_raw2) %>%
+  mutate_all(str_trim)
+
+# ====write out====
+
+(path_out <- glue::glue("xlsx/year-{Year}-cow-sheep.xlsx"))
+openxlsx::write.xlsx(tbl_tidy, path_out)
+
+```
+
+
+
+### year-2020-all名单xlsx
+
+```{r}
+#==== files html path====
+files_path <- "html/year-2020-all.xlsx"
+Year <- as.numeric(str_extract(files_path, "(\\d{4})"))
+
+# target columns and names
+header_full <- c("year","index","area_name", "type",
+                 "name_origin", "name_change", "mark")
+
+## ====read sheet 1====
+my_header <- c("index",  "name_origin", "type")
+tbl_raw1 <- openxlsx::read.xlsx(files_path, colNames = T,
+                               sheet = 1) %>%
+  rename_all(.,~my_header) %>%
+  add_column(year = Year) %>%
+  add_column(mark = "资格取消") 
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw1)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw1[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw1 <- tbl_raw1 %>%
+  select(all_of(header_full))
+
+
+## ====read sheet 2====
+my_header <- c("index", "area_name", "name_origin", "name_change")
+tbl_raw2 <- openxlsx::read.xlsx(files_path, colNames = T,
+                               sheet = 2) %>%
+  rename_all(.,~my_header) %>%
+  add_column(year = Year) %>%
+  add_column(mark = "名称变更")
+
+# check columns and names, add columns if needed
+header_tbl <- names(tbl_raw2)
+(header_needed <- setdiff(header_full,header_tbl))
+if (length(header_needed)!=0) {
+  for (i in 1: length(header_needed)) {
+    tbl_raw2[, header_needed[i]] <- NA
+    print(glue::glue("{length(header_needed)} culumn needed!  now we will add column names: {header_needed[i]}."))
+  }
+  
+}
+# select columns
+tbl_raw2 <- tbl_raw2 %>%
+  select(all_of(header_full))
+
+# ==== combind and tidy ====
+tbl_tidy <- bind_rows(tbl_raw1, tbl_raw2) %>%
+  mutate_all(str_trim)
+
+# ====write out====
+
+(path_out <- glue::glue("xlsx/year-{Year}-all.xlsx"))
+openxlsx::write.xlsx(tbl_tidy, path_out)
+
+```
+
+## 3.3 清洗数据
+
+### 3.3.1 合并清洗全部数据（2010-2020）
+
+```{r}
+file_dir <- "xlsx/"
+file_name <- list.files(file_dir)
+file_target <- file_name[which(str_detect(file_name, "year-"))]
+file_path <- paste0(file_dir, file_target) 
+
+read_file <- function(path) {
+  df <- openxlsx::read.xlsx(path) %>%
+    mutate_all(., .funs = as.character)
+}
+
+tbl_out <- tibble(url = file_path) %>%
+  mutate(dt = map(url, read_file)) %>%
+  select(-url) %>%
+  unnest(dt) %>%
+  # handle string newline
+  mutate_all(.,.funs = str_replace, 
+             pattern = "\n",
+             replacement = "") 
+
+
+```
+
+### 3.3.2 识别添加省份信息
+
+```{r}
+
+# target columns and names
+header_target <- c("year","index","province", "type",
+                 "name_origin", "name_change", "mark")
+
+require(techme)
+
+data("ProvinceCity")
+dt_city <- ProvinceCity %>%
+  select(city_clean, province_clean)
+
+ptn_city<- paste0(unique(ProvinceCity$city_clean), collapse = "|")
+ptn_province <- paste0(unique(ProvinceCity$province_clean), collapse = "|")
+
+tbl_province <- tbl_out %>%
+  # get obvious province
+  mutate(province_area = str_extract(area_name, ptn_province)) %>%
+  # extract from 'name_origin'
+  mutate(province_origin = str_extract(name_origin,ptn_province)) %>%
+  # extract from 'name_change'
+  mutate(province_change = str_extract(name_change,ptn_province)) %>%
+  # get obvinous city
+  mutate(city_clean = str_extract(name_origin, ptn_city)) %>%
+  # match city database
+  left_join(., dt_city, by = "city_clean") %>%
+  # from province_area
+  mutate(province = ifelse(!is.na(province_area),
+                           province_area,
+                           NA)) %>%
+  # from province_origin
+  mutate(province = ifelse(is.na(province),
+                           province_origin,
+                           province)) %>%
+  # from province_change
+  mutate(province = ifelse(is.na(province),
+                           province_change,
+                           province))  %>%
+  # from province_clean
+  mutate(province = ifelse(is.na(province),
+                           province_clean,
+                           province)) %>%
+  select(all_of(header_target))
+
+# for check
+tbl_province %>%
+  filter(is.na(province))
+
+
+```
+
+
+### 3.3.3 导出年度数据
+
+```{r}
+#====write out ====
+Year <- sort(unique(tbl_province$year))
+
+for (i in seq_along(Year)) {
+  tbl_tidy <- tbl_province %>%
+    filter(year == Year[i]) 
+  
+  path_out <- glue::glue("update/tidy-year-{Year[i]}.xlsx")
+  openxlsx::write.xlsx(tbl_tidy,path_out)
+  Sys.sleep(0.5)
+  print(glue::glue("year {Year[i]} write to xlsx succeed."))
+}
+
+```
+
+### 3.3.4 读取全部数据（2010-2020）
+
+```{r}
+file_dir <- "update/"
+file_name <- list.files(file_dir)
+file_target <- file_name[which(str_detect(file_name, "tidy-year-"))]
+file_path <- paste0(file_dir, file_target) 
+
+read_file <- function(path) {
+  df <- openxlsx::read.xlsx(path) %>%
+    mutate_all(., .funs = as.character)
+}
+
+tbl_out <- tibble(url = file_path) %>%
+  mutate(dt = map(url, read_file)) %>%
+  select(-url) %>%
+  unnest(dt) %>%
+  # handle string newline
+  mutate_all(.,.funs = str_replace, 
+             pattern = "\n",
+             replacement = "")
+
+```
+
+
+
+### 3.3.4 机构名称列表（唯一化处理）
+
+```{r}
+require("techme")
+
+data("queryTianyan")
+dt_match <- queryTianyan %>%
+  select(name_origin, province) %>%
+  rename(institution = "name_origin")
+
+data("BasicProvince")
+ptn_province <- paste0(BasicProvince$province, collapse =  "|")
+
+list_institution <- tbl_out %>%
+  filter(is.na(province)) %>%
+  select(name_origin) %>%
+  rename(institution ="name_origin") %>%
+  unique() %>%
+  arrange(institution) %>%
+  left_join(., dt_match, by= "institution" ) %>%
+  # filter obvious province info
+  mutate(province_raw = str_extract(institution, ptn_province)) %>%
+  mutate(province = ifelse(is.na(province), province_raw, province)) %>%
+  filter(is.na(province)) %>%
+  select(institution) %>%
+  arrange(institution)
+
+  
+
+# check 
+check <- sum(is.na(list_institution$institution))
+if(check > 0) stop("please check the name of institution!")
+
+dir_xlsx <- "d:/github/techme/data-raw/data-tidy/hack-tianyan/ship/"
+file_xlsx <- glue::glue("ship-tot{nrow(list_institution)}-{Sys.Date()}.xlsx")
+(path_xlsx <- paste0(dir_xlsx, file_xlsx))
+
+openxlsx::write.xlsx(list_institution, path_xlsx)
+
+```
+
+### 3.3.6 在R包techme中进行天眼查
+
+- 循环查询
+
+- 得到结果，并人工确认
+
+- 重新整合更新`qureyTianyan`
+
+- build 并push `techme`
+
+### 3.3.7 在R包techme中上传数据集
+
+- `data-raw/wfl_useData-Breeding.R`
+
+- 匹配省份信息
+
+- 数据集名为`PubCars`
+

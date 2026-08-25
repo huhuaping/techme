@@ -1,0 +1,23 @@
+---
+description: 从 html/pdf/docx 等附件抽文本时的工具选择（markdownify、unlock_pdf）
+alwaysApply: true
+---
+
+# 附件文本抽取：选对工具
+
+详细 SOP 见 `techme-read-attachments` skill。路径用**绝对路径、正斜杠**。
+
+## 默认路由
+
+| 来源 | 首选 | 禁止 |
+|------|------|------|
+| 本地 docx / xlsx / pptx | markdownify 对应 `*-to-markdown` | — |
+| 本地 pdf（有文本层） | markdownify `pdf-to-markdown` 或 unlock_pdf `read_pdf` | **pdf-reader**（路径写死） |
+| 本地 html | 直接 Read 文件 | `webpage-to-markdown`（只要 URL） |
+| 在线网页 | markdownify `webpage-to-markdown` | — |
+| ofd | 先转 pdf 再按 pdf 处理 | 现有 MCP 都不认 ofd |
+| 论文 citekey | literature | 不要用 literature 读公示名单 |
+
+扫描件 pdf：先确认有无文本层；抽空再 OCR。名单入库走 xlsx / 现有 Rmd，Markdown 只用来看清结构。
+
+禁止在对话中粘贴 `data-raw/` 原始表内容；只回报列名、行数、年份覆盖、异常类型。

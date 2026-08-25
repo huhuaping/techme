@@ -23,8 +23,15 @@ A data frame:
 PubBreedingXmj
 }
 \description{
+\strong{Deprecated.} Use \link{PubXmjBreeding} instead. This 2010–2020 snapshot
+will be removed in a future release.
+}
+\details{
 A data set containing detail information of Officer Livestock Breeding List
 from the public site MOA (Xmj) \url{http://www.moa.gov.cn},
 with wide data format.
+
+Superseded by \link{PubXmjBreeding}, which covers 2010 onward and adds
+核验通过 from 2021. Do not use this object in new code.
 }
 \keyword{datasets}

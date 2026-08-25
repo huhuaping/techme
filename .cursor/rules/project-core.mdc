@@ -48,4 +48,4 @@ devtools::document()
 
 ## 工作流 Skills
 
-按任务类型读取 `.cursor/skills/techme-*/SKILL.md`，不要凭记忆跳步。乱码修复用 `techme-encoding-utf8`。
+按任务类型读取 `.cursor/skills/techme-*/SKILL.md`，不要凭记忆跳步。乱码修复用 `techme-encoding-utf8`。html/pdf/docx 抽取用 `techme-read-attachments`。

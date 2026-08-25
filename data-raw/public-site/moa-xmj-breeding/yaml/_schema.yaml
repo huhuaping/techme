@@ -1,0 +1,87 @@
+# 国家畜禽核心育种场 YAML 中间层（2021 年起）
+#
+# 定位：
+#   公示原文（html/pdf/docx）→ 本目录 year-{YYYY}.yaml →
+#   code-scrape-breeding.R 展开为 xlsx/year-{YYYY}.xlsx →
+#   再清洗为 data-tidy/.../xlsx/tidy-year-{YYYY}.xlsx
+#
+# 文件名 year-{YYYY}.yaml 中的 YYYY 是通知所指业务年份，不是发文年份。
+# 例：农办种〔2025〕4 号公布的是 2024 年增补/核验，文件为 year-2024.yaml。
+#
+# R 读取并展开为 tidy 列（与 2010–2020 tidy-year-*.xlsx 对齐）：
+#   yml <- yaml::read_yaml(path)
+#   rows <- list()
+#   for (ax in yml$annexes) {
+#     for (g in ax$groups) {
+#       for (it in g$items) {
+#         rows[[length(rows) + 1]] <- tibble::tibble(
+#           year = yml$year,
+#           index = it$index,
+#           province = it$province,
+#           type = g$type,
+#           name_origin = it$name_origin,
+#           name_change = it$name_change,
+#           mark = ax$mark
+#         )
+#       }
+#     }
+#   }
+#   tbl <- dplyr::bind_rows(rows)
+#
+# 目标 tidy 列：
+#   year, index, province, type, name_origin, name_change, mark
+#
+# mark 受控词（与历史 tidy 对齐，2021 年起补「核验通过」）：
+#   遴选公示 / 核验通过 / 资格取消 / 名称变更
+#
+# 口径约定：
+#   - 2024 年「增补名单」映射为 mark=遴选公示，annex_kind 仍写 增补。
+#   - 「信息变更」（场址/法人/品种）仍映射为 mark=名称变更；
+#     仅名称未变时 name_change 为 null，细节放 address_*/legal_*/breed_*。
+#   - type 沿用公示原文，不做历史别名改写：
+#       「国家羊核心育种场」不改成「国家肉羊核心育种场」；
+#       2024「良种扩繁推广场」不改成「基地」；
+#       「国家核心种公猪站」不改成「全国生猪遗传改良计划种公猪站」。
+#   - index 为附件表内原序号（各组各自从 1 起），不是全年流水号。
+#   - province 用 BasicProvince 简称；province_raw 保留「北京市」等原文。
+#     已有省份一律不改写。仅当 province / province_raw 为 null 时，
+#     才根据 name_origin / note / 市县名推断补齐。推断不到仍为 null。
+#   - 某 mark 当年无名单时仍保留 annex 节点，groups: []，方便以后年度套用。
+#   - 正文有取消/变更但无独立附件时 annex 取 body。
+#
+# 字段一览（* 为目标 tidy 列；其余供以后年度维护，xlsx 阶段可丢弃）：
+#   year*            业务年份
+#   mark*            公示类别
+#   annex            附件序号，或 body
+#   annex_kind       遴选 / 增补 / 核验 / 取消 / 变更
+#   type*            育种场类型（写在 groups[].type，条目继承）
+#   index*           附件原序号
+#   name_origin*     遴选/核验/取消=单位名称；变更=原单位名称
+#   name_change*     仅变更名单；公示为「———」或未变更时为 null
+#   province_raw     公示「所在省份」原文
+#   province*        简称
+#   breed            品种名称；多品种用顿号，与原文一致
+#   note             备注（常含「原名称：…」）
+#   address_origin / address_change
+#   breed_origin / breed_change
+#   legal_origin / legal_change
+#   change_kinds     名称 / 场址 / 品种 / 法人 的子集
+#
+# 每年文件顶层键：year, title, doc_no, effective_date, pub_date,
+#   url, url_alt, source, source_files, counts, annexes.
+
+schema_version: 1
+dataset: PubXmjBreeding
+mark_values:
+  - 遴选公示
+  - 核验通过
+  - 资格取消
+  - 名称变更
+tidy_columns:
+  - year
+  - index
+  - province
+  - type
+  - name_origin
+  - name_change
+  - mark

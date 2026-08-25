@@ -1755,8 +1755,8 @@ choose.nameData <- function() {
         ## observe-station, multiple departments
         "PubObsStation", # old version
         "PubObsStationX", # new version
-        ## moa-xmj-breeding
-        "PubBreedingXmj",
+        ## moa-xmj-breeding（PubBreedingXmj 已弃用，下版移除）
+        "PubXmjBreeding",
         ## moa-xmj-standard
         "PubStandardXmj",
         ## moa-industry-convergence

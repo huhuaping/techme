@@ -34,6 +34,7 @@ devtools::load_all()
 |------|------|
 | 年鉴年度更新 | [.cursor/skills/techme-yearbook-update/SKILL.md](.cursor/skills/techme-yearbook-update/SKILL.md) |
 | 公开网站数据更新 | [.cursor/skills/techme-public-site-update/SKILL.md](.cursor/skills/techme-public-site-update/SKILL.md) |
+| 附件文本抽取（html/pdf/docx） | [.cursor/skills/techme-read-attachments/SKILL.md](.cursor/skills/techme-read-attachments/SKILL.md) |
 | 新增数据集 | [.cursor/skills/techme-new-dataset/SKILL.md](.cursor/skills/techme-new-dataset/SKILL.md) |
 | 包验证与测试 | [.cursor/skills/techme-r-package-check/SKILL.md](.cursor/skills/techme-r-package-check/SKILL.md) |
 | 文档维护 | [.cursor/skills/techme-pkgdown-docs/SKILL.md](.cursor/skills/techme-pkgdown-docs/SKILL.md) |

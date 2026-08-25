@@ -52,6 +52,7 @@ data-raw/data-tidy/{source-name}-web/
 - 静态页面：R 脚本 + `rvest` 或手工下载
 - 动态页面：Docker Selenium（见下方）
 - 输出 html 至 `data-raw/data-tidy/xxx-web/html/`
+- 通知附件（html / pdf / docx / ofd）先按 `techme-read-attachments` 看清结构，再写入本数据源 `xlsx/`；不要把 Markdown 当入库文件
 
 ### Step 3 — 清洗为 xlsx
 

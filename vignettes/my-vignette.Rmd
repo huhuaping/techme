@@ -608,16 +608,34 @@ PubMachineCountyCase %>%
 data("PubBreedingXmj")
 ```
 
+> **已弃用**：请改用 `PubXmjBreeding`。本对象为 2010–2020 快照，将在后续版本移除。
+
 **`PubBreedingXmj`**：A **wide format** data set containing details of Officer' Livestock Breeding List from MOA (Xmj).
 
 - Totally `r dim(PubBreedingXmj)[2]` columns including: `r paste0(names(PubBreedingXmj), collapse =", ")`.
 
 - Totally `r dim(PubBreedingXmj)[1]` rows.
 
-- Years range from `r min(PubBreedingXmj$year)` to `r max(PubBreedingXmj$year)` 
+- Years range from `r min(PubBreedingXmj$year)` to `r max(PubBreedingXmj$year)`
+
+### PubXmjBreeding
+
+```{r,echo=FALSE}
+data("PubXmjBreeding")
+```
+
+> **说明**：本数据集在 `techme` 项目下整理农业农村部国家畜禽核心育种场等公示名单（`data-raw/public-site/moa-xmj-breeding/`）。2010–2020 年由 `scrape-breeding.Rmd` 清洗（空省份已从旧快照回填）；2021 年起 YAML 经 `code-scrape-breeding.R` 展开为 tidy xlsx，再由 `wfl-PubXmjBreeding.R` 编译。这是当前唯一应使用的名单。
+
+**`PubXmjBreeding`**：A **wide format** data set containing national core livestock breeding farms, elite multiplier farms, and core sire stations from MOA notices.
+
+- Totally `r dim(PubXmjBreeding)[2]` columns including: `r paste0(names(PubXmjBreeding), collapse =", ")`.
+
+- Totally `r dim(PubXmjBreeding)[1]` rows.
+
+- Years range from `r min(PubXmjBreeding$year)` to `r max(PubXmjBreeding$year)`
 
 ```{r}
-PubBreedingXmj %>%
+PubXmjBreeding %>%
   sample_n(size = 10) %>%
   kable()
 ```
