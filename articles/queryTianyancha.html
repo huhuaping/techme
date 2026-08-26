@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">techme</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.2.9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,16 +30,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="active nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/guide-sources-public-site.html">网站数据来源</a></li>
-    <li><a class="dropdown-item" href="../articles/guide-sources-yearbook.html">年鉴数据来源</a></li>
-    <li><a class="dropdown-item" href="../articles/my-vignette.html">02-Techme数据集</a></li>
-    <li><a class="dropdown-item" href="../articles/pkg-design.html">01-Techme包设计</a></li>
-    <li><a class="dropdown-item" href="../articles/queryTianyancha.html">机构信息库</a></li>
-  </ul>
-</li>
+<li class="active nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -131,24 +122,24 @@ basic info of institution enrolled in officer administrator.</p>
 <ul>
 <li><p>Totally 9 columns including: index, name_origin, name_search,
 address, tel, url, province, city, province_raw.</p></li>
-<li><p>Totally 588 rows.</p></li>
+<li><p>Totally 596 rows.</p></li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">queryTianyan</span><span class="op">)</span></span>
 <span><span class="va">queryTianyan</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_n</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
 <col width="2%">
-<col width="20%">
-<col width="20%">
-<col width="23%">
-<col width="5%">
 <col width="16%">
+<col width="16%">
+<col width="26%">
+<col width="5%">
+<col width="19%">
 <col width="3%">
 <col width="2%">
-<col width="4%">
+<col width="5%">
 </colgroup>
 <thead><tr class="header">
 <th align="right">index</th>
@@ -163,70 +154,26 @@ address, tel, url, province, city, province_raw.</p></li>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">120</td>
-<td align="left">中国疾病预防控制中心辐射防护与核安全医学所</td>
-<td align="left">中国疾病预防控制中心辐射防护与核安全医学所</td>
-<td align="left">北京市西城区新康街2号</td>
+<td align="right">112</td>
+<td align="left">中国地质科学院岩溶地质研究所</td>
+<td align="left">中国地质科学院岩溶地质研究所</td>
+<td align="left">广西壮族自治区桂林市七星区七星路50号</td>
 <td align="left">暂无信息</td>
-<td align="left"><a href="https://www.tianyancha.com/company/3097986118" class="external-link uri">https://www.tianyancha.com/company/3097986118</a></td>
-<td align="left">北京</td>
-<td align="left">NA</td>
-<td align="left">北京</td>
+<td align="left"><a href="https://www.tianyancha.com/company/2998353967" class="external-link uri">https://www.tianyancha.com/company/2998353967</a></td>
+<td align="left">广西</td>
+<td align="left">桂林市</td>
+<td align="left">广西</td>
 </tr>
 <tr class="even">
-<td align="right">3</td>
-<td align="left">中国长城葡萄酒有限公司</td>
-<td align="left">中国长城葡萄酒有限公司</td>
-<td align="left">河北省张家口市怀来县沙城镇</td>
+<td align="right">29</td>
+<td align="left">中国林业科学研究院林业科技信息研究所</td>
+<td align="left">中国林业科学研究院林业科技信息研究所</td>
+<td align="left">北京市海淀区东小府2号</td>
 <td align="left">暂无信息</td>
-<td align="left"><a href="https://www.tianyancha.com/company/334595663" class="external-link uri">https://www.tianyancha.com/company/334595663</a></td>
-<td align="left">河北</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="right">8</td>
-<td align="left">国家人口计生委科学技术研究所</td>
-<td align="left">国家人口计生委科学技术研究所计划生育生殖健康技术服务中心</td>
-<td align="left">北京市海淀区大慧寺路12号</td>
-<td align="left">暂无信息</td>
-<td align="left"><a href="https://www.tianyancha.com/company/3097982223" class="external-link uri">https://www.tianyancha.com/company/3097982223</a></td>
+<td align="left"><a href="https://www.tianyancha.com/company/2349164917" class="external-link uri">https://www.tianyancha.com/company/2349164917</a></td>
 <td align="left">北京</td>
 <td align="left">NA</td>
-<td align="left">北京</td>
-</tr>
-<tr class="even">
-<td align="right">10</td>
-<td align="left">广州海洋地质调查局</td>
-<td align="left">广州海洋地质调查局</td>
-<td align="left">广东省广州市南沙区环市大道南25号南沙科技创新中心A4栋2楼208-218房</td>
-<td align="left">暂无信息</td>
-<td align="left"><a href="https://www.tianyancha.com/company/1312458900" class="external-link uri">https://www.tianyancha.com/company/1312458900</a></td>
-<td align="left">广东</td>
-<td align="left">广州市</td>
-<td align="left">广东</td>
-</tr>
-<tr class="odd">
-<td align="right">34</td>
-<td align="left">中国中医科学院中药研究所</td>
-<td align="left">中国中医科学院中药研究所</td>
-<td align="left">北京市东城区东直门内南小街16号</td>
-<td align="left">暂无信息</td>
-<td align="left"><a href="https://www.tianyancha.com/company/11454755" class="external-link uri">https://www.tianyancha.com/company/11454755</a></td>
-<td align="left">北京</td>
 <td align="left">NA</td>
-<td align="left">北京</td>
-</tr>
-<tr class="even">
-<td align="right">51</td>
-<td align="left">中国农业科学院农业资源与农业区划研究所</td>
-<td align="left">中国农业科学院农业资源与农业区划研究所</td>
-<td align="left">北京市海淀区中关村南大街12号</td>
-<td align="left">010-86616891</td>
-<td align="left"><a href="https://www.tianyancha.com/company/2318856838" class="external-link uri">https://www.tianyancha.com/company/2318856838</a></td>
-<td align="left">北京</td>
-<td align="left">NA</td>
-<td align="left">北京市</td>
 </tr>
 <tr class="odd">
 <td align="right">7</td>
@@ -240,147 +187,191 @@ address, tel, url, province, city, province_raw.</p></li>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
-<td align="right">148</td>
-<td align="left">中国科学院光电研究院</td>
-<td align="left">中国科学院光电研究院</td>
+<td align="right">2</td>
+<td align="left">大连海事大学</td>
+<td align="left">大连海事大学</td>
+<td align="left">辽宁省大连市甘井子区凌水街道凌海路1号</td>
 <td align="left">暂无信息</td>
-<td align="left">暂无信息</td>
-<td align="left"><a href="https://www.tianyancha.com/company/22183757" class="external-link uri">https://www.tianyancha.com/company/22183757</a></td>
-<td align="left">四川</td>
-<td align="left">成都市</td>
-<td align="left">四川</td>
+<td align="left"><a href="https://www.tianyancha.com/company/521989738" class="external-link uri">https://www.tianyancha.com/company/521989738</a></td>
+<td align="left">辽宁</td>
+<td align="left">大连市</td>
+<td align="left">辽宁</td>
 </tr>
 <tr class="odd">
-<td align="right">144</td>
-<td align="left">中国科学院分子植物科学卓越创新中心（植物生理生态研究所）</td>
-<td align="left">中国科学院分子植物科学卓越创新中心</td>
-<td align="left">上海市徐汇区枫林路300号4号楼</td>
+<td align="right">26</td>
+<td align="left">中国科学院古脊椎动物与古人类研究所</td>
+<td align="left">中国科学院古脊椎动物与古人类研究所</td>
+<td align="left">北京市西直门外大街142号</td>
 <td align="left">暂无信息</td>
-<td align="left"><a href="https://www.tianyancha.com/company/3453552820" class="external-link uri">https://www.tianyancha.com/company/3453552820</a></td>
-<td align="left">上海</td>
+<td align="left"><a href="https://www.tianyancha.com/company/125733723" class="external-link uri">https://www.tianyancha.com/company/125733723</a></td>
+<td align="left">北京</td>
 <td align="left">NA</td>
-<td align="left">上海</td>
+<td align="left">北京</td>
 </tr>
 <tr class="even">
-<td align="right">9</td>
-<td align="left">海通食品集团有限公司</td>
-<td align="left">海通食品集团有限公司</td>
-<td align="left">浙江省慈溪市古塘街道海通路528号</td>
-<td align="left">0574-5899****</td>
-<td align="left"><a href="https://www.tianyancha.com/company/65905634" class="external-link uri">https://www.tianyancha.com/company/65905634</a></td>
-<td align="left">浙江</td>
+<td align="right">43</td>
+<td align="left">中国科学院微电子研究所</td>
+<td align="left">中国科学院微电子研究所</td>
+<td align="left">北京市朝阳区北土城西路3号</td>
+<td align="left">010-84025539</td>
+<td align="left"><a href="https://www.tianyancha.com/company/11619487" class="external-link uri">https://www.tianyancha.com/company/11619487</a></td>
+<td align="left">北京</td>
 <td align="left">NA</td>
-<td align="left">浙江省</td>
+<td align="left">北京市</td>
 </tr>
 <tr class="odd">
-<td align="right">28</td>
-<td align="left">星光农机股份有限公司</td>
-<td align="left">星光农机股份有限公司</td>
-<td align="left">浙江省湖州市和孚镇星光大街1699号</td>
-<td align="left">0572-3966138</td>
-<td align="left"><a href="https://www.tianyancha.com/company/864512390" class="external-link uri">https://www.tianyancha.com/company/864512390</a></td>
-<td align="left">浙江</td>
-<td align="left">湖州市</td>
-<td align="left">浙江省</td>
+<td align="right">4</td>
+<td align="left">中国科学院空天信息创新研究院</td>
+<td align="left">中国科学院空天信息创新研究院</td>
+<td align="left">地址</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">北京</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
-<td align="right">24</td>
-<td align="left">国家康复辅具研究中心</td>
-<td align="left">国家康复辅具研究中心</td>
-<td align="left">北京经济技术开发区荣华中路1号</td>
+<td align="right">140</td>
+<td align="left">中国科学院电子学研究所</td>
+<td align="left">中国科学院电子学研究所</td>
+<td align="left">北京市海淀区北四环西路19号</td>
 <td align="left">暂无信息</td>
-<td align="left"><a href="https://www.tianyancha.com/company/213045" class="external-link uri">https://www.tianyancha.com/company/213045</a></td>
+<td align="left"><a href="https://www.tianyancha.com/company/789299" class="external-link uri">https://www.tianyancha.com/company/789299</a></td>
 <td align="left">北京</td>
 <td align="left">NA</td>
 <td align="left">北京</td>
 </tr>
 <tr class="odd">
+<td align="right">136</td>
+<td align="left">中国科学院大气物理研究所</td>
+<td align="left">中国科学院大气物理研究所</td>
+<td align="left">北京德胜门外祁家豁子华严里7号楼</td>
+<td align="left">暂无信息</td>
+<td align="left"><a href="https://www.tianyancha.com/company/2319154562" class="external-link uri">https://www.tianyancha.com/company/2319154562</a></td>
+<td align="left">北京</td>
+<td align="left">NA</td>
+<td align="left">北京</td>
+</tr>
+<tr class="even">
 <td align="right">1</td>
-<td align="left">中国农业科学院农业基因组研究所</td>
-<td align="left">中国农业科学院农业基因组研究所</td>
-<td align="left">广东省深圳市大鹏新区鹏飞路7号B5栋</td>
-<td align="left">010-</td>
-<td align="left"><a href="https://www.tianyancha.com/company/3097985016" class="external-link uri">https://www.tianyancha.com/company/3097985016</a></td>
-<td align="left">广东</td>
+<td align="left">大连工业大学</td>
+<td align="left">大连工业大学</td>
+<td align="left">大连市甘井子区轻工苑1号</td>
+<td align="left">暂无信息</td>
+<td align="left"><a href="https://www.tianyancha.com/company/472532688" class="external-link uri">https://www.tianyancha.com/company/472532688</a></td>
+<td align="left">辽宁</td>
+<td align="left">大连市</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">20</td>
+<td align="left">农业部环境保护科研监测所</td>
+<td align="left">农业部环境保护科研监测所</td>
+<td align="left">天津市南开区复康路31号</td>
+<td align="left">暂无信息</td>
+<td align="left"><a href="https://www.tianyancha.com/company/2960438574" class="external-link uri">https://www.tianyancha.com/company/2960438574</a></td>
+<td align="left">天津</td>
+<td align="left">NA</td>
+<td align="left">天津市</td>
+</tr>
+<tr class="even">
+<td align="right">16</td>
+<td align="left">国家海洋环境预报中心</td>
+<td align="left">国家海洋环境预报中心</td>
+<td align="left">北京市海淀区大慧寺8号</td>
+<td align="left">暂无信息</td>
+<td align="left"><a href="https://www.tianyancha.com/company/3372709473" class="external-link uri">https://www.tianyancha.com/company/3372709473</a></td>
+<td align="left">北京</td>
+<td align="left">NA</td>
+<td align="left">北京</td>
+</tr>
+<tr class="odd">
+<td align="right">34</td>
+<td align="left">金宇保灵生物药品有限公司</td>
+<td align="left">金宇保灵生物药品有限公司</td>
+<td align="left">内蒙古自治区呼和浩特市经济技术开发区沙尔沁工业园区金宇大街1号</td>
+<td align="left">暂无信息</td>
+<td align="left"><a href="https://www.tianyancha.com/company/745538508" class="external-link uri">https://www.tianyancha.com/company/745538508</a></td>
+<td align="left">内蒙古</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
-<td align="right">59</td>
-<td align="left">中国肉类食品综合研究中心</td>
-<td align="left">中国肉类食品综合研究中心</td>
-<td align="left">北京市丰台区洋桥70号</td>
-<td align="left">暂无信息</td>
-<td align="left"><a href="https://www.tianyancha.com/company/8533692" class="external-link uri">https://www.tianyancha.com/company/8533692</a></td>
+<td align="right">51</td>
+<td align="left">中国农业科学院农业资源与农业区划研究所</td>
+<td align="left">中国农业科学院农业资源与农业区划研究所</td>
+<td align="left">北京市海淀区中关村南大街12号</td>
+<td align="left">010-86616891</td>
+<td align="left"><a href="https://www.tianyancha.com/company/2318856838" class="external-link uri">https://www.tianyancha.com/company/2318856838</a></td>
 <td align="left">北京</td>
 <td align="left">NA</td>
 <td align="left">北京市</td>
 </tr>
 <tr class="odd">
-<td align="right">23</td>
-<td align="left">播恩集团股份有限公司</td>
-<td align="left">播恩集团股份有限公司</td>
-<td align="left">江西省赣州经济技术开发区迎宾大道中段</td>
+<td align="right">15</td>
+<td align="left">华智生物技术有限公司</td>
+<td align="left">华智生物技术有限公司</td>
+<td align="left">长沙市芙蓉区合平路618号</td>
 <td align="left">暂无信息</td>
-<td align="left"><a href="https://www.tianyancha.com/company/3125580100" class="external-link uri">https://www.tianyancha.com/company/3125580100</a></td>
-<td align="left">江西</td>
+<td align="left"><a href="https://www.tianyancha.com/company/3423810641" class="external-link uri">https://www.tianyancha.com/company/3423810641</a></td>
+<td align="left">湖南</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">北方民族大学</td>
+<td align="left">北方民族大学</td>
+<td align="left">宁夏回族自治区银川市西夏区文昌北街204号</td>
+<td align="left">暂无信息</td>
+<td align="left"><a href="https://www.tianyancha.com/company/3097985620" class="external-link uri">https://www.tianyancha.com/company/3097985620</a></td>
+<td align="left">宁夏</td>
+<td align="left">银川市</td>
+<td align="left">宁夏</td>
+</tr>
+<tr class="odd">
+<td align="right">39</td>
+<td align="left">中国科学院南海海洋研究所</td>
+<td align="left">中国科学院南海海洋研究所</td>
+<td align="left">广东省广州市南沙区海滨路1119号</td>
+<td align="left">暂无信息</td>
+<td align="left"><a href="https://www.tianyancha.com/company/2325512000" class="external-link uri">https://www.tianyancha.com/company/2325512000</a></td>
+<td align="left">广东</td>
+<td align="left">广州市</td>
+<td align="left">广东省</td>
 </tr>
 <tr class="even">
 <td align="right">9</td>
-<td align="left">工业和信息化部电子第五研究所</td>
-<td align="left">工业和信息化部电子第五研究所</td>
-<td align="left">广州市天河区</td>
+<td align="left">中国农科院兰州畜牧与兽药研究所</td>
+<td align="left">中国农业科学院兰州畜牧与兽药研究所</td>
+<td align="left">甘肃省兰州市七里河区硷沟沿335号</td>
 <td align="left">暂无信息</td>
-<td align="left"><a href="https://www.tianyancha.com/company/1146137548" class="external-link uri">https://www.tianyancha.com/company/1146137548</a></td>
-<td align="left">广东</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
+<td align="left"><a href="https://www.tianyancha.com/company/26596773" class="external-link uri">https://www.tianyancha.com/company/26596773</a></td>
+<td align="left">甘肃</td>
+<td align="left">兰州市</td>
+<td align="left">甘肃</td>
 </tr>
 <tr class="odd">
-<td align="right">47</td>
-<td align="left">中国农业大学</td>
-<td align="left">中国农业大学</td>
-<td align="left">北京市海淀区圆明园西路2号</td>
-<td align="left">13810166051</td>
-<td align="left"><a href="https://www.tianyancha.com/company/5786858" class="external-link uri">https://www.tianyancha.com/company/5786858</a></td>
-<td align="left">北京</td>
-<td align="left">NA</td>
-<td align="left">北京市</td>
+<td align="right">239</td>
+<td align="left">中国石油大学（华东）</td>
+<td align="left">中国石油大学（华东）</td>
+<td align="left">山东省东营市北二路271号</td>
+<td align="left">暂无信息</td>
+<td align="left"><a href="https://www.tianyancha.com/company/2965372695" class="external-link uri">https://www.tianyancha.com/company/2965372695</a></td>
+<td align="left">山东</td>
+<td align="left">东营市</td>
+<td align="left">山东</td>
 </tr>
 <tr class="even">
-<td align="right">17</td>
-<td align="left">中国科学院东北地理与农业生态研究所</td>
-<td align="left">中国科学院东北地理与农业生态研究所</td>
-<td align="left">吉林省长春市高新技术产业开发区长东北核心区盛北大街4888号</td>
-<td align="left">暂无信息</td>
-<td align="left"><a href="https://www.tianyancha.com/company/931798166" class="external-link uri">https://www.tianyancha.com/company/931798166</a></td>
-<td align="left">吉林</td>
-<td align="left">长春市</td>
-<td align="left">吉林</td>
-</tr>
-<tr class="odd">
-<td align="right">247</td>
-<td align="left">中国水产科学研究院渔业机械仪器研究所</td>
-<td align="left">中国水产科学研究院渔业机械仪器研究所</td>
-<td align="left">上海市杨浦区四平街道赤峰路63号</td>
-<td align="left">暂无信息</td>
-<td align="left"><a href="https://www.tianyancha.com/company/2344962239" class="external-link uri">https://www.tianyancha.com/company/2344962239</a></td>
-<td align="left">上海</td>
+<td align="right">30</td>
+<td align="left">袁隆平农业高科技股份有限公司</td>
+<td align="left">袁隆平农业高科技股份有限公司</td>
+<td align="left">长沙市芙蓉区合平路618号A座518</td>
+<td align="left">0731-82183111</td>
+<td align="left"><a href="https://www.tianyancha.com/company/19889710" class="external-link uri">https://www.tianyancha.com/company/19889710</a></td>
+<td align="left">湖南</td>
+<td align="left">长沙市</td>
 <td align="left">NA</td>
-<td align="left">上海</td>
-</tr>
-<tr class="even">
-<td align="right">38</td>
-<td align="left">中国科学院理化技术研究所</td>
-<td align="left">中国科学院理化技术研究所</td>
-<td align="left">北京市海淀区中关村东路29号</td>
-<td align="left">暂无信息</td>
-<td align="left"><a href="https://www.tianyancha.com/company/1187848" class="external-link uri">https://www.tianyancha.com/company/1187848</a></td>
-<td align="left">北京</td>
-<td align="left">NA</td>
-<td align="left">北京市</td>
 </tr>
 </tbody>
 </table>

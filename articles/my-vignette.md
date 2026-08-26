@@ -134,7 +134,7 @@ enrolled in officer administrator.
 - Totally 9 columns including: index, name_origin, name_search, address,
   tel, url, province, city, province_raw.
 
-- Totally 588 rows.
+- Totally 596 rows.
 
 ``` r
 
@@ -145,16 +145,16 @@ queryTianyan %>%
 
 | index | name_origin | name_search | address | tel | url | province | city | province_raw |
 |---:|:---|:---|:---|:---|:---|:---|:---|:---|
-| 36 | 中国建筑设计研究院有限公司 | 中国建筑设计研究院有限公司 | 北京市西城区车公庄大街19号 | 010-88328625 | <https://www.tianyancha.com/company/3200742605> | 北京 | NA | 北京市 |
-| 17 | 国家海洋技术中心 | 国家海洋技术中心 | 天津市南开区芥园西道219号 | 暂无信息 | <https://www.tianyancha.com/company/3153218736> | 天津 | NA | 天津 |
-| 212 | 中国农业科学院麻类研究所 | 中国农业科学院麻类研究所 | 湖南省长沙市岳麓区咸嘉湖西路348号 | 暂无信息 | <https://www.tianyancha.com/company/2330710592> | 湖南 | 长沙市 | 湖南 |
-| 97 | 中国地震局地震研究所 | 中国地震局地震研究所 | 湖北省武汉市武昌区洪山侧路40号 | 暂无信息 | <https://www.tianyancha.com/company/1149780828> | 湖北 | 武汉市 | 湖北 |
-| 213 | 中国农业科学院蜜蜂研究所 | 中国农业科学院蜜蜂研究所 | 北京市海淀区香山北沟1号 | 暂无信息 | <https://www.tianyancha.com/company/7057364> | 北京 | NA | 北京 |
-| 12 | 北大荒信息有限公司 | 北大荒信息有限公司 | 哈尔滨市松北区智谷大街288号深圳（哈尔滨）产业园区科创总部1号楼 | 暂无信息 | <https://www.tianyancha.com/company/4175511939> | 黑龙江 | NA | NA |
-| 64 | 南京理工大学 | 南京理工大学 | 江苏省南京市玄武区孝陵卫街道孝陵卫街200号 | 暂无信息 | <https://www.tianyancha.com/company/683783896> | 江苏 | 南京市 | 江苏 |
-| 21 | 清华大学 | 清华大学 | 北京市海淀区清华园 | 暂无信息 | <https://www.tianyancha.com/company/516739> | 北京 | NA | 北京市 |
-| 127 | 中国疾病预防控制中心营养与健康所 | 中国疾病预防控制中心营养与健康所 | 北京市西城区南纬路29号 | 暂无信息 | <https://www.tianyancha.com/company/3097983476> | 北京 | NA | 北京 |
-| 131 | 中国科学院半导体研究所 | 中国科学院半导体研究所 | 北京海淀区清华东路甲35号 | 暂无信息 | <https://www.tianyancha.com/company/6421402> | 北京 | NA | 北京 |
+| 28 | 星光农机股份有限公司 | 星光农机股份有限公司 | 浙江省湖州市和孚镇星光大街1699号 | 0572-3966138 | <https://www.tianyancha.com/company/864512390> | 浙江 | 湖州市 | 浙江省 |
+| 9 | 工业和信息化部电子第五研究所 | 工业和信息化部电子第五研究所 | 广州市天河区 | 暂无信息 | <https://www.tianyancha.com/company/1146137548> | 广东 | NA | NA |
+| 204 | 中国林业科学研究院资源昆虫研究所 | 中国林业科学研究院资源昆虫研究所 | 云南省昆明市盘龙区白龙寺 | 暂无信息 | <https://www.tianyancha.com/company/245341328> | 云南 | 昆明市 | 云南 |
+| 89 | 应急管理部沈阳消防研究所 | 应急管理部沈阳消防研究所 | 辽宁省沈阳市皇姑区文大路218－20号甲 | 暂无信息 | <https://www.tianyancha.com/company/3324476301> | 辽宁 | 沈阳市 | 辽宁 |
+| 205 | 中国林业科学研究院资源信息研究所 | 中国林业科学研究院资源信息研究所 | 北京市海淀区东小府2号 | 暂无信息 | <https://www.tianyancha.com/company/93212936> | 北京 | NA | 北京 |
+| 4 | 中牧实业股份有限公司 | 中牧实业股份有限公司 | 北京市丰台区南四环西路188号八区16-19号楼 | 暂无信息 | <https://www.tianyancha.com/company/6174164> | 北京 | NA | NA |
+| 56 | 交通运输部科学研究院 | 交通运输部科学研究院 | 北京市朝阳区惠新里240号 | 暂无信息 | <https://www.tianyancha.com/company/30004385> | 北京 | NA | 北京 |
+| 13 | 华南农业大学 | 华南农业大学 | 广东省广州市天河区五山 | 暂无信息 | <https://www.tianyancha.com/company/1096941724> | 广东 | 广州市 | 广东省 |
+| 119 | 中国疾病预防控制中心传染病预防控制所 | 中国疾病预防控制中心传染病预防控制所 | 北京市昌平流字5号（北京市昌平区百善乡孟祖村北） | 暂无信息 | <https://www.tianyancha.com/company/403803636> | 北京 | NA | 北京 |
+| 123 | 中国疾病预防控制中心寄生虫病预防控制所 | 中国疾病预防控制中心寄生虫病预防控制所 | 上海市卢湾区瑞金二路207号 | 暂无信息 | <https://www.tianyancha.com/company/3028120171> | 上海 | NA | 上海 |
 
 ## Yearbook
 
@@ -168,9 +168,9 @@ Machine statistics .
 - Totally 6 columns including: province, year, chn_block4, value, units,
   variables.
 
-- Totally 5792 rows.
+- Totally 6144 rows.
 
-- Years range from 2010 to 2023
+- Years range from 2010 to 2024
 
 - Variables including: v7_sctj_nyjx_dztlj, v7_sctj_nyjx_dztlj_pt,
   v7_sctj_nyjx_jbmj, v7_sctj_nyjx_jdtlj, v7_sctj_nyjx_jgmj,
@@ -185,18 +185,18 @@ AgriMachine %>%
   kable()
 ```
 
-| province | year | chn_block4           |    value | units  | variables             |
-|:---------|:-----|:---------------------|---------:|:-------|:----------------------|
-| 山东     | 2018 | 农用排灌柴油机       |       NA | 万台   | v7_sctj_nyjx_pgcyj    |
-| 安徽     | 2018 | 节水灌溉类机械       |  21.2000 | 万套   | v7_sctj_nyjx_jsgg     |
-| 广西     | 2011 | 农用排灌柴油机       |  50.4347 | 万台   | v7_sctj_nyjx_pgcyj    |
-| 宁夏     | 2013 | 农用水泵             |   4.1200 | 万台   | v7_sctj_nyjx_nysb     |
-| 安徽     | 2011 | 大中型拖拉机配套农具 |  27.6958 | 万部   | v7_sctj_nyjx_dztlj_pt |
-| 贵州     | 2019 | 农用水泵             |  61.8000 | 万台   | v7_sctj_nyjx_nysb     |
-| 江苏     | 2012 | 机耕面积             |       NA | 千公顷 | v7_sctj_nyjx_jgmj     |
-| 内蒙古   | 2010 | 农用水泵             |  35.9600 | 万台   | v7_sctj_nyjx_nysb     |
-| 海南     | 2013 | 小型拖拉机           |   5.2700 | 万台   | v7_sctj_nyjx_xtlj     |
-| 安徽     | 2012 | 农用排灌电动机       | 114.2300 | 万台   | v7_sctj_nyjx_pgddj    |
+| province | year | chn_block4         |    value | units  | variables            |
+|:---------|:-----|:-------------------|---------:|:-------|:---------------------|
+| 海南     | 2019 | 机播面积           |  23.2000 | 千公顷 | v7_sctj_nyjx_jbmj    |
+| 全国     | 2019 | 联合收获机         | 212.8000 | 万台   | v7_sctj_nyjx_lhshj   |
+| 广西     | 2012 | 小型拖拉机配套农具 |  58.7900 | 万部   | v7_sctj_nyjx_xtlj_pt |
+| 北京     | 2010 | 机动脱粒机         |   0.5100 | 万台   | v7_sctj_nyjx_jdtlj   |
+| 宁夏     | 2014 | 小型拖拉机         |  16.7800 | 万台   | v7_sctj_nyjx_xtlj    |
+| 安徽     | 2012 | 机耕面积           |       NA | 千公顷 | v7_sctj_nyjx_jgmj    |
+| 贵州     | 2020 | 农用水泵           |  61.7000 | 万台   | v7_sctj_nyjx_nysb    |
+| 江苏     | 2013 | 联合收获机         |  13.6600 | 万台   | v7_sctj_nyjx_lhshj   |
+| 内蒙古   | 2011 | 小型拖拉机         |  47.9091 | 万台   | v7_sctj_nyjx_xtlj    |
+| 海南     | 2013 | 大中型拖拉机       |   4.4500 | 万台   | v7_sctj_nyjx_dztlj   |
 
 #### AgriFertilizer
 
@@ -206,9 +206,9 @@ Fertilizer statistics .
 - Totally 6 columns including: province, year, chn_block4, value, units,
   variables.
 
-- Totally 1088 rows.
+- Totally 1248 rows.
 
-- Years range from 2010 to 2023
+- Years range from 2010 to 2024
 
 - Variables including: v7_sctj_nyhf_df, v7_sctj_nyhf_fhf,
   v7_sctj_nyhf_hj, v7_sctj_nyhf_jf, v7_sctj_nyhf_lf
@@ -220,18 +220,18 @@ AgriFertilizer %>%
   kable()
 ```
 
-| province | year | chn_block4 | value | units | variables        |
-|:---------|:-----|:-----------|------:|:------|:-----------------|
-| 新疆     | 2019 | 磷肥       |  64.5 | 万吨  | v7_sctj_nyhf_lf  |
-| 浙江     | 2016 | 化肥使用量 |  84.5 | 万吨  | v7_sctj_nyhf_hj  |
-| 陕西     | 2020 | 钾肥       |  23.0 | 万吨  | v7_sctj_nyhf_jf  |
-| 云南     | 2013 | 化肥使用量 | 219.0 | 万吨  | v7_sctj_nyhf_hj  |
-| 北京     | 2023 | 复合肥     |   4.2 | 万吨  | v7_sctj_nyhf_fhf |
-| 上海     | 2016 | 化肥使用量 |   9.2 | 万吨  | v7_sctj_nyhf_hj  |
-| 天津     | 2019 | 化肥使用量 |  16.2 | 万吨  | v7_sctj_nyhf_hj  |
-| 河北     | 2021 | 复合肥     | 138.8 | 万吨  | v7_sctj_nyhf_fhf |
-| 上海     | 2019 | 钾肥       |   0.3 | 万吨  | v7_sctj_nyhf_jf  |
-| 全国     | 2020 | 钾肥       | 541.9 | 万吨  | v7_sctj_nyhf_jf  |
+| province | year | chn_block4 |  value | units | variables        |
+|:---------|:-----|:-----------|-------:|:------|:-----------------|
+| 全国     | 2020 | 氮肥       | 1833.9 | 万吨  | v7_sctj_nyhf_df  |
+| 新疆     | 2020 | 磷肥       |   62.0 | 万吨  | v7_sctj_nyhf_lf  |
+| 浙江     | 2019 | 磷肥       |    7.8 | 万吨  | v7_sctj_nyhf_lf  |
+| 陕西     | 2021 | 钾肥       |   23.1 | 万吨  | v7_sctj_nyhf_jf  |
+| 云南     | 2018 | 化肥使用量 |  217.4 | 万吨  | v7_sctj_nyhf_hj  |
+| 北京     | 2024 | 复合肥     |    4.4 | 万吨  | v7_sctj_nyhf_fhf |
+| 上海     | 2019 | 磷肥       |    0.4 | 万吨  | v7_sctj_nyhf_lf  |
+| 天津     | 2020 | 化肥使用量 |   15.3 | 万吨  | v7_sctj_nyhf_hj  |
+| 河北     | 2022 | 复合肥     |  138.4 | 万吨  | v7_sctj_nyhf_fhf |
+| 上海     | 2020 | 钾肥       |    0.2 | 万吨  | v7_sctj_nyhf_jf  |
 
 #### AgriPlastic
 
@@ -241,9 +241,9 @@ Plastic statistics .
 - Totally 6 columns including: province, year, chn_block4, value, units,
   variables.
 
-- Totally 1344 rows.
+- Totally 1440 rows.
 
-- Years range from 2010 to 2023
+- Years range from 2010 to 2024
 
 - Variables including: v7_sctj_nybm_bmsy, v7_sctj_nybm_dmfg,
   v7_sctj_nybm_dmsy
@@ -255,18 +255,18 @@ AgriPlastic %>%
   kable()
 ```
 
-| province | year | chn_block4     |    value | units | variables         |
-|:---------|:-----|:---------------|---------:|:------|:------------------|
-| 贵州     | 2016 | NA             |  30758.0 | NA    | v7_sctj_nybm_dmsy |
-| 广西     | 2014 | NA             | 416345.0 | NA    | v7_sctj_nybm_dmfg |
-| 上海     | 2013 | NA             |  21961.0 | NA    | v7_sctj_nybm_dmfg |
-| 安徽     | 2011 | NA             |  39231.0 | NA    | v7_sctj_nybm_dmsy |
-| 陕西     | 2022 | 地膜使用量     |      2.1 | 万吨  | v7_sctj_nybm_dmsy |
-| 湖北     | 2013 | NA             |  38162.0 | NA    | v7_sctj_nybm_dmsy |
-| 上海     | 2023 | 地膜使用量     |      0.3 | 万吨  | v7_sctj_nybm_dmsy |
-| 内蒙古   | 2022 | 农用薄膜使用量 |     11.5 | 万吨  | v7_sctj_nybm_bmsy |
-| 四川     | 2015 | 农用薄膜使用量 | 132170.0 | 吨    | v7_sctj_nybm_bmsy |
-| 西藏     | 2015 | NA             |   3522.0 | NA    | v7_sctj_nybm_dmfg |
+| province | year | chn_block4     |     value | units | variables         |
+|:---------|:-----|:---------------|----------:|:------|:------------------|
+| 全国     | 2018 | 农用薄膜使用量 | 2464795.0 | 吨    | v7_sctj_nybm_bmsy |
+| 贵州     | 2017 | NA             |   31901.0 | NA    | v7_sctj_nybm_dmsy |
+| 广西     | 2015 | NA             |  415443.0 | NA    | v7_sctj_nybm_dmfg |
+| 上海     | 2014 | NA             |   21296.0 | NA    | v7_sctj_nybm_dmfg |
+| 安徽     | 2012 | NA             |   40479.0 | NA    | v7_sctj_nybm_dmsy |
+| 陕西     | 2023 | 地膜使用量     |       2.2 | 万吨  | v7_sctj_nybm_dmsy |
+| 湖北     | 2014 | NA             |   40645.0 | NA    | v7_sctj_nybm_dmsy |
+| 上海     | 2024 | 地膜使用量     |       0.3 | 万吨  | v7_sctj_nybm_dmsy |
+| 内蒙古   | 2023 | 农用薄膜使用量 |      12.7 | 万吨  | v7_sctj_nybm_bmsy |
+| 四川     | 2016 | 农用薄膜使用量 |  132384.0 | 吨    | v7_sctj_nybm_bmsy |
 
 #### AgriPesticide
 
@@ -276,9 +276,9 @@ Pesticide statistics .
 - Totally 6 columns including: province, year, chn_block4, value, units,
   variables.
 
-- Totally 608 rows.
+- Totally 672 rows.
 
-- Years range from 2010 to 2023
+- Years range from 2010 to 2024
 
 - Variables including: v7_sctj_cyny_cysy, v7_sctj_cyny_nysy
 
@@ -291,16 +291,16 @@ AgriPesticide %>%
 
 | province | year | chn_block4     |    value | units | variables         |
 |:---------|:-----|:---------------|---------:|:------|:------------------|
-| 山东     | 2013 | 农药使用量     | 158384.0 | 吨    | v7_sctj_cyny_nysy |
-| 福建     | 2019 | 农用柴油使用量 |     81.2 | 万吨  | v7_sctj_cyny_cysy |
-| 贵州     | 2013 | 农药使用量     |  13480.0 | 吨    | v7_sctj_cyny_nysy |
-| 宁夏     | 2017 | 农药使用量     |   2540.0 | 吨    | v7_sctj_cyny_nysy |
-| 安徽     | 2023 | 农用柴油使用量 |     73.7 | 万吨  | v7_sctj_cyny_cysy |
-| 安徽     | 2015 | 农药使用量     | 111048.0 | 吨    | v7_sctj_cyny_nysy |
-| 湖南     | 2010 | 农药使用量     | 118762.0 | 吨    | v7_sctj_cyny_nysy |
-| 新疆     | 2019 | 农用柴油使用量 |     94.2 | 万吨  | v7_sctj_cyny_cysy |
-| 山西     | 2020 | 农用柴油使用量 |     26.0 | 万吨  | v7_sctj_cyny_cysy |
-| 黑龙江   | 2012 | 农药使用量     |  80511.0 | 吨    | v7_sctj_cyny_nysy |
+| 山东     | 2015 | 农药使用量     | 151004.0 | 吨    | v7_sctj_cyny_nysy |
+| 福建     | 2020 | 农用柴油使用量 |     78.4 | 万吨  | v7_sctj_cyny_cysy |
+| 贵州     | 2015 | 农药使用量     |  13722.0 | 吨    | v7_sctj_cyny_nysy |
+| 湖南     | 2019 | 农药使用量     | 105548.0 | 吨    | v7_sctj_cyny_nysy |
+| 安徽     | 2024 | 农用柴油使用量 |     73.9 | 万吨  | v7_sctj_cyny_cysy |
+| 安徽     | 2011 | 农药使用量     | 117475.0 | 吨    | v7_sctj_cyny_nysy |
+| 安徽     | 2017 | 农药使用量     |  99394.0 | 吨    | v7_sctj_cyny_nysy |
+| 湖南     | 2012 | 农药使用量     | 122980.0 | 吨    | v7_sctj_cyny_nysy |
+| 新疆     | 2020 | 农用柴油使用量 |     85.2 | 万吨  | v7_sctj_cyny_cysy |
+| 山西     | 2021 | 农用柴油使用量 |     25.8 | 万吨  | v7_sctj_cyny_cysy |
 
 ### Source from Sci-Tech Yearbook
 
@@ -320,9 +320,9 @@ statistics.
 - Totally 6 columns including: province, year, chn_block4, value, units,
   variables.
 
-- Totally 832 rows.
+- Totally 896 rows.
 
-- Years range from 2011 to 2023
+- Years range from 2011 to 2024
 
 - Variables including: v4_ztr_jf_RD, v4_ztr_qd_RD
 
@@ -335,16 +335,16 @@ RDIntense %>%
 
 | province | year | chn_block4 |  value | units | variables    |
 |:---------|:-----|:-----------|-------:|:------|:-------------|
-| 甘肃     | 2011 | RD强度     |   0.97 | %     | v4_ztr_qd_RD |
-| 辽宁     | 2019 | RD经费     | 508.50 | 亿元  | v4_ztr_jf_RD |
-| 山西     | 2013 | RD经费     | 155.00 | 亿元  | v4_ztr_jf_RD |
-| 陕西     | 2016 | RD经费     | 419.60 | 亿元  | v4_ztr_jf_RD |
-| 北京     | 2015 | RD强度     |   6.01 | %     | v4_ztr_qd_RD |
-| 海南     | 2016 | RD经费     |  21.70 | 亿元  | v4_ztr_jf_RD |
-| 湖南     | 2019 | RD强度     |   1.98 | %     | v4_ztr_qd_RD |
-| 河北     | 2018 | RD强度     |   1.39 | %     | v4_ztr_qd_RD |
-| 广西     | 2013 | RD强度     |   0.75 | %     | v4_ztr_qd_RD |
-| 安徽     | 2020 | RD强度     |   2.28 | %     | v4_ztr_qd_RD |
+| 山西     | 2012 | RD强度     |   1.09 | %     | v4_ztr_qd_RD |
+| 黑龙江   | 2016 | RD经费     | 152.50 | 亿元  | v4_ztr_jf_RD |
+| 甘肃     | 2012 | RD强度     |   1.07 | %     | v4_ztr_qd_RD |
+| 辽宁     | 2020 | RD经费     | 549.00 | 亿元  | v4_ztr_jf_RD |
+| 山西     | 2014 | RD经费     | 152.20 | 亿元  | v4_ztr_jf_RD |
+| 陕西     | 2017 | RD经费     | 460.90 | 亿元  | v4_ztr_jf_RD |
+| 北京     | 2016 | RD强度     |   5.96 | %     | v4_ztr_qd_RD |
+| 海南     | 2017 | RD经费     |  23.10 | 亿元  | v4_ztr_jf_RD |
+| 河北     | 2011 | RD经费     | 201.30 | 亿元  | v4_ztr_jf_RD |
+| 湖南     | 2020 | RD强度     |   2.15 | %     | v4_ztr_qd_RD |
 
 #### RDActivity
 
@@ -354,9 +354,9 @@ statistics .
 - Totally 6 columns including: province, year, chn_block4, value, units,
   variables.
 
-- Totally 1792 rows.
+- Totally 1920 rows.
 
-- Years range from 2010 to 2023
+- Years range from 2010 to 2024
 
 - Variables including: v4_zh_nbzc_hj, v4_zh_nbzc_jcyj, v4_zh_nbzc_syfz,
   v4_zh_nbzc_yyyj
@@ -368,18 +368,18 @@ RDActivity %>%
   kable()
 ```
 
-| province | year | chn_block4 |        value | units | variables       |
-|:---------|:-----|:-----------|-------------:|:------|:----------------|
-| 辽宁     | 2019 | 合计       |    5084604.0 | 万元  | v4_zh_nbzc_hj   |
-| 福建     | 2014 | 基础研究   |      75426.9 | 万元  | v4_zh_nbzc_jcyj |
-| 湖南     | 2015 | 基础研究   |     136021.5 | 万元  | v4_zh_nbzc_jcyj |
-| 广西     | 2022 | 基础研究   |     171275.0 | 万元  | v4_zh_nbzc_jcyj |
-| 内蒙古   | 2020 | 应用研究   |     171318.0 | 万元  | v4_zh_nbzc_yyyj |
-| 黑龙江   | 2014 | 基础研究   |     124047.1 | 万元  | v4_zh_nbzc_jcyj |
-| 全国     | 2023 | 试验发展   | 274364624\.0 | 万元  | v4_zh_nbzc_syfz |
-| 黑龙江   | 2020 | 基础研究   |     230334.0 | 万元  | v4_zh_nbzc_jcyj |
-| 河北     | 2017 | 基础研究   |     105087.1 | 万元  | v4_zh_nbzc_jcyj |
-| 广西     | 2023 | 基础研究   |     156901.0 | 万元  | v4_zh_nbzc_jcyj |
+| province | year | chn_block4 |     value | units | variables       |
+|:---------|:-----|:-----------|----------:|:------|:----------------|
+| 河北     | 2014 | 应用研究   |  275703.4 | 万元  | v4_zh_nbzc_yyyj |
+| 天津     | 2017 | 基础研究   |  336505.3 | 万元  | v4_zh_nbzc_jcyj |
+| 广西     | 2011 | 基础研究   |   46124.0 | 万元  | v4_zh_nbzc_jcyj |
+| 湖南     | 2018 | 应用研究   |  724941.2 | 万元  | v4_zh_nbzc_yyyj |
+| 陕西     | 2023 | 合计       | 8460446.0 | 万元  | v4_zh_nbzc_hj   |
+| 辽宁     | 2020 | 合计       | 5490052.0 | 万元  | v4_zh_nbzc_hj   |
+| 全国     | 2010 | 基础研究   | 3244923.3 | 万元  | v4_zh_nbzc_jcyj |
+| 福建     | 2015 | 基础研究   |  100022.3 | 万元  | v4_zh_nbzc_jcyj |
+| 湖南     | 2016 | 基础研究   |  131039.1 | 万元  | v4_zh_nbzc_jcyj |
+| 广西     | 2023 | 基础研究   |  156901.0 | 万元  | v4_zh_nbzc_jcyj |
 
 #### IndustryOperation
 
@@ -389,9 +389,9 @@ Operation statistics .
 - Totally 6 columns including: province, year, chn_block4, value, units,
   variables.
 
-- Totally 1248 rows.
+- Totally 1344 rows.
 
-- Years range from 2010 to 2023
+- Years range from 2010 to 2024
 
 - Variables including: v4_cy_scjy_lrze, v4_cy_scjy_qys, v4_cy_scjy_zyyw
 
@@ -402,18 +402,18 @@ IndustryOperation %>%
   kable()
 ```
 
-| province | year | chn_block4   |      value | units | variables       |
-|:---------|:-----|:-------------|-----------:|:------|:----------------|
-| 青海     | 2016 | 利润总额     |    8.77192 | 亿元  | v4_cy_scjy_lrze |
-| 浙江     | 2010 | 利润总额     |  296.30000 | 亿元  | v4_cy_scjy_lrze |
-| 新疆     | 2020 | 利润总额     |   21.00000 | 亿元  | v4_cy_scjy_lrze |
-| 河南     | 2022 | 主营业务收入 | 9282.00000 | 亿元  | v4_cy_scjy_zyyw |
-| 浙江     | 2015 | 主营业务收入 | 5288.06619 | 亿元  | v4_cy_scjy_zyyw |
-| 安徽     | 2021 | 利润总额     |  430.00000 | 亿元  | v4_cy_scjy_lrze |
-| 山东     | 2019 | 主营业务收入 | 5911.00000 | 亿元  | v4_cy_scjy_zyyw |
-| 广西     | 2010 | 利润总额     |   55.90000 | 亿元  | v4_cy_scjy_lrze |
-| 河南     | 2015 | 利润总额     |  408.30398 | 亿元  | v4_cy_scjy_lrze |
-| 内蒙古   | 2021 | 企业数       |  111.00000 | 个    | v4_cy_scjy_qys  |
+| province | year | chn_block4   |   value | units | variables       |
+|:---------|:-----|:-------------|--------:|:------|:----------------|
+| 重庆     | 2020 | 企业数       |   813.0 | 个    | v4_cy_scjy_qys  |
+| 江苏     | 2011 | 主营业务收入 | 19396.0 | 亿元  | v4_cy_scjy_zyyw |
+| 河北     | 2024 | 企业数       |  1011.0 | 个    | v4_cy_scjy_qys  |
+| 北京     | 2020 | 主营业务收入 |  6573.0 | 亿元  | v4_cy_scjy_zyyw |
+| 黑龙江   | 2015 | 企业数       |   179.0 | 个    | v4_cy_scjy_qys  |
+| 湖北     | 2024 | 利润总额     |   425.0 | 亿元  | v4_cy_scjy_lrze |
+| 青海     | 2018 | 企业数       |    44.0 | 个    | v4_cy_scjy_qys  |
+| 浙江     | 2011 | 利润总额     |   350.2 | 亿元  | v4_cy_scjy_lrze |
+| 湖南     | 2010 | 利润总额     |    89.3 | 亿元  | v4_cy_scjy_lrze |
+| 新疆     | 2021 | 利润总额     |    12.0 | 亿元  | v4_cy_scjy_lrze |
 
 #### IndustryRD
 
@@ -423,9 +423,9 @@ statistics .
 - Totally 6 columns including: province, year, chn_block4, value, units,
   variables.
 
-- Totally 3968 rows.
+- Totally 4380 rows.
 
-- Years range from 2016 to 2023
+- Years range from 2016 to 2024
 
 - Variables including: v4_cy_cytz_gdzc, v4_cy_cytz_jcxm,
   v4_cy_cytz_kgxm, v4_cy_cytz_sgxm, v4_cy_cytz_tzze, v4_cy_jsgz_gmzc,
@@ -441,18 +441,18 @@ IndustryRD %>%
   kable()
 ```
 
-| province | year | chn_block4       |        value | units | variables       |
-|:---------|:-----|:-----------------|-------------:|:------|:----------------|
-| 西藏     | 2016 | 投资额           | 3.739200e+00 | 亿元  | v4_cy_cytz_tzze |
-| 浙江     | 2017 | 开发项目数       | 1.174200e+04 | 项    | v4_cy_xcp_kfxm  |
-| 江苏     | 2023 | 专利申请数       | 6.691400e+04 | 件    | v4_cy_qyzl_sqs  |
-| 贵州     | 2023 | 有效专利数       | 1.522000e+03 | 件    | v4_cy_qyzl_yxs  |
-| 内蒙古   | 2023 | 出口             | 2.138620e+05 | 万元  | v4_cy_xcp_ck    |
-| 内蒙古   | 2023 | 开发经费支出     | 2.365670e+05 | 万元  | v4_cy_xcp_kfjf  |
-| 宁夏     | 2018 | 技术引进经费支出 |           NA | 万元  | v4_cy_jsgz_yjzc |
-| 河南     | 2019 | 销售收入         | 2.405640e+07 | 万元  | v4_cy_xcp_xssr  |
-| 北京     | 2018 | 专利申请数       | 7.796000e+03 | 件    | v4_cy_qyzl_sqs  |
-| 广东     | 2017 | 开发经费支出     | 1.536649e+07 | 万元  | v4_cy_xcp_kfjf  |
+| province | year | chn_block4           |     value | units | variables        |
+|:---------|:-----|:---------------------|----------:|:------|:-----------------|
+| 广西     | 2024 | 开发经费支出         |  271425.0 | 万元  | v4_cy_xcp_kfjf   |
+| 山东     | 2018 | 经费内部支出         | 2265528.0 | 万元  | v4_cy_RDhd_nbzc  |
+| 内蒙古   | 2020 | 开发经费支出         |   80283.0 | 万元  | v4_cy_xcp_kfjf   |
+| 吉林     | 2021 | 出口                 |  341804.0 | 万元  | v4_cy_xcp_ck     |
+| 广西     | 2018 | 研发机构数           |      51.0 | 个    | v4_cy_RDhd_yfjgs |
+| 浙江     | 2024 | 购买境内技术经费支出 |   97539.0 | 万元  | v4_cy_jsgz_gmzc  |
+| 福建     | 2016 | 人员折合全时当量     |   27895.2 | 人年  | v4_cy_RDhd_qsdl  |
+| 内蒙古   | 2024 | 开发经费支出         |  245206.0 | 万元  | v4_cy_xcp_kfjf   |
+| 云南     | 2018 | 经费内部支出         |   92228.0 | 万元  | v4_cy_RDhd_nbzc  |
+| 甘肃     | 2020 | 技术引进经费支出     |     900.0 | 万元  | v4_cy_jsgz_yjzc  |
 
 #### MarketPull
 
@@ -464,9 +464,9 @@ statistics .
 - Totally 6 columns including: province, year, chn_block4, value, units,
   variables.
 
-- Totally 960 rows.
+- Totally 1024 rows.
 
-- Years range from 2000 to 2023
+- Years range from 2000 to 2024
 
 - Variables including: v4_cg_jssr_ht, v4_cg_jssr_je
 
@@ -477,18 +477,18 @@ MarketPull %>%
   kable()
 ```
 
-| province | year | chn_block4 |    value | units | variables     |
-|:---------|:-----|:-----------|---------:|:------|:--------------|
-| 江西     | 2022 | 数量       |    12612 | 项    | v4_cg_jssr_ht |
-| 内蒙古   | 2000 | 金额       |    79600 | 万元  | v4_cg_jssr_je |
-| 湖北     | 2013 | 数量       |     9758 | 项    | v4_cg_jssr_ht |
-| 山东     | 2000 | 数量       |    30909 | 项    | v4_cg_jssr_ht |
-| 广西     | 2020 | 数量       |     6337 | 项    | v4_cg_jssr_ht |
-| 四川     | 2013 | 数量       |    11729 | 项    | v4_cg_jssr_ht |
-| 甘肃     | 2023 | 金额       | 10217970 | 万元  | v4_cg_jssr_je |
-| 河南     | 2012 | 数量       |     5680 | 项    | v4_cg_jssr_ht |
-| 河北     | 2023 | 数量       |    24272 | 项    | v4_cg_jssr_ht |
-| 内蒙古   | 2019 | 数量       |     5851 | 项    | v4_cg_jssr_ht |
+| province | year | chn_block4 |     value | units | variables     |
+|:---------|:-----|:-----------|----------:|:------|:--------------|
+| 湖北     | 2000 | 金额       |  190942.0 | 万元  | v4_cg_jssr_je |
+| 青海     | 2017 | 金额       |  775210.4 | 万元  | v4_cg_jssr_je |
+| 江西     | 2024 | 数量       |   32765.0 | 项    | v4_cg_jssr_ht |
+| 内蒙古   | 2005 | 金额       |  301515.5 | 万元  | v4_cg_jssr_je |
+| 湖北     | 2015 | 数量       |   14831.0 | 项    | v4_cg_jssr_ht |
+| 山东     | 2010 | 数量       |    9993.0 | 项    | v4_cg_jssr_ht |
+| 广西     | 2022 | 数量       |    8853.0 | 项    | v4_cg_jssr_ht |
+| 四川     | 2015 | 数量       |   11195.0 | 项    | v4_cg_jssr_ht |
+| 甘肃     | 2024 | 金额       | 6725924.0 | 万元  | v4_cg_jssr_je |
+| 河南     | 2014 | 数量       |    5343.0 | 项    | v4_cg_jssr_ht |
 
 #### MarketPush
 
@@ -500,9 +500,9 @@ statistics .
 - Totally 6 columns including: province, year, chn_block4, value, units,
   variables.
 
-- Totally 960 rows.
+- Totally 1024 rows.
 
-- Years range from 2000 to 2023
+- Years range from 2000 to 2024
 
 - Variables including: v4_cg_jssc_ht, v4_cg_jssc_je
 
@@ -513,18 +513,18 @@ MarketPush %>%
   kable()
 ```
 
-| province | year | chn_block4 |      value | units | variables     |
-|:---------|:-----|:-----------|-----------:|:------|:--------------|
-| 福建     | 2019 | 金额       |  1395883.0 | 万元  | v4_cg_jssc_je |
-| 北京     | 2012 | 数量       |    59969.0 | 项    | v4_cg_jssc_ht |
-| 广东     | 2000 | 金额       |   482104.0 | 万元  | v4_cg_jssc_je |
-| 内蒙古   | 2000 | 金额       |    60287.0 | 万元  | v4_cg_jssc_je |
-| 山西     | 2021 | 数量       |     1424.0 | 项    | v4_cg_jssc_ht |
-| 湖北     | 2012 | 金额       |  1963922.5 | 万元  | v4_cg_jssc_je |
-| 甘肃     | 2018 | 数量       |     5072.0 | 项    | v4_cg_jssc_ht |
-| 宁夏     | 2012 | 数量       |      564.0 | 项    | v4_cg_jssc_ht |
-| 四川     | 2022 | 金额       | 16435301.0 | 万元  | v4_cg_jssc_je |
-| 青海     | 2014 | 金额       |   291001.1 | 万元  | v4_cg_jssc_je |
+| province | year | chn_block4 |     value | units | variables     |
+|:---------|:-----|:-----------|----------:|:------|:--------------|
+| 福建     | 2005 | 数量       |    6510.0 | 项    | v4_cg_jssc_ht |
+| 甘肃     | 2000 | 金额       |   26413.0 | 万元  | v4_cg_jssc_je |
+| 湖南     | 2000 | 数量       |   21115.0 | 项    | v4_cg_jssc_ht |
+| 内蒙古   | 2021 | 数量       |    1524.0 | 项    | v4_cg_jssc_ht |
+| 福建     | 2020 | 金额       | 1635367.0 | 万元  | v4_cg_jssc_je |
+| 北京     | 2014 | 数量       |   67284.0 | 项    | v4_cg_jssc_ht |
+| 上海     | 2000 | 数量       |   20974.0 | 项    | v4_cg_jssc_ht |
+| 广东     | 2005 | 金额       | 1124739.8 | 万元  | v4_cg_jssc_je |
+| 宁夏     | 2000 | 数量       |     233.0 | 项    | v4_cg_jssc_ht |
+| 内蒙古   | 2005 | 金额       |  109938.8 | 万元  | v4_cg_jssc_je |
 
 #### IndustryTrade
 
@@ -551,6 +551,9 @@ IndustryTrade %>%
 
 | province | year | chn_block4 |       value | units    | variables    |
 |:---------|:-----|:-----------|------------:|:---------|:-------------|
+| 山西     | 2018 | 进口贸易额 |   4050.0000 | 百万美元 | v4_cy_my_jk  |
+| 河北     | 2017 | 贸易总额   |   3144.3140 | 百万美元 | v4_cy_my_jck |
+| 四川     | 2018 | 进口贸易额 |  31073.0000 | 百万美元 | v4_cy_my_jk  |
 | 贵州     | 2017 | 进口贸易额 |   1330.2896 | 百万美元 | v4_cy_my_jk  |
 | 河南     | 2017 | 贸易总额   |  51509.5219 | 百万美元 | v4_cy_my_jck |
 | 宁夏     | 2018 | 出口贸易额 |    146.0000 | 百万美元 | v4_cy_my_ck  |
@@ -558,9 +561,6 @@ IndustryTrade %>%
 | 四川     | 2018 | 出口贸易额 |  33488.0000 | 百万美元 | v4_cy_my_ck  |
 | 新疆     | 2016 | 贸易总额   |    385.2117 | 百万美元 | v4_cy_my_jck |
 | 贵州     | 2018 | 贸易总额   |   3439.0000 | 百万美元 | v4_cy_my_jck |
-| 上海     | 2018 | 出口贸易额 |  86463.0000 | 百万美元 | v4_cy_my_ck  |
-| 湖南     | 2016 | 出口贸易额 |   2619.3848 | 百万美元 | v4_cy_my_ck  |
-| 湖南     | 2017 | 进口贸易额 |   2394.6562 | 百万美元 | v4_cy_my_jk  |
 
 ### Source from China National Yearbook
 
@@ -575,25 +575,25 @@ statistics.
 - Totally 6 columns including: province, year, chn_block4, value, units,
   variables.
 
-- Totally 1756 rows.
+- Totally 1884 rows.
 
-- Years range from 2010 to 2023
+- Years range from 2010 to 2024
 
 - Variables including: v6_cz_yszc_hj, v6_cz_yszc_jy, v6_cz_yszc_kxjs,
   v6_cz_yszc_nls
 
-| province | year | chn_block4 |   value | units | variables       |
-|:---------|:-----|:-----------|--------:|:------|:----------------|
-| 甘肃     | 2019 | 合计       | 3951.60 | 亿元  | v6_cz_yszc_hj   |
-| 河南     | 2023 | 教育       | 1993.35 | 亿元  | v6_cz_yszc_jy   |
-| 云南     | 2015 | 科学技术   |   48.56 | 亿元  | v6_cz_yszc_kxjs |
-| 安徽     | 2018 | 科学技术   |  294.81 | 亿元  | v6_cz_yszc_kxjs |
-| 福建     | 2016 | 科学技术   |   80.28 | 亿元  | v6_cz_yszc_kxjs |
-| 宁夏     | 2019 | 合计       | 1438.29 | 亿元  | v6_cz_yszc_hj   |
-| 广东     | 2016 | 科学技术   |  742.97 | 亿元  | v6_cz_yszc_kxjs |
-| 山东     | 2016 | 科学技术   |  167.00 | 亿元  | v6_cz_yszc_kxjs |
-| 黑龙江   | 2011 | 合计       | 2794.08 | 亿元  | v6_cz_yszc_hj   |
-| 海南     | 2021 | 教育       |  295.10 | 亿元  | v6_cz_yszc_jy   |
+| province | year | chn_block4 |     value | units | variables       |
+|:---------|:-----|:-----------|----------:|:------|:----------------|
+| 福建     | 2012 | 教育       |  562.3008 | 亿元  | v6_cz_yszc_jy   |
+| 黑龙江   | 2018 | 科学技术   |   39.5200 | 亿元  | v6_cz_yszc_kxjs |
+| 湖南     | 2019 | 科学技术   |  171.9200 | 亿元  | v6_cz_yszc_kxjs |
+| 西藏     | 2018 | 科学技术   |    8.1200 | 亿元  | v6_cz_yszc_kxjs |
+| 安徽     | 2015 | 科学技术   |  147.9400 | 亿元  | v6_cz_yszc_kxjs |
+| 甘肃     | 2020 | 合计       | 4163.4000 | 亿元  | v6_cz_yszc_hj   |
+| 河南     | 2024 | 教育       | 2059.6601 | 亿元  | v6_cz_yszc_jy   |
+| 四川     | 2016 | 科学技术   |  101.0900 | 亿元  | v6_cz_yszc_kxjs |
+| 宁夏     | 2019 | 教育       |  179.3300 | 亿元  | v6_cz_yszc_jy   |
+| 上海     | 2010 | 教育       |  417.2775 | 亿元  | v6_cz_yszc_jy   |
 
 ### Source from Livestock Yearbook
 
@@ -615,18 +615,18 @@ Breeding statistics.
   v8_t2_zcqc_zdjysdjc, v8_t2_zcqc_zdjysrjc（top 20 of totally 98
   variables.
 
-| province | year | chn_block4 | value | units | variables          |
-|:---------|:-----|:-----------|------:|:------|:-------------------|
-| 陕西     | 2011 | 种牦牛场   |    NA | 个    | v8_t1_zcqc_zhnc    |
-| 辽宁     | 2018 | 种羊场     | 12674 | 只    | v8_t6_nfmccl_zyc   |
-| 陕西     | 2018 | 种马场     |   182 | 匹    | v8_t6_nfmccl_zmc   |
-| 吉林     | 2015 | 种兔场     |    14 | 个    | v8_t2_zcqc_ztc     |
-| 山东     | 2015 | 种马场     |     3 | 个    | v8_t1_zcqc_zmc     |
-| 吉林     | 2015 | 种公猪站   |    90 | 个    | v8_t3_zcqc_zgzz    |
-| 浙江     | 2013 | 种公猪站   |    67 | 个    | v8_t3_zcqc_zgzz    |
-| 四川     | 2018 | 种猪场     |   219 | 个    | v8_t1_zcqc_zzc     |
-| 北京     | 2013 | 种羊场     |  1300 | 只    | v8_t7_cczcq_zyc    |
-| 辽宁     | 2018 | 种绒山羊场 |  4617 | 只    | v8_t7_nfmccl_zmsyc |
+| province | year | chn_block4 |  value | units | variables        |
+|:---------|:-----|:-----------|-------:|:------|:-----------------|
+| 广东     | 2014 | 种鹅场     |     22 | 个    | v8_t2_zcqc_zec   |
+| 宁夏     | 2015 | 种公牛站   |      1 | 个    | v8_t3_zcqc_zgnz  |
+| 江苏     | 2017 | 种绵羊场   |    453 | 枚    | v8_t9_scpt_zmyc  |
+| 江西     | 2016 | 种蛋鸡场   | 770185 | 套    | v8_t4_nmcl_zdjc  |
+| 海南     | 2016 | 种水牛场   |      0 | 枚    | v8_t8_scpt_zsnc  |
+| 陕西     | 2011 | 种牦牛场   |     NA | 个    | v8_t1_zcqc_zhnc  |
+| 辽宁     | 2018 | 种羊场     |  12674 | 只    | v8_t6_nfmccl_zyc |
+| 陕西     | 2018 | 种马场     |    182 | 匹    | v8_t6_nfmccl_zmc |
+| 吉林     | 2015 | 种兔场     |     14 | 个    | v8_t2_zcqc_ztc   |
+| 山东     | 2015 | 种马场     |      3 | 个    | v8_t1_zcqc_zmc   |
 
 ## Public site
 
@@ -660,6 +660,8 @@ PubNKRDP %>%
 
 | year | date | NO | index | title | institution | chairman | funds | type | duration | NO_head | NO_year | NO_mark | NO_num | NO_num_p1 | NO_num_p2 | NO_tail |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| 2018 | 20191015 | SQ2018YFD030061 | 396 | 江西双季稻区绿色规模化丰产增效技术集成与示范 | 江西省农业科学院土壤肥料与资源环境研究所 | 刘光荣 | 2840 | 粮食丰产增效科技创新 | NA | SQ | 2018 | YFD | 030061 | 03 | 0061 | NA |
+| 2018 | 20191015 | 2018YFC0809800 | 583 | 社区风险监测与防范关键技术研究 | 天津大学 | 王文俊 | 2365 | 公共安全风险防控与应急技术装备 | NA |  | 2018 | YFC | 0809800 | 08 | 09800 | NA |
 | 2018 | 20191015 | 2018YFC1505700 | 832 | 青藏高原地-气相互作用及其对下游天气气候的影响 | 中国气象科学研究院 | 赵平 | 2864 | 重大自然灾害监测预警与防范 | NA |  | 2018 | YFC | 1505700 | 15 | 05700 | NA |
 | 2019 | 20191015 | 2019YFA0110800 | 31 | 单基因遗传病的基因治疗研究 | 中国科学院动物研究所 | 李伟 | 2808 | 干细胞及转化研究 | NA |  | 2019 | YFA | 0110800 | 01 | 10800 | NA |
 | 2019 | 20191015 | 2019YFA0508500 | 68 | 固有免疫应答新型关键蛋白质机器功能与机制研究 | 中国科学技术大学 | 周荣斌 | 2444 | 蛋白质机器与生命过程调控 | NA |  | 2019 | YFA | 0508500 | 05 | 08500 | NA |
@@ -668,8 +670,6 @@ PubNKRDP %>%
 | 2018 | 20191015 | 2018YFA0507900 | 57 | 抑郁相关神经递质膜受体蛋白质机器促进胃癌侵袭转移的分子机制及靶向干预研究 | 中国人民解放军第三军医大学 | 欧阳勤 | 494 | 蛋白质机器与生命过程调控 | NA |  | 2018 | YFA | 0507900 | 05 | 07900 | NA |
 | 2018 | 20191015 | 2018YFA0404500 | 43 | 星系结构、演化与宇宙学研究 | 中国科学院国家天文台 | 毛淑德 | 4754 | 大科学装置前沿研究 | NA |  | 2018 | YFA | 0404500 | 04 | 04500 | NA |
 | 2018 | 20191015 | 2018YFC1407000 | 528 | 海洋动力灾害观测预警系统集成与应用示范 | 国家海洋环境预报中心 | 于福江 | 1325 | 海洋环境安全保障 | NA |  | 2018 | YFC | 1407000 | 14 | 07000 | NA |
-| 2020 | 20201223 | 2020YFB1711500 | 122 | 大数据模型驱动的3D打印定制化医疗器械智能设计/仿真协同云平台研发 | 江苏云仟佰数字科技有限公司 | NA | NA | 网络协同制造和智能工厂 | 3 |  | 2020 | YFB | 1711500 | 17 | 11500 | NA |
-| 2020 | 20201223 | 2020YFB2009700 | 178 | 阀口独立控制型大流量液压 阀关键技术研究与示范应用 | 江苏恒立液压股份有限公司 | NA | NA | 制造基础技术与关键部件 | 3 |  | 2020 | YFB | 2009700 | 20 | 09700 | NA |
 
 #### PubAgriParkList
 
@@ -693,6 +693,8 @@ PubAgriParkList %>%
 
 | index | batch | name                               | province |
 |------:|:------|:-----------------------------------|:---------|
+|    17 | 05    | 广东湛江国家农业科技园区           | 广东     |
+|    27 | 06    | 广东河源国家农业科技园区           | 广东     |
 |    37 | 05    | 山东泰安国家农业科技园区           | 山东     |
 |    11 | 02    | 新疆昌吉国家农业科技园区           | 新疆     |
 |     4 | 09    | 内蒙古自治区兴安盟国家农业科技园区 | 内蒙古   |
@@ -701,8 +703,6 @@ PubAgriParkList %>%
 |    25 | 03    | 新疆伊犁国家农业科技园区           | 新疆     |
 |     4 | 02    | 安徽宿州国家农业科技园区           | 安徽     |
 |     9 | 06    | 重庆潼南国家农业科技园区           | 重庆     |
-|    22 | 06    | 湖北荆门国家农业科技园区           | 湖北     |
-|     7 | 03    | 广西北海国家农业科技园区           | 广西     |
 
 #### PubAgriParkEval
 
@@ -726,6 +726,8 @@ PubAgriParkEval %>%
 
 | year | index | name                           | result | province |
 |-----:|------:|:-------------------------------|:-------|:---------|
+| 2020 |    13 | 湖北荆门国家农业科技园区       | ok     | 湖北     |
+| 2019 |    23 | 浙江金华国家农业科技园区       | ok     | 浙江     |
 | 2021 |    46 | 陕西铜川国家农业科技园区       | ok     | 陕西     |
 | 2020 |     1 | 河北石家庄藁城国家农业科技园区 | good   | 河北     |
 | 2020 |     3 | 江苏南通国家农业科技园区       | good   | 江苏     |
@@ -734,8 +736,6 @@ PubAgriParkEval %>%
 | 2021 |     3 | 吉林延边国家农业科技园区       | retain | 吉林     |
 | 2019 |    43 | 湖北潜江国家农业科技园区       | ok     | 湖北     |
 | 2021 |     9 | 辽宁锦州国家农业科技园区       | ok     | 辽宁     |
-| 2021 |     1 | 宁夏银川国家农业科技园区       | cancel | 宁夏     |
-| 2021 |    13 | 江苏镇江国家农业科技园区       | ok     | 江苏     |
 
 #### PubAgriParkCheck
 
@@ -760,6 +760,8 @@ PubAgriParkCheck %>%
 
 | year | index | name                         | result | province | doc_num            |
 |-----:|------:|:-----------------------------|:-------|:---------|:-------------------|
+| 2018 |    18 | 山东临沂国家农业科技园区     | pass   | 山东     | 国科办农2018-99    |
+| 2021 |    15 | 河南信阳国家农业科技园区     | pass   | 河南     | 国科办农2021-150号 |
 | 2017 |    34 | 安徽蚌埠国家农业科技园区     | pass   | 安徽     | 国科办函农2017-767 |
 | 2017 |    42 | 安徽合肥国家农业科技园区     | pass   | 安徽     | 国科办函农2017-767 |
 | 2018 |     5 | 江苏无锡国家农业科技园区     | pass   | 江苏     | 国科办农2018-99    |
@@ -768,8 +770,6 @@ PubAgriParkCheck %>%
 | 2018 |    39 | 陕西咸阳国家农业科技园区     | pass   | 陕西     | 国科办农2018-99    |
 | 2023 |    15 | 湖北咸宁国家农业科技园区     | pass   | 湖北     | 国科办农2023-60    |
 | 2021 |    31 | 新疆博尔塔拉国家农业科技园区 | pass   | 新疆     | 国科办农2021-150号 |
-| 2019 |     5 | 河北辛集国家农业科技园区     | pass   | 河北     | 国科办农2019-87    |
-| 2019 |     8 | 广西贺州国家农业科技园区     | pass   | 广西     | 国科办农2019-87    |
 
 #### HitechFirmsPub
 
@@ -782,9 +782,9 @@ Hi-tech Firms Numbers on Public Site.
 
 - Totally 4 columns including: index, year, province, num.
 
-- Totally 217 rows.
+- Totally 248 rows.
 
-- Years range from 2018 to 2024
+- Years range from 2018 to 2025
 
 ``` r
 
@@ -795,16 +795,16 @@ HitechFirmsPub %>%
 
 | index | year | province |   num |
 |------:|-----:|:---------|------:|
-|    10 | 2020 | 江苏     | 13114 |
-|    20 | 2023 | 广西     |  1281 |
-|    20 | 2021 | 广西     |  1484 |
-|    13 | 2019 | 福建     |  1951 |
-|    14 | 2018 | 江西     |  1868 |
-|    18 | 2020 | 湖南     |  4071 |
 |     5 | 2022 | 内蒙古   |   681 |
-|    18 | 2024 | 湖南     |  6083 |
-|    19 | 2020 | 广东     | 20279 |
-|    30 | 2022 | 宁夏     |   216 |
+|    28 | 2018 | 甘肃     |   426 |
+|     8 | 2022 | 黑龙江   |  1200 |
+|    10 | 2021 | 江苏     | 12631 |
+|    20 | 2024 | 广西     |  1143 |
+|    20 | 2022 | 广西     |  1376 |
+|    30 | 2019 | 宁夏     |    85 |
+|    13 | 2020 | 福建     |  2989 |
+|     5 | 2018 | 内蒙古   |   335 |
+|    28 | 2019 | 甘肃     |   354 |
 
 #### PubOpenShare
 
@@ -819,9 +819,9 @@ Scientific Instruments Sharing.
 - Totally 6 columns including: year, index, institution, result,
   administrator, province.
 
-- Totally 2453 rows.
+- Totally 2797 rows.
 
-- Years range from 2018 to 2024
+- Years range from 2018 to 2025
 
 ``` r
 
@@ -832,16 +832,16 @@ PubOpenShare %>%
 
 | year | index | institution | result | administrator | province |
 |---:|---:|:---|:---|:---|:---|
-| 2018 | 92 | 中国林业科学研究院资源信息研究所 | 良好 | 国家林业和草原局 | 北京 |
-| 2019 | 291 | 中国中医科学院中药研究所 | 合格 | 国家中医药管理局 | 北京 |
-| 2019 | 146 | 中国科学院遥感与数字地球研究所 | 合格 | 中国科学院 | 北京 |
-| 2018 | 277 | 国家海洋局东海分局 | 合格 | 自然资源部 | 上海 |
-| 2022 | 151 | 中国科学院深圳先进技术研究院 | 合格 | NA | 广东 |
-| 2019 | 82 | 中国科学院植物研究所 | 良好 | 中国科学院 | 北京 |
-| 2024 | 239 | 中国农业科学院草原研究所 | 合格 |  | 内蒙古 |
-| 2018 | 324 | 中国医学科学院肿瘤医院 | 合格 | 国家卫生健康委员会 | 北京 |
-| 2019 | 85 | 中国农业科学院农业质量标准与检测技术研究所 | 良好 | 农业农村部 | 北京 |
-| 2021 | 15 | 清华大学 | 优秀 | NA | 北京 |
+| 2023 | 280 | 中国科学院北京基因组研究所（国家生物信息中心） | 合格 |  | 北京 |
+| 2018 | 278 | 中国林业科学研究院林业研究所 | 合格 | 国家林业和草原局 | 北京 |
+| 2018 | 136 | 中国科学院北京基因组研究所 | 合格 | 中国科学院 | 北京 |
+| 2025 | 67 | 哈尔滨工程大学 | 良好 |  | 黑龙江 |
+| 2020 | 342 | 中国疾病预防控制中心寄生虫病预防控制所 | 合格 | NA | 上海 |
+| 2023 | 319 | 国家深海基地管理中心 | 合格 |  | 山东 |
+| 2018 | 23 | 中国城市规划设计研究院 | 优秀 | 住房和城乡建设部 | 北京 |
+| 2019 | 92 | 国际竹藤中心 | 良好 | 国家林业和草原局 | 北京 |
+| 2020 | 303 | 中国测绘科学研究院 | 合格 | NA | 北京 |
+| 2018 | 160 | 重庆大学 | 合格 | 教育部 | 重庆 |
 
 ### Source from MOA or MOE
 
@@ -869,14 +869,15 @@ data("PubCars")
 **`PubCars`**：A **wide format** data set containing Details of China
 Agricultural Research System(CARS) from MOA.
 
-- Totally 14 columns including: year, index, area_num_eng, area_name,
+- Totally 16 columns including: year, index, area_num_eng, area_name,
   chairman_industry, institution_industry, func_num, func_name,
   func_inst, func_director, researcher_area, researcher_name,
-  researcher_inst, province.
+  researcher_inst, province_industry, province_func,
+  province_researcher.
 
-- Totally 1783 rows.
+- Totally 2190 rows.
 
-- Years range from 2011 to 2024
+- Years range from 2011 to 2026
 
 ``` r
 
@@ -887,18 +888,92 @@ PubObsStation %>%
 
 | officer | year | index | name | institution | administrator | province |
 |:---|:---|:---|:---|:---|:---|:---|
+| MOE | 2019 | 1 | 塞罕坝森林草原过渡带教育部野外科学观测研究站 | 北京大学 | NA | 北京 |
+| MOA | 2018 | 21 | 国家土壤质量洪山观测实验站 | 湖北省农业科学院 | NA | 湖北 |
+| MOA | 2019 | 64 | 国家农业科学农业环境日喀则观测实验站 | 西藏自治区农牧科学院 | NA | 西藏 |
+| MOA | 2019 | 21 | 国家农业科学农业环境儋州观测实验站 | 中国热带农业科学院环境与植物保护研究所 | NA | 海南 |
+| MOST | 2019 | 96 | 青海格尔木盐湖水环境材料腐蚀国家野外科学观测研究站 | 钢铁研究总院青岛海洋腐蚀研究所有限公司 | 国资委 | 山东 |
+| MOST | 2019 | 75 | 福建厦门海水环境材料腐蚀国家野外科学观测研究站 | 中国船舶重工集团公司第七二五研究所 | 国资委 | 河南 |
+| MOST | 2021 | 51 | 上海长江河口湿地生态系统国家野外科学观测研究站 | 复旦大学 | 上海市科学技术委员会 | 上海 |
+| MOA | 2019 | 67 | 国家农业科学农业环境沈阳观测实验站 | 中国科学院沈阳应用生态研究所 | NA | 辽宁 |
+| MOST | 2021 | 25 | 江苏南京水稻种质资源国家野外科学观测研究站 | 南京农业大学 | 农业农村部、教育部 | 江苏 |
 | MOA | 2019 | 19 | 国家农业科学渔业资源环境秦皇岛观测实验站 | 中国水产科学研究院北戴河中心实验站 | NA | 河北 |
-| MOST | 2019 | 18 | 青海瓦里关大气成分本底国家野外科学观测研究站 | 中国气象科学研究院、青海省气象局 | 气象局 | 北京 |
-| MOA | 2018 | 19 | 国家土壤质量雁山观测实验站 | 桂林市农业科学院 | NA | 广西 |
-| MOA | 2019 | 69 | 国家农业科学农业环境拉萨观测实验站 | 中国科学院地理科学与资源研究所 | NA | 北京 |
-| MOST | 2019 | 85 | 西藏林芝高山森林生态系统国家野外科学观测研究站 | 西藏农牧学院 | 西藏自治区科技厅、林草局 | 西藏 |
-| MOA | 2019 | 30 | 国家农业科学土壤质量武川观测实验站 | 内蒙古农牧业科学院 | NA | 内蒙古 |
-| MOST | 2019 | 76 | 海南三亚海水环境材料腐蚀国家野外科学观测研究站 | 中国船舶重工集团公司第七二五研究所 | 国资委 | 河南 |
-| MOST | 2021 | 63 | 西藏那曲高寒草地生态系统国家野外科学观测研究站 | 中国科学院地理科学与资源研究所、中国科学院青藏高原研究所、西藏大学 | 西藏自治区科学技术厅 | 北京 |
-| MOA | 2018 | 1 | 国家土壤质量德州观测实验站 | 中国农业科学院农业资源与农业区划研究所 | NA | 北京 |
-| MOST | 2021 | 48 | 辽宁盘锦湿地生态系统国家野外科学观测研究站 | 沈阳农业大学 | 辽宁省科学技术厅 | 辽宁 |
+
+#### PubGeneticResourceCrop
+
+> **说明**：本数据集在`techme`项目下参数化爬取全国农作物种质资源信息平台库圃列表（“techme/data-raw/public-site/moa-genetic-resource/”），清洗后的xlsx经由`wfl-PubGeneticResource.R`编译。与按年度批次公示的`PubGeneticResource`口径不同。
+
+**`PubGeneticResourceCrop`**：A **wide format** data set containing the
+full list of national crop germplasm resource banks and nurseries.
+
+- Totally 7 columns including: year, index, determineYear, province,
+  nature, title, institution.
+
+- Totally 81 rows.
+
+- Years range from 2026 to 2026
+
+``` r
+
+PubGeneticResourceCrop %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+| year | index | determineYear | province | nature | title | institution |
+|---:|---:|---:|:---|:---|:---|:---|
+| 2026 | 34 | 2022 | 山东 | 种质圃 | 国家核桃板栗种质资源圃（泰安） | 山东省果树研究所 |
+| 2026 | 77 | 2022 | 河北 | 种质圃 | 国家环渤海地区特色果树种质资源圃（昌黎） | 河北省农林科学院昌黎果树研究所 |
+| 2026 | 51 | 2022 | 广西 | 种质圃 | 国家野生稻种质资源圃（南宁） | 广西壮族自治区农业科学院 |
+| 2026 | 31 | 2022 | 福建 | 种质圃 | 国家闽台特色作物种质资源圃（漳州） | 福建省农业科学院亚热带农业研究所 |
+| 2026 | 26 | 2022 | 浙江 | 中期库 | 国家水稻种质资源中期库（杭州） | 中国水稻研究所 |
+| 2026 | 3 | 2022 | 北京 | 中期库 | 国家蔬菜种质资源中期库（北京） | 中国农业科学院蔬菜花卉研究所 |
+| 2026 | 17 | 2022 | 黑龙江 | 中期库 | 国家甜菜种质资源中期库（哈尔滨） | 黑龙江大学 |
+| 2026 | 63 | 2022 | 云南 | 种质圃 | 国家甘蔗种质资源圃（开远） | 云南省农业科学院甘蔗研究所 |
+| 2026 | 33 | 2022 | 山东 | 中期库 | 国家烟草种质资源中期库（青岛） | 中国农业科学院烟草研究所 |
+| 2026 | 48 | 2022 | 广东 | 种质圃 | 国家荔枝香蕉种质资源圃（广州） | 广东省农业科学院果树研究所 |
+
+#### PubMachineCountyCase
+
+> **说明**：本数据集在`techme`项目下整理农业农村部特色经济作物全程机械化生产模式与典型案例公示名单（“techme/data-raw/public-site/moa-machine-county/”），yaml
+> 经 `code-moa-machine-county-case.R` 展开为 xlsx，再由
+> `wfl-PubMachineCounty.R` 编译。
+
+**`PubMachineCountyCase`**：A **wide format** data set containing
+typical cases of full-process mechanization for specialty economic
+crops.
+
+- Totally 9 columns including: year, batch, category, index, order,
+  title, province, place, crop.
+
+- Totally 120 rows.
+
+- Years range from 2021 to 2025
+
+``` r
+
+PubMachineCountyCase %>%
+  sample_n(size = 10) %>%
+  kable()
+```
+
+| year | batch | category | index | order | title | province | place | crop |
+|---:|---:|:---|---:|---:|:---|:---|:---|:---|
+| 2021 | 1 | 蔬菜 | 12 | 12 | 山东章丘大葱机械化生产模式与典型案例 | 山东 | 章丘 | 大葱 |
+| 2021 | 1 | 中药材 | 26 | 12 | 辽宁省龙胆草种植机械化生产模式与典型案例 | 辽宁 | 清原县 | 龙胆草 |
+| 2021 | 1 | 蔬菜 | 13 | 13 | 山东大蒜机械化生产模式与典型案例 | 山东 | 章丘 | 大蒜 |
+| 2022 | 2 | 茶叶 | 26 | 9 | 浙江陡坡茶园（绍兴日铸茶）机械化生产模式与典型案例 | 浙江 | 绍兴 | 日铸茶 |
+| 2025 | 5 | 中药材 | 18 | 4 | 安徽太和桔梗机械化生产模式与典型案例 | 安徽 | 太和 | 桔梗 |
+| 2021 | 1 | 中药材 | 25 | 11 | 东北人参种植机械化生产模式与典型案例 | 吉林 | 集安市 | 人参 |
+| 2022 | 2 | 中药材 | 32 | 4 | 广西藤县粉葛机械化生产模式与典型案例 | 广西 | 藤县 | 粉葛 |
+| 2024 | 4 | 蔬菜 | 5 | 5 | 日光温室果菜轨道辅助生产机械化模式与典型案例 | NA | NA | 果菜 |
+| 2021 | 1 | 蔬菜 | 4 | 4 | 江苏响水西兰花机械化生产模式与典型案例 | 江苏 | 响水 | 西兰花 |
+| 2022 | 2 | 茶叶 | 25 | 8 | 浙江平地茶园（松阳绿茗峰）机械化生产模式与典型案例 | 浙江 | 松阳 | 茶叶 |
 
 #### PubBreedingXmj
+
+> **已弃用**：请改用 `PubXmjBreeding`。本对象为 2010–2020
+> 快照，将在后续版本移除。
 
 **`PubBreedingXmj`**：A **wide format** data set containing details of
 Officer’ Livestock Breeding List from MOA (Xmj).
@@ -910,30 +985,52 @@ Officer’ Livestock Breeding List from MOA (Xmj).
 
 - Years range from 2010 to 2020
 
+#### PubXmjBreeding
+
+> **说明**：本数据集在 `techme`
+> 项目下整理农业农村部国家畜禽核心育种场等公示名单（`data-raw/public-site/moa-xmj-breeding/`）。2010–2020
+> 年由 `scrape-breeding.Rmd` 清洗（空省份已从旧快照回填）；2021 年起
+> YAML 经 `code-scrape-breeding.R` 展开为 tidy xlsx，再由
+> `wfl-PubXmjBreeding.R` 编译。这是当前唯一应使用的名单。
+
+**`PubXmjBreeding`**：A **wide format** data set containing national
+core livestock breeding farms, elite multiplier farms, and core sire
+stations from MOA notices.
+
+- Totally 7 columns including: year, index, province, type, name_origin,
+  name_change, mark.
+
+- Totally 610 rows.
+
+- Years range from 2010 to 2024
+
 ``` r
 
-PubBreedingXmj %>%
+PubXmjBreeding %>%
   sample_n(size = 10) %>%
   kable()
 ```
 
 | year | index | province | type | name_origin | name_change | mark |
 |:---|:---|:---|:---|:---|:---|:---|
-| 2019 | 1 | 河南 | 国家肉牛核心育种场 | 泌阳县夏南牛科技开发有限公司 | NA | 遴选公示 |
-| 2015 | 12 | 湖北 | 国家生猪核心育种场 | 湖北金旭爵士种畜有限公司 | NA | 遴选公示 |
-| 2018 | 2 | 广东 | 国家肉鸡核心育种场 | 台山市科朗现代农业有限公司 | NA | 遴选公示 |
-| 2015 | 11 | 陕西 | 国家肉牛核心育种场 | 陕西省秦川肉牛良种繁育中心 | NA | 遴选公示 |
-| 2017 | 4 | 湖南 | 国家肉牛核心育种场 | 湖南天华实业有限公司 | NA | 遴选公示 |
-| 2010 | 7 | 海南 | 国家生猪核心育种场 | 海南罗牛山种猪育种有限公司 | NA | 遴选公示 |
-| 2012 | 15 | 广西 | 国家生猪核心育种场 | 桂林美冠原种猪育种有限责任公司 | NA | 遴选公示 |
-| 2015 | 8 | 江西 | 国家生猪核心育种场 | 井冈山市傲新华富育种有限公司 | NA | 遴选公示 |
-| 2010 | 4 | 江西 | 国家生猪核心育种场 | 江西省原种猪场有限公司 | NA | 遴选公示 |
-| 2015 | 13 | 广西 | 国家肉鸡良种扩繁推广基地 | 隆安凤鸣农牧有限公司 | NA | 遴选公示 |
+| 2020 | 2 | 辽宁 | 国家生猪核心育种场 | 阜新原种猪场 | NA | 资格取消 |
+| 2018 | 5 | 上海 | 国家奶牛核心育种场 | 光明牧业有限公司金山种奶牛场 | NA | 遴选公示 |
+| 2023 | 22 | 新疆 | 国家奶牛核心育种场 | 昌吉市吉缘牧业有限公司良种繁育场 | NA | 核验通过 |
+| 2014 | 9 | 云南 | 国家肉牛核心育种场 | 腾冲县巴福乐槟榔江水牛良种繁育有限公司 | NA | 遴选公示 |
+| 2015 | 4 | 上海 | 国家生猪核心育种场 | 上海市上海农场 | NA | 遴选公示 |
+| 2024 | 33 | 湖北 | 国家蛋鸡良种扩繁推广场 | 湖北峪口禽业有限公司 | NA | 核验通过 |
+| 2024 | 2 | 黑龙江 | 国家奶牛核心育种场 | 北安农垦长鑫牧场专业合作社 | NA | 遴选公示 |
+| 2020 | 3 | 江苏 | NA | 江苏省家禽科学研究所家禽育种中心 | 江苏省家禽科学研究所科技创新中心 | 名称变更 |
+| 2023 | 9 | 河南 | 国家生猪核心育种场 | 河南省黄泛区鑫欣牧业股份有限公司 | NA | 核验通过 |
+| 2015 | 6 | 山东 | 国家肉鸡良种扩繁推广基地 | 山东益生种畜禽股份有限公司 | NA | 遴选公示 |
 
 #### PubStandardXmj
 
+> **已弃用**：请改用 `PubXmjStandard`。本对象为 2010–2020
+> 快照，将在后续版本移除。
+
 **`PubStandardXmj`**：A **wide format** data set containing details of
-Officer’ Livestock Breeding List from MOA (Xmj).
+Officer’ Livestock Standard List from MOA (Xmj).
 
 - Totally 5 columns including: year, index, province, prod_name,
   com_name.
@@ -942,22 +1039,40 @@ Officer’ Livestock Breeding List from MOA (Xmj).
 
 - Years range from 2010 to 2020
 
+#### PubXmjStandard
+
+> **说明**：本数据集在 `techme`
+> 项目下整理农业农村部畜禽养殖标准化示范场认定名单（`data-raw/public-site/moa-xmj-standard/`）。2010–2020
+> 年由 `scrape-standard.Rmd` 清洗（无 2012 年公示）；2021 年起 YAML 经
+> `code-scrape-standard.R` 展开为 tidy xlsx，再由 `wfl-PubXmjStandard.R`
+> 编译。这是当前唯一应使用的名单。
+
+**`PubXmjStandard`**：A **wide format** data set containing livestock
+standardized demonstration farms from MOA designation notices.
+
+- Totally 5 columns including: year, index, area_name, prod_name,
+  com_name.
+
+- Totally 3968 rows.
+
+- Years range from 2010 to 2023
+
 ``` r
 
-PubStandardXmj %>%
+PubXmjStandard %>%
   sample_n(size = 10) %>%
   kable()
 ```
 
-| year | index | province | prod_name | com_name |
-|:---|:---|:---|:---|:---|
-| 2015 | 54 | 辽宁 | 生猪 | 盘山县庆隆三元猪业有限公司 |
-| 2011 | 383 | 四川 | 生猪 | 遂宁安居区金龟村曾白林生猪养殖专业合作社顺木养殖场 |
-| 2017 | 180 | 江苏 | 生猪 | 南通赛天蓬牧业有限公司 |
-| 2016 | 439 | 广西 | 肉羊 | 大新县福隆乡楚烽养殖场 |
-| 2010 | 83 | 吉林 | 蛋鸡 | 九台市龙嘉镇秀文养殖场 |
-| 2014 | 184 | 河南 | 蛋鸡 | 河南三高农牧股份有限公司第五养鸡场 |
-| 2010 | 142 | 浙江 | 肉鸡 | 杭州萧山志伟家禽有限公司 |
-| 2017 | 443 | 广东 | 肉牛 | 高州市春色养殖专业合作社 |
-| 2017 | 243 | 江西 | 生猪 | 江西省正邦养殖有限公司龙南分公司桃江良种猪场 |
-| 2013 | 268 | 四川 | 肉牛 | 广安市广安区三合肉牛养殖专业合作社 |
+| year | index | area_name | prod_name | com_name                             |
+|:-----|:------|:----------|:----------|:-------------------------------------|
+| 2020 | 71    | 山东      | 奶牛      | 格润富德农牧科技股份有限公司（牧场） |
+| 2014 | 52    | 辽宁      | 肉羊      | 永生养羊专业合作社                   |
+| 2015 | 169   | 江西      | 蛋鸡      | 江西小牧童生态农业发展有限公司       |
+| 2023 | 83    | 山东      | 生猪      | 青岛新万福食品有限公司(青山猪场)     |
+| 2017 | 273   | 山东      | 生猪      | 高唐县庆凯养殖有限公司               |
+| 2010 | 69    | 河北省    | 奶牛      | 武邑县茂祥奶牛养殖有限公司           |
+| 2023 | 142   | 四川      | 生猪      | 大竹县国牧农业集团有限公司           |
+| 2014 | 315   | 宁夏      | 肉羊      | 宁夏易林环境建设有限公司             |
+| 2014 | 115   | 安徽      | 生猪      | 合肥市华杰畜禽养殖有限公司           |
+| 2017 | 19    | 河北      | 生猪      | 廊坊市安达养殖有限公司               |

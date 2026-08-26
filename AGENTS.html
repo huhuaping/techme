@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">techme</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.2.9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,14 +16,7 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="articles/guide-sources-public-site.html">网站数据来源</a></li>
-    <li><a class="dropdown-item" href="articles/guide-sources-yearbook.html">年鉴数据来源</a></li>
-    <li><a class="dropdown-item" href="articles/my-vignette.html">02-Techme数据集</a></li>
-    <li><a class="dropdown-item" href="articles/pkg-design.html">01-Techme包设计</a></li>
-    <li><a class="dropdown-item" href="articles/queryTianyancha.html">机构信息库</a></li>
-  </ul></li>
+<li class="nav-item"><a class="nav-link" href="articles/index.html">Articles</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/huhuaping/techme/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -58,7 +51,7 @@
 </tr></thead><tbody><tr><td><code>R/</code></td>
 <td>包源码：工作流函数（<code>wfl.*</code>）、数据集桩、工具函数</td>
 </tr><tr><td><code>data/</code></td>
-<td>52 个标准 <code>.rda</code> 数据集（<code>LazyData: true</code>）</td>
+<td>53 个标准 <code>.rda</code> 数据集（<code>LazyData: true</code>）</td>
 </tr><tr><td><code>data-raw/</code></td>
 <td>原始数据 + 清洗脚本（<code>.Rbuildignore</code> 排除，不打包）</td>
 </tr><tr><td><code>man/</code></td>
@@ -80,7 +73,7 @@
 </ul></div>
 </div>
 <div class="section level2">
-<h2 id="六大工作流skills">六大工作流（Skills）<a class="anchor" aria-label="anchor" href="#%E5%85%AD%E5%A4%A7%E5%B7%A5%E4%BD%9C%E6%B5%81skills"></a></h2>
+<h2 id="工作流-skills">工作流 Skills<a class="anchor" aria-label="anchor" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81-skills"></a></h2>
 <p>执行任务前，读取对应 Skill：</p>
 <table class="table"><colgroup><col width="42%"><col width="57%"></colgroup><thead><tr><th>工作流</th>
 <th>Skill 路径</th>
@@ -88,6 +81,8 @@
 <td><a href=".cursor/skills/techme-yearbook-update/SKILL.html">.cursor/skills/techme-yearbook-update/SKILL.md</a></td>
 </tr><tr><td>公开网站数据抓取与更新</td>
 <td><a href=".cursor/skills/techme-public-site-update/SKILL.html">.cursor/skills/techme-public-site-update/SKILL.md</a></td>
+</tr><tr><td>附件文本抽取（html/pdf/docx）</td>
+<td><a href=".cursor/skills/techme-read-attachments/SKILL.html">.cursor/skills/techme-read-attachments/SKILL.md</a></td>
 </tr><tr><td>新增/调整数据集与 varsList</td>
 <td><a href=".cursor/skills/techme-new-dataset/SKILL.html">.cursor/skills/techme-new-dataset/SKILL.md</a></td>
 </tr><tr><td>R 包工程化（check、test）</td>
@@ -96,6 +91,8 @@
 <td><a href=".cursor/skills/techme-pkgdown-docs/SKILL.html">.cursor/skills/techme-pkgdown-docs/SKILL.md</a></td>
 </tr><tr><td>与 tech-report 联动</td>
 <td><a href=".cursor/skills/techme-report-bridge/SKILL.html">.cursor/skills/techme-report-bridge/SKILL.md</a></td>
+</tr><tr><td>UTF-8/中文乱码修复</td>
+<td><a href=".cursor/skills/techme-encoding-utf8/SKILL.html">.cursor/skills/techme-encoding-utf8/SKILL.md</a></td>
 </tr></tbody></table></div>
 <div class="section level2">
 <h2 id="常用-r-命令">常用 R 命令<a class="anchor" aria-label="anchor" href="#%E5%B8%B8%E7%94%A8-r-%E5%91%BD%E4%BB%A4"></a></h2>
@@ -121,6 +118,7 @@
 <ul><li>CNKI 加密 xls 转换依赖 Microsoft Office 的 <code>excelcnv.exe</code>（<code><a href="reference/get_excelcnv_exe.html">get_excelcnv_exe()</a></code> 自动查找）。</li>
 <li>含 <code><a href="https://rdrr.io/r/base/readline.html" class="external-link">readline()</a></code> 的交互脚本（如 <code>wfl.writeXlsx</code>）须用户在 <strong>RStudio 中手动执行</strong>，Agent 不可无人值守运行。</li>
 <li>路径使用正斜杠或 <code><a href="https://here.r-lib.org/reference/here.html" class="external-link">here::here()</a></code>，避免硬编码反斜杠。</li>
+<li>源文件 <strong>UTF-8 无 BOM</strong>。对话改文件遵守 <code>encoding-utf8</code> 规则；写入后由 <code>.cursor/hooks.json</code> 的 <code>afterFileEdit</code> 抽查。禁止按 GBK 读写后再另存，禁止把非法字节写成 <code>?</code> / U+FFFD。</li>
 </ul></div>
 <div class="section level2">
 <h2 id="与-tech-report-联动">与 tech-report 联动<a class="anchor" aria-label="anchor" href="#%E4%B8%8E-tech-report-%E8%81%94%E5%8A%A8"></a></h2>
@@ -145,6 +143,8 @@
 </li>
 <li>新增变量先查/扩 <code>varsList</code>，遵循 block 命名法</li>
 <li>保持最小改动范围，匹配现有命名与风格</li>
+<li>写入源文件保持合法 UTF-8；乱码按 <code>techme-encoding-utf8</code> 从 git 历史恢复</li>
+<li>读 html/pdf/docx 等附件时按 <code>techme-read-attachments</code> 选 MCP，不在对话中粘贴 <code>data-raw/</code> 原始表</li>
 </ul></div>
 <div class="section level3">
 <h3 id="禁止">禁止<a class="anchor" aria-label="anchor" href="#%E7%A6%81%E6%AD%A2"></a></h3>
@@ -152,6 +152,7 @@
 </li>
 <li>在对话中粘贴 <code>data-raw/</code> 原始数据内容</li>
 <li>未经请求做全仓库重构</li>
+<li>对已损坏的 UTF-8 文件执行「打开并保存」或 <code>errors="replace"</code> 后写回</li>
 </ul></div>
 </div>
 <div class="section level2">

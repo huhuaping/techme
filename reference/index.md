@@ -93,9 +93,13 @@ MOA（农业农村部）, MOST（科技部）, MOE（教育部） et. al.
   County
 - [`PubGeneticResource`](https://huhuaping.github.io/techme/reference/PubGeneticResource.md)
   : Details of Approved List of National Genetic Resource Base
+- [`PubGeneticResourceCrop`](https://huhuaping.github.io/techme/reference/PubGeneticResourceCrop.md)
+  : Details of National Crop Germplasm Resource Banks and Nurseries
 - [`PubMachineCounty`](https://huhuaping.github.io/techme/reference/PubMachineCounty.md)
   : Details of Approved List of Agricultural Machinery Demonstration
   County
+- [`PubMachineCountyCase`](https://huhuaping.github.io/techme/reference/PubMachineCountyCase.md)
+  : Typical Cases of Full Mechanization for Specialty Economic Crops
 - [`PubOpenShare`](https://huhuaping.github.io/techme/reference/PubOpenShare.md)
   : Details of Evaluation Results for Major Scientific Infrastructure
   and Large-scale Scientific Instruments Sharing
@@ -104,6 +108,10 @@ MOA（农业农村部）, MOST（科技部）, MOE（教育部） et. al.
   Demonstration Base
 - [`PubSeedFirm`](https://huhuaping.github.io/techme/reference/PubSeedFirm.md)
   : National Integrated Seed Production and Marketing Firms in China
+- [`PubXmjBreeding`](https://huhuaping.github.io/techme/reference/PubXmjBreeding.md)
+  : National Core Livestock Breeding Farms (国家畜禽核心育种场)
+- [`PubXmjStandard`](https://huhuaping.github.io/techme/reference/PubXmjStandard.md)
+  : Livestock Standardized Demonstration Farms (畜禽养殖标准化示范场)
 
 ## Data Subset for the special chapter
 
@@ -112,8 +120,12 @@ al.
 
 - [`PubBreedingXmj`](https://huhuaping.github.io/techme/reference/PubBreedingXmj.md)
   : Details of Officer Livestock Breeding List from MOA (Xmj)
+- [`PubXmjBreeding`](https://huhuaping.github.io/techme/reference/PubXmjBreeding.md)
+  : National Core Livestock Breeding Farms (国家畜禽核心育种场)
 - [`PubStandardXmj`](https://huhuaping.github.io/techme/reference/PubStandardXmj.md)
   : Details of Officer Livestock Standard List from MOA (Xmj)
+- [`PubXmjStandard`](https://huhuaping.github.io/techme/reference/PubXmjStandard.md)
+  : Livestock Standardized Demonstration Farms (畜禽养殖标准化示范场)
 - [`LivestockBreeding`](https://huhuaping.github.io/techme/reference/LivestockBreeding.md)
   : Date Set of Livestock Breeding
 - [`MachineService`](https://huhuaping.github.io/techme/reference/MachineService.md)

@@ -16,3 +16,8 @@ Useful links:
 
 **Maintainer**: Kevin Hu <huhuaping01@hotmail.com>
 ([ORCID](https://orcid.org/YOUR-ORCID-ID))
+
+Authors:
+
+- Kevin Hu <huhuaping01@hotmail.com>
+  ([ORCID](https://orcid.org/YOUR-ORCID-ID))

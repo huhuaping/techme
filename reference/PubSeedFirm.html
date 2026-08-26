@@ -15,7 +15,7 @@ integrated seed firms across provinces and years.'></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">techme</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.2.9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,14 +24,7 @@ integrated seed firms across provinces and years.'></head><body>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/guide-sources-public-site.html">网站数据来源</a></li>
-    <li><a class="dropdown-item" href="../articles/guide-sources-yearbook.html">年鉴数据来源</a></li>
-    <li><a class="dropdown-item" href="../articles/my-vignette.html">02-Techme数据集</a></li>
-    <li><a class="dropdown-item" href="../articles/pkg-design.html">01-Techme包设计</a></li>
-    <li><a class="dropdown-item" href="../articles/queryTianyancha.html">机构信息库</a></li>
-  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/huhuaping/techme/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -127,29 +120,29 @@ in China, as of the latest update.</p></li>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># View the structure of the dataset</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">PubSeedFirm</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tibble [451 × 13] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ date_upto                   : chr [1:451] "2024-12-31" "2024-12-31" "2024-12-31" "2024-12-31" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ province                    : chr [1:451] "北京" "北京" "北京" "北京" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ label                       : chr [1:451] "北京市" "北京市" "北京市" "北京市" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ id                          : chr [1:451] "110000" "110000" "110000" "110000" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ type                        : chr [1:451] "province" "province" "province" "province" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ LicenceNo                   : chr [1:451] "A(京)农种许字(2020)第0001号" "A(京)农种许字(2022)第0001号" "A(京)农种许字(2017)第0009号" "A(京)农种许字(2017)第0004号" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ApplyCompanyName            : chr [1:451] "北京大京九农业开发有限公司" "北京丰度高科种业有限公司" "北京华农伟业种子科技股份有限公司" "北京金色农华种业科技股份有限公司" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ PrinterProductionManageCrops: chr [1:451] "玉米" "玉米" "玉米" "稻" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ IssuingAuthorityCaption     : chr [1:451] "北京市" "北京市" "北京市" "北京市" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ InitialPublishDate          : Date[1:451], format: "2020-01-17" "2022-10-19" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ PublishDate                 : Date[1:451], format: "2020-01-17" "2024-07-29" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ExpireDate                  : Date[1:451], format: "2025-01-16" "2027-10-18" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ licence_type                : chr [1:451] "A" "A" "A" "A" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tibble [629 × 13] (S3: tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ date_upto                   : chr [1:629] "2025-12-31" "2025-12-31" "2025-12-31" "2025-12-31" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ province                    : chr [1:629] "北京" "北京" "北京" "北京" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ label                       : chr [1:629] "北京市" "北京市" "北京市" "北京市" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ id                          : chr [1:629] "110000" "110000" "110000" "110000" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ type                        : chr [1:629] "province" "province" "province" "province" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ LicenceNo                   : chr [1:629] "A(京)农种许字(2026)第0001号" "A(京)农种许字(2020)第0001号" "A(京)农种许字(2022)第0001号" "A(京)农种许字(2017)第0009号" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ApplyCompanyName            : chr [1:629] "北京创种科技有限公司" "北京大京九农业开发有限公司" "北京丰度高科种业有限公司" "北京华农伟业种子科技股份有限公司" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ PrinterProductionManageCrops: chr [1:629] "玉米" "玉米" "玉米" "玉米" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ IssuingAuthorityCaption     : chr [1:629] "北京市" "北京市" "北京市" "北京市" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ InitialPublishDate          : Date[1:629], format: "2026-05-28" "2024-11-13" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ PublishDate                 : Date[1:629], format: "2026-06-08" "2024-11-13" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ExpireDate                  : Date[1:629], format: "2031-05-27" "2029-11-12" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ licence_type                : chr [1:629] "A" "A" "A" "A" ...</span>
 <span class="r-in"><span><span class="co"># Count the number of firms by province</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">PubSeedFirm</span><span class="op">$</span><span class="va">province</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   上海   云南 内蒙古   北京   吉林   四川   天津   安徽   山东   山西   广东 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      9      2     16     31     24     23      1     33     47     20     12 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     12      3     22     42     33     31      2     45     65     28     16 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   广西   新疆   江苏   江西   河北   河南   浙江   海南   湖北   湖南   甘肃 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      9     11     20     24     29     30      4      6     16     18     22 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     12     16     26     32     39     41      7      8     22     24     35 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   福建   贵州   辽宁   重庆   陕西 黑龙江 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      9      1      8      6      7     13 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     16      2     12      8     10     20 </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

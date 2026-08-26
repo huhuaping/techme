@@ -39,6 +39,7 @@ devtools::load_all()
 |----|----|
 | 年鉴年度更新 | [.cursor/skills/techme-yearbook-update/SKILL.md](https://huhuaping.github.io/techme/.cursor/skills/techme-yearbook-update/SKILL.md) |
 | 公开网站数据更新 | [.cursor/skills/techme-public-site-update/SKILL.md](https://huhuaping.github.io/techme/.cursor/skills/techme-public-site-update/SKILL.md) |
+| 附件文本抽取（html/pdf/docx） | [.cursor/skills/techme-read-attachments/SKILL.md](https://huhuaping.github.io/techme/.cursor/skills/techme-read-attachments/SKILL.md) |
 | 新增数据集 | [.cursor/skills/techme-new-dataset/SKILL.md](https://huhuaping.github.io/techme/.cursor/skills/techme-new-dataset/SKILL.md) |
 | 包验证与测试 | [.cursor/skills/techme-r-package-check/SKILL.md](https://huhuaping.github.io/techme/.cursor/skills/techme-r-package-check/SKILL.md) |
 | 文档维护 | [.cursor/skills/techme-pkgdown-docs/SKILL.md](https://huhuaping.github.io/techme/.cursor/skills/techme-pkgdown-docs/SKILL.md) |

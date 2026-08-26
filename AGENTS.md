@@ -18,7 +18,7 @@
 | 目录         | 职责                                                |
 |--------------|-----------------------------------------------------|
 | `R/`         | 包源码：工作流函数（`wfl.*`）、数据集桩、工具函数   |
-| `data/`      | 52 个标准 `.rda` 数据集（`LazyData: true`）         |
+| `data/`      | 53 个标准 `.rda` 数据集（`LazyData: true`）         |
 | `data-raw/`  | 原始数据 + 清洗脚本（`.Rbuildignore` 排除，不打包） |
 | `man/`       | roxygen 自动生成的 `.Rd`（禁止手改）                |
 | `vignettes/` | 设计文档与数据集说明                                |
@@ -33,7 +33,7 @@
   成品：`data-raw/data-tidy/xxx-web/{html,xlsx}/`
 - 年度更新入口：`data-raw/update-yearbook/`、`data-raw/update-public/`
 
-## 六大工作流（Skills）
+## 工作流 Skills
 
 执行任务前，读取对应 Skill：
 
@@ -41,10 +41,12 @@
 |----|----|
 | 年鉴数据年度更新 | [.cursor/skills/techme-yearbook-update/SKILL.md](https://huhuaping.github.io/techme/.cursor/skills/techme-yearbook-update/SKILL.md) |
 | 公开网站数据抓取与更新 | [.cursor/skills/techme-public-site-update/SKILL.md](https://huhuaping.github.io/techme/.cursor/skills/techme-public-site-update/SKILL.md) |
+| 附件文本抽取（html/pdf/docx） | [.cursor/skills/techme-read-attachments/SKILL.md](https://huhuaping.github.io/techme/.cursor/skills/techme-read-attachments/SKILL.md) |
 | 新增/调整数据集与 varsList | [.cursor/skills/techme-new-dataset/SKILL.md](https://huhuaping.github.io/techme/.cursor/skills/techme-new-dataset/SKILL.md) |
 | R 包工程化（check、test） | [.cursor/skills/techme-r-package-check/SKILL.md](https://huhuaping.github.io/techme/.cursor/skills/techme-r-package-check/SKILL.md) |
 | 文档与 pkgdown 维护 | [.cursor/skills/techme-pkgdown-docs/SKILL.md](https://huhuaping.github.io/techme/.cursor/skills/techme-pkgdown-docs/SKILL.md) |
 | 与 tech-report 联动 | [.cursor/skills/techme-report-bridge/SKILL.md](https://huhuaping.github.io/techme/.cursor/skills/techme-report-bridge/SKILL.md) |
+| UTF-8/中文乱码修复 | [.cursor/skills/techme-encoding-utf8/SKILL.md](https://huhuaping.github.io/techme/.cursor/skills/techme-encoding-utf8/SKILL.md) |
 
 ## 常用 R 命令
 
@@ -82,6 +84,9 @@ devtools::install_github("huhuaping/techme")
   不可无人值守运行。
 - 路径使用正斜杠或
   [`here::here()`](https://here.r-lib.org/reference/here.html)，避免硬编码反斜杠。
+- 源文件 **UTF-8 无 BOM**。对话改文件遵守 `encoding-utf8` 规则；写入后由
+  `.cursor/hooks.json` 的 `afterFileEdit` 抽查。禁止按 GBK
+  读写后再另存，禁止把非法字节写成 `?` / U+FFFD。
 
 ## 与 tech-report 联动
 
@@ -103,12 +108,17 @@ devtools::install_github("huhuaping/techme")
 - 更新数据集走 `data-raw` 流水线 → `use_data()`，不直接编辑 `.rda`
 - 新增变量先查/扩 `varsList`，遵循 block 命名法
 - 保持最小改动范围，匹配现有命名与风格
+- 写入源文件保持合法 UTF-8；乱码按 `techme-encoding-utf8` 从 git
+  历史恢复
+- 读 html/pdf/docx 等附件时按 `techme-read-attachments` 选
+  MCP，不在对话中粘贴 `data-raw/` 原始表
 
 ### 禁止
 
 - 手改 `NAMESPACE`、`man/*.Rd`、`data/*.rda`
 - 在对话中粘贴 `data-raw/` 原始数据内容
 - 未经请求做全仓库重构
+- 对已损坏的 UTF-8 文件执行「打开并保存」或 `errors="replace"` 后写回
 
 ## 推荐 Agent 指令模板
 

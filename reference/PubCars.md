@@ -64,11 +64,20 @@ A data frame:
 
 - researcher_inst:
 
-  character, institution of the esearcher
+  character, institution of the researcher
 
-- province:
+- province_industry:
 
-  matched province of the institution
+  character, matched province of the industry chairman institution
+
+- province_func:
+
+  character, matched province of the functional-area director
+  institution
+
+- province_researcher:
+
+  character, matched province of the researcher institution
 
 ## Source
 

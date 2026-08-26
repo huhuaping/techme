@@ -1,8 +1,8 @@
 # Details of Officer Livestock Standard List from MOA (Xmj)
 
-A data set containing detail information of Officer Livestock Standard
-List from the public site MOA (Xmj) <http://www.moa.gov.cn>, with wide
-data format.
+**Deprecated.** Use
+[PubXmjStandard](https://huhuaping.github.io/techme/reference/PubXmjStandard.md)
+instead. This 2010–2020 snapshot will be removed in a future release.
 
 ## Usage
 
@@ -37,3 +37,14 @@ A data frame:
 ## Source
 
 <https://www.huhuaping.com/>
+
+## Details
+
+A data set containing detail information of Officer Livestock Standard
+List from the public site MOA (Xmj) <http://www.moa.gov.cn>, with wide
+data format.
+
+Superseded by
+[PubXmjStandard](https://huhuaping.github.io/techme/reference/PubXmjStandard.md),
+which covers 2010 onward (no 2012 gazette) and keeps `area_name` as
+printed. Do not use this object in new code.

@@ -13,7 +13,7 @@ Science and Technology, covering all provinces and regions in China."></head><bo
 
     <a class="navbar-brand me-2" href="../index.html">techme</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.2.9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,14 +22,7 @@ Science and Technology, covering all provinces and regions in China."></head><bo
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/guide-sources-public-site.html">网站数据来源</a></li>
-    <li><a class="dropdown-item" href="../articles/guide-sources-yearbook.html">年鉴数据来源</a></li>
-    <li><a class="dropdown-item" href="../articles/my-vignette.html">02-Techme数据集</a></li>
-    <li><a class="dropdown-item" href="../articles/pkg-design.html">01-Techme包设计</a></li>
-    <li><a class="dropdown-item" href="../articles/queryTianyancha.html">机构信息库</a></li>
-  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/huhuaping/techme/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -101,11 +94,11 @@ patents.</p></li>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># View the structure of the dataset</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">RDPatentAccept</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 'data.frame':	1791 obs. of  6 variables:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 'data.frame':	1919 obs. of  6 variables:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ province  : chr  "全国" "全国" "全国" "全国" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ year      : chr  "2023" "2023" "2023" "2023" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ year      : chr  "2024" "2024" "2024" "2024" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ chn_block4: chr  "合计" "发明" "实用新型" "外观设计" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ value     : num  5383449 1522292 3057150 804007 318984 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ value     : num  5653429 1672001 3178314 803114 321445 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ units     : chr  "件" "件" "件" "件" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ variables : chr  "v4_cg_zlsq_hj" "v4_cg_zlsq_fm" "v4_cg_zlsq_syxx" "v4_cg_zlsq_wgsj" ...</span>
 <span class="r-in"><span><span class="co"># Filter data for invention patents in 2023</span></span></span>

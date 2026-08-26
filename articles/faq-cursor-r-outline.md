@@ -1,0 +1,136 @@
+# FAQ：Cursor 里 R 脚本 Outline 为空
+
+> **工程 FAQ 系列** · `faq-cursor-r-outline` · 更新于 2026-08-15。
+> 本系列放在 `vignettes/articles/faq-*.Rmd`，由 pkgdown 编入「工程
+> FAQ」。 操作约定以仓库根目录 `.Rprofile`
+> 为准；本文说明**现象与原理**。
+
+## 一句话
+
+Cursor 左侧 Outline 对 `.R` 为空，不是因为 `files.associations` 没设成
+`r`，而是 **R 包 `languageserver` 的 callr 解析进程在激活 renv
+时超时退出**，没有 Document Symbol Provider。仓库已在 `.Rprofile` 里对
+vscode-R / callr 后台会话跳过 renv。
+
+## 症状
+
+同时出现下面几条，基本可以认定是本问题，而不是「文件被当成纯文本」：
+
+- 打开 `data-raw/tech-yearbook/wfl-tech-yearbook.R` 这类脚本时，Outline
+  提示 *The active editor cannot provide outline information*。
+- 右下角语言模式已经是 **R**，语法高亮正常；Air 格式化也可能可用。
+- `Ctrl+Shift+O`（转到文件中的符号）同样没有结果。
+- 输出面板 **R Language Server** 出现
+  `Could not start R session, timed out`，随后 `ECONNRESET` 且 *Server
+  will not be restarted*。
+
+脚本里的 `# Workflow: ... ----` 分段，本来就是 languageserver 会收进
+Outline 的 section。服务器一死，这些标题也不会出现。
+
+## 来源与根因
+
+Outline 不是 TextMate 语法或 `files.associations` 提供的。对 R
+来说，链路是：
+
+    REditorSupport.r 启动
+      -> 运行 R 包 languageserver
+      -> languageserver 用 callr 再拉一个带 user profile 的 R 子进程解析当前文件
+      -> 提供 textDocument/documentSymbol
+      -> Cursor Outline / 转到符号
+
+`*.R` 关联到语言 ID `r` 只保证高亮和
+Air。Air（`Posit.air-vscode`）是格式化语言服务器，**不提供
+documentSymbol**。
+
+本仓库根目录 `.Rprofile` 会 `source("renv/activate.R")`。vscode-R
+启动的主 LSP 进程等得够久，所以能起来；但 languageserver 内部的 callr
+子进程默认只等数秒，而本仓库在 Windows 上激活 renv 常常超过 10
+秒。子进程超时后，languageserver 把这当成致命错误并退出，vscode-R
+**不会自动重启**。
+
+次要因素：`REditorSupport.r` 的激活条件没有 `onLanguage:r`，主要靠
+`workspaceContains:**/*.{R,Rmd,...}`。`data-raw/`
+文件很多时，这个扫描会超时，扩展可能要等你开了 R
+终端才激活。这会让「只打开脚本、Outline 一直空」更容易出现，但只要
+Language Server 日志里已有 `timed out`，主因仍是 callr + renv。
+
+已排除的常见误判：
+
+| 检查项 | 本仓库情况 |
+|----|----|
+| `files.associations` 未把 `*.R` 设为 `r` | 用户设置里已有；Air 能按 `onLanguage:r` 激活 |
+| 未安装 R 扩展 | 需要 `REditorSupport.r` 与 `REditorSupport.r-syntax` |
+| 未安装 `languageserver` | 项目 renv 库与用户库都可以加载 |
+| `r.rpath.windows` 指错 | 指向本机 `R-4.4.3` 的 `R.exe` 即可 |
+
+## 解决办法
+
+### 仓库内已做的
+
+`.Rprofile` 在下列后台会话里**不**激活 renv，交互式 R / `Rscript`
+流水线不受影响：
+
+- vscode-R 后台进程及其子进程（环境变量
+  `VSCR_LSP_PORT`、`VSCR_LIB_PATHS`、`VSCR_LIM`）
+- `callr` 工作进程（`CALLR` / `CALLR_IS_RUNNING`）
+- 手动 `TECHME_USE_RENV=FALSE`（原有开关，仍然有效）
+
+改的是启动策略，不是 `settings.json` 的文件关联。
+
+### 改完后请你做
+
+1.  命令面板执行 **Developer: Reload Window**。
+2.  打开任意年鉴入口 `.R`（例如
+    `data-raw/tech-yearbook/wfl-tech-yearbook.R`）。
+3.  若 Outline 仍空：命令面板执行 **R: Create R terminal**，再看一次
+    Outline。
+4.  输出面板选 **R Language Server**，不应再出现
+    `Could not start R session, timed out`。
+
+预期：Outline 列出 `# ... ----` 分段和 `function()` 定义；`Ctrl+Shift+O`
+能跳转。
+
+### 不要做
+
+- 再叠加一层 `files.associations`：语言模式已经是 `r`。
+- 为了 Outline 卸载 Air：Air 不是元凶，卸了只少格式化。
+- 用 `terminal.integrated.env.windows` 设
+  `TECHME_USE_RENV=FALSE`：那只影响集成终端，进不了 LSP / callr 子进程。
+- 把 `languageserver` 写进 `renv.lock` 来「修复
+  Outline」：缺的不是包，是子进程等不及 renv。
+- 在 FAQ 或对话里粘贴 `data-raw/` 原始表内容。
+
+### 若 Reload 后仍空
+
+1.  输出面板确认扩展已激活：命令面板 **Developer: Show Running
+    Extensions** 里应有 `REditorSupport.r`。
+2.  在项目外的 R
+    会话检查：[`requireNamespace("languageserver", quietly = TRUE)`](https://rdrr.io/r/base/ns-load.html)
+    应为 `TRUE`。
+3.  用户设置保持 `"r.lsp.enabled": true`。`r.useRenvLibPath` 只给主 LSP
+    追加 renv cache，不能代替本次 `.Rprofile` 判断。
+
+## 相关文档
+
+| 文档 | 职责 |
+|----|----|
+| `.Rprofile` | 对 vscode-R / callr 跳过 renv 的实际判断 |
+| `vignettes/articles/faq-r-style.Rmd` | 年鉴入口脚本怎么写、为何依赖 `# ... ----` 分段 |
+| `vignettes/articles/faq-encoding-utf8.Rmd` | 源文件 UTF-8 / 中文乱码 |
+| `vignettes/articles/faq-cursor-slack.Rmd` | Cursor IDE 与 Slack 的关联和互动 |
+| `AGENTS.md` | Windows 上 R 扩展与交互脚本的约束 |
+| `.cursor/skills/techme-pkgdown-docs/SKILL.md` | 工程 FAQ 的写法与收录 |
+
+## 本系列约定
+
+后续同类说明请复制
+`vignettes/articles/_faq-template.Rmd`（下划线前缀，pkgdown
+不收录），另存为 `faq-<topic>.Rmd`，并保持：
+
+1.  YAML 含 `%\VignetteEncoding{UTF-8}` 与 `html_vignette`。
+2.  结构固定为：**一句话 → 症状 → 来源与根因 → 解决办法 → 相关文档**。
+3.  不粘贴 `data-raw/`
+    原始表内容；示例用路径、变量名、日志原文，不用业务数据。
+4.  默认少求值、不依赖 Office / 本地年鉴路径，保证 pkgdown CI 能渲染。
+5.  文件名以 `faq-` 开头；`_pkgdown.yml` 用
+    `starts_with("articles/faq-")` 收入「工程 FAQ」。

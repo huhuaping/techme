@@ -94,7 +94,8 @@ safe_dir_tree(dir_tar)
 #> ├── raw-2021.xlsx
 #> ├── raw-2022.xls
 #> ├── raw-2023.xls
-#> └── raw-2023.xlsx
+#> ├── raw-2023.xlsx
+#> └── raw-2024.xlsx
 ```
 
 #### 清洗后数据文件
@@ -119,7 +120,8 @@ safe_dir_tree(dir_tar)
 #> ├── 2020.xlsx
 #> ├── 2021.xlsx
 #> ├── 2022.xlsx
-#> └── 2023.xlsx
+#> ├── 2023.xlsx
+#> └── 2024.xlsx
 ```
 
 #### 数据集展示
@@ -183,7 +185,9 @@ safe_dir_tree(dir_tar)
 #> ├── raw-2021-2022.xls
 #> ├── raw-2021-2022.xlsx
 #> ├── raw-2022-2023.xls
-#> └── raw-2022-2023.xlsx
+#> ├── raw-2022-2023.xlsx
+#> ├── raw-2023-2024.xls
+#> └── raw-2023-2024.xlsx
 ```
 
 #### 清洗后数据文件
@@ -209,7 +213,8 @@ safe_dir_tree(dir_tar)
 #> ├── 2020.xlsx
 #> ├── 2021.xlsx
 #> ├── 2022.xlsx
-#> └── 2023.xlsx
+#> ├── 2023.xlsx
+#> └── 2024.xlsx
 ```
 
 #### 数据集展示
@@ -272,7 +277,9 @@ safe_dir_tree(dir_tar)
 #> ├── raw-2021-2022.xls
 #> ├── raw-2021-2022.xlsx
 #> ├── raw-2022-2023.xls
-#> └── raw-2022-2023.xlsx
+#> ├── raw-2022-2023.xlsx
+#> ├── raw-2023-2024.xls
+#> └── raw-2023-2024.xlsx
 ```
 
 #### 清洗后数据文件
@@ -298,7 +305,8 @@ safe_dir_tree(dir_tar)
 #> ├── 2020.xlsx
 #> ├── 2021.xlsx
 #> ├── 2022.xlsx
-#> └── 2023.xlsx
+#> ├── 2023.xlsx
+#> └── 2024.xlsx
 ```
 
 #### 数据集展示
@@ -346,7 +354,9 @@ safe_dir_tree(dir_tar)
 #> ├── raw-2020-2021.xlsx
 #> ├── raw-2021-2022.xls
 #> ├── raw-2022-2023.xls
-#> └── raw-2022-2023.xlsx
+#> ├── raw-2022-2023.xlsx
+#> ├── raw-2023-2024.xls
+#> └── raw-2023-2024.xlsx
 ```
 
 #### 清洗后数据文件
@@ -371,7 +381,8 @@ safe_dir_tree(dir_tar)
 #> ├── 2020.xlsx
 #> ├── 2021.xlsx
 #> ├── 2022.xlsx
-#> └── 2023.xlsx
+#> ├── 2023.xlsx
+#> └── 2024.xlsx
 ```
 
 #### 数据集展示
@@ -422,7 +433,9 @@ safe_dir_tree(dir_tar)
 #> ├── raw-2020-2021.xlsx
 #> ├── raw-2021-2022.xls
 #> ├── raw-2022-2023.xls
-#> └── raw-2022-2023.xlsx
+#> ├── raw-2022-2023.xlsx
+#> ├── raw-2023-2024.xls
+#> └── raw-2023-2024.xlsx
 ```
 
 #### 清洗后数据文件
@@ -448,7 +461,8 @@ safe_dir_tree(dir_tar)
 #> ├── 2020.xlsx
 #> ├── 2021.xlsx
 #> ├── 2022.xlsx
-#> └── 2023.xlsx
+#> ├── 2023.xlsx
+#> └── 2024.xlsx
 ```
 
 #### 数据集展示
@@ -526,7 +540,9 @@ safe_dir_tree(dir_tar)
 #> ├── raw-2021.xlsx
 #> ├── raw-2022.xls
 #> ├── raw-2023.xls
-#> └── raw-2023.xlsx
+#> ├── raw-2023.xlsx
+#> ├── raw-2024.xls
+#> └── raw-2024.xlsx
 ```
 
 #### 清洗后数据文件
@@ -552,7 +568,8 @@ safe_dir_tree(dir_tar)
 #> ├── 2020.xlsx
 #> ├── 2021.xlsx
 #> ├── 2022.xlsx
-#> └── 2023.xlsx
+#> ├── 2023.xlsx
+#> └── 2024.xlsx
 ```
 
 #### 数据集展示
@@ -701,7 +718,9 @@ safe_dir_tree(dir_tar)
 #> ├── raw-2022.xls
 #> ├── raw-2022.xlsx
 #> ├── raw-2023.xls
-#> └── raw-2023.xlsx
+#> ├── raw-2023.xlsx
+#> ├── raw-2024.xls
+#> └── raw-2024.xlsx
 ```
 
 #### 清洗后数据文件
@@ -726,7 +745,8 @@ safe_dir_tree(dir_tar)
 #> ├── 2020.xlsx
 #> ├── 2021.xlsx
 #> ├── 2022.xlsx
-#> └── 2023.xlsx
+#> ├── 2023.xlsx
+#> └── 2024.xlsx
 ```
 
 #### 数据集展示
@@ -789,7 +809,9 @@ safe_dir_tree(dir_tar)
 #> ├── raw-2022.xls
 #> ├── raw-2022.xlsx
 #> ├── raw-2023.xls
-#> └── raw-2023.xlsx
+#> ├── raw-2023.xlsx
+#> ├── raw-2024.xls
+#> └── raw-2024.xlsx
 ```
 
 #### 清洗后数据文件
@@ -814,7 +836,8 @@ safe_dir_tree(dir_tar)
 #> ├── 2020.xlsx
 #> ├── 2021.xlsx
 #> ├── 2022.xlsx
-#> └── 2023.xlsx
+#> ├── 2023.xlsx
+#> └── 2024.xlsx
 ```
 
 #### 数据集展示
@@ -877,7 +900,9 @@ safe_dir_tree(dir_tar)
 #> ├── raw-2022.xls
 #> ├── raw-2022.xlsx
 #> ├── raw-2023.xls
-#> └── raw-2023.xlsx
+#> ├── raw-2023.xlsx
+#> ├── raw-2024.xls
+#> └── raw-2024.xlsx
 ```
 
 #### 清洗后数据文件
@@ -902,7 +927,8 @@ safe_dir_tree(dir_tar)
 #> ├── 2020.xlsx
 #> ├── 2021.xlsx
 #> ├── 2022.xlsx
-#> └── 2023.xlsx
+#> ├── 2023.xlsx
+#> └── 2024.xlsx
 ```
 
 #### 数据集展示
@@ -965,7 +991,9 @@ safe_dir_tree(dir_tar)
 #> ├── raw-2022.xls
 #> ├── raw-2022.xlsx
 #> ├── raw-2023.xls
-#> └── raw-2023.xlsx
+#> ├── raw-2023.xlsx
+#> ├── raw-2024.xls
+#> └── raw-2024.xlsx
 ```
 
 #### 清洗后数据文件
@@ -990,7 +1018,8 @@ safe_dir_tree(dir_tar)
 #> ├── 2020.xlsx
 #> ├── 2021.xlsx
 #> ├── 2022.xlsx
-#> └── 2023.xlsx
+#> ├── 2023.xlsx
+#> └── 2024.xlsx
 ```
 
 #### 数据集展示
@@ -1051,7 +1080,9 @@ safe_dir_tree(dir_tar)
 #> ├── raw-2021.xls
 #> ├── raw-2021.xlsx
 #> ├── raw-2022.xls
-#> └── raw-2022.xlsx
+#> ├── raw-2022.xlsx
+#> ├── raw-2023.xls
+#> └── raw-2023.xlsx
 ```
 
 #### 清洗后数据文件
@@ -1075,7 +1106,8 @@ safe_dir_tree(dir_tar)
 #> ├── 2019.xlsx
 #> ├── 2020.xlsx
 #> ├── 2021.xlsx
-#> └── 2022.xlsx
+#> ├── 2022.xlsx
+#> └── 2023.xlsx
 ```
 
 #### 数据集展示
@@ -1138,7 +1170,9 @@ safe_dir_tree(dir_tar)
 #> ├── raw-2022.xls
 #> ├── raw-2022.xlsx
 #> ├── raw-2023.xls
-#> └── raw-2023.xlsx
+#> ├── raw-2023.xlsx
+#> ├── raw-2024.xls
+#> └── raw-2024.xlsx
 ```
 
 #### 清洗后数据文件
@@ -1162,7 +1196,8 @@ safe_dir_tree(dir_tar)
 #> ├── 2020.xlsx
 #> ├── 2021.xlsx
 #> ├── 2022.xlsx
-#> └── 2023.xlsx
+#> ├── 2023.xlsx
+#> └── 2024.xlsx
 ```
 
 #### 数据集展示
@@ -1220,7 +1255,9 @@ safe_dir_tree(dir_tar)
 #> ├── raw-2022.xls
 #> ├── raw-2022.xlsx
 #> ├── raw-2023.xls
-#> └── raw-2023.xlsx
+#> ├── raw-2023.xlsx
+#> ├── raw-2024.xls
+#> └── raw-2024.xlsx
 ```
 
 #### 清洗后数据文件
@@ -1244,7 +1281,8 @@ safe_dir_tree(dir_tar)
 #> ├── 2020.xlsx
 #> ├── 2021.xlsx
 #> ├── 2022.xlsx
-#> └── 2023.xlsx
+#> ├── 2023.xlsx
+#> └── 2024.xlsx
 ```
 
 #### 数据集展示
@@ -1289,6 +1327,8 @@ safe_dir_tree(dir_tar)
 #> ├── raw-type-amount-2022.xls
 #> ├── raw-type-amount-2023.xls
 #> ├── raw-type-amount-2023.xlsx
+#> ├── raw-type-amount-2024.xls
+#> ├── raw-type-amount-2024.xlsx
 #> ├── raw-type-funds-2019.xls
 #> ├── raw-type-funds-2020-edited.xlsx
 #> ├── raw-type-funds-2020-soshu.xls
@@ -1297,7 +1337,9 @@ safe_dir_tree(dir_tar)
 #> ├── raw-type-funds-2021.xlsx
 #> ├── raw-type-funds-2022.xls
 #> ├── raw-type-funds-2023.xls
-#> └── raw-type-funds-2023.xlsx
+#> ├── raw-type-funds-2023.xlsx
+#> ├── raw-type-funds-2024.xls
+#> └── raw-type-funds-2024.xlsx
 ```
 
 #### 清洗后数据文件
@@ -1324,6 +1366,7 @@ safe_dir_tree(dir_tar)
 #> ├── amount-2021.xlsx
 #> ├── amount-2022.xlsx
 #> ├── amount-2023.xlsx
+#> ├── amount-2024.xlsx
 #> ├── funds-2000.xlsx
 #> ├── funds-2005.xlsx
 #> ├── funds-2010.xlsx
@@ -1338,7 +1381,8 @@ safe_dir_tree(dir_tar)
 #> ├── funds-2020.xlsx
 #> ├── funds-2021.xlsx
 #> ├── funds-2022.xlsx
-#> └── funds-2023.xlsx
+#> ├── funds-2023.xlsx
+#> └── funds-2024.xlsx
 ```
 
 #### 数据集展示
@@ -1383,6 +1427,8 @@ safe_dir_tree(dir_tar)
 #> ├── raw-type-amount-2022.xls
 #> ├── raw-type-amount-2023.xls
 #> ├── raw-type-amount-2023.xlsx
+#> ├── raw-type-amount-2024.xls
+#> ├── raw-type-amount-2024.xlsx
 #> ├── raw-type-funds-2019.xls
 #> ├── raw-type-funds-2020-edited.xlsx
 #> ├── raw-type-funds-2020-soshu.xls
@@ -1391,7 +1437,9 @@ safe_dir_tree(dir_tar)
 #> ├── raw-type-funds-2021.xlsx
 #> ├── raw-type-funds-2022.xls
 #> ├── raw-type-funds-2023.xls
-#> └── raw-type-funds-2023.xlsx
+#> ├── raw-type-funds-2023.xlsx
+#> ├── raw-type-funds-2024.xls
+#> └── raw-type-funds-2024.xlsx
 ```
 
 #### 清洗后数据文件
@@ -1418,6 +1466,7 @@ safe_dir_tree(dir_tar)
 #> ├── amount-2021.xlsx
 #> ├── amount-2022.xlsx
 #> ├── amount-2023.xlsx
+#> ├── amount-2024.xlsx
 #> ├── funds-2000.xlsx
 #> ├── funds-2005.xlsx
 #> ├── funds-2010.xlsx
@@ -1432,7 +1481,8 @@ safe_dir_tree(dir_tar)
 #> ├── funds-2020.xlsx
 #> ├── funds-2021.xlsx
 #> ├── funds-2022.xlsx
-#> └── funds-2023.xlsx
+#> ├── funds-2023.xlsx
+#> └── funds-2024.xlsx
 ```
 
 #### 数据集展示
@@ -1477,12 +1527,12 @@ head(IndustryTrade)
 data("IndustryRD",package = "techme")
 head(IndustryRD)
 #>   province year       chn_block4     value units        variables
-#> 1     全国 2023       研发机构数     25821    个 v4_cy_RDhd_yfjgs
-#> 2     全国 2023 人员折合全时当量   1397796  人年  v4_cy_RDhd_qsdl
-#> 3     全国 2023     经费内部支出  69602196  万元  v4_cy_RDhd_nbzc
-#> 4     全国 2023       开发项目数    281742    项   v4_cy_xcp_kfxm
-#> 5     全国 2023     开发经费支出  90228012  万元   v4_cy_xcp_kfjf
-#> 6     全国 2023         销售收入 858901500  万元   v4_cy_xcp_xssr
+#> 1     全国 2024       研发机构数     29849    个 v4_cy_RDhd_yfjgs
+#> 2     全国 2024 人员折合全时当量   1470006  人年  v4_cy_RDhd_qsdl
+#> 3     全国 2024     经费内部支出  76688617  万元  v4_cy_RDhd_nbzc
+#> 4     全国 2024       开发项目数    307940    项   v4_cy_xcp_kfxm
+#> 5     全国 2024     开发经费支出 101131693  万元   v4_cy_xcp_kfjf
+#> 6     全国 2024         销售收入 933425608  万元   v4_cy_xcp_xssr
 ```
 
 #### 注意事项
@@ -1623,7 +1673,9 @@ safe_dir_tree(dir_tar)
 #> ├── raw-2022.xls
 #> ├── raw-2022.xlsx
 #> ├── raw-2023.xls
-#> └── raw-2023.xlsx
+#> ├── raw-2023.xlsx
+#> ├── raw-2024.xls
+#> └── raw-2024.xlsx
 ```
 
 #### 清洗后数据文件
@@ -1646,7 +1698,8 @@ safe_dir_tree(dir_tar)
 #> ├── 2020.xlsx
 #> ├── 2021.xlsx
 #> ├── 2022.xlsx
-#> └── 2023.xlsx
+#> ├── 2023.xlsx
+#> └── 2024.xlsx
 ```
 
 #### 数据集展示

@@ -1,0 +1,114 @@
+# FAQ：techme 的 R 编程习惯
+
+> **工程 FAQ 系列** · `faq-r-style` · 更新于 2026-08-15。 操作细则以
+> `.cursor/rules/r-style.mdc` 为准；本文说明**为什么这样写、怎样自检**。
+
+## 一句话
+
+年鉴入口和 `R/workflow_funs.R` 已经用了多年。新代码用 **tidyverse +
+原生管道
+`|>`**，步骤写给人看，参数显式传入；不要另起一层封装，也不要整文件只为换管道而改旧的
+`%>%`。
+
+## 症状
+
+下面几条同时出现，通常说明写法和仓库习惯拧着：
+
+- 为三五行清洗新写了 `wfl.xxx()` 或
+  [`purrr::compose()`](https://purrr.tidyverse.org/reference/compose.html)
+  套娃，入口脚本反而看不清在做什么。
+- 函数内部去读未传入的全局对象（例如依赖会话里碰巧有 `file_xlsx`）。
+- 一条管道里混用 `|>` 与 `%>%`，或把整份旧脚本的 `%>%`
+  全部替换却没有任何行为变化。
+- 关键参数（`header.mode`、`cols.drop`、`dir.case`）不写，靠默认值“碰巧正确”。
+- 重要步骤没有人话注释，或反过来给 `i <- i + 1` 写注释。
+
+## 来源与根因
+
+本包不是绿场 Web 项目，而是服务《中国旱区农业技术发展报告》的 **R
+数据包 + ETL**。`data-raw/tech-yearbook/wfl-tech-yearbook.R`
+这类入口是按步骤 `source` / 交互执行的，维护者需要：
+
+1.  对着脚本能核对今年改了哪个设置；
+2.  在 `View(df_out)`、`View(df_tidy)` 处停下来看表；
+3.  和去年同一份脚本对比 diff。
+
+因此“聪明”的深层封装会增加隐式状态：Agent
+或一次性脚本若再包一层，明年的人（以及作者自己）要对着函数跳转才能看懂。原生
+`|>` 在 R 4.1+（本仓库锁定 R
+4.4）可用，新代码用它即可，但旧管道能跑就不必为风格而全库替换。
+
+## 解决办法
+
+### 风格
+
+- tidyverse 优先：`dplyr`、`stringr`、`tidyr`、`purrr`。
+- **新改的行用 `|>`**。未改动的旧管道可保留
+  `%>%`。同一条管道内不要混用。
+- base R
+  只做辅助：[`stop()`](https://rdrr.io/r/base/stop.html)、[`file.exists()`](https://rdrr.io/r/base/files.html)、简单下标、[`as.numeric()`](https://rdrr.io/r/base/numeric.html)。
+
+``` r
+
+# 宽表转长后，只保留分析用列
+df_tidy <- wfl.tidyTable(dt = df_out) |>
+    dplyr::filter(!is.na(vars), stringr::str_trim(vars) != "") |>
+    dplyr::select(province, year, vars, value, units)
+```
+
+### 可读（给人类看）
+
+- 短管道；中间对象沿用现有名字：`tbl_dir`、`df_out`、`df_tidy`。
+- `select()` 写明列名。
+- 重要函数、关键参数、每个工作流步骤上方加**一行人话**：做什么、为何选这个参数。语气对齐邻近年鉴脚本。
+- 不要用注释代替可读的对象名。
+
+``` r
+
+# 这张内部支出表是双行表头，必须用 vars-vars；vars 会留下空变量名
+(mode_sel <- header_mode[4])
+```
+
+### 透明（少隐式状态、少复杂度）
+
+- 路径、表、正则从**参数传入**，不要读未声明的全局量。
+- 不用
+  [`options()`](https://rdrr.io/r/base/options.html)、[`assign()`](https://rdrr.io/r/base/assign.html)、`<<-`
+  传流水线状态；每步写成中间对象，方便
+  [`View()`](https://rdrr.io/r/utils/View.html)。
+- 能在入口里写清的三五行，不要再包成新 `wfl.*`。先复用
+  `R/workflow_funs.R`。
+- 多层嵌套拆成多个短步骤，而不是一个谁也读不懂的超级函数。
+- 关键参数写全，少靠默认值。
+
+### 连续性
+
+- 改年鉴入口时只动顶部设置和当前步骤，后段 `matchVars` / `useData`
+  保持不动。
+- 新逻辑对齐 `wfl-rural-yearbook.R`、`wfl_unpivot.R` 的检查点。
+- 改了 `R/` 导出函数后运行
+  [`devtools::document()`](https://devtools.r-lib.org/reference/document.html)。
+
+### 避免
+
+- 为一次性清洗写深层 helper。
+- 用 [`suppressWarnings()`](https://rdrr.io/r/base/warning.html)
+  掩盖类型转换问题；先处理空值/脚注，再
+  [`as.numeric()`](https://rdrr.io/r/base/numeric.html)。
+
+## 相关文档
+
+| 文档 | 职责 |
+|----|----|
+| `.cursor/rules/r-style.mdc` | 每次对话生效的写法约定 |
+| `.cursor/rules/r-package.mdc` | `R/` 的 roxygen、导入、命名 |
+| `vignettes/articles/pkg-design.Rmd` | 数据包设计理念 |
+| `vignettes/articles/faq-encoding-utf8.Rmd` | 源文件 UTF-8 / 中文乱码 |
+| `vignettes/articles/faq-cursor-r-outline.Rmd` | Cursor 里 R 脚本 Outline 为空 |
+| `vignettes/articles/faq-cursor-slack.Rmd` | Cursor IDE 与 Slack 的关联和互动 |
+
+## 本系列约定
+
+后续同类说明请复制 `vignettes/articles/_faq-template.Rmd` 为
+`faq-<topic>.Rmd`。`_pkgdown.yml` 用 `starts_with("articles/faq-")`
+收入「工程 FAQ」。
