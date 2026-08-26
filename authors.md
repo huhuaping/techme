@@ -7,7 +7,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/huhuaping/techme/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/huhuaping/techme/blob/v1.0.0/DESCRIPTION)
 
 Hu K (2026). *techme: Generate Research Report with Complex Data
 Sources*. R package version 1.0.0,
