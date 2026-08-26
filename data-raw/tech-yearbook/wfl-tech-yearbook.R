@@ -20,8 +20,8 @@ pattern_sel <- choose.filePattern(
 ##  run the function to find target directory and files ----
 find_result <- wfl.findFiles(
     dt = tbl_dir, # the directory table
-    dir.case = "RD_output", # the case name of the target directory
-    i.final = 6, # the index of the final subdirectory
+    dir.case = "RD_over", # the case name of the target directory
+    i.final = 1, # the index of the final subdirectory
     pattern = pattern_sel # the regex pattern for table identifier
 )
 
@@ -64,7 +64,7 @@ header_mode <- c(
     "year", "vars", "vars-year", "vars-vars",
     "vars-h3", "vars-h4", "vars-h5"
 )
-(mode_sel <- header_mode[2]) # "vars-vars"; "vars" leaves most vars empty on this table
+(mode_sel <- header_mode[4]) # "vars-vars"; "vars" leaves most vars empty on this table
 
 ## setting 3： specify the regex pattern for table identifier
 # pattern_table <- "^地.*区" # not to use "续表" !
