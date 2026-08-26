@@ -16,3 +16,9 @@
 ^vignettes/\.quarto$
 ^vignettes/\.quarto/.*$
 ^scripts$
+^\.quarto$
+^\.quarto/.*$
+^\.cursor$
+^\.vscode$
+^\.editorconfig$
+^\.lintr$
