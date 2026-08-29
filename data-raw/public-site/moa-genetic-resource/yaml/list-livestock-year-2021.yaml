@@ -1,0 +1,1267 @@
+# 国家畜禽遗传资源保护单位年度公示中间层（第一批）
+# 字段与展开方式见同目录 _schema.yaml。
+# 对照农业农村部公告第453号公报网页表，并与 html/list-livestock-year-2021.pdf 扫描件核对。
+
+year: 2021
+title: 中华人民共和国农业农村部公告第453号
+doc_no: 农业农村部公告第453号
+effective_date: '2021-08-09'
+pub_date: '2021-12-31'
+url: http://www.moa.gov.cn/nybgb/2021/202112/202112/t20211231_6386155.htm
+url_alt: https://www.163.com/dy/article/GU5EB4EV05149E7M.html
+source: 农业农村部
+source_files:
+  html: html/list-livestock-year-2021.html
+  pdf: html/list-livestock-year-2021.pdf
+counts:
+  基因库: 8
+  保护区: 24
+  保种场: 173
+  变更: 0
+  合计: 205
+annexes:
+- annex: 1
+  mark: 认定
+  type: 畜禽基因库
+  title: 国家畜禽遗传资源基因库名单（第一批）
+  items:
+    - index: 1
+      batch: 01
+      code: A1101
+      name: 国家家畜基因库
+      institution: 全国畜牧总站
+      province: 北京
+    - index: 2
+      batch: 01
+      code: A1108
+      name: 国家蜜蜂基因库（北京）
+      institution: 中国农业科学院蜜蜂研究所
+      province: 北京
+    - index: 3
+      batch: 01
+      code: A2202
+      name: 国家蜜蜂基因库（吉林）
+      institution: 吉林省养蜂科学研究所
+      province: 吉林
+    - index: 4
+      batch: 01
+      code: A3203
+      name: 国家地方鸡种基因库（江苏）
+      institution: 江苏省家禽科学研究所
+      province: 江苏
+    - index: 5
+      batch: 01
+      code: A3204
+      name: 国家水禽基因库（江苏）
+      institution: 江苏农牧科技职业学院
+      province: 江苏
+    - index: 6
+      batch: 01
+      code: A3305
+      name: 国家地方鸡种基因库（浙江）
+      institution: 浙江光大农业科技发展有限公司
+      province: 浙江
+    - index: 7
+      batch: 01
+      code: A3506
+      name: 国家水禽基因库（福建）
+      institution: 石狮市种业发展中心
+      province: 福建
+    - index: 8
+      batch: 01
+      code: A4507
+      name: 国家地方鸡种基因库（广西）
+      institution: 广西金陵家禽育种有限公司
+      province: 广西
+- annex: 2
+  mark: 认定
+  type: 畜禽保护区
+  title: 国家畜禽遗传资源保护区名单（第一批）
+  items:
+    - index: 1
+      batch: 01
+      code: B1411001
+      name: 广灵驴国家保护区
+      institution: 广灵县农业农村局
+      province: 山西
+    - index: 2
+      batch: 01
+      code: B1510801
+      name: 内蒙古绒山羊（阿拉善型）国家保护区
+      institution: 阿拉善左旗家畜改良工作站
+      province: 内蒙古
+    - index: 3
+      batch: 01
+      code: B1510901
+      name: 蒙古马国家保护区
+      institution: 锡林郭勒盟畜牧工作站
+      province: 内蒙古
+    - index: 4
+      batch: 01
+      code: B1511101
+      name: 阿拉善双峰驼国家保护区
+      institution: 阿拉善左旗家畜改良工作站
+      province: 内蒙古
+    - index: 5
+      batch: 01
+      code: B2230101
+      name: 中蜂（长白山中蜂）国家保护区
+      institution: 吉林省蜜蜂遗传资源基因保护中心
+      province: 吉林
+    - index: 6
+      batch: 01
+      code: B2330201
+      name: 东北黑蜂国家保护区
+      institution: 黑龙江饶河东北黑蜂国家自然保护区管理局
+      province: 黑龙江
+    - index: 7
+      batch: 01
+      code: B3210101
+      name: 二花脸猪国家保护区
+      institution: 常州市舜溪畜牧科技有限公司
+      province: 江苏
+    - index: 8
+      batch: 01
+      code: B3210701
+      name: 湖羊国家保护区
+      institution: 苏州市吴中区东山动物防疫站
+      province: 江苏
+    - index: 9
+      batch: 01
+      code: B3310701
+      name: 湖羊国家保护区
+      institution: 湖州菰城湖羊合作社联合社
+      province: 浙江
+    - index: 10
+      batch: 01
+      code: B3510901
+      name: 晋江马国家保护区
+      institution: 晋江市畜牧业兽医站
+      province: 福建
+    - index: 11
+      batch: 01
+      code: B3730101
+      name: 中蜂（北方型）国家保护区
+      institution: 临沂市畜牧技术推广站（临沂市蜂业发展技术中心）
+      province: 山东
+    - index: 12
+      batch: 01
+      code: B4230101
+      name: 中蜂（华中中蜂）国家保护区
+      institution: 神农架林区农业农村局
+      province: 湖北
+    - index: 13
+      batch: 01
+      code: B4310101
+      name: 宁乡猪国家保护区
+      institution: 宁乡市畜牧水产事务中心
+      province: 湖南
+    - index: 14
+      batch: 01
+      code: B4430101
+      name: 中蜂（华南中蜂）国家保护区
+      institution: 蕉岭县畜牧兽医技术推广站
+      province: 广东
+    - index: 15
+      batch: 01
+      code: B5010101
+      name: 荣昌猪国家保护区
+      institution: 重庆市荣昌区畜牧发展中心
+      province: 重庆
+    - index: 16
+      batch: 01
+      code: B5110101
+      name: 藏猪国家保护区
+      institution: 乡城县农牧农村和科技局
+      province: 四川
+    - index: 17
+      batch: 01
+      code: B5310101
+      name: 藏猪国家保护区
+      institution: 迪庆藏族自治州畜牧兽医科学研究院
+      province: 云南
+    - index: 18
+      batch: 01
+      code: B5410101
+      name: 藏猪国家保护区
+      institution: 工布江达县农业农村局
+      province: 西藏
+    - index: 19
+      batch: 01
+      code: B5410501
+      name: 帕里牦牛国家保护区
+      institution: 亚东帕里牦牛原种场
+      province: 西藏
+    - index: 20
+      batch: 01
+      code: B6210101
+      name: 藏猪（合作猪）国家保护区
+      institution: 甘南藏族自治州畜牧工作站
+      province: 甘肃
+    - index: 21
+      batch: 01
+      code: B6210501
+      name: 天祝白牦牛国家保护区
+      institution: 甘肃省天祝白牦牛育种实验场
+      province: 甘肃
+    - index: 22
+      batch: 01
+      code: B6510701
+      name: 和田羊国家保护区
+      institution: 和田地区畜牧技术推广站
+      province: 新疆
+    - index: 23
+      batch: 01
+      code: B6511001
+      name: 新疆驴国家保护区
+      institution: 和田地区畜牧技术推广站
+      province: 新疆
+    - index: 24
+      batch: 01
+      code: B6530201
+      name: 新疆黑蜂国家保护区
+      institution: 尼勒克县畜牧兽医发展中心
+      province: 新疆
+- annex: 3
+  mark: 认定
+  type: 畜禽保种场
+  title: 国家畜禽遗传资源保种场名单（第一批）
+  items:
+    - index: 1
+      batch: 01
+      code: C1110101
+      name: 国家五指山猪保种场
+      institution: 中国农业科学院北京畜牧兽医研究所
+      province: 北京
+    - index: 2
+      batch: 01
+      code: C1111301
+      name: 国家北京油鸡保种场
+      institution: 中国农业科学院北京畜牧兽医研究所
+      province: 北京
+    - index: 3
+      batch: 01
+      code: C1111401
+      name: 国家北京鸭保种场
+      institution: 中国农业科学院北京畜牧兽医研究所
+      province: 北京
+    - index: 4
+      batch: 01
+      code: C1111402
+      name: 国家北京鸭保种场
+      institution: 北京南口鸭育种科技有限公司
+      province: 北京
+    - index: 5
+      batch: 01
+      code: C1311001
+      name: 国家德州驴保种场
+      institution: 海兴县绿洲生态畜禽养殖有限公司
+      province: 河北
+    - index: 6
+      batch: 01
+      code: C1410101
+      name: 国家马身猪保种场
+      institution: 大同市农业种质资源保护试验中心
+      province: 山西
+    - index: 7
+      batch: 01
+      code: C1410201
+      name: 国家晋南牛保种场
+      institution: 运城市国家级晋南牛遗传资源基因保护中心
+      province: 山西
+    - index: 8
+      batch: 01
+      code: C1410801
+      name: 国家太行山羊保种场
+      institution: 左权县新世纪农业科技有限责任公司
+      province: 山西
+    - index: 9
+      batch: 01
+      code: C1411001
+      name: 国家广灵驴保种场
+      institution: 广灵县畜牧兽医服务中心
+      province: 山西
+    - index: 10
+      batch: 01
+      code: C1411301
+      name: 国家边鸡保种场
+      institution: 山西省农业科学院畜牧兽医研究所
+      province: 山西
+    - index: 11
+      batch: 01
+      code: C1510201
+      name: 国家蒙古牛保种场
+      institution: 阿拉善左旗绿森种牛场
+      province: 内蒙古
+    - index: 12
+      batch: 01
+      code: C1510701
+      name: 国家乌珠穆沁羊保种场
+      institution: 东乌珠穆沁旗东兴畜牧综合开发基地乌珠穆沁羊原种场
+      province: 内蒙古
+    - index: 13
+      batch: 01
+      code: C1510702
+      name: 国家苏尼特羊保种场
+      institution: 苏尼特右旗苏尼特羊良种场
+      province: 内蒙古
+    - index: 14
+      batch: 01
+      code: C1510801
+      name: 国家内蒙古绒山羊（二狼山型）保种场
+      institution: 巴彦淖尔市同和太种畜场
+      province: 内蒙古
+    - index: 15
+      batch: 01
+      code: C1510802
+      name: 国家内蒙古绒山羊（阿尔巴斯型）保种场
+      institution: 内蒙古亿维白绒山羊有限责任公司
+      province: 内蒙古
+    - index: 16
+      batch: 01
+      code: C1510803
+      name: 国家内蒙古绒山羊（阿拉善型）保种场
+      institution: 内蒙古阿拉善白绒山羊种羊场
+      province: 内蒙古
+    - index: 17
+      batch: 01
+      code: C1511101
+      name: 国家阿拉善双峰驼保种场
+      institution: 阿拉善双峰驼种驼场
+      province: 内蒙古
+    - index: 18
+      batch: 01
+      code: C2110101
+      name: 国家民猪（荷包猪）保种场
+      institution: 凌源禾丰牧业有限责任公司
+      province: 辽宁
+    - index: 19
+      batch: 01
+      code: C2110201
+      name: 国家复州牛保种场
+      institution: 瓦房店市种牛场
+      province: 辽宁
+    - index: 20
+      batch: 01
+      code: C2110801
+      name: 国家辽宁绒山羊保种场
+      institution: 辽宁省辽宁绒山羊原种场有限公司
+      province: 辽宁
+    - index: 21
+      batch: 01
+      code: C2111301
+      name: 国家大骨鸡保种场
+      institution: 庄河市大骨鸡繁育中心
+      province: 辽宁
+    - index: 22
+      batch: 01
+      code: C2111302
+      name: 国家大骨鸡保种场
+      institution: 辽宁庄河大骨鸡原种场有限公司
+      province: 辽宁
+    - index: 23
+      batch: 01
+      code: C2111501
+      name: 国家豁眼鹅保种场
+      institution: 辽宁省辽宁绒山羊原种场有限公司
+      province: 辽宁
+    - index: 24
+      batch: 01
+      code: C2130101
+      name: 国家中蜂保种场
+      institution: 辽宁春兴畜牧兽医服务中心
+      province: 辽宁
+    - index: 25
+      batch: 01
+      code: C2210201
+      name: 国家延边牛保种场
+      institution: 延边东盛黄牛资源保种有限公司
+      province: 吉林
+    - index: 26
+      batch: 01
+      code: C2220101
+      name: 国家吉林梅花鹿保种场
+      institution: 东丰县文福种鹿场
+      province: 吉林
+    - index: 27
+      batch: 01
+      code: C2310101
+      name: 国家民猪保种场
+      institution: 兰西县种猪场有限公司
+      province: 黑龙江
+    - index: 28
+      batch: 01
+      code: C2310901
+      name: 国家鄂伦春马保种场
+      institution: 黑河市新生刺尔滨种马场有限公司
+      province: 黑龙江
+    - index: 29
+      batch: 01
+      code: C2311301
+      name: 国家林甸鸡保种场
+      institution: 黑龙江省林甸鸡原种场有限公司
+      province: 黑龙江
+    - index: 30
+      batch: 01
+      code: C2330201
+      name: 国家东北黑蜂保种场
+      institution: 饶河东北黑蜂产业（集团）有限公司
+      province: 黑龙江
+    - index: 31
+      batch: 01
+      code: C3110101
+      name: 国家梅山猪保种场
+      institution: 上海市嘉定区动物疫病预防控制中心
+      province: 上海
+    - index: 32
+      batch: 01
+      code: C3110102
+      name: 国家浦东白猪保种场
+      institution: 上海浦汇良种繁育科技有限公司
+      province: 上海
+    - index: 33
+      batch: 01
+      code: C3110103
+      name: 国家沙乌头猪保种场
+      institution: 上海市崇明区种畜场
+      province: 上海
+    - index: 34
+      batch: 01
+      code: C3111301
+      name: 国家浦东鸡保种场
+      institution: 上海浦汇浦东鸡繁育有限公司
+      province: 上海
+    - index: 35
+      batch: 01
+      code: C3210101
+      name: 国家梅山猪保种场
+      institution: 江苏农林职业技术学院
+      province: 江苏
+    - index: 36
+      batch: 01
+      code: C3210102
+      name: 国家二花脸猪保种场
+      institution: 常熟市牧工商有限公司
+      province: 江苏
+    - index: 37
+      batch: 01
+      code: C3210103
+      name: 国家二花脸猪、梅山猪保种场
+      institution: 苏州苏太企业有限公司
+      province: 江苏
+    - index: 38
+      batch: 01
+      code: C3210104
+      name: 国家姜曲海猪保种场
+      institution: 江苏姜曲海种猪场
+      province: 江苏
+    - index: 39
+      batch: 01
+      code: C3210105
+      name: 国家淮猪保种场
+      institution: 江苏东海老淮猪产业发展有限公司
+      province: 江苏
+    - index: 40
+      batch: 01
+      code: C3210106
+      name: 国家梅山猪保种场
+      institution: 太仓市种猪场
+      province: 江苏
+    - index: 41
+      batch: 01
+      code: C3210107
+      name: 国家米猪保种场
+      institution: 常州市金坛米猪原种场
+      province: 江苏
+    - index: 42
+      batch: 01
+      code: C3210108
+      name: 国家沙乌头猪保种场
+      institution: 江苏兴旺农牧科技发展有限公司
+      province: 江苏
+    - index: 43
+      batch: 01
+      code: C3210109
+      name: 国家梅山猪保种场
+      institution: 昆山市梅山猪保种有限公司
+      province: 江苏
+    - index: 44
+      batch: 01
+      code: C3210401
+      name: 国家海子水牛保种场
+      institution: 射阳县种牛场
+      province: 江苏
+    - index: 45
+      batch: 01
+      code: C3210402
+      name: 国家海子水牛保种场
+      institution: 东台市种畜场
+      province: 江苏
+    - index: 46
+      batch: 01
+      code: C3210701
+      name: 国家湖羊保种场
+      institution: 苏州太湖东山湖羊产业发展有限公司
+      province: 江苏
+    - index: 47
+      batch: 01
+      code: C3210801
+      name: 国家长江三角洲白山羊（笔料毛型）保种场
+      institution: 南通市海门区长江三角洲白山羊保种繁殖研究所
+      province: 江苏
+    - index: 48
+      batch: 01
+      code: C3211301
+      name: 国家狼山鸡保种场
+      institution: 如东县狼山鸡种鸡场
+      province: 江苏
+    - index: 49
+      batch: 01
+      code: C3211302
+      name: 国家溧阳鸡保种场
+      institution: 溧阳市种畜场
+      province: 江苏
+    - index: 50
+      batch: 01
+      code: C3211303
+      name: 国家鹿苑鸡保种场
+      institution: 张家港市畜禽有限公司
+      province: 江苏
+    - index: 51
+      batch: 01
+      code: C3211401
+      name: 国家高邮鸭保种场
+      institution: 高邮市高邮鸭良种繁育中心
+      province: 江苏
+    - index: 52
+      batch: 01
+      code: C3211501
+      name: 国家太湖鹅保种场
+      institution: 苏州市乡韵太湖鹅有限公司
+      province: 江苏
+    - index: 53
+      batch: 01
+      code: C3310101
+      name: 国家金华猪保种场
+      institution: 浙江加华种猪有限公司
+      province: 浙江
+    - index: 54
+      batch: 01
+      code: C3310102
+      name: 国家嵊县花猪保种场
+      institution: 绍兴市嵊花种猪有限公司
+      province: 浙江
+    - index: 55
+      batch: 01
+      code: C3310103
+      name: 国家嘉兴黑猪保种场
+      institution: 嘉兴青莲黑猪原种场有限公司
+      province: 浙江
+    - index: 56
+      batch: 01
+      code: C3310401
+      name: 国家温州水牛保种场
+      institution: 平阳县挺志温州水牛乳业有限公司
+      province: 浙江
+    - index: 57
+      batch: 01
+      code: C3310701
+      name: 国家湖羊保种场
+      institution: 浙江华丽牧业有限公司
+      province: 浙江
+    - index: 58
+      batch: 01
+      code: C3311301
+      name: 国家仙居鸡保种场
+      institution: 浙江省仙居种鸡场
+      province: 浙江
+    - index: 59
+      batch: 01
+      code: C3311401
+      name: 国家绍兴鸭保种场
+      institution: 绍兴咸亨绍鸭育种有限公司
+      province: 浙江
+    - index: 60
+      batch: 01
+      code: C3311402
+      name: 国家绍兴鸭保种场
+      institution: 浙江国伟科技有限公司
+      province: 浙江
+    - index: 61
+      batch: 01
+      code: C3311403
+      name: 国家缙云麻鸭保种场
+      institution: 浙江欣昌农业开发有限公司
+      province: 浙江
+    - index: 62
+      batch: 01
+      code: C3311501
+      name: 国家太湖鹅保种场
+      institution: 湖州卓旺太湖鹅原种场
+      province: 浙江
+    - index: 63
+      batch: 01
+      code: C3311502
+      name: 国家浙东白鹅保种场
+      institution: 象山县浙东白鹅研究所
+      province: 浙江
+    - index: 64
+      batch: 01
+      code: C3410101
+      name: 国家淮猪保种场
+      institution: 安徽省浩宇牧业有限公司
+      province: 安徽
+    - index: 65
+      batch: 01
+      code: C3410102
+      name: 国家安庆六白猪保种场
+      institution: 望江县现代良种养殖有限公司
+      province: 安徽
+    - index: 66
+      batch: 01
+      code: C3410103
+      name: 国家安庆六白猪保种场
+      institution: 安徽省花亭湖绿色食品开发有限公司
+      province: 安徽
+    - index: 67
+      batch: 01
+      code: C3410104
+      name: 国家皖南黑猪保种场
+      institution: 广德市三溪生态农业有限公司
+      province: 安徽
+    - index: 68
+      batch: 01
+      code: C3411501
+      name: 国家皖西白鹅保种场
+      institution: 安徽省皖西白鹅原种场有限公司
+      province: 安徽
+    - index: 69
+      batch: 01
+      code: C3510101
+      name: 国家莆田黑猪保种场
+      institution: 莆田市乡里香黑猪开发有限公司
+      province: 福建
+    - index: 70
+      batch: 01
+      code: C3510102
+      name: 国家槐猪保种场
+      institution: 上杭绿琦槐猪保种场
+      province: 福建
+    - index: 71
+      batch: 01
+      code: C3510901
+      name: 国家晋江马保种场
+      institution: 晋江市峻富生态林牧有限公司
+      province: 福建
+    - index: 72
+      batch: 01
+      code: C3511201
+      name: 国家福建黄兔保种场
+      institution: 福建省连江玉华山自然生态农业试验场
+      province: 福建
+    - index: 73
+      batch: 01
+      code: C3511301
+      name: 国家河田鸡保种场
+      institution: 福建省长汀县南塅河田鸡保种场有限公司
+      province: 福建
+    - index: 74
+      batch: 01
+      code: C3511401
+      name: 国家连城白鸭保种场
+      institution: 连城县白鸭原种场
+      province: 福建
+    - index: 75
+      batch: 01
+      code: C3511402
+      name: 国家金定鸭、莆田黑鸭保种场
+      institution: 泉州市诚信农牧发展有限公司
+      province: 福建
+    - index: 76
+      batch: 01
+      code: C3610101
+      name: 国家玉江猪（玉山黑猪）保种场
+      institution: 江西省玉山黑猪原种场
+      province: 江西
+    - index: 77
+      batch: 01
+      code: C3611301
+      name: 国家丝羽乌骨鸡保种场
+      institution: 江西省泰和县泰和鸡原种场
+      province: 江西
+    - index: 78
+      batch: 01
+      code: C3611302
+      name: 国家白耳黄鸡保种场
+      institution: 上饶市广丰区白耳黄鸡原种场
+      province: 江西
+    - index: 79
+      batch: 01
+      code: C3611401
+      name: 国家吉安红毛鸭保种场
+      institution: 江西省吉水八都板鸭有限公司吉安红毛鸭原种场
+      province: 江西
+    - index: 80
+      batch: 01
+      code: C3611501
+      name: 国家兴国灰鹅保种场
+      institution: 江西省兴国灰鹅原种场
+      province: 江西
+    - index: 81
+      batch: 01
+      code: C3630101
+      name: 国家中蜂（华中中蜂）保种场
+      institution: 江西益精蜂业有限公司
+      province: 江西
+    - index: 82
+      batch: 01
+      code: C3710101
+      name: 国家莱芜猪保种场
+      institution: 济南市莱芜猪种猪繁育有限公司
+      province: 山东
+    - index: 83
+      batch: 01
+      code: C3710102
+      name: 国家大蒲莲猪保种场
+      institution: 济宁东三大蒲莲猪原种场
+      province: 山东
+    - index: 84
+      batch: 01
+      code: C3710103
+      name: 国家里岔黑猪保种场
+      institution: 青岛里岔黑猪繁育基地
+      province: 山东
+    - index: 85
+      batch: 01
+      code: C3710201
+      name: 国家渤海黑牛保种场
+      institution: 山东无棣华兴渤海黑牛种业股份有限公司
+      province: 山东
+    - index: 86
+      batch: 01
+      code: C3710202
+      name: 国家鲁西牛保种场
+      institution: 鄄城鸿翔牧业有限公司
+      province: 山东
+    - index: 87
+      batch: 01
+      code: C3710203
+      name: 国家鲁西牛保种场
+      institution: 山东科龙畜牧产业有限公司
+      province: 山东
+    - index: 88
+      batch: 01
+      code: C3710701
+      name: 国家小尾寒羊保种场
+      institution: 嘉祥县种羊场
+      province: 山东
+    - index: 89
+      batch: 01
+      code: C3710702
+      name: 国家大尾寒羊保种场
+      institution: 临清润林牧业有限公司
+      province: 山东
+    - index: 90
+      batch: 01
+      code: C3710801
+      name: 国家济宁青山羊保种场
+      institution: 济宁青山羊原种场
+      province: 山东
+    - index: 91
+      batch: 01
+      code: C3710802
+      name: 国家莱芜黑山羊保种场
+      institution: 山东峰祥畜牧种业科技有限公司莱芜黑山羊原种场
+      province: 山东
+    - index: 92
+      batch: 01
+      code: C3710803
+      name: 国家牙山黑绒山羊保种场
+      institution: 山东广耀牧业集团有限公司
+      province: 山东
+    - index: 93
+      batch: 01
+      code: C3711001
+      name: 国家德州驴保种场
+      institution: 山东省无棣良种畜禽繁育场
+      province: 山东
+    - index: 94
+      batch: 01
+      code: C3711002
+      name: 国家德州驴保种场
+      institution: 山东东阿黑毛驴牧业科技有限公司
+      province: 山东
+    - index: 95
+      batch: 01
+      code: C3711003
+      name: 国家德州驴保种场
+      institution: 山东俊驰驴业有限公司
+      province: 山东
+    - index: 96
+      batch: 01
+      code: C3711301
+      name: 国家汶上芦花鸡保种场
+      institution: 山东金秋农牧科技股份有限公司
+      province: 山东
+    - index: 97
+      batch: 01
+      code: C4110101
+      name: 国家淮猪保种场
+      institution: 河南三高农牧股份有限公司
+      province: 河南
+    - index: 98
+      batch: 01
+      code: C4110201
+      name: 国家南阳牛保种场
+      institution: 南阳市黄牛良种繁育场
+      province: 河南
+    - index: 99
+      batch: 01
+      code: C4110202
+      name: 国家郏县红牛保种场
+      institution: 平顶山市羴牛畜禽良种繁育有限公司
+      province: 河南
+    - index: 100
+      batch: 01
+      code: C4111001
+      name: 国家泌阳驴保种场
+      institution: 泌阳县兴盛泌阳驴种业有限公司
+      province: 河南
+    - index: 101
+      batch: 01
+      code: C4111501
+      name: 国家皖西白鹅保种场
+      institution: 固始县恒歌鹅业有限公司
+      province: 河南
+    - index: 102
+      batch: 01
+      code: C4210101
+      name: 国家华中两头乌猪（通城猪）保种场
+      institution: 通城县国营种畜场
+      province: 湖北
+    - index: 103
+      batch: 01
+      code: C4210102
+      name: 国家清平猪保种场
+      institution: 当阳市清平种猪场
+      province: 湖北
+    - index: 104
+      batch: 01
+      code: C4210103
+      name: 国家华中两头乌猪（监利猪）保种场
+      institution: 湖北荆贡种猪有限公司
+      province: 湖北
+    - index: 105
+      batch: 01
+      code: C4211301
+      name: 国家双莲鸡保种场
+      institution: 湖北民大农牧发展有限公司
+      province: 湖北
+    - index: 106
+      batch: 01
+      code: C4310101
+      name: 国家湘西黑猪保种场
+      institution: 桃源县桃源黑猪资源场
+      province: 湖南
+    - index: 107
+      batch: 01
+      code: C4310102
+      name: 国家宁乡猪保种场
+      institution: 湖南省流沙河花猪生态牧业股份有限公司
+      province: 湖南
+    - index: 108
+      batch: 01
+      code: C4310103
+      name: 国家湘西黑猪保种场
+      institution: 湖南湘西牧业有限公司
+      province: 湖南
+    - index: 109
+      batch: 01
+      code: C4310104
+      name: 国家华中两头乌（沙子岭猪）保种场
+      institution: 湘潭市家畜育种站（湘潭市饲料监测站）
+      province: 湖南
+    - index: 110
+      batch: 01
+      code: C4310105
+      name: 国家大围子猪保种场
+      institution: 湖南天府生态农业有限公司
+      province: 湖南
+    - index: 111
+      batch: 01
+      code: C4310201
+      name: 国家巫陵牛（湘西牛）保种场
+      institution: 湖南德农牧业集团有限公司
+      province: 湖南
+    - index: 112
+      batch: 01
+      code: C4311401
+      name: 国家攸县麻鸭保种场
+      institution: 攸县麻鸭资源场
+      province: 湖南
+    - index: 113
+      batch: 01
+      code: C4311501
+      name: 国家溆浦鹅保种场
+      institution: 湖南鸿羽溆浦鹅业科技发展有限公司
+      province: 湖南
+    - index: 114
+      batch: 01
+      code: C4410101
+      name: 国家大花白猪、蓝塘猪保种场
+      institution: 新丰板岭原种猪场
+      province: 广东
+    - index: 115
+      batch: 01
+      code: C4410102
+      name: 国家粤东黑猪保种场
+      institution: 蕉岭县泰农黑猪发展有限公司
+      province: 广东
+    - index: 116
+      batch: 01
+      code: C4410201
+      name: 国家雷琼牛保种场
+      institution: 湛江市麻章区畜牧技术推广站
+      province: 广东
+    - index: 117
+      batch: 01
+      code: C4411301
+      name: 国家清远麻鸡保种场
+      institution: 广东天农食品集团股份有限公司
+      province: 广东
+    - index: 118
+      batch: 01
+      code: C4411302
+      name: 国家怀乡鸡保种场
+      institution: 广东盈富农业有限公司
+      province: 广东
+    - index: 119
+      batch: 01
+      code: C4411303
+      name: 国家惠阳胡须鸡保种场
+      institution: 广东金种农牧科技股份有限公司
+      province: 广东
+    - index: 120
+      batch: 01
+      code: C4411501
+      name: 国家狮头鹅保种场
+      institution: 汕头市白沙禽畜原种研究所
+      province: 广东
+    - index: 121
+      batch: 01
+      code: C4411502
+      name: 国家乌鬃鹅保种场
+      institution: 清远市金羽丰鹅业有限公司
+      province: 广东
+    - index: 122
+      batch: 01
+      code: C4411503
+      name: 国家狮头鹅保种场
+      institution: 广东立兴农业开发有限公司
+      province: 广东
+    - index: 123
+      batch: 01
+      code: C4510101
+      name: 国家香猪（环江香猪）保种场
+      institution: 环江毛南族自治县环江香猪原种保种场
+      province: 广西
+    - index: 124
+      batch: 01
+      code: C4510102
+      name: 国家巴马香猪保种场
+      institution: 巴马原种香猪农牧实业有限公司
+      province: 广西
+    - index: 125
+      batch: 01
+      code: C4510103
+      name: 国家两广小花猪（陆川猪）保种场
+      institution: 陆川县良种猪场
+      province: 广西
+    - index: 126
+      batch: 01
+      code: C4510901
+      name: 国家德保矮马保种场
+      institution: 德保矮马研究所
+      province: 广西
+    - index: 127
+      batch: 01
+      code: C4511301
+      name: 国家龙胜凤鸡保种场
+      institution: 龙胜县宏胜禽业有限责任公司
+      province: 广西
+    - index: 128
+      batch: 01
+      code: C4610101
+      name: 国家五指山猪保种场
+      institution: 海南省农业科学院畜牧兽医研究所
+      province: 海南
+    - index: 129
+      batch: 01
+      code: C4610102
+      name: 国家海南猪（屯昌猪）保种场
+      institution: 海南龙健畜牧开发有限公司
+      province: 海南
+    - index: 130
+      batch: 01
+      code: C4611301
+      name: 国家文昌鸡保种场
+      institution: 海南罗牛山文昌鸡育种有限公司
+      province: 海南
+    - index: 131
+      batch: 01
+      code: C5010101
+      name: 国家荣昌猪保种场
+      institution: 重庆市种猪场
+      province: 重庆
+    - index: 132
+      batch: 01
+      code: C5010701
+      name: 国家大足黑山羊保种场
+      institution: 重庆腾达牧业有限公司
+      province: 重庆
+    - index: 133
+      batch: 01
+      code: C5110101
+      name: 国家内江猪保种场
+      institution: 内江市种猪场
+      province: 四川
+    - index: 134
+      batch: 01
+      code: C5110501
+      name: 国家九龙牦牛保种场
+      institution: 四川省甘孜州九龙牦牛良种繁育场
+      province: 四川
+    - index: 135
+      batch: 01
+      code: C5110801
+      name: 国家成都麻羊保种场
+      institution: 成都市西岭雪农业开发有限公司
+      province: 四川
+    - index: 136
+      batch: 01
+      code: C5111201
+      name: 国家四川白兔保种场
+      institution: 四川省畜牧科学研究院
+      province: 四川
+    - index: 137
+      batch: 01
+      code: C5111301
+      name: 国家藏鸡保种场
+      institution: 乡城县藏咯咯农业开发有限公司
+      province: 四川
+    - index: 138
+      batch: 01
+      code: C5111401
+      name: 国家建昌鸭保种场
+      institution: 德昌县种鸭场
+      province: 四川
+    - index: 139
+      batch: 01
+      code: C5111501
+      name: 国家四川白鹅保种场
+      institution: 宜宾市南溪区四川白鹅育种场
+      province: 四川
+    - index: 140
+      batch: 01
+      code: C5111502
+      name: 国家钢鹅保种场
+      institution: 西昌华农禽业有限公司
+      province: 四川
+    - index: 141
+      batch: 01
+      code: C5130101
+      name: 国家中蜂（阿坝中蜂）保种场
+      institution: 马尔康市农业畜牧局
+      province: 四川
+    - index: 142
+      batch: 01
+      code: C5210101
+      name: 国家香猪（从江香猪）保种场
+      institution: 贵州从江粤黔香猪开发有限公司
+      province: 贵州
+    - index: 143
+      batch: 01
+      code: C5310101
+      name: 国家滇南小耳猪保种场
+      institution: 西双版纳小耳猪生物科技有限公司
+      province: 云南
+    - index: 144
+      batch: 01
+      code: C5310102
+      name: 国家乌金猪（大河猪）保种场
+      institution: 富源县大河种猪场
+      province: 云南
+    - index: 145
+      batch: 01
+      code: C5310103
+      name: 国家撒坝猪保种场
+      institution: 楚雄彝族自治州种猪种鸡场
+      province: 云南
+    - index: 146
+      batch: 01
+      code: C5310601
+      name: 国家独龙牛保种场
+      institution: 贡山县独龙牛种牛场
+      province: 云南
+    - index: 147
+      batch: 01
+      code: C5310401
+      name: 国家槟榔江水牛保种场
+      institution: 腾冲市巴福乐槟榔江水牛良种繁育有限公司
+      province: 云南
+    - index: 148
+      batch: 01
+      code: C5310801
+      name: 国家龙陵黄山羊保种场
+      institution: 龙陵县黄山羊核心种羊有限责任公司
+      province: 云南
+    - index: 149
+      batch: 01
+      code: C5311301
+      name: 国家瓢鸡保种场
+      institution: 镇沅云岭广大瓢鸡原种保种有限公司
+      province: 云南
+    - index: 150
+      batch: 01
+      code: C5311302
+      name: 国家茶花鸡保种场
+      institution: 西双版纳云岭茶花鸡产业发展有限公司
+      province: 云南
+    - index: 151
+      batch: 01
+      code: C5410801
+      name: 国家西藏山羊（白绒型）保种场
+      institution: 阿里地区日土县白绒山羊原种场
+      province: 西藏
+    - index: 152
+      batch: 01
+      code: C5410802
+      name: 国家西藏山羊（紫绒型）保种场
+      institution: 措勤县绒山羊良种扩繁殖场
+      province: 西藏
+    - index: 153
+      batch: 01
+      code: C6110101
+      name: 国家八眉猪保种场
+      institution: 定边县农业畜禽种业服务中心
+      province: 陕西
+    - index: 154
+      batch: 01
+      code: C6110102
+      name: 国家汉江黑猪保种场
+      institution: 勉县黑河猪种猪场
+      province: 陕西
+    - index: 155
+      batch: 01
+      code: C6110201
+      name: 国家秦川牛保种场
+      institution: 陕西省农牧良种场
+      province: 陕西
+    - index: 156
+      batch: 01
+      code: C6110701
+      name: 国家汉中绵羊保种场
+      institution: 勉县汉中绵羊保种场
+      province: 陕西
+    - index: 157
+      batch: 01
+      code: C6110702
+      name: 国家同羊保种场
+      institution: 白水县同羊原种场
+      province: 陕西
+    - index: 158
+      batch: 01
+      code: C6110901
+      name: 国家宁强马保种场
+      institution: 宁强县良种繁育中心
+      province: 陕西
+    - index: 159
+      batch: 01
+      code: C6111001
+      name: 国家关中驴保种场
+      institution: 陕西省农牧良种场
+      province: 陕西
+    - index: 160
+      batch: 01
+      code: C6130101
+      name: 国家中蜂保种场
+      institution: 榆林市畜牧兽医服务中心
+      province: 陕西
+    - index: 161
+      batch: 01
+      code: C6210101
+      name: 国家八眉猪保种场
+      institution: 灵台县旺富鑫八眉猪良种猪场
+      province: 甘肃
+    - index: 162
+      batch: 01
+      code: C6210501
+      name: 国家甘南牦牛保种场
+      institution: 玛曲县阿孜畜牧科技示范园区
+      province: 甘肃
+    - index: 163
+      batch: 01
+      code: C6310101
+      name: 国家八眉猪保种场
+      institution: 互助县八眉猪养殖技术服务中心
+      province: 青海
+    - index: 164
+      batch: 01
+      code: C6310501
+      name: 国家青海高原牦牛保种场
+      institution: 青海省大通种牛场
+      province: 青海
+    - index: 165
+      batch: 01
+      code: C6310701
+      name: 国家贵德黑裘皮羊保种场
+      institution: 贵南县黑羊场
+      province: 青海
+    - index: 166
+      batch: 01
+      code: C6410701
+      name: 国家滩羊保种场
+      institution: 宁夏回族自治区盐池滩羊选育场
+      province: 宁夏
+    - index: 167
+      batch: 01
+      code: C6410702
+      name: 国家滩羊保种场
+      institution: 红寺堡区天源良种羊繁育养殖有限公司
+      province: 宁夏
+    - index: 168
+      batch: 01
+      code: C6410801
+      name: 国家中卫山羊保种场
+      institution: 宁夏回族自治区中卫山羊选育场
+      province: 宁夏
+    - index: 169
+      batch: 01
+      code: C6510701
+      name: 国家多浪羊保种场
+      institution: 新疆五征绿色农业发展有限公司
+      province: 新疆
+    - index: 170
+      batch: 01
+      code: C6510901
+      name: 国家焉耆马保种场
+      institution: 和静县伊克扎尔尕斯台牧业发展有限公司
+      province: 新疆
+    - index: 171
+      batch: 01
+      code: C6511301
+      name: 国家拜城油鸡保种场
+      institution: 新疆诺奇拜城油鸡发展有限公司
+      province: 新疆
+    - index: 172
+      batch: 01
+      code: C6511501
+      name: 国家伊犁鹅保种场
+      institution: 额敏县恒鑫实业有限公司
+      province: 新疆
+    - index: 173
+      batch: 01
+      code: C6530201
+      name: 国家新疆黑蜂保种场
+      institution: 尼勒克县种蜂繁殖场
+      province: 新疆

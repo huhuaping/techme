@@ -3,29 +3,60 @@
 \docType{data}
 \name{PubGeneticResource}
 \alias{PubGeneticResource}
-\title{Details of Approved List of National Genetic Resource Base}
+\title{National Genetic Resource Bases (国家级种质资源库)}
 \format{
 A data frame:
 \describe{
-\item{year}{integer, the official approved year }
-\item{batch}{character, the batch NO.}
-\item{type}{character, type of the base  }
-\item{index}{integer, the ordered index of list}
-\item{name}{character, name of the base }
-\item{institution}{character, name of the on duty institution}
-\item{province}{character, province of approved county in reduced chinese}
+\item{year}{integer. Official notice / designation year.}
+\item{batch}{character. Two-digit batch number within that source
+family (crop batches and livestock batches are numbered separately).}
+\item{type}{character. Controlled vocabulary combining both source
+families. Crop / microbe: 农作物, 农业微生物. Livestock: 畜禽保种场,
+畜禽基因库, 畜禽保护区, 畜禽变更.}
+\item{index}{integer. Sequence number within the source table.}
+\item{name}{character. Unit name as printed.}
+\item{institution}{character. Supporting / construction institution;
+for 畜禽变更, the new institution.}
+\item{province}{character. Province name in reduced Chinese.}
 }
 }
 \source{
-\url{https://www.huhuaping.com/}
+Ministry of Agriculture and Rural Affairs of China notices,
+\url{https://www.moa.gov.cn}; crop-bank downloads also appear at
+\url{https://ncgrip.cgris.net}.
 }
 \usage{
 PubGeneticResource
 }
 \description{
-A data set containing Approved List of National Genetic Resource Base
-year by year from the "moa-genetic-resource" project
-which public at \url{https://www.moa.gov.cn},
-with wide data format.
+Official batch lists of national crop / agricultural-microbe germplasm
+banks and national livestock genetic-resource conservation units,
+compiled from public notices of the Ministry of Agriculture and Rural
+Affairs (MOA). Each row is one named unit in a given notice year and
+batch. The two source families share the same columns and are
+distinguished by \code{type}.
+}
+\details{
+Two statistical calibers share this object:
+\itemize{
+\item Crop and agricultural-microbe banks (from 2022): \code{type} is 农作物 or
+农业微生物. Tidied from year-batch notices by
+\code{code-moa-genetic-resource.R}.
+\item Livestock conservation units (from 2021; earlier seven batches
+repealed): \code{type} is 畜禽保种场, 畜禽基因库, 畜禽保护区, or 畜禽变更.
+Years 2021–2023 are expanded from YAML
+(\verb{data-raw/public-site/moa-genetic-resource/yaml/}) by
+\code{code-moa-genetic-resource-yaml.R}; from 2024 the livestock annexes
+are published with the crop notices.
+}
+
+Package data are written by \code{wfl-PubGeneticResource.R}. The full
+crop-bank snapshot \link{PubGeneticResourceCrop} is a different caliber
+(platform list, not year-batch notices).
+}
+\examples{
+str(PubGeneticResource)
+table(PubGeneticResource$type)
+
 }
 \keyword{datasets}

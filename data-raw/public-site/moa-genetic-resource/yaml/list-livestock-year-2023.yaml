@@ -1,0 +1,109 @@
+# 国家畜禽遗传资源保护单位年度公示中间层（2023 年认定 + 变更）
+# 字段与展开方式见同目录 _schema.yaml。
+# 对照 html/list-livestock-year-2023.html（农业农村部公告第720号）。
+# 附件1保护区为第二批；附件2/3保种场、基因库为第三批。
+
+year: 2023
+title: 中华人民共和国农业农村部公告第720号
+doc_no: 农业农村部公告第720号
+effective_date: '2023-10-30'
+pub_date: '2023-12-06'
+url: https://www.moa.gov.cn/govpublic/nybzzj1/202312/t20231207_6442237.htm
+url_alt: null
+source: 农业农村部种业管理司
+source_files:
+  html: html/list-livestock-year-2023.html
+counts:
+  基因库: 1
+  保护区: 1
+  保种场: 8
+  变更: 1
+  合计: 11
+annexes:
+- annex: 1
+  mark: 认定
+  type: 畜禽保护区
+  title: 国家畜禽遗传资源保护区名单（第二批）
+  items:
+    - index: 1
+      batch: 02
+      code: B6210901
+      name: 岔口驿马国家保护区
+      institution: 天祝藏族自治县畜牧技术推广站
+      province: 甘肃
+- annex: 2
+  mark: 认定
+  type: 畜禽保种场
+  title: 国家畜禽遗传资源保种场名单（第三批）
+  items:
+    - index: 1
+      batch: 03
+      code: C3610102
+      name: 国家乐平猪保种场
+      institution: 抚州市绿缘农牧集团有限公司
+      province: 江西
+    - index: 2
+      batch: 03
+      code: C3710104
+      name: 国家里岔黑猪保种场
+      institution: 胶州市茂华里岔黑猪良种场
+      province: 山东
+    - index: 3
+      batch: 03
+      code: C6210701
+      name: 国家兰州大尾羊保种场
+      institution: 永靖县瑞霖科技养殖有限公司
+      province: 甘肃
+    - index: 4
+      batch: 03
+      code: C6210702
+      name: 国家岷县黑裘皮羊保种场
+      institution: 岷县汇丰农业发展有限公司
+      province: 甘肃
+    - index: 5
+      batch: 03
+      code: C4410801
+      name: 国家雷州山羊保种场
+      institution: 雷州市状元黑山羊养殖有限公司
+      province: 广东
+    - index: 6
+      batch: 03
+      code: C3511302
+      name: 国家闽清毛脚鸡保种场
+      institution: 福建同一农牧有限公司上莲分公司
+      province: 福建
+    - index: 7
+      batch: 03
+      code: C5111302
+      name: 国家金阳丝毛鸡保种场
+      institution: 金阳县金凰报喜农业开发有限公司
+      province: 四川
+    - index: 8
+      batch: 03
+      code: C5211302
+      name: 国家矮脚鸡保种场
+      institution: 兴义市黔农汇农业科技有限公司
+      province: 贵州
+- annex: 3
+  mark: 认定
+  type: 畜禽基因库
+  title: 国家畜禽遗传资源基因库名单（第三批）
+  items:
+    - index: 1
+      batch: 03
+      code: A2111
+      name: 国家蚕遗传资源基因库（辽宁）
+      institution: 辽宁省蚕业科学研究所
+      province: 辽宁
+- annex: 4
+  mark: 变更
+  type: 畜禽变更
+  title: 变更建设单位国家畜禽遗传资源保种场名单
+  items:
+    - index: 1
+      batch: 01
+      code: C2130101
+      name: 国家中蜂保种场
+      institution: 辽宁省农业发展服务中心
+      institution_origin: 辽宁春兴畜牧兽医服务中心
+      province: 辽宁

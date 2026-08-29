@@ -558,6 +558,31 @@ PubObsStation %>%
   kable()
 ```
 
+### PubGeneticResource
+
+```{r,echo=FALSE}
+data("PubGeneticResource")
+```
+
+> **说明**：本数据集合并两条年度批次公示口径（`data-raw/public-site/moa-genetic-resource/`），由 `wfl-PubGeneticResource.R` 编译。`type` 同时收录农作物 / 农业微生物，以及畜禽保种场 / 畜禽基因库 / 畜禽保护区 / 畜禽变更。全量库圃快照见 `PubGeneticResourceCrop`。
+
+**`PubGeneticResource`**：A **wide format** data set containing approved national genetic-resource bases from MOA year-batch notices (crop / microbe banks and livestock conservation units).
+
+- Totally `r dim(PubGeneticResource)[2]` columns including: `r paste0(names(PubGeneticResource), collapse =", ")`.
+
+- Totally `r dim(PubGeneticResource)[1]` rows.
+
+- Years range from `r min(PubGeneticResource$year)` to `r max(PubGeneticResource$year)`
+
+- `type` values: 农作物 / 农业微生物；畜禽保种场 / 畜禽基因库 / 畜禽保护区 / 畜禽变更。
+
+```{r}
+PubGeneticResource %>%
+  count(year, type) %>%
+  tidyr::pivot_wider(names_from = type, values_from = n, values_fill = 0) %>%
+  kable()
+```
+
 ### PubGeneticResourceCrop
 
 ```{r,echo=FALSE}

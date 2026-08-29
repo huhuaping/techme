@@ -1859,21 +1859,32 @@ ptn_clean <-c(
 
 ### 数据说明
 
-更新状态：updated
+更新状态：updated（`techme::PubGeneticResource`，2026-08-29 入库）。
 
 数据来源：参看全国农作物种质资源信息平台<https://ncgrip.cgris.net> 【文件下载】栏目。参考资源2（中国作物种质资源信息网）：<https://www.cgris.net/home>，可以查询具体作物种质资源信息。
 
-统计类别：
+数据集1`techme::PubGeneticResource`，清洗脚本：`data-raw/public-site/moa-genetic-resource/code-moa-genetic-resource.R`（农作物 / 农业微生物）、`code-moa-genetic-resource-yaml.R`（2021–2023 畜禽）；发布脚本：`wfl-PubGeneticResource.R`。
 
-- 国家级农作物、农业微生物种质资源库名单
+两套公示共用列 `year, batch, type, index, name, institution, province`，用 `type` 区分口径。`type` 受控词：
 
-当前统计口径1:年度批次公示名单(数据集`techme::PubGeneticResource`)：
+- 口径1（农作物 / 农业微生物）：农作物、农业微生物
+- 口径2（畜禽）：畜禽保种场、畜禽基因库、畜禽保护区、畜禽变更
+
+`techme::PubGeneticResource`统计口径1:国家级农作物、农业微生物种质资源库名单年度批次公示名单(2022年开始认定)：
 
 - 第x批国家农作物种质资源库(圃)名单
-- 第x批农业微生物种质资源库名单(2022年开始认定)
-- 第x批国家畜禽遗传资源保种场(基因库)名单（2022年开始认定）
+- 第x批农业微生物种质资源库名单
+- 目标变量：year（年份）	batch（批次）	type（类型：农作物 / 农业微生物）	index（序号）	name（名称）	institution（机构）	province（省份）。
 
-当前统计口径2:农作物种质资源库圃列表 (数据集`techme::PubGeneticResourceCrop`)：
+`techme::PubGeneticResource`统计口径2:国家畜禽遗传资源保种场(基因库)名单年度批次公示名单（2021年开始重新认定，此前认定作废）：
+
+- 第x批国家畜禽遗传资源保种场(基因库)名单
+
+- 目标变量：year（年份）	batch（批次）	type（类型：畜禽保种场 / 畜禽基因库 / 畜禽保护区 / 畜禽变更）	index（序号）	name（名称）	institution（机构）	province（省份）。
+
+数据集2：`techme::PubGeneticResourceCrop`，R脚本文件：`data-raw/public-site/moa-genetic-resource/code-moa-genetic-resource-crop.R`.。
+
+`techme::PubGeneticResourceCrop`统计口径:农作物种质资源库圃列表（年度网页爬取）。
 
 - 全部国家农作物种质资源库(圃)名单，来自全国农作物种质资源信息平台<https://ncgrip.cgris.net/web/home/protection>。包括：种质圃、中期圃、试管苗库等
 - 参数化爬取<https://ncgrip.cgris.net/srv/api/coops/list?pageNum=1&pageSize=10000>
@@ -1882,7 +1893,7 @@ ptn_clean <-c(
 
 注意事项：
 
-- 公告文件中可能还包括“国家禽畜遗传资源保种场名单”，本数据集于2026年开始系统收集。
+- 畜禽口径已从 2021 年第一批重新认定收录；2021–2023 年走 YAML，2024 年起与农作物库圃同文发布。`type=畜禽变更` 为建设单位变更，不是新认定批次。
 
 
 ### 文件管理
@@ -1897,6 +1908,20 @@ safe_dir_tree(dir_tar)
 本项目内维护，通过`techme`进行数据发布。执行R代码文件：`data-raw/public-site/moa-genetic-resource/wfl-PubGeneticResource.R`
 
 批次公示名单（`PubGeneticResource`）：
+
+```{r}
+techme::PubGeneticResource %>%
+  dplyr::count(year, type) %>%
+  tidyr::pivot_wider(names_from = type, values_from = n, values_fill = 0) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 15,
+      scrollX = TRUE
+    )
+  )
+```
 
 ```{r}
 techme::PubGeneticResource %>%
@@ -1929,20 +1954,34 @@ techme::PubGeneticResourceCrop %>%
 ### 数据进度
 
 
-#### 批次公示名单html/pdf
+#### 国家农作物种质资源库(圃)批次公示名单
 
-- 【pdf附件转xlsx】2025年，（第四批）国家农作物种质资源库(圃)，平台网站"文件下载"栏目[公示](https://ncgrip.cgris.net/web/download)，公示日期2026年1月9日。新增确定（第四批）国家农作物种质资源库(圖)3个、（第五批）国家畜禽遗传资源保种场(基因库)7个,变更6个国家畜禽遗传资源保种场的建设单位。见pdf[附件]：'data-raw/public-site/moa-genetic-resource/html/list-year-2025-batch-04.pdf'。
-
-    - html转载中国兽医协会[参看](https://www.cvma.org.cn/6849/202601/72785.html)
+- 【第四批 pdf附件转xlsx】2025年，（第四批）国家农作物种质资源库(圃)，平台网站"文件下载"栏目[公示](https://ncgrip.cgris.net/web/download)，公示日期2026年1月9日。新增确定（第四批）国家农作物种质资源库(圖)3个、（第五批）国家畜禽遗传资源保种场(基因库)7个,变更6个国家畜禽遗传资源保种场的建设单位。见pdf[附件]：'data-raw/public-site/moa-genetic-resource/html/list-year-2025-batch-04.pdf'。 html转载中国兽医协会[参看](https://www.cvma.org.cn/6849/202601/72785.html)
 
 
-- 【pdf附件转xlsx】2024年，（第三批）国家农作物种质资源库(圃)，平台网站"文件下载"栏目[公示](https://ncgrip.cgris.net/web/download)。见附件[pdf]：'data-raw/public-site/moa-genetic-resource/html/list-year-2024-batch-03.pdf'。
+- 【第三批 pdf附件转xlsx】2024年12月29日，农业农村部公告 第865号。确定（第三批）国家农作物种质资源库(圃)5个、（第四批）国家畜禽遗传资源保种场13个、 （第三批）国家农业微生物种质资源库2个,变更国家畜禽遗传资源保种场和基因库建设单位5个(名单见[附件](https://www.moa.gov.cn/govpublic/nybzzj1/202501/t20250103_6468854.htm))。考虑到数量较少，直接通过人工手动录入xlsx。
 
-  - 【pdf附件转xlsx】2024年12月29日，农业农村部公告 第865号。确定（第三批）国家农作物种质资源库(圃)5个、（第四批）国家畜禽遗传资源保种场13个、 （第三批）国家农业微生物种质资源库2个,变更国家畜禽遗传资源保种场和基因库建设单位5个(名单见[附件](https://www.moa.gov.cn/govpublic/nybzzj1/202501/t20250103_6468854.htm))。考虑到数量较少，直接通过人工手动录入xlsx。
+  - 【pdf附件转xlsx】2024年，（第三批）国家农作物种质资源库(圃)，平台网站"文件下载"栏目[公示](https://ncgrip.cgris.net/web/download)。见附件[pdf]：'data-raw/public-site/moa-genetic-resource/html/list-year-2024-batch-03.pdf'。
 
-- 【html tab转xlsx】2023年12月29日 第二批国家农作物种质资源圃1个、国家农业微生物种质资源库8个的[公告](http://www.moa.gov.cn/govpublic/nybzzj1/202401/t20240117_6446108.html)
+<!-- 2024年及以后，与国家畜禽遗传资源保种场名单、基因库名单批次公示名单同步发布。不再单独发布。 -->
 
-- 【pdf名单转htm table转xlsx】2022-08-10 关于第一批拟确定国家级农作物、农业微生物种质资源库的[公示](http://www.zys.moa.gov.cn/gsgg/202208/t20220810_6406720.htm)
+- 【第二批 html tab转xlsx】2023年12月29日 第二批国家农作物种质资源圃1个、国家农业微生物种质资源库8个的[公告](http://www.moa.gov.cn/govpublic/nybzzj1/202401/t20240117_6446108.html)。
+
+- 【第一批 pdf名单转htm table转xlsx】2022-08-10 关于第一批拟确定国家级农作物、农业微生物种质资源库的[公示](http://www.zys.moa.gov.cn/gsgg/202208/t20220810_6406720.htm)
+
+#### 国家畜禽遗传资源保种场名单、基因库批次公示名单
+
+- （同上）【第五批 pdf附件转xlsx】2025年，（第四批）国家农作物种质资源库(圃)，平台网站"文件下载"栏目[公示](https://ncgrip.cgris.net/web/download)，公示日期2026年1月9日。新增确定（第四批）国家农作物种质资源库(圖)3个、（第五批）国家畜禽遗传资源保种场(基因库)7个,变更6个国家畜禽遗传资源保种场的建设单位。见pdf[附件]：'data-raw/public-site/moa-genetic-resource/html/list-year-2025-batch-04.pdf'。
+
+- （同上）【第四批 pdf附件转xlsx】2024年12月29日，农业农村部公告 第865号。确定（第三批）国家农作物种质资源库(圃)5个、（第四批）国家畜禽遗传资源保种场13个、 （第三批）国家农业微生物种质资源库2个,变更国家畜禽遗传资源保种场和基因库建设单位5个(名单见[附件](https://www.moa.gov.cn/govpublic/nybzzj1/202501/t20250103_6468854.htm))。考虑到数量较少，直接通过人工手动录入xlsx。已经完成数据爬取和xlsx处理。
+
+<!-- 2024年及以后，与国家农作物种质资源库(圃)批次公示名单同步发布。不再单独发布。 -->
+
+- 【第三批 html table 转yaml】2023年12月06日，中华人民共和国农业农村部公告[第720号](https://www.moa.gov.cn/govpublic/nybzzj1/202312/t20231207_6442237.htm)。确定国家畜禽遗传资源保护区1个、保种场8个、基因库1个，变更国家畜禽遗传资源保种场建设单位1个（名单见附件）。附件1：国家畜禽遗传资源保护区名单（第二批）；附件2：国家畜禽遗传资源保种场名单（第三批）；附件3：国家畜禽遗传资源基因库名单（第三批）；附件4：变更建设单位国家畜禽遗传资源保种场名单。html公示文件`data-raw/public-site/moa-genetic-resource/html/list-livestoc-year-2023.html`。
+
+- 【第二批 html公告，pdf扫描件附转yaml】2022年12月26日,（非官方转债转载）农业农村部公告[第631号](农业农村部公告第631号)。确定第二批国家畜禽遗传资源保种场10个、基因库2个（名单见附件）。附件1：国家畜禽遗传资源保种场名单（第二批）；附件2：国家畜禽遗传资源基因库名单（第二批）。pdf附件`data-raw/public-site/moa-genetic-resource/html/list-livestoc-year-2022.pdf`；html公示文件`data-raw/public-site/moa-genetic-resource/html/list-livestoc-year-2022.html`。
+
+- 【第一批 html公告，pdf扫描件附转yaml】2021年8月9日，（非官方转载）第一批国家级畜禽遗传资源基因库、保护区、保种场名单[发布](https://www.163.com/dy/article/GU5EB4EV05149E7M.html)。确定国家畜禽遗传资源基因库8个、保护区24个、保种场173个（名单见附件）。此前发布的七批国家级畜禽遗传资源基因库、保护区、保种场名单（中华人民共和国农业部公告第1058号、1587号、1828号、2234号、2332号、2535号，中华人民共和国农业农村部公告第167号）同日废止。pdf附件`data-raw/public-site/moa-genetic-resource/html/list-livestoc-year-2021.pdf`；html公示文件`data-raw/public-site/moa-genetic-resource/html/list-livestoc-year-2021.html`。
 
 #### 全部库圃列表
 
@@ -1960,21 +1999,13 @@ techme::PubGeneticResourceCrop %>%
 
 ### 数据流程
 
-（1）抓取名单公示html/pdf。执行R代码文件：`data-raw/public-site/moa-genetic-resource/code-moa-genetic-resource.R`
+（1）农作物 / 农业微生物批次公示。执行 `data-raw/public-site/moa-genetic-resource/code-moa-genetic-resource.R`，写出 `xlsx/list-year-{YYYY}-batch-*.xlsx`。
 
-- 读取html（pdf转html）
+（2）2021–2023 畜禽批次公示：YAML（`yaml/list-livestock-year-{YYYY}.yaml`）经 `code-moa-genetic-resource-yaml.R` 展开为 `xlsx/list-livestock-year-{YYYY}.xlsx` 与 `data-tidy/.../xlsx/`。2024 年起畜禽附件并入（1）的 `list-year-` 文件。
 
-- 清洗数据
+（3）参数化爬取全部库圃列表，形成 `PubGeneticResourceCrop`（`code-moa-genetic-resource-crop.R`）。
 
-- 添加整理信息
-
-- 依次导出年度xlsx
-
-（2）参数化爬取全部库圃列表。同一脚本上段，得到 `tbl_crop_raw`，后续形成 `PubGeneticResourceCrop`。
-
-（3）`techme`维护数据集。执行R代码文件：`data-raw/public-site/moa-genetic-resource/wfl-PubGeneticResource.R`
-
-- 循环读取年度xlsx（`list-year-` → `PubGeneticResource`；`list-crops-year-` → `PubGeneticResourceCrop`）
+（4）发布。执行 `data-raw/public-site/moa-genetic-resource/wfl-PubGeneticResource.R`：`list-year-` 与 `list-livestock-year-` → `PubGeneticResource`；`list-crops-year-` → `PubGeneticResourceCrop`。
 
 
 

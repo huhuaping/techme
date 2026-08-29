@@ -1,0 +1,104 @@
+# 国家畜禽遗传资源保护单位年度公示中间层（第二批）
+# 字段与展开方式见同目录 _schema.yaml。
+# 对照 html/list-livestock-year-2022.pdf 扫描件（农业农村部公告第631号）。
+
+year: 2022
+title: 中华人民共和国农业农村部公告第631号
+doc_no: 农业农村部公告第631号
+effective_date: '2022-12-26'
+pub_date: '2022-12-26'
+url: https://www.waizi.org.cn/law/138934.html
+url_alt: null
+source: 农业农村部
+source_files:
+  html: html/list-livestock-year-2022.html
+  pdf: html/list-livestock-year-2022.pdf
+counts:
+  基因库: 2
+  保护区: 0
+  保种场: 10
+  变更: 0
+  合计: 12
+annexes:
+- annex: 1
+  mark: 认定
+  type: 畜禽保种场
+  title: 国家畜禽遗传资源保种场名单（第二批）
+  items:
+    - index: 1
+      batch: 02
+      code: C4310106
+      name: 国家华中两头乌猪（沙子岭猪）保种场
+      institution: 衡阳县种畜场
+      province: 湖南
+    - index: 2
+      batch: 02
+      code: C2210202
+      name: 国家延边牛保种场
+      institution: 珲春市吉兴牧业有限公司
+      province: 吉林
+    - index: 3
+      batch: 02
+      code: C3310201
+      name: 国家温岭高峰牛保种场
+      institution: 温岭市农业农村发展有限公司
+      province: 浙江
+    - index: 4
+      batch: 02
+      code: C6310702
+      name: 国家西藏羊（草地型）保种场
+      institution: 青海省种羊繁育推广服务中心
+      province: 青海
+    - index: 5
+      batch: 02
+      code: C4411304
+      name: 国家惠阳胡须鸡保种场
+      institution: 广东智威农业科技股份有限公司
+      province: 广东
+    - index: 6
+      batch: 02
+      code: C5211301
+      name: 国家长顺绿壳蛋鸡保种场
+      institution: 长顺县三原农业产业发展有限公司
+      province: 贵州
+    - index: 7
+      batch: 02
+      code: C6211301
+      name: 国家静原鸡保种场
+      institution: 静宁绿洲生态农业科技发展有限公司
+      province: 甘肃
+    - index: 8
+      batch: 02
+      code: C6411301
+      name: 国家静原鸡保种场
+      institution: 宁夏万升实业有限责任公司
+      province: 宁夏
+    - index: 9
+      batch: 02
+      code: C1520301
+      name: 国家敖鲁古雅驯鹿保种场
+      institution: 根河市敖鲁古雅鄂温克族乡综合保障和技术推广中心
+      province: 内蒙古
+    - index: 10
+      batch: 02
+      code: C2230101
+      name: 国家中蜂（长白山中蜂）保种场
+      institution: 吉林省养蜂科学研究所
+      province: 吉林
+- annex: 2
+  mark: 认定
+  type: 畜禽基因库
+  title: 国家畜禽遗传资源基因库名单（第二批）
+  items:
+    - index: 1
+      batch: 02
+      code: A3209
+      name: 国家蚕遗传资源基因库（江苏）
+      institution: 中国农业科学院蚕业研究所
+      province: 江苏
+    - index: 2
+      batch: 02
+      code: A5010
+      name: 国家蚕遗传资源基因库（重庆）
+      institution: 西南大学
+      province: 重庆

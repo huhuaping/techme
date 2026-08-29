@@ -1,0 +1,82 @@
+# 国家畜禽遗传资源保护单位 YAML 中间层（2021–2023）
+#
+# 定位：
+#   公示原文（html/pdf）→ 本目录 list-livestock-year-{YYYY}.yaml →
+#   code-moa-genetic-resource-yaml.R 第 2 步展开为
+#   xlsx/list-livestock-year-{YYYY}.xlsx →
+#   第 3 步写入 data-tidy/.../xlsx/
+#
+# 文件名中的 YYYY 是通知业务年份（2021 第一批、2022 第二批、2023 第三批保种场/基因库）。
+# 2023 附件 1 的保护区为「第二批」，batch 写在 annex / item 上，不要用文件名当批次。
+#
+# R 读取并展开为目标 tidy 列：
+#   yml <- yaml::read_yaml(path)
+#   rows <- list()
+#   for (ax in yml$annexes) {
+#     for (it in ax$items) {
+#       rows[[length(rows) + 1]] <- tibble::tibble(
+#         year = yml$year,
+#         batch = it$batch,
+#         type = ax$type,
+#         index = it$index,
+#         name = it$name,
+#         institution = it$institution,
+#         province = it$province
+#       )
+#     }
+#   }
+#   tbl <- dplyr::bind_rows(rows)
+#
+# 目标 tidy 列（与现有 PubGeneticResource / list-year-*.xlsx 对齐）：
+#   year, batch, type, index, name, institution, province
+#
+# type 受控词（畜禽口径；与农作物 / 农业微生物区分）：
+#   畜禽保种场 / 畜禽基因库 / 畜禽保护区 / 畜禽变更
+#
+# 口径约定：
+#   - 本批 YAML 只覆盖 2021–2023 畜禽遗传资源保护单位。
+#     2024 年起已与农作物库圃同步发布，沿用现有 list-year-{YYYY}-batch-*.xlsx。
+#   - 认定名单写入 annexes；变更建设单位单独 annex，
+#     type=畜禽变更，mark=变更。第 2 步保留变更行，用 type 区分。
+#   - 2021 年重新认定，此前七批名单废止；保护区 24 个、基因库 8 个一并收录。
+#   - 公示表无「省份」列。province 由编号第 2–3 位行政区划代码推断简称
+#     （与 BasicProvince 对齐）。65 记为新疆。已有推断结果不改写。
+#   - name / institution / code 沿用公示原文，不做别名改写。
+#   - index 为该附件表内原序号（各组各自从 1 起）。
+#   - batch 为「第 x 批」的两位数字字符（01/02/03），写在 items[].batch。
+#
+# 字段一览（* 为目标 tidy 列；其余供维护，xlsx 阶段可丢弃）：
+#   year*              业务年份
+#   batch*             该条所属批次（两位字符）
+#   type*              畜禽保种场 / 畜禽基因库 / 畜禽保护区 / 畜禽变更
+#   mark               认定 / 变更
+#   annex              附件序号
+#   index*             附件原序号
+#   code               公示编号（A/B/C + 区划码）
+#   name*              保护单位名称
+#   institution*       建设单位；变更名单取变更后
+#   institution_origin 仅变更名单：原建设单位
+#   province*          由编号推断的省份简称
+#
+# 每年文件顶层键：year, title, doc_no, effective_date, pub_date,
+#   url, url_alt, source, source_files, counts, annexes.
+
+schema_version: 1
+dataset: PubGeneticResource
+scope: livestock
+type_values:
+  - 畜禽保种场
+  - 畜禽基因库
+  - 畜禽保护区
+  - 畜禽变更
+mark_values:
+  - 认定
+  - 变更
+tidy_columns:
+  - year
+  - batch
+  - type
+  - index
+  - name
+  - institution
+  - province
