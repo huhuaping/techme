@@ -38,7 +38,7 @@
 | 新增/调整数据集与 varsList | [.cursor/skills/techme-new-dataset/SKILL.md](.cursor/skills/techme-new-dataset/SKILL.md) |
 | R 包工程化（check、test） | [.cursor/skills/techme-r-package-check/SKILL.md](.cursor/skills/techme-r-package-check/SKILL.md) |
 | 文档与 pkgdown 维护 | [.cursor/skills/techme-pkgdown-docs/SKILL.md](.cursor/skills/techme-pkgdown-docs/SKILL.md) |
-| 与 tech-report 联动 | [.cursor/skills/techme-report-bridge/SKILL.md](.cursor/skills/techme-report-bridge/SKILL.md) |
+| 与报告仓联动 / 本地安装钉 renv | [.cursor/skills/techme-report-bridge/SKILL.md](.cursor/skills/techme-report-bridge/SKILL.md) |
 | UTF-8/中文乱码修复 | [.cursor/skills/techme-encoding-utf8/SKILL.md](.cursor/skills/techme-encoding-utf8/SKILL.md) |
 
 ## 常用 R 命令
