@@ -1,0 +1,2560 @@
+year: 2024
+title: 农业农村部关于定点市场复核结果的通报
+doc_no: 农市发〔2024〕2号
+effective_date: '2024-10-10'
+pub_date: '2024-10-10'
+url: https://scs.moa.gov.cn/tzggscxx/202410/t20241010_6464018.htm
+url_alt: null
+source: 农业农村部市场与信息化司
+source_files:
+  html: html/year-2024.html
+  confirmed_docx: html/year-2024-a-confirmed.docx
+  canceled_docx: html/year-2024-b-canceled.docx
+notes:
+- 表头为序号、市场名称；省份来自加粗分组行，分组行上的“N家”只作校验不入库。
+- 新疆生产建设兵团单独成组，原文保留；第 2 步若与其他 Pub* 对齐可改为新疆。
+- name 保留附件中的“（…）”官方并列写法。
+counts:
+  认定名单: 663
+  取消名单: 180
+  合计: 843
+annexes:
+- annex: 1
+  mark: 认定
+  type: 认定名单
+  title: 农业农村部定点市场名单
+  items:
+  - index: 1
+    province: 北京
+    name: 北京新发地农产品股份有限公司（北京新发地农副产品批发市场中心）
+  - index: 2
+    province: 北京
+    name: 北京大洋路农副产品市场有限公司
+  - index: 3
+    province: 北京
+    name: 北京锦绣大地农副产品批发市场有限责任公司
+  - index: 4
+    province: 北京
+    name: 北京大红门京深海鲜批发市场有限公司
+  - index: 5
+    province: 北京
+    name: 北京顺鑫石门国际农产品批发市场集团有限公司
+  - index: 6
+    province: 北京
+    name: 北京水屯农副产品批发市场有限公司
+  - index: 7
+    province: 北京
+    name: 北京京丰岳各庄农副产品批发市场中心
+  - index: 8
+    province: 天津
+    name: 天津海吉星国际农产品物流园（天津静海海吉星农产品批发市场）
+  - index: 9
+    province: 天津
+    name: 天津市隆海葛沽农产品市场
+  - index: 10
+    province: 天津
+    name: 天津市静海区范庄子蔬菜批发中心
+  - index: 11
+    province: 天津
+    name: 天津韩家墅海吉星农产品物流有限公司（天津韩家墅海吉星农产品批发市场）
+  - index: 12
+    province: 天津
+    name: 天津宁河区贸易开发区综合批发市场
+  - index: 13
+    province: 天津
+    name: 天津金元宝滨海农产品交易市场
+  - index: 14
+    province: 天津
+    name: 天津市红旗农贸综合批发市场有限公司
+  - index: 15
+    province: 天津
+    name: 天津何庄子农产品批发市场
+  - index: 16
+    province: 天津
+    name: 天津大沙河蔬菜批发市场
+  - index: 17
+    province: 天津
+    name: 天津碧城农产品批发市场
+  - index: 18
+    province: 天津
+    name: 天津市宝坻区京东市场建设服务有限公司农产品批发市场
+  - index: 19
+    province: 天津
+    name: 天津环渤海绿色农产品交易物流中心(天津环渤海农产品交易市场)
+  - index: 20
+    province: 天津
+    name: 天津市蓟州万家蔬菜批发有限公司(天津市蓟州蔬菜批发市场)
+  - index: 21
+    province: 天津
+    name: 天津金钟农产品批发市场
+  - index: 22
+    province: 天津
+    name: 天津市兴耀粮油食品批发市场有限公司(天津市兴耀粮油食品批发市场)
+  - index: 23
+    province: 河北
+    name: 河北石家庄雨润农产品全球采购有限公司（河北石家庄雨润农产品全球采购中心）
+  - index: 24
+    province: 河北
+    name: 河北乐亭县冀东国际农产品物流有限公司（河北乐亭县冀东果菜批发市场）
+  - index: 25
+    province: 河北
+    name: 河北邯郸市（馆陶）金凤禽蛋农贸批发市场
+  - index: 26
+    province: 河北
+    name: 河北定州市西城蔬菜批发市场
+  - index: 27
+    province: 河北
+    name: 河北高邑蔬菜批发市场
+  - index: 28
+    province: 河北
+    name: 河北唐山市荷花坑农副产品批发市场
+  - index: 29
+    province: 河北
+    name: 河北秦皇岛农副产品批发市场
+  - index: 30
+    province: 河北
+    name: 河北魏县现代农业产业发展服务中心（河北邯郸（魏县）天仙果菜批发交易市场）
+  - index: 31
+    province: 河北
+    name: 河北怀来县京西果菜批发市场有限责任公司
+  - index: 32
+    province: 河北
+    name: 河北威县冀南瓜菜有限公司（河北威县瓜菜批发市场）
+  - index: 33
+    province: 河北
+    name: 河北无极县王村鲜活农产品交易市场
+  - index: 34
+    province: 河北
+    name: 河北冀州区周村辣椒专业批发市场
+  - index: 35
+    province: 河北
+    name: 河北邯郸市蔚庄农产品市场有限公司
+  - index: 36
+    province: 河北
+    name: 河北黄骅市沈庄贸易城综合市场有限公司
+  - index: 37
+    province: 河北
+    name: 河北沧州红枣交易市场
+  - index: 38
+    province: 河北
+    name: 河北衡水市东明村农产品企业管理有限责任公司（河北衡水市东明蔬菜果品批发市场）
+  - index: 39
+    province: 河北
+    name: 河北宣化盛发蔬菜水产有限责任公司（河北宣化盛发蔬菜批发市场有限公司）
+  - index: 40
+    province: 河北
+    name: 河北康保县杂粮商会（河北康保县杂粮市场）
+  - index: 41
+    province: 河北
+    name: 河北唐山市众船农贸市场管理有限公司
+  - index: 42
+    province: 河北
+    name: 河北承德市隆化县兴业大牲畜交易市场
+  - index: 43
+    province: 河北
+    name: 河北唐山金玉农产品综合批发市场
+  - index: 44
+    province: 河北
+    name: 河北河间市堤口农产品批发市场
+  - index: 45
+    province: 河北
+    name: 河北遵化市燕山果菜批发市场有限公司
+  - index: 46
+    province: 河北
+    name: 河北滦南县姚王庄青河沿果菜批发市场
+  - index: 47
+    province: 河北
+    name: 河北宁晋县绿源蔬菜果品批发市场有限公司
+  - index: 48
+    province: 河北
+    name: 河北张北县坝上蔬菜产业有限公司（河北张北县农产品综合批发市场）
+  - index: 49
+    province: 河北
+    name: 河北首衡高碑店国际农产品交易中心
+  - index: 50
+    province: 河北
+    name: 河北昌黎县嘉诚实业集团有限公司新集农副产品批发市场
+  - index: 51
+    province: 河北
+    name: 河北邢州现代农产品市场服务有限公司
+  - index: 52
+    province: 河北
+    name: 河北保定新发地联农批发市场
+  - index: 53
+    province: 河北
+    name: 河北邯郸开发区滏东现代农业管理有限公司（河北邯郸南大堡蔬菜批发市场）
+  - index: 54
+    province: 河北
+    name: 河北唐山市曹妃甸区远通农贸综合批发市场
+  - index: 55
+    province: 河北
+    name: 河北邯郸市超盟农产品贸易有限公司（河北邯郸冀南超盟农副产品批发市场）
+  - index: 56
+    province: 河北
+    name: 河北唐山市丰南农副产品交易市场
+  - index: 57
+    province: 河北
+    name: 河北邢台润恒农副产品市场管理有限公司
+  - index: 58
+    province: 河北
+    name: 河北承德市南区农产品批发市场有限公司
+  - index: 59
+    province: 山西
+    name: 山西太原市裕吉经贸发展有限公司（山西太原市杏花岭区城东利民果菜批发市场）
+  - index: 60
+    province: 山西
+    name: 山西太原市河西农产品有限公司（山西太原市万柏林区河西农副产品市场）
+  - index: 61
+    province: 山西
+    name: 山西大同市平城区振华蔬菜农贸批发市场
+  - index: 62
+    province: 山西
+    name: 山西大同市康圆果蔬贸易有限责任公司（山西大同市平城区康圆果蔬批发市场）
+  - index: 63
+    province: 山西
+    name: 山西华胜农贸市场有限公司
+  - index: 64
+    province: 山西
+    name: 山西长治市天禾农产品有限公司（山西长治市上党经开区天禾农产品交易市场）
+  - index: 65
+    province: 山西
+    name: 山西长治市紫坊农产品综合交易市场有限公司
+  - index: 66
+    province: 山西
+    name: 山西长治市金鑫瓜果批发市场
+  - index: 67
+    province: 山西
+    name: 山西应县南河种蔬菜批发市场
+  - index: 68
+    province: 山西
+    name: 山西朔州大运果菜批发市场有限公司
+  - index: 69
+    province: 山西
+    name: 山西右玉玉羊畜产品有限责任公司（山西朔州市右玉县玉羊肉类批发市场）
+  - index: 70
+    province: 山西
+    name: 山西晋中汇隆农产品置业有限公司（山西晋中市榆次区汇隆市场）
+  - index: 71
+    province: 山西
+    name: 山西孝义市绿海蔬菜批发销售有限公司
+  - index: 72
+    province: 山西
+    name: 山西临汾市尧都区奶牛场尧丰农副产品批发市场
+  - index: 73
+    province: 山西
+    name: 山西吕梁市离石区马茂庄常青蔬菜瓜果综合市场
+  - index: 74
+    province: 山西
+    name: 山西忻州市忻府区华瑞农副产品转运中心
+  - index: 75
+    province: 内蒙古
+    name: 内蒙古美通首府无公害农产品物流中心
+  - index: 76
+    province: 内蒙古
+    name: 内蒙呼和浩特市东瓦窑农副产品批发市场有限责任公司
+  - index: 77
+    province: 内蒙古
+    name: 内蒙古食全食美股份有限公司石羊桥交易中心
+  - index: 78
+    province: 内蒙古
+    name: 内蒙古西龙王庙万惠农副产品商贸有限责任公司（内蒙古呼和浩特市万惠农副产品批发市场）
+  - index: 79
+    province: 内蒙古
+    name: 内蒙古包头市友谊蔬菜批发市场有限责任公司
+  - index: 80
+    province: 内蒙古
+    name: 内蒙古呼伦贝尔市海拉尔区胜利农工商联合公司（内蒙古呼伦贝尔市新桥市场）
+  - index: 81
+    province: 内蒙古
+    name: 内蒙古扎兰屯市蒙东牲畜交易市场有限责任公司
+  - index: 82
+    province: 内蒙古
+    name: 内蒙古扎赉特旗石头城子牲畜交易（市场）有限公司
+  - index: 83
+    province: 内蒙古
+    name: 内蒙古赤峰西城市场
+  - index: 84
+    province: 内蒙古
+    name: 内蒙古宁城蔬菜大市场
+  - index: 85
+    province: 内蒙古
+    name: 内蒙古赤峰平庄新发地农副产品批发市场
+  - index: 86
+    province: 内蒙古
+    name: 内蒙古察右后旗北方马铃薯批发市场有限责任公司
+  - index: 87
+    province: 内蒙古
+    name: 内蒙古察右中旗红胡萝卜批发市场
+  - index: 88
+    province: 内蒙古
+    name: 内蒙古鄂托克前旗三段地活畜交易市场
+  - index: 89
+    province: 内蒙古
+    name: 内蒙古临河四季青批发市场有限公司
+  - index: 90
+    province: 内蒙古
+    name: 内蒙古鸿鼎工贸园（内蒙古五原县鸿鼎农贸市场）
+  - index: 91
+    province: 内蒙古
+    name: 内蒙古通辽市成峰牲畜交易市场有限公司
+  - index: 92
+    province: 内蒙古
+    name: 内蒙古鄂尔多斯市东胜区欣祥万家惠农贸市场
+  - index: 93
+    province: 内蒙古
+    name: 内蒙古赤峰雨润农产品物流有限公司
+  - index: 94
+    province: 内蒙古
+    name: 内蒙古通辽市科尔沁区建国农产品批发市场有限责任公司
+  - index: 95
+    province: 内蒙古
+    name: 内蒙古乌兰浩特泰华农产品批发市场有限公司
+  - index: 96
+    province: 内蒙古
+    name: 内蒙古开鲁县雨田农畜交易市场有限责任公司
+  - index: 97
+    province: 内蒙古
+    name: 内蒙古科左后旗科尔沁黄牛市场有限公司
+  - index: 98
+    province: 内蒙古
+    name: 内蒙古包头市远大诚信瓜果蔬菜副食市场有限公司
+  - index: 99
+    province: 内蒙古
+    name: 内蒙古赤峰八里罕活畜市场有限责任公司
+  - index: 100
+    province: 内蒙古
+    name: 内蒙古满洲里市德丰贸易有限责任公司（内蒙古满洲里市口岸农副产品批发市场）
+  - index: 101
+    province: 辽宁
+    name: 辽宁沈阳市粮食批发市场
+  - index: 102
+    province: 辽宁
+    name: 辽宁塔湾北行农贸市场
+  - index: 103
+    province: 辽宁
+    name: 辽宁沈阳盛发菜果批发有限公司（辽宁沈阳盛发菜果批发市场）
+  - index: 104
+    province: 辽宁
+    name: 辽宁沈阳水产批发市场
+  - index: 105
+    province: 辽宁
+    name: 辽宁大连棉麻有限公司果菜批发市场
+  - index: 106
+    province: 辽宁
+    name: 辽宁大连双兴商品城有限公司（辽宁大连双兴批发市场）
+  - index: 107
+    province: 辽宁
+    name: 辽宁大连辽渔国际水产品市场
+  - index: 108
+    province: 辽宁
+    name: 辽宁鞍山宁远农产品批发市场
+  - index: 109
+    province: 辽宁
+    name: 辽宁本溪大河农产品批发市场
+  - index: 110
+    province: 辽宁
+    name: 辽宁东港黄海水产品批发市场
+  - index: 111
+    province: 辽宁
+    name: 辽宁窟窿台蔬菜批发市场
+  - index: 112
+    province: 辽宁
+    name: 辽宁阜新市瑞轩实业发展有限公司（辽宁阜新市瑞轩蔬菜农副产品综合批发市场）
+  - index: 113
+    province: 辽宁
+    name: 辽宁辽阳市果品批发市场
+  - index: 114
+    province: 辽宁
+    name: 辽宁万隆农产品大市场
+  - index: 115
+    province: 辽宁
+    name: 辽宁北票市庄头营蔬菜批发市场有限公司
+  - index: 116
+    province: 辽宁
+    name: 辽宁朝阳果菜批发市场
+  - index: 117
+    province: 辽宁
+    name: 辽宁凌源市八里堡蔬菜果品批发市场有限公司
+  - index: 118
+    province: 辽宁
+    name: 辽宁凌源市四官营子果菜批发市场
+  - index: 119
+    province: 辽宁
+    name: 辽宁凌源市茂源花卉有限责任公司（辽宁凌源市花卉市场）
+  - index: 120
+    province: 辽宁
+    name: 辽宁前当堡鲜鱼批发市场
+  - index: 121
+    province: 辽宁
+    name: 辽宁绥中县荣利农贸蔬菜批发市场
+  - index: 122
+    province: 辽宁
+    name: 辽宁朝阳市朱碌科杂粮专业批发市场管理有限公司
+  - index: 123
+    province: 辽宁
+    name: 辽宁沈阳雨润农副产品全球采购中心（辽宁沈阳雨润农产品批发市场）
+  - index: 124
+    province: 辽宁
+    name: 辽宁大连现代农业产业中心农产品交易市场
+  - index: 125
+    province: 辽宁
+    name: 辽宁葫芦岛兴宫农副产品批发交易市场
+  - index: 126
+    province: 吉林
+    name: 吉林长春汉夏农业发展有限公司（吉林省长春市汉夏牛交易市场）
+  - index: 127
+    province: 吉林
+    name: 吉林省进步蔬菜批发市场有限公司
+  - index: 128
+    province: 吉林
+    name: 吉林白城保胜农产品批发市场
+  - index: 129
+    province: 吉林
+    name: 吉林蛟河市黄松甸食用菌市场
+  - index: 130
+    province: 吉林
+    name: 吉林市东北亚农产品批发市场
+  - index: 131
+    province: 吉林
+    name: 吉林伊通县营城子镇黄牛市场
+  - index: 132
+    province: 吉林
+    name: 吉林仙城物流园区农产品批发市场
+  - index: 133
+    province: 吉林
+    name: 吉林白山市星泰批发市场
+  - index: 134
+    province: 吉林
+    name: 吉林汪清县天成农业服务有限公司（吉林省延边州汪清县天成黑木耳批发市场）
+  - index: 135
+    province: 吉林
+    name: 吉林敦化市长白山特产市场有限责任公司
+  - index: 136
+    province: 吉林
+    name: 吉林农安县万隆三辣交易市场有限公司
+  - index: 137
+    province: 吉林
+    name: 中国三井子杂粮市场
+  - index: 138
+    province: 吉林
+    name: 中国快大人参交易市场
+  - index: 139
+    province: 吉林
+    name: 吉林四平万邦农副产品批发市场
+  - index: 140
+    province: 黑龙江
+    name: 黑龙江哈尔滨哈达农副产品股份有限公司（黑龙江哈尔滨哈达农副产品批发市场）
+  - index: 141
+    province: 黑龙江
+    name: 黑龙江农业高新技术产品综合市场
+  - index: 142
+    province: 黑龙江
+    name: 黑龙江先锋农业生产资料交易市场有限责任公司
+  - index: 143
+    province: 黑龙江
+    name: 黑龙江宝清县紫香白瓜籽交易市场有限公司
+  - index: 144
+    province: 黑龙江
+    name: 黑龙江苇河黑木耳批发市场有限公司
+  - index: 145
+    province: 黑龙江
+    name: 黑龙江齐齐哈尔市站前农产品综合批发市场
+  - index: 146
+    province: 黑龙江
+    name: 黑龙江齐齐哈尔水产品批发市场
+  - index: 147
+    province: 黑龙江
+    name: 黑龙江牡丹江牡达农副产品有限公司
+  - index: 148
+    province: 黑龙江
+    name: 黑龙江东宁雨润绥阳木耳大市场有限公司
+  - index: 149
+    province: 黑龙江
+    name: 黑龙江七台河市合兴蔬菜综合批发股份合作公司
+  - index: 150
+    province: 黑龙江
+    name: 黑龙江鸡西市绿信蔬菜副食品有限公司（黑龙江鸡西市绿信蔬菜副食品批发市场）
+  - index: 151
+    province: 黑龙江
+    name: 黑龙江大庆农产品中心批发市场有限公司
+  - index: 152
+    province: 黑龙江
+    name: 黑龙江鹤岗市万圃源蔬菜批发市场有限公司
+  - index: 153
+    province: 黑龙江
+    name: 黑龙江北安市北方商城有限责任公司（黑龙江北安市北方商城农贸市场）
+  - index: 154
+    province: 黑龙江
+    name: 黑龙江安达市北方第一蔬菜批发市场
+  - index: 155
+    province: 黑龙江
+    name: 黑龙江大豆贸易中心有限公司
+  - index: 156
+    province: 黑龙江
+    name: 黑龙江华博农产品市场有限公司
+  - index: 157
+    province: 黑龙江
+    name: 黑龙江齐齐哈尔市城乡粮油交易市场有限公司
+  - index: 158
+    province: 黑龙江
+    name: 黑龙江宁安市源丰经贸有限公司（黑龙江宁安市源丰农产品批发市场）
+  - index: 159
+    province: 黑龙江
+    name: 黑龙江四达农副产品有限公司（黑龙江四达中俄国际贸易中心）
+  - index: 160
+    province: 上海
+    name: 上海市江桥批发市场经营管理有限公司
+  - index: 161
+    province: 上海
+    name: 上海农产品中心批发市场经营管理有限公司
+  - index: 162
+    province: 上海
+    name: 上海西郊国际农产品交易有限公司（上海西郊国际农产品交易中心）
+  - index: 163
+    province: 江苏
+    name: 江苏南京农副产品物流配送中心有限公司
+  - index: 164
+    province: 江苏
+    name: 江苏固城湖水产市场股份有限公司
+  - index: 165
+    province: 江苏
+    name: 江苏无锡天鹏菜篮子工程有限公司
+  - index: 166
+    province: 江苏
+    name: 江苏无锡朝阳股份有限公司（江苏无锡朝阳农产品大市场）
+  - index: 167
+    province: 江苏
+    name: 江苏宜兴市瑞德蔬菜果品批发市场有限公司
+  - index: 168
+    province: 江苏
+    name: 江苏徐州源洋商贸发展有限公司（江苏徐州农副产品中心批发市场）
+  - index: 169
+    province: 江苏
+    name: 江苏新沂市北方农副产品批发市场有限公司
+  - index: 170
+    province: 江苏
+    name: 江苏苏浙皖边界市场发展有限公司
+  - index: 171
+    province: 江苏
+    name: 江苏夏溪花木市场控股有限公司
+  - index: 172
+    province: 江苏
+    name: 江苏凌家塘市场发展有限公司
+  - index: 173
+    province: 江苏
+    name: 江苏苏州市南环桥市场发展股份有限公司
+  - index: 174
+    province: 江苏
+    name: 江苏张家港市青草巷农副产品批发市场有限公司
+  - index: 175
+    province: 江苏
+    name: 江苏苏州市新福地农产品市场发展有限公司
+  - index: 176
+    province: 江苏
+    name: 江苏太仓市江南农副食品城
+  - index: 177
+    province: 江苏
+    name: 江苏苏中农副产品交易中心有限公司
+  - index: 178
+    province: 江苏
+    name: 江苏南通吕四盈港市场有限公司
+  - index: 179
+    province: 江苏
+    name: 江苏淮安宏进农副产品物流有限公司（江苏淮安宏进农副产品物流中心）
+  - index: 180
+    province: 江苏
+    name: 江苏阜宁县古河粮油批发交易市场有限公司
+  - index: 181
+    province: 江苏
+    name: 江苏阿波罗花木市场发展有限公司
+  - index: 182
+    province: 江苏
+    name: 江苏联谊农副产品批发市场
+  - index: 183
+    province: 江苏
+    name: 江苏镇江农副产品批发市场有限公司
+  - index: 184
+    province: 江苏
+    name: 江苏泰州市姜堰区曹安市场有限责任公司
+  - index: 185
+    province: 江苏
+    name: 江苏兴化市粮食交易市场
+  - index: 186
+    province: 江苏
+    name: 江苏兴化市桃源畜禽有限公司（江苏兴化桃源畜禽综合市场）
+  - index: 187
+    province: 江苏
+    name: 江苏苏州市粮食批发交易市场服务有限公司
+  - index: 188
+    province: 江苏
+    name: 江苏昆山市粮食批发交易市场贸易公司
+  - index: 189
+    province: 江苏
+    name: 江苏南通农副产品物流有限公司（江苏南通农副产品物流中心）
+  - index: 190
+    province: 江苏
+    name: 江苏涟水农产品批发市场
+  - index: 191
+    province: 江苏
+    name: 江苏华东（盐城）农产品交易中心
+  - index: 192
+    province: 江苏
+    name: 江苏亚联农副产品有限公司（江苏亚联农副产品批发市场）
+  - index: 193
+    province: 江苏
+    name: 江苏句容市唐陵花木交易市场有限公司
+  - index: 194
+    province: 江苏
+    name: 江苏南门市场发展有限公司
+  - index: 195
+    province: 江苏
+    name: 江苏渔婆农副产品批发市场有限公司
+  - index: 196
+    province: 江苏
+    name: 江苏南方小麦交易市场有限公司
+  - index: 197
+    province: 江苏
+    name: 江苏沭阳蓝添花木城经营管理有限公司（中国沭阳国际花木城）
+  - index: 198
+    province: 江苏
+    name: 江苏中合兴业市场建设管理有限公司（江苏滨海农副产品批发市场）
+  - index: 199
+    province: 江苏
+    name: 江苏徐州东高农产品市场管理有限公司
+  - index: 200
+    province: 江苏
+    name: 江苏泰兴市玉隆农贸批发市场有限公司
+  - index: 201
+    province: 浙江
+    name: 浙江杭州农副产品物流中心良渚蔬菜批发市场
+  - index: 202
+    province: 浙江
+    name: 浙江杭州农副产品物流中心果品批发市场
+  - index: 203
+    province: 浙江
+    name: 中国水产城
+  - index: 204
+    province: 浙江
+    name: 浙江宁海县蔬菜果品市场有限公司（浙江宁海县合兴蔬菜果品批发市场）
+  - index: 205
+    province: 浙江
+    name: 浙江宁波蔬菜批发市场
+  - index: 206
+    province: 浙江
+    name: 浙江宁波市江东水产批发市场
+  - index: 207
+    province: 浙江
+    name: 浙江苍南县水产品市场开发有限公司（浙江温州浙福边贸水产城）
+  - index: 208
+    province: 浙江
+    name: 浙江温州市菜篮子农副产品批发交易市场
+  - index: 209
+    province: 浙江
+    name: 浙江温州市浙南农副产品中心市场
+  - index: 210
+    province: 浙江
+    name: 浙江嘉兴蔬菜批发交易市场
+  - index: 211
+    province: 浙江
+    name: 浙江嘉兴水果市场
+  - index: 212
+    province: 浙江
+    name: 浙江平湖市农副产品综合批发市场有限公司
+  - index: 213
+    province: 浙江
+    name: 浙江绍兴市蔬菜果品批发交易市场有限公司
+  - index: 214
+    province: 浙江
+    name: 浙江嵊州市浙东农副产品物流中心
+  - index: 215
+    province: 浙江
+    name: 浙江金华农产品批发市场有限公司
+  - index: 216
+    province: 浙江
+    name: 浙江江山成坤农贸城有限公司（浙江江山农贸城）
+  - index: 217
+    province: 浙江
+    name: 浙江舟山水产品中心批发市场
+  - index: 218
+    province: 浙江
+    name: 浙江台州水产品交易中心
+  - index: 219
+    province: 浙江
+    name: 浙江台州（中国）农港城
+  - index: 220
+    province: 浙江
+    name: 浙江省黄岩柑桔果品副食品综合市场
+  - index: 221
+    province: 浙江
+    name: 浙江台州市新路蔬菜批发有限公司（浙江台州市蔬菜批发中心）
+  - index: 222
+    province: 浙江
+    name: 浙江松门水产品批发市场
+  - index: 223
+    province: 浙江
+    name: 浙西南农贸城
+  - index: 224
+    province: 浙江
+    name: 浙南茶叶市场
+  - index: 225
+    province: 浙江
+    name: 浙闽赣食用菌交易市场
+  - index: 226
+    province: 浙江
+    name: 浙江余姚海吉新城农副产品批发市场
+  - index: 227
+    province: 浙江
+    name: 浙江湖州城商农副产品集散（物流）中心
+  - index: 228
+    province: 浙江
+    name: 浙江兰溪农产品交易城
+  - index: 229
+    province: 浙江
+    name: 浙江丽水市市场开发服务有限公司
+  - index: 230
+    province: 浙江
+    name: 浙江庆元香菇市场
+  - index: 231
+    province: 安徽
+    name: 安徽合肥周谷堆农产品批发市场股份有限公司（安徽合肥周谷堆批发市场）
+  - index: 232
+    province: 安徽
+    name: 安徽马鞍山市安民农副产品贸易有限公司（安徽马鞍山安民农副产品批发交易中心）
+  - index: 233
+    province: 安徽
+    name: 安徽阜阳瑶海农产品市场开发有限公司（安徽阜阳农产品物流中心）
+  - index: 234
+    province: 安徽
+    name: 安徽亳州蔬菜批发市场
+  - index: 235
+    province: 安徽
+    name: 安徽霍山大别山绿色商城
+  - index: 236
+    province: 安徽
+    name: 安徽砀山农产品中心惠丰批发市场
+  - index: 237
+    province: 安徽
+    name: 安徽淮南市安成鑫海农产品批发市场有限公司（安徽淮南安成批发市场）
+  - index: 238
+    province: 安徽
+    name: 安徽黄山茶叶城
+  - index: 239
+    province: 安徽
+    name: 安徽中瑞农产品批发市场
+  - index: 240
+    province: 安徽
+    name: 安徽阜南县会龙蔬菜批发市场
+  - index: 241
+    province: 安徽
+    name: 安徽铜陵绿源农产品大市场
+  - index: 242
+    province: 安徽
+    name: 安徽徽商集团肥东大市场农副产品批发园区（安徽徽商农产品批发大市场）
+  - index: 243
+    province: 安徽
+    name: 安徽宿州百大农产品物流有限责任公司（安徽宿州百大农产品批发市场）
+  - index: 244
+    province: 安徽
+    name: 安徽宿州市光彩城农资大市场
+  - index: 245
+    province: 安徽
+    name: 安徽池州市杏花村农产品批发大市场
+  - index: 246
+    province: 安徽
+    name: 安徽东至县官港茶叶香菇市场
+  - index: 247
+    province: 安徽
+    name: 安徽六安中川农贸城
+  - index: 248
+    province: 安徽
+    name: 安徽蚌埠海吉星农产品批发市场
+  - index: 249
+    province: 安徽
+    name: 安徽天长市永福农副产品批发市场
+  - index: 250
+    province: 安徽
+    name: 安徽蒙城新发地农副产品有限公司（安徽蒙城新发地农副产品批发市场）
+  - index: 251
+    province: 安徽
+    name: 安徽西商农副产品批发市场
+  - index: 252
+    province: 安徽
+    name: 安徽六安市紫竹林农副产品批发有限公司（安徽六安市紫竹林农产品物流中心）
+  - index: 253
+    province: 安徽
+    name: 中国供销·大别山农产品批发市场
+  - index: 254
+    province: 安徽
+    name: 安徽安庆海吉星农产品物流园有限公司（安徽安庆海吉星农产品批发市场）
+  - index: 255
+    province: 安徽
+    name: 安徽岳西县金翠兰茶叶大市场
+  - index: 256
+    province: 安徽
+    name: 安徽芜湖大地农副产品批发市场管理有限责任公司（安徽芜湖大地农副产品批发市场）
+  - index: 257
+    province: 福建
+    name: 福建福州民天实业有限公司海峡蔬菜批发市场
+  - index: 258
+    province: 福建
+    name: 福建福州民天实业有限公司海峡果品批发市场
+  - index: 259
+    province: 福建
+    name: 福建海峡水产品交易中心
+  - index: 260
+    province: 福建
+    name: 福建省古田食用菌批发市场
+  - index: 261
+    province: 福建
+    name: 福建福鼎闽浙边界农贸中心市场
+  - index: 262
+    province: 福建
+    name: 福建厦门闽南农副产品物流中心
+  - index: 263
+    province: 福建
+    name: 福建厦门夏商农产品集团有限公司中埔蔬菜农副产品批发市场
+  - index: 264
+    province: 福建
+    name: 福建南安市中国粮食城粮油交易中心
+  - index: 265
+    province: 福建
+    name: 福建闽台农产品市场
+  - index: 266
+    province: 福建
+    name: 福建安溪茶叶批发市场
+  - index: 267
+    province: 福建
+    name: 福建福州市农垦集团五里亭茶叶批发市场
+  - index: 268
+    province: 江西
+    name: 江西南昌深圳农产品中心批发市场
+  - index: 269
+    province: 江西
+    name: 江西南昌市佛塔农产品批发市场有限公司
+  - index: 270
+    province: 江西
+    name: 江西南昌赣昌水产品综合交易批发市场
+  - index: 271
+    province: 江西
+    name: 江西萍乡市城南农副产品批发市场
+  - index: 272
+    province: 江西
+    name: 江西宜春市赣西农副产品批发市场
+  - index: 273
+    province: 江西
+    name: 中国崇仁麻鸡农博城
+  - index: 274
+    province: 江西
+    name: 江西乐平蔬菜农产品批发市场有限公司
+  - index: 275
+    province: 江西
+    name: 江西九江市琵琶湖农产品物流有限公司
+  - index: 276
+    province: 江西
+    name: 江西新余市果蔬批发市场
+  - index: 277
+    province: 江西
+    name: 江西新余市优质农产品批发市场
+  - index: 278
+    province: 江西
+    name: 江西吉安农副产品物流中心
+  - index: 279
+    province: 江西
+    name: 江西省供销余干农商大市场
+  - index: 280
+    province: 江西
+    name: 中国供销上饶农产品交易城
+  - index: 281
+    province: 江西
+    name: 中国(赣州)华东农副产品综合商贸物流城
+  - index: 282
+    province: 江西
+    name: 中国供销赣州国际农产品交易中心
+  - index: 283
+    province: 江西
+    name: 江西省上饶市江天农博城
+  - index: 284
+    province: 山东
+    name: 山东济南市章丘区刁镇蔬菜批发市场
+  - index: 285
+    province: 山东
+    name: 山东济南堤口果品批发发展有限责任公司
+  - index: 286
+    province: 山东
+    name: 山东济南曲堤蔬菜销售有限公司（山东济南曲堤蔬菜批发市场）
+  - index: 287
+    province: 山东
+    name: 山东济南维尔康肉类水产批发市场
+  - index: 288
+    province: 山东
+    name: 山东济南七里堡综合批发市场
+  - index: 289
+    province: 山东
+    name: 山东匡山农产品综合交易市场管理有限公司
+  - index: 290
+    province: 山东
+    name: 山东青岛南村蔬菜有限公司（山东青岛平度市南村蔬菜批发市场）
+  - index: 291
+    province: 山东
+    name: 山东青岛东庄头蔬菜批发市场有限公司
+  - index: 292
+    province: 山东
+    name: 山东青岛丁家庄蔬菜果品批发市场有限公司
+  - index: 293
+    province: 山东
+    name: 山东青岛市城阳蔬菜水产品批发市场有限公司
+  - index: 294
+    province: 山东
+    name: 山东青岛抚顺路蔬菜副食品批发市场股份有限公司
+  - index: 295
+    province: 山东
+    name: 山东海月龙宫商业管理有限公司（山东淄博海盛水产品市场）
+  - index: 296
+    province: 山东
+    name: 山东淄博鲁中蔬菜批发市场有限公司
+  - index: 297
+    province: 山东
+    name: 山东博发农副产品综合批发市场有限公司
+  - index: 298
+    province: 山东
+    name: 山东滕州市农副产品物流中心
+  - index: 299
+    province: 山东
+    name: 山东利津县田园投资开发有限公司（山东利津县北岭蔬菜批发市场)
+  - index: 300
+    province: 山东
+    name: 山东黄河三角洲畜产品购销有限公司（山东利津县黄河三角洲畜产品大市场）
+  - index: 301
+    province: 山东
+    name: 山东招远坤发农产品交易市场
+  - index: 302
+    province: 山东
+    name: 山东烟台市三站果品批发市场有限责任公司
+  - index: 303
+    province: 山东
+    name: 山东安丘市姜蒜批发市场服务中心
+  - index: 304
+    province: 山东
+    name: 山东青州市高柳蔬菜购销有限公司（山东青州市高柳蔬菜交易市场）
+  - index: 305
+    province: 山东
+    name: 山东宏大生姜市场有限公司
+  - index: 306
+    province: 山东
+    name: 山东诸城市渤海水产城批发市场
+  - index: 307
+    province: 山东
+    name: 山东寿光果菜批发市场有限公司
+  - index: 308
+    province: 山东
+    name: 山东济宁蔬菜批发市场有限责任公司
+  - index: 309
+    province: 山东
+    name: 山东金乡大蒜国际交易市场
+  - index: 310
+    province: 山东
+    name: 山东省金乡大蒜专业批发市场
+  - index: 311
+    province: 山东
+    name: 山东泰安市良庄北宋蔬菜批发市场开发服务中心
+  - index: 312
+    province: 山东
+    name: 山东泰安市泰山红农产品有限公司（山东泰安泰山红西红柿专业批发市场）
+  - index: 313
+    province: 山东
+    name: 山东威海市蔬菜有限公司农副产品批发市场管理分公司
+  - index: 314
+    province: 山东
+    name: 山东石岛水产品中心批发市场有限公司
+  - index: 315
+    province: 山东
+    name: 山东威海水产品批发市场
+  - index: 316
+    province: 山东
+    name: 山东日照市岚山兴海鲜活水产品批发有限公司
+  - index: 317
+    province: 山东
+    name: 山东鲁南蔬菜产业有限公司（山东兰陵县鲁南蔬菜批发市场）
+  - index: 318
+    province: 山东
+    name: 山东黑马农副产品批发市场
+  - index: 319
+    province: 山东
+    name: 山东平原蔬菜果品批发市场
+  - index: 320
+    province: 山东
+    name: 山东金乡凯盛国际农产品物流园
+  - index: 321
+    province: 山东
+    name: 山东宁津县东崔蔬菜产销专业合作社（山东宁津县东崔蔬菜批发市场）
+  - index: 322
+    province: 山东
+    name: 山东周公河蔬菜批发市场
+  - index: 323
+    province: 山东
+    name: 山东滨州市六街商贸总公司（山东滨州鲁北（六街）蔬菜批发市场）
+  - index: 324
+    province: 山东
+    name: 山东沾化区王尔庄海蜇批发市场
+  - index: 325
+    province: 山东
+    name: 山东惠民蔬菜大市场
+  - index: 326
+    province: 山东
+    name: 山东定陶区黄店镇万家蔬菜交易市场
+  - index: 327
+    province: 山东
+    name: 山东微山新农商市场有限公司
+  - index: 328
+    province: 山东
+    name: 山东莘县十八里铺蔬菜购销服务中心
+  - index: 329
+    province: 山东
+    name: 山东菏泽农产品物流中心
+  - index: 330
+    province: 山东
+    name: 山东喜地农产品批发市场
+  - index: 331
+    province: 山东
+    name: 山东肥城鲁中桃源农产品有限公司（山东肥城鲁中桃源土豆大白菜批发市场）
+  - index: 332
+    province: 山东
+    name: 山东青岛黄河路市场经营服务有限责任公司
+  - index: 333
+    province: 山东
+    name: 山东济南海鲜大市场
+  - index: 334
+    province: 山东
+    name: 山东莱州市吕村大姜批发市场管理有限公司
+  - index: 335
+    province: 山东
+    name: 山东安丘市盛大农产品交易市场有限公司
+  - index: 336
+    province: 山东
+    name: 山东潍坊亿家安农贸批发市场有限公司
+  - index: 337
+    province: 山东
+    name: 山东昌邑琨福大姜蔬菜批发市场
+  - index: 338
+    province: 山东
+    name: 中国武城辣椒城
+  - index: 339
+    province: 山东
+    name: 山东青州天禄农业发展股份有限公司（山东青州市天禄农业蔬菜交易市场）
+  - index: 340
+    province: 山东
+    name: 山东青州市佳腾瓜菜购销服务中心
+  - index: 341
+    province: 山东
+    name: 山东兰陵县公益性农产品批发市场
+  - index: 342
+    province: 山东
+    name: 山东省临沂市费县自由市场开发有限公司
+  - index: 343
+    province: 山东
+    name: 新腾（山东）供应链科技有限公司（山东沂南县北于蔬菜交易市场）
+  - index: 344
+    province: 山东
+    name: 山东省沾化鲁北海产品有限公司（山东滨州鲁北水产品批发大市场）
+  - index: 345
+    province: 山东
+    name: 山东康巨农产品商贸有限公司（山东巨野县康巨农产品批发市场）
+  - index: 346
+    province: 山东
+    name: 山东日照新发地农副产品批发市场
+  - index: 347
+    province: 山东
+    name: 山东烟台顺泰植保张格庄大樱桃市场
+  - index: 348
+    province: 河南
+    name: 河南郑州万邦调味品有限公司（河南郑州万邦粮油调味品干果市场）
+  - index: 349
+    province: 河南
+    name: 河南新乡市宇鑫农贸有限公司综合批发市场
+  - index: 350
+    province: 河南
+    name: 河南省金土地农产品流通市场有限公司
+  - index: 351
+    province: 河南
+    name: 河南许昌市群发实业有限公司（河南许昌群发农产品批发市场）
+  - index: 352
+    province: 河南
+    name: 河南金河批发市场
+  - index: 353
+    province: 河南
+    name: 河南丁河镇食用菌批发市场
+  - index: 354
+    province: 河南
+    name: 河南南阳果品批发交易中心
+  - index: 355
+    province: 河南
+    name: 河南双龙镇香菇批发市场
+  - index: 356
+    province: 河南
+    name: 河南省新野新蔬菜有限责任公司（河南新野蔬菜批发市场）
+  - index: 357
+    province: 河南
+    name: 河南源潭辣椒城
+  - index: 358
+    province: 河南
+    name: 河南商丘农产品中心批发市场
+  - index: 359
+    province: 河南
+    name: 河南济源市南街集贸中心
+  - index: 360
+    province: 河南
+    name: 河南济源市亚桥农产品有限责任公司（河南济源亚桥农贸市场）
+  - index: 361
+    province: 河南
+    name: 河南黄淮农产品股份有限公司（河南周口市黄淮物流港农产品批发市场）
+  - index: 362
+    province: 河南
+    name: 河南新乡市牧绿菜业股份有限公司（河南新乡市牧绿菜业批发市场）
+  - index: 363
+    province: 河南
+    name: 河南中原四季水产物流港
+  - index: 364
+    province: 河南
+    name: 河南鹤壁市四季青农产品批发市场
+  - index: 365
+    province: 河南
+    name: 河南万邦水产冻品物流有限公司（河南万邦水产冻品海鲜市场）
+  - index: 366
+    province: 河南
+    name: 河南万邦国际农产品物流股份有限公司（河南万邦果蔬市场）
+  - index: 367
+    province: 河南
+    name: 河南许昌鲜之达农产品物流有限公司（河南中原国际农产品物流港）
+  - index: 368
+    province: 河南
+    name: 河南濮阳宏进农副产品批发市场有限公司
+  - index: 369
+    province: 河南
+    name: 河南内黄果蔬城农产品交易市场
+  - index: 370
+    province: 河南
+    name: 河南南阳中商农产品批发市场开发有限公司
+  - index: 371
+    province: 河南
+    name: 河南金牛大别山农产品现代物流中心
+  - index: 372
+    province: 河南
+    name: 河南万邦濮阳国际农产品批发市场
+  - index: 373
+    province: 河南
+    name: 河南驻马店市众信农副产品综合批发市场有限公司
+  - index: 374
+    province: 河南
+    name: 河南漯河伊诺中原农产品交易市场
+  - index: 375
+    province: 河南
+    name: 河南杞县大蒜国际交易市场
+  - index: 376
+    province: 湖北
+    name: 湖北武汉白沙洲农副产品大市场有限公司
+  - index: 377
+    province: 湖北
+    name: 湖北新华南国际农贸产业园
+  - index: 378
+    province: 湖北
+    name: 湖北黄石市新港商贸发展有限公司农产品批发市场
+  - index: 379
+    province: 湖北
+    name: 湖北襄阳竹叶山农产品交易中心
+  - index: 380
+    province: 湖北
+    name: 湖北两湖平原农产品交易物流中心（湖北两湖绿谷农产品批发市场）
+  - index: 381
+    province: 湖北
+    name: 湖北荆州市楚丰农产品大市场有限公司
+  - index: 382
+    province: 湖北
+    name: 湖北洪湖市农友农贸市场有限公司
+  - index: 383
+    province: 湖北
+    name: 湖北洪湖市闽洪水产品原产地批发交易市场
+  - index: 384
+    province: 湖北
+    name: 湖北聚四海水产品批发市场
+  - index: 385
+    province: 湖北
+    name: 湖北鄂州市蟠龙农产品批发市场有限公司
+  - index: 386
+    province: 湖北
+    name: 湖北浠水城北农产品批发市场
+  - index: 387
+    province: 湖北
+    name: 湖北天门供销华西农商城有限公司
+  - index: 388
+    province: 湖北
+    name: 湖北咸宁市宏大农贸有限责任公司（湖北咸宁市宏大农产品批发市场）
+  - index: 389
+    province: 湖北
+    name: 湖北鄂南农贸大市场
+  - index: 390
+    province: 湖北
+    name: 湖北随州香菇大市场
+  - index: 391
+    province: 湖北
+    name: 湖北恩施华硒农副产品批发市场
+  - index: 392
+    province: 湖北
+    name: 湖北潜江市四季友农产品市场有限公司
+  - index: 393
+    province: 湖北
+    name: 湖北新华南国际果品（湖北华南果品批发市场）
+  - index: 394
+    province: 湖北
+    name: 湖北四季青农贸城管理有限公司
+  - index: 395
+    province: 湖北
+    name: 湖北南漳食用菌交易市场
+  - index: 396
+    province: 湖北
+    name: 湖北宜昌三峡物流园有限公司
+  - index: 397
+    province: 湖北
+    name: 湖北供销华西十堰农商城
+  - index: 398
+    province: 湖北
+    name: 湖北佰昌优质农产品物流园
+  - index: 399
+    province: 湖北
+    name: 湖北供销中和农产品市场集团有限公司
+  - index: 400
+    province: 湖北
+    name: 湖北黄冈市天宏商贸有限公司天宏农副产品分公司（湖北黄冈天宏农副产品批发市场）
+  - index: 401
+    province: 湖北
+    name: 湖北裕丰农副产品市场
+  - index: 402
+    province: 湖北
+    name: 湖北随州白沙洲农副产品物流园有限公司
+  - index: 403
+    province: 湖北
+    name: 湖北多辉农产品物流园开发有限公司
+  - index: 404
+    province: 湖北
+    name: 湖北英山县大别山茶叶广场
+  - index: 405
+    province: 湖北
+    name: 湖北首衡孝感国际农产品交易中心
+  - index: 406
+    province: 湖北
+    name: 湖北潜江小龙虾交易市场
+  - index: 407
+    province: 湖北
+    name: 湖北仙桃市先锋黄鳝大市场有限责任公司
+  - index: 408
+    province: 湖北
+    name: 湖北汉川市宏翔农贸有限公司（湖北汉川市宏翔农副产品批发市场）
+  - index: 409
+    province: 湖北
+    name: 湖北广水市锦诚农产品实业有限公司（湖北广水市锦诚农产品批发市场）
+  - index: 410
+    province: 湖南
+    name: 湖南长沙黄兴海吉星国际农产品物流园
+  - index: 411
+    province: 湖南
+    name: 红星实业集团有限公司红星农副产品大市场
+  - index: 412
+    province: 湖南
+    name: 湖南高桥大市场茶叶城
+  - index: 413
+    province: 湖南
+    name: 湖南长沙大河西农产品物流中心
+  - index: 414
+    province: 湖南
+    name: 湖南长沙水渡河农产品市场
+  - index: 415
+    province: 湖南
+    name: 湖南湘潭市农产品物流配送中心
+  - index: 416
+    province: 湖南
+    name: 湖南衡阳市西园农副产品批发大市场
+  - index: 417
+    province: 湖南
+    name: 湖南三得利水果批发市场
+  - index: 418
+    province: 湖南
+    name: 湖南邵阳市江北农产品市场
+  - index: 419
+    province: 湖南
+    name: 湖南岳阳市花板桥蔬菜批发市场
+  - index: 420
+    province: 湖南
+    name: 湖南常德国际农产品交易中心
+  - index: 421
+    province: 湖南
+    name: 湖南娄底市湘中果品蔬菜批发大市场
+  - index: 422
+    province: 湖南
+    name: 湖南永州商业城果蔬批发市场
+  - index: 423
+    province: 湖南
+    name: 湖南佳惠农产品批发市场
+  - index: 424
+    province: 湖南
+    name: 湖南吉首市乾州农贸市场
+  - index: 425
+    province: 湖南
+    name: 湖南吉首市蔬菜果品批发大市场
+  - index: 426
+    province: 湖南
+    name: 湖南邵阳市湘西南大市场
+  - index: 427
+    province: 湖南
+    name: 湖南岳阳海吉星国际农产品物流园
+  - index: 428
+    province: 湖南
+    name: 湖南省岳阳市茶博城
+  - index: 429
+    province: 湖南
+    name: 湖南娄底市中兴大市场
+  - index: 430
+    province: 湖南
+    name: 湖南株洲中南蔬菜批发市场
+  - index: 431
+    province: 湖南
+    name: 湖南醴陵市湘东农副产品大市场
+  - index: 432
+    province: 湖南
+    name: 湖南红联大市场
+  - index: 433
+    province: 湖南
+    name: 湖南武陵缘现代农产品大市场
+  - index: 434
+    province: 广东
+    name: 广东广州江南果蔬批发市场
+  - index: 435
+    province: 广东
+    name: 广东广州黄沙水产交易市场
+  - index: 436
+    province: 广东
+    name: 广东东莞市信立国际农产品贸易城
+  - index: 437
+    province: 广东
+    name: 广东东莞市果菜副食交易市场有限公司
+  - index: 438
+    province: 广东
+    name: 广东东莞市大京九农副产品中心批发市场
+  - index: 439
+    province: 广东
+    name: 广东东莞市江南农副产品批发市场
+  - index: 440
+    province: 广东
+    name: 广东江门市水产冻品副食批发市场
+  - index: 441
+    province: 广东
+    name: 广东江门市蓬江区远洋农副产品批发市场
+  - index: 442
+    province: 广东
+    name: 广东江门市白沙江南蔬菜禽畜批发市场
+  - index: 443
+    province: 广东
+    name: 广东江门市江会水果批发市场
+  - index: 444
+    province: 广东
+    name: 广东翁源县宝源市场开发有限公司
+  - index: 445
+    province: 广东
+    name: 广东深圳市福田农产品批发市场有限公司
+  - index: 446
+    province: 广东
+    name: 广东中山公用事业集团股份有限公司中山农产品交易中心分公司
+  - index: 447
+    province: 广东
+    name: 广东惠州海吉星农产品国际物流园
+  - index: 448
+    province: 广东
+    name: 广东汕头市农副产品批发中心市场
+  - index: 449
+    province: 广东
+    name: 广东四会市仓丰农贸交易市场
+  - index: 450
+    province: 广东
+    name: 广东珠海市铭海投资发展有限公司农副产品批发物流中心
+  - index: 451
+    province: 广东
+    name: 广东徐闻农产品交易市场
+  - index: 452
+    province: 广东
+    name: 广东佛山市南海盐步环球水产交易市场
+  - index: 453
+    province: 广东
+    name: 广东佛山市大沥桂江农产品综合批发市场
+  - index: 454
+    province: 广东
+    name: 广东佛山中南农产品批发市场
+  - index: 455
+    province: 广东
+    name: 广东润丰农业发展集团有限公司石碣润丰（国际）蔬菜交易中心
+  - index: 456
+    province: 广东
+    name: 广东韶关市东联水产批发市场
+  - index: 457
+    province: 广东
+    name: 广东梅州海吉新城农副产品商贸物流园
+  - index: 458
+    province: 广东
+    name: 广东中山市之荣水产批发市场服务管理有限公司
+  - index: 459
+    province: 广东
+    name: 广东广州市荔塱农副产品综合批发市场
+  - index: 460
+    province: 广东
+    name: 广东东莞市虎门富民农副产品批发市场
+  - index: 461
+    province: 广东
+    name: 广东深圳市海吉星国际农产品物流园
+  - index: 462
+    province: 广东
+    name: 广东深圳市友信冷冻食品交易市场
+  - index: 463
+    province: 广东
+    name: 广东中山市小榄镇三鸟综合交易中心有限公司
+  - index: 464
+    province: 广东
+    name: 广东湛江市霞山（东堤）水产品批发市场
+  - index: 465
+    province: 广东
+    name: 广东阳江市宏粤海产品批发
+  - index: 466
+    province: 广东
+    name: 广东河源市农副产品批发中心
+  - index: 467
+    province: 广东
+    name: 广东连州市南北农产品批发市场有限公司
+  - index: 468
+    province: 广东
+    name: 广东顺德三洲农产品交易中心
+  - index: 469
+    province: 广西
+    name: 广西白沙农副产品综合批发市场
+  - index: 470
+    province: 广西
+    name: 广西南宁农产品交易中心
+  - index: 471
+    province: 广西
+    name: 广西海吉星农产品国际物流中心
+  - index: 472
+    province: 广西
+    name: 广西南宁市饲料兽药名龟市场
+  - index: 473
+    province: 广西
+    name: 广西荔浦市农副产品综合批发市场
+  - index: 474
+    province: 广西
+    name: 广西桂林五里店果蔬批发市场
+  - index: 475
+    province: 广西
+    name: 广西田阳农副产品综合批发市场
+  - index: 476
+    province: 广西
+    name: 广西新柳邕农产品批发市场
+  - index: 477
+    province: 广西
+    name: 广西玉林中药材专业市场
+  - index: 478
+    province: 广西
+    name: 广西玉林宏进农副产品交易中心
+  - index: 479
+    province: 广西
+    name: 广西南宁市佳禾市场投资开发有限公司
+  - index: 480
+    province: 广西
+    name: 广西恭城县水果批发市场
+  - index: 481
+    province: 广西
+    name: 中国珍珠城北海水产市场
+  - index: 482
+    province: 广西
+    name: 广西金桥国际农产品批发市场
+  - index: 483
+    province: 广西
+    name: 广西灵山大型农产品综合交易市场
+  - index: 484
+    province: 海南
+    name: 海南海口南北水果市场
+  - index: 485
+    province: 海南
+    name: 海南岛东农产品物流中心批发市场
+  - index: 486
+    province: 海南
+    name: 海南东部畜禽批发市场
+  - index: 487
+    province: 海南
+    name: 海南海口市菜篮子江楠农产品批发市场
+  - index: 488
+    province: 海南
+    name: 海南崖州果蔬综合批发市场
+  - index: 489
+    province: 重庆
+    name: 重庆花枝农业九龙坡蔬菜批发市场
+  - index: 490
+    province: 重庆
+    name: 重庆吉之汇国际农贸物流城
+  - index: 491
+    province: 重庆
+    name: 重庆潼南蔬菜批发物流市场有限公司
+  - index: 492
+    province: 重庆
+    name: 重庆市黄水黄连产地批发市场
+  - index: 493
+    province: 重庆
+    name: 重庆万州区宏远批发市场
+  - index: 494
+    province: 重庆
+    name: 重庆双福农产品批发市场有限公司
+  - index: 495
+    province: 重庆
+    name: 重庆恒康茶叶批发市场有限公司
+  - index: 496
+    province: 重庆
+    name: 重庆新大兴·国际农副产品交易中心
+  - index: 497
+    province: 重庆
+    name: 重庆龙门实业（集团）有限公司西三街农副水产品市场
+  - index: 498
+    province: 重庆
+    name: 重庆市合川区蟠龙市场管理有限公司
+  - index: 499
+    province: 重庆
+    name: 中国（荣昌）畜牧产品交易市场
+  - index: 500
+    province: 重庆
+    name: 渝西国际商贸物流港
+  - index: 501
+    province: 重庆
+    name: 国家级重庆(荣昌)生猪交易市场
+  - index: 502
+    province: 重庆
+    name: 重庆观农贸批发市场
+  - index: 503
+    province: 四川
+    name: 四川雨润国际农产品交易中心
+  - index: 504
+    province: 四川
+    name: 四川成都农产品中心批发市场有限责任公司
+  - index: 505
+    province: 四川
+    name: 四川聚和生态农业发展有限公司（四川成都龙泉聚合（国际）果蔬菜交易中心）
+  - index: 506
+    province: 四川
+    name: 四川三联禽畜水产交易中心
+  - index: 507
+    province: 四川
+    name: 四川绵阳高水蔬菜批发市场
+  - index: 508
+    province: 四川
+    name: 四川邻水县农产品交易中心
+  - index: 509
+    province: 四川
+    name: 川九襄农贸商城
+  - index: 510
+    province: 四川
+    name: 四川川南农副产品批发市场
+  - index: 511
+    province: 四川
+    name: 四川好一新复兴农副产品批发市场
+  - index: 512
+    province: 四川
+    name: 川陕甘农产品交易中心
+  - index: 513
+    province: 四川
+    name: 四川平昌县新华农产品批发市场
+  - index: 514
+    province: 四川
+    name: 四川阆中市圣果农产品综合贸易有限公司（四川阆中市圣果农产品批发市场）
+  - index: 515
+    province: 四川
+    name: 四川南充川北农产品交易中心
+  - index: 516
+    province: 四川
+    name: 四川省隆昌县禽苗市场开发有限责任公司
+  - index: 517
+    province: 四川
+    name: 四川广安临港国际农产品食品城
+  - index: 518
+    province: 四川
+    name: 四川春天花乐园国家花卉市场
+  - index: 519
+    province: 四川
+    name: 四川雅江县松茸交易市场
+  - index: 520
+    province: 四川
+    name: 四川巴中农副产品交易中心
+  - index: 521
+    province: 四川
+    name: 四川西南农商国际物流港
+  - index: 522
+    province: 四川
+    name: 四川金沙江智慧物流商贸城
+  - index: 523
+    province: 贵州
+    name: 贵州贵阳谷丰粮油食品批发市场
+  - index: 524
+    province: 贵州
+    name: 贵州贵阳地利农产品物流园
+  - index: 525
+    province: 贵州
+    name: 贵州贵阳花溪云上大牲畜交易批发市场有限公司
+  - index: 526
+    province: 贵州
+    name: 贵州遵义绿色农产品交易中心
+  - index: 527
+    province: 贵州
+    name: 贵州凤冈县金桥梁大牲畜交易有限公司
+  - index: 528
+    province: 贵州
+    name: 贵州遵义湄潭中国茶城
+  - index: 529
+    province: 贵州
+    name: 贵州遵义市博源果蔬市场经营管理有限公司
+  - index: 530
+    province: 贵州
+    name: 贵州铜仁玉屏牲畜产地批发市场
+  - index: 531
+    province: 贵州
+    name: 贵州万屯大牲畜交易市场
+  - index: 532
+    province: 贵州
+    name: 贵州关岭自治县断桥果蔬批发市场
+  - index: 533
+    province: 贵州
+    name: 贵州遵义新雪域农产品物流园
+  - index: 534
+    province: 贵州
+    name: 贵州贵阳数字化禽蛋配送中心
+  - index: 535
+    province: 贵州
+    name: 贵州黔北鸭溪大牲畜交易市场
+  - index: 536
+    province: 贵州
+    name: 中国辣椒城
+  - index: 537
+    province: 贵州
+    name: 贵州贵阳农产品物流园
+  - index: 538
+    province: 贵州
+    name: 贵州贵阳共享农创城
+  - index: 539
+    province: 贵州
+    name: 贵州六盘水市农产品综合物流园
+  - index: 540
+    province: 贵州
+    name: 贵州毕节市创美农副产品批发交易中心
+  - index: 541
+    province: 贵州
+    name: 贵州黔西北农产品电商物流园
+  - index: 542
+    province: 贵州
+    name: 贵州黔东南银田农产品物流园
+  - index: 543
+    province: 贵州
+    name: 贵州施秉太子参牛大场交易中心
+  - index: 544
+    province: 贵州
+    name: 贵州黔匀和农产品物流园
+  - index: 545
+    province: 贵州
+    name: 贵州双龙现代农副产品交易中心
+  - index: 546
+    province: 贵州
+    name: 贵州兴义市吉祥综合农贸市场
+  - index: 547
+    province: 云南
+    name: 云南昆明斗南花卉市场
+  - index: 548
+    province: 云南
+    name: 云南龙城蔬菜批发市场
+  - index: 549
+    province: 云南
+    name: 云南昆明市王旗营蔬菜批发市场有限公司
+  - index: 550
+    province: 云南
+    name: 云南昆明骏骐干菜副食粮油批发市场
+  - index: 551
+    province: 云南
+    name: 云南康乐茶文化城
+  - index: 552
+    province: 云南
+    name: 云南昆明市金马正昌第二果品市场
+  - index: 553
+    province: 云南
+    name: 云南富源县金城农贸市场
+  - index: 554
+    province: 云南
+    name: 云南通海金山蔬菜批发市场
+  - index: 555
+    province: 云南
+    name: 云南元谋县蔬菜交易市场
+  - index: 556
+    province: 云南
+    name: 云南泸西县粮贸综合市场
+  - index: 557
+    province: 云南
+    name: 云南保山市隆阳区蔬菜水果综合批发市场
+  - index: 558
+    province: 云南
+    name: 云南砚山县稼依辣椒专业交易市场
+  - index: 559
+    province: 云南
+    name: 云南省滇西蔬菜批发市场
+  - index: 560
+    province: 云南
+    name: 云南新登生猪交易有限公司（云南省大理州辛屯新登生猪交易市场）
+  - index: 561
+    province: 云南
+    name: 云南寻甸羊街大型畜产品综合交易市场
+  - index: 562
+    province: 云南
+    name: 云南澄江县右所镇柿花园交易市场
+  - index: 563
+    province: 云南
+    name: 云南滇东农产品集散交易与物流中心
+  - index: 564
+    province: 云南
+    name: 云南文山三七国际交易中心
+  - index: 565
+    province: 云南
+    name: 云南华潮水产品批发市场
+  - index: 566
+    province: 云南
+    name: 云南师宗县凤城综合农贸市场
+  - index: 567
+    province: 陕西
+    name: 陕西西安市朱雀农产品市场有限公司（陕西西安朱雀农副产品物流中心）
+  - index: 568
+    province: 陕西
+    name: 陕西咸阳新阳光农副产品有限公司（陕西咸阳新阳光农副产品批发市场）
+  - index: 569
+    province: 陕西
+    name: 陕西渭南市曙光农副综合批发市场
+  - index: 570
+    province: 陕西
+    name: 陕西渭南市华州区君沙蔬菜批发中心
+  - index: 571
+    province: 陕西
+    name: 陕西宝鸡市恒丰园蔬菜批发市场
+  - index: 572
+    province: 陕西
+    name: 陕西西部欣桥农产品物流中心市场
+  - index: 573
+    province: 陕西
+    name: 陕西泾云现代农业股份有限公司云阳蔬菜批发市场
+  - index: 574
+    province: 陕西
+    name: 陕西三原富民农产品贸易有限责任公司（陕西三原富民农产品批发市场）
+  - index: 575
+    province: 陕西
+    name: 陕西富县综合市场
+  - index: 576
+    province: 陕西
+    name: 陕西彬县商贸市场服务中心
+  - index: 577
+    province: 陕西
+    name: 陕西宝鸡汇农常丰商贸有限公司（陕西宝鸡汇丰农副产品交易中心）
+  - index: 578
+    province: 甘肃
+    name: 甘肃兰州国际高原夏菜副食品采购中心有限公司
+  - index: 579
+    province: 甘肃
+    name: 甘肃兰州蒋氏农产品有限公司（甘肃省榆中县蒋氏农产品交易市场）
+  - index: 580
+    province: 甘肃
+    name: 甘肃桃海市场
+  - index: 581
+    province: 甘肃
+    name: 甘肃金昌市金川天然农产品发展有限责任公司（甘肃金昌农产品综合批发市场）
+  - index: 582
+    province: 甘肃
+    name: 甘肃北方菜业有限责任公司（甘肃省靖远县瓜果蔬菜批发市场）
+  - index: 583
+    province: 甘肃
+    name: 甘肃定西马铃薯综合交易中心
+  - index: 584
+    province: 甘肃
+    name: 甘肃定西市临洮县崖湾蔬菜批发市场
+  - index: 585
+    province: 甘肃
+    name: 甘肃临洮县腾胜蔬菜市场服务有限责任公司
+  - index: 586
+    province: 甘肃
+    name: 甘肃渭源县会川马铃薯优质种薯专业批发市场
+  - index: 587
+    province: 甘肃
+    name: 甘肃陇西县清吉洋芋批发交易市场有限责任公司
+  - index: 588
+    province: 甘肃
+    name: 甘肃庆阳市西峰西郊瓜果蔬菜批发有限责任公司
+  - index: 589
+    province: 甘肃
+    name: 甘肃天水瀛池果菜批发市场
+  - index: 590
+    province: 甘肃
+    name: 甘肃甘谷浙江商贸城农产品冷链物流中心
+  - index: 591
+    province: 甘肃
+    name: 国家级武山洛门蔬菜批发市场
+  - index: 592
+    province: 甘肃
+    name: 甘肃陇南农副产品批发交易中心
+  - index: 593
+    province: 甘肃
+    name: 甘肃酒泉春光农产品市场有限责任公司
+  - index: 594
+    province: 甘肃
+    name: 甘肃武威昊天农产品交易市场暨仓储物流中心
+  - index: 595
+    province: 甘肃
+    name: 甘肃张掖绿洲农副产品综合交易市场
+  - index: 596
+    province: 甘肃
+    name: 甘肃高台景隆农产品市场流通有限责任公司
+  - index: 597
+    province: 甘肃
+    name: 甘肃邦农农产品批发市场
+  - index: 598
+    province: 甘肃
+    name: 甘肃平凉新阳光陇东农副产品批发交易市场
+  - index: 599
+    province: 甘肃
+    name: 甘肃渭源县渭水源中药材贸易中心
+  - index: 600
+    province: 甘肃
+    name: 甘肃敦煌龙德盛农产品交易市场有限责任公司
+  - index: 601
+    province: 甘肃
+    name: 甘肃古浪县八步沙羊产业链服务中心
+  - index: 602
+    province: 甘肃
+    name: 甘肃巨龙农产品综合批发市场
+  - index: 603
+    province: 甘肃
+    name: 甘肃兰州新区国源农贸副食品批发市场
+  - index: 604
+    province: 甘肃
+    name: 甘肃兰州高原夏菜蔬菜物流交易中心
+  - index: 605
+    province: 甘肃
+    name: 甘肃金昌江楠农产品综合批发市场
+  - index: 606
+    province: 甘肃
+    name: 甘肃甘南牦牛及产品专业批发市场
+  - index: 607
+    province: 青海
+    name: 青海西宁仁杰粮油批发市场
+  - index: 608
+    province: 青海
+    name: 青海西宁盛强综合批发市场
+  - index: 609
+    province: 青海
+    name: 青海农牧生产资料（集团）股份有限公司定点农资市场
+  - index: 610
+    province: 青海
+    name: 青海裕泰牛羊肉交易市场
+  - index: 611
+    province: 青海
+    name: 青海东部农副产品综合市场
+  - index: 612
+    province: 青海
+    name: 青海共和县恰卜恰镇农畜产品批发市场
+  - index: 613
+    province: 青海
+    name: 青海乐都区东升综合农贸市场
+  - index: 614
+    province: 青海
+    name: 青海青藏高原农副产品集散中心
+  - index: 615
+    province: 青海
+    name: 青海柴达木枸杞批发市场
+  - index: 616
+    province: 青海
+    name: 青海格尔木河东农贸市场
+  - index: 617
+    province: 青海
+    name: 青海海东市海平诚信农副产品批发市场
+  - index: 618
+    province: 青海
+    name: 青海新发地农副产品批发市场
+  - index: 619
+    province: 宁夏
+    name: 宁夏西北农资城
+  - index: 620
+    province: 宁夏
+    name: 宁夏四季鲜农产品综合批发市场
+  - index: 621
+    province: 宁夏
+    name: 宁夏瑞加祥定点活禽交易市场
+  - index: 622
+    province: 宁夏
+    name: 宁夏同心县预旺马铃薯批发市场
+  - index: 623
+    province: 宁夏
+    name: 宁夏盐池县畜产品交易市场
+  - index: 624
+    province: 宁夏
+    name: 宁夏涝河桥清真牛羊肉批发市场
+  - index: 625
+    province: 宁夏
+    name: 宁夏固原农副产品批发市场
+  - index: 626
+    province: 宁夏
+    name: 宁夏西吉县将台马铃薯批发市场
+  - index: 627
+    province: 宁夏
+    name: 宁夏中宁国际枸杞交易中心
+  - index: 628
+    province: 宁夏
+    name: 宁夏宁北鲜活农产品综合批发市场
+  - index: 629
+    province: 宁夏
+    name: 宁夏富民乐蔬菜综合批发市场
+  - index: 630
+    province: 宁夏
+    name: 宁夏中卫四季鲜农产品综合批发市场
+  - index: 631
+    province: 新疆
+    name: 新疆乌鲁木齐北园春果业经营管理有限责任公司（新疆北园春市场）
+  - index: 632
+    province: 新疆
+    name: 新疆明珠花卉市场
+  - index: 633
+    province: 新疆
+    name: 新疆乌鲁木齐新联综合农贸市场
+  - index: 634
+    province: 新疆
+    name: 新疆华凌物流集散管理有限公司定点牛羊肉销售分公司（新疆华凌定点牛羊肉批发市场）
+  - index: 635
+    province: 新疆
+    name: 新疆伊犁九鼎富通农产品批发交易市场
+  - index: 636
+    province: 新疆
+    name: 新疆克拉玛依农副产品批发市场
+  - index: 637
+    province: 新疆
+    name: 新疆奎屯市农资专业批发市场
+  - index: 638
+    province: 新疆
+    name: 新疆塔城市华宝农贸批发市场
+  - index: 639
+    province: 新疆
+    name: 新疆通汇市场有限公司
+  - index: 640
+    province: 新疆
+    name: 新疆阿图什市博格拉市场管理有限公司
+  - index: 641
+    province: 新疆
+    name: 新疆昌吉市亚中商城综合批发市场
+  - index: 642
+    province: 新疆
+    name: 新疆昌吉市园丰农副产品交易市场有限责任公司
+  - index: 643
+    province: 新疆
+    name: 新疆沙湾县宝源农副产品批发交易市场
+  - index: 644
+    province: 新疆
+    name: 新疆海宝国际农产品物流商贸城
+  - index: 645
+    province: 新疆
+    name: 新疆海鸿国际食品物流港
+  - index: 646
+    province: 新疆
+    name: 新疆博乐市兴农蔬菜果品批发市场
+  - index: 647
+    province: 新疆
+    name: 新疆焉耆县光明农副产品综合批发市场
+  - index: 648
+    province: 新疆
+    name: 新疆阜康市城北农贸市场
+  - index: 649
+    province: 新疆
+    name: 新疆阿勒泰西部农副产品物流中心
+  - index: 650
+    province: 新疆
+    name: 新疆和田北园春慕士塔格农产品批发有限责任公司
+  - index: 651
+    province: 新疆
+    name: 新疆喀什曙光农博城
+  - index: 652
+    province: 新疆
+    name: 新疆喀什疆南农副产品批发市场
+  - index: 653
+    province: 新疆
+    name: 新疆果品（伽师）批发交易市场
+  - index: 654
+    province: 新疆
+    name: 新疆核桃（叶城）批发交易市场
+  - index: 655
+    province: 新疆生产建设兵团
+    name: 新疆兵团新疆绿珠九鼎农产品经营管理有限公司（新疆兵团第八师石河子市九鼎农产品批发市场）
+  - index: 656
+    province: 新疆生产建设兵团
+    name: 新疆兵团第五师博乐三和农副产品综合批发市场
+  - index: 657
+    province: 新疆生产建设兵团
+    name: 新疆兵团农二师二十一团制干红辣椒批发市场
+  - index: 658
+    province: 新疆生产建设兵团
+    name: 新疆兵团第二师孔雀市场
+  - index: 659
+    province: 新疆生产建设兵团
+    name: 新疆兵团第七师一三七团绿衡蔬菜瓜果批发市场
+  - index: 660
+    province: 新疆生产建设兵团
+    name: 新疆兵团农十三师红星一场农产品批发交易市场
+  - index: 661
+    province: 新疆生产建设兵团
+    name: 新疆兵团第八师石河子市种子交易市场
+  - index: 662
+    province: 新疆生产建设兵团
+    name: 新疆兵团新疆九鼎农产品批发交易市场
+  - index: 663
+    province: 新疆生产建设兵团
+    name: 新疆兵团新疆昆仑农产品有限公司（新疆兵团第三师图木舒克市昆仑农产品市场）
+- annex: 2
+  mark: 取消
+  type: 取消名单
+  title: 取消农业农村部定点市场资格的市场名单
+  items:
+  - index: 1
+    province: 北京
+    name: 北京八里桥农产品中心批发市场有限公司
+  - index: 2
+    province: 北京
+    name: 北京日上综合商品批发市场有限公司
+  - index: 3
+    province: 北京
+    name: 北京八达岭绿野菜蔬中心
+  - index: 4
+    province: 北京
+    name: 北京盛华宏林粮油批发市场有限公司
+  - index: 5
+    province: 北京
+    name: 中央农产品批发市场有限责任公司
+  - index: 6
+    province: 天津
+    name: 天津宝粮农副产品批发市场
+  - index: 7
+    province: 天津
+    name: 天津曹庄花卉市场
+  - index: 8
+    province: 河北
+    name: 河北石家庄桥西蔬菜中心批发市场
+  - index: 9
+    province: 河北
+    name: 河北保定市工农路蔬菜果品批发市场
+  - index: 10
+    province: 河北
+    name: 河北青县盘古市场服务有限公司
+  - index: 11
+    province: 河北
+    name: 河北饶阳县春阳瓜菜果品交易市场
+  - index: 12
+    province: 河北
+    name: 河北三河市建兴农副产品批发市场
+  - index: 13
+    province: 河北
+    name: 河北任县蔬菜批发市场
+  - index: 14
+    province: 河北
+    name: 河北新乐市花生米市场
+  - index: 15
+    province: 河北
+    name: 河北保定天惠果品批发市场有限公司
+  - index: 16
+    province: 河北
+    name: 河北邯郸市农科贸易城农副产品批发市场
+  - index: 17
+    province: 河北
+    name: 河北邢台市顺兴蔬菜批发市场
+  - index: 18
+    province: 河北
+    name: 河北邯郸联邦农产品物流集团有限公司
+  - index: 19
+    province: 河北
+    name: 河北平乡县润宏益盛农业开发有限公司
+  - index: 20
+    province: 河北
+    name: 河北秦皇岛市海阳农副产品批发市场
+  - index: 21
+    province: 山西
+    name: 山西鑫龙腾花卉有限公司
+  - index: 22
+    province: 山西
+    name: 山西忻州市忻府区华润菜果批发市场
+  - index: 23
+    province: 山西
+    name: 山西新绛县蔬菜产业发展有限公司
+  - index: 24
+    province: 山西
+    name: 山西稷山县两红农副产品开发有限公司
+  - index: 25
+    province: 山西
+    name: 山西运城市晋利果品购销有限公司
+  - index: 26
+    province: 山西
+    name: 山西运城蔬菜批发市场
+  - index: 27
+    province: 山西
+    name: 山西介休市顺城关农贸市场管理有限公司
+  - index: 28
+    province: 山西
+    name: 山西平遥中药材批发市场
+  - index: 29
+    province: 内蒙古
+    name: 内蒙古赤峰兴绿蔬菜批发市场
+  - index: 30
+    province: 内蒙古
+    name: 内蒙古亚雄农产品交易市场
+  - index: 31
+    province: 辽宁
+    name: 辽宁大连桃源荣盛市场有限公司
+  - index: 32
+    province: 辽宁
+    name: 辽宁海城市中流蔬菜综合批发市场
+  - index: 33
+    province: 辽宁
+    name: 辽宁鞍山市果品有限公司
+  - index: 34
+    province: 辽宁
+    name: 辽宁台安县黄沙坨鲜活农产品批发市场管理有限公司
+  - index: 35
+    province: 辽宁
+    name: 辽宁黑山县大十字蔬菜市场有限公司
+  - index: 36
+    province: 辽宁
+    name: 辽宁大石桥市蔬菜水果批发市场
+  - index: 37
+    province: 辽宁
+    name: 辽宁彰武县哈尔套镇农产品综合批发市场
+  - index: 38
+    province: 辽宁
+    name: 辽宁铁岭市市场开发服务中心
+  - index: 39
+    province: 辽宁
+    name: 辽宁喀左县绿港现代农产品交易市场
+  - index: 40
+    province: 辽宁
+    name: 辽宁阜新市彰武县豪德农贸物流中心
+  - index: 41
+    province: 辽宁
+    name: 辽宁海城市鸿尊达果蔬市场有限公司
+  - index: 42
+    province: 辽宁
+    name: 辽宁海城市祝家南果梨批发市场
+  - index: 43
+    province: 吉林
+    name: 吉林市泗河城商贸市场有限公司
+  - index: 44
+    province: 吉林
+    name: 吉林怀德拉拉屯油豆角批发市场
+  - index: 45
+    province: 吉林
+    name: 吉林那丹伯镇牲畜交易市场
+  - index: 46
+    province: 吉林
+    name: 吉林通化市农产品批发市场有限公司
+  - index: 47
+    province: 吉林
+    name: 吉林鹤翔农产品批发市场
+  - index: 48
+    province: 吉林
+    name: 吉林洮南市铁东杂粮杂豆批发市场
+  - index: 49
+    province: 吉林
+    name: 吉林万源农副产品批发市场
+  - index: 50
+    province: 吉林
+    name: 吉林松原市松江蔬菜果品交易中心
+  - index: 51
+    province: 黑龙江
+    name: 黑龙江新胜蛋禽批发市场有限责任公司
+  - index: 52
+    province: 黑龙江
+    name: 黑龙江绥化众旺农副产品批发市场有限公司
+  - index: 53
+    province: 江苏
+    name: 江苏泰兴市苏中蔬菜批发市场
+  - index: 54
+    province: 江苏
+    name: 江苏江阴市江南农副产品批发市场有限公司
+  - index: 55
+    province: 江苏
+    name: 江苏淮海蔬菜批发交易市场有限公司
+  - index: 56
+    province: 江苏
+    name: 江苏邳州市宿羊山大蒜批发交易市场有限公司
+  - index: 57
+    province: 江苏
+    name: 江苏连云港农副产品批发市场有限公司
+  - index: 58
+    province: 江苏
+    name: 江苏灌云县淮连农副产品批发市场有限公司
+  - index: 59
+    province: 浙江
+    name: 浙江杭州华东家禽交易中心有限公司
+  - index: 60
+    province: 浙江
+    name: 浙江杭州农副产品物流中心
+  - index: 61
+    province: 浙江
+    name: 浙江杭州市粮油批发交易市场
+  - index: 62
+    province: 浙江
+    name: 浙江杭州临安浙皖农贸城实业有限公司
+  - index: 63
+    province: 浙江
+    name: 浙江新农都长兴农副产品批发市场
+  - index: 64
+    province: 浙江
+    name: 浙江余姚市农副产品批发市场
+  - index: 65
+    province: 浙江
+    name: 浙江慈溪市农副产品批发市场有限公司
+  - index: 66
+    province: 浙江
+    name: 浙江嘉善县浙北果蔬批发交易中心
+  - index: 67
+    province: 浙江
+    name: 浙江湖州浙北农副产品交易中心有限公司
+  - index: 68
+    province: 浙江
+    name: 浙江亚太粮食批发交易物流市场有限公司
+  - index: 69
+    province: 浙江
+    name: 浙江新昌中国茶市
+  - index: 70
+    province: 浙江
+    name: 浙江义乌农贸城
+  - index: 71
+    province: 浙江
+    name: 浙江舟山群岛新区水产品交易中心
+  - index: 72
+    province: 浙江
+    name: 浙江衢州市新农都
+  - index: 73
+    province: 浙江
+    name: 浙江庆元香菇市场
+  - index: 74
+    province: 浙江
+    name: 浙江台州市伟立水产批发有限公司
+  - index: 75
+    province: 浙江
+    name: 浙江衢州农商城
+  - index: 76
+    province: 浙江
+    name: 浙江遂昌龙谷名茶市场
+  - index: 77
+    province: 安徽
+    name: 安徽三山农副产品批发市场有限公司
+  - index: 78
+    province: 安徽
+    name: 安徽安庆市龙狮桥蔬菜批发市场
+  - index: 79
+    province: 安徽
+    name: 安徽和县皖江蔬菜副食品批发交易市场
+  - index: 80
+    province: 安徽
+    name: 安徽叶集思源农副产品批发市场
+  - index: 81
+    province: 安徽
+    name: 安徽芜湖长江园蔬菜批发市场
+  - index: 82
+    province: 安徽
+    name: 安徽徽州井信农产品综合批发市场
+  - index: 83
+    province: 福建
+    name: 福建福州海峡茶都
+  - index: 84
+    province: 福建
+    name: 福建天新蔬菜水果批发市场
+  - index: 85
+    province: 福建
+    name: 福建漳州闽南新城茶叶大市场
+  - index: 86
+    province: 江西
+    name: 江西潘阳县鄱阳湖国际水产城发展有限公司
+  - index: 87
+    province: 山东
+    name: 山东济南济北瓜菜批发市场（济南济北瓜菜购销有限公司）
+  - index: 88
+    province: 山东
+    name: 山东烟台蛇窝泊果品批发市场
+  - index: 89
+    province: 山东
+    name: 山东新泰市青龙路市场服务有限公司
+  - index: 90
+    province: 山东
+    name: 山东桃都农贸有限公司
+  - index: 91
+    province: 山东
+    name: 山东威海家家悦生鲜加工配送有限公司
+  - index: 92
+    province: 山东
+    name: 山东沂南县鲁中蔬菜批发市场（山东鲁中农牧股份发展有限公司）
+  - index: 93
+    province: 山东
+    name: 山东德州市南郊岳高铺瓜果蔬菜批发市场
+  - index: 94
+    province: 山东
+    name: 山东临邑县临南蔬菜批发大市场
+  - index: 95
+    province: 山东
+    name: 山东莘县河店镇瓜果菌菜交易市场（山东莘县绿兴瓜菜有限公司）
+  - index: 96
+    province: 山东
+    name: 山东成武县大田集大蒜蔬菜批发市场（山东水发金桥国际贸易有限公司）
+  - index: 97
+    province: 山东
+    name: 山东莱芜市官寺市场服务有限公司
+  - index: 98
+    province: 山东
+    name: 山东莘县魏庄镇瓜果菌菜服务中心
+  - index: 99
+    province: 山东
+    name: 山东莘县中原农产品物流中心（莘县中原现代农业发展有限公司）
+  - index: 100
+    province: 河南
+    name: 河南郑州毛庄农产品批发市场
+  - index: 101
+    province: 河南
+    name: 河南漯河市双河农产品浦发交易市场
+  - index: 102
+    province: 河南
+    name: 河南信阳商城县武氏批发市场
+  - index: 103
+    province: 河南
+    name: 河南信阳长生台花生批发市场
+  - index: 104
+    province: 河南
+    name: 中国德利和现代冷链物流中心
+  - index: 105
+    province: 湖北
+    name: 湖北皇经堂农副产品批发市场
+  - index: 106
+    province: 湖北
+    name: 湖北十堰市蔬菜贸易总公司神定河农产品中心批发市场
+  - index: 107
+    province: 湖北
+    name: 湖北孝感市南大批发市场
+  - index: 108
+    province: 湖北
+    name: 湖北红安县城关农贸市场
+  - index: 109
+    province: 湖北
+    name: 湖北麻城市农产品批发市场
+  - index: 110
+    province: 湖北
+    name: 湖北海吉星农产品物流园
+  - index: 111
+    province: 湖北
+    name: 湖北孝感市沙沟农产品有限公司
+  - index: 112
+    province: 湖南
+    name: 湖南湘潭市金海农产品批发市场
+  - index: 113
+    province: 湖南
+    name: 湖南石门皂市柑橘大市场
+  - index: 114
+    province: 湖南
+    name: 湖南澧县八百里洞庭水产批发市场
+  - index: 115
+    province: 湖南
+    name: 湖南永州市三多亭农产品大市场
+  - index: 116
+    province: 湖南
+    name: 湖南衡阳县城西综合市场
+  - index: 117
+    province: 湖南
+    name: 湖南张家界新峰农产品批发市场
+  - index: 118
+    province: 湖南
+    name: 湖南益阳海吉星农产品物流有限公司
+  - index: 119
+    province: 湖南
+    name: 湖南娄底市观化农贸经营服务有限公司
+  - index: 120
+    province: 湖南
+    name: 湖南攸县攸州农产品市场
+  - index: 121
+    province: 广东
+    name: 广东广州市白云山农产品综合批发市场
+  - index: 122
+    province: 广东
+    name: 广东广州市金戎牲畜交易批发市场
+  - index: 123
+    province: 广东
+    name: 广东广州花卉博览园有限公司
+  - index: 124
+    province: 广东
+    name: 广东普宁市洪阳水果专业市场
+  - index: 125
+    province: 广东
+    name: 广东揭阳市果菜批发市场
+  - index: 126
+    province: 广东
+    name: 广东湛江市霞山水产品批发市场
+  - index: 127
+    province: 广东
+    name: 广东深圳市南山农产品批发市场
+  - index: 128
+    province: 广东
+    name: 广东中山市小榄水产品批发市场
+  - index: 129
+    province: 广东
+    name: 广东阳江市建设海产品批发市场经营管理有限公司
+  - index: 130
+    province: 广东
+    name: 广东阳春市河西综合市场
+  - index: 131
+    province: 广西
+    name: 广西武鸣县标营果菜批发市场
+  - index: 132
+    province: 广西
+    name: 广西永福县三皇乡果蔬批发市场
+  - index: 133
+    province: 海南
+    name: 海南加来农副产品批发市场
+  - index: 134
+    province: 四川
+    name: 四川苏坡农副产品综合市场
+  - index: 135
+    province: 四川
+    name: 四川江油市川西北仔猪交易批发市场
+  - index: 136
+    province: 四川
+    name: 四川攀西农产品交易中心
+  - index: 137
+    province: 四川
+    name: 四川巴中市西城农业品综合批发市场
+  - index: 138
+    province: 四川
+    name: 四川凉山州会东县堵格牲畜交易市场
+  - index: 139
+    province: 四川
+    name: 四川凉山州越西县普雄镇牲畜交易市场
+  - index: 140
+    province: 四川
+    name: 四川会理县万项农产品物流有限公司
+  - index: 141
+    province: 四川
+    name: 四川北新天府大市场（四川北新达亿投资有限公司）
+  - index: 142
+    province: 四川
+    name: 四川长德新世贸农副产品 (物流)批发中心
+  - index: 143
+    province: 四川
+    name: 四川会理县正鑫实业有限责任公司
+  - index: 144
+    province: 四川
+    name: 四川凉山宏林农产品批发市场有限公司
+  - index: 145
+    province: 四川
+    name: 四川好农农产品综合批发市场
+  - index: 146
+    province: 四川
+    name: 四川眉山市圣丰农产品批发市场管理有限责任公司
+  - index: 147
+    province: 重庆
+    name: 重庆九龙坡区白市驿农技站太慈农副产品批发市场
+  - index: 148
+    province: 贵州
+    name: 贵州西南农畜农资产品综合批发市场
+  - index: 149
+    province: 贵州
+    name: 贵州铜仁市东太农产品综合批发市场
+  - index: 150
+    province: 贵州
+    name: 贵州深圳“东西合作”生态农特产品集散中心
+  - index: 151
+    province: 贵州
+    name: 贵州盘县畜产品批发市场
+  - index: 152
+    province: 贵州
+    name: 贵州施秉县牛大场中药材交易市场
+  - index: 153
+    province: 云南
+    name: 云南师宗县蔬菜批发市场
+  - index: 154
+    province: 云南
+    name: 云南罗平万丰湖水产品交易市场
+  - index: 155
+    province: 云南
+    name: 云南峨山滇中畜禽山货交易市场
+  - index: 156
+    province: 云南
+    name: 云南蒙自市新安所镇石榴交易市场
+  - index: 157
+    province: 陕西
+    name: 陕西西安胡家庙果品批发市场
+  - index: 158
+    province: 陕西
+    name: 陕西咸阳市礼泉县西北果品交易中心
+  - index: 159
+    province: 陕西
+    name: 陕西兴华农产品市场
+  - index: 160
+    province: 甘肃
+    name: 甘肃兰州金星农副产品有限责任公司
+  - index: 161
+    province: 甘肃
+    name: 甘肃兰州陇海农产品市场有限公司
+  - index: 162
+    province: 甘肃
+    name: 甘肃天水东部蔬菜果品批发市场
+  - index: 163
+    province: 甘肃
+    name: 甘肃永昌县正安蔬菜批发市场
+  - index: 164
+    province: 青海
+    name: 青海百德投资发展有限公司乐家湾畜产品交易批发市场
+  - index: 165
+    province: 青海
+    name: 青海雪舟三绒集团有限公司畜产品交易市场
+  - index: 166
+    province: 青海
+    name: 青海海东地区诚信农副产品批发市场
+  - index: 167
+    province: 青海
+    name: 青海东部蔬菜综合批发市场
+  - index: 168
+    province: 宁夏
+    name: 宁夏银川市北环蔬菜果品综合批发市场
+  - index: 169
+    province: 宁夏
+    name: 宁夏盐池县惠安堡清真牛羊肉批发市场
+  - index: 170
+    province: 宁夏
+    name: 宁夏隆德县渝河道农贸市场
+  - index: 171
+    province: 宁夏
+    name: 宁夏石嘴山市大武口区百花市场
+  - index: 172
+    province: 宁夏
+    name: 宁夏宝丰清真牛羊肉批发市场
+  - index: 173
+    province: 宁夏
+    name: 宁夏中卫市宣和禽蛋批发市场
+  - index: 174
+    province: 新疆
+    name: 新疆新源县综合消费品市场
+  - index: 175
+    province: 新疆
+    name: 新疆昌吉市中亚农副农资建材批发市场有限责任公司
+  - index: 176
+    province: 新疆
+    name: 新疆哈密市丰盛农副产品综合批发市场有限公司
+  - index: 177
+    province: 新疆
+    name: 新疆和硕县兴和辣椒专业批发市场
+  - index: 178
+    province: 新疆
+    name: 新疆若羌县楼兰特色果蔬综合市场有限责任公司
+  - index: 179
+    province: 新疆
+    name: 新疆阿克苏疆域农产品批发有限公司
+  - index: 180
+    province: 新疆生产建设兵团
+    name: 新疆兵团农十四师皮墨垦区农产品批发市场

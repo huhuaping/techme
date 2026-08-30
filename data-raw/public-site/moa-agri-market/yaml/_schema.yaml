@@ -1,0 +1,57 @@
+# 农业农村部定点市场 YAML 中间层
+#
+# 定位：
+#   公示原文（html / docx / ceb→pdf）→ 本目录 year-{YYYY}.yaml →
+#   code-moa-agri-market-yaml.R 第 2 步展开为 xlsx/year-{YYYY}.xlsx →
+#   第 3 步写入 data-tidy/.../xlsx/
+#
+# 文件名中的 YYYY 是通报业务年份（2018 清查认定、2024 复核）。
+#
+# R 读取并展开为目标 tidy 列：
+#   yml <- yaml::read_yaml(path)
+#   rows <- list()
+#   for (ax in yml$annexes) {
+#     for (it in ax$items) {
+#       rows[[length(rows) + 1]] <- tibble::tibble(
+#         year = yml$year,
+#         type = ax$type,
+#         province = it$province,
+#         index = it$index,
+#         name = it$name
+#       )
+#     }
+#   }
+#   tbl <- dplyr::bind_rows(rows)
+#
+# 目标 tidy 列：
+#   year, type, province, index, name
+#
+# type 受控词：
+#   认定名单 / 取消名单
+#
+# 口径约定：
+#   - 每年两个附件：附件1 认定名单，附件2 取消名单。
+#   - index 为该附件表内原序号（各自从 1 起，跨省连续）。
+#   - province 取分组行原文简称。新疆维吾尔自治区记为新疆。
+#     第 2 步把新疆生产建设兵团 / 新疆兵团 / 兵团改写为新疆。
+#   - name 沿用公示原文，保留“（原…）”“合并为…”等说明，不做别名改写。
+#   - 2018 年 PDF 由 CEB 转换，序号与“N家”为汉字数字，YAML 中已还原。
+#
+# 每年文件顶层键：year, title, doc_no, effective_date, pub_date,
+#   url, url_alt, source, source_files, counts, annexes。
+
+schema_version: 1
+dataset: PubAgriMarket
+scope: moa-designated-market
+type_values:
+  - 认定名单
+  - 取消名单
+mark_values:
+  - 认定
+  - 取消
+tidy_columns:
+  - year
+  - type
+  - province
+  - index
+  - name

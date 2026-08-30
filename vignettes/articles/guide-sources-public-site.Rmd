@@ -1635,6 +1635,77 @@ R代码文件：
 
 - 制表：旱区省份/最新年份名单列表
 
+## 农业农村部定点市场
+
+### 数据说明
+
+更新状态：updated（`techme::PubAgriMarket`，2026-08-30 入库）。
+
+统计类别：
+- 农业农村部定点市场名单，包括两类附件名单：认定名单、取消名单
+
+当前统计口径：目标变量：year（年份）	type（类型：认定名单 / 取消名单）	province（省份）	index（序号）	name（名称）。
+
+`type` 受控词：认定名单、取消名单。`province` 为简称；新疆生产建设兵团记为新疆。
+
+清洗脚本：`data-raw/public-site/moa-agri-market/code-moa-agri-market-yaml.R`；发布脚本：`wfl-PubAgriMarket.R`。
+
+- 2018 年清查认定、2024 年复核名单
+
+### 文件管理
+
+文件夹路径：
+
+```{r}
+dir_tar <- here::here("data-raw/public-site/moa-agri-market/")
+fs::dir_tree(dir_tar)
+```
+
+### 数据集展示
+
+本项目内维护，通过`techme`进行数据发布。执行R代码文件：`data-raw/public-site/moa-agri-market/wfl-PubAgriMarket.R`
+
+```{r}
+techme::PubAgriMarket %>%
+  dplyr::count(year, type) %>%
+  tidyr::pivot_wider(names_from = type, values_from = n, values_fill = 0) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+```{r}
+techme::PubAgriMarket %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = TRUE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+### 数据流程
+
+（1）YAML。`yaml/year-{YYYY}.yaml`，约定见 `yaml/_schema.yaml`。
+
+（2）展开与 tidy。执行 `code-moa-agri-market-yaml.R`：yaml → `xlsx/year-{YYYY}.xlsx` → `data-tidy/.../xlsx/year-{YYYY}.xlsx`。兵团改写为新疆。
+
+（3）发布。执行 `wfl-PubAgriMarket.R`。
+
+### 数据进度
+
+- 【html公告，docx附件】2024年10月10日，农业农村部关于定点市场复核结果的[通报](https://scs.moa.gov.cn/tzggscxx/202410/t20241010_6464018.htm)。农市发[2024]2号。确定北京新发地农产品股份有限公司等663家批发市场为农业农村部定点市场,取消北京八里桥农产品中心批发市场有限公司等180家市场的农业农村部定点市场资格。html文件：`data-raw/public-site/moa-agri-market/html/year-2024.html`。docx附件1：`data-raw/public-site/moa-agri-market/html/year-2024-a-confirmed.docx`。docx附件2：`data-raw/public-site/moa-agri-market/html/year-2024-b-canceled.docx`。
+
+- 【html公告，CEB格式附件】2018年11月21日，农业农村部关于定点市场清查和认定结果的[通报](https://www.gov.cn/zhengce/zhengceku/2018-12/31/content_5443447.htm)。农市发〔2018〕6号。认定北京新发地农产品批发市场等745家市场为农业农村部定点市场,取消北京城北回龙观农产品批发市场等194家市场的农业农村部定点市场资格。
+
 # MOA农业部/农村合作经济指导司
 
 数据来源：农业农村部/农村合作经济指导司<http://www.hzjjs.moa.gov.cn/>

@@ -558,6 +558,31 @@ PubObsStation %>%
   kable()
 ```
 
+### PubAgriMarket
+
+```{r,echo=FALSE}
+data("PubAgriMarket")
+```
+
+> **说明**：本数据集整理农业农村部定点市场认定 / 取消名单（`data-raw/public-site/moa-agri-market/`）。2018、2024 年 YAML 经 `code-moa-agri-market-yaml.R` 展开为 tidy xlsx，再由 `wfl-PubAgriMarket.R` 编译。`type` 为认定名单 / 取消名单；新疆生产建设兵团记为新疆。
+
+**`PubAgriMarket`**：A **wide format** data set containing MOA designated wholesale markets from the 2018 review and 2024 re-inspection notices.
+
+- Totally `r dim(PubAgriMarket)[2]` columns including: `r paste0(names(PubAgriMarket), collapse =", ")`.
+
+- Totally `r dim(PubAgriMarket)[1]` rows.
+
+- Years: `r paste(sort(unique(PubAgriMarket$year)), collapse = ", ")`
+
+- `type` values: 认定名单 / 取消名单。
+
+```{r}
+PubAgriMarket %>%
+  count(year, type) %>%
+  tidyr::pivot_wider(names_from = type, values_from = n, values_fill = 0) %>%
+  kable()
+```
+
 ### PubGeneticResource
 
 ```{r,echo=FALSE}
