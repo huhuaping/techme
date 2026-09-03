@@ -54,6 +54,7 @@ reference:
     Data sets assembled from the public sources, including MOA（农业农村部）, MOST（科技部）, MOE（教育部） et. al.
   contents:
   - PubAgriMarket
+  - PubAgriTechDemoBase
   - PubAgriParkList
   - PubAgriParkCheck
   - PubAgriParkEval

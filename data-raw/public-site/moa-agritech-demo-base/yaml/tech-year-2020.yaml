@@ -1,0 +1,465 @@
+year: 2020
+caliber: 历史口径
+source: 国家农业科技示范展示基地
+title: 农业农村部办公厅关于开展国家农业科技示范展示基地建设的通知
+doc_no: 农办科〔2020〕6号
+effective_date: '2020-04-20'
+pub_date: '2020-04-20'
+url: https://www.abeedata.com/home/article/detail/id/5257.html
+url_alt: null
+batch: null
+source_files:
+  html: html/tech-year-2020.html
+  docx: html/tech-year-2020-attach.docx
+notes:
+- 2020 年附件无行业 type，annex.type 为 null；第 2 步展开为 NA。
+- institution 对应表头「建设运营单位」。无联合单位列。
+- province 由建设运营单位区划词推断，缺省时用名称括号内地点。
+- 中国农业大学 / 中国农科院等总部在京单位，按试验站地点记省（如曲周→河北）。
+counts:
+  合计: 110
+annexes:
+- annex: 1
+  type: null
+  title: 国家现代农业科技示范展示基地名单
+  items:
+  - index: 1
+    province: 北京
+    name: 国家现代农业科技示范展示基地（昌平）
+    institution: 北京市农业技术推广站
+  - index: 2
+    province: 北京
+    name: 国家现代农业科技示范展示基地（通州）
+    institution: 北京中农富通园艺有限公司
+  - index: 3
+    province: 北京
+    name: 国家现代农业科技示范展示基地（小汤山）
+    institution: 北京市农林科学院
+  - index: 4
+    province: 北京
+    name: 国家现代农业科技示范展示基地（顺义）
+    institution: 中国农业科学院作物科学研究所
+  - index: 5
+    province: 天津
+    name: 国家现代农业科技示范展示基地（宁河）
+    institution: 天津市天祥水产有限责任公司
+  - index: 6
+    province: 天津
+    name: 国家现代农业科技示范展示基地（武清）
+    institution: 天津新世纪牧业有限公司
+  - index: 7
+    province: 河北
+    name: 国家现代农业科技示范展示基地（辛集）
+    institution: 河北省辛集市马兰农场
+  - index: 8
+    province: 河北
+    name: 国家现代农业科技示范展示基地（鹿泉）
+    institution: 河北省石家庄天泉良种奶牛有限公司
+  - index: 9
+    province: 河北
+    name: 国家现代农业科技示范展示基地（曹妃甸）
+    institution: 河北省唐山市曹妃甸区会达水产养殖有限公司
+  - index: 10
+    province: 河北
+    name: 国家现代农业科技示范展示基地（永清）
+    institution: 河北恒都美业农业开发有限公司
+  - index: 11
+    province: 河北
+    name: 国家现代农业科技示范展示基地（曲周）
+    institution: 中国农业大学
+  - index: 12
+    province: 河北
+    name: 国家现代农业科技示范展示基地（廊坊）
+    institution: 中国农业科学院植物保护研究所
+  - index: 13
+    province: 山西
+    name: 国家现代农业科技示范展示基地（文水）
+    institution: 山西大象农牧集团有限公司
+  - index: 14
+    province: 山西
+    name: 国家现代农业科技示范展示基地（汾西）
+    institution: 山西省汾西县高寒农牧专业合作社
+  - index: 15
+    province: 内蒙古
+    name: 国家现代农业科技示范展示基地（阿荣旗）
+    institution: 内蒙古阿荣旗农业技术推广中心
+  - index: 16
+    province: 内蒙古
+    name: 国家现代农业科技示范展示基地（乌拉特中旗）
+    institution: 内蒙古农业大学
+  - index: 17
+    province: 内蒙古
+    name: 国家现代农业科技示范展示基地（科尔沁）
+    institution: 内蒙古科尔沁肉牛种业股份有限公司
+  - index: 18
+    province: 内蒙古
+    name: 国家现代农业科技示范展示基地（乌兰图克）
+    institution: 内蒙古富川养殖科技股份有限公司
+  - index: 19
+    province: 辽宁
+    name: 国家现代农业科技示范展示基地（盘锦）
+    institution: 辽宁省盘锦光合蟹业有限公司
+  - index: 20
+    province: 辽宁
+    name: 国家现代农业科技示范展示基地（沈河）
+    institution: 沈阳农业大学
+  - index: 21
+    province: 辽宁
+    name: 国家现代农业科技示范展示基地（辽中）
+    institution: 沈阳农业大学
+  - index: 22
+    province: 辽宁
+    name: 国家现代农业科技示范展示基地（海城）
+    institution: 辽宁省海城市三星生态农业有限公司
+  - index: 23
+    province: 吉林
+    name: 国家现代农业科技示范展示基地（梨树）
+    institution: 吉林省梨树县农技推广中心
+  - index: 24
+    province: 吉林
+    name: 国家现代农业科技示范展示基地（净月）
+    institution: 吉林农业大学
+  - index: 25
+    province: 吉林
+    name: 国家现代农业科技示范展示基地（抚松）
+    institution: 吉林省精气神有限公司
+  - index: 26
+    province: 黑龙江
+    name: 国家现代农业科技示范展示基地（道外）
+    institution: 黑龙江省农业科学院
+  - index: 27
+    province: 黑龙江
+    name: 国家现代农业科技示范展示基地（宾县）
+    institution: 黑龙江省哈尔滨永和菜业有限公司
+  - index: 28
+    province: 黑龙江
+    name: 国家现代农业科技示范展示基地（松北）
+    institution: 黑龙江省哈尔滨市农业科学院
+  - index: 29
+    province: 黑龙江
+    name: 国家现代农业科技示范展示基地（庆安）
+    institution: 黑龙江东禾农业集团有限公司
+  - index: 30
+    province: 上海
+    name: 国家现代农业科技示范展示基地（海湾）
+    institution: 上海星辉蔬菜有限公司
+  - index: 31
+    province: 上海
+    name: 国家现代农业科技示范展示基地（马陆）
+    institution: 上海马陆葡萄公园有限公司
+  - index: 32
+    province: 江苏
+    name: 国家现代农业科技示范展示基地（灌南）
+    institution: 江苏省灌南县蔬菜办公室
+  - index: 33
+    province: 江苏
+    name: 国家现代农业科技示范展示基地（丰县）
+    institution: 江苏大沙河现代农业综合开发集团有限公司
+  - index: 34
+    province: 江苏
+    name: 国家现代农业科技示范展示基地（金坛）
+    institution: 江苏省常州市金坛区农业试验站
+  - index: 35
+    province: 江苏
+    name: 国家现代农业科技示范展示基地（响水）
+    institution: 江苏省响水县蔬菜生产技术指导站
+  - index: 36
+    province: 江苏
+    name: 国家现代农业科技示范展示基地（扬州）
+    institution: 江苏省扬州三江农业科技发展有限公司
+  - index: 37
+    province: 江苏
+    name: 国家现代农业科技示范展示基地（江宁）
+    institution: 南京农业大学
+  - index: 38
+    province: 江苏
+    name: 国家现代农业科技示范展示基地（扬中）
+    institution: 中国水产科学研究院淡水渔业研究中心
+  - index: 39
+    province: 浙江
+    name: 国家现代农业科技示范展示基地（武义）
+    institution: 浙江更香有机茶业开发有限公司
+  - index: 40
+    province: 浙江
+    name: 国家现代农业科技示范展示基地（余杭）
+    institution: 浙江恒泽生态农业科技有限公司
+  - index: 41
+    province: 安徽
+    name: 国家现代农业科技示范展示基地（舒城）
+    institution: 安徽省舒城县农业科学研究所
+  - index: 42
+    province: 安徽
+    name: 国家现代农业科技示范展示基地（徽州）
+    institution: 安徽谢裕大茶叶股份有限公司
+  - index: 43
+    province: 安徽
+    name: 国家现代农业科技示范展示基地（宜秀）
+    institution: 安徽宇顺高科种业股份有限公司
+  - index: 44
+    province: 安徽
+    name: 国家现代农业科技示范展示基地（义安）
+    institution: 安徽张林渔业有限公司
+  - index: 45
+    province: 安徽
+    name: 国家现代农业科技示范展示基地（泗县）
+    institution: 安徽泗县石龙湖田园综合开发有限公司
+  - index: 46
+    province: 安徽
+    name: 国家现代农业科技示范展示基地（界首）
+    institution: 安徽丰絮农业科技股份有限公司
+  - index: 47
+    province: 安徽
+    name: 国家现代农业科技示范展示基地（宣州）
+    institution: 中国农业科学院烟草研究所
+  - index: 48
+    province: 福建
+    name: 国家现代农业科技示范展示基地（福清）
+    institution: 福建三华农业有限公司
+  - index: 49
+    province: 福建
+    name: 国家现代农业科技示范展示基地（西塘）
+    institution: 福建省泉州市农业科学研究所
+  - index: 50
+    province: 福建
+    name: 国家现代农业科技示范展示基地（云霄）
+    institution: 福建省漳州绿洲农业发展股份有限公司
+  - index: 51
+    province: 江西
+    name: 国家现代农业科技示范展示基地（吉州）
+    institution: 江西省井冈山农业科技园管理委员会
+  - index: 52
+    province: 江西
+    name: 国家现代农业科技示范展示基地（进贤）
+    institution: 江西省红壤研究所
+  - index: 53
+    province: 江西
+    name: 国家现代农业科技示范展示基地（信丰）
+    institution: 江西绿萌科技控股有限公司
+  - index: 54
+    province: 江西
+    name: 国家现代农业科技示范展示基地（南昌）
+    institution: 江西省蚕桑茶叶研究所
+  - index: 55
+    province: 江西
+    name: 国家现代农业科技示范展示基地（袁州）
+    institution: 宜春市袁州区中州米业有限公司
+  - index: 56
+    province: 山东
+    name: 国家现代农业科技示范展示基地（任城）
+    institution: 济宁市四季园苗木种植有限公司
+  - index: 57
+    province: 山东
+    name: 国家现代农业科技示范展示基地（齐河）
+    institution: 山东省齐河县宋坊良种繁殖场
+  - index: 58
+    province: 山东
+    name: 国家现代农业科技示范展示基地（南湖）
+    institution: 山东省诸城市万景源农业科技有限公司
+  - index: 59
+    province: 山东
+    name: 国家现代农业科技示范展示基地（垦利）
+    institution: 山东景明海洋科技有限公司
+  - index: 60
+    province: 山东
+    name: 国家现代农业科技示范展示基地（福山）
+    institution: 山东省烟台市农业科学研究院
+  - index: 61
+    province: 山东
+    name: 国家现代农业科技示范展示基地（德州）
+    institution: 中国农业科学院德州盐碱土改良实验站
+  - index: 62
+    province: 河南
+    name: 国家现代农业科技示范展示基地（新乡）
+    institution: 河南科技学院
+  - index: 63
+    province: 河南
+    name: 国家现代农业科技示范展示基地（周口）
+    institution: 河南省黄泛区实业集团有限公司
+  - index: 64
+    province: 河南
+    name: 国家现代农业科技示范展示基地（新县）
+    institution: 河南草木人生态茶业有限责任公司
+  - index: 65
+    province: 湖北
+    name: 国家现代农业科技示范展示基地（武湖）
+    institution: 武汉市农业科学院
+  - index: 66
+    province: 湖北
+    name: 国家现代农业科技示范展示基地（公安）
+    institution: 湖北省金秋农业高新技术有限公司
+  - index: 67
+    province: 湖北
+    name: 国家现代农业科技示范展示基地（鄂城）
+    institution: 武汉大学
+  - index: 68
+    province: 湖北
+    name: 国家现代农业科技示范展示基地（武陵山）
+    institution: 湖北省农业科学院
+  - index: 69
+    province: 湖北
+    name: 国家现代农业科技示范展示基地（来凤）
+    institution: 湖北省农园（恩施）农业发展有限公司
+  - index: 70
+    province: 湖南
+    name: 国家现代农业科技示范展示基地（邵阳）
+    institution: 湖南省邵阳市农业科学研究院
+  - index: 71
+    province: 湖南
+    name: 国家现代农业科技示范展示基地（麻阳）
+    institution: 麻阳楠木桥大学生村官创业园开发有限公司
+  - index: 72
+    province: 湖南
+    name: 国家现代农业科技示范展示基地（常德）
+    institution: 湖南德人牧业科技有限公司
+  - index: 73
+    province: 广东
+    name: 国家现代农业科技示范展示基地（佛山）
+    institution: 佛山市农业科学研究所
+  - index: 74
+    province: 广东
+    name: 国家现代农业科技示范展示基地（从化）
+    institution: 广东省广州花卉研究中心
+  - index: 75
+    province: 广西
+    name: 国家现代农业科技示范展示基地（隆安）
+    institution: 广西金穗农业集团有限公司
+  - index: 76
+    province: 广东
+    name: 国家现代农业科技示范展示基地（南海）
+    institution: 中国水产科学研究院南海水产研究所
+  - index: 77
+    province: 广西
+    name: 国家现代农业科技示范展示基地（桂平）
+    institution: 广西鸣鸣果业有限公司
+  - index: 78
+    province: 广西
+    name: 国家现代农业科技示范展示基地（武鸣）
+    institution: 广西壮族自治区农业技术推广总站
+  - index: 79
+    province: 海南
+    name: 国家现代农业科技示范展示基地（琼山）
+    institution: 海南大湖桥园林股份有限公司
+  - index: 80
+    province: 海南
+    name: 国家现代农业科技示范展示基地（澄迈）
+    institution: 海南翔泰渔业股份有限公司
+  - index: 81
+    province: 海南
+    name: 国家现代农业科技示范展示基地（东方）
+    institution: 容益（海南）农业开发有限公司
+  - index: 82
+    province: 海南
+    name: 国家现代农业科技示范展示基地（万宁）
+    institution: 中国热带农业科学院香料饮料研究所
+  - index: 83
+    province: 海南
+    name: 国家现代农业科技示范展示基地（儋州）
+    institution: 中国热带农业科学院橡胶研究所
+  - index: 84
+    province: 重庆
+    name: 国家现代农业科技示范展示基地（九龙坡）
+    institution: 重庆市农业科学院
+  - index: 85
+    province: 重庆
+    name: 国家现代农业科技示范展示基地（巴南）
+    institution: 重庆市二圣茶业有限公司
+  - index: 86
+    province: 四川
+    name: 国家现代农业科技示范展示基地（名山）
+    institution: 四川省名山茶树良种繁育场
+  - index: 87
+    province: 四川
+    name: 国家现代农业科技示范展示基地（绵阳）
+    institution: 绵阳市农业科学研究院
+  - index: 88
+    province: 四川
+    name: 国家现代农业科技示范展示基地（成都）
+    institution: 四川省泰隆农业科技有限公司
+  - index: 89
+    province: 四川
+    name: 国家现代农业科技示范展示基地（宣汉）
+    institution: 四川省宣汉锦宏蜀宣牧业有限公司
+  - index: 90
+    province: 四川
+    name: 国家现代农业科技示范展示基地（西充）
+    institution: 四川省西充县金科种养殖有限公司
+  - index: 91
+    province: 四川
+    name: 国家现代农业科技示范展示基地（东坡）
+    institution: 四川省眉山市好味稻水稻专业合作社
+  - index: 92
+    province: 四川
+    name: 国家现代农业科技示范展示基地（理塘）
+    institution: 四川省理塘县康藏阳光农牧业科技开发有限责任公司
+  - index: 93
+    province: 贵州
+    name: 国家现代农业科技示范展示基地（水城）
+    institution: 贵州省水城县农业产业园区管委会
+  - index: 94
+    province: 贵州
+    name: 国家现代农业科技示范展示基地（播州）
+    institution: 贵州卓豪农业科技股份有限公司
+  - index: 95
+    province: 贵州
+    name: 国家现代农业科技示范展示基地（黄平）
+    institution: 贵州黄平农博翔有限责任公司
+  - index: 96
+    province: 云南
+    name: 国家现代农业科技示范展示基地（勐海）
+    institution: 云南省农业科学院
+  - index: 97
+    province: 云南
+    name: 国家现代农业科技示范展示基地（嵩明）
+    institution: 云南省农业科学院
+  - index: 98
+    province: 云南
+    name: 国家现代农业科技示范展示基地（马龙）
+    institution: 云南省草地动物科学研究院
+  - index: 99
+    province: 陕西
+    name: 国家现代农业科技示范展示基地（澄城）
+    institution: 澄城县现代农业发展投资有限公司
+  - index: 100
+    province: 陕西
+    name: 国家现代农业科技示范展示基地（杨凌）
+    institution: 杨凌珂瑞农业专业合作社
+  - index: 101
+    province: 陕西
+    name: 国家现代农业科技示范展示基地（陇县）
+    institution: 陕西和氏高寒川牧业有限公司
+  - index: 102
+    province: 陕西
+    name: 国家现代农业科技示范展示基地（白水）
+    institution: 西北农林科技大学
+  - index: 103
+    province: 甘肃
+    name: 国家现代农业科技示范展示基地（宕昌）
+    institution: 甘肃省宕昌县中药材开发服务中心
+  - index: 104
+    province: 青海
+    name: 国家现代农业科技示范展示基地（城北）
+    institution: 青海省农林科学院
+  - index: 105
+    province: 青海
+    name: 国家现代农业科技示范展示基地（湟源）
+    institution: 青海省农林科学院
+  - index: 106
+    province: 宁夏
+    name: 国家现代农业科技示范展示基地（贺兰）
+    institution: 宁夏银川科海生物技术有限公司
+  - index: 107
+    province: 宁夏
+    name: 国家现代农业科技示范展示基地（青铜峡）
+    institution: 宁夏塞外香食品有限公司
+  - index: 108
+    province: 宁夏
+    name: 国家现代农业科技示范展示基地（永宁）
+    institution: 宁夏晓鸣农牧股份有限公司
+  - index: 109
+    province: 新疆
+    name: 国家现代农业科技示范展示基地（昭苏）
+    institution: 新疆维吾尔自治区昭苏农业科技园
+  - index: 110
+    province: 新疆
+    name: 国家现代农业科技示范展示基地（泽普）
+    institution: 新疆维吾尔自治区农业科学院

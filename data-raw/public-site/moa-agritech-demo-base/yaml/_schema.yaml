@@ -1,0 +1,77 @@
+# 农业农村部科技试验示范基地 YAML 中间层
+#
+# 定位：
+#   公示原文（html / docx / 扫描 pdf）→ 本目录 {prefix}-year-{YYYY}.yaml →
+#   code-moa-agritech-demo-base-yaml.R 第 2 步展开为 xlsx/ →
+#   第 3 步写入 data-tidy/.../xlsx/
+#
+# 文件名：
+#   tech-year-2020.yaml     历史口径：国家农业科技示范展示基地
+#   modern-year-2025.yaml   当前口径：现代农业科技试验示范基地（第一批）
+#
+# 两套口径共用列，用 source 区分；2020 无行业分类，type 为 null。
+#
+# R 读取并展开为目标 tidy 列：
+#   yml <- yaml::read_yaml(path)
+#   rows <- list()
+#   for (ax in yml$annexes) {
+#     for (it in ax$items) {
+#       rows[[length(rows) + 1]] <- tibble::tibble(
+#         year = yml$year,
+#         index = it$index,
+#         source = yml$source,
+#         type = ax$type,
+#         name = it$name,
+#         institution = it$institution,
+#         province = it$province
+#       )
+#     }
+#   }
+#
+# 目标 tidy 列：
+#   year, index, source, type, name, institution, province
+#
+# source 受控词：
+#   现代农业科技试验示范基地
+#   国家农业科技示范展示基地
+#   国家农业科技创新与集成示范基地   # 预留，本批无名单文件
+#
+# type 受控词（仅当前口径；历史口径为 null）：
+#   种植业 / 畜牧兽医 / 渔业 / 农机 / 资源环境
+#
+# 口径约定：
+#   - index 为该附件（或该 type 分组）表内原序号；2025 各类各自从 1 起。
+#   - institution：2020 为建设运营单位；2025 为牵头单位。
+#   - partners：仅 2025 有「联合单位」，YAML 保留原文（顿号分隔）；
+#     第 2 步可丢弃。2020 无此列。
+#   - province 为简称。第 2 步把新疆生产建设兵团 / 兵团改写为新疆。
+#   - name 沿用公示原文，保留括号内地点，不做别名改写。
+#   - 2025 年 PDF 为扫描件，无文本层。
+#
+# 每年文件顶层键：year, caliber, source, title, doc_no, effective_date,
+#   pub_date, url, url_alt, batch, source_files, counts, annexes。
+
+schema_version: 1
+dataset: PubAgriTechDemoBase
+scope: moa-agritech-demo-base
+caliber_values:
+  - 当前口径
+  - 历史口径
+source_values:
+  - 现代农业科技试验示范基地
+  - 国家农业科技示范展示基地
+  - 国家农业科技创新与集成示范基地
+type_values:
+  - 种植业
+  - 畜牧兽医
+  - 渔业
+  - 农机
+  - 资源环境
+tidy_columns:
+  - year
+  - index
+  - source
+  - type
+  - name
+  - institution
+  - province

@@ -583,6 +583,31 @@ PubAgriMarket %>%
   kable()
 ```
 
+### PubAgriTechDemoBase
+
+```{r,echo=FALSE}
+data("PubAgriTechDemoBase")
+```
+
+> **说明**：本数据集合并两套公示口径（`data-raw/public-site/moa-agritech-demo-base/`）。2020、2025 年 YAML 经 `code-moa-agritech-demo-base-yaml.R` 展开为 tidy xlsx，再由 `wfl-PubAgriTechDemoBase.R` 编译。`source` 区分当前口径（现代农业科技试验示范基地）与历史口径（国家农业科技示范展示基地）；2025 的 `type` 为种植业 / 畜牧兽医 / 渔业 / 农机 / 资源环境，2020 无分类。新疆生产建设兵团记为新疆。
+
+**`PubAgriTechDemoBase`**：A **wide format** data set containing MOA agricultural sci-tech demonstration bases from the 2020 historical list and the 2025 first-batch notice.
+
+- Totally `r dim(PubAgriTechDemoBase)[2]` columns including: `r paste0(names(PubAgriTechDemoBase), collapse =", ")`.
+
+- Totally `r dim(PubAgriTechDemoBase)[1]` rows.
+
+- Years: `r paste(sort(unique(PubAgriTechDemoBase$year)), collapse = ", ")`
+
+- `source` values: 现代农业科技试验示范基地 / 国家农业科技示范展示基地。
+
+```{r}
+PubAgriTechDemoBase %>%
+  count(year, source) %>%
+  tidyr::pivot_wider(names_from = source, values_from = n, values_fill = 0) %>%
+  kable()
+```
+
 ### PubGeneticResource
 
 ```{r,echo=FALSE}
