@@ -478,6 +478,28 @@ PubAgriParkCheck %>%
   kable()
 ```
 
+### PubAgrimodernZone
+
+```{r,echo=FALSE}
+data("PubAgrimodernZone")
+```
+
+> **说明**：本数据集整理农业农村部农业现代化示范区创建名单（`data-raw/public-site/moa-agrimodern-zone/`）。年度 html 经 `code-moa-agrimodern-zone.R` 解析为 xlsx，再由 `wfl-PubAgrimodernZone.R` 编译。覆盖 2021–2023 年三批创建名单，以及 2026 年拟批准公示名单；2024、2025 年名单暂未公示。
+
+**`PubAgrimodernZone`**：A **wide format** data set containing MOA agricultural modernization demonstration zones from annual creation notices.
+
+- Totally `r dim(PubAgrimodernZone)[2]` columns including: `r paste0(names(PubAgrimodernZone), collapse =", ")`.
+
+- Totally `r dim(PubAgrimodernZone)[1]` rows.
+
+- Years: `r paste(sort(unique(PubAgrimodernZone$year)), collapse = ", ")`
+
+```{r}
+PubAgrimodernZone %>%
+  count(year) %>%
+  kable()
+```
+
 ### HitechFirmsPub
 
 **数据来源**：科学技术部火炬高技术产业开发中心<http://www.innocom.gov.cn>。

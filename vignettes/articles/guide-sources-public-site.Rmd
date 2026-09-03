@@ -1306,7 +1306,7 @@ document()
 
 ### 数据说明
 
-更新状态：update
+更新状态：updated（`techme::PubAgrimodernZone`，2026-09-03 续更 2026 年名单）。
 
 统计类别：
 
@@ -1314,9 +1314,15 @@ document()
 
 当前统计口径：
 
-- 202x年农业现代化示范区创建名单公示
+- 202x年农业现代化示范区创建名单公示（`list-year-{YYYY}`）
 
 历史口径：
+
+目标变量：year（年份）	index（序号）	name（县市区名称）	province（省份）。
+
+清洗脚本：`data-raw/public-site/moa-agrimodern-zone/code-moa-agrimodern-zone.R`；发布脚本：`wfl-PubAgrimodernZone.R`。
+
+- 2021 年第一批、2022 年第二批、2023 年创建名单；2026 年拟批准公示名单。2024、2025 年名单暂未公示。
 
 
 
@@ -1329,7 +1335,20 @@ safe_dir_tree(dir_tar)
 
 ### 数据集展示
 
-本项目内维护，通过`techme`进行数据发布：
+本项目内维护，通过`techme`进行数据发布。执行R代码文件：`data-raw/public-site/moa-agrimodern-zone/wfl-PubAgrimodernZone.R`
+
+```{r}
+techme::PubAgrimodernZone %>%
+  dplyr::count(year) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "t",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
 
 ```{r}
 techme::PubAgrimodernZone %>%
@@ -1344,10 +1363,10 @@ techme::PubAgrimodernZone %>%
   )
 ```
 
-### 数据进度(staying)
+### 数据进度(updated)
 
 
-- 【html div】2026年6月4日，（非官方转载）2026年国家农业现代化示范区创建[名单](https://finance.sina.cn/2026-06-05/detail-iniaikay8665386.d.html?vt=4&cid=76729&node_id=76729)。形成2026年拟批准创建国家农业现代化示范区名单（附件），现将北京市昌平区等56个申报单位予以公示。公示文档存放本地`data-raw/public-site/moa-agrimodern-zone/list-year-2026.html`。
+- 【html div】2026年6月4日，（非官方转载）2026年国家农业现代化示范区创建[名单](https://finance.sina.cn/2026-06-05/detail-iniaikay8665386.d.html?vt=4&cid=76729&node_id=76729)。形成2026年拟批准创建国家农业现代化示范区名单（附件），现将北京市昌平区等56个申报单位予以公示。公示文档存放本地`data-raw/public-site/moa-agrimodern-zone/html/list-year-2026.html`。
 
 - 2024年、2025年农业现代化示范区创建名单暂未公示。
 
@@ -1361,41 +1380,13 @@ techme::PubAgrimodernZone %>%
 
 ### 数据流程
 
-（1）抓取公示html文件。
+（1）解析公示 html。执行 `code-moa-agrimodern-zone.R`：读取 `html/list-year-{YYYY}.html` → 清洗名单 → 匹配省区 → 写出 `xlsx/list-year-{YYYY}.xlsx`，并拷贝到 `data-tidy/.../xlsx/`。
 
-- 读取公示文件html
-
-- 清洗数据表
-
-- 匹配省区信息
-
-- 添加整理信息
-
-- 导出年度xlsx
-
-（2）`techme`维护数据集
-
-- 循环读取年度xlsx
-
-- 在techme包项目中更新
+（2）发布。执行 `wfl-PubAgrimodernZone.R`。
 
 #### 注意事项
 
-历史工作流说明：
-
-- 2025年以前通过一个中间步骤进行数据框导出，然后更新数据集。
-
-- 2025年开始，直接循环读取年度xlsx，然后使用`use_data()`更新数据集。
-
-
-- 导出`rda`数据文件到`techme/data-raw/public`
-
-```
-"D:/github/techme/data-raw/wfl_useData_universe.R"
-use_data()
-use_r()
-document()
-```
+- 2026 年开始用 `wfl-PubAgrimodernZone.R` 循环读取 `list-year-*.xlsx` 后 `use_data()`。`R/PubAgrimodernZone.R` 已手写，勿再用 `use_r()` / `document_dt()` 覆盖。
 
 ### 背景知识
 

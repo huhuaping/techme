@@ -1,20 +1,37 @@
-#' Details of Approved List of Agricultural Modernization Demonstration Zone.
+#' MOA Agricultural Modernization Demonstration Zones (农业现代化示范区)
 #'
-#' A data set containing Approved List of Agricultural Modernization Demonstration Zone
-#'   year by year from the public
-#'   site \url{https://www.most.gov.cn},
-#'   see demo page \url{http://nyt.hubei.gov.cn/bmdt/yw/mtksn/202208/t20220810_4256547.shtml}.
-#'   with wide data format.
+#' Official lists of counties (cities, districts) designated to create
+#' national agricultural modernization demonstration zones, compiled from
+#' public notices of the Ministry of Agriculture and Rural Affairs (MOA).
+#' Each row is one named unit in a given notice year.
 #'
 #' @format A data frame:
 #' \describe{
-#'   \item{year}{integer, the official Approved year }
-#'   \item{index}{integer, the ordered index of list }
-#'   \item{name}{character, name of the Demonstration Zone }
-#'   \item{province}{character, province of Demonstration Zone in reduced chinese}
+#'   \item{year}{integer. Official notice / designation year.}
+#'   \item{index}{integer. Sequence number within that year's list.}
+#'   \item{name}{character. County (city, district) name as printed.}
+#'   \item{province}{character. Province name in reduced Chinese.}
 #' }
 #'
-#' @source \url{https://www.huhuaping.com/}
+#' @details
+#' Coverage currently collected:
 #'
-
+#' * 2021 first batch (农规发〔2021〕14号).
+#' * 2022 second batch.
+#' * 2023 (农规发〔2023〕13号).
+#' * 2026 proposed list (公示拟批准创建名单). 2024 and 2025 notices have
+#'   not been published.
+#'
+#' HTML notices are parsed by `code-moa-agrimodern-zone.R`. Package data
+#' are written by `wfl-PubAgrimodernZone.R` from
+#' `data-raw/data-tidy/public-site/moa-agrimodern-zone/xlsx/`.
+#'
+#' @source Ministry of Agriculture and Rural Affairs of China,
+#'   Development Planning Department,
+#'   \url{https://www.moa.gov.cn}.
+#'
+#' @examples
+#' str(PubAgrimodernZone)
+#' table(PubAgrimodernZone$year)
+#'
 "PubAgrimodernZone"
