@@ -771,6 +771,37 @@ PubAgriParkCheck %>%
 | 2023 |    15 | 湖北咸宁国家农业科技园区     | pass   | 湖北     | 国科办农2023-60    |
 | 2021 |    31 | 新疆博尔塔拉国家农业科技园区 | pass   | 新疆     | 国科办农2021-150号 |
 
+#### PubAgrimodernZone
+
+> **说明**：本数据集整理农业农村部农业现代化示范区创建名单（`data-raw/public-site/moa-agrimodern-zone/`）。年度
+> html 经 `code-moa-agrimodern-zone.R` 解析为 xlsx，再由
+> `wfl-PubAgrimodernZone.R` 编译。覆盖 2021–2023 年三批创建名单，以及
+> 2026 年拟批准公示名单；2024、2025 年名单暂未公示。
+
+**`PubAgrimodernZone`**：A **wide format** data set containing MOA
+agricultural modernization demonstration zones from annual creation
+notices.
+
+- Totally 4 columns including: year, index, name, province.
+
+- Totally 356 rows.
+
+- Years: 2021, 2022, 2023, 2026
+
+``` r
+
+PubAgrimodernZone %>%
+  count(year) %>%
+  kable()
+```
+
+| year |   n |
+|-----:|----:|
+| 2021 | 100 |
+| 2022 | 100 |
+| 2023 | 100 |
+| 2026 |  56 |
+
 #### HitechFirmsPub
 
 **数据来源**：科学技术部火炬高技术产业开发中心<http://www.innocom.gov.cn>。
@@ -898,6 +929,111 @@ PubObsStation %>%
 | MOA | 2019 | 67 | 国家农业科学农业环境沈阳观测实验站 | 中国科学院沈阳应用生态研究所 | NA | 辽宁 |
 | MOST | 2021 | 25 | 江苏南京水稻种质资源国家野外科学观测研究站 | 南京农业大学 | 农业农村部、教育部 | 江苏 |
 | MOA | 2019 | 19 | 国家农业科学渔业资源环境秦皇岛观测实验站 | 中国水产科学研究院北戴河中心实验站 | NA | 河北 |
+
+#### PubAgriMarket
+
+> **说明**：本数据集整理农业农村部定点市场认定 /
+> 取消名单（`data-raw/public-site/moa-agri-market/`）。2018、2024 年
+> YAML 经 `code-moa-agri-market-yaml.R` 展开为 tidy xlsx，再由
+> `wfl-PubAgriMarket.R` 编译。`type` 为认定名单 /
+> 取消名单；新疆生产建设兵团记为新疆。
+
+**`PubAgriMarket`**：A **wide format** data set containing MOA
+designated wholesale markets from the 2018 review and 2024 re-inspection
+notices.
+
+- Totally 5 columns including: year, type, province, index, name.
+
+- Totally 1782 rows.
+
+- Years: 2018, 2024
+
+- `type` values: 认定名单 / 取消名单。
+
+``` r
+
+PubAgriMarket %>%
+  count(year, type) %>%
+  tidyr::pivot_wider(names_from = type, values_from = n, values_fill = 0) %>%
+  kable()
+```
+
+| year | 取消名单 | 认定名单 |
+|-----:|---------:|---------:|
+| 2018 |      194 |      745 |
+| 2024 |      180 |      663 |
+
+#### PubAgriTechDemoBase
+
+> **说明**：本数据集合并两套公示口径（`data-raw/public-site/moa-agritech-demo-base/`）。2020、2025
+> 年 YAML 经 `code-moa-agritech-demo-base-yaml.R` 展开为 tidy xlsx，再由
+> `wfl-PubAgriTechDemoBase.R` 编译。`source`
+> 区分当前口径（现代农业科技试验示范基地）与历史口径（国家农业科技示范展示基地）；2025
+> 的 `type` 为种植业 / 畜牧兽医 / 渔业 / 农机 / 资源环境，2020
+> 无分类。新疆生产建设兵团记为新疆。
+
+**`PubAgriTechDemoBase`**：A **wide format** data set containing MOA
+agricultural sci-tech demonstration bases from the 2020 historical list
+and the 2025 first-batch notice.
+
+- Totally 7 columns including: year, index, source, type, name,
+  institution, province.
+
+- Totally 259 rows.
+
+- Years: 2020, 2025
+
+- `source` values: 现代农业科技试验示范基地 / 国家农业科技示范展示基地。
+
+``` r
+
+PubAgriTechDemoBase %>%
+  count(year, source) %>%
+  tidyr::pivot_wider(names_from = source, values_from = n, values_fill = 0) %>%
+  kable()
+```
+
+| year | 国家农业科技示范展示基地 | 现代农业科技试验示范基地 |
+|-----:|-------------------------:|-------------------------:|
+| 2020 |                      110 |                        0 |
+| 2025 |                        0 |                      149 |
+
+#### PubGeneticResource
+
+> **说明**：本数据集合并两条年度批次公示口径（`data-raw/public-site/moa-genetic-resource/`），由
+> `wfl-PubGeneticResource.R` 编译。`type` 同时收录农作物 /
+> 农业微生物，以及畜禽保种场 / 畜禽基因库 / 畜禽保护区 /
+> 畜禽变更。全量库圃快照见 `PubGeneticResourceCrop`。
+
+**`PubGeneticResource`**：A **wide format** data set containing approved
+national genetic-resource bases from MOA year-batch notices (crop /
+microbe banks and livestock conservation units).
+
+- Totally 7 columns including: year, batch, type, index, name,
+  institution, province.
+
+- Totally 358 rows.
+
+- Years range from 2021 to 2025
+
+- `type` values: 农作物 / 农业微生物；畜禽保种场 / 畜禽基因库 /
+  畜禽保护区 / 畜禽变更。
+
+``` r
+
+PubGeneticResource %>%
+  count(year, type) %>%
+  tidyr::pivot_wider(names_from = type, values_from = n, values_fill = 0) %>%
+  kable()
+```
+
+| year | 畜禽保护区 | 畜禽保种场 | 畜禽基因库 | 农业微生物 | 农作物 | 畜禽变更 |
+|-----:|-----------:|-----------:|-----------:|-----------:|-------:|---------:|
+| 2021 |         24 |        173 |          8 |          0 |      0 |        0 |
+| 2022 |          0 |         10 |          2 |         19 |     72 |        0 |
+| 2023 |          1 |          8 |          1 |          8 |      1 |        1 |
+| 2024 |          0 |         13 |          0 |          2 |      5 |        0 |
+| 2025 |          0 |          2 |          5 |          0 |      3 |        0 |
 
 #### PubGeneticResourceCrop
 

@@ -57,6 +57,10 @@ source from the public site.
 Data sets assembled from the public sources, including
 MOA（农业农村部）, MOST（科技部）, MOE（教育部） et. al.
 
+- [`PubAgriMarket`](https://huhuaping.github.io/techme/reference/PubAgriMarket.md)
+  : MOA Designated Wholesale Markets (农业农村部定点市场)
+- [`PubAgriTechDemoBase`](https://huhuaping.github.io/techme/reference/PubAgriTechDemoBase.md)
+  : MOA Agricultural Sci-tech Demonstration Bases (农业科技试验示范基地)
 - [`PubAgriParkList`](https://huhuaping.github.io/techme/reference/PubAgriParkList.md)
   : Details of Approved List of National Agricultural Sci-tech Park
 - [`PubAgriParkCheck`](https://huhuaping.github.io/techme/reference/PubAgriParkCheck.md)
@@ -76,8 +80,8 @@ MOA（农业农村部）, MOST（科技部）, MOE（教育部） et. al.
 - [`HitechFirmsPub`](https://huhuaping.github.io/techme/reference/HitechFirmsPub.md)
   : Data Set of Hi-tech Firms Numbers on Public Site
 - [`PubAgrimodernZone`](https://huhuaping.github.io/techme/reference/PubAgrimodernZone.md)
-  : Details of Approved List of Agricultural Modernization Demonstration
-  Zone.
+  : MOA Agricultural Modernization Demonstration Zones
+  (农业现代化示范区)
 - [`PubConvergenceAffirm`](https://huhuaping.github.io/techme/reference/PubConvergenceAffirm.md)
   : Details of Affirmed List of National Agricultural Demonstration Park
 - [`PubConvergenceCluster`](https://huhuaping.github.io/techme/reference/PubConvergenceCluster.md)
@@ -92,7 +96,7 @@ MOA（农业农村部）, MOST（科技部）, MOE（教育部） et. al.
   : Details of Approved List of Spot Agri-products Fresh keeping test
   County
 - [`PubGeneticResource`](https://huhuaping.github.io/techme/reference/PubGeneticResource.md)
-  : Details of Approved List of National Genetic Resource Base
+  : National Genetic Resource Bases (国家级种质资源库)
 - [`PubGeneticResourceCrop`](https://huhuaping.github.io/techme/reference/PubGeneticResourceCrop.md)
   : Details of National Crop Germplasm Resource Banks and Nurseries
 - [`PubMachineCounty`](https://huhuaping.github.io/techme/reference/PubMachineCounty.md)

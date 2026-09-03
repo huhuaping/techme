@@ -513,7 +513,7 @@ techme::PubAgriParkEval %>%
 
 - 2018-01-22，国家农业科技园区发展规划（2018—2025年）。[链接](https://www.ncsti.gov.cn/zcfg/zcwj/201811/t20181123_13272.html)。
 
-- 科技部、农业农村部、水利部、林草局中科院、中国农业银行关于印发《国家农业科技园区管理办法》的[通知](https://www.gov.cn/gongbao/content/2020/content_5535330.htm)
+- 2020年07月15日，科技部、农业农村部、水利部、林草局中科院、中国农业银行关于印发《国家农业科技园区管理办法》的[通知](https://www.gov.cn/gongbao/content/2020/content_5535330.htm)
 
 ## MOA农业部
 
@@ -856,7 +856,7 @@ techme::PubCars %>%
 
 - \[html表格\]2026年5月28日，（中国饲料工业信息网转载发布）关于公示现代农业产业技术体系首席科学家和岗位科学家名单的[通知](http://www.chinafeed.com.cn/dongtai/show-83932.md)。将2026年度遴选的11位首席科学家和153名岗位科学家名单予以公示。
 
-- 2025年没有查询到任何年度公示文件，疑似没有公示或者没有进行遴选。
+- 2025年没有查询到任何年度公示文件，疑似没有公示或者没有进行遴选。2025年主要开展的是申报和部分省级体系增补工作。2026年进行公示。
 
 - \[html表格\]2024年9月12日,农业农村部关于公示现代农业产业技术体系首席科学家和岗位科学家候选人名单的[通知](http://www.chinafeedm.com/h-nd-27052.md)
 
@@ -1508,7 +1508,8 @@ use_list
 
 #### 数据说明
 
-更新状态：update
+更新状态：updated（[`techme::PubAgrimodernZone`](https://huhuaping.github.io/techme/reference/PubAgrimodernZone.md)，2026-09-03
+续更 2026 年名单）。
 
 统计类别：
 
@@ -1516,9 +1517,17 @@ use_list
 
 当前统计口径：
 
-- 202x年农业现代化示范区创建名单公示
+- 202x年农业现代化示范区创建名单公示（`list-year-{YYYY}`）
 
 历史口径：
+
+目标变量：year（年份） index（序号） name（县市区名称）
+province（省份）。
+
+清洗脚本：`data-raw/public-site/moa-agrimodern-zone/code-moa-agrimodern-zone.R`；发布脚本：`wfl-PubAgrimodernZone.R`。
+
+- 2021 年第一批、2022 年第二批、2023 年创建名单；2026
+  年拟批准公示名单。2024、2025 年名单暂未公示。
 
 #### 文件管理
 
@@ -1533,16 +1542,33 @@ safe_dir_tree(dir_tar)
 #> ├── html
 #> │   ├── list-year-2021.html
 #> │   ├── list-year-2022.html
-#> │   └── list-year-2023.html
+#> │   ├── list-year-2023.html
+#> │   └── list-year-2026.html
+#> ├── wfl-PubAgrimodernZone.R
 #> └── xlsx
 #>     ├── list-year-2021.xlsx
 #>     ├── list-year-2022.xlsx
-#>     └── list-year-2023.xlsx
+#>     ├── list-year-2023.xlsx
+#>     └── list-year-2026.xlsx
 ```
 
 #### 数据集展示
 
-本项目内维护，通过`techme`进行数据发布：
+本项目内维护，通过`techme`进行数据发布。执行R代码文件：`data-raw/public-site/moa-agrimodern-zone/wfl-PubAgrimodernZone.R`
+
+``` r
+
+techme::PubAgrimodernZone %>%
+  dplyr::count(year) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "t",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
 
 ``` r
 
@@ -1558,57 +1584,38 @@ techme::PubAgrimodernZone %>%
   )
 ```
 
-#### 数据进度(staying)
-
-- 2024年农业现代化示范区创建名单暂未公示。
+#### 数据进度(updated)
 
 - 【html
-  div】2023-08-01。2023年农业现代化示范区创建名单[公示](https://news.cnstock.com/news,bwkx-202308-5099816.htm)，非官方。[官方](http://nyj.xjbt.gov.cn/c/2023-08-01/8293503.smd)。
+  div】2026年6月4日，（非官方转载）2026年国家农业现代化示范区创建[名单](https://finance.sina.cn/2026-06-05/detail-iniaikay8665386.d.html?vt=4&cid=76729&node_id=76729)。形成2026年拟批准创建国家农业现代化示范区名单（附件），现将北京市昌平区等56个申报单位予以公示。公示文档存放本地`data-raw/public-site/moa-agrimodern-zone/html/list-year-2026.html`。
+
+- 2024年、2025年农业现代化示范区创建名单暂未公示。
+
+- 【html
+  div】2023-08-01。2023年农业现代化示范区创建名单[公示](https://news.cnstock.com/news,bwkx-202308-5099816.htm)，非官方。[官方](http://nyj.xjbt.gov.cn/c/2023-08-01/8293503.smd)。农规发〔2023〕13号。同意将北京市大兴区等100个县（市、区）列入2023年农业现代化示范区创建名单。
 
 - 2022年8月9日
-  2022年农业现代化示范区创建名单公示（第二批）[公告](http://nyt.hubei.gov.cn/bmdt/yw/mtksn/202208/t20220810_4256547.smd)
+  2022年农业现代化示范区创建名单公示（第二批）[公告](http://nyt.hubei.gov.cn/bmdt/yw/mtksn/202208/t20220810_4256547.smd)。同意将北京市密云区等100个县（市、区）列入2022年农业现代化示范区创建名单。
 
   - 关于开展2022年农业现代化示范区创建工作的[通知](https://www.gov.cn/zhengce/zhengceku/2022-04/27/content_5687511.htm)
 
 - 2021-11-19
-  关于创建农业现代化示范区名单（第一批）公示[公告](https://www.moa.gov.cn/govpublic/FZJHS/202112/t20211210_6384493.htm)。另[参看](https://www.moa.gov.cn/xw/zxfb/202111/t20211119_6382561.htm)
+  关于创建农业现代化示范区名单（第一批）公示[公告](https://www.moa.gov.cn/govpublic/FZJHS/202112/t20211210_6384493.htm)。另[参看](https://www.moa.gov.cn/xw/zxfb/202111/t20211119_6382561.htm)。农规发〔2021〕14号。同意将北京市平谷区等100个县（市、区）列入2021年农业现代化示范区创建名单。
 
 #### 数据流程
 
-（1）抓取公示html文件。
+（1）解析公示 html。执行 `code-moa-agrimodern-zone.R`：读取
+`html/list-year-{YYYY}.html` → 清洗名单 → 匹配省区 → 写出
+`xlsx/list-year-{YYYY}.xlsx`，并拷贝到 `data-tidy/.../xlsx/`。
 
-- 读取公示文件html
-
-- 清洗数据表
-
-- 匹配省区信息
-
-- 添加整理信息
-
-- 导出年度xlsx
-
-（2）`techme`维护数据集
-
-- 循环读取年度xlsx
-
-- 在techme包项目中更新
+（2）发布。执行 `wfl-PubAgrimodernZone.R`。
 
 ##### 注意事项
 
-历史工作流说明：
-
-- 2025年以前通过一个中间步骤进行数据框导出，然后更新数据集。
-
-- 2025年开始，直接循环读取年度xlsx，然后使用`use_data()`更新数据集。
-
-- 导出`rda`数据文件到`techme/data-raw/public`
-
-&nbsp;
-
-    "D:/github/techme/data-raw/wfl_useData_universe.R"
-    use_data()
-    use_r()
-    document()
+- 2026 年开始用 `wfl-PubAgrimodernZone.R` 循环读取 `list-year-*.xlsx` 后
+  `use_data()`。`R/PubAgrimodernZone.R` 已手写，勿再用 `use_r()` /
+  [`document_dt()`](https://huhuaping.github.io/techme/reference/document_dt.md)
+  覆盖。
 
 #### 背景知识
 
@@ -1620,7 +1627,8 @@ techme::PubAgrimodernZone %>%
 
 #### 数据说明
 
-更新状态：newcoming
+更新状态：updated（[`techme::PubAgriTechDemoBase`](https://huhuaping.github.io/techme/reference/PubAgriTechDemoBase.md)，2026-09-03
+入库）。
 
 统计类别：
 
@@ -1632,21 +1640,109 @@ techme::PubAgrimodernZone %>%
 
 当前统计口径：
 
-- 2025年农业农村部现代农业科技试验示范基地设立名单
+- 2025年农业农村部现代农业科技试验示范基地设立名单 modern-year-xxxx
+  (2025年开始)
 
 历史口径：
 
-- 国家农业科技创新与集成示范基地(历史口径)
+- 国家现代农业科技示范展示基地(历史口径) tech-year-xxxx （2020年开始）
+- 国家农业科技创新与集成示范基地(历史口径) innovation-year-xxxx
 
-- 国家现代农业科技示范展示基地(历史口径)
+目标变量：year（年份）index（序号）source(来源：现代农业科技试验示范基地、国家农业科技示范展示基地、国家农业科技创新与集成示范基地)
+type（类型：种植业、畜牧兽医、渔业、农机、资源环境）name（基地名称）institution(牵头单位/运营单位)
+province（省份）。
+
+`source`
+受控词：现代农业科技试验示范基地、国家农业科技示范展示基地、国家农业科技创新与集成示范基地（预留）。`type`
+受控词：种植业、畜牧兽医、渔业、农机、资源环境；2020
+历史口径无分类，记为缺失。`province`
+为简称；新疆生产建设兵团记为新疆。2025 联合单位不进入 tidy 表。
+
+清洗脚本：`data-raw/public-site/moa-agritech-demo-base/code-moa-agritech-demo-base-yaml.R`；发布脚本：`wfl-PubAgriTechDemoBase.R`。
 
 #### 文件管理
 
+``` r
+
+dir_tar <- here::here("data-raw/public-site/moa-agritech-demo-base")
+safe_dir_tree(dir_tar)
+#> /home/runner/work/techme/techme/data-raw/public-site/moa-agritech-demo-base
+#> ├── code-moa-agritech-demo-base-yaml.R
+#> ├── html
+#> │   ├── modern-year-2025-attach.pdf
+#> │   ├── modern-year-2025.html
+#> │   ├── tech-year-2020-attach.docx
+#> │   └── tech-year-2020.html
+#> ├── wfl-PubAgriTechDemoBase.R
+#> ├── xlsx
+#> │   ├── modern-year-2025.xlsx
+#> │   └── tech-year-2020.xlsx
+#> └── yaml
+#>     ├── _schema.yaml
+#>     ├── modern-year-2025.yaml
+#>     └── tech-year-2020.yaml
+#fs::dir_create(dir_tar)
+```
+
 #### 数据集展示
 
-#### 数据进度(newcoming)
+本项目内维护，通过`techme`进行数据发布。执行R代码文件：`data-raw/public-site/moa-agritech-demo-base/wfl-PubAgriTechDemoBase.R`
 
-- 【html图片，非官方】2025年12月15日，农业农村部现代农业科技试验示范基地(第一批)设立名单[公告](https://h.mffb.com.cn/a/482819.html)。第一批设立149个农业农村部现代农业科技试验示范基地。
+``` r
+
+techme::PubAgriTechDemoBase %>%
+  dplyr::count(year, source) %>%
+  tidyr::pivot_wider(names_from = source, values_from = n, values_fill = 0) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+``` r
+
+techme::PubAgriTechDemoBase %>%
+  dplyr::count(year, type) %>%
+  tidyr::pivot_wider(names_from = type, values_from = n, values_fill = 0) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 数据流程
+
+（1）YAML。`yaml/{prefix}-year-{YYYY}.yaml`，约定见
+`yaml/_schema.yaml`。当前口径 `modern-year-*.yaml`，历史口径
+`tech-year-*.yaml`。
+
+（2）展开与 tidy。执行 `code-moa-agritech-demo-base-yaml.R`：yaml →
+`xlsx/{prefix}-year-{YYYY}.xlsx` →
+`data-tidy/.../xlsx/{prefix}-year-{YYYY}.xlsx`。兵团改写为新疆；`partners`
+不进入 tidy。
+
+（3）发布。执行 `wfl-PubAgriTechDemoBase.R`。
+
+#### 数据进度
+
+##### 农业农村部现代农业科技试验示范基地（当前口径）
+
+- 【html公示、附件图片转pdf】2025年12月15日，农业农村部现代农业科技试验示范基地(第一批)设立名单[公告](https://h.mffb.com.cn/a/482819.html)。农科办【2025】16号。农业农村部公布第一批149个农业农村部现代农业科技试验示范基地(以下简称“试验示范基地”)设立名单予以公布。种植业（65个）、畜牧兽医（30个）、渔业（20个）、农机（20个）、资源环境（14个），合计149个。公示文档存放本地`data-raw/public-site/moa-agritech-demo-base/html/modern-year-2025.html`。附件pdf文档（扫描图片转pdf版）存放本地`data-raw/public-site/moa-agritech-demo-base/html/modern-year-2025-attach.pdf`。
+
+##### 国家农业科技示范展示基地（历史口径）
+
+农业农村部：全国农技中心 、科技教育司。
+
+- 【html通知，docx附件】2020年4月20日,（非官方转载）农业农村部办公厅关于开展国家农业科技示范展示基地建设的[通知](https://www.abeedata.com/home/article/detail/id/5257.html)
+  。农办科〔2020〕6号。在全国遴选了110个国家现代农业科技示范展示基地（以下简称“基地”，名单见附件1）。公示文档存放本地`data-raw/public-site/moa-agritech-demo-base/html/tech-year-2020.html`。附件docx文档存放本地`data-raw/public-site/moa-agritech-demo-base/html/tech-year-2020-attach.docx`。
 
 ## MOA农业部/市场与信息化司
 
@@ -1873,6 +1969,102 @@ R代码文件：
 图表设计：
 
 - 制表：旱区省份/最新年份名单列表
+
+### 农业农村部定点市场
+
+#### 数据说明
+
+更新状态：updated（[`techme::PubAgriMarket`](https://huhuaping.github.io/techme/reference/PubAgriMarket.md)，2026-08-30
+入库）。
+
+统计类别： -
+农业农村部定点市场名单，包括两类附件名单：认定名单、取消名单
+
+当前统计口径：目标变量：year（年份） type（类型：认定名单 / 取消名单）
+province（省份） index（序号） name（名称）。
+
+`type` 受控词：认定名单、取消名单。`province`
+为简称；新疆生产建设兵团记为新疆。
+
+清洗脚本：`data-raw/public-site/moa-agri-market/code-moa-agri-market-yaml.R`；发布脚本：`wfl-PubAgriMarket.R`。
+
+- 2018 年清查认定、2024 年复核名单
+
+#### 文件管理
+
+文件夹路径：
+
+``` r
+
+dir_tar <- here::here("data-raw/public-site/moa-agri-market/")
+fs::dir_tree(dir_tar)
+#> /home/runner/work/techme/techme/data-raw/public-site/moa-agri-market/
+#> ├── code-moa-agri-market-yaml.R
+#> ├── html
+#> │   ├── year-2018.ceb
+#> │   ├── year-2018.html
+#> │   ├── year-2018.pdf
+#> │   ├── year-2024-a-confirmed.docx
+#> │   ├── year-2024-b-canceled.docx
+#> │   └── year-2024.html
+#> ├── wfl-PubAgriMarket.R
+#> ├── xlsx
+#> │   ├── year-2018.xlsx
+#> │   └── year-2024.xlsx
+#> └── yaml
+#>     ├── _schema.yaml
+#>     ├── year-2018.yaml
+#>     └── year-2024.yaml
+```
+
+#### 数据集展示
+
+本项目内维护，通过`techme`进行数据发布。执行R代码文件：`data-raw/public-site/moa-agri-market/wfl-PubAgriMarket.R`
+
+``` r
+
+techme::PubAgriMarket %>%
+  dplyr::count(year, type) %>%
+  tidyr::pivot_wider(names_from = type, values_from = n, values_fill = 0) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+``` r
+
+techme::PubAgriMarket %>%
+  head(100) %>%
+  DT::datatable(
+    rownames = TRUE,
+    options = list(
+      dom = "ftip",
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+```
+
+#### 数据流程
+
+（1）YAML。`yaml/year-{YYYY}.yaml`，约定见 `yaml/_schema.yaml`。
+
+（2）展开与 tidy。执行 `code-moa-agri-market-yaml.R`：yaml →
+`xlsx/year-{YYYY}.xlsx` →
+`data-tidy/.../xlsx/year-{YYYY}.xlsx`。兵团改写为新疆。
+
+（3）发布。执行 `wfl-PubAgriMarket.R`。
+
+#### 数据进度
+
+- 【html公告，docx附件】2024年10月10日，农业农村部关于定点市场复核结果的[通报](https://scs.moa.gov.cn/tzggscxx/202410/t20241010_6464018.htm)。农市发\[2024\]2号。确定北京新发地农产品股份有限公司等663家批发市场为农业农村部定点市场,取消北京八里桥农产品中心批发市场有限公司等180家市场的农业农村部定点市场资格。html文件：`data-raw/public-site/moa-agri-market/html/year-2024.html`。docx附件1：`data-raw/public-site/moa-agri-market/html/year-2024-a-confirmed.docx`。docx附件2：`data-raw/public-site/moa-agri-market/html/year-2024-b-canceled.docx`。
+
+- 【html公告，CEB格式附件】2018年11月21日，农业农村部关于定点市场清查和认定结果的[通报](https://www.gov.cn/zhengce/zhengceku/2018-12/31/content_5443447.htm)。农市发〔2018〕6号。认定北京新发地农产品批发市场等745家市场为农业农村部定点市场,取消北京城北回龙观农产品批发市场等194家市场的农业农村部定点市场资格。
 
 ## MOA农业部/农村合作经济指导司
 
@@ -2154,23 +2346,41 @@ ptn_clean <-c(
 
 #### 数据说明
 
-更新状态：updated
+更新状态：updated（[`techme::PubGeneticResource`](https://huhuaping.github.io/techme/reference/PubGeneticResource.md)，2026-08-29
+入库）。
 
 数据来源：参看全国农作物种质资源信息平台<https://ncgrip.cgris.net>
 【文件下载】栏目。参考资源2（中国作物种质资源信息网）：<https://www.cgris.net/home>，可以查询具体作物种质资源信息。
 
-统计类别：
+数据集1[`techme::PubGeneticResource`](https://huhuaping.github.io/techme/reference/PubGeneticResource.md)，清洗脚本：`data-raw/public-site/moa-genetic-resource/code-moa-genetic-resource.R`（农作物
+/ 农业微生物）、`code-moa-genetic-resource-yaml.R`（2021–2023
+畜禽）；发布脚本：`wfl-PubGeneticResource.R`。
 
-- 国家级农作物、农业微生物种质资源库名单
+两套公示共用列
+`year, batch, type, index, name, institution, province`，用 `type`
+区分口径。`type` 受控词：
 
-当前统计口径1:年度批次公示名单(数据集[`techme::PubGeneticResource`](https://huhuaping.github.io/techme/reference/PubGeneticResource.md))：
+- 口径1（农作物 / 农业微生物）：农作物、农业微生物
+- 口径2（畜禽）：畜禽保种场、畜禽基因库、畜禽保护区、畜禽变更
+
+[`techme::PubGeneticResource`](https://huhuaping.github.io/techme/reference/PubGeneticResource.md)统计口径1:国家级农作物、农业微生物种质资源库名单年度批次公示名单(2022年开始认定)：
 
 - 第x批国家农作物种质资源库(圃)名单
-- 第x批农业微生物种质资源库名单(2022年开始认定)
-- 第x批国家畜禽遗传资源保种场(基因库)名单（2022年开始认定）
+- 第x批农业微生物种质资源库名单
+- 目标变量：year（年份） batch（批次） type（类型：农作物 / 农业微生物）
+  index（序号） name（名称） institution（机构） province（省份）。
 
-当前统计口径2:农作物种质资源库圃列表
-(数据集[`techme::PubGeneticResourceCrop`](https://huhuaping.github.io/techme/reference/PubGeneticResourceCrop.md))：
+[`techme::PubGeneticResource`](https://huhuaping.github.io/techme/reference/PubGeneticResource.md)统计口径2:国家畜禽遗传资源保种场(基因库)名单年度批次公示名单（2021年开始重新认定，此前认定作废）：
+
+- 第x批国家畜禽遗传资源保种场(基因库)名单
+
+- 目标变量：year（年份） batch（批次） type（类型：畜禽保种场 /
+  畜禽基因库 / 畜禽保护区 / 畜禽变更） index（序号） name（名称）
+  institution（机构） province（省份）。
+
+数据集2：[`techme::PubGeneticResourceCrop`](https://huhuaping.github.io/techme/reference/PubGeneticResourceCrop.md)，R脚本文件：`data-raw/public-site/moa-genetic-resource/code-moa-genetic-resource-crop.R`.。
+
+[`techme::PubGeneticResourceCrop`](https://huhuaping.github.io/techme/reference/PubGeneticResourceCrop.md)统计口径:农作物种质资源库圃列表（年度网页爬取）。
 
 - 全部国家农作物种质资源库(圃)名单，来自全国农作物种质资源信息平台<https://ncgrip.cgris.net/web/home/protection>。包括：种质圃、中期圃、试管苗库等
 - 参数化爬取<https://ncgrip.cgris.net/srv/api/coops/list?pageNum=1&pageSize=10000>
@@ -2179,7 +2389,9 @@ ptn_clean <-c(
 
 注意事项：
 
-- 公告文件中可能还包括“国家禽畜遗传资源保种场名单”，本数据集于2026年开始系统收集。
+- 畜禽口径已从 2021 年第一批重新认定收录；2021–2023 年走 YAML，2024
+  年起与农作物库圃同文发布。`type=畜禽变更`
+  为建设单位变更，不是新认定批次。
 
 #### 文件管理
 
@@ -2188,11 +2400,18 @@ ptn_clean <-c(
 dir_tar <- here("data-raw/public-site/moa-genetic-resource/")
 safe_dir_tree(dir_tar)
 #> /home/runner/work/techme/techme/data-raw/public-site/moa-genetic-resource/
+#> ├── code-moa-genetic-resource-crop.R
+#> ├── code-moa-genetic-resource-yaml.R
 #> ├── code-moa-genetic-resource.R
 #> ├── html
 #> │   ├── list-crops-year-2026.json
 #> │   ├── list-crops-year-2026.pdf
 #> │   ├── list-crops-year-2026.xlsx
+#> │   ├── list-livestock-year-2021.html
+#> │   ├── list-livestock-year-2021.pdf
+#> │   ├── list-livestock-year-2022.html
+#> │   ├── list-livestock-year-2022.pdf
+#> │   ├── list-livestock-year-2023.html
 #> │   ├── list-year-2022-batch-01.htm
 #> │   ├── list-year-2023-batch-02.html
 #> │   ├── list-year-2024-batch-a-plant.pdf
@@ -2201,12 +2420,20 @@ safe_dir_tree(dir_tar)
 #> │   ├── list-year-2025-batch-04.pdf
 #> │   └── list-year-2025-batch.html
 #> ├── wfl-PubGeneticResource.R
-#> └── xlsx
-#>     ├── list-crops-year-2026.xlsx
-#>     ├── list-year-2022-batch-01.xlsx
-#>     ├── list-year-2023-batch-02.xlsx
-#>     ├── list-year-2024-batch-03.xlsx
-#>     └── list-year-2025-batch-04.xlsx
+#> ├── xlsx
+#> │   ├── list-crops-year-2026.xlsx
+#> │   ├── list-livestock-year-2021.xlsx
+#> │   ├── list-livestock-year-2022.xlsx
+#> │   ├── list-livestock-year-2023.xlsx
+#> │   ├── list-year-2022-batch-01.xlsx
+#> │   ├── list-year-2023-batch-02.xlsx
+#> │   ├── list-year-2024-batch-03.xlsx
+#> │   └── list-year-2025-batch-04.xlsx
+#> └── yaml
+#>     ├── _schema.yaml
+#>     ├── list-livestock-year-2021.yaml
+#>     ├── list-livestock-year-2022.yaml
+#>     └── list-livestock-year-2023.yaml
 ```
 
 #### 数据集展示
@@ -2214,6 +2441,21 @@ safe_dir_tree(dir_tar)
 本项目内维护，通过`techme`进行数据发布。执行R代码文件：`data-raw/public-site/moa-genetic-resource/wfl-PubGeneticResource.R`
 
 批次公示名单（`PubGeneticResource`）：
+
+``` r
+
+techme::PubGeneticResource %>%
+  dplyr::count(year, type) %>%
+  tidyr::pivot_wider(names_from = type, values_from = n, values_fill = 0) %>%
+  DT::datatable(
+    rownames = FALSE,
+    options = list(
+      dom = "ftip",
+      pageLength = 15,
+      scrollX = TRUE
+    )
+  )
+```
 
 ``` r
 
@@ -2247,23 +2489,45 @@ techme::PubGeneticResourceCrop %>%
 
 #### 数据进度
 
-##### 批次公示名单html/pdf
+##### 国家农作物种质资源库(圃)批次公示名单
 
-- 【pdf附件转xlsx】2025年，（第四批）国家农作物种质资源库(圃)，平台网站”文件下载”栏目[公示](https://ncgrip.cgris.net/web/download)，公示日期2026年1月9日。新增确定（第四批）国家农作物种质资源库(圖)3个、（第五批）国家畜禽遗传资源保种场(基因库)7个,变更6个国家畜禽遗传资源保种场的建设单位。见pdf\[附件\]：‘data-raw/public-site/moa-genetic-resource/html/list-year-2025-batch-04.pdf’。
+- 【第四批
+  pdf附件转xlsx】2025年，（第四批）国家农作物种质资源库(圃)，平台网站”文件下载”栏目[公示](https://ncgrip.cgris.net/web/download)，公示日期2026年1月9日。新增确定（第四批）国家农作物种质资源库(圖)3个、（第五批）国家畜禽遗传资源保种场(基因库)7个,变更6个国家畜禽遗传资源保种场的建设单位。见pdf\[附件\]：‘data-raw/public-site/moa-genetic-resource/html/list-year-2025-batch-04.pdf’。
+  html转载中国兽医协会[参看](https://www.cvma.org.cn/6849/202601/72785.html)
 
-  - html转载中国兽医协会[参看](https://www.cvma.org.cn/6849/202601/72785.html)
+- 【第三批 pdf附件转xlsx】2024年12月29日，农业农村部公告
+  第865号。确定（第三批）国家农作物种质资源库(圃)5个、（第四批）国家畜禽遗传资源保种场13个、
+  （第三批）国家农业微生物种质资源库2个,变更国家畜禽遗传资源保种场和基因库建设单位5个(名单见[附件](https://www.moa.gov.cn/govpublic/nybzzj1/202501/t20250103_6468854.htm))。考虑到数量较少，直接通过人工手动录入xlsx。
 
-- 【pdf附件转xlsx】2024年，（第三批）国家农作物种质资源库(圃)，平台网站”文件下载”栏目[公示](https://ncgrip.cgris.net/web/download)。见附件\[pdf\]：‘data-raw/public-site/moa-genetic-resource/html/list-year-2024-batch-03.pdf’。
+  - 【pdf附件转xlsx】2024年，（第三批）国家农作物种质资源库(圃)，平台网站”文件下载”栏目[公示](https://ncgrip.cgris.net/web/download)。见附件\[pdf\]：‘data-raw/public-site/moa-genetic-resource/html/list-year-2024-batch-03.pdf’。
 
-  - 【pdf附件转xlsx】2024年12月29日，农业农村部公告
-    第865号。确定（第三批）国家农作物种质资源库(圃)5个、（第四批）国家畜禽遗传资源保种场13个、
-    （第三批）国家农业微生物种质资源库2个,变更国家畜禽遗传资源保种场和基因库建设单位5个(名单见[附件](https://www.moa.gov.cn/govpublic/nybzzj1/202501/t20250103_6468854.htm))。考虑到数量较少，直接通过人工手动录入xlsx。
+&nbsp;
 
-- 【html tab转xlsx】2023年12月29日
-  第二批国家农作物种质资源圃1个、国家农业微生物种质资源库8个的[公告](http://www.moa.gov.cn/govpublic/nybzzj1/202401/t20240117_6446108.md)
+- 【第二批 html tab转xlsx】2023年12月29日
+  第二批国家农作物种质资源圃1个、国家农业微生物种质资源库8个的[公告](http://www.moa.gov.cn/govpublic/nybzzj1/202401/t20240117_6446108.md)。
 
-- 【pdf名单转htm table转xlsx】2022-08-10
+- 【第一批 pdf名单转htm table转xlsx】2022-08-10
   关于第一批拟确定国家级农作物、农业微生物种质资源库的[公示](http://www.zys.moa.gov.cn/gsgg/202208/t20220810_6406720.htm)
+
+##### 国家畜禽遗传资源保种场名单、基因库批次公示名单
+
+- （同上）【第五批
+  pdf附件转xlsx】2025年，（第四批）国家农作物种质资源库(圃)，平台网站”文件下载”栏目[公示](https://ncgrip.cgris.net/web/download)，公示日期2026年1月9日。新增确定（第四批）国家农作物种质资源库(圖)3个、（第五批）国家畜禽遗传资源保种场(基因库)7个,变更6个国家畜禽遗传资源保种场的建设单位。见pdf\[附件\]：‘data-raw/public-site/moa-genetic-resource/html/list-year-2025-batch-04.pdf’。
+
+- （同上）【第四批 pdf附件转xlsx】2024年12月29日，农业农村部公告
+  第865号。确定（第三批）国家农作物种质资源库(圃)5个、（第四批）国家畜禽遗传资源保种场13个、
+  （第三批）国家农业微生物种质资源库2个,变更国家畜禽遗传资源保种场和基因库建设单位5个(名单见[附件](https://www.moa.gov.cn/govpublic/nybzzj1/202501/t20250103_6468854.htm))。考虑到数量较少，直接通过人工手动录入xlsx。已经完成数据爬取和xlsx处理。
+
+&nbsp;
+
+- 【第三批 html table
+  转yaml】2023年12月06日，中华人民共和国农业农村部公告[第720号](https://www.moa.gov.cn/govpublic/nybzzj1/202312/t20231207_6442237.htm)。确定国家畜禽遗传资源保护区1个、保种场8个、基因库1个，变更国家畜禽遗传资源保种场建设单位1个（名单见附件）。附件1：国家畜禽遗传资源保护区名单（第二批）；附件2：国家畜禽遗传资源保种场名单（第三批）；附件3：国家畜禽遗传资源基因库名单（第三批）；附件4：变更建设单位国家畜禽遗传资源保种场名单。html公示文件`data-raw/public-site/moa-genetic-resource/html/list-livestoc-year-2023.html`。
+
+- 【第二批
+  html公告，pdf扫描件附转yaml】2022年12月26日,（非官方转债转载）农业农村部公告[第631号](https://huhuaping.github.io/techme/articles/%E5%86%9C%E4%B8%9A%E5%86%9C%E6%9D%91%E9%83%A8%E5%85%AC%E5%91%8A%E7%AC%AC631%E5%8F%B7)。确定第二批国家畜禽遗传资源保种场10个、基因库2个（名单见附件）。附件1：国家畜禽遗传资源保种场名单（第二批）；附件2：国家畜禽遗传资源基因库名单（第二批）。pdf附件`data-raw/public-site/moa-genetic-resource/html/list-livestoc-year-2022.pdf`；html公示文件`data-raw/public-site/moa-genetic-resource/html/list-livestoc-year-2022.html`。
+
+- 【第一批
+  html公告，pdf扫描件附转yaml】2021年8月9日，（非官方转载）第一批国家级畜禽遗传资源基因库、保护区、保种场名单[发布](https://www.163.com/dy/article/GU5EB4EV05149E7M.html)。确定国家畜禽遗传资源基因库8个、保护区24个、保种场173个（名单见附件）。此前发布的七批国家级畜禽遗传资源基因库、保护区、保种场名单（中华人民共和国农业部公告第1058号、1587号、1828号、2234号、2332号、2535号，中华人民共和国农业农村部公告第167号）同日废止。pdf附件`data-raw/public-site/moa-genetic-resource/html/list-livestoc-year-2021.pdf`；html公示文件`data-raw/public-site/moa-genetic-resource/html/list-livestoc-year-2021.html`。
 
 ##### 全部库圃列表
 
@@ -2284,23 +2548,23 @@ techme::PubGeneticResourceCrop %>%
 
 #### 数据流程
 
-（1）抓取名单公示html/pdf。执行R代码文件：`data-raw/public-site/moa-genetic-resource/code-moa-genetic-resource.R`
+（1）农作物 / 农业微生物批次公示。执行
+`data-raw/public-site/moa-genetic-resource/code-moa-genetic-resource.R`，写出
+`xlsx/list-year-{YYYY}-batch-*.xlsx`。
 
-- 读取html（pdf转html）
+（2）2021–2023
+畜禽批次公示：YAML（`yaml/list-livestock-year-{YYYY}.yaml`）经
+`code-moa-genetic-resource-yaml.R` 展开为
+`xlsx/list-livestock-year-{YYYY}.xlsx` 与 `data-tidy/.../xlsx/`。2024
+年起畜禽附件并入（1）的 `list-year-` 文件。
 
-- 清洗数据
+（3）参数化爬取全部库圃列表，形成
+`PubGeneticResourceCrop`（`code-moa-genetic-resource-crop.R`）。
 
-- 添加整理信息
-
-- 依次导出年度xlsx
-
-（2）参数化爬取全部库圃列表。同一脚本上段，得到 `tbl_crop_raw`，后续形成
+（4）发布。执行
+`data-raw/public-site/moa-genetic-resource/wfl-PubGeneticResource.R`：`list-year-`
+与 `list-livestock-year-` → `PubGeneticResource`；`list-crops-year-` →
 `PubGeneticResourceCrop`。
-
-（3）`techme`维护数据集。执行R代码文件：`data-raw/public-site/moa-genetic-resource/wfl-PubGeneticResource.R`
-
-- 循环读取年度xlsx（`list-year-` →
-  `PubGeneticResource`；`list-crops-year-` → `PubGeneticResourceCrop`）
 
 历史维护：
 

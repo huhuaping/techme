@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">techme</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,7 @@
       <h1>02-Techme数据集</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/huhuaping/techme/blob/v1.0.0/vignettes/my-vignette.Rmd" class="external-link"><code>vignettes/my-vignette.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/huhuaping/techme/blob/dev/vignettes/my-vignette.Rmd" class="external-link"><code>vignettes/my-vignette.Rmd</code></a></small>
       <div class="d-none name"><code>my-vignette.Rmd</code></div>
     </div>
 
@@ -2731,6 +2731,54 @@ doc_num.</p></li>
 </table>
 </div>
 <div class="section level4">
+<h4 id="pubagrimodernzone">PubAgrimodernZone<a class="anchor" aria-label="anchor" href="#pubagrimodernzone"></a>
+</h4>
+<blockquote>
+<p><strong>说明</strong>：本数据集整理农业农村部农业现代化示范区创建名单（<code>data-raw/public-site/moa-agrimodern-zone/</code>）。年度
+html 经 <code>code-moa-agrimodern-zone.R</code> 解析为 xlsx，再由
+<code>wfl-PubAgrimodernZone.R</code> 编译。覆盖 2021–2023
+年三批创建名单，以及 2026 年拟批准公示名单；2024、2025
+年名单暂未公示。</p>
+</blockquote>
+<p><strong><code>PubAgrimodernZone</code></strong>：A <strong>wide
+format</strong> data set containing MOA agricultural modernization
+demonstration zones from annual creation notices.</p>
+<ul>
+<li><p>Totally 4 columns including: year, index, name,
+province.</p></li>
+<li><p>Totally 356 rows.</p></li>
+<li><p>Years: 2021, 2022, 2023, 2026</p></li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">PubAgrimodernZone</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="right">n</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2021</td>
+<td align="right">100</td>
+</tr>
+<tr class="even">
+<td align="right">2022</td>
+<td align="right">100</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="right">100</td>
+</tr>
+<tr class="even">
+<td align="right">2026</td>
+<td align="right">56</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level4">
 <h4 id="hitechfirmspub">HitechFirmsPub<a class="anchor" aria-label="anchor" href="#hitechfirmspub"></a>
 </h4>
 <p><strong>数据来源</strong>：科学技术部火炬高技术产业开发中心<a href="http://www.innocom.gov.cn" class="external-link uri">http://www.innocom.gov.cn</a>。</p>
@@ -2743,7 +2791,7 @@ Public Site.</p>
 <li><p>Totally 248 rows.</p></li>
 <li><p>Years range from 2018 to 2025</p></li>
 </ul>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">HitechFirmsPub</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_n</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -2833,7 +2881,7 @@ administrator, province.</p></li>
 <li><p>Totally 2797 rows.</p></li>
 <li><p>Years range from 2018 to 2025</p></li>
 </ul>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">PubOpenShare</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_n</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -2957,7 +3005,7 @@ institution, administrator, province.</p></li>
 <li><p>Totally 324 rows.</p></li>
 <li><p>Years range from 2018 to 2021</p></li>
 </ul>
-<!---CARS from MOA----><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<!---CARS from MOA----><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"PubCars"</span><span class="op">)</span></span></code></pre></div>
 <p><strong><code>PubCars</code></strong>：A <strong>wide format</strong>
 data set containing Details of China Agricultural Research System(CARS)
@@ -2971,7 +3019,7 @@ province_researcher.</p></li>
 <li><p>Totally 2190 rows.</p></li>
 <li><p>Years range from 2011 to 2026</p></li>
 </ul>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">PubObsStation</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_n</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -3089,6 +3137,194 @@ province_researcher.</p></li>
 </table>
 </div>
 <div class="section level4">
+<h4 id="pubagrimarket">PubAgriMarket<a class="anchor" aria-label="anchor" href="#pubagrimarket"></a>
+</h4>
+<blockquote>
+<p><strong>说明</strong>：本数据集整理农业农村部定点市场认定 /
+取消名单（<code>data-raw/public-site/moa-agri-market/</code>）。2018、2024
+年 YAML 经 <code>code-moa-agri-market-yaml.R</code> 展开为 tidy
+xlsx，再由 <code>wfl-PubAgriMarket.R</code> 编译。<code>type</code>
+为认定名单 / 取消名单；新疆生产建设兵团记为新疆。</p>
+</blockquote>
+<p><strong><code>PubAgriMarket</code></strong>：A <strong>wide
+format</strong> data set containing MOA designated wholesale markets
+from the 2018 review and 2024 re-inspection notices.</p>
+<ul>
+<li><p>Totally 5 columns including: year, type, province, index,
+name.</p></li>
+<li><p>Totally 1782 rows.</p></li>
+<li><p>Years: 2018, 2024</p></li>
+<li><p><code>type</code> values: 认定名单 / 取消名单。</p></li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">PubAgriMarket</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">type</span>, values_from <span class="op">=</span> <span class="va">n</span>, values_fill <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="right">取消名单</th>
+<th align="right">认定名单</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="right">194</td>
+<td align="right">745</td>
+</tr>
+<tr class="even">
+<td align="right">2024</td>
+<td align="right">180</td>
+<td align="right">663</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="pubagritechdemobase">PubAgriTechDemoBase<a class="anchor" aria-label="anchor" href="#pubagritechdemobase"></a>
+</h4>
+<blockquote>
+<p><strong>说明</strong>：本数据集合并两套公示口径（<code>data-raw/public-site/moa-agritech-demo-base/</code>）。2020、2025
+年 YAML 经 <code>code-moa-agritech-demo-base-yaml.R</code> 展开为 tidy
+xlsx，再由 <code>wfl-PubAgriTechDemoBase.R</code>
+编译。<code>source</code>
+区分当前口径（现代农业科技试验示范基地）与历史口径（国家农业科技示范展示基地）；2025
+的 <code>type</code> 为种植业 / 畜牧兽医 / 渔业 / 农机 / 资源环境，2020
+无分类。新疆生产建设兵团记为新疆。</p>
+</blockquote>
+<p><strong><code>PubAgriTechDemoBase</code></strong>：A <strong>wide
+format</strong> data set containing MOA agricultural sci-tech
+demonstration bases from the 2020 historical list and the 2025
+first-batch notice.</p>
+<ul>
+<li><p>Totally 7 columns including: year, index, source, type, name,
+institution, province.</p></li>
+<li><p>Totally 259 rows.</p></li>
+<li><p>Years: 2020, 2025</p></li>
+<li><p><code>source</code> values: 现代农业科技试验示范基地 /
+国家农业科技示范展示基地。</p></li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">PubAgriTechDemoBase</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">source</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">source</span>, values_from <span class="op">=</span> <span class="va">n</span>, values_fill <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="right">国家农业科技示范展示基地</th>
+<th align="right">现代农业科技试验示范基地</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="right">110</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">2025</td>
+<td align="right">0</td>
+<td align="right">149</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="pubgeneticresource">PubGeneticResource<a class="anchor" aria-label="anchor" href="#pubgeneticresource"></a>
+</h4>
+<blockquote>
+<p><strong>说明</strong>：本数据集合并两条年度批次公示口径（<code>data-raw/public-site/moa-genetic-resource/</code>），由
+<code>wfl-PubGeneticResource.R</code> 编译。<code>type</code>
+同时收录农作物 / 农业微生物，以及畜禽保种场 / 畜禽基因库 / 畜禽保护区 /
+畜禽变更。全量库圃快照见 <code>PubGeneticResourceCrop</code>。</p>
+</blockquote>
+<p><strong><code>PubGeneticResource</code></strong>：A <strong>wide
+format</strong> data set containing approved national genetic-resource
+bases from MOA year-batch notices (crop / microbe banks and livestock
+conservation units).</p>
+<ul>
+<li><p>Totally 7 columns including: year, batch, type, index, name,
+institution, province.</p></li>
+<li><p>Totally 358 rows.</p></li>
+<li><p>Years range from 2021 to 2025</p></li>
+<li><p><code>type</code> values: 农作物 / 农业微生物；畜禽保种场 /
+畜禽基因库 / 畜禽保护区 / 畜禽变更。</p></li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">PubGeneticResource</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">type</span>, values_from <span class="op">=</span> <span class="va">n</span>, values_fill <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="7%">
+<col width="16%">
+<col width="16%">
+<col width="16%">
+<col width="16%">
+<col width="10%">
+<col width="13%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="right">畜禽保护区</th>
+<th align="right">畜禽保种场</th>
+<th align="right">畜禽基因库</th>
+<th align="right">农业微生物</th>
+<th align="right">农作物</th>
+<th align="right">畜禽变更</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2021</td>
+<td align="right">24</td>
+<td align="right">173</td>
+<td align="right">8</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">2022</td>
+<td align="right">0</td>
+<td align="right">10</td>
+<td align="right">2</td>
+<td align="right">19</td>
+<td align="right">72</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">2023</td>
+<td align="right">1</td>
+<td align="right">8</td>
+<td align="right">1</td>
+<td align="right">8</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">2024</td>
+<td align="right">0</td>
+<td align="right">13</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">5</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">2025</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">5</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level4">
 <h4 id="pubgeneticresourcecrop">PubGeneticResourceCrop<a class="anchor" aria-label="anchor" href="#pubgeneticresourcecrop"></a>
 </h4>
 <blockquote>
@@ -3103,7 +3339,7 @@ province, nature, title, institution.</p></li>
 <li><p>Totally 81 rows.</p></li>
 <li><p>Years range from 2026 to 2026</p></li>
 </ul>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">PubGeneticResourceCrop</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_n</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -3237,7 +3473,7 @@ title, province, place, crop.</p></li>
 <li><p>Totally 120 rows.</p></li>
 <li><p>Years range from 2021 to 2025</p></li>
 </ul>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">PubMachineCountyCase</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_n</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -3415,7 +3651,7 @@ name_origin, name_change, mark.</p></li>
 <li><p>Totally 610 rows.</p></li>
 <li><p>Years range from 2010 to 2024</p></li>
 </ul>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">PubXmjBreeding</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_n</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -3568,7 +3804,7 @@ com_name.</p></li>
 <li><p>Totally 3968 rows.</p></li>
 <li><p>Years range from 2010 to 2023</p></li>
 </ul>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">PubXmjStandard</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_n</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>

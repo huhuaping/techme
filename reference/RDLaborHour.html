@@ -13,7 +13,7 @@ covering all provinces and regions in China."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">techme</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@ covering all provinces and regions in China."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>RD Personnel Full-time Equivalent by Region</h1>
-      <small class="dont-index">Source: <a href="https://github.com/huhuaping/techme/blob/v1.0.0/R/tech-RDLaborHour.R" class="external-link"><code>R/tech-RDLaborHour.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/huhuaping/techme/blob/dev/R/tech-RDLaborHour.R" class="external-link"><code>R/tech-RDLaborHour.R</code></a></small>
       <div class="d-none name"><code>RDLaborHour.Rd</code></div>
     </div>
 
@@ -92,176 +92,176 @@ equivalent of one person working full-time for one year.</p></li>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># View the structure of the dataset</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">RDLaborHour</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 'data.frame':	2240 obs. of  6 variables:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 'data.frame':	2400 obs. of  6 variables:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ province  : chr  "全国" "全国" "全国" "全国" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ year      : chr  "2023" "2023" "2023" "2023" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ year      : chr  "2024" "2024" "2024" "2024" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ chn_block4: chr  "合计" "研究人员" "基础研究" "应用研究" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ value     : num  7240582 3001302 575033 776817 5888748 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ value     : num  7568818 3179806 596971 892483 6079377 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ units     : chr  "人年" "人年" "人年" "人年" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ variables : chr  "v4_zh_qsdl_hj" "v4_zh_qsdl_yjry" "v4_zh_qsdl_jcyj" "v4_zh_qsdl_yyyj" ...</span>
 <span class="r-in"><span><span class="co"># Filter data for a specific year</span></span></span>
 <span class="r-in"><span><span class="va">RDLaborHour</span><span class="op">[</span><span class="va">RDLaborHour</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2020</span>, <span class="op">]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     province year chn_block4   value units       variables</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 481     全国 2020       合计 5234508  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 482     全国 2020   研究人员 2281134  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 483     全国 2020   基础研究  426772  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 484     全国 2020   应用研究  643130  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 485     全国 2020   试验发展 4164620  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 486     北京 2020       合计  336280  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 487     北京 2020   研究人员  226005  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 488     北京 2020   基础研究   75082  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 489     北京 2020   应用研究   95186  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 490     北京 2020   试验发展  166014  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 491     天津 2020       合计   90640  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 492     天津 2020   研究人员   48371  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 493     天津 2020   基础研究    9196  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 494     天津 2020   应用研究   13676  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 495     天津 2020   试验发展   67768  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 496     河北 2020       合计  125058  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 497     河北 2020   研究人员   55320  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 498     河北 2020   基础研究    8293  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 499     河北 2020   应用研究   19083  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 500     河北 2020   试验发展   97682  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 501     山西 2020       合计   52394  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 502     山西 2020   研究人员   23880  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 503     山西 2020   基础研究    7667  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 504     山西 2020   应用研究   10019  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 505     山西 2020   试验发展   34709  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 506   内蒙古 2020       合计   27914  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 507   内蒙古 2020   研究人员   13789  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 508   内蒙古 2020   基础研究    2062  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 509   内蒙古 2020   应用研究    5143  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 510   内蒙古 2020   试验发展   20708  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 511     辽宁 2020       合计  111931  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 512     辽宁 2020   研究人员   61459  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 513     辽宁 2020   基础研究   14898  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 514     辽宁 2020   应用研究   21097  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 515     辽宁 2020   试验发展   75937  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 516     吉林 2020       合计   44472  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 517     吉林 2020   研究人员   30712  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 518     吉林 2020   基础研究   15879  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 519     吉林 2020   应用研究   13945  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 520     吉林 2020   试验发展   14649  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 521   黑龙江 2020       合计   44205  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 522   黑龙江 2020   研究人员   31834  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 523   黑龙江 2020   基础研究   12279  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 524   黑龙江 2020   应用研究   13843  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 525   黑龙江 2020   试验发展   18082  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 526     上海 2020       合计  228621  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 527     上海 2020   研究人员  128355  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 528     上海 2020   基础研究   32966  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 529     上海 2020   应用研究   34943  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 530     上海 2020   试验发展  160715  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 531     江苏 2020       合计  669084  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 532     江苏 2020   研究人员  262406  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 533     江苏 2020   基础研究   25979  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 534     江苏 2020   应用研究   42112  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 535     江苏 2020   试验发展  600994  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 536     浙江 2020       合计  582981  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 537     浙江 2020   研究人员  172119  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 538     浙江 2020   基础研究   15839  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 539     浙江 2020   应用研究   29465  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 540     浙江 2020   试验发展  537679  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 541     安徽 2020       合计  194688  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 542     安徽 2020   研究人员   84818  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 543     安徽 2020   基础研究   16411  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 544     安徽 2020   应用研究   23578  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 545     安徽 2020   试验发展  154698  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 546     福建 2020       合计  185622  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 547     福建 2020   研究人员   72535  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 548     福建 2020   基础研究    6613  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 549     福建 2020   应用研究   19183  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 550     福建 2020   试验发展  159826  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 551     江西 2020       合计  124326  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 552     江西 2020   研究人员   43360  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 553     江西 2020   基础研究    6229  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 554     江西 2020   应用研究    8716  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 555     江西 2020   试验发展  109381  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 556     山东 2020       合计  341159  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 557     山东 2020   研究人员  141786  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 558     山东 2020   基础研究   23105  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 559     山东 2020   应用研究   34857  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 560     山东 2020   试验发展  283197  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 561     河南 2020       合计  203080  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 562     河南 2020   研究人员   80815  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 563     河南 2020   基础研究    7488  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 564     河南 2020   应用研究   21681  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 565     河南 2020   试验发展  173914  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 566     湖北 2020       合计  192168  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 567     湖北 2020   研究人员   89997  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 568     湖北 2020   基础研究   13265  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 569     湖北 2020   应用研究   27170  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 570     湖北 2020   试验发展  151732  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 571     湖南 2020       合计  177561  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 572     湖南 2020   研究人员   80254  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 573     湖南 2020   基础研究   13127  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 574     湖南 2020   应用研究   24777  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 575     湖南 2020   试验发展  139660  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 576     广东 2020       合计  872238  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 577     广东 2020   研究人员  295901  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 578     广东 2020   基础研究   38655  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 579     广东 2020   应用研究   69225  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 580     广东 2020   试验发展  764360  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 581     广西 2020       合计   45821  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 582     广西 2020   研究人员   25981  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 583     广西 2020   基础研究    8404  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 584     广西 2020   应用研究    9385  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 585     广西 2020   试验发展   28031  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 586     海南 2020       合计    8961  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 587     海南 2020   研究人员    4927  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 588     海南 2020   基础研究    2077  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 589     海南 2020   应用研究    1774  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 590     海南 2020   试验发展    5110  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 591     重庆 2020       合计  105712  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 592     重庆 2020   研究人员   47445  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 593     重庆 2020   基础研究    7525  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 594     重庆 2020   应用研究   17411  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 595     重庆 2020   试验发展   80777  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 596     四川 2020       合计  189829  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 597     四川 2020   研究人员   99173  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 598     四川 2020   基础研究   16372  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 599     四川 2020   应用研究   32414  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 600     四川 2020   试验发展  141044  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 601     贵州 2020       合计   41496  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 602     贵州 2020   研究人员   19198  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 603     贵州 2020   基础研究    6068  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 604     贵州 2020   应用研究    7234  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 605     贵州 2020   试验发展   28194  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 606     云南 2020       合计   60369  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 607     云南 2020   研究人员   29204  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 608     云南 2020   基础研究   10895  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 609     云南 2020   应用研究    9712  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 610     云南 2020   试验发展   39762  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 611     西藏 2020       合计    1579  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 612     西藏 2020   研究人员    1175  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 613     西藏 2020   基础研究     481  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 614     西藏 2020   应用研究     501  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 615     西藏 2020   试验发展     597  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 616     陕西 2020       合计  118807  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 617     陕西 2020   研究人员   74459  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 618     陕西 2020   基础研究   17664  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 619     陕西 2020   应用研究   23573  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 620     陕西 2020   试验发展   77571  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 621     甘肃 2020       合计   26814  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 622     甘肃 2020   研究人员   18533  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 623     甘肃 2020   基础研究    6652  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 624     甘肃 2020   应用研究    7178  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 625     甘肃 2020   试验发展   12983  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 626     青海 2020       合计    4423  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 627     青海 2020   研究人员    2399  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 628     青海 2020   基础研究     721  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 629     青海 2020   应用研究    1069  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 630     青海 2020   试验发展    2634  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 631     宁夏 2020       合计   12169  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 632     宁夏 2020   研究人员    5483  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 633     宁夏 2020   基础研究    1311  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 634     宁夏 2020   应用研究    1450  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 635     宁夏 2020   试验发展    9409  人年 v4_zh_qsdl_syfz</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 636     新疆 2020       合计   14109  人年   v4_zh_qsdl_hj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 637     新疆 2020   研究人员    9443  人年 v4_zh_qsdl_yjry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 638     新疆 2020   基础研究    3573  人年 v4_zh_qsdl_jcyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 639     新疆 2020   应用研究    3730  人年 v4_zh_qsdl_yyyj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 640     新疆 2020   试验发展    6806  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 641     全国 2020       合计 5234508  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 642     全国 2020   研究人员 2281134  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 643     全国 2020   基础研究  426772  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 644     全国 2020   应用研究  643130  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 645     全国 2020   试验发展 4164620  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 646     北京 2020       合计  336280  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 647     北京 2020   研究人员  226005  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 648     北京 2020   基础研究   75082  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 649     北京 2020   应用研究   95186  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 650     北京 2020   试验发展  166014  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 651     天津 2020       合计   90640  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 652     天津 2020   研究人员   48371  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 653     天津 2020   基础研究    9196  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 654     天津 2020   应用研究   13676  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 655     天津 2020   试验发展   67768  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 656     河北 2020       合计  125058  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 657     河北 2020   研究人员   55320  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 658     河北 2020   基础研究    8293  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 659     河北 2020   应用研究   19083  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 660     河北 2020   试验发展   97682  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 661     山西 2020       合计   52394  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 662     山西 2020   研究人员   23880  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 663     山西 2020   基础研究    7667  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 664     山西 2020   应用研究   10019  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 665     山西 2020   试验发展   34709  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 666   内蒙古 2020       合计   27914  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 667   内蒙古 2020   研究人员   13789  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 668   内蒙古 2020   基础研究    2062  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 669   内蒙古 2020   应用研究    5143  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 670   内蒙古 2020   试验发展   20708  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 671     辽宁 2020       合计  111931  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 672     辽宁 2020   研究人员   61459  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 673     辽宁 2020   基础研究   14898  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 674     辽宁 2020   应用研究   21097  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 675     辽宁 2020   试验发展   75937  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 676     吉林 2020       合计   44472  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 677     吉林 2020   研究人员   30712  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 678     吉林 2020   基础研究   15879  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 679     吉林 2020   应用研究   13945  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 680     吉林 2020   试验发展   14649  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 681   黑龙江 2020       合计   44205  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 682   黑龙江 2020   研究人员   31834  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 683   黑龙江 2020   基础研究   12279  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 684   黑龙江 2020   应用研究   13843  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 685   黑龙江 2020   试验发展   18082  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 686     上海 2020       合计  228621  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 687     上海 2020   研究人员  128355  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 688     上海 2020   基础研究   32966  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 689     上海 2020   应用研究   34943  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 690     上海 2020   试验发展  160715  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 691     江苏 2020       合计  669084  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 692     江苏 2020   研究人员  262406  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 693     江苏 2020   基础研究   25979  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 694     江苏 2020   应用研究   42112  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 695     江苏 2020   试验发展  600994  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 696     浙江 2020       合计  582981  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 697     浙江 2020   研究人员  172119  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 698     浙江 2020   基础研究   15839  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 699     浙江 2020   应用研究   29465  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 700     浙江 2020   试验发展  537679  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 701     安徽 2020       合计  194688  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 702     安徽 2020   研究人员   84818  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 703     安徽 2020   基础研究   16411  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 704     安徽 2020   应用研究   23578  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 705     安徽 2020   试验发展  154698  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 706     福建 2020       合计  185622  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 707     福建 2020   研究人员   72535  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 708     福建 2020   基础研究    6613  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 709     福建 2020   应用研究   19183  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 710     福建 2020   试验发展  159826  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 711     江西 2020       合计  124326  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 712     江西 2020   研究人员   43360  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 713     江西 2020   基础研究    6229  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 714     江西 2020   应用研究    8716  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 715     江西 2020   试验发展  109381  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 716     山东 2020       合计  341159  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 717     山东 2020   研究人员  141786  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 718     山东 2020   基础研究   23105  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 719     山东 2020   应用研究   34857  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 720     山东 2020   试验发展  283197  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 721     河南 2020       合计  203080  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 722     河南 2020   研究人员   80815  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 723     河南 2020   基础研究    7488  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 724     河南 2020   应用研究   21681  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 725     河南 2020   试验发展  173914  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 726     湖北 2020       合计  192168  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 727     湖北 2020   研究人员   89997  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 728     湖北 2020   基础研究   13265  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 729     湖北 2020   应用研究   27170  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 730     湖北 2020   试验发展  151732  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 731     湖南 2020       合计  177561  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 732     湖南 2020   研究人员   80254  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 733     湖南 2020   基础研究   13127  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 734     湖南 2020   应用研究   24777  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 735     湖南 2020   试验发展  139660  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 736     广东 2020       合计  872238  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 737     广东 2020   研究人员  295901  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 738     广东 2020   基础研究   38655  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 739     广东 2020   应用研究   69225  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 740     广东 2020   试验发展  764360  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 741     广西 2020       合计   45821  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 742     广西 2020   研究人员   25981  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 743     广西 2020   基础研究    8404  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 744     广西 2020   应用研究    9385  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 745     广西 2020   试验发展   28031  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 746     海南 2020       合计    8961  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 747     海南 2020   研究人员    4927  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 748     海南 2020   基础研究    2077  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 749     海南 2020   应用研究    1774  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 750     海南 2020   试验发展    5110  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 751     重庆 2020       合计  105712  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 752     重庆 2020   研究人员   47445  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 753     重庆 2020   基础研究    7525  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 754     重庆 2020   应用研究   17411  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 755     重庆 2020   试验发展   80777  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 756     四川 2020       合计  189829  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 757     四川 2020   研究人员   99173  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 758     四川 2020   基础研究   16372  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 759     四川 2020   应用研究   32414  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 760     四川 2020   试验发展  141044  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 761     贵州 2020       合计   41496  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 762     贵州 2020   研究人员   19198  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 763     贵州 2020   基础研究    6068  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 764     贵州 2020   应用研究    7234  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 765     贵州 2020   试验发展   28194  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 766     云南 2020       合计   60369  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 767     云南 2020   研究人员   29204  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 768     云南 2020   基础研究   10895  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 769     云南 2020   应用研究    9712  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 770     云南 2020   试验发展   39762  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 771     西藏 2020       合计    1579  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 772     西藏 2020   研究人员    1175  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 773     西藏 2020   基础研究     481  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 774     西藏 2020   应用研究     501  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 775     西藏 2020   试验发展     597  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 776     陕西 2020       合计  118807  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 777     陕西 2020   研究人员   74459  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 778     陕西 2020   基础研究   17664  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 779     陕西 2020   应用研究   23573  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 780     陕西 2020   试验发展   77571  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 781     甘肃 2020       合计   26814  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 782     甘肃 2020   研究人员   18533  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 783     甘肃 2020   基础研究    6652  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 784     甘肃 2020   应用研究    7178  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 785     甘肃 2020   试验发展   12983  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 786     青海 2020       合计    4423  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 787     青海 2020   研究人员    2399  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 788     青海 2020   基础研究     721  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 789     青海 2020   应用研究    1069  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 790     青海 2020   试验发展    2634  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 791     宁夏 2020       合计   12169  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 792     宁夏 2020   研究人员    5483  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 793     宁夏 2020   基础研究    1311  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 794     宁夏 2020   应用研究    1450  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 795     宁夏 2020   试验发展    9409  人年 v4_zh_qsdl_syfz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 796     新疆 2020       合计   14109  人年   v4_zh_qsdl_hj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 797     新疆 2020   研究人员    9443  人年 v4_zh_qsdl_yjry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 798     新疆 2020   基础研究    3573  人年 v4_zh_qsdl_jcyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 799     新疆 2020   应用研究    3730  人年 v4_zh_qsdl_yyyj</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 800     新疆 2020   试验发展    6806  人年 v4_zh_qsdl_syfz</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
