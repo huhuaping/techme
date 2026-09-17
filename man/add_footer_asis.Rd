@@ -9,7 +9,8 @@ add_footer_asis(note, source, pre_note = "注")
 \arguments{
 \item{note}{character, note text for figure or table.}
 
-\item{source}{character, source text for figure or table.}
+\item{source}{character, source text for figure or table.
+Empty string or \code{NULL} omits the source line.}
 
 \item{pre_note}{character, prefix for note with default value.}
 }
